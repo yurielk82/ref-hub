@@ -1,3 +1,180 @@
 # 분석 실행
 
-이 페이지는 준비 중입니다.
+업로드된 시험 데이터에 대해 Weibull 분석과 신뢰성 예측을 수행하는 방법을 설명합니다.
+
+## Weibull 분석 개요
+
+Weibull 분포는 고장 시간 데이터를 모델링하는 데 가장 널리 사용되는 수명 분포입니다. 두 개의 핵심 모수로 고장 패턴을 설명합니다.
+
+| 모수 | 기호 | 의미 |
+|------|------|------|
+| 형상 모수 (Shape) | β | 고장 패턴. β < 1: 초기 고장, β = 1: 우발 고장, β > 1: 마모 고장 |
+| 척도 모수 (Scale) | η | 수명 특성. 전체의 63.2%가 고장나는 시점 |
+
+β 값에 따른 고장 메커니즘 해석:
+
+- **β < 1**: 초기 고장 (Infant Mortality). 제조 결함, 조립 불량이 원인
+- **β ≈ 1**: 우발 고장 (Random Failure). 외부 충격, 과부하 등 무작위 원인
+- **β > 1**: 마모 고장 (Wear-out). 피로, 부식, 절연 열화 등 경년 열화
+
+### MTTF (평균 고장 시간)
+
+Weibull 분포의 MTTF는 다음과 같이 계산됩니다.
+
+```
+MTTF = η × Γ(1 + 1/β)
+```
+
+여기서 Γ는 감마 함수입니다. `simulation/domain/` 모듈이 이 계산을 자동으로 수행합니다.
+
+## 시뮬레이션 실행
+
+### CLI에서 실행
+
+`simulation/runner.py`가 분석의 진입점입니다.
+
+```bash
+cd ev-motor-reliability
+source venv/bin/activate
+
+# 기본 Weibull 분석 실행
+python -m simulation.runner --input data/test_001.csv --analysis weibull
+
+# 복수 파일 일괄 분석
+python -m simulation.runner --input data/*.csv --analysis weibull --batch
+
+# Monte Carlo 시뮬레이션 포함
+python -m simulation.runner --input data/test_001.csv --analysis weibull --monte-carlo --iterations 10000
+```
+
+### 웹 대시보드에서 실행
+
+1. 대시보드에서 분석할 데이터셋을 선택합니다
+2. **분석 설정** 패널에서 분석 유형과 파라미터를 지정합니다
+3. **분석 시작** 버튼을 클릭합니다
+4. 진행률 표시줄이 나타나며, 완료 시 결과 페이지로 이동합니다
+
+## 분석 파라미터 설정
+
+### 기본 파라미터
+
+| 파라미터 | 기본값 | 설명 |
+|---------|--------|------|
+| `confidence_level` | 0.90 | 신뢰 구간 수준 (0.80 ~ 0.99) |
+| `estimation_method` | `mle` | 모수 추정법. `mle` (최대우도), `rr` (순위회귀) |
+| `failure_criteria` | `temperature` | 고장 판정 기준 |
+| `threshold` | 180.0 | 고장 판정 임계값 (degC) |
+
+### 고장 판정 기준
+
+시험 데이터에서 고장 시점을 판정하는 기준을 설정합니다.
+
+| 기준 | 임계값 (기본) | 설명 |
+|------|-------------|------|
+| `temperature` | 180 degC | 권선 온도가 절연 등급 한계 초과 |
+| `vibration` | 가속도 4g | 베어링 진동 수준 초과 |
+| `current_imbalance` | 15% | 3상 전류 불평형률 초과 |
+| `efficiency_drop` | 10% | 정격 대비 효율 저하 |
+
+복수 기준을 조합하여 OR/AND 조건으로 설정할 수 있습니다.
+
+```python
+# config 예시 (analysis 모듈에 전달)
+analysis_config = {
+    "confidence_level": 0.90,
+    "estimation_method": "mle",
+    "failure_criteria": {
+        "mode": "or",
+        "conditions": [
+            {"type": "temperature", "threshold": 180.0},
+            {"type": "current_imbalance", "threshold": 0.15},
+        ],
+    },
+}
+```
+
+### 추정 방법 비교
+
+| 방법 | 장점 | 단점 | 권장 조건 |
+|------|------|------|-----------|
+| MLE (최대우도) | 대표본에서 정확, 중도 절단 처리 우수 | 소표본(n < 20)에서 편향 | 데이터 30개 이상 |
+| RR (순위회귀) | 소표본에서 안정적, 직관적 | 중도 절단 처리 제한적 | 데이터 30개 미만 |
+
+## 결과 해석
+
+분석이 완료되면 아래 결과가 생성됩니다.
+
+### 모수 추정 결과
+
+```
+========================================
+Weibull Analysis Result
+========================================
+Shape (β):     2.45 [1.87, 3.21] (90% CI)
+Scale (η):     8,520 h [7,100, 10,220] (90% CI)
+MTTF:          7,553 h
+B10 Life:      3,012 h
+Correlation:   0.987
+========================================
+```
+
+- **Shape (β) = 2.45**: β > 1이므로 마모 고장 패턴. 사용 시간이 길수록 고장률 증가
+- **Scale (η) = 8,520 h**: 전체 시험 유닛의 63.2%가 8,520시간 이내에 고장
+- **MTTF = 7,553 h**: 평균 고장 시간
+- **B10 Life = 3,012 h**: 전체의 10%가 고장나는 시점. 보증 기간 설정에 활용
+- **Correlation = 0.987**: Weibull 적합도. 0.95 이상이면 양호
+
+### B-Life 해석
+
+B-Life는 누적 고장 확률이 특정 퍼센트에 도달하는 시점입니다.
+
+| 지표 | 의미 | 활용 |
+|------|------|------|
+| B1 | 1% 고장 시점 | 안전 관련 부품 보증 |
+| B10 | 10% 고장 시점 | 일반 부품 보증 기간 |
+| B50 | 50% 고장 시점 | 중위 수명 (≠ MTTF) |
+
+## 고장 예측 모델
+
+Weibull 모수를 기반으로 향후 고장 확률을 예측합니다.
+
+### 신뢰도 함수
+
+시각 t에서 아직 고장나지 않을 확률:
+
+```
+R(t) = exp(-(t/η)^β)
+```
+
+### 고장률 함수 (Hazard Function)
+
+시각 t에서의 순간 고장률:
+
+```
+h(t) = (β/η) × (t/η)^(β-1)
+```
+
+### 잔여 수명 예측
+
+현재 가동 시간 t₀에서 추가로 Δt만큼 생존할 조건부 확률:
+
+```
+R(Δt | t₀) = R(t₀ + Δt) / R(t₀)
+```
+
+이 계산은 `analysis/domain/` 모듈에서 제공하며, 결과는 JSON 및 CSV 형태로 내보낼 수 있습니다.
+
+```bash
+# 예측 결과 내보내기
+python -m simulation.runner --input data/test_001.csv --analysis weibull --export results/
+```
+
+`results/` 디렉토리에 다음 파일이 생성됩니다:
+
+- `weibull_params.json` — 추정된 모수 및 신뢰 구간
+- `reliability_table.csv` — 시간별 신뢰도/고장률 테이블
+- `prediction.csv` — 잔여 수명 예측 결과
+
+## 다음 단계
+
+분석 결과를 차트로 확인하려면 [시각화](/ev-motor-reliability/user-guide/visualization)를 참조합니다.

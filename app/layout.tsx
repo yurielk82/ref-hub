@@ -7,22 +7,22 @@ import 'nextra-theme-docs/style.css'
 
 export const metadata: Metadata = {
   title: {
-    default: 'Yurie Docs',
-    template: '%s — Yurie Docs',
+    default: 'Codegear Dev Portal',
+    template: '%s — Codegear Dev Portal',
   },
   description: '프로젝트 통합 레퍼런스 사이트',
 }
 
 const navbar = (
   <Navbar
-    logo={<b>Yurie Docs</b>}
+    logo={<b>Codegear Dev Portal</b>}
     projectLink="https://github.com/yurielk82"
   />
 )
 
 const footer = (
   <Footer>
-    MIT {new Date().getFullYear()} © Yurie Docs
+    MIT {new Date().getFullYear()} © Codegear
   </Footer>
 )
 
@@ -38,7 +38,7 @@ export default async function RootLayout({
         <Layout
           navbar={navbar}
           pageMap={await getPageMap()}
-          docsRepositoryBase="https://github.com/yurielk82/yurie-docs/tree/main"
+          docsRepositoryBase="https://github.com/yurielk82/codegear-dev-portal/tree/main"
           footer={footer}
           sidebar={{ defaultMenuCollapseLevel: 1 }}
           editLink="이 페이지 수정하기"

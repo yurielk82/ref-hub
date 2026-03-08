@@ -1,6 +1,6 @@
 {
-  "name": "yurie-docs",
-  "version": "0.1.0",
+  "name": "codegear-dev-portal",
+  "version": "0.1.1",
   "private": true,
   "description": "프로젝트 통합 레퍼런스 사이트",
   "scripts": {

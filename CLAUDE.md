@@ -1,4 +1,4 @@
-# yurie-docs — 프로젝트 통합 레퍼런스 사이트
+# codegear-dev-portal — 프로젝트 통합 레퍼런스 사이트
 
 ## 프로젝트 정보
 

@@ -1,3 +1,304 @@
 # 데이터베이스
 
-이 페이지는 준비 중입니다.
+SQLite 데이터베이스 구조, 이중 저장소 아키텍처, 주요 테이블 설명, 백업/복원 절차를 안내합니다.
+
+## 개요
+
+| 항목 | 설명 |
+|------|------|
+| 엔진 | SQLite (better-sqlite3) |
+| 파일 경로 | `data/medicine.db` |
+| 모드 | WAL (Write-Ahead Logging) — 읽기/쓰기 동시성 개선 |
+| 전문 검색 | FTS5 — 표준코드명 검색 최적화 |
+| 마이그레이션 | `server/db.ts`에서 초기화 시 자동 ALTER TABLE |
+
+## 이중 저장소 아키텍처
+
+시스템은 **메모리**와 **DB** 두 곳에 데이터를 유지합니다. 사용자가 편집하는 동안에는 메모리에서 작업하고, 명시적으로 DB에 동기화하는 구조입니다.
+
+```
+엑셀 업로드 → [파싱] → 메모리(Zustand Store) + DB(gap_rows/eul_rows)
+                           │
+                    사용자 편집 (메모리만 변경)
+                           │
+                    flushCurrentDate()
+                           │
+                    DB에 최종 상태 저장
+```
+
+### 동작 방식
+
+| 단계 | 저장 위치 | 설명 |
+|------|----------|------|
+| 업로드 | 메모리 + DB | 파싱 결과를 양쪽에 동시 저장 |
+| 편집 | 메모리만 | 코드매핑, 규칙 적용, 수동 수정 — 메모리에서만 처리 |
+| 동기화 | DB | `flushCurrentDate()` 호출 시 메모리 상태를 DB에 반영 |
+| 조회 | DB | 페이지 새로고침, 날짜 전환 시 DB에서 로드 |
+
+> 편집 중 페이지를 새로고침하면 마지막 동기화 시점의 데이터로 돌아갑니다. 중요한 수정 후에는 반드시 동기화(flush)를 수행하세요.
+
+## 주요 테이블 구조
+
+### 공급 데이터
+
+#### gap_rows (갑지 행)
+
+갑지 엑셀에서 업로드된 공급내역 행 데이터입니다. 21열의 갑지 데이터와 제출 상태를 함께 저장합니다.
+
+| 컬럼 | 타입 | 설명 |
+|------|------|------|
+| id | INTEGER PK | 자동 증가 |
+| report_date | TEXT | 보고 날짜 (YYYY-MM-DD) |
+| supply_type | TEXT | 공급구분 (1~5) |
+| seq_no | TEXT | 연번 (을지 매칭 키) |
+| standard_code | TEXT | 13자리 표준코드 |
+| product_name | TEXT | 제품명 |
+| supply_qty | REAL | 공급수량 |
+| supply_amount | REAL | 공급금액 (총액, 불변) |
+| supply_price | REAL | 공급단가 |
+| receipt_no | TEXT | API 제출 후 부여되는 접수번호 |
+| submit_status | TEXT | 제출 상태 (`submitted`/`registered`/`returned`) |
+| submit_error | TEXT | 제출 실패 메시지 |
+
+> 전체 컬럼은 사업자번호, 영업형태, 계약방법, 공급형태, 거래처 정보, 로트번호, 유효기간 등 21개 이상입니다.
+
+#### eul_rows (을지 행)
+
+갑지에 연결되는 의약품 일련번호/RFID 데이터입니다.
+
+| 컬럼 | 타입 | 설명 |
+|------|------|------|
+| id | INTEGER PK | 자동 증가 |
+| report_date | TEXT | 보고 날짜 |
+| seq_no | TEXT | 연번 (갑지 A열과 매칭) |
+| serial_no | TEXT | 16자리 일련번호 |
+| rfid | TEXT | RFID/바코드 |
+
+### 표준코드 마스터
+
+#### standard_codes
+
+KPIS 13자리 의약품 식별코드 마스터 테이블입니다. 바코드 데이터, 엑셀 업로드, API 조회 3가지 소스에서 적재됩니다.
+
+| 컬럼 | 타입 | 설명 |
+|------|------|------|
+| std_cd | TEXT PK | 13자리 표준코드 |
+| kor_name | TEXT | 한글 제품명 |
+| pack_qty | INTEGER | 포장단위 |
+| up_cost | REAL | 상한가 |
+| pay_type | INTEGER | 급여구분 (0:급여, 9:비급여) |
+| spc_gnl_cd | INTEGER | 전문/일반 (1:일반, 2:전문, 3:기타) |
+| source | TEXT | 데이터 출처 (`barcode`/`excel`/`api`) |
+| company | TEXT | 제조사 |
+| cancel_date | TEXT | 취소일 (코드 만료) |
+
+#### standard_codes_fts (전문 검색)
+
+표준코드와 제품명의 빠른 검색을 위한 FTS5 가상 테이블입니다.
+
+검색 3단계:
+1. **정확 일치**: `WHERE kor_name = ?`
+2. **LIKE**: `WHERE kor_name LIKE '%keyword%'`
+3. **FTS5**: `WHERE standard_codes_fts MATCH ?` (특수문자 이스케이프)
+
+#### code_mapping (코드매핑 학습)
+
+제품명과 표준코드의 매핑 이력을 저장하여 자동 매칭에 활용합니다.
+
+| 컬럼 | 타입 | 설명 |
+|------|------|------|
+| product_name | TEXT | 제품명 |
+| standard_code | TEXT | 매핑된 표준코드 |
+| supply_type | TEXT | 공급구분 (탭별 독립 관리) |
+| usage_count | INTEGER | 사용 횟수 (높을수록 우선 적용) |
+| last_used | TEXT | 마지막 사용 일시 |
+
+### 규칙 및 학습
+
+#### batch_rules (일괄 수정 규칙)
+
+사용자가 정의한 조건-액션 규칙입니다. 우선순위 순서대로 적용됩니다.
+
+| 컬럼 | 타입 | 설명 |
+|------|------|------|
+| id | TEXT PK | 규칙 고유 ID |
+| name | TEXT | 규칙 이름 |
+| conditions | TEXT (JSON) | 조건 배열 (`RuleCondition[]`) |
+| actions | TEXT (JSON) | 액션 배열 (`RuleAction[]`) |
+| priority | INTEGER | 우선순위 (높을수록 먼저 적용) |
+| is_active | INTEGER | 활성 여부 (0/1) |
+| supply_type | TEXT | 적용 대상 공급구분 |
+| apply_count | INTEGER | 누적 적용 횟수 |
+
+#### auto_correction_rules (자동 보정)
+
+과거 수정 패턴을 학습하여 동일 오류 발생 시 자동 보정을 제안합니다.
+
+| 컬럼 | 타입 | 설명 |
+|------|------|------|
+| error_type | TEXT | 오류 유형 |
+| field | TEXT | 보정 대상 필드 |
+| original_pattern | TEXT | 원래 값 패턴 |
+| corrected_value | TEXT | 보정 값 |
+| confidence | REAL | 신뢰도 (0.0~1.0) |
+| apply_count | INTEGER | 적용 횟수 |
+| success_count | INTEGER | 성공 횟수 |
+| fail_count | INTEGER | 실패 횟수 |
+
+#### edit_history (수정 이력)
+
+모든 데이터 변경 이력을 감사 추적용으로 저장합니다.
+
+| 컬럼 | 타입 | 설명 |
+|------|------|------|
+| timestamp | TEXT | 수정 시각 |
+| seq_no | TEXT | 대상 행 연번 |
+| field | TEXT | 변경된 필드 |
+| old_value | TEXT | 변경 전 값 |
+| new_value | TEXT | 변경 후 값 |
+| edit_type | TEXT | `manual`/`rule`/`correction`/`auto_match` |
+| rule_name | TEXT | 적용된 규칙 이름 |
+
+### 인증 및 설정
+
+#### users (사용자)
+
+| 컬럼 | 타입 | 설명 |
+|------|------|------|
+| email | TEXT UNIQUE | Google 계정 이메일 |
+| name | TEXT | 사용자 이름 |
+| approved | INTEGER | 승인 상태 (0:미승인, 1:승인) |
+| role | TEXT | 역할 (`admin`/`user`) |
+
+> 최초 가입 사용자가 자동으로 `admin` 역할을 부여받습니다.
+
+#### api_config (API 설정, 싱글톤)
+
+| 컬럼 | 타입 | 설명 |
+|------|------|------|
+| apl_hbin | TEXT | 사업자등록번호 |
+| api_key_encrypted | TEXT | BASE64 암호화된 API KEY |
+
+#### cert_config (인증서 설정, 싱글톤)
+
+| 컬럼 | 타입 | 설명 |
+|------|------|------|
+| pfx_encrypted | TEXT | AES-256-CBC 암호화된 인증서 |
+| password_encrypted | TEXT | 암호화된 비밀번호 |
+| subject_cn | TEXT | 인증서 주체 |
+| valid_from / valid_to | TEXT | 유효기간 |
+| uploaded_by | INTEGER FK | 업로드한 사용자 ID |
+
+### 기타 테이블
+
+| 테이블 | 설명 |
+|--------|------|
+| sessions | express-session 세션 저장 |
+| file_groups | 날짜별 갑지/을지 파일 그룹 |
+| unit_conversion_history | 단위 변환 이력 |
+| split_submissions | 분할 전송 이력 |
+| statistics | 날짜+공급구분별 통계 (UNIQUE) |
+| report_ignore | 미보고 무시 날짜 관리 |
+| error_history | 오류 발생 이력 |
+| error_solutions | 오류 해결 패턴 학습 |
+| notification_history | 알림 이력 |
+| app_settings | 앱 설정 (KEY-VALUE) |
+| jwt_tokens | KPIS JWT 토큰 캐싱 (id=1) |
+
+## 인덱스
+
+주요 쿼리 성능 최적화를 위한 인덱스 목록입니다.
+
+| 대상 테이블 | 인덱스 컬럼 | 용도 |
+|------------|------------|------|
+| standard_codes | kor_name | 제품명 검색 |
+| code_mapping | product_name | 코드매핑 조회 |
+| code_mapping | (product_name, standard_code, supply_type) | 복합 유니크 조회 |
+| gap_rows | report_date | 날짜별 데이터 로드 |
+| eul_rows | report_date | 날짜별 을지 로드 |
+| batch_rules | priority, is_active | 규칙 우선순위 정렬 |
+| edit_history | timestamp, rule_id, edit_type | 이력 조회/필터링 |
+| error_history | date, error_code | 오류 추적 |
+| sessions | expired | 만료 세션 정리 |
+
+## 데이터 초기 시딩
+
+서버 최초 기동 시 마스터 데이터를 자동 적재합니다.
+
+| 소스 파일 | 대상 테이블 | source 값 | 방식 |
+|----------|------------|-----------|------|
+| `src/data/barcodeData.json` | standard_codes | `barcode` | 트랜잭션 UPSERT |
+| `src/data/standardCodes.json` | standard_codes | `excel` | ON CONFLICT 병합 |
+| 사용자 업로드 (`/api/master-data/load`) | standard_codes | 파일별 | 엑셀 파싱 후 적재 |
+
+> 시딩 후 적재 건수를 `loadedBarcodeCdCount`, `loadedExcelCdCount`로 추적합니다.
+
+## 마이그레이션
+
+별도 마이그레이션 도구 없이 `server/db.ts`에서 서버 시작 시 자동 수행합니다.
+
+### 마이그레이션 패턴
+
+```
+컬럼 존재 여부 확인 (PRAGMA table_info)
+  → 없으면 ALTER TABLE ADD COLUMN
+  → 있으면 스킵
+```
+
+### 마이그레이션 이력
+
+| 대상 | 변경 내용 | 버전 |
+|------|----------|------|
+| standard_codes | spec, company, dosage_form 등 7개 컬럼 추가 | v0.7.0 |
+| code_mapping | supply_type 컬럼 추가 | v0.8.0 |
+| users | role 컬럼 추가 (첫 사용자 자동 admin) | v0.9.0 |
+| cert_config | 테이블 동적 생성 | v0.9.2 |
+| gap_rows, eul_rows, report_ignore | 테이블 동적 생성 | v0.9.4 |
+
+## 데이터 백업 및 복원
+
+### 백업
+
+SQLite는 단일 파일(`data/medicine.db`)이므로 파일 복사로 백업됩니다.
+
+```bash
+# NHN 서버에서 백업
+cp data/medicine.db data/medicine_backup_$(date +%Y%m%d).db
+```
+
+WAL 모드 사용 중이므로 `-wal`, `-shm` 파일도 함께 백업해야 합니다.
+
+```bash
+# WAL 파일 포함 백업
+cp data/medicine.db data/medicine.db-wal data/medicine.db-shm /backup/
+```
+
+### 복원
+
+```bash
+# 서버 중지
+pm2 stop kpis-dsr-api
+
+# 백업 파일 복원
+cp /backup/medicine.db data/medicine.db
+cp /backup/medicine.db-wal data/medicine.db-wal 2>/dev/null
+cp /backup/medicine.db-shm data/medicine.db-shm 2>/dev/null
+
+# 서버 재시작
+pm2 restart kpis-dsr-api
+```
+
+> 복원 시 반드시 서버를 중지한 후 진행합니다. 실행 중 파일 교체는 DB 손상을 유발할 수 있습니다.
+
+### 정기 백업 권장
+
+| 항목 | 권장값 |
+|------|--------|
+| 백업 주기 | 매일 1회 (cron) |
+| 보관 기간 | 최근 30일 |
+| 저장 위치 | 별도 볼륨 또는 외부 스토리지 |
+
+## 다음 단계
+
+- [API 레퍼런스](/kpis-dsr-api/admin-guide/api-reference) — 내부/외부 API 엔드포인트
+- [문제 해결](/kpis-dsr-api/admin-guide/troubleshooting) — DB 관련 장애 대응

@@ -1,0 +1,22 @@
+# 배포
+
+KPIS DSR API 배포 가이드입니다.
+
+## 아키텍처
+
+- **프론트엔드**: Vercel에 배포 (React 19 + Vite)
+- **API 서버**: NHN 서버에 PM2로 운영 (Express 5)
+
+## API 서버 배포 (NHN)
+
+```bash
+# SSH 접속 후
+cd /path/to/kpis-dsr-api
+git pull origin main
+npm install --production
+pm2 restart kpis-dsr-api
+```
+
+## 프론트엔드 배포 (Vercel)
+
+`main` 브랜치에 푸시 시 Vercel이 자동 배포합니다.

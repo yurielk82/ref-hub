@@ -26,6 +26,23 @@ const footer = (
   </Footer>
 )
 
+/**
+ * embed 모드: ?embed=true 시 네비/사이드바/푸터 숨김 (iframe 임베딩용)
+ * 두 상수 모두 서버 측 하드코딩 — 사용자 입력 미포함, XSS 위험 없음
+ */
+const EMBED_DETECT_SCRIPT = `if(new URLSearchParams(location.search).has('embed'))document.documentElement.dataset.embed='true'`
+
+const EMBED_HIDE_STYLE = [
+  'html[data-embed="true"] nav,',
+  'html[data-embed="true"] aside,',
+  'html[data-embed="true"] footer,',
+  'html[data-embed="true"] .nextra-sidebar-container,',
+  'html[data-embed="true"] .nextra-toc',
+  '{ display:none !important }',
+  'html[data-embed="true"] article',
+  '{ max-width:100% !important; padding:2rem !important }',
+].join('\n')
+
 export default async function RootLayout({
   children,
 }: {
@@ -35,6 +52,10 @@ export default async function RootLayout({
     <html lang="ko" dir="ltr" suppressHydrationWarning>
       <Head faviconGlyph="📚" />
       <body>
+        {/* eslint-disable-next-line -- 하드코딩 상수, XSS 무관 */}
+        <script dangerouslySetInnerHTML={{ __html: EMBED_DETECT_SCRIPT }} />
+        {/* eslint-disable-next-line -- 하드코딩 상수, XSS 무관 */}
+        <style dangerouslySetInnerHTML={{ __html: EMBED_HIDE_STYLE }} />
         <Layout
           navbar={navbar}
           pageMap={await getPageMap()}

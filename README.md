@@ -14,21 +14,42 @@
 ## 개발
 
 ```bash
+git submodule update --init --recursive  # submodule 초기화
 npm install
-npm run dev     # http://localhost:3000
-npm run build   # 프로덕션 빌드
+npm run dev     # http://localhost:3000 (predev가 문서 자동 동기화)
+npm run build   # 프로덕션 빌드 (prebuild가 문서 자동 동기화)
 ```
 
 ## 구조
 
 ```
-content/          # MDX 문서 파일
-├── _meta.tsx     # 전체 네비게이션
-├── index.mdx     # 홈페이지
-├── csoweb/       # CSO Web 매뉴얼
-├── kpis-dsr-api/ # KPIS DSR API 매뉴얼
-├── studiogo/     # StudioGo 매뉴얼
-└── ev-motor-reliability/ # EV Motor 매뉴얼
+repos/                  # Git submodule (문서 원본)
+├── csoweb/
+├── kpis-dsr-api/
+├── studiogo/
+└── ev-motor-reliability/
+scripts/
+└── sync-docs.mjs       # repos/*/docs/manual/ → content/*/ 동기화
+content/                # MDX 문서 파일 (Nextra 자동 라우팅)
+├── _meta.tsx           # 전체 네비게이션
+├── index.mdx           # 홈페이지
+├── csoweb/             # sync 생성 (.gitignore)
+├── kpis-dsr-api/       # sync 생성 (.gitignore)
+├── studiogo/           # sync 생성 (.gitignore)
+└── ev-motor-reliability/ # sync 생성 (.gitignore)
+```
+
+## 문서 동기화
+
+각 프로젝트의 `docs/manual/`에서 문서를 작성하고, submodule로 포털에 동기화합니다.
+
+```bash
+# 최신 문서 가져오기
+git submodule update --remote
+npm run sync
+
+# 특정 프로젝트만 업데이트
+git submodule update --remote repos/csoweb
 ```
 
 ## 스택
@@ -39,4 +60,4 @@ content/          # MDX 문서 파일
 
 ## 버전
 
-v0.1.0
+v0.2.0

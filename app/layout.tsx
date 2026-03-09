@@ -34,13 +34,8 @@ const EMBED_DETECT_SCRIPT = `if(new URLSearchParams(location.search).has('embed'
 
 const EMBED_HIDE_STYLE = [
   'html[data-embed="true"] header.nextra-navbar,',
-  'html[data-embed="true"] aside,',
-  'html[data-embed="true"] footer,',
-  'html[data-embed="true"] .nextra-sidebar-container,',
-  'html[data-embed="true"] .nextra-toc',
+  'html[data-embed="true"] footer',
   '{ display:none !important }',
-  'html[data-embed="true"] article',
-  '{ max-width:100% !important; padding:2rem !important }',
 ].join('\n')
 
 export default async function RootLayout({

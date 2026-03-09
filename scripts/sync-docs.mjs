@@ -15,21 +15,31 @@ const PROJECTS = [
   { repo: 'ev-motor-reliability', content: 'ev-motor-reliability' },
 ]
 
+let synced = 0
+let failed = 0
+
 for (const { repo, content } of PROJECTS) {
   const src = resolve(ROOT, 'repos', repo, 'docs', 'manual')
   const dest = resolve(ROOT, 'content', content)
 
   if (!existsSync(src)) {
-    console.warn(`[sync-docs] 경고: ${src} 없음 — 건너뜀`)
+    console.error(`[sync-docs] 오류: ${src} 없음`)
+    failed++
     continue
   }
 
-  // clean sync: 기존 파일 삭제 후 복사
-  if (existsSync(dest)) {
-    rmSync(dest, { recursive: true })
+  try {
+    if (existsSync(dest)) {
+      rmSync(dest, { recursive: true })
+    }
+    cpSync(src, dest, { recursive: true })
+    synced++
+    console.log(`[sync-docs] ${repo}/docs/manual/ → content/${content}/`)
+  } catch (err) {
+    console.error(`[sync-docs] 실패: ${repo}`, err.message)
+    failed++
   }
-  cpSync(src, dest, { recursive: true })
-  console.log(`[sync-docs] ${repo}/docs/manual/ → content/${content}/`)
 }
 
-console.log('[sync-docs] 동기화 완료')
+console.log(`[sync-docs] 완료: ${synced}개 동기화, ${failed}개 실패`)
+if (failed > 0) process.exit(1)

@@ -33,7 +33,7 @@ const footer = (
 const EMBED_DETECT_SCRIPT = `if(new URLSearchParams(location.search).has('embed'))document.documentElement.dataset.embed='true'`
 
 const EMBED_HIDE_STYLE = [
-  'html[data-embed="true"] nav,',
+  'html[data-embed="true"] header.nextra-navbar,',
   'html[data-embed="true"] aside,',
   'html[data-embed="true"] footer,',
   'html[data-embed="true"] .nextra-sidebar-container,',

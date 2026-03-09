@@ -1,0 +1,29 @@
+# EV Motor Reliability
+
+전기차 구동모터/인버터 신뢰성 시험 자동화 플랫폼
+
+## 개요
+
+| 항목 | 내용 |
+|------|------|
+| **펌웨어** | C (TMS320F2838x DSP, Code Composer Studio) |
+| **분석** | Python 3.x (numpy, scipy, matplotlib, reliability) |
+| **하드웨어** | SMC300 모터제어 패키지, PMSM, BLDC |
+| **도구** | CCS, UniFlash, JTAG (SDS200i) |
+
+## 주요 기능
+
+- 모터/인버터 신뢰성 시험 자동화
+- Weibull 분석 및 시각화
+- 고장 예측 모델 (MTTF, 고장률)
+- 시리얼/JTAG 통신 기반 실시간 데이터 수집
+- 시뮬레이션 파이프라인 (runner.py, pipeline.py)
+
+## 단위 규칙
+
+SI 단위계 사용: `rad/s` (속도), `A` (전류), `V` (전압), `N·m` (토크), `degC` (온도)
+
+## 매뉴얼
+
+- [사용자 매뉴얼](/ev-motor-reliability/user-guide) — 분석/시험 담당자용
+- [운영자 매뉴얼](/ev-motor-reliability/admin-guide) — 서버/장비 관리자용

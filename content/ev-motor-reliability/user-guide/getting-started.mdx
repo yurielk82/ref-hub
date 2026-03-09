@@ -1,0 +1,44 @@
+# 시작하기
+
+EV Motor Reliability 시스템 사용을 위한 초기 설정 가이드입니다.
+
+## 시스템 요구사항
+
+| 항목 | 요구사항 |
+|------|---------|
+| **Python** | 3.x (numpy, scipy, matplotlib, pandas, reliability) |
+| **펌웨어 개발** | Code Composer Studio + C2000Ware |
+| **하드웨어** | SMC300 모터제어 패키지, JTAG 디버거 (SDS200i) |
+| **OS** | Windows 10+ 또는 Linux |
+
+## 환경 설정
+
+```bash
+# Python 가상환경 생성
+python3 -m venv venv
+source venv/bin/activate  # Linux/Mac
+# venv\Scripts\activate   # Windows
+
+# 의존성 설치
+pip install -r requirements.txt
+```
+
+## 프로젝트 구조
+
+| 디렉토리 | 설명 |
+|---------|------|
+| `simulation/` | 시뮬레이션 도메인 (순수 수학/물리 로직) |
+| `analysis/` | 분석 도메인 (Weibull, 고장률) |
+| `automation/` | 자동화 인프라 (시리얼, JTAG, 파일 I/O) |
+| `firmware/` | DSP 펌웨어 (알고리즘 + HAL) |
+| `data/` | 시험 데이터 (Git 미추적) |
+
+## 단위 규칙
+
+모든 데이터는 SI 단위계를 사용합니다:
+- 속도: `rad/s`, 전류: `A`, 전압: `V`, 토크: `N·m`, 온도: `degC`
+
+## 다음 단계
+
+- [데이터 업로드](/ev-motor-reliability/user-guide/data-upload)
+- [분석 실행](/ev-motor-reliability/user-guide/analysis)

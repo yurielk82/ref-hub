@@ -12,7 +12,6 @@ const PROJECTS = [
   { repo: 'csoweb', content: 'csoweb' },
   { repo: 'kpis-dsr-api', content: 'kpis-dsr-api' },
   { repo: 'studiogo', content: 'studiogo' },
-  { repo: 'ev-motor-reliability', content: 'ev-motor-reliability' },
 ]
 
 let synced = 0

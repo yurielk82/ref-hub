@@ -15,16 +15,17 @@
 
 ## 프로젝트 구조
 
-- `repos/` — 4개 프로젝트 Git submodule (문서 원본)
+- `repos/` — 3개 프로젝트 Git submodule (csoweb, kpis-dsr-api, studiogo)
 - `scripts/sync-docs.mjs` — `repos/*/docs/manual/` → `content/*/` 복사 스크립트
 - `content/index.mdx`, `content/_meta.tsx` — 포털 홈/네비게이션 (포털 리포 관리)
-- `content/{project}/` — submodule에서 동기화된 문서 (.gitignore 대상)
+- `content/{csoweb,kpis-dsr-api,studiogo}/` — submodule에서 동기화된 문서 (.gitignore 대상)
+- `content/ev-motor-reliability/` — 포털 리포에서 직접 관리 (private 리포)
 - `app/layout.tsx` — 루트 레이아웃 (Nextra 테마 설정)
 - `public/images/` — 스크린샷, 다이어그램
 
 ## 문서 동기화 (Git Submodules)
 
-문서는 각 프로젝트 리포의 `docs/manual/`에서 작성하고, submodule로 포털에 동기화한다.
+문서는 각 프로젝트 리포의 `docs/manual/`에서 작성하고, submodule로 포털에 동기화한다. ev-motor-reliability는 private 리포이므로 포털에서 직접 관리.
 
 ```bash
 # 최신 문서 가져오기 + 동기화

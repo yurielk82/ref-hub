@@ -34,6 +34,8 @@ const EMBED_DETECT_SCRIPT = `if(new URLSearchParams(location.search).has('embed'
 
 const EMBED_HIDE_STYLE = [
   'html[data-embed="true"] header.nextra-navbar,',
+  'html[data-embed="true"] .nextra-sidebar,',
+  'html[data-embed="true"] .nextra-breadcrumb,',
   'html[data-embed="true"] footer',
   '{ display:none !important }',
 ].join('\n')

@@ -30,7 +30,7 @@ const footer = (
  * embed 모드: ?embed=true 시 네비/사이드바/푸터 숨김 (iframe 임베딩용)
  * 두 상수 모두 서버 측 하드코딩 — 사용자 입력 미포함, XSS 위험 없음
  */
-const EMBED_DETECT_SCRIPT = `if(new URLSearchParams(location.search).has('embed'))document.documentElement.dataset.embed='true'`
+const EMBED_DETECT_SCRIPT = `(function(){var e=new URLSearchParams(location.search).has('embed');if(e)sessionStorage.setItem('_embed','1');if(e||sessionStorage.getItem('_embed'))document.documentElement.dataset.embed='true'})()`
 
 const EMBED_HIDE_STYLE = [
   'html[data-embed="true"] header.nextra-navbar,',

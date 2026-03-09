@@ -32,3 +32,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Submodule 동기화 콘텐츠 (sync-docs.mjs가 생성)
+content/csoweb/
+content/kpis-dsr-api/
+content/studiogo/
+content/ev-motor-reliability/

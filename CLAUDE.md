@@ -15,17 +15,34 @@
 
 ## 프로젝트 구조
 
-- `content/` — MDX 문서 파일 (Nextra가 자동 라우팅)
-- `content/_meta.tsx` — 전체 네비게이션 구조
-- `content/{project}/` — 프로젝트별 섹션
+- `repos/` — 4개 프로젝트 Git submodule (문서 원본)
+- `scripts/sync-docs.mjs` — `repos/*/docs/manual/` → `content/*/` 복사 스크립트
+- `content/index.mdx`, `content/_meta.tsx` — 포털 홈/네비게이션 (포털 리포 관리)
+- `content/{project}/` — submodule에서 동기화된 문서 (.gitignore 대상)
 - `app/layout.tsx` — 루트 레이아웃 (Nextra 테마 설정)
 - `public/images/` — 스크린샷, 다이어그램
+
+## 문서 동기화 (Git Submodules)
+
+문서는 각 프로젝트 리포의 `docs/manual/`에서 작성하고, submodule로 포털에 동기화한다.
+
+```bash
+# 최신 문서 가져오기 + 동기화
+git submodule update --remote && npm run sync
+
+# 로컬 개발 (predev가 sync 자동 실행)
+npm run dev
+```
+
+- 문서 수정: 프로젝트 리포에서 `docs/manual/` 수정 → 커밋+푸시
+- 포털 반영: `git submodule update --remote repos/{project}` → 커밋+푸시 → Vercel 자동 배포
 
 ## 컨벤션
 
 ### 파일 구조
 
-- 새 프로젝트: `content/{project}/index.mdx` + `user-guide/` + `admin-guide/` + 각 디렉토리에 `_meta.tsx`
+- 새 프로젝트: 해당 프로젝트 리포에 `docs/manual/` 생성 후 submodule 추가
+- 구조: `docs/manual/index.mdx` + `user-guide/` + `admin-guide/` + 각 디렉토리에 `_meta.tsx`
 - `_meta.tsx`는 `MetaRecord` 타입, 한국어 타이틀
 - 파일명: kebab-case (예: `getting-started.mdx`)
 - 프론트매터 미사용 (Nextra가 `_meta.tsx`로 타이틀/순서 관리)

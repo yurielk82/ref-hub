@@ -1,10 +1,13 @@
 {
   "name": "codegear-dev-portal",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "private": true,
   "description": "프로젝트 통합 레퍼런스 사이트",
   "scripts": {
+    "sync": "node scripts/sync-docs.mjs",
+    "predev": "node scripts/sync-docs.mjs",
     "dev": "next dev",
+    "prebuild": "node scripts/sync-docs.mjs",
     "build": "next build",
     "start": "next start"
   },

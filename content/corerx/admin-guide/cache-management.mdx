@@ -1,0 +1,136 @@
+# 캐시 관리
+
+CoreRx는 모든 KPI 계산을 PostgreSQL DB Function으로 사전 수행하여 캐시 테이블에 저장합니다. 대시보드(BI 도구)는 캐시 테이블만 조회하므로, 캐시 갱신 전략이 데이터 정합성과 대시보드 성능의 핵심입니다.
+
+## 캐시 아키텍처
+
+### 원칙
+
+- **원본 테이블 직접 조회 금지**: 대시보드는 반드시 `corerx_cache_*` 캐시 테이블만 조회합니다.
+- **DB Function으로 집계**: 모든 KPI 계산은 PostgreSQL Function에서 수행합니다.
+- **TRUNCATE + INSERT 패턴**: 각 캐시 함수는 기존 데이터를 삭제하고 새로 계산된 결과를 삽입합니다.
+
+### 캐시 테이블 목록
+
+| 캐시 테이블 | 원본 테이블 | 내용 |
+|------------|------------|------|
+| corerx_cache_sales_monthly | kpis_gap_rows, erp_orders | 월별 매출 집계 (경로, 제품, 거래처별) |
+| corerx_cache_product_ranking | kpis_gap_rows, kpis_standard_codes | 제품 순위, 약효군별 비중 |
+| corerx_cache_account_summary | kpis_gap_rows | 거래처 요약 (지역, 유형, 매출, 성장률) |
+| corerx_cache_market_share | corerx_ubist_data | 시장점유율 (MS%, 약효군별, 경쟁사) |
+| corerx_cache_cso_status | csoweb_settlements, corerx_cso_preemption | CSO 성과 (흡수율, 정산 상태) |
+| corerx_cache_meta | - | 캐시 메타정보 (갱신 일시, 상태, 행 수) |
+
+## refresh_all_kpi_cache()
+
+전체 캐시를 일괄 갱신하는 마스터 함수입니다.
+
+### 실행 방식
+
+내부적으로 5개의 개별 캐시 갱신 함수를 순차 실행합니다:
+
+1. `refresh_cache_sales_monthly(company_id)` — 월별 매출 캐시
+2. `refresh_cache_product_ranking(company_id)` — 제품 순위 캐시
+3. `refresh_cache_account_summary(company_id)` — 거래처 요약 캐시
+4. `refresh_cache_market_share(company_id)` — 시장점유율 캐시
+5. `refresh_cache_cso_status(company_id)` — CSO 성과 캐시
+
+각 함수 완료 시 `corerx_cache_meta` 테이블에 상태가 기록됩니다.
+
+### 수동 실행
+
+Superset SQL Lab 또는 psql에서 직접 실행할 수 있습니다.
+
+```sql
+SELECT refresh_all_kpi_cache(
+  '4b5b1d04-23f6-42a7-9fe5-acb0a9998c55',
+  'manual'
+);
+```
+
+| 파라미터 | 설명 |
+|----------|------|
+| company_id | 회사 UUID (한국유니온제약: `4b5b1d04-23f6-42a7-9fe5-acb0a9998c55`) |
+| trigger | 갱신 사유 (manual / ubist_upload / erp_import 등) |
+
+### 개별 캐시만 갱신
+
+특정 캐시만 갱신해야 하는 경우 개별 함수를 직접 호출합니다.
+
+```sql
+-- 시장점유율 캐시만 갱신 (UBIST 데이터 업데이트 후)
+SELECT refresh_cache_market_share(
+  '4b5b1d04-23f6-42a7-9fe5-acb0a9998c55'
+);
+```
+
+## 갱신 주기와 트리거
+
+### 자동 갱신
+
+| 트리거 이벤트 | 갱신 대상 | 시점 |
+|--------------|-----------|------|
+| UBIST ETL 완료 | 전체 캐시 (5개) | ETL 스크립트가 자동 호출 |
+| ERP 주문서 임포트 | 매출/제품/거래처 캐시 | 임포트 스크립트가 자동 호출 |
+
+### 수동 갱신이 필요한 경우
+
+| 상황 | 조치 |
+|------|------|
+| CSO 선점 데이터 수정 후 | CSO 캐시 개별 갱신 |
+| 매출 목표 변경 후 | 매출 캐시 개별 갱신 |
+| 캐시 상태가 failed인 경우 | 원인 해결 후 전체 캐시 갱신 |
+| 대시보드 데이터가 오래된 경우 | 전체 캐시 수동 갱신 |
+
+## 성능 고려사항
+
+### 갱신 소요 시간
+
+캐시 갱신 시간은 데이터 양에 비례합니다.
+
+| 캐시 | 예상 소요 시간 | 주요 연산 |
+|------|---------------|-----------|
+| sales_monthly | 10~30초 | 월별 집계, 데이터 소스 우선순위 적용 |
+| product_ranking | 5~15초 | 제품별 집계, 약효군 매핑 |
+| account_summary | 5~15초 | 거래처별 집계, 성장률 계산 |
+| market_share | 15~45초 | UBIST 전체 시장 집계, MS% 계산 |
+| cso_status | 10~30초 | 선점 매칭, 흡수율 계산, 정산 집계 |
+| **전체** | **45초~2분** | 5개 순차 실행 |
+
+### 갱신 중 대시보드 동작
+
+- TRUNCATE + INSERT 패턴이므로, 갱신 진행 중 대시보드를 조회하면 일시적으로 데이터가 비어 보일 수 있습니다.
+- 갱신 중에는 `corerx_cache_meta`의 상태가 `running`으로 표시됩니다.
+- 사용자가 적은 시간대(업무 시작 전, 점심시간 등)에 갱신을 실행하는 것을 권장합니다.
+
+### 메모리 사용량
+
+DB Function은 서버 사이드에서 실행되므로, PostgreSQL의 `work_mem` 설정이 충분해야 합니다. UBIST 데이터가 대용량(11만 행)이므로 market_share 캐시 갱신 시 메모리 사용량이 높아질 수 있습니다.
+
+> **주의**: 캐시 갱신이 반복적으로 실패하면 PostgreSQL 로그를 확인하세요. 메모리 부족이 원인인 경우 `work_mem` 값을 조정해야 합니다.
+
+## 캐시 메타 테이블
+
+`corerx_cache_meta` 테이블은 각 캐시의 갱신 이력을 기록합니다.
+
+| 컬럼 | 설명 |
+|------|------|
+| cache_name | 캐시 테이블명 |
+| last_refreshed | 마지막 갱신 완료 일시 |
+| status | completed / running / failed |
+| row_count | 갱신 후 행 수 |
+| trigger_type | 갱신을 유발한 이벤트 |
+| error_message | 실패 시 에러 메시지 |
+
+### 모니터링
+
+데이터 관리 탭에서 캐시 상태를 정기적으로 확인합니다. 다음 경우에 주의가 필요합니다:
+
+- `last_refreshed`가 예상 갱신 주기보다 오래된 경우
+- `status`가 `failed`인 경우
+- `row_count`가 이전 대비 크게 변동한 경우 (데이터 누락 또는 중복 가능성)
+
+## 다음 단계
+
+- [ETL 파이프라인](/corerx/admin-guide/etl-pipeline) — UBIST 데이터 적재 방법
+- [문제 해결](/corerx/admin-guide/troubleshooting) — 캐시 관련 문제 대응

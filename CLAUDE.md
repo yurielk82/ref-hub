@@ -17,7 +17,7 @@
 
 ## 도메인 컨텍스트
 
-4개 프로젝트(csoweb, KPIS-DSR-API, StudioGo, ev-motor-reliability)의 사용자/운영자 매뉴얼을 통합 관리하는 문서 사이트.
+5개 프로젝트(csoweb, KPIS-DSR-API, StudioGo, ev-motor-reliability, CoreRx)의 사용자/운영자 매뉴얼을 통합 관리하는 문서 사이트.
 
 ## 프로젝트 구조
 
@@ -26,6 +26,7 @@
 - `content/index.mdx`, `content/_meta.tsx` — 포털 홈/네비게이션 (포털 리포 관리)
 - `content/{csoweb,kpis-dsr-api,studiogo}/` — submodule에서 동기화된 문서 (.gitignore 대상)
 - `content/ev-motor-reliability/` — 포털 리포에서 직접 관리 (private 리포)
+- `content/corerx/` — 포털 리포에서 직접 관리 (private 리포)
 - `app/layout.tsx` — 루트 레이아웃 (Nextra 테마 설정)
 - `public/images/` — 스크린샷, 다이어그램
 

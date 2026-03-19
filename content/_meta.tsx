@@ -17,6 +17,10 @@ const meta: MetaRecord = {
     title: 'StudioGo',
     type: 'page',
   },
+  corerx: {
+    title: 'CoreRx',
+    type: 'page',
+  },
   'ev-motor-reliability': {
     title: 'EV Motor Reliability',
     type: 'page',

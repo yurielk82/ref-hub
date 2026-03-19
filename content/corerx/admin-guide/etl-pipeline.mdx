@@ -1,0 +1,161 @@
+# ETL 파이프라인
+
+UBIST 처방조제 데이터를 엑셀 파일에서 PostgreSQL 데이터베이스로 적재하는 ETL(Extract-Transform-Load) 파이프라인의 구조와 실행 방법을 설명합니다.
+
+## UBIST 엑셀 구조
+
+UBIST에서 제공하는 엑셀 파일은 Wide/Pivot 형태입니다.
+
+| 항목 | 내용 |
+|------|------|
+| 파일명 | UBIST_D1 Sales.xlsx |
+| 시트 | Sheet1 |
+| 행 수 | 약 110,000행 |
+| 컬럼 구조 | 10개 차원 컬럼 + 3개 지표 x 60개월 = 191 컬럼 |
+| 데이터 범위 | 268개 제조사, 13,265개 제품, 60개월분 |
+
+### 차원 컬럼 (10개)
+
+| 엑셀 컬럼 | DB 컬럼명 | 설명 |
+|-----------|-----------|------|
+| 제조사 (A열) | manufacturer | 268개 제조사. 자사는 '유니온' |
+| 판매사 (B열) | seller | 판매사명 |
+| 제품 (C열) | product | 13,265개 제품명 |
+| ATC (E열) | atc_class | ATC 약효군 분류 |
+| 성분 (F열) | ingredient | 주성분명 |
+| 식약처 (G열) | kfda_class | 식약처 분류 |
+| 제형 (H열) | dosage_form | 제형 (정제, 캡슐 등) |
+| 투여경로 (I열) | admin_route | 경구, 주사 등 |
+| 급여구분 (J열) | reimbursement_type | 급여/본인부담/비급여 |
+| 병상 (K열) | bed_size | 의료기관 규모 (300+/100~299/30~99/30 미만) |
+
+### 지표 컬럼 (3개 x 60개월)
+
+| 지표 접미사 | DB 컬럼명 | 단위 |
+|------------|-----------|------|
+| 처방건수_P | prescription_count | 건 |
+| 처방조제액(원) | prescription_amount | 원 |
+| 처방량_P | prescription_qty | 수량 |
+
+## Wide→Long 변환
+
+ETL의 핵심은 Wide 형태(월이 컬럼)를 Long 형태(월이 행)로 변환하는 것입니다.
+
+### 변환 전 (Wide)
+
+```
+제조사 | 제품 | ATC | 2025-01_처방건수 | 2025-01_처방액 | 2025-01_처방량 | 2025-02_처방건수 | ...
+유니온 | A제품 | N02  | 150              | 5000000        | 300            | 160              | ...
+```
+
+### 변환 후 (Long)
+
+```
+제조사 | 제품 | ATC | 연월    | 처방건수 | 처방액   | 처방량
+유니온 | A제품 | N02  | 2025-01 | 150     | 5000000 | 300
+유니온 | A제품 | N02  | 2025-02 | 160     | 5200000 | 320
+```
+
+### 변환 규칙
+
+- 3개 지표(처방건수, 처방액, 처방량)가 모두 0인 월은 제외합니다 (불필요한 제로 레코드 방지).
+- 동일 배치 내 중복 키(제조사+제품+연월)가 존재하면 UPSERT로 최신 값을 유지합니다.
+- D열(제조사 중복)은 무시합니다 (A열과 100% 동일).
+
+## 실행 명령어
+
+ETL 스크립트는 `scripts/ubist_import.py`입니다.
+
+### 전체 적재
+
+전체 데이터를 한 번에 적재합니다. 최초 실행 또는 전체 재적재 시 사용합니다.
+
+```bash
+python3 scripts/ubist_import.py --file "UBIST_D1 Sales.xlsx" --direct
+```
+
+### 특정 연도만 적재
+
+특정 연도의 데이터만 적재합니다. 증분 업데이트 시 사용합니다.
+
+```bash
+python3 scripts/ubist_import.py --file "UBIST_D1 Sales.xlsx" --year 2025
+```
+
+### 드라이런 (테스트)
+
+실제 DB에 적재하지 않고 변환 결과만 확인합니다. 새 파일 검증 시 사용합니다.
+
+```bash
+python3 scripts/ubist_import.py --file "UBIST_D1 Sales.xlsx" --dry-run
+```
+
+### 특정 연도 삭제
+
+특정 연도의 UBIST 데이터를 DB에서 삭제합니다.
+
+```bash
+python3 scripts/ubist_import.py --delete-year 2021
+```
+
+## 실행 흐름
+
+ETL 스크립트의 내부 처리 순서는 다음과 같습니다:
+
+1. 엑셀 파일 로드 (openpyxl, read_only 모드로 메모리 효율화)
+2. 헤더 파싱 (1~2행: 지표 그룹 + 월 헤더 매핑)
+3. Wide→Long 변환 (행 x 월 조합을 개별 레코드로 분해)
+4. 제로값 스킵 (3개 지표 모두 0이면 해당 레코드 제외)
+5. 배치 내 중복 제거 (UPSERT 키 기준)
+6. 벌크 UPSERT (psycopg2 execute_values, 5,000행 단위 배치)
+7. 적재 완료 후 캐시 자동 갱신 (`refresh_all_kpi_cache()` 호출)
+
+## 에러 처리
+
+### 파일 관련 에러
+
+| 에러 | 원인 | 해결 |
+|------|------|------|
+| FileNotFoundError | 파일 경로 오류 | `--file` 경로 확인, 파일명 공백 주의 (따옴표로 감싸기) |
+| 헤더 파싱 실패 | 엑셀 구조 변경 | UBIST 파일 형식이 변경되었는지 확인. 컬럼 순서 검증 |
+| 메모리 부족 | 96MB 파일 로드 시 | `read_only=True` 모드 확인. 서버 메모리 여유 확보 |
+
+### DB 관련 에러
+
+| 에러 | 원인 | 해결 |
+|------|------|------|
+| Connection refused | DB 연결 실패 | Supabase Docker 컨테이너 상태 확인 |
+| UNIQUE violation | 중복 키 충돌 | UPSERT가 정상 동작하면 발생하지 않음. 스크립트 버전 확인 |
+| Disk full | 디스크 용량 부족 | 디스크 여유 공간 확보 후 재실행 |
+
+### 재실행 안전성
+
+ETL 스크립트는 UPSERT(INSERT ON CONFLICT UPDATE) 방식으로 동작하므로, 같은 파일을 여러 번 실행해도 데이터가 중복되지 않습니다. 에러 발생 시 원인을 해결한 후 동일한 명령어로 재실행하면 됩니다.
+
+## 의존성
+
+ETL 스크립트 실행에 필요한 Python 패키지입니다.
+
+| 패키지 | 역할 |
+|--------|------|
+| openpyxl | 엑셀 파일 파싱 |
+| psycopg2-binary | PostgreSQL 연결 및 벌크 UPSERT |
+| python-dotenv | `.env` 파일에서 환경변수 로드 |
+
+```bash
+pip install -r scripts/requirements.txt
+```
+
+## 환경변수
+
+ETL 스크립트가 사용하는 환경변수입니다. 프로젝트 루트의 `.env` 파일에 설정합니다.
+
+| 환경변수 | 설명 |
+|----------|------|
+| DATABASE_URL | PostgreSQL 연결 문자열 |
+| POSTGRES_PASSWORD | PostgreSQL 비밀번호 |
+
+## 다음 단계
+
+- [캐시 관리](/corerx/admin-guide/cache-management) — ETL 이후 캐시 갱신 전략
+- [문제 해결](/corerx/admin-guide/troubleshooting) — ETL 실패 시 대응 방법

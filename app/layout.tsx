@@ -7,15 +7,15 @@ import 'nextra-theme-docs/style.css'
 
 export const metadata: Metadata = {
   title: {
-    default: 'Codegear Dev Portal',
-    template: '%s — Codegear Dev Portal',
+    default: 'Ref Hub',
+    template: '%s — Ref Hub',
   },
   description: '프로젝트 통합 레퍼런스 사이트',
 }
 
 const navbar = (
   <Navbar
-    logo={<b>Codegear Dev Portal</b>}
+    logo={<b>Ref Hub</b>}
     projectLink="https://github.com/yurielk82"
   />
 )
@@ -56,7 +56,7 @@ export default async function RootLayout({
         <Layout
           navbar={navbar}
           pageMap={await getPageMap()}
-          docsRepositoryBase="https://github.com/yurielk82/codegear-dev-portal/tree/main"
+          docsRepositoryBase="https://github.com/yurielk82/ref-hub/tree/main"
           footer={footer}
           sidebar={{ defaultMenuCollapseLevel: 1 }}
           editLink="이 페이지 수정하기"

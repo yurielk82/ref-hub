@@ -1,4 +1,4 @@
-# Yurie Docs
+# Ref Hub
 
 프로젝트 통합 레퍼런스 사이트 — Nextra v4 (App Router)
 

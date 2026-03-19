@@ -7,3 +7,6 @@
 [submodule "repos/studiogo"]
 	path = repos/studiogo
 	url = https://github.com/yurielk82/StudioGo.git
+[submodule "repos/ev-motor-reliability"]
+	path = repos/ev-motor-reliability
+	url = https://github.com/yurielk82/ev-motor-reliability.git

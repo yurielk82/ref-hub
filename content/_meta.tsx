@@ -18,7 +18,7 @@ const meta: MetaRecord = {
     type: 'page',
   },
   pharmkpi: {
-    title: 'Union KPI',
+    title: 'PharmKPI',
     type: 'page',
   },
   corerx: {

@@ -5,10 +5,10 @@ ERP 데이터 수집과 동기화 관리 방법을 설명합니다.
 ## 동기화 구조
 
 ```
-사내 ERP (MSSQL) → erp-relay-gateway → Union KPI API → Supabase (PostgreSQL)
+사내 ERP (MSSQL) → erp-relay-gateway → PharmKPI API → Supabase (PostgreSQL)
 ```
 
-Union KPI는 사내 DB에 직접 접근하지 않습니다. erp-relay-gateway가 MSSQL에서 데이터를 조회하여 JSON으로 전달합니다.
+PharmKPI는 사내 DB에 직접 접근하지 않습니다. erp-relay-gateway가 MSSQL에서 데이터를 조회하여 JSON으로 전달합니다.
 
 ## 동기화 방식
 

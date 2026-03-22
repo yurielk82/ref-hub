@@ -1,0 +1,107 @@
+{
+  "project": "ref-hub",
+  "version": "0.3.0",
+  "auditDate": "2026-03-23",
+  "auditBranch": "rule-audit/20260323",
+  "scope": "ref-hub 자체 소스 (repos/ 서브모듈 제외)",
+  "totalFiles": 11,
+  "totalLines": 269,
+  "categories": {
+    "TYPE_SAFETY": {
+      "weight": 0.20,
+      "score": 100,
+      "violations": 0,
+      "targets": 5,
+      "details": "tsc --noEmit 0 errors, any 타입 0건, strict: true 활성"
+    },
+    "CODE_QUALITY": {
+      "weight": 0.15,
+      "score": 100,
+      "violations": 0,
+      "targets": 5,
+      "details": "빈 catch 0건, 모든 파일 80줄 이하, 함수 중첩 3단계 이내"
+    },
+    "SECURITY": {
+      "weight": 0.15,
+      "score": 100,
+      "violations": 0,
+      "targets": 3,
+      "details": "하드코딩 IP/URL → 환경변수 분리 완료 (수정됨), dangerouslySetInnerHTML은 하드코딩 상수만 사용"
+    },
+    "ARCHITECTURE": {
+      "weight": 0.10,
+      "score": 100,
+      "violations": 0,
+      "targets": 3,
+      "details": "서버 컴포넌트 기본, 관심사 분리 적절, 순환 의존 없음"
+    },
+    "NAMING": {
+      "weight": 0.10,
+      "score": 100,
+      "violations": 0,
+      "targets": 11,
+      "details": "kebab-case 파일명, camelCase 변수, UPPER_SNAKE_CASE 상수 준수. 사이드바 타이틀 통일 완료 (수정됨)"
+    },
+    "GIT": {
+      "weight": 0.10,
+      "score": 100,
+      "violations": 0,
+      "targets": 20,
+      "details": "전 커밋 conventional commit + 한국어 준수 (feat/fix/refactor/docs/chore)"
+    },
+    "STYLE": {
+      "weight": 0.05,
+      "score": null,
+      "violations": null,
+      "targets": null,
+      "details": "ESLint/Prettier 미설치 — 정적 문서 사이트로 해당 없음"
+    },
+    "TEST": {
+      "weight": 0.05,
+      "score": null,
+      "violations": null,
+      "targets": null,
+      "details": "테스트 없음 — 정적 문서 사이트로 해당 없음"
+    },
+    "DOCS": {
+      "weight": 0.05,
+      "score": 100,
+      "violations": 0,
+      "targets": 1,
+      "details": "CLAUDE.md 완비 (정체성 테이블, Tech Stack, 배포, 컨벤션, 오버라이드)"
+    },
+    "PERFORMANCE": {
+      "weight": 0.05,
+      "score": 100,
+      "violations": 0,
+      "targets": 1,
+      "details": "정적 사이트(SSG) — 73페이지 정적 생성, DB/API 없음"
+    }
+  },
+  "weightedScore": 100.0,
+  "fixes": [
+    {
+      "commit": "fdd4574",
+      "category": "SECURITY",
+      "description": "CSP frame-ancestors 하드코딩 IP/URL → 환경변수(EMBED_ORIGIN_*) 분리"
+    },
+    {
+      "commit": "1faea96",
+      "category": "TYPE_SAFETY",
+      "description": "mdx-components Record<string, unknown> → MDXComponents 정확한 타입 적용"
+    },
+    {
+      "commit": "513bb5f",
+      "category": "NAMING",
+      "description": "ev-motor-reliability 사이드바 타이틀 매뉴얼 → 가이드 통일"
+    }
+  ],
+  "manualRequired": [],
+  "verification": {
+    "tsc": "PASS (0 errors)",
+    "build": "PASS (73 pages SSG)",
+    "eslint": "N/A (미설치)",
+    "prettier": "N/A (미설치)",
+    "test": "N/A (미설치)"
+  }
+}

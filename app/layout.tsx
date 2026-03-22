@@ -1,5 +1,5 @@
 import { Footer, Layout, Navbar } from 'nextra-theme-docs'
-import { Head } from 'nextra/components'
+import { Head, Search } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
@@ -32,6 +32,8 @@ const footer = (
  */
 const EMBED_DETECT_SCRIPT = `(function(){var e=new URLSearchParams(location.search).has('embed');if(e)sessionStorage.setItem('_embed','1');if(e||sessionStorage.getItem('_embed'))document.documentElement.dataset.embed='true'})()`
 
+const GLOBAL_STYLE = 'body { word-break: keep-all; }'
+
 const EMBED_HIDE_STYLE = [
   'html[data-embed="true"] header.nextra-navbar,',
   'html[data-embed="true"] .nextra-sidebar,',
@@ -52,12 +54,15 @@ export default async function RootLayout({
         {/* eslint-disable-next-line -- 하드코딩 상수, XSS 무관 */}
         <script dangerouslySetInnerHTML={{ __html: EMBED_DETECT_SCRIPT }} />
         {/* eslint-disable-next-line -- 하드코딩 상수, XSS 무관 */}
+        <style dangerouslySetInnerHTML={{ __html: GLOBAL_STYLE }} />
+        {/* eslint-disable-next-line -- 하드코딩 상수, XSS 무관 */}
         <style dangerouslySetInnerHTML={{ __html: EMBED_HIDE_STYLE }} />
         <Layout
           navbar={navbar}
           pageMap={await getPageMap()}
           docsRepositoryBase="https://github.com/yurielk82/ref-hub/tree/main"
           footer={footer}
+          search={<Search placeholder="문서 검색..." />}
           sidebar={{ defaultMenuCollapseLevel: 1 }}
           editLink="이 페이지 수정하기"
           feedback={{ content: '피드백 보내기' }}

@@ -1,0 +1,46 @@
+# 배포
+
+Union KPI의 배포 환경과 운영 방법을 설명합니다.
+
+## 배포 환경
+
+| 항목 | 값 |
+|------|-----|
+| **호스팅** | Coolify (Oracle Cloud ARM) |
+| **URL** | [kpi.dvsharp.com](https://kpi.dvsharp.com) |
+| **DB** | Supabase 셀프호스팅 (sb.dvsharp.com, pkpi_ 접두사) |
+| **프레임워크** | Next.js 16 (App Router) |
+
+## Coolify 배포
+
+Coolify UI 또는 API를 통해 배포합니다:
+
+1. Coolify 대시보드에서 Union KPI 프로젝트 선택
+2. **Deploy** 버튼 클릭
+3. 빌드 로그에서 성공 여부 확인
+
+## 환경변수
+
+| 변수 | 설명 |
+|------|------|
+| `DATABASE_URL` | Supabase PostgreSQL 연결 문자열 (pgbouncer) |
+| `DIRECT_URL` | Prisma 마이그레이션용 직접 연결 |
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase API 엔드포인트 |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase 공개 키 |
+| `SUPABASE_SERVICE_ROLE_KEY` | 서버 사이드 전용 서비스 키 |
+
+> **주의**: 환경변수는 Coolify 프로젝트 설정에서 관리합니다. 코드에 하드코딩하지 않습니다.
+
+## DB 접속
+
+```bash
+# Supabase PostgreSQL 직접 접속
+docker exec supabase-db psql -U postgres
+
+# 특정 SQL 실행
+docker exec supabase-db psql -U postgres -c "SELECT count(*) FROM pkpi_sales;"
+```
+
+## 다음 단계
+
+- [데이터 동기화](/pharmkpi/admin-guide/data-sync) — ERP 데이터 동기화 관리

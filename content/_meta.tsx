@@ -17,6 +17,10 @@ const meta: MetaRecord = {
     title: 'StudioGo',
     type: 'page',
   },
+  pharmkpi: {
+    title: 'Union KPI',
+    type: 'page',
+  },
   corerx: {
     title: 'CoreRx',
     type: 'page',

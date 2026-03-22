@@ -17,7 +17,7 @@
 
 ## 도메인 컨텍스트
 
-5개 프로젝트(csoweb, KPIS-DSR-API, StudioGo, ev-motor-reliability, CoreRx)의 사용자/운영자 매뉴얼을 통합 관리하는 문서 사이트.
+6개 프로젝트(csoweb, KPIS-DSR-API, pharmkpi, StudioGo, ev-motor-reliability, CoreRx)의 사용자/운영자 매뉴얼을 통합 관리하는 문서 사이트.
 
 ## 프로젝트 구조
 

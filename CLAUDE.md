@@ -100,3 +100,7 @@ npm run dev
 
 - design-constraints: Tailwind 직접 사용 없음 (Nextra 테마가 스타일 제공)
 - code-principles: 컴포넌트 분리 불필요 (MDX 문서 중심)
+
+## 트러블슈팅
+
+<!-- 반복 장애 발생 시 1줄씩 추가: 증상 → 원인 → 해결책 -->

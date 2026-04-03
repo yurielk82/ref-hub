@@ -33,7 +33,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# Submodule 동기화 콘텐츠 (sync-docs.mjs가 생성)
-content/csoweb/
-content/kpis-dsr-api/
-content/studiogo/
+# Submodule 동기화 콘텐츠 — git 추적 (Vercel 서브모듈 접근 불가 대응)
+# content/csoweb/
+# content/kpis-dsr-api/
+# content/studiogo/

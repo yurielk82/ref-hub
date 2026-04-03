@@ -1,0 +1,89 @@
+# StudioGo
+
+의류 창고 기반 라이브커머스 스튜디오 예약 플랫폼 `v1.5.0`
+
+## 개요
+
+| 항목 | 내용 |
+|------|------|
+| **프론트엔드** | Expo SDK 52+ (React Native) + TypeScript strict + NativeWind v5 |
+| **백엔드** | Hono (Vercel Serverless) |
+| **DB** | Neon PostgreSQL (서버리스) + Drizzle ORM |
+| **인증** | 카카오 로그인 (네이티브 + 웹 OAuth) |
+| **알림** | 카카오 알림톡 + Expo Push Notification + 인앱 알림 |
+| **상태 관리** | TanStack Query (서버 상태) + Zustand (UI 상태) |
+| **폼 검증** | React Hook Form + Zod |
+| **호스팅** | Vercel (API 서버) + App Store / Google Play (모바일 앱) |
+
+## 도메인
+
+- **BJ(방송인/MEMBER)**: 스튜디오를 빌려 라이브커머스 방송
+- **창고 운영자(OPERATOR)**: 예약 승인, 체크인, 포장/출고 관리
+- **관리자(ADMIN)**: 모든 설정, 권한, 시스템 제어
+- **스튜디오**: 한정 자원, 예약제 운영
+- **슬롯**: 운영시간을 일정 간격으로 나눈 예약 단위
+- **Hold**: 예약 위자드 중 2분간 슬롯 임시 점유
+
+## 주요 기능
+
+- 스튜디오 예약/취소
+- 실시간 슬롯 현황 캘린더
+- 예약 승인/거절 (운영자)
+- 체크인 처리
+- 카카오 알림톡 자동 발송
+
+## 외부 연동
+
+### 카카오 로그인
+
+네이티브 앱과 웹 환경 모두에서 카카오 OAuth 인증을 지원한다.
+
+| 환경 | 방식 |
+|------|------|
+| **모바일 (iOS/Android)** | 카카오톡 앱 연동 네이티브 OAuth |
+| **웹** | 카카오 웹 OAuth 리다이렉트 |
+
+카카오 토큰은 서버 측에서 검증하며, 클라이언트에 민감 토큰을 노출하지 않는다.
+
+### 카카오 알림톡
+
+카카오 비즈메시지 기반으로 사용자에게 자동 알림을 발송한다.
+
+| 알림 유형 | 발송 시점 |
+|----------|----------|
+| **예약 확인** | 예약 승인 완료 시 |
+| **취소 안내** | 예약 취소 처리 시 |
+| **운영 알림** | 체크인 리마인더, 슬롯 변경 등 운영 이벤트 발생 시 |
+
+### Expo Push Notification
+
+앱 내 푸시 알림을 Expo Push Notification 서비스로 전송한다. 카카오 알림톡과 병행하여 앱 설치 사용자에게는 인앱 알림도 동시에 전달된다.
+
+### Neon PostgreSQL + Drizzle ORM
+
+Neon PostgreSQL은 서버리스 환경에 최적화된 PostgreSQL 호환 데이터베이스로, Vercel Serverless 함수에서 콜드 스타트 없이 연결한다. Drizzle ORM으로 타입 안전한 쿼리를 작성하며, 마이그레이션은 Drizzle Kit으로 관리한다.
+
+## 프로젝트 구조
+
+| 디렉토리 | 역할 |
+|---------|------|
+| `apps/mobile/` | Expo 앱 (app/ 라우트, src/ 소스) |
+| `apps/api/` | Hono API 서버 (routes → services → repositories) |
+| `shared/domain/` | 순수 비즈니스 규칙 (프레임워크 의존 없음) |
+| `shared/contracts/` | Zod 스키마, DTO, enum (클라이언트-서버 공유) |
+| `shared/db/` | Drizzle 스키마, 마이그레이션, 시드 |
+| `shared/constants/` | 공유 상수 |
+
+## 배포
+
+| 대상 | 플랫폼 | 설명 |
+|------|--------|------|
+| **API 서버** | Vercel | Hono 기반 Serverless Functions로 자동 배포 |
+| **iOS 앱** | App Store | Expo EAS Build → App Store Connect 제출 |
+| **Android 앱** | Google Play | Expo EAS Build → Google Play Console 제출 |
+
+## 매뉴얼
+
+- [사용자 매뉴얼](/studiogo/user-guide/getting-started) — BJ(방송인)/앱 사용자용
+- [운영자 매뉴얼](/studiogo/operator-guide/overview) — 창고 운영자용 (예약 승인, 체크인, 출고 관리)
+- [관리자 매뉴얼](/studiogo/admin-guide/deployment) — 시스템 관리자용

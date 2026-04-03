@@ -41,4 +41,4 @@ for (const { repo, content } of PROJECTS) {
 }
 
 console.log(`[sync-docs] 완료: ${synced}개 동기화, ${failed}개 실패`)
-if (failed > 0) process.exit(1)
+if (failed > 0 && synced === 0 && !process.env.VERCEL) process.exit(1)

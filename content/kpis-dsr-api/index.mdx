@@ -1,0 +1,96 @@
+# KPIS DSR API
+
+의약품 공급내역 가공 시스템 v0.77.0 (Korean Pharmaceutical Information Service - Drug Supply Report API)
+
+## 개요
+
+| 항목 | 내용 |
+|------|------|
+| **버전** | v0.77.0 |
+| **스택** | Vite 7 + React 19 SPA + Express 5 API + TypeScript 5.9 |
+| **UI** | Tailwind CSS 4 + shadcn/ui (Radix UI) + Lucide Icons |
+| **DB** | Supabase (PostgreSQL) + better-sqlite3 (인증서 저장) |
+| **호스팅** | Vercel (프론트엔드 SPA) + Oracle Cloud PM2 (Express API) |
+| **인증** | Google OAuth (Supabase Auth) + Basic Auth 대체 모드 |
+
+## 도메인
+
+- **KPIS (의약품관리종합정보센터)**: 의약품 유통 보고 의무를 관리하는 정부 기관
+- **DSR (Drug Supply Report)**: 의약품 공급내역 보고서
+- **갑지**: 공급자 보고 문서 (21열) — 공급사업자, 제품명, 표준코드, 수량/단가/금액, 공급구분
+- **을지**: 일련번호 문서 (3열) — 갑지 연번에 매칭되는 의약품 일련번호/RFID
+
+## 주요 기능
+
+- 엑셀 업로드 (갑지/을지) 및 자동 날짜 추출
+- 5단계 자동 코드매핑 (코드매핑 → 마스터매칭 → 단가수정 → 규격보정 → 규칙엔진)
+- 3단계 유효성 검증 (필수값 → 형식 → 비즈니스)
+- KPIS API 자동 제출 (MA111 등록 → MA112 결과확인 → MA113 반송신청 → MA114 상태조회)
+- 엑셀 내보내기 (수동 보고용, 폴더 지정 저장)
+- 반송 관리 및 오류 자동해결
+- 대시보드 (월별 보고 현황, KPI 카드, 차트)
+
+## 외부 연동
+
+### KPIS OpenAPI
+
+KPIS OpenAPI는 인증 방식에 따라 두 가지로 나뉩니다.
+
+| 구분 | API ID | 인증 방식 | 용도 |
+|------|--------|----------|------|
+| 조회 API | MA101~MA110 | API KEY (`aplHbin` + `apiKey`) | 표준코드 조회, 거래처 확인, 보고기간 조회 |
+| 등록 API | MA111~MA114 | JWT (`client_id`/`client_secret`) + 공동인증서 | 공급내역 등록, 결과확인, 반송신청, 상태조회 |
+
+- 조회 API는 사업자등록번호와 API KEY만으로 호출할 수 있습니다.
+- 등록 API는 서버에서 JWT 토큰을 발급받고, 공동인증서로 전자서명하여 호출합니다.
+
+### 인증 체계
+
+| 인증 | 설명 |
+|------|------|
+| **Google OAuth** | Supabase Auth 기반 사용자 인증 (기본 모드) |
+| **Basic Auth** | 인증 서버 없이 운영할 때의 대체 모드 |
+| **공동인증서** | KPIS API 등록 시 필요한 전자서명용 인증서 (DER 포맷, AES-256 암호화 보관) |
+
+### 이중 배포 구조
+
+| 계층 | 플랫폼 | 역할 |
+|------|--------|------|
+| **프론트엔드** | Vercel | React SPA 정적 호스팅 |
+| **API 서버** | Oracle Cloud PM2 | Express API, KPIS 프록시, 인증서 관리 |
+
+> **주의**: KPIS API는 IP 화이트리스트 기반으로 접근을 제한합니다. API 서버가 Oracle Cloud에 고정 IP로 배포되어야 KPIS 서버와 통신할 수 있습니다. Vercel에서 직접 KPIS API를 호출할 수 없습니다.
+
+### 기타 외부 연동
+
+| 서비스 | 용도 |
+|--------|------|
+| **공공데이터포털 API** | 공휴일 데이터 자동 수집 (영업일 계산에 활용) |
+| **Supabase** | PostgreSQL 데이터베이스, 사용자 인증, 스토리지 |
+
+## 데이터 흐름
+
+시스템의 전체 데이터 흐름은 다음과 같습니다.
+
+```
+Excel(갑지+을지) → [업로드/파싱] → 메모리 + Supabase DB 저장
+       ↓
+[자동처리] 코드매핑 → 마스터매칭 → 단가수정 → 규격보정 → 규칙엔진
+       ↓
+[검증] 필수값 → 형식 → 비즈니스 규칙
+       ↓
+[수동수정] 사용자가 오류/경고 행을 직접 편집
+       ↓
+├→ [내보내기/수동보고] 엑셀 다운로드 → KPIS 포털 직접 업로드
+└→ [API 제출/자동보고] MA111 등록 → MA112 결과확인 → 반송 시 MA113 재신청
+```
+
+- 업로드된 엑셀은 메모리에서 파싱된 후 Supabase DB에 저장됩니다.
+- 사용자의 편집은 메모리에서 즉시 반영되고, `flushCurrentDate()` 호출 시 DB에 동기화됩니다.
+- 내보내기는 순수 읽기 작업으로 DB에 영향을 주지 않습니다.
+- API 제출 시 접수번호가 발급되어 각 행에 즉시 반영됩니다.
+
+## 매뉴얼
+
+- [사용자 매뉴얼](/kpis-dsr-api/user-guide/getting-started) — 의약품 도매상 담당자용
+- [운영자 매뉴얼](/kpis-dsr-api/admin-guide/deployment) — API 서버/시스템 관리자용

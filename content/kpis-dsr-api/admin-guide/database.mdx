@@ -1,0 +1,305 @@
+# 데이터베이스
+
+Supabase(PostgreSQL) 기반 데이터 아키텍처, 이중 저장소 패턴, 주요 테이블 설명, 백업/복원 절차를 안내합니다.
+
+## 개요
+
+| 항목 | 설명 |
+|------|------|
+| 메인 DB | Supabase 셀프호스팅 PostgreSQL (`sb.dvsharp.com`) |
+| 로컬 DB | SQLite (better-sqlite3) — 공동인증서(`cert_config`) 전용 |
+| 마이그레이션 | `supabase/migrations/` SQL 파일 순서 적용 |
+| 접근 방식 | 프론트엔드: anon key + RLS / 서버: service_role key |
+
+> v0.43.0에서 SQLite → Supabase 마이그레이션 완료. 인증서 바이너리만 로컬 SQLite에 유지합니다.
+
+## 이중 저장소 아키텍처
+
+시스템은 **메모리**와 **Supabase** 두 곳에 데이터를 유지합니다. 사용자가 편집하는 동안에는 메모리에서 작업하고, 명시적으로 DB에 동기화하는 구조입니다.
+
+```
+엑셀 업로드 → [파싱] → 메모리(Zustand Store) + Supabase(kpis_gap_rows/kpis_eul_rows)
+                           │
+                    사용자 편집 (메모리만 변경)
+                           │
+                    flushCurrentDate()
+                           │
+                    Supabase에 최종 상태 저장 (RPC)
+```
+
+### 동작 방식
+
+| 단계 | 저장 위치 | 설명 |
+|------|----------|------|
+| 업로드 | 메모리 + Supabase | 파싱 결과를 양쪽에 동시 저장 (`kpis_upload_gap_eul` RPC) |
+| 편집 | 메모리만 | 코드매핑, 규칙 적용, 수동 수정 — 메모리에서만 처리 |
+| 동기화 | Supabase | `flushCurrentDate()` 호출 시 메모리 상태를 DB에 반영 (`kpis_flush_gap_rows` RPC) |
+| 조회 | Supabase | 페이지 새로고침, 날짜 전환 시 Supabase에서 로드 |
+
+> 편집 중 페이지를 새로고침하면 마지막 동기화 시점의 데이터로 돌아갑니다. 중요한 수정 후에는 반드시 동기화(flush)를 수행하세요.
+
+## 주요 테이블 구조
+
+### 공급 데이터
+
+#### kpis_gap_rows (갑지 행)
+
+갑지 엑셀에서 업로드된 공급내역 행 데이터입니다. 21열의 갑지 데이터와 제출 상태를 함께 저장합니다.
+
+| 컬럼 | 타입 | 설명 |
+|------|------|------|
+| id | BIGINT PK | 자동 증가 |
+| tenant_id | UUID | 테넌트 식별자 (RLS) |
+| report_date | TEXT | 보고 날짜 (YYYY-MM-DD) |
+| supply_type | TEXT | 공급구분 (1~5) |
+| seq_no | TEXT | 연번 (을지 매칭 키) |
+| standard_code | TEXT | 13자리 표준코드 |
+| product_name | TEXT | 제품명 |
+| supply_qty | NUMERIC | 공급수량 |
+| supply_amount | NUMERIC | 공급금액 (총액, 불변) |
+| supply_price | NUMERIC | 공급단가 |
+| receipt_no | TEXT | API 제출 후 부여되는 접수번호 |
+| submit_status | TEXT | 제출 상태 (`submitted`/`registered`/`returned`) |
+| submit_error | TEXT | 제출 실패 메시지 |
+
+> 전체 컬럼은 사업자번호, 영업형태, 계약방법, 공급형태, 거래처 정보, 로트번호, 유효기간 등 21개 이상입니다.
+
+#### kpis_eul_rows (을지 행)
+
+갑지에 연결되는 의약품 일련번호/RFID 데이터입니다.
+
+| 컬럼 | 타입 | 설명 |
+|------|------|------|
+| id | BIGINT PK | 자동 증가 |
+| tenant_id | UUID | 테넌트 식별자 |
+| report_date | TEXT | 보고 날짜 |
+| seq_no | TEXT | 연번 (갑지 A열과 매칭) |
+| serial_no | TEXT | 16자리 일련번호 |
+| rfid | TEXT | RFID/바코드 |
+
+### 표준코드 마스터
+
+#### kpis_standard_codes
+
+KPIS 13자리 의약품 식별코드 마스터 테이블입니다. 바코드 데이터, 엑셀 업로드, API 조회 3가지 소스에서 적재됩니다.
+
+| 컬럼 | 타입 | 설명 |
+|------|------|------|
+| std_cd | TEXT PK | 13자리 표준코드 |
+| kor_name | TEXT | 한글 제품명 |
+| pack_qty | INTEGER | 포장단위 |
+| up_cost | NUMERIC | 상한가 |
+| pay_type | INTEGER | 급여구분 (0:급여, 9:비급여) |
+| spc_gnl_cd | INTEGER | 전문/일반 (1:일반, 2:전문, 3:기타) |
+| source | TEXT | 데이터 출처 (`barcode`/`excel`/`api`) |
+| company | TEXT | 제조사 |
+| cancel_date | TEXT | 취소일 (코드 만료) |
+
+#### kpis_code_mappings (코드매핑 학습)
+
+제품명과 표준코드의 매핑 이력을 저장하여 자동 매칭에 활용합니다.
+
+| 컬럼 | 타입 | 설명 |
+|------|------|------|
+| product_name | TEXT | 제품명 |
+| standard_code | TEXT | 매핑된 표준코드 |
+| supply_type | TEXT | 공급구분 (탭별 독립 관리) |
+| usage_count | INTEGER | 사용 횟수 (높을수록 우선 적용) |
+| last_used | TIMESTAMPTZ | 마지막 사용 일시 |
+
+### 규칙 및 학습
+
+#### kpis_batch_rules (일괄 수정 규칙)
+
+사용자가 정의한 조건-액션 규칙입니다. 우선순위 순서대로 적용됩니다.
+
+| 컬럼 | 타입 | 설명 |
+|------|------|------|
+| id | TEXT PK | 규칙 고유 ID |
+| name | TEXT | 규칙 이름 |
+| conditions | JSONB | 조건 배열 (`RuleCondition[]`) |
+| actions | JSONB | 액션 배열 (`RuleAction[]`) |
+| priority | INTEGER | 우선순위 (높을수록 먼저 적용) |
+| is_active | BOOLEAN | 활성 여부 |
+| supply_type | TEXT | 적용 대상 공급구분 |
+| apply_count | INTEGER | 누적 적용 횟수 |
+
+#### kpis_auto_correction_rules (자동 보정)
+
+과거 수정 패턴을 학습하여 동일 오류 발생 시 자동 보정을 제안합니다.
+
+| 컬럼 | 타입 | 설명 |
+|------|------|------|
+| error_type | TEXT | 오류 유형 |
+| field | TEXT | 보정 대상 필드 |
+| original_pattern | TEXT | 원래 값 패턴 |
+| corrected_value | TEXT | 보정 값 |
+| confidence | NUMERIC | 신뢰도 (0.0~1.0) |
+| apply_count | INTEGER | 적용 횟수 |
+| success_count | INTEGER | 성공 횟수 |
+| fail_count | INTEGER | 실패 횟수 |
+
+#### kpis_edit_history (수정 이력)
+
+모든 데이터 변경 이력을 감사 추적용으로 저장합니다.
+
+| 컬럼 | 타입 | 설명 |
+|------|------|------|
+| timestamp | TIMESTAMPTZ | 수정 시각 |
+| seq_no | TEXT | 대상 행 연번 |
+| field | TEXT | 변경된 필드 |
+| old_value | TEXT | 변경 전 값 |
+| new_value | TEXT | 변경 후 값 |
+| edit_type | TEXT | `manual`/`rule`/`correction`/`auto_match` |
+| rule_name | TEXT | 적용된 규칙 이름 |
+
+### 인증 및 설정
+
+#### kpis_users (사용자)
+
+| 컬럼 | 타입 | 설명 |
+|------|------|------|
+| id | UUID PK | Supabase Auth uid |
+| email | TEXT UNIQUE | Google 계정 이메일 |
+| name | TEXT | 사용자 이름 |
+| approved | BOOLEAN | 승인 상태 |
+| role | TEXT | 역할 (`admin`/`user`) |
+
+> 최초 가입 사용자가 자동으로 `admin` 역할을 부여받습니다.
+
+#### kpis_api_config (API 설정, 싱글톤)
+
+| 컬럼 | 타입 | 설명 |
+|------|------|------|
+| apl_hbin | TEXT | 사업자등록번호 |
+| api_key_encrypted | TEXT | BASE64 암호화된 API KEY |
+
+#### cert_config (인증서 설정 — 로컬 SQLite)
+
+로컬 SQLite(`data/local.db`)에 저장됩니다. 바이너리 데이터 보안 정책상 Supabase가 아닌 로컬에 유지합니다.
+
+| 컬럼 | 타입 | 설명 |
+|------|------|------|
+| pfx_encrypted | TEXT | AES-256-CBC 암호화된 인증서 |
+| password_encrypted | TEXT | 암호화된 비밀번호 |
+| subject_cn | TEXT | 인증서 주체 |
+| issuer_cn | TEXT | 발급자 |
+| valid_from / valid_to | TEXT | 유효기간 |
+| serial_number | TEXT | 시리얼 번호 |
+| uploaded_by | INTEGER | 업로드한 사용자 ID |
+| uploaded_at | DATETIME | 업로드 시간 |
+
+### 기타 테이블
+
+| 테이블 | 설명 |
+|--------|------|
+| kpis_file_groups | 날짜별 갑지/을지 파일 그룹 |
+| kpis_unit_conversion_history | 단위 변환 이력 |
+| kpis_split_submissions | 분할 전송 이력 |
+| kpis_statistics | 날짜+공급구분별 통계 (UNIQUE) |
+| kpis_report_ignore | 미보고 무시 날짜 관리 |
+| kpis_report_records | 보고 기록 |
+| kpis_error_history | 오류 발생 이력 |
+| kpis_error_solutions | 오류 해결 패턴 학습 |
+| kpis_notification_history | 알림 이력 |
+| kpis_app_settings | 앱 설정 (KEY-VALUE) |
+| kpis_jwt_tokens | KPIS JWT 토큰 캐싱 |
+| kpis_price_learn | 단가 학습 데이터 |
+| kpis_holidays | 공휴일/회사 휴일 |
+| kpis_config | 시스템 설정 |
+| kpis_dashboard_cache | 대시보드 캐시 |
+| kpis_master_barcode | 바코드 마스터 소스 |
+| kpis_master_excel | 엑셀 마스터 소스 |
+| kpis_master_atc | ATC 마스터 소스 |
+
+## RPC 함수
+
+Supabase RPC를 통해 복합 데이터 조작을 수행합니다.
+
+### 데이터 조작
+
+| RPC | 용도 |
+|-----|------|
+| `kpis_upload_gap_eul` | 갑지/을지 업로드 (트랜잭션) |
+| `kpis_flush_gap_rows` | 메모리→DB 동기화 |
+| `kpis_delete_date_data` | 날짜별 데이터 삭제 |
+| `kpis_reset_report_status` | 보고 상태 초기화 |
+| `kpis_submit_reports` | 제출 결과 기록 |
+
+### 대시보드
+
+| RPC | 용도 |
+|-----|------|
+| `kpis_dashboard_overview` | 전체 현황 요약 |
+| `kpis_dashboard_by_date` | 날짜별 집계 |
+| `kpis_dashboard_by_supply_type` | 공급구분별 집계 |
+| `kpis_dashboard_monthly_amounts` | 월별 금액 추이 |
+| `kpis_dashboard_top_products` | 상위 제품 |
+| `kpis_dashboard_top_receivers` | 상위 거래처 |
+| `kpis_get_date_summary` | 날짜 요약 |
+| `kpis_get_calendar_agg` | 달력 집계 |
+| `kpis_refresh_dashboard_cache` | 캐시 갱신 |
+
+## 마이그레이션
+
+`supabase/migrations/` 디렉토리에 순서대로 SQL 파일을 관리합니다.
+
+| 파일 | 내용 |
+|------|------|
+| 001_kpis_schema.sql | 전체 테이블 + 업로드 RPC |
+| 002_rls_auth.sql | RLS 정책 (service_role 전체 접근) |
+| 003_dashboard_rpcs.sql | 대시보드 RPC 10개 |
+| 004_dashboard_cache.sql | 대시보드 캐시 테이블 |
+| 004_master_sources.sql | 마스터 소스 테이블 3개 |
+| 005_grant_rpcs.sql | RPC 권한 설정 |
+| 006_reorder_gap_columns.sql | gap_rows 컬럼 순서 변경 |
+| 007_atc_drop_unique_add_clear.sql | ATC 마스터 스키마 변경 |
+| 008_master_clear_and_sync.sql | 마스터 동기화 |
+| 009_create_kpis_holidays.sql | 공휴일 테이블 |
+| 010_create_kpis_config.sql | 시스템 설정 테이블 |
+
+## 데이터 백업 및 복원
+
+### Supabase (메인 DB)
+
+Supabase 셀프호스팅 환경에서 PostgreSQL 표준 백업을 사용합니다.
+
+```bash
+# Supabase PostgreSQL 백업 (pg_dump)
+pg_dump -h sb.dvsharp.com -U postgres -d postgres \
+  --schema=public -F c -f backup_$(date +%Y%m%d).dump
+
+# 복원
+pg_restore -h sb.dvsharp.com -U postgres -d postgres \
+  --clean --if-exists backup_20260315.dump
+```
+
+### 로컬 SQLite (cert_config)
+
+인증서 데이터는 로컬 SQLite 단일 파일입니다.
+
+```bash
+# 백업
+cp data/local.db data/local_backup_$(date +%Y%m%d).db
+
+# 복원
+pm2 stop kpis-dsr-api
+cp /backup/local_backup.db data/local.db
+pm2 restart kpis-dsr-api
+```
+
+> 복원 시 반드시 서버를 중지한 후 진행합니다.
+
+### 정기 백업 권장
+
+| 항목 | 권장값 |
+|------|--------|
+| Supabase 백업 주기 | 매일 1회 (cron) |
+| 로컬 DB 백업 주기 | 인증서 업로드 시마다 |
+| 보관 기간 | 최근 30일 |
+| 저장 위치 | 별도 볼륨 또는 외부 스토리지 |
+
+## 다음 단계
+
+- [API 레퍼런스](/kpis-dsr-api/admin-guide/api-reference) — 내부/외부 API 엔드포인트
+- [문제 해결](/kpis-dsr-api/admin-guide/troubleshooting) — DB 관련 장애 대응

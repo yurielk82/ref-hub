@@ -1,0 +1,61 @@
+# CSO Web
+
+CSO 정산 포털 — B2B 제약 정산 수수료 조회 시스템 (v0.65.0)
+
+## 개요
+
+| 항목 | 내용 |
+|------|------|
+| **스택** | Next.js 14 (App Router) + TypeScript + Tailwind CSS + Radix UI |
+| **DB** | Supabase 셀프호스팅 (sb.dvsharp.com, PostgreSQL 15 + RLS) |
+| **호스팅** | Vercel (Primary) + Coolify (Secondary, cso.dvsharp.com) |
+| **인증** | 자체 JWT (jose) + 사업자번호 기반 로그인 |
+| **이메일** | Resend API + SMTP 하이웍스 (듀얼 프로바이더) |
+| **버전** | v0.65.0 |
+
+## 도메인
+
+- **CSO**: 위탁영업(Commissioned Sales Organization) — 제약사 대신 의약품을 영업하는 수탁업체
+- **정산서**: SIT솔루션에서 추출한 엑셀 데이터. 1행 = 1건의 처방/거래, 최대 47개 컬럼
+
+## 주요 기능
+
+- 사업자번호 기반 회원가입 및 국세청 NTS(National Tax Service) API 자동 인증
+- 정산서 데이터 조회 및 엑셀 다운로드
+- CSO 매칭 (엑셀 업체명 ↔ 회원 사업자번호 매핑)
+- 회원 관리 (가입 승인/거부, 비밀번호 초기화)
+- 메일머지 일괄 발송 (개인화 변수 치환)
+- 월별 수수료 합계 통계
+- 공지사항(Notice) 관리 및 변수 치환
+
+## 외부 연동
+
+CSO 정산 포털은 다음 외부 서비스와 연동되어 운영됩니다.
+
+### 국세청 NTS API
+
+사업자등록번호 진위확인 API입니다. 회원가입 시 사업자번호 10자리를 입력하면 국세청 데이터로 실시간 인증하여 계속사업자/휴업자/폐업자 상태를 자동 판별합니다. 계속사업자만 가입이 허용됩니다.
+
+### HIRA API
+
+건강보험심사평가원(Health Insurance Review and Assessment Service) API입니다. 병원 정보 조회 API와 약국 정보 조회 API 두 가지를 사용하며, 거래처 유효성 검증에 활용됩니다.
+
+### 이메일 듀얼 프로바이더
+
+이메일 발송은 두 가지 프로바이더를 병행합니다.
+
+| 프로바이더 | 용도 | 특징 |
+|-----------|------|------|
+| **Resend API** | 시스템 자동 메일 (가입 알림, 승인/거부, 비밀번호 재설정) | 환경변수 설정만으로 동작, 안정적 |
+| **SMTP 하이웍스** | 메일머지 대량 발송 | 큐 기반 워커(PM2)로 순차 발송, 발송 간격 설정 가능 |
+
+관리자는 사이트 설정에서 활성 프로바이더를 전환하거나 SMTP 서버 정보를 변경할 수 있습니다.
+
+### Supabase 셀프호스팅
+
+데이터베이스는 Oracle Cloud 서버에 셀프호스팅된 Supabase(sb.dvsharp.com)를 사용합니다. PostgreSQL 15 기반이며, RLS(Row Level Security)로 일반회원은 자사 매칭 데이터만 접근할 수 있도록 제어됩니다.
+
+## 매뉴얼
+
+- [사용자 매뉴얼](/csoweb/user-guide/getting-started) — CSO 업체 담당자용
+- [운영자 매뉴얼](/csoweb/admin-guide/deployment) — 영업관리팀/시스템 관리자용

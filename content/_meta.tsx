@@ -2,8 +2,9 @@ import type { MetaRecord } from 'nextra'
 
 const meta: MetaRecord = {
   index: {
-    title: '홈',
+    title: '← 포트폴리오',
     type: 'page',
+    href: '/',
   },
   csoweb: {
     title: 'CSO Web',

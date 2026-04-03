@@ -1,8 +1,8 @@
 {
   "name": "ref-hub",
-  "version": "0.3.1",
+  "version": "1.0.0",
   "private": true,
-  "description": "프로젝트 통합 레퍼런스 사이트",
+  "description": "개인 개발자 포트폴리오 & 프로젝트 레퍼런스 사이트",
   "scripts": {
     "sync": "node scripts/sync-docs.mjs",
     "predev": "node scripts/sync-docs.mjs",
@@ -12,11 +12,19 @@
     "start": "next start"
   },
   "dependencies": {
+    "@tailwindcss/postcss": "^4.2.2",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.7.0",
     "next": "^15.3.0",
+    "next-themes": "^0.4.6",
     "nextra": "^4.2.0",
     "nextra-theme-docs": "^4.2.0",
+    "postcss": "^8.5.8",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "tailwind-merge": "^3.5.0",
+    "tailwindcss": "^4.2.2"
   },
   "devDependencies": {
     "@types/node": "25.3.5",

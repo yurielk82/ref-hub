@@ -1,0 +1,14 @@
+@import "tailwindcss" source(none);
+
+@source "../app";
+@source "../components";
+@source "../data";
+
+@theme {
+  --font-sans: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+}
+
+body {
+  word-break: keep-all;
+}

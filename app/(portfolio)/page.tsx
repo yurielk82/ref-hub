@@ -11,9 +11,10 @@ export default function HomePage() {
             권대환
           </h1>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-zinc-600 dark:text-zinc-400">
-            수작업 중심의 제약 영업관리 환경에서 데이터와 시스템으로 병목을
-            개선해 왔으며, 보다 고도화된 환경에서는 이를 더 큰 운영 효율화로
-            확장할 수 있습니다.
+            제약 영업관리 및 유통 실무를 기반으로, 데이터·시스템·AI를 활용해
+            반복 수작업과 운영 병목을 개선해 왔습니다. 현업과 IT 사이의 간극을
+            줄이며, 업무를 실제로 작동하는 프로세스와 시스템으로 연결하는 역할에
+            강점이 있습니다.
           </p>
           <a
             href="https://github.com/yurielk82"

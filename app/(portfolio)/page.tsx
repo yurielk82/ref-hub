@@ -1,5 +1,5 @@
 import { PROJECTS } from '@/data/projects'
-import { ProjectCard } from '@/components/portfolio/project-card'
+import { SortableGrid } from '@/components/portfolio/sortable-grid'
 
 export default function HomePage() {
   return (
@@ -33,11 +33,7 @@ export default function HomePage() {
           <h2 className="mb-8 text-lg font-semibold text-zinc-700 dark:text-zinc-300">
             프로젝트
           </h2>
-          <div className="grid gap-6 sm:grid-cols-2">
-            {PROJECTS.map((project) => (
-              <ProjectCard key={project.slug} project={project} />
-            ))}
-          </div>
+          <SortableGrid projects={PROJECTS} />
         </div>
       </section>
     </>

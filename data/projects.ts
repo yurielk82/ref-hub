@@ -124,6 +124,28 @@ export const PROJECTS: Project[] = [
     year: '2024',
   },
   {
+    slug: 'erp-spec',
+    name: 'ERP Spec',
+    tagline: 'Oracle ERP 785개 테이블 명세 웹 문서 (v2.9)',
+    description:
+      'Oracle ERP의 785개 테이블 구조를 웹에서 검색·조회할 수 있는 명세 사이트. 테이블 간 관계를 인터랙티브 그래프(React Flow + dagre)로 시각화하여 개발자·DBA의 스키마 탐색을 지원합니다.',
+    tech: ['Next.js 15', 'Nextra', 'React Flow', 'dagre', 'TypeScript'],
+    category: 'web',
+    liveUrl: 'https://erp-spec.dvsharp.com',
+    githubUrl: 'https://github.com/yurielk82/erp-spec',
+    screenshot: '/images/portfolio/erp-spec/hero.png',
+    emoji: '🗄️',
+    gradient: 'from-slate-600/20 to-zinc-600/20',
+    features: [
+      '785개 ERP 테이블 구조 검색·조회',
+      '테이블 관계 인터랙티브 그래프 시각화',
+      'React Flow + dagre 자동 레이아웃',
+      '컬럼 타입·제약조건·인덱스 상세 표시',
+    ],
+    highlight: 'React Flow 기반 ERP 스키마 관계 시각화',
+    year: '2024',
+  },
+  {
     slug: 'srt',
     name: 'SRT 자동예매',
     tagline: 'SRT 열차 자동 예매 시스템 (v1.3)',

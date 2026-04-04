@@ -11,11 +11,11 @@ export default function HomePage() {
           <FadeInUp>
             <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
               <span className="gradient-text">
-                보이지 않는 패턴을
+                현업의 병목을 데이터와
               </span>
               <br />
               <span className="gradient-text">
-                시스템으로 만듭니다.
+                시스템으로 해결합니다.
               </span>
             </h1>
           </FadeInUp>

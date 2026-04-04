@@ -44,7 +44,7 @@ function SortableCard({ project }: { project: Project }) {
       <button
         {...attributes}
         {...listeners}
-        className="absolute left-2 top-2 z-10 rounded-md bg-zinc-800/80 p-1 text-zinc-500 opacity-0 backdrop-blur-sm transition-opacity hover:text-zinc-300 group-hover:opacity-100 [div:hover>&]:opacity-100"
+        className="absolute left-2 top-2 z-10 rounded-md bg-stone-800/80 p-1 text-stone-500 opacity-0 transition-opacity hover:text-stone-300 group-hover:opacity-100 [div:hover>&]:opacity-100"
         aria-label="드래그하여 순서 변경"
       >
         <GripVertical className="h-3.5 w-3.5" />
@@ -107,7 +107,7 @@ export function SortableGrid({ projects }: { projects: Project[] }) {
         <div className="mb-4 flex justify-end">
           <button
             onClick={handleReset}
-            className="text-xs text-zinc-500 transition-colors hover:text-zinc-300"
+            className="text-xs text-stone-500 transition-colors hover:text-stone-300"
           >
             순서 초기화
           </button>

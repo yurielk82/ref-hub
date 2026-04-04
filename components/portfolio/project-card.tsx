@@ -35,17 +35,17 @@ export function ProjectCard({ project }: { project: Project }) {
         )}
 
         {/* 카테고리 뱃지 */}
-        <span className="absolute right-3 top-3 rounded-full border border-[var(--glass-border)] bg-[var(--glass-bg)] px-2.5 py-0.5 font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-wider text-zinc-600 backdrop-blur-md dark:text-zinc-300">
+        <span className="absolute right-3 top-3 rounded-full border border-stone-200 bg-white/90 px-2.5 py-0.5 font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-wider text-stone-600 dark:border-stone-700 dark:bg-stone-900/90 dark:text-stone-300">
           {project.category}
         </span>
       </div>
 
       {/* 콘텐츠 */}
       <div className="p-5">
-        <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-100">
+        <h3 className="text-base font-semibold text-stone-900 dark:text-stone-100">
           {project.name}
         </h3>
-        <p className="mt-1 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
+        <p className="mt-1 text-sm leading-relaxed text-stone-500 dark:text-stone-400">
           {project.tagline}
         </p>
 

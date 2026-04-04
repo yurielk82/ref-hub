@@ -9,23 +9,20 @@ export default function HomePage() {
       <section className="px-6 pb-20 pt-24 sm:pt-32">
         <div className="mx-auto max-w-5xl">
           <FadeInUp>
-            <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
-              <span className="gradient-text">
-                현업의 병목을 데이터와
-              </span>
+            <div className="mb-6 h-1 w-10 rounded-full bg-[var(--accent)]" />
+            <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-snug tracking-tight text-stone-900 dark:text-stone-100 sm:text-5xl lg:text-6xl" style={{ textWrap: 'balance' }}>
+              현업의 병목을 데이터와
               <br />
-              <span className="gradient-text">
-                시스템으로 해결합니다.
-              </span>
+              시스템으로 해결합니다.
             </h1>
           </FadeInUp>
           <FadeInUp delay={0.1}>
-            <p className="mt-5 text-sm text-zinc-500">
+            <p className="mt-5 text-sm text-stone-500">
               권대환 · 한국유니온제약 영업관리팀
             </p>
           </FadeInUp>
           <FadeInUp delay={0.2}>
-            <p className="mt-5 max-w-2xl text-base leading-relaxed text-zinc-600 dark:text-zinc-400">
+            <p className="mt-5 max-w-2xl text-base leading-relaxed text-stone-600 dark:text-stone-400">
               제약 영업관리 현장에서 수기 프로세스를 자동화하며 출발했습니다.
               반복 업무를 줄이는 데서 그치지 않고, 운영 기준을 정리하고 데이터를
               실시간으로 가시화하며 시스템 중심의 업무 구조로 전환하는 일을
@@ -41,10 +38,10 @@ export default function HomePage() {
         <div className="mx-auto max-w-5xl">
           <FadeInUp>
             <div className="mb-10">
-              <span className="inline-block rounded-full border border-[var(--accent-muted)] bg-[var(--accent-muted)] px-3 py-1 font-[family-name:var(--font-mono)] text-xs tracking-wider text-[var(--accent)]">
+              <p className="font-[family-name:var(--font-mono)] text-xs uppercase tracking-widest text-[var(--accent)]">
                 Projects
-              </span>
-              <h2 className="mt-3 text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+              </p>
+              <h2 className="mt-2 text-2xl font-bold tracking-tight text-stone-900 dark:text-stone-100">
                 프로젝트
               </h2>
             </div>

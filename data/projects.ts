@@ -72,7 +72,7 @@ export const PROJECTS: Project[] = [
     docsPath: '/kpis-dsr-api',
     screenshot: '/images/portfolio/kpis-dsr-api/hero.png',
     emoji: '📋',
-    gradient: 'from-violet-600/20 to-purple-600/20',
+    gradient: 'from-stone-500/15 to-stone-400/15',
     features: [
       '일일 공급내역 자동 리포트 생성',
       '커스텀 검증 규칙 엔진',
@@ -135,7 +135,7 @@ export const PROJECTS: Project[] = [
     githubUrl: 'https://github.com/yurielk82/erp-spec',
     screenshot: '/images/portfolio/erp-spec/hero.png',
     emoji: '🗄️',
-    gradient: 'from-slate-600/20 to-zinc-600/20',
+    gradient: 'from-stone-600/15 to-stone-400/15',
     features: [
       '785개 ERP 테이블 구조 검색·조회',
       '테이블 관계 인터랙티브 그래프 시각화',
@@ -156,7 +156,7 @@ export const PROJECTS: Project[] = [
     liveUrl: 'https://srt.dvsharp.com',
     screenshot: '/images/portfolio/srt/hero.png',
     emoji: '🚄',
-    gradient: 'from-indigo-600/20 to-blue-600/20',
+    gradient: 'from-sky-500/15 to-teal-500/15',
     features: [
       'SRT API 연동 자동 예매 매크로',
       'Redis 큐 기반 백그라운드 작업 관리',
@@ -176,7 +176,7 @@ export const PROJECTS: Project[] = [
     category: 'tool',
     githubUrl: 'https://github.com/yurielk82/claude-dotfiles',
     emoji: '🤖',
-    gradient: 'from-rose-600/20 to-pink-600/20',
+    gradient: 'from-amber-500/15 to-orange-500/15',
     features: [
       '22개 규칙 (코드 원칙, 보안, DDD, 디자인 시스템)',
       '48개 훅 (커밋 가드, 배포 검증, GSD 워크플로우)',

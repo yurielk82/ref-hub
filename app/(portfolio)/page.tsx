@@ -11,11 +11,11 @@ export default function HomePage() {
           <FadeInUp>
             <div className="mb-6 h-1 w-10 rounded-full bg-[var(--accent)]" />
             <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-snug tracking-tight text-stone-900 dark:text-stone-100 sm:text-5xl lg:text-6xl" style={{ textWrap: 'balance' }}>
-              매출이 아니라 매출이 만들어지는
+              목적을 정의하고,
               <br />
-              구조를 봅니다.
+              그 목적이 작동하는 시스템을
               <br />
-              그리고 그 구조를 직접 만듭니다.
+              직접 만듭니다.
             </h1>
           </FadeInUp>
           <FadeInUp delay={0.1}>

@@ -20,15 +20,18 @@ export default function AboutPage() {
             className="font-[family-name:var(--font-display)] text-3xl font-bold leading-snug tracking-tight text-stone-900 dark:text-stone-100 sm:text-4xl"
             style={{ textWrap: 'balance' }}
           >
-            현장 문제를 시스템으로 바꾸는 개발자
+            권대환
           </h1>
         </FadeInUp>
         <FadeInUp delay={0.1}>
+          <p className="mt-3 text-sm text-stone-500">
+            한국유니온제약 영업관리팀
+          </p>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-stone-600 dark:text-stone-400">
-            제약 영업관리 현장에서 수기 프로세스를 자동화하며 출발했습니다.
-            반복 업무를 줄이는 데서 그치지 않고, 운영 기준을 정리하고 데이터를
-            실시간으로 가시화하며 시스템 중심의 업무 구조로 전환하는 일을
-            해왔습니다.
+            엑셀과 수기 대장으로 돌아가던 영업관리 업무를 웹 시스템으로
+            옮기는 일을 하고 있습니다. 데이터를 모으고, 화면에 띄우고,
+            사람이 직접 하던 판단을 코드로 대신하는 과정을 반복하면서
+            제약·물류·라이브커머스 도메인의 프로젝트를 만들어 왔습니다.
           </p>
         </FadeInUp>
 
@@ -130,10 +133,10 @@ export default function AboutPage() {
                 className="text-xl font-bold text-stone-900 dark:text-stone-100"
                 style={{ textWrap: 'balance' }}
               >
-                함께 일하는 방식을 고민합니다.
+                연락처
               </h2>
               <p className="mt-2 text-sm leading-relaxed text-stone-600 dark:text-stone-400">
-                현업의 문제를 기술로 해결하는 데 관심이 있다면, 편하게 연락해 주세요.
+                프로젝트 관련 문의나 협업 제안은 아래로 연락해 주세요.
               </p>
               <div className="mt-5 flex flex-wrap gap-3">
                 <a

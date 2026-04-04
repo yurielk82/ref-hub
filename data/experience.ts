@@ -13,28 +13,28 @@ export interface SkillCategory {
 
 export const EXPERIENCES: Experience[] = [
   {
-    period: '2024 — 현재',
+    period: '2025 — 2026',
     title: '한국유니온제약 영업관리팀',
-    role: '영업관리 시스템 개발',
+    role: '사내 시스템 기획·개발',
     description:
-      '영업 데이터 자동화, KPI 대시보드, CSO 정산 시스템 등 현업 문제를 직접 시스템으로 해결',
+      '매출·수금·마진 지표를 실시간으로 추적하는 KPI 대시보드, CSO 수수료 정산 포털, 의약품 공급내역 검증 시스템을 직접 설계하고 운영까지 담당. Oracle ERP 데이터를 자동 수집하는 파이프라인과 멀티 AI 분석 기능을 구축했습니다.',
     projects: ['pharmkpi', 'csoweb', 'kpis-dsr-api', 'erp-spec'],
+  },
+  {
+    period: '2025',
+    title: 'AI 기반 개발 환경 구축',
+    role: 'Claude Code 하네스 + 자동 예매 시스템',
+    description:
+      '규칙 22개·훅 48개·스킬 128개로 구성된 AI 페어 프로그래밍 자동화 하네스를 설계하고, SRT 열차 자동 예매 시스템을 Next.js + FastAPI + Redis 풀스택으로 구축했습니다.',
+    projects: ['claude-dotfiles', 'srt'],
   },
   {
     period: '2024',
     title: '프리랜서 개발',
-    role: '다양한 도메인 프로젝트',
+    role: '외부 프로젝트',
     description:
-      '라이브커머스 스튜디오 예약 플랫폼, EV 모터 신뢰성 분석 도구 등 다양한 도메인 프로젝트',
+      '라이브커머스 스튜디오 예약 모바일 앱(Expo + Hono)과 전기차 구동 모터 신뢰성 시험 데이터 분석 도구(Python + C DSP)를 개발했습니다.',
     projects: ['studiogo', 'ev-motor-reliability'],
-  },
-  {
-    period: '2025',
-    title: 'AI 개발 자동화',
-    role: 'Claude Code 하네스 구축',
-    description:
-      '규칙·훅·에이전트·스킬을 계층화한 AI 페어 프로그래밍 자동화 설정 저장소 구축',
-    projects: ['claude-dotfiles', 'srt'],
   },
 ]
 

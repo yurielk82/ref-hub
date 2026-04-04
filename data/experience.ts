@@ -14,10 +14,10 @@ export interface SkillCategory {
 export const EXPERIENCES: Experience[] = [
   {
     period: '2025 — 2026',
-    title: '한국유니온제약 영업관리팀',
-    role: '사내 시스템 기획·개발',
+    title: '한국유니온제약(주) 영업관리팀',
+    role: '운영 체계 재정비 · 시스템 기획·구축',
     description:
-      '매출·수금·마진 지표를 실시간으로 추적하는 KPI 대시보드, CSO 수수료 정산 포털, 의약품 공급내역 검증 시스템을 직접 설계하고 운영까지 담당. Oracle ERP 데이터를 자동 수집하는 파이프라인과 멀티 AI 분석 기능을 구축했습니다.',
+      '회생절차와 인수 과정에서 불안정해진 운영 기준을 재정비하고, 부서 간 협업 구조를 실무적으로 재설계했습니다. CSO 정산 시스템을 AI로 기획·구축하여 수기 정산을 자동화했고, ERP 신규 전환에서 현업·전산팀·외부 파트너 간 조율을 담당했습니다.',
     projects: ['pharmkpi', 'csoweb', 'kpis-dsr-api', 'erp-spec'],
   },
   {
@@ -40,8 +40,8 @@ export const EXPERIENCES: Experience[] = [
 
 export const SKILL_CATEGORIES: SkillCategory[] = [
   {
-    label: '프론트엔드',
-    items: ['Next.js', 'React', 'React Native', 'Tailwind CSS', 'shadcn/ui'],
+    label: '웹 개발',
+    items: ['Next.js', 'React', 'React Native', 'TypeScript', 'Tailwind CSS'],
   },
   {
     label: '백엔드',
@@ -49,6 +49,10 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
   },
   {
     label: 'AI · 데이터',
-    items: ['Claude API', 'Gemini', 'GPT', 'Python', 'Plotly'],
+    items: ['Claude API', 'Gemini', 'GPT', 'Python', 'ERP 운영'],
+  },
+  {
+    label: '도구',
+    items: ['GitHub', 'Cloudflare', 'Netlify', 'Office 365', 'Google Workspace'],
   },
 ]

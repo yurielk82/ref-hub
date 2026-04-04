@@ -26,8 +26,11 @@ export default function HomePage() {
           </FadeInUp>
           <FadeInUp delay={0.2}>
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-zinc-600 dark:text-zinc-400">
-              제약 영업관리의 수기 프로세스를 자동화한 것이 시작이었습니다.
-              지금은 도메인을 가리지 않고, 현장의 반복을 구조로 바꿉니다.
+              제약 영업관리 현장에서 수기 프로세스를 자동화하며 출발했습니다.
+              반복 업무를 줄이는 데서 그치지 않고, 운영 기준을 정리하고 데이터를
+              실시간으로 가시화하며 시스템 중심의 업무 구조로 전환하는 일을
+              해왔습니다. 앞으로는 이러한 경험을 바탕으로 더 고도화된 환경에서
+              표준화, 운영 효율화, 시스템 혁신까지 확장해 나가고자 합니다.
             </p>
           </FadeInUp>
         </div>

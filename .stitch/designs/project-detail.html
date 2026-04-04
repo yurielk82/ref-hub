@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PharmKPI | Project Details</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;family=Inter:wght@400;500;600;700&amp;family=Outfit:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: "#2a7c6f",
+                            dark: "#5ec4b2"
+                        },
+                        accent: "#d4a574",
+                        stone: {
+                            50: "#fafaf9",
+                            100: "#f5f5f4",
+                            200: "#e7e5e4",
+                            500: "#78716c",
+                            600: "#57534e",
+                            800: "#292524",
+                            900: "#1c1917",
+                            950: "#0c0a09"
+                        }
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        headline: ["Space Grotesk", "sans-serif"],
+                        body: ["Inter", "sans-serif"],
+                        label: ["Space Grotesk", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-headline { font-family: 'Space Grotesk', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900 selection:bg-teal-100 selection:text-teal-900">
+<!-- TopNavBar (Shared Component) -->
+<nav class="sticky top-0 w-full z-50 bg-stone-50/80 backdrop-blur-md border-b border-stone-200/50">
+<div class="flex justify-between items-center max-w-5xl mx-auto px-6 h-20">
+<div class="text-xl font-black text-stone-900 tracking-tighter font-headline">Ref Hub</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-teal-700 border-b-2 border-teal-700 pb-1 font-headline font-bold tracking-tight transition-colors duration-200" href="#">Projects</a>
+<a class="text-stone-500 hover:text-teal-600 transition-colors duration-200" href="#">Experience</a>
+<a class="text-stone-500 hover:text-teal-600 transition-colors duration-200" href="#">About</a>
+<a class="text-stone-500 hover:text-teal-600 transition-colors duration-200" href="#">Contact</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-stone-500 hover:text-teal-600 transition-colors">
+<span class="material-symbols-outlined">dark_mode</span>
+</button>
+<a class="bg-primary text-white px-5 py-2 rounded-full text-sm font-bold font-headline transition-opacity hover:opacity-90" href="#">Resume</a>
+</div>
+</div>
+</nav>
+<main class="max-w-5xl mx-auto px-6">
+<!-- Project Hero (60/40 Split) -->
+<section class="pt-24 pb-20 grid grid-cols-1 md:grid-cols-10 gap-12 items-start">
+<!-- Left (60%) -->
+<div class="md:col-span-6">
+<a class="inline-flex items-center gap-1 text-primary text-sm font-medium mb-8 hover:underline" href="#">
+<span class="material-symbols-outlined text-sm">arrow_back</span>
+                    프로젝트 목록
+                </a>
+<div class="text-5xl mb-6">📊</div>
+<h1 class="text-5xl font-extrabold font-headline tracking-tighter text-stone-900 mb-4">PharmKPI</h1>
+<p class="text-lg text-stone-500 mb-8 font-medium">제약 KPI 대시보드 (v1.16)</p>
+<p class="text-stone-600 text-lg leading-relaxed mb-10 break-keep">
+                    매출·수금·마진·흡수율 등 제약 산업 핵심 지표를 실시간으로 시각화하는 대시보드. Oracle ERP 데이터를 자동 수집하고, Claude·Gemini·GPT 멀티 AI로 매출 추이를 분석합니다.
+                </p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-primary text-white px-8 py-3.5 rounded-xl font-bold font-headline flex items-center gap-2 hover:opacity-90 transition-opacity">
+                        사이트 보기
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+<button class="border-2 border-primary text-primary px-8 py-3.5 rounded-xl font-bold font-headline hover:bg-teal-50 transition-colors">
+                        문서 보기
+                    </button>
+</div>
+</div>
+<!-- Right (40%) -->
+<div class="md:col-span-4 h-full">
+<div class="bg-white border border-stone-200/50 rounded-xl overflow-hidden shadow-[0_1px_3px_rgba(28,25,23,0.04)] aspect-square flex items-center justify-center relative group hover:border-primary/30 transition-colors">
+<img alt="Dashboard Mockup" class="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700" data-alt="Modern pharmaceutical analytics dashboard interface featuring clean charts, data tables, and AI-driven insights with a teal and stone color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfFJQn1ehGhzphKUrrgNs9jlfXZ8VrvBT4Tx3FaWJDm1g4ybNaA4T9iHe_Mizp0xXKC_68cJowTsHAPgFK1dTceLmMzhTA63oPXfGNJ_IMkPjSbCcjfYPy5EWMO2g5fL8kVunnbNHBP7HN_pptWmFTr140qjDGuzf2vYBW3mm04XxM2eIYGYZLFWdOzYrvSByM9Ylca6M0Mg5QmC4EGqVZvXXW0nCN-5Glcqld_IaKLGrdEWoQ7V0IaKSC8OadwhX9jgMWT6hMsg"/>
+<div class="relative z-10 bg-white/90 backdrop-blur-md px-6 py-3 rounded-full border border-stone-200 shadow-sm text-stone-800 font-bold font-headline text-sm tracking-wide">
+                        Dashboard Preview
+                    </div>
+</div>
+</div>
+</section>
+<!-- Tech Stack Section -->
+<section class="pb-24 border-b border-stone-200/50">
+<div class="flex flex-col gap-6">
+<h2 class="text-xs font-bold uppercase tracking-widest text-primary font-headline">Tech Stack</h2>
+<div class="flex flex-wrap gap-3">
+<span class="px-4 py-2 bg-stone-100 text-stone-700 rounded-full text-sm font-semibold border border-stone-200">Next.js 16</span>
+<span class="px-4 py-2 bg-stone-100 text-stone-700 rounded-full text-sm font-semibold border border-stone-200">Prisma 7</span>
+<span class="px-4 py-2 bg-stone-100 text-stone-700 rounded-full text-sm font-semibold border border-stone-200">Supabase</span>
+<span class="px-4 py-2 bg-stone-100 text-stone-700 rounded-full text-sm font-semibold border border-stone-200">Anthropic SDK</span>
+<span class="px-4 py-2 bg-stone-100 text-stone-700 rounded-full text-sm font-semibold border border-stone-200">Recharts</span>
+</div>
+</div>
+</section>
+<!-- Features Section -->
+<section class="py-32">
+<h2 class="text-3xl font-black font-headline tracking-tighter mb-20 text-stone-900">주요 기능</h2>
+<div class="space-y-40">
+<!-- Feature 1 (Left text) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+<div>
+<span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-teal-50 text-primary font-headline font-bold text-lg border border-teal-100 mb-8">01</span>
+<h3 class="text-2xl font-bold mb-4 font-headline break-keep">실시간 매출·수금·마진 KPI 대시보드</h3>
+<p class="text-stone-600 leading-relaxed break-keep">전국 약국 및 병원별 매출 데이터를 실시간으로 집계하여 기업의 유동성과 수익성을 한눈에 파악할 수 있는 고성능 대시보드 UI를 제공합니다.</p>
+</div>
+<div class="bg-stone-100 rounded-xl aspect-[16/10] overflow-hidden border border-stone-200/50">
+<img alt="Real-time KPI visualization" class="w-full h-full object-cover grayscale-[20%]" data-alt="Professional data visualization dashboard showing financial charts, bar graphs, and performance indicators in clean corporate aesthetics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-poJfRj9v_z-6Fq_kfS-yLUq8eyo_t6hxEmkmAi2P-6dvTy4TrC_Z2HwJLoqKAoaJOfRvyWym9kdYmQLLrpjCnpvpa4mAmEuJnc41Yj90P7j0UGZJUjJdmOE_11QDNEZfUxgyfQB3ewhpG6fqxrbbu5TzJm3vXuzw4SSRjDl7rE2ALHNPIGVkOMFo2WsO9G-l4KtCSIxsEzRhn1Vol9gAqEr3vBAm_5hn4u7hxTbaFDDGglXti8GSDX6mG9lN1ueDv-HoueA7tw"/>
+</div>
+</div>
+<!-- Feature 2 (Right text) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+<div class="md:order-2">
+<span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-teal-50 text-primary font-headline font-bold text-lg border border-teal-100 mb-8">02</span>
+<h3 class="text-2xl font-bold mb-4 font-headline break-keep">멀티 AI (Claude, Gemini, GPT) 매출 분석</h3>
+<p class="text-stone-600 leading-relaxed break-keep">단일 AI의 편향성을 극복하기 위해 Anthropic, Google, OpenAI의 엔진을 동시에 활용하여 시장 추세를 다각도로 분석하고 예측 리포트를 생성합니다.</p>
+</div>
+<div class="md:order-1 bg-stone-100 rounded-xl aspect-[16/10] overflow-hidden border border-stone-200/50">
+<img alt="AI Analysis Engine" class="w-full h-full object-cover" data-alt="Abstract representation of artificial intelligence neural networks with glowing lines and nodes in cool teal and stone tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAD8jdBOGMOUrIsu6Zb-CqrMbVeDn1XetFoNm_6-bOsVQZScdj31TZOsfvgTLA6pQImdmDSe8O8lwQeQYyc2674WwJKApmo1FHFfAKdGOiGlfJrs_HKZGbvqn80hCjiA1IIxbJji-IrGEURqNGgLXIKWweFQ02ZLV6AximTtooNh24h5qm7Cped24-BD5OKVY6HchqnwLwPdDgSIktjoVSNTST1rpq9KUp2pmtZqtUgo7B0xPOHpYocaYd0z_ODzM_nq1_R6y6TyA"/>
+</div>
+</div>
+<!-- Feature 3 (Left text) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+<div>
+<span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-teal-50 text-primary font-headline font-bold text-lg border border-teal-100 mb-8">03</span>
+<h3 class="text-2xl font-bold mb-4 font-headline break-keep">PDF/Excel 리포트 자동 생성</h3>
+<p class="text-stone-600 leading-relaxed break-keep">매주 월요일 아침, 지난주 KPI 지표를 요약한 리포트를 PDF와 Excel 포맷으로 자동 생성하여 주요 이해관계자들에게 발송합니다.</p>
+</div>
+<div class="bg-stone-100 rounded-xl aspect-[16/10] overflow-hidden border border-stone-200/50">
+<img alt="Automated Reporting" class="w-full h-full object-cover" data-alt="Close-up of a high-quality printed financial report with charts lying on a clean workspace with a laptop in soft focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmiYEbpnpqoP9Qe2gTGeiEeH461aO18HDd_XQSBtyNELedx1I1hzj9fKat-jMmGB___4a0-x3SZK6n8W-6hIhAjNNoKX8kXCPHe7m20e2qzpUJTYksmHza0Wk8xEcSoH5kWEnZmAoVy0N1x7w83riP90WqapR5DDrUbIsDzxc_y1snuXisqFvKfkuvbsyWq-KGluCwv7zTjx7DMeEvqSPFyp_2fLwKnsFYvNyttYgAPcIBkltbH6lMFWsEkyP-ZB2iTNCtiDSwWA"/>
+</div>
+</div>
+<!-- Feature 4 (Right text) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+<div class="md:order-2">
+<span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-teal-50 text-primary font-headline font-bold text-lg border border-teal-100 mb-8">04</span>
+<h3 class="text-2xl font-bold mb-4 font-headline break-keep">Oracle ERP → Supabase ETL 파이프라인</h3>
+<p class="text-stone-600 leading-relaxed break-keep">온프레미스 Oracle ERP 환경의 데이터를 클라우드 기반 Supabase로 안전하고 효율적으로 동기화하는 ETL 파이프라인을 구축했습니다.</p>
+</div>
+<div class="md:order-1 bg-stone-100 rounded-xl aspect-[16/10] overflow-hidden border border-stone-200/50">
+<img alt="Data Pipeline Infrastructure" class="w-full h-full object-cover" data-alt="Server room with network equipment and data cables glowing with soft light, representing robust data infrastructure." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWNW0Mr701Mc_m6B1OA3zWYpOQxFjx3ct5bI_W15DuzAPGInKgBlMe97wbfr4g9aZ-9fv9uhN-iRrQG68xsydxrINmwb6k98St2Zt369TTAIYFIjOfJlPWvfd6RxXFFeRSt7fUxigRGJSJP6fktR5TQH8y-IRwdSP92C-6xFtN2qSHdpunSiO346waRCm_08ymUKa_byhHTB8970iOB_G5TuU20pz9HT8o62C2oxlGlKF9z1G_8uLUP8Pxhl10zTYKCNje5HuEfA"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Highlight Callout -->
+<section class="pb-32">
+<div class="relative bg-white border border-stone-200/50 rounded-xl p-10 overflow-hidden shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-8 group">
+<div class="absolute top-0 left-0 bottom-0 w-1.5 bg-accent"></div>
+<div>
+<div class="flex items-center gap-3 mb-4">
+<h3 class="text-2xl font-bold font-headline tracking-tight text-stone-900">Oracle ERP 연동 + 멀티 AI 분석 대시보드</h3>
+<span class="px-3 py-1 bg-stone-100 text-stone-500 rounded-full text-xs font-bold font-headline tracking-widest border border-stone-200">2024</span>
+</div>
+<p class="text-stone-600 max-w-2xl break-keep">
+                        전통적인 제약 산업 인프라와 최신 생성형 AI 기술을 결합하여, 단순 데이터 조회를 넘어 비즈니스 인사이트를 도출하는 차세대 솔루션입니다.
+                    </p>
+</div>
+<div class="flex-shrink-0">
+<button class="bg-stone-900 text-white px-6 py-3 rounded-lg font-bold font-headline flex items-center gap-2 hover:bg-stone-800 transition-colors">
+                        상세 기술 스택
+                        <span class="material-symbols-outlined text-sm">open_in_new</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="w-full py-12 border-t border-stone-200 bg-stone-50">
+<div class="max-w-5xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="font-body text-sm leading-relaxed text-stone-500">© 2024 Ref Hub. Built with editorial precision.</p>
+<div class="flex gap-6">
+<a class="font-body text-sm text-stone-500 hover:text-teal-600 underline decoration-teal-500/30 underline-offset-4 transition-colors" href="#">Github</a>
+<a class="font-body text-sm text-stone-500 hover:text-teal-600 underline decoration-teal-500/30 underline-offset-4 transition-colors" href="#">LinkedIn</a>
+<a class="font-body text-sm text-stone-500 hover:text-teal-600 underline decoration-teal-500/30 underline-offset-4 transition-colors" href="#">Email</a>
+</div>
+</div>
+</footer>
+</body></html>

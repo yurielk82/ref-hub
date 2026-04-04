@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              stone: {
+                50: "#fafaf9",
+                100: "#f5f5f4",
+                200: "#e7e5e4",
+                300: "#d6d3d1",
+                400: "#a8a29e",
+                500: "#78716c",
+                600: "#57534e",
+                700: "#44403c",
+                800: "#292524",
+                900: "#1c1917",
+                950: "#0c0a09",
+              },
+              teal: {
+                400: "#5ec4b2",
+                500: "#2a7c6f",
+              }
+            },
+            borderRadius: {
+              "DEFAULT": "0.5rem",
+              "lg": "1rem",
+              "xl": "1.5rem",
+              "full": "9999px"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk", "sans-serif"],
+              "body": ["Inter", "sans-serif"],
+              "label": ["Space Grotesk", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      body {
+        background-color: #0c0a09;
+        color: #f5f5f4;
+        word-break: keep-all;
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+    </style>
+</head>
+<body class="font-body selection:bg-teal-500/30 selection:text-teal-400">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-stone-950/80 backdrop-blur-md border-b border-stone-800/50 shadow-sm">
+<div class="flex justify-between items-center max-w-5xl mx-auto px-6 h-16">
+<div class="text-xl font-bold text-stone-100 flex items-center gap-1 after:content-[''] after:w-1.5 after:h-1.5 after:bg-teal-500 after:rounded-full font-headline tracking-tight">
+                Ref Hub
+            </div>
+<div class="hidden md:flex items-center gap-8 font-sans text-stone-100 antialiased tracking-tight">
+<a class="text-teal-400 font-medium border-b-2 border-teal-500 pb-1" href="#">Projects</a>
+<a class="text-stone-300 hover:text-stone-100 transition-colors hover:text-teal-400 transition-all duration-300" href="#">Experience</a>
+<a class="text-stone-300 hover:text-stone-100 transition-colors hover:text-teal-400 transition-all duration-300" href="#">About</a>
+<a class="text-stone-300 hover:text-stone-100 transition-colors hover:text-teal-400 transition-all duration-300" href="#">Contact</a>
+</div>
+<button class="bg-stone-100 text-stone-950 px-5 py-1.5 rounded-full text-sm font-medium active:scale-95 transition-transform">
+                Resume
+            </button>
+</div>
+</nav>
+<main class="pt-32 pb-20 px-6 max-w-5xl mx-auto">
+<!-- Hero Section -->
+<section class="mb-32">
+<div class="w-[40px] h-[4px] bg-teal-400 mb-8"></div>
+<h1 class="text-4xl md:text-6xl font-bold font-headline text-stone-100 leading-[1.1] tracking-tight text-wrap mb-6">
+                현업의 병목을 데이터와<br/>시스템으로 해결합니다.
+            </h1>
+<p class="text-stone-500 text-lg mb-4 font-medium">
+                권대환 · 한국유니온제약 영업관리팀
+            </p>
+<p class="text-stone-400 text-lg max-w-2xl leading-relaxed">
+                제약, 물류, 라이브커머스 도메인을 거치며 복잡한 비즈니스 로직을 효율적인 디지털 도구로 전환해왔습니다. 데이터의 가시성을 확보하고 반복되는 수작업을 자동화하여 실질적인 운영 효율을 만듭니다.
+            </p>
+</section>
+<!-- Projects Section -->
+<section id="projects">
+<div class="mb-12">
+<span class="text-xs font-mono tracking-widest text-teal-400 uppercase">PROJECTS</span>
+<h2 class="text-3xl font-bold text-stone-100 mt-2">프로젝트</h2>
+</div>
+<!-- 2-Column Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Project 1: PharmKPI -->
+<div class="group bg-stone-900 border border-white/[0.07] p-6 rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.25)] transition-all duration-300 hover:-translate-y-1 hover:border-teal-400/50">
+<div class="flex items-start justify-between mb-4">
+<div class="p-2.5 bg-stone-800 rounded-lg text-stone-100">
+<span class="material-symbols-outlined" data-icon="bar_chart">bar_chart</span>
+</div>
+<span class="text-[10px] font-mono py-1 px-2 rounded bg-teal-400/10 text-teal-400 tracking-wider">DATA ANALYSIS</span>
+</div>
+<h3 class="text-xl font-bold text-stone-100 mb-2">PharmKPI 📊</h3>
+<p class="text-stone-400 text-sm leading-relaxed mb-6">제약 영업 실적 데이터를 시각화하고 목표 달성률을 실시간으로 추적하는 통합 KPI 대시보드 시스템.</p>
+<div class="flex flex-wrap gap-2">
+<span class="text-xs py-1 px-2 rounded-md bg-teal-400/5 text-teal-400">Python</span>
+<span class="text-xs py-1 px-2 rounded-md bg-teal-400/5 text-teal-400">PowerBI</span>
+<span class="text-xs py-1 px-2 rounded-md bg-teal-400/5 text-teal-400">SQL</span>
+</div>
+</div>
+<!-- Project 2: CSO Web -->
+<div class="group bg-stone-900 border border-white/[0.07] p-6 rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.25)] transition-all duration-300 hover:-translate-y-1 hover:border-teal-400/50">
+<div class="flex items-start justify-between mb-4">
+<div class="p-2.5 bg-stone-800 rounded-lg text-stone-100">
+<span class="material-symbols-outlined" data-icon="business_center">business_center</span>
+</div>
+<span class="text-[10px] font-mono py-1 px-2 rounded bg-teal-400/10 text-teal-400 tracking-wider">PLATFORM</span>
+</div>
+<h3 class="text-xl font-bold text-stone-100 mb-2">CSO Web 💼</h3>
+<p class="text-stone-400 text-sm leading-relaxed mb-6">판매 대행 조직(CSO)과의 원활한 정산 및 발주 협업을 위한 웹 포털 인터페이스 개발.</p>
+<div class="flex flex-wrap gap-2">
+<span class="text-xs py-1 px-2 rounded-md bg-teal-400/5 text-teal-400">React</span>
+<span class="text-xs py-1 px-2 rounded-md bg-teal-400/5 text-teal-400">Node.js</span>
+<span class="text-xs py-1 px-2 rounded-md bg-teal-400/5 text-teal-400">Supabase</span>
+</div>
+</div>
+<!-- Project 3: KPIS DSR -->
+<div class="group bg-stone-900 border border-white/[0.07] p-6 rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.25)] transition-all duration-300 hover:-translate-y-1 hover:border-teal-400/50">
+<div class="flex items-start justify-between mb-4">
+<div class="p-2.5 bg-stone-800 rounded-lg text-stone-100">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+</div>
+<span class="text-[10px] font-mono py-1 px-2 rounded bg-teal-400/10 text-teal-400 tracking-wider">INTERNAL TOOL</span>
+</div>
+<h3 class="text-xl font-bold text-stone-100 mb-2">KPIS DSR 📋</h3>
+<p class="text-stone-400 text-sm leading-relaxed mb-6">Daily Sales Report 자동 생성을 위한 구글 시트 기반의 워크플로우 엔진 고도화.</p>
+<div class="flex flex-wrap gap-2">
+<span class="text-xs py-1 px-2 rounded-md bg-teal-400/5 text-teal-400">GAS</span>
+<span class="text-xs py-1 px-2 rounded-md bg-teal-400/5 text-teal-400">Spreadsheet</span>
+</div>
+</div>
+<!-- Project 4: StudioGo -->
+<div class="group bg-stone-900 border border-white/[0.07] p-6 rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.25)] transition-all duration-300 hover:-translate-y-1 hover:border-teal-400/50">
+<div class="flex items-start justify-between mb-4">
+<div class="p-2.5 bg-stone-800 rounded-lg text-stone-100">
+<span class="material-symbols-outlined" data-icon="movie">movie</span>
+</div>
+<span class="text-[10px] font-mono py-1 px-2 rounded bg-teal-400/10 text-teal-400 tracking-wider">LIVE COMMERCE</span>
+</div>
+<h3 class="text-xl font-bold text-stone-100 mb-2">StudioGo 🎬</h3>
+<p class="text-stone-400 text-sm leading-relaxed mb-6">라이브 커머스 방송 스케줄링 및 출연진 매칭을 위한 관리 오퍼레이션 시스템.</p>
+<div class="flex flex-wrap gap-2">
+<span class="text-xs py-1 px-2 rounded-md bg-teal-400/5 text-teal-400">Next.js</span>
+<span class="text-xs py-1 px-2 rounded-md bg-teal-400/5 text-teal-400">PostgreSQL</span>
+</div>
+</div>
+<!-- Project 5: EV Motor -->
+<div class="group bg-stone-900 border border-white/[0.07] p-6 rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.25)] transition-all duration-300 hover:-translate-y-1 hover:border-teal-400/50">
+<div class="flex items-start justify-between mb-4">
+<div class="p-2.5 bg-stone-800 rounded-lg text-stone-100">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+</div>
+<span class="text-[10px] font-mono py-1 px-2 rounded bg-teal-400/10 text-teal-400 tracking-wider">LOGISTICS</span>
+</div>
+<h3 class="text-xl font-bold text-stone-100 mb-2">EV Motor ⚡</h3>
+<p class="text-stone-400 text-sm leading-relaxed mb-6">전기차 모터 부품 물류 최적화를 위한 자재 소요량 산출(MRP) 자동화 프로젝트.</p>
+<div class="flex flex-wrap gap-2">
+<span class="text-xs py-1 px-2 rounded-md bg-teal-400/5 text-teal-400">Python</span>
+<span class="text-xs py-1 px-2 rounded-md bg-teal-400/5 text-teal-400">Pandas</span>
+</div>
+</div>
+<!-- Project 6: ERP Spec -->
+<div class="group bg-stone-900 border border-white/[0.07] p-6 rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.25)] transition-all duration-300 hover:-translate-y-1 hover:border-teal-400/50">
+<div class="flex items-start justify-between mb-4">
+<div class="p-2.5 bg-stone-800 rounded-lg text-stone-100">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+</div>
+<span class="text-[10px] font-mono py-1 px-2 rounded bg-teal-400/10 text-teal-400 tracking-wider">ERP SYSTEM</span>
+</div>
+<h3 class="text-xl font-bold text-stone-100 mb-2">ERP Spec 🗄️</h3>
+<p class="text-stone-400 text-sm leading-relaxed mb-6">전사적 자원 관리 시스템의 데이터 스키마 및 비즈니스 프로세스 명세서 표준화.</p>
+<div class="flex flex-wrap gap-2">
+<span class="text-xs py-1 px-2 rounded-md bg-teal-400/5 text-teal-400">Documentation</span>
+<span class="text-xs py-1 px-2 rounded-md bg-teal-400/5 text-teal-400">ERD</span>
+</div>
+</div>
+<!-- Project 7: SRT -->
+<div class="group bg-stone-900 border border-white/[0.07] p-6 rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.25)] transition-all duration-300 hover:-translate-y-1 hover:border-teal-400/50">
+<div class="flex items-start justify-between mb-4">
+<div class="p-2.5 bg-stone-800 rounded-lg text-stone-100">
+<span class="material-symbols-outlined" data-icon="train">train</span>
+</div>
+<span class="text-[10px] font-mono py-1 px-2 rounded bg-teal-400/10 text-teal-400 tracking-wider">AUTOMATION</span>
+</div>
+<h3 class="text-xl font-bold text-stone-100 mb-2">SRT 🚄</h3>
+<p class="text-stone-400 text-sm leading-relaxed mb-6">영업 사원들의 출장 동선 최적화 및 열차 예매 현황 모니터링 툴.</p>
+<div class="flex flex-wrap gap-2">
+<span class="text-xs py-1 px-2 rounded-md bg-teal-400/5 text-teal-400">Crawler</span>
+<span class="text-xs py-1 px-2 rounded-md bg-teal-400/5 text-teal-400">Slack Bot</span>
+</div>
+</div>
+<!-- Project 8: Claude Dotfiles -->
+<div class="group bg-stone-900 border border-white/[0.07] p-6 rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.25)] transition-all duration-300 hover:-translate-y-1 hover:border-teal-400/50">
+<div class="flex items-start justify-between mb-4">
+<div class="p-2.5 bg-stone-800 rounded-lg text-stone-100">
+<span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
+</div>
+<span class="text-[10px] font-mono py-1 px-2 rounded bg-teal-400/10 text-teal-400 tracking-wider">DEVELOPMENT</span>
+</div>
+<h3 class="text-xl font-bold text-stone-100 mb-2">Claude Dotfiles 🤖</h3>
+<p class="text-stone-400 text-sm leading-relaxed mb-6">AI 기반 개발 환경 구축을 위한 환경 설정 자동화 및 프롬프트 엔지니어링 기록 저장소.</p>
+<div class="flex flex-wrap gap-2">
+<span class="text-xs py-1 px-2 rounded-md bg-teal-400/5 text-teal-400">Zsh</span>
+<span class="text-xs py-1 px-2 rounded-md bg-teal-400/5 text-teal-400">Lua</span>
+<span class="text-xs py-1 px-2 rounded-md bg-teal-400/5 text-teal-400">AI</span>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section (Editorial Split) -->
+<section class="mt-32 grid md:grid-cols-2 gap-12 items-center border-t border-stone-800 pt-24">
+<div>
+<h2 class="text-3xl font-bold text-stone-100 mb-6">함께 일하는 방식을 고민합니다.</h2>
+<p class="text-stone-400 leading-relaxed">단순히 기능을 만드는 것을 넘어, 실제 사용자가 겪는 불편함을 제거하는 데 집중합니다. 저의 프로젝트나 경력에 대해 더 궁금하신 점이 있다면 언제든 연락주세요.</p>
+</div>
+<div class="flex flex-col gap-4">
+<a class="flex items-center justify-between p-4 bg-stone-900 border border-white/[0.05] rounded-lg hover:border-teal-400 transition-colors group" href="#">
+<span class="text-stone-100 font-medium">LinkedIn 프로필 보기</span>
+<span class="material-symbols-outlined text-stone-500 group-hover:text-teal-400" data-icon="arrow_forward">arrow_forward</span>
+</a>
+<a class="flex items-center justify-between p-4 bg-stone-900 border border-white/[0.05] rounded-lg hover:border-teal-400 transition-colors group" href="mailto:contact@refhub.com">
+<span class="text-stone-100 font-medium">이메일 보내기</span>
+<span class="material-symbols-outlined text-stone-500 group-hover:text-teal-400" data-icon="mail">mail</span>
+</a>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 border-t border-stone-800 bg-stone-900">
+<div class="max-w-5xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+<p class="text-sm font-mono tracking-widest uppercase text-stone-400">© 2024 Ref Hub. Designed with editorial precision.</p>
+<div class="flex gap-8">
+<a class="text-sm font-mono tracking-widest uppercase text-stone-500 hover:text-teal-400 transition-colors opacity-80 hover:opacity-100" href="#">LinkedIn</a>
+<a class="text-sm font-mono tracking-widest uppercase text-stone-500 hover:text-teal-400 transition-colors opacity-80 hover:opacity-100" href="#">GitHub</a>
+<a class="text-sm font-mono tracking-widest uppercase text-stone-500 hover:text-teal-400 transition-colors opacity-80 hover:opacity-100" href="#">Email</a>
+</div>
+</div>
+</footer>
+</body></html>

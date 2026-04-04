@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ref Hub — 권대환 포트폴리오</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;700;800&amp;family=Outfit:wght@600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#2a7c6f',
+                            container: '#f0f9f7'
+                        },
+                        stone: {
+                            50: '#fafaf9',
+                            100: '#f5f5f4',
+                            200: '#e7e5e4',
+                            400: '#a8a29e',
+                            500: '#78716c',
+                            600: '#57534e',
+                            900: '#1c1917',
+                            950: '#0c0a09'
+                        }
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        headline: ["Space Grotesk", "sans-serif"],
+                        body: ["Inter", "sans-serif"],
+                        label: ["Space Grotesk", "monospace"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; word-break: keep-all; }
+        .font-headline { font-family: 'Space Grotesk', sans-serif; }
+        .material-symbols-outlined { font-size: 20px; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(28, 25, 23, 0.08);
+            box-shadow: 0 1px 3px rgba(28, 25, 23, 0.04);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            transform: translateY(-2px);
+            border-color: #2a7c6f;
+            box-shadow: 0 10px 20px rgba(28, 25, 23, 0.06);
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900 antialiased">
+<!-- TopAppBar Navigation Shell -->
+<header class="sticky top-0 w-full z-50 bg-stone-50/80 backdrop-blur-md border-b border-stone-200/50">
+<div class="flex justify-between items-center max-w-5xl mx-auto px-6 h-[56px]">
+<div class="flex items-center gap-2">
+<div class="w-1.5 h-1.5 rounded-full bg-teal-700"></div>
+<a class="text-xl font-black text-stone-900 tracking-tighter font-headline" href="/">Ref Hub</a>
+</div>
+<nav class="flex items-center gap-6">
+<div class="hidden md:flex gap-6 items-center">
+<a class="text-stone-500 hover:text-teal-600 font-medium transition-colors" href="#">Docs</a>
+</div>
+<div class="flex items-center gap-4 border-l border-stone-200 ml-2 pl-6">
+<button class="text-stone-500 hover:text-teal-600 flex items-center">
+<span class="material-symbols-outlined">light_mode</span>
+</button>
+<a class="text-stone-500 hover:text-teal-600 flex items-center" href="https://github.com">
+<span class="material-symbols-outlined">terminal</span>
+</a>
+</div>
+</nav>
+</div>
+</header>
+<main class="max-w-5xl mx-auto px-6">
+<!-- Hero Section -->
+<section class="pt-24 pb-32">
+<div class="w-10 h-1 bg-teal-700 rounded-full mb-8"></div>
+<h1 class="text-4xl md:text-6xl font-bold font-headline tracking-tight text-stone-900 mb-8 max-w-4xl leading-[1.1]">
+                현업의 병목을 데이터와 시스템으로 해결합니다.
+            </h1>
+<div class="flex flex-col gap-6">
+<p class="text-sm font-medium text-stone-500 tracking-wide font-headline">
+                    권대환 · 한국유니온제약 영업관리팀
+                </p>
+<p class="text-lg md:text-xl text-stone-600 max-w-2xl leading-relaxed">
+                    제약 영업관리 현장에서 수기 프로세스를 자동화하며 출발했습니다. 반복 업무를 줄이는 데서 그치지 않고, 운영 기준을 정리하고 데이터를 실시간으로 가시화하며 시스템 중심의 업무 구조로 전환하는 일을 해왔습니다.
+                </p>
+</div>
+</section>
+<!-- Projects Grid Section -->
+<section class="pb-32">
+<div class="mb-12">
+<span class="text-xs font-mono font-bold tracking-[0.2em] text-teal-700 uppercase">Projects</span>
+<h2 class="text-3xl font-bold font-headline text-stone-900 mt-2">프로젝트</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Project Card 1 -->
+<div class="glass-card rounded-xl p-8 flex flex-col h-full">
+<div class="mb-4 text-3xl">📊</div>
+<h3 class="text-xl font-bold font-headline mb-1">PharmKPI</h3>
+<p class="text-sm text-stone-500 mb-4">제약 KPI 대시보드</p>
+<p class="text-stone-600 mb-6 text-sm flex-grow">지점별 매출 실적과 목표 달성률을 실시간 가시화하여 의사결정 속도를 40% 개선했습니다.</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-teal-50 text-teal-700 text-[10px] font-bold rounded uppercase">PowerBI</span>
+<span class="px-2 py-1 bg-teal-50 text-teal-700 text-[10px] font-bold rounded uppercase">SQL</span>
+</div>
+</div>
+<!-- Project Card 2 -->
+<div class="glass-card rounded-xl p-8 flex flex-col h-full">
+<div class="mb-4 text-3xl">💼</div>
+<h3 class="text-xl font-bold font-headline mb-1">CSO Web</h3>
+<p class="text-sm text-stone-500 mb-4">B2B 제약 CSO 정산</p>
+<p class="text-stone-600 mb-6 text-sm flex-grow">복잡한 CSO 수수료 체계를 자동화된 웹 인터페이스로 구축하여 정산 오류 제로를 달성했습니다.</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-teal-50 text-teal-700 text-[10px] font-bold rounded uppercase">Vue.js</span>
+<span class="px-2 py-1 bg-teal-50 text-teal-700 text-[10px] font-bold rounded uppercase">Node.js</span>
+</div>
+</div>
+<!-- Project Card 3 -->
+<div class="glass-card rounded-xl p-8 flex flex-col h-full">
+<div class="mb-4 text-3xl">📋</div>
+<h3 class="text-xl font-bold font-headline mb-1">KPIS DSR</h3>
+<p class="text-sm text-stone-500 mb-4">의약품 공급내역</p>
+<p class="text-stone-600 mb-6 text-sm flex-grow">정부 보고용 의약품 유통 데이터를 일원화하여 법적 준수 사항을 시스템적으로 관리합니다.</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-teal-50 text-teal-700 text-[10px] font-bold rounded uppercase">Excel Automation</span>
+<span class="px-2 py-1 bg-teal-50 text-teal-700 text-[10px] font-bold rounded uppercase">Python</span>
+</div>
+</div>
+<!-- Project Card 4 -->
+<div class="glass-card rounded-xl p-8 flex flex-col h-full">
+<div class="mb-4 text-3xl">🎬</div>
+<h3 class="text-xl font-bold font-headline mb-1">StudioGo</h3>
+<p class="text-sm text-stone-500 mb-4">라이브커머스 예약</p>
+<p class="text-stone-600 mb-6 text-sm flex-grow">방송 스케줄링과 장비 대여 프로세스를 통합한 사내 스튜디오 매니지먼트 시스템입니다.</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-teal-50 text-teal-700 text-[10px] font-bold rounded uppercase">React</span>
+<span class="px-2 py-1 bg-teal-50 text-teal-700 text-[10px] font-bold rounded uppercase">Supabase</span>
+</div>
+</div>
+<!-- Project Card 5 -->
+<div class="glass-card rounded-xl p-8 flex flex-col h-full">
+<div class="mb-4 text-3xl">⚡</div>
+<h3 class="text-xl font-bold font-headline mb-1">EV Motor</h3>
+<p class="text-sm text-stone-500 mb-4">전기차 신뢰성</p>
+<p class="text-stone-600 mb-6 text-sm flex-grow">모터 생산 라인의 품질 검사 데이터를 분석하여 불량 원인을 선제적으로 파악하는 모듈입니다.</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-teal-50 text-teal-700 text-[10px] font-bold rounded uppercase">Data Science</span>
+<span class="px-2 py-1 bg-teal-50 text-teal-700 text-[10px] font-bold rounded uppercase">IoT</span>
+</div>
+</div>
+<!-- Project Card 6 -->
+<div class="glass-card rounded-xl p-8 flex flex-col h-full">
+<div class="mb-4 text-3xl">🗄️</div>
+<h3 class="text-xl font-bold font-headline mb-1">ERP Spec</h3>
+<p class="text-sm text-stone-500 mb-4">Oracle ERP 명세</p>
+<p class="text-stone-600 mb-6 text-sm flex-grow">사내 ERP 테이블 명세서와 쿼리 라이브러리를 구축하여 유지보수 효율을 높였습니다.</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-teal-50 text-teal-700 text-[10px] font-bold rounded uppercase">Oracle</span>
+<span class="px-2 py-1 bg-teal-50 text-teal-700 text-[10px] font-bold rounded uppercase">Documentation</span>
+</div>
+</div>
+<!-- Project Card 7 -->
+<div class="glass-card rounded-xl p-8 flex flex-col h-full">
+<div class="mb-4 text-3xl">🚄</div>
+<h3 class="text-xl font-bold font-headline mb-1">SRT</h3>
+<p class="text-sm text-stone-500 mb-4">SRT 자동예매</p>
+<p class="text-stone-600 mb-6 text-sm flex-grow">반복적인 출장 예매 업무를 자동화하기 위해 개발한 셀레니움 기반의 스크립트 도구입니다.</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-teal-50 text-teal-700 text-[10px] font-bold rounded uppercase">Selenium</span>
+<span class="px-2 py-1 bg-teal-50 text-teal-700 text-[10px] font-bold rounded uppercase">Automation</span>
+</div>
+</div>
+<!-- Project Card 8 -->
+<div class="glass-card rounded-xl p-8 flex flex-col h-full">
+<div class="mb-4 text-3xl">🤖</div>
+<h3 class="text-xl font-bold font-headline mb-1">Claude Dotfiles</h3>
+<p class="text-sm text-stone-500 mb-4">AI 개발 자동화</p>
+<p class="text-stone-600 mb-6 text-sm flex-grow">AI 에이전트와 워크플로우를 결합하여 코딩 및 문서화 작업을 가속하는 개인 자동화 환경입니다.</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-teal-50 text-teal-700 text-[10px] font-bold rounded uppercase">LLM Ops</span>
+<span class="px-2 py-1 bg-teal-50 text-teal-700 text-[10px] font-bold rounded uppercase">Shell</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Navigation Shell -->
+<footer class="w-full py-12 border-t border-stone-200 mt-20">
+<div class="max-w-5xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-sm text-stone-500 font-body">© 2025 권대환. Built with editorial precision.</p>
+<div class="flex gap-8 items-center">
+<a class="text-stone-500 hover:text-teal-600 transition-colors text-sm font-medium" href="#">Github</a>
+<a class="text-stone-500 hover:text-teal-600 transition-colors text-sm font-medium" href="#">LinkedIn</a>
+<a class="text-stone-500 hover:text-teal-600 transition-colors text-sm font-medium" href="#">Email</a>
+<a class="text-stone-900 hover:opacity-80" href="https://github.com">
+<span class="material-symbols-outlined">terminal</span>
+</a>
+</div>
+</div>
+</footer>
+</body></html>

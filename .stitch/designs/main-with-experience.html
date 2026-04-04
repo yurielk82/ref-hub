@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ref Hub | Portfolio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                teal: "#2a7c6f",
+                teal_light: "#5ec4b2",
+              },
+              accent: {
+                warm: "#d4a574",
+              },
+              stone: {
+                50: "#fafaf9",
+                100: "#f5f5f4",
+                200: "#e7e5e4",
+                300: "#d6d3d1",
+                400: "#a8a29e",
+                500: "#78716c",
+                600: "#57534e",
+                700: "#44403c",
+                800: "#292524",
+                900: "#1c1917",
+                950: "#0c0a09",
+              }
+            },
+            borderRadius: {
+              "DEFAULT": "0.5rem",
+              "lg": "0.75rem",
+              "xl": "1rem",
+              "full": "9999px"
+            },
+            fontFamily: {
+              headline: ["Space Grotesk", "sans-serif"],
+              body: ["Inter", "sans-serif"],
+              mono: ["JetBrains Mono", "monospace"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      body { font-family: 'Inter', sans-serif; word-break: keep-all; }
+      h1, h2, h3, .font-headline { font-family: 'Space Grotesk', sans-serif; }
+      .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+      .glass-card {
+        background: white;
+        border: 1px solid rgba(28, 25, 23, 0.08);
+        box-shadow: 0 1px 3px rgba(28, 25, 23, 0.04);
+        transition: all 0.2s ease-in-out;
+      }
+      .glass-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 24px -10px rgba(42, 124, 111, 0.15);
+        border-color: #2a7c6f;
+      }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900 selection:bg-primary-teal/10 selection:text-primary-teal">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-stone-50/80 dark:bg-stone-900/80 backdrop-blur-md border-b border-stone-200/50 dark:border-stone-800/50 shadow-sm">
+<div class="flex justify-between items-center max-w-5xl mx-auto px-6 h-16">
+<div class="text-xl font-bold tracking-tighter text-stone-900 dark:text-stone-50">Ref Hub</div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-teal-700 dark:text-teal-400 font-semibold border-b-2 border-teal-700 dark:border-teal-400 pb-1 font-sans tracking-tight" href="#">Projects</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-teal-600 dark:hover:text-teal-300 transition-colors font-sans tracking-tight" href="#">Experience</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-teal-600 dark:hover:text-teal-300 transition-colors font-sans tracking-tight" href="#">About</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-teal-600 dark:hover:text-teal-300 transition-colors font-sans tracking-tight" href="#">Contact</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-stone-600 hover:opacity-80 transition-opacity p-2 rounded-full">
+<span class="material-symbols-outlined">dark_mode</span>
+</button>
+<button class="text-stone-600 hover:opacity-80 transition-opacity p-2 rounded-full">
+<span class="material-symbols-outlined">code</span>
+</button>
+</div>
+</div>
+</nav>
+<main class="max-w-5xl mx-auto px-6 pt-32 lg:pt-48 pb-20">
+<!-- Hero Section -->
+<section class="mb-32">
+<div class="w-10 h-1 bg-primary-teal mb-8"></div>
+<h1 class="text-4xl md:text-6xl font-bold leading-[1.1] mb-6 tracking-tight text-wrap balance">
+                현업의 병목을 데이터와<br/>시스템으로 해결합니다.
+            </h1>
+<p class="text-sm font-medium text-stone-500 mb-8 font-headline uppercase tracking-widest">
+                권대환 · 한국유니온제약 영업관리팀
+            </p>
+<p class="text-base md:text-lg leading-relaxed text-stone-600 max-w-2xl font-body">
+                제약 영업관리 현장에서 수기 프로세스를 자동화하며 출발했습니다. 반복 업무를 줄이는 데서 그치지 않고, 운영 기준을 정리하고 데이터를 실시간으로 가시화하며 시스템 중심의 업무 구조로 전환하는 일을 해왔습니다.
+            </p>
+</section>
+<!-- Experience Section -->
+<section class="mb-32">
+<div class="flex flex-col mb-12">
+<span class="text-xs font-mono uppercase tracking-[0.2em] text-primary-teal mb-2">Experience</span>
+<h2 class="text-2xl md:text-3xl font-bold text-stone-900">경험</h2>
+</div>
+<div class="relative pl-8 border-l-2 border-dashed border-primary-teal/30 space-y-12">
+<!-- Item 1 -->
+<div class="relative">
+<div class="absolute -left-[41px] top-0 w-4 h-4 rounded-full bg-primary-teal border-4 border-stone-50"></div>
+<div class="glass-card p-6 rounded-lg border-l-[3px] border-l-primary-teal">
+<div class="flex flex-wrap items-center gap-3 mb-4">
+<span class="px-3 py-1 bg-accent-warm/10 text-accent-warm text-xs font-bold rounded-full">2024 — 현재</span>
+<h3 class="text-lg md:text-xl font-bold text-stone-900">한국유니온제약 영업관리팀</h3>
+</div>
+<p class="text-sm font-semibold text-stone-500 mb-3">영업관리 시스템 개발</p>
+<p class="text-stone-600 text-sm leading-relaxed mb-6">영업 데이터 자동화, KPI 대시보드, CSO 정산 시스템 등 현업 문제를 직접 시스템으로 해결</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-stone-100 text-stone-600 text-[10px] font-mono rounded">PharmKPI</span>
+<span class="px-2 py-1 bg-stone-100 text-stone-600 text-[10px] font-mono rounded">CSO Web</span>
+<span class="px-2 py-1 bg-stone-100 text-stone-600 text-[10px] font-mono rounded">KPIS DSR</span>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="relative">
+<div class="absolute -left-[41px] top-0 w-4 h-4 rounded-full bg-stone-300 border-4 border-stone-50"></div>
+<div class="glass-card p-6 rounded-lg border-l-[3px] border-l-stone-300">
+<div class="flex flex-wrap items-center gap-3 mb-4">
+<span class="px-3 py-1 bg-stone-100 text-stone-500 text-xs font-bold rounded-full">2024</span>
+<h3 class="text-lg md:text-xl font-bold text-stone-900">프리랜서 개발</h3>
+</div>
+<p class="text-stone-600 text-sm leading-relaxed mb-6">라이브커머스 스튜디오 예약 플랫폼, EV 모터 신뢰성 분석 도구 등 다양한 도메인 프로젝트</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-stone-100 text-stone-600 text-[10px] font-mono rounded">StudioGo</span>
+<span class="px-2 py-1 bg-stone-100 text-stone-600 text-[10px] font-mono rounded">EV Motor</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Skills Overview -->
+<section class="mb-32">
+<div class="flex flex-col mb-12">
+<span class="text-xs font-mono uppercase tracking-[0.2em] text-primary-teal mb-2">Skills</span>
+<h2 class="text-2xl md:text-3xl font-bold text-stone-900">보유 기술</h2>
+</div>
+<div class="space-y-1 bg-white border border-stone-200 rounded-xl overflow-hidden">
+<div class="grid grid-cols-1 md:grid-cols-[160px_1fr] border-b border-stone-100 group">
+<div class="bg-stone-50/50 p-4 flex items-center">
+<span class="text-xs font-bold text-stone-400 group-hover:text-primary-teal transition-colors">프론트엔드</span>
+</div>
+<div class="p-4 flex flex-wrap gap-2">
+<span class="px-3 py-1.5 bg-stone-100 text-stone-700 text-sm rounded-lg">Next.js</span>
+<span class="px-3 py-1.5 bg-stone-100 text-stone-700 text-sm rounded-lg">React</span>
+<span class="px-3 py-1.5 bg-stone-100 text-stone-700 text-sm rounded-lg">React Native</span>
+<span class="px-3 py-1.5 bg-stone-100 text-stone-700 text-sm rounded-lg">Tailwind</span>
+<span class="px-3 py-1.5 bg-stone-100 text-stone-700 text-sm rounded-lg">shadcn/ui</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-[160px_1fr] border-b border-stone-100 group">
+<div class="bg-stone-50/50 p-4 flex items-center">
+<span class="text-xs font-bold text-stone-400 group-hover:text-primary-teal transition-colors">백엔드</span>
+</div>
+<div class="p-4 flex flex-wrap gap-2">
+<span class="px-3 py-1.5 bg-stone-100 text-stone-700 text-sm rounded-lg">Express</span>
+<span class="px-3 py-1.5 bg-stone-100 text-stone-700 text-sm rounded-lg">FastAPI</span>
+<span class="px-3 py-1.5 bg-stone-100 text-stone-700 text-sm rounded-lg">Hono</span>
+<span class="px-3 py-1.5 bg-stone-100 text-stone-700 text-sm rounded-lg">Prisma</span>
+<span class="px-3 py-1.5 bg-stone-100 text-stone-700 text-sm rounded-lg">Supabase</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-[160px_1fr] group">
+<div class="bg-stone-50/50 p-4 flex items-center">
+<span class="text-xs font-bold text-stone-400 group-hover:text-primary-teal transition-colors">AI / 데이터</span>
+</div>
+<div class="p-4 flex flex-wrap gap-2">
+<span class="px-3 py-1.5 bg-stone-100 text-stone-700 text-sm rounded-lg">Claude API</span>
+<span class="px-3 py-1.5 bg-stone-100 text-stone-700 text-sm rounded-lg">Gemini</span>
+<span class="px-3 py-1.5 bg-stone-100 text-stone-700 text-sm rounded-lg">GPT</span>
+<span class="px-3 py-1.5 bg-stone-100 text-stone-700 text-sm rounded-lg">Python</span>
+<span class="px-3 py-1.5 bg-stone-100 text-stone-700 text-sm rounded-lg">Plotly</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Projects Grid -->
+<section class="mb-32">
+<div class="flex flex-col mb-12">
+<span class="text-xs font-mono uppercase tracking-[0.2em] text-primary-teal mb-2">Projects</span>
+<h2 class="text-2xl md:text-3xl font-bold text-stone-900">주요 프로젝트</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Project 1 -->
+<div class="glass-card overflow-hidden flex flex-col group">
+<div class="aspect-video w-full bg-stone-100 overflow-hidden">
+<img alt="PharmKPI Interface" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Modern data visualization dashboard showing pharmaceutical sales analytics with clean teal charts and dark stone background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0-wKtL-lfREtPNXrWCl8L_BU5Io_an3NdQVO2f6pv9EN348Nv7X86qPFQtW77ibqXuFgsm5Njf8_ZdjssMNNI8-03GVXsskCt2c8MycJ_n_Eg59M-nVNG758vj1QXU2kax4FfmkEGlYMCz-AlC7nQw6QyIWYuROC_m8Qok7yvkKjw8Hmk14AjtxldHrl842aAGnHmm_FLcMWsryueBHT9togf25J-y6o_siF1TBlf1wh--DTNawA3OsdvDnmK4RMYaA2JL5c33A"/>
+</div>
+<div class="p-6">
+<h3 class="font-bold text-xl mb-2">PharmKPI</h3>
+<p class="text-sm text-stone-500 mb-4 leading-relaxed">제약 영업 KPI 시각화 및 자동 분석 시스템. 수기 보고를 실시간 대시보드로 전환.</p>
+<div class="flex gap-2">
+<span class="text-[10px] font-mono text-primary-teal">Next.js</span>
+<span class="text-[10px] font-mono text-primary-teal">Plotly</span>
+</div>
+</div>
+</div>
+<!-- Project 2 -->
+<div class="glass-card overflow-hidden flex flex-col group">
+<div class="aspect-video w-full bg-stone-100 overflow-hidden">
+<img alt="CSO Web Interface" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Sleek web application interface for financial management with minimalist tables and professional stone gray aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9146NQCZ0OufrGDkmMMs0rvHVciF5eLF0ZTAhWJSeIDBlu5_Cwm7eOlJhti5Bx20RTM0UbDspsdlFyL1cqpRQMy4pkiQQDARpTwfvL4oX1nfv825uIFaRG6HWrL3NBz8degMOVmOUkEQRwnbA2rP4bc28U2opCLuVuwxnXwtuDzI0pYQ808gyNvF4Un7p3FGl2fG72X0quH3W0lVnn73zR3EPdKR0-_wbTy5-DtCScp2lNEPP4WEifIFYqKlfcX_ozN1FazChXQ"/>
+</div>
+<div class="p-6">
+<h3 class="font-bold text-xl mb-2">CSO Web</h3>
+<p class="text-sm text-stone-500 mb-4 leading-relaxed">위탁 영업 정산 관리 플랫폼. 복잡한 수수료 체계를 자동화하여 정산 오류 제로화.</p>
+<div class="flex gap-2">
+<span class="text-[10px] font-mono text-primary-teal">React</span>
+<span class="text-[10px] font-mono text-primary-teal">Supabase</span>
+</div>
+</div>
+</div>
+<!-- Project 3 -->
+<div class="glass-card overflow-hidden flex flex-col group">
+<div class="aspect-video w-full bg-stone-100 overflow-hidden">
+<img alt="KPIS DSR" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Data reporting tool showing mobile interface with clean typography and simple functional components" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbePBzYueJhWVQUVWr6_MI9NTCr4BFRbv_dZDAaq8SWQjdWIE-qsd0-hYtK9TeX7nMw4jEz8DZs-2t5yhiQioP09pckGq3FNaVpokfuSh2PnEWqK4iukgT2_k6C-8KxkWF2A_J4ETElCXjD4aalFuuIR3_cmNujP3TAQ7zAD3QvRLpzPDQXRCbUf2Pt-WtRZhTpdMgjEcd1TJAjMTezxDUTEODxE8QN2Ahm4RfTqAbeL6qaJnbRdNWUTIBIGH8tTHiSjrxIdf9dw"/>
+</div>
+<div class="p-6">
+<h3 class="font-bold text-xl mb-2">KPIS DSR</h3>
+<p class="text-sm text-stone-500 mb-4 leading-relaxed">매일의 영업 실적을 간편하게 리포팅하는 모바일 친화적 도구.</p>
+<div class="flex gap-2">
+<span class="text-[10px] font-mono text-primary-teal">Tailwind</span>
+<span class="text-[10px] font-mono text-primary-teal">FastAPI</span>
+</div>
+</div>
+</div>
+<!-- Project 4 -->
+<div class="glass-card overflow-hidden flex flex-col group">
+<div class="aspect-video w-full bg-stone-100 overflow-hidden">
+<img alt="StudioGo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Professional studio reservation calendar with warm accent colors and high-end editorial layout" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG2wHY5RJNhubfgbfsqQiNYFmYcD_3Pj39o_nC8nSiGKx1o4WUJaW_gogiKmKIKv6f7ffqJCVqifV-q0ra3tCpGJMuVaJJ0AaYQp3XUHd9-_52064Hm7WR3cqrzR0eY2p2om1Z7V0HQUWKT7ry77-1EdgOHTONmQyLfCFj3eRExD7Yl7yiuyuMv4a_68ASw2yxUuG70IfLpBWLeHl7vA8nhFRsFR_lToXCzX0KVNDNZoTxFv_bZkK7z5wn96h4q-GX2eYU5RHSpQ"/>
+</div>
+<div class="p-6">
+<h3 class="font-bold text-xl mb-2">StudioGo</h3>
+<p class="text-sm text-stone-500 mb-4 leading-relaxed">라이브커머스 스튜디오 예약 전용 플랫폼. 타임라인 기반 예약 최적화.</p>
+<div class="flex gap-2">
+<span class="text-[10px] font-mono text-primary-teal">Hono</span>
+<span class="text-[10px] font-mono text-primary-teal">Prisma</span>
+</div>
+</div>
+</div>
+<!-- Project 5 -->
+<div class="glass-card overflow-hidden flex flex-col group">
+<div class="aspect-video w-full bg-stone-100 overflow-hidden">
+<img alt="EV Motor" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Engineering software interface displaying electrical motor performance metrics and reliability graphs" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvL4bSZ3myjoyNBsOKMWluMmRbg7OJD4E8GQLMJ8WMZmO2qAxH_QGQNnp_t2WPjzcaSbg2VRIlYaJ6mpxk8l4ixRAqyHMRhwxZSwx73ypd6E2bwuPcRM9G3VvgNtshUlx7LIBequBnvaUJH6L-N6Paiv0TNpXUTY-7tS_4pntKxHGICUoTasj94SEHdVNAknfO8uGleroSaMPvZ4lzfGwYjtnXJABb54-P4nF2O5D2tyHoEixyv2uhkfr9q54D_8DOiL3oBwQG-A"/>
+</div>
+<div class="p-6">
+<h3 class="font-bold text-xl mb-2">EV Motor Analysis</h3>
+<p class="text-sm text-stone-500 mb-4 leading-relaxed">전기차 모터 신뢰성 분석 데이터 시각화 툴.</p>
+<div class="flex gap-2">
+<span class="text-[10px] font-mono text-primary-teal">Python</span>
+<span class="text-[10px] font-mono text-primary-teal">Express</span>
+</div>
+</div>
+</div>
+<!-- Project 6 -->
+<div class="glass-card overflow-hidden flex flex-col group">
+<div class="aspect-video w-full bg-stone-100 overflow-hidden">
+<img alt="ERP Spec" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Detailed technical documentation layout with clean grid structure and professional typography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCK3Itu0l6XFjV5ghaqrqMgFs68cxQi0y5dbz3SQ6chD7YybnYKcNn1grsGb2x-TZ-XFIp2IWKZGnf1BsMnSp-70LXwJfpRfhdDXRURGgq2K6vcLI4-Hhthi-JA3yKcPqmyzJWJkSE7kDvodYnJ_on7pkh-aeOEnVhOT-dPZ7tEbokUicQk3VBwOXguNDezaYmmjKdiG1Mc99eiVxPCs_gJYYfJst0KljAGhs6yOuoLW7kX7ORh5f119I_6zb8VfSVoYhbt9CEnUQ"/>
+</div>
+<div class="p-6">
+<h3 class="font-bold text-xl mb-2">ERP Spec</h3>
+<p class="text-sm text-stone-500 mb-4 leading-relaxed">사내 ERP 구축을 위한 상세 명세 및 데이터 매핑 설계.</p>
+<div class="flex gap-2">
+<span class="text-[10px] font-mono text-primary-teal">Documentation</span>
+</div>
+</div>
+</div>
+<!-- Project 7 -->
+<div class="glass-card overflow-hidden flex flex-col group">
+<div class="aspect-video w-full bg-stone-100 overflow-hidden">
+<img alt="SRT Tracking" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Minimalist tracking application showing timeline and status updates with soft shadow depth" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2WlWJlAYdw9efhy-vvF0eokfF_hlK0CDu_bAJAeTYBPe6e4vqwm0wgTNIFmRrHpifHxZJHvmYOztsSOgEWnxgWY7MaDdg-duwks4XlrVMXYbV3cvyYhfCierjXVphetVL0f5nOp-_t1IeDK-UZvQ7IxDp-dpItqL_J1ute5Kc4oZJW76KenwNIye3fbeMdSeMWoonWCXhiBIR-f_Ap0laE4OWagkXJNHowXkNoIItsJPmHbB7SdrTJ8BMYu4aOsmvFO7w2IcjkQ"/>
+</div>
+<div class="p-6">
+<h3 class="font-bold text-xl mb-2">SRT</h3>
+<p class="text-sm text-stone-500 mb-4 leading-relaxed">배송 및 상태 추적을 위한 심플한 물류 대시보드.</p>
+<div class="flex gap-2">
+<span class="text-[10px] font-mono text-primary-teal">React Native</span>
+</div>
+</div>
+</div>
+<!-- Project 8 -->
+<div class="glass-card overflow-hidden flex flex-col group">
+<div class="aspect-video w-full bg-stone-100 overflow-hidden">
+<img alt="Claude Dotfiles" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Terminal window showing code configuration files in a high contrast dark mode aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMYoS7VclIxjT3oamagvhRI5zXeO2LektkFnBsUBrJ8AdWZ33h8tMSL-eSn7WvllUtb2W5uBFahEft1o8HtIMkhOkaHtDFI0cs1bMpMml-CQTVo01toznFy5wFoIkHrIQSlLkCyrknQKWe_FoCV1xBoptuok7afMuZqnMyLqJ_Muw1X9cTW_QQ6w3-UrLXRhh-MBuEWvVE3uXAnIY52sajK-vyk_VhSXWHbAMjmU0-tqsTJLPaXSDLMaZa6HENolre98U9IwenDw"/>
+</div>
+<div class="p-6">
+<h3 class="font-bold text-xl mb-2">Claude Dotfiles</h3>
+<p class="text-sm text-stone-500 mb-4 leading-relaxed">AI 개발 생산성 극대화를 위한 환경 설정 및 자동화 스크립트 모음.</p>
+<div class="flex gap-2">
+<span class="text-[10px] font-mono text-primary-teal">Claude API</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 mt-24 border-t border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-stone-950">
+<div class="flex flex-col md:flex-row justify-between items-center max-w-5xl mx-auto px-6 gap-4">
+<div class="text-xs uppercase tracking-widest font-mono text-stone-500">
+                © 2024 Ref Hub. Built with precision.
+            </div>
+<div class="flex gap-8">
+<a class="text-xs uppercase tracking-widest font-mono text-stone-500 hover:text-teal-700 dark:hover:text-teal-300 underline underline-offset-4 transition-colors" href="#">LinkedIn</a>
+<a class="text-xs uppercase tracking-widest font-mono text-stone-500 hover:text-teal-700 dark:hover:text-teal-300 underline underline-offset-4 transition-colors" href="#">GitHub</a>
+<a class="text-xs uppercase tracking-widest font-mono text-stone-500 hover:text-teal-700 dark:hover:text-teal-300 underline underline-offset-4 transition-colors" href="#">Email</a>
+</div>
+</div>
+</footer>
+</body></html>

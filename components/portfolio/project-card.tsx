@@ -9,7 +9,7 @@ export function ProjectCard({ project }: { project: Project }) {
   return (
     <Link
       href={`/projects/${project.slug}`}
-      className="group block overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50 transition-all duration-300 hover:border-zinc-300 hover:bg-zinc-100 dark:border-zinc-800/60 dark:bg-zinc-900/50 dark:hover:border-zinc-700 dark:hover:bg-zinc-900"
+      className="glass-card group block overflow-hidden rounded-2xl"
     >
       {/* 스크린샷 또는 그라데이션 플레이스홀더 */}
       <div className="relative aspect-video overflow-hidden">
@@ -35,17 +35,17 @@ export function ProjectCard({ project }: { project: Project }) {
         )}
 
         {/* 카테고리 뱃지 */}
-        <span className="absolute right-3 top-3 rounded-full bg-white/70 px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wider text-zinc-600 backdrop-blur-sm dark:bg-zinc-950/70 dark:text-zinc-300">
+        <span className="absolute right-3 top-3 rounded-full border border-[var(--glass-border)] bg-[var(--glass-bg)] px-2.5 py-0.5 font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-wider text-zinc-600 backdrop-blur-md dark:text-zinc-300">
           {project.category}
         </span>
       </div>
 
       {/* 콘텐츠 */}
       <div className="p-5">
-        <h3 className="text-base font-semibold text-zinc-900 group-hover:text-black dark:text-zinc-100 dark:group-hover:text-white">
+        <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-100">
           {project.name}
         </h3>
-        <p className="mt-1 text-sm leading-relaxed text-zinc-400">
+        <p className="mt-1 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
           {project.tagline}
         </p>
 
@@ -54,7 +54,7 @@ export function ProjectCard({ project }: { project: Project }) {
           {project.tech.slice(0, 4).map((t) => (
             <span
               key={t}
-              className="rounded-md bg-zinc-200/80 px-2 py-0.5 text-[11px] text-zinc-600 dark:bg-zinc-800/80 dark:text-zinc-400"
+              className="rounded-md bg-[var(--accent-muted)] px-2 py-0.5 font-[family-name:var(--font-mono)] text-[11px] text-[var(--accent)]"
             >
               {t}
             </span>

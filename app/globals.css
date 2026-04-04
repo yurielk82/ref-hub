@@ -1,3 +1,7 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
 @import "tailwindcss" source(none);
 
 @source "../app";
@@ -5,10 +9,57 @@
 @source "../data";
 
 @theme {
-  --font-sans: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-display: 'Outfit', 'Pretendard Variable', sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+  --color-accent: var(--accent);
+  --color-accent-muted: var(--accent-muted);
+}
+
+:root {
+  --accent: #5b6abf;
+  --accent-light: #7c8aff;
+  --accent-muted: #5b6abf33;
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(0, 0, 0, 0.06);
+  --glass-shadow: rgba(0, 0, 0, 0.04);
+  --surface: #f8f9fc;
+  --surface-raised: #ffffff;
+}
+
+.dark {
+  --accent: #7c8aff;
+  --accent-light: #a5b0ff;
+  --accent-muted: #7c8aff22;
+  --glass-bg: rgba(24, 24, 27, 0.5);
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --glass-shadow: rgba(0, 0, 0, 0.2);
+  --surface: #09090b;
+  --surface-raised: #18181b;
 }
 
 body {
   word-break: keep-all;
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 4px 24px var(--glass-shadow);
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+
+.glass-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px var(--glass-shadow), 0 0 0 1px var(--accent-muted);
+  border-color: var(--accent-muted);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent) 0%, #a78bfa 50%, #c084fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }

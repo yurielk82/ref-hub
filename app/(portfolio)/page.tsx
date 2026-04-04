@@ -11,11 +11,11 @@ export default function HomePage() {
           <FadeInUp>
             <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
               <span className="gradient-text">
-                수작업을 시스템으로,
+                보이지 않는 패턴을
               </span>
               <br />
               <span className="gradient-text">
-                데이터로, AI로.
+                시스템으로 만듭니다.
               </span>
             </h1>
           </FadeInUp>
@@ -26,10 +26,8 @@ export default function HomePage() {
           </FadeInUp>
           <FadeInUp delay={0.2}>
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-zinc-600 dark:text-zinc-400">
-              제약 영업관리 및 유통 실무를 기반으로, 데이터·시스템·AI를 활용해
-              반복 수작업과 운영 병목을 개선해 왔습니다. 현업과 IT 사이의 간극을
-              줄이며, 업무를 실제로 작동하는 프로세스와 시스템으로 연결하는 역할에
-              강점이 있습니다.
+              제약 영업관리의 수기 프로세스를 자동화한 것이 시작이었습니다.
+              지금은 도메인을 가리지 않고, 현장의 반복을 구조로 바꿉니다.
             </p>
           </FadeInUp>
         </div>

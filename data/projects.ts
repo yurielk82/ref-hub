@@ -14,6 +14,13 @@ export interface Project {
   features: string[]
   highlight: string
   year: string
+  badge?: string
+  featuredModule?: {
+    name: string
+    description: string
+    path: string
+    emoji: string
+  }
 }
 
 export const PROJECTS: Project[] = [
@@ -53,13 +60,21 @@ export const PROJECTS: Project[] = [
     emoji: '💼',
     gradient: 'from-emerald-600/20 to-teal-600/20',
     features: [
+      'AI Vision 기반 EDI 문서 자동 검증 (OCR + 위변조 탐지)',
       '거래처별 수수료 자동 정산',
-      'AI Vision 기반 EDI 문서 자동 검토',
       '다단계 승인 워크플로우',
       '이메일 알림 워커 + Upstash Rate Limit',
     ],
     highlight: 'Anthropic Vision API + EDI 문서 자동화',
     year: '2024',
+    badge: 'NEW',
+    featuredModule: {
+      name: 'EDI 검증 시스템',
+      description:
+        '처방통계 이미지를 Claude Vision OCR로 자동 추출하고, ELA·EXIF·Perceptual Hash로 위변조를 탐지하며, 사람이 최종 검수하는 Human-in-the-loop 자동 검증 모듈',
+      path: '/edi-verification',
+      emoji: '🔍',
+    },
   },
   {
     slug: 'kpis-dsr-api',

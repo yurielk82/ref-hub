@@ -1,37 +1,28 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import type { Project } from '@/data/projects'
 import { cn } from '@/lib/utils'
+import { NewBadge } from './badge'
+import { ProjectThumbnail } from './project-thumbnail'
+import { TechTags } from './tech-tags'
 
 export function ProjectCard({ project }: { project: Project }) {
-  const { screenshot } = project
-
   return (
     <Link
       href={`/projects/${project.slug}`}
-      className="glass-card group block overflow-hidden rounded-2xl"
+      className={cn(
+        'glass-card group block overflow-hidden rounded-2xl',
+        project.badge && 'ring-2 ring-[color-mix(in_srgb,var(--accent)_30%,transparent)]',
+      )}
     >
       {/* 스크린샷 또는 그라데이션 플레이스홀더 */}
       <div className="relative aspect-video overflow-hidden">
-        {screenshot ? (
-          <Image
-            src={screenshot}
-            alt={`${project.name} 스크린샷`}
-            fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-            sizes="(max-width: 768px) 100vw, 50vw"
-          />
-        ) : (
-          <div
-            className={cn(
-              'flex h-full items-center justify-center bg-gradient-to-br',
-              project.gradient,
-            )}
-          >
-            <span className="text-5xl transition-transform duration-300 group-hover:scale-110">
-              {project.emoji}
-            </span>
-          </div>
+        <ProjectThumbnail project={project} variant="card" />
+
+        {/* NEW 뱃지 */}
+        {project.badge && (
+          <span className="absolute left-3 top-3 z-10 shadow-sm">
+            <NewBadge label={project.badge} />
+          </span>
         )}
 
         {/* 카테고리 뱃지 */}
@@ -50,15 +41,8 @@ export function ProjectCard({ project }: { project: Project }) {
         </p>
 
         {/* 기술 스택 태그 */}
-        <div className="mt-3 flex flex-wrap gap-1.5">
-          {project.tech.slice(0, 4).map((t) => (
-            <span
-              key={t}
-              className="rounded-md bg-[var(--accent-muted)] px-2 py-0.5 font-[family-name:var(--font-mono)] text-[11px] text-[var(--accent)]"
-            >
-              {t}
-            </span>
-          ))}
+        <div className="mt-3">
+          <TechTags items={project.tech.slice(0, 4)} variant="compact" />
         </div>
       </div>
     </Link>

@@ -1,10 +1,12 @@
 import { notFound } from 'next/navigation'
-import Image from 'next/image'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import { ArrowLeft, ExternalLink, BookOpen } from 'lucide-react'
 import { PROJECTS, getProject } from '@/data/projects'
 import { cn } from '@/lib/utils'
+import { NewBadge } from '@/components/portfolio/badge'
+import { ProjectThumbnail } from '@/components/portfolio/project-thumbnail'
+import { TechTags } from '@/components/portfolio/tech-tags'
 
 export function generateStaticParams() {
   return PROJECTS.map((p) => ({ slug: p.slug }))
@@ -28,8 +30,6 @@ export default async function ProjectPage(
   const { slug } = await props.params
   const project = getProject(slug)
   if (!project) notFound()
-
-  const { screenshot } = project
 
   return (
     <article className="px-6 pb-28 pt-12">
@@ -100,46 +100,46 @@ export default async function ProjectPage(
           {/* 우측 40% — 스크린샷 */}
           <div className="lg:w-2/5">
             <div className="glass-card overflow-hidden rounded-2xl">
-              {screenshot ? (
-                <div className="relative aspect-video">
-                  <Image
-                    src={screenshot}
-                    alt={`${project.name} 스크린샷`}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 40vw"
-                    priority
-                  />
-                </div>
-              ) : (
-                <div
-                  className={cn(
-                    'flex aspect-video items-center justify-center bg-gradient-to-br',
-                    project.gradient,
-                  )}
-                >
-                  <span className="text-6xl">{project.emoji}</span>
-                </div>
-              )}
+              <ProjectThumbnail project={project} variant="detail" />
             </div>
           </div>
         </div>
+
+        {/* 핵심 모듈 콜아웃 */}
+        {project.featuredModule && (
+          <section className="mt-16">
+            <div className="overflow-hidden rounded-2xl border border-[color-mix(in_srgb,var(--accent)_20%,transparent)] bg-gradient-to-r from-[color-mix(in_srgb,var(--accent)_5%,transparent)] to-transparent">
+              <div className="flex flex-col gap-6 p-8 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex-1">
+                  <div className="flex items-center gap-2.5">
+                    <span className="text-2xl">{project.featuredModule.emoji}</span>
+                    <NewBadge />
+                  </div>
+                  <h2 className="mt-3 font-[family-name:var(--font-display)] text-xl font-bold text-stone-900 dark:text-stone-50">
+                    {project.featuredModule.name}
+                  </h2>
+                  <p className="mt-2 max-w-xl text-sm leading-relaxed text-stone-600 dark:text-stone-400">
+                    {project.featuredModule.description}
+                  </p>
+                </div>
+                <Link
+                  href={project.featuredModule.path}
+                  className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-[var(--accent)] px-5 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90"
+                >
+                  <BookOpen className="h-3.5 w-3.5" />
+                  상세 문서
+                </Link>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* 기술 스택 */}
         <section className="mt-16">
           <p className="mb-4 font-[family-name:var(--font-mono)] text-xs uppercase tracking-widest text-[var(--accent)]">
             Tech Stack
           </p>
-          <div className="flex flex-wrap gap-2">
-            {project.tech.map((t) => (
-              <span
-                key={t}
-                className="rounded-lg bg-stone-100 px-4 py-2 text-sm font-medium text-stone-700 dark:bg-stone-800 dark:text-stone-300"
-              >
-                {t}
-              </span>
-            ))}
-          </div>
+          <TechTags items={project.tech} variant="full" />
         </section>
 
         {/* 주요 기능 — 번호 매김 */}

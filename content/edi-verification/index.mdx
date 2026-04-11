@@ -1,0 +1,67 @@
+# EDI 검증
+
+처방통계 이미지 기반 EDI 자동 검증 시스템 — OCR + 위변조 탐지 + 사람 검수(Human-in-the-loop)
+
+## 개요
+
+| 항목 | 내용 |
+|------|------|
+| **스택** | Next.js 14 (App Router) + TypeScript + Tailwind CSS + Radix UI |
+| **DB** | Supabase 셀프호스팅 (PostgreSQL 15 + RLS) |
+| **호스팅** | Vercel (CSO Web 내 모듈) |
+| **인증** | CSO Web 자체 JWT (관리자 전용) |
+| **OCR** | Claude Vision API (구조화 추출) |
+| **위변조** | ELA(Error Level Analysis) + EXIF 분석 + Perceptual Hash |
+
+## 도메인 컨텍스트
+
+제약 CSO(위탁영업) 업체는 매월 처방통계를 제출하여 수수료를 청구합니다. 기존에는 사람이 수백 장의 처방통계 이미지를 일일이 대조했으나, EDI 검증 시스템이 이 프로세스를 자동화합니다.
+
+- **EDI**: 전자문서교환(Electronic Data Interchange). 여기서는 처방통계 이미지 → 구조화 데이터 추출을 의미
+- **처방통계**: 병원/약국이 발행하는 의약품 처방·조제 수량 보고서 (이미지 또는 PDF)
+- **CSO**: 제약사 대신 의약품을 영업하는 위탁업체. 처방통계로 실적을 증빙
+
+## 핵심 워크플로우
+
+```
+ZIP 업로드 → CSO 자동매칭 → OCR 추출 → 자사품목 필터링
+  → 자동확인/플래그 분류 → 위변조 분석 → 사람 검수 → 확정
+```
+
+1. **업로드** — CSO별 폴더로 구성된 ZIP 파일 업로드 (이미지/PDF)
+2. **CSO 매칭** — 폴더명 기반 CSO 업체 자동 매칭 (유사도 검색)
+3. **OCR 처리** — Claude Vision API로 표 구조 추출 (품목명, 청구코드, 수량, 금액)
+4. **품목 필터링** — 자사 품목/CSO 계약 품목 자동 분류
+5. **자동 판정** — 신뢰도 임계값 이상이면 자동확인(auto_pass), 미만이면 플래그(flagged)
+6. **위변조 탐지** — ELA 점수, EXIF 편집 소프트웨어, 해시 중복 검사
+7. **사람 검수** — 플래그된 건에 대해 관리자가 확인/수정/의심 판정
+8. **확정** — 배치 전체 검수 완료 후 엑셀 리포트 다운로드
+
+## 주요 기능
+
+- ZIP 일괄 업로드 및 CSO 폴더 구조 자동 파싱
+- CSO 업체명 퍼지 매칭 (pg_trgm 유사도)
+- Claude Vision OCR 구조화 추출 (표 헤더 + 품목 행)
+- 자사 품목 마스터 연동 (청구코드 기반 매칭)
+- 실시간 처리 진행률 (SSE 스트리밍)
+- 처리 일시정지/재개 (Pause/Resume)
+- ELA(Error Level Analysis) 위변조 탐지
+- EXIF 편집 소프트웨어 감지
+- Perceptual Hash 중복 이미지 검출
+- 인라인 셀 편집 (검수 중 OCR 오류 수정)
+- 배치별 엑셀 리포트 자동 생성
+- 처리 이력 관리 및 재처리
+
+## 데이터 모델
+
+| 테이블 | 역할 |
+|--------|------|
+| csoweb_company_products | 자사 품목 마스터 |
+| csoweb_cso_contract_products | CSO 계약 품목 매핑 |
+| csoweb_edi_verification_batches | 검증 배치 (월 단위) |
+| csoweb_edi_verification_requests | 검증 요청 (파일 단위) |
+| csoweb_edi_verification_items | OCR 추출 항목 (품목 단위) |
+
+## 매뉴얼
+
+- [사용자 매뉴얼](/edi-verification/user-guide/getting-started) — 영업관리팀 담당자용

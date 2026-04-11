@@ -22,6 +22,10 @@ const meta: MetaRecord = {
     title: 'PharmKPI',
     type: 'page',
   },
+  'edi-verification': {
+    title: 'EDI 검증',
+    type: 'page',
+  },
   corerx: {
     title: 'CoreRx',
     type: 'page',

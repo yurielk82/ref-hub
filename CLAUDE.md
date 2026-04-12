@@ -4,7 +4,6 @@
 |------|-----|
 | **유형** | 정적 |
 | **역할** | 프로젝트 통합 레퍼런스 문서 사이트 |
-| **MCP** | Vercel |
 
 ## 프로젝트 정보
 
@@ -12,7 +11,10 @@
 |------|------|
 | **스택** | Next.js 15 + Nextra v4 (App Router) + TypeScript |
 | **DB** | 없음 (정적 사이트) |
-| **호스팅** | Vercel |
+| **호스팅** | PM2 (standalone) + Nginx |
+| **도메인** | ref.dvsharp.com |
+| **포트** | 3007 |
+| **PM2 이름** | ref-hub |
 | **인증** | 없음 (공개 문서) |
 
 ## 도메인 컨텍스트
@@ -43,7 +45,8 @@ npm run dev
 ```
 
 - 문서 수정: 프로젝트 리포에서 `docs/manual/` 수정 → 커밋+푸시
-- 포털 반영: `git submodule update --remote repos/{project}` → 커밋+푸시 → Vercel 자동 배포
+- 포털 반영: `git submodule update --remote repos/{project}` → 커밋+푸시
+- 배포: `npm run build && cp -r .next/static .next/standalone/.next/static && cp -r public .next/standalone/public && pm2 startOrReload ecosystem.config.cjs`
 
 ## 컨벤션
 

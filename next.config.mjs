@@ -17,6 +17,7 @@ const withNextra = nextra({
 })
 
 export default withNextra({
+  output: 'standalone',
   reactStrictMode: true,
   outputFileTracingRoot: __dirname,
   async headers() {

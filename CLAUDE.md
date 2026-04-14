@@ -46,7 +46,7 @@ npm run dev
 
 - 문서 수정: 프로젝트 리포에서 `docs/manual/` 수정 → 커밋+푸시
 - 포털 반영: `git submodule update --remote repos/{project}` → 커밋+푸시
-- 배포: `npm run build && cp -r .next/static .next/standalone/.next/static && cp -r public .next/standalone/public && pm2 startOrReload ecosystem.config.cjs`
+- 배포: `cd /home/ubuntu/GitHub && ./bin/deploy.sh ref-hub` (등록 후 사용 — 현재 `bin/projects.tsv`에 ref-hub 엔트리가 있는지 확인 필요. 없으면 추가해야 함)
 
 ## 컨벤션
 

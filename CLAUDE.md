@@ -46,7 +46,8 @@ npm run dev
 
 - 문서 수정: 프로젝트 리포에서 `docs/manual/` 수정 → 커밋+푸시
 - 포털 반영: `git submodule update --remote repos/{project}` → 커밋+푸시
-- 배포: `cd /home/ubuntu/GitHub && ./bin/deploy.sh ref-hub` (등록 후 사용 — 현재 `bin/projects.tsv`에 ref-hub 엔트리가 있는지 확인 필요. 없으면 추가해야 함)
+- 배포: `cd /home/ubuntu/GitHub && ./bin/deploy.sh ref-hub` (포트 3007, health: `http://127.0.0.1:3007/`)
+- PM2 namespace: `ref-hub`. 관리: `./bin/pmx logs ref-hub`, `./bin/pmx restart ref-hub`. 상세: 워크스페이스 `.claude/rules/deploy.md`
 
 ## 컨벤션
 

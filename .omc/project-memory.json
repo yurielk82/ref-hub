@@ -1,0 +1,231 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1776008075920,
+  "projectRoot": "/home/ubuntu/GitHub/ref-hub",
+  "techStack": {
+    "languages": [
+      {
+        "name": "JavaScript/TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "package.json"
+        ]
+      },
+      {
+        "name": "TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "tsconfig.json"
+        ]
+      }
+    ],
+    "frameworks": [
+      {
+        "name": "next",
+        "version": "15.3.0",
+        "category": "fullstack"
+      },
+      {
+        "name": "react",
+        "version": "19.0.0",
+        "category": "frontend"
+      },
+      {
+        "name": "react-dom",
+        "version": "19.0.0",
+        "category": "frontend"
+      }
+    ],
+    "packageManager": "npm",
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": "npm run build",
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": "npm run dev",
+    "scripts": {
+      "sync": "node scripts/sync-docs.mjs",
+      "predev": "node scripts/sync-docs.mjs",
+      "dev": "next dev",
+      "prebuild": "node scripts/sync-docs.mjs",
+      "build": "next build",
+      "start": "next start"
+    }
+  },
+  "conventions": {
+    "namingStyle": "camelCase",
+    "importStyle": "ES modules",
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "app",
+      "components",
+      "lib",
+      "public",
+      "scripts"
+    ],
+    "gitBranches": null
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "app": {
+      "path": "app",
+      "purpose": "Application code",
+      "fileCount": 2,
+      "lastAccessed": 1776008075881,
+      "keyFiles": [
+        "globals.css",
+        "layout.tsx"
+      ]
+    },
+    "components": {
+      "path": "components",
+      "purpose": "UI components",
+      "fileCount": 1,
+      "lastAccessed": 1776008075882,
+      "keyFiles": [
+        "theme-provider.tsx"
+      ]
+    },
+    "content": {
+      "path": "content",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1776008075899,
+      "keyFiles": [
+        "_meta.tsx"
+      ]
+    },
+    "data": {
+      "path": "data",
+      "purpose": "Data files",
+      "fileCount": 2,
+      "lastAccessed": 1776008075906,
+      "keyFiles": [
+        "experience.ts",
+        "projects.ts"
+      ]
+    },
+    "lib": {
+      "path": "lib",
+      "purpose": "Library code",
+      "fileCount": 1,
+      "lastAccessed": 1776008075909,
+      "keyFiles": [
+        "utils.ts"
+      ]
+    },
+    "public": {
+      "path": "public",
+      "purpose": "Public files",
+      "fileCount": 0,
+      "lastAccessed": 1776008075910,
+      "keyFiles": []
+    },
+    "repos": {
+      "path": "repos",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1776008075910,
+      "keyFiles": []
+    },
+    "scripts": {
+      "path": "scripts",
+      "purpose": "Build/utility scripts",
+      "fileCount": 2,
+      "lastAccessed": 1776008075910,
+      "keyFiles": [
+        "capture-screenshots.mjs",
+        "sync-docs.mjs"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "",
+      "accessCount": 5,
+      "lastAccessed": 1776010252176,
+      "type": "directory"
+    },
+    {
+      "path": "package.json",
+      "accessCount": 4,
+      "lastAccessed": 1776009617927,
+      "type": "file"
+    },
+    {
+      "path": "app/(portfolio)/page.tsx",
+      "accessCount": 3,
+      "lastAccessed": 1776008507844,
+      "type": "file"
+    },
+    {
+      "path": "CLAUDE.md",
+      "accessCount": 3,
+      "lastAccessed": 1776009256744,
+      "type": "file"
+    },
+    {
+      "path": "next.config.mjs",
+      "accessCount": 2,
+      "lastAccessed": 1776009079468,
+      "type": "file"
+    },
+    {
+      "path": "ecosystem.config.cjs",
+      "accessCount": 2,
+      "lastAccessed": 1776009618890,
+      "type": "file"
+    },
+    {
+      "path": "components",
+      "accessCount": 2,
+      "lastAccessed": 1776010263476,
+      "type": "directory"
+    },
+    {
+      "path": "app/layout.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1776008112685,
+      "type": "file"
+    },
+    {
+      "path": "app/(docs)/layout.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1776008112816,
+      "type": "file"
+    },
+    {
+      "path": "app/(portfolio)/layout.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1776008118227,
+      "type": "file"
+    },
+    {
+      "path": "app",
+      "accessCount": 1,
+      "lastAccessed": 1776010246010,
+      "type": "directory"
+    },
+    {
+      "path": "data",
+      "accessCount": 1,
+      "lastAccessed": 1776010264351,
+      "type": "directory"
+    },
+    {
+      "path": "app/(portfolio)",
+      "accessCount": 1,
+      "lastAccessed": 1776010268779,
+      "type": "directory"
+    }
+  ],
+  "userDirectives": []
+}

@@ -9,7 +9,8 @@
     "dev": "next dev",
     "prebuild": "node scripts/sync-docs.mjs",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "node --test tests/**/*.test.mjs"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

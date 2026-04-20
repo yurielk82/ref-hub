@@ -50,3 +50,13 @@ PM2 namespace: `ref-hub`. 관리: `./bin/pmx logs ref-hub`, `./bin/pmx restart r
 ## 트러블슈팅
 
 <!-- 반복 장애 발생 시 1줄씩 추가: 증상 → 원인 → 해결책 -->
+
+<!-- AUTO-HISTORY:START -->
+_자동 생성 — `.claude/scripts/sync-claude-md.sh`. 수동 편집 금지 (append-only 로 .claude/SESSION_LOG.md 가 원본)._
+
+## 최근 세션 히스토리
+
+_세션 로그 미생성 — 첫 커밋 후 자동 초기화._
+
+원본: `.claude/SESSION_LOG.md` (append-only)
+<!-- AUTO-HISTORY:END -->

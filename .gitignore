@@ -38,3 +38,6 @@ next-env.d.ts
 # content/kpis-dsr-api/
 # content/studiogo/
 graphify-out/
+
+# Auto session log (local only — CLAUDE.md AUTO-HISTORY block is the committed view)
+.claude/SESSION_LOG.md

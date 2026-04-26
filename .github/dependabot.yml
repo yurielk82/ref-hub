@@ -1,0 +1,15 @@
+# Auto-update GitHub Actions to latest pinned SHAs
+# zizmor unpinned-uses 보안 권고 자동화
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    groups:
+      actions:
+        patterns:
+          - "*"
+

@@ -1,10 +1,13 @@
----
 name: CI
 
 "on":
   push:
     branches:
-      - main
+    - main
+    paths-ignore:
+    - '**.md'
+    - docs/**
+    - .gitignore
   pull_request:
 
 concurrency:
@@ -17,24 +20,24 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
-        with:
-          submodules: recursive
-          persist-credentials: false
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        persist-credentials: false
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "24"
-          cache: npm
+    - uses: actions/setup-node@v4
+      with:
+        node-version: "24"
+        cache: npm
 
-      - name: install
-        run: npm ci
+    - name: install
+      run: npm ci
 
       # build 가 prebuild 훅을 통해 sync-docs 를 자동 실행
-      - name: build
-        run: npm run build
-        env:
-          NEXT_TELEMETRY_DISABLED: "1"
+    - name: build
+      run: npm run build
+      env:
+        NEXT_TELEMETRY_DISABLED: "1"
 
-      - name: test
-        run: npm test
+    - name: test
+      run: npm test

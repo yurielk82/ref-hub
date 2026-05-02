@@ -58,12 +58,16 @@ test('embed mode keeps CSP frame-ancestors protection', async () => {
   assert.match(cspHeader.value, /https:\/\/example\.dev/)
 })
 
-test('AX resume route and data source are present', () => {
+test('AX resume home route and data source are present', () => {
+  const homePage = path.join(ROOT, 'app', '(portfolio)', 'page.tsx')
   const axPage = path.join(ROOT, 'app', '(portfolio)', 'ax', 'page.tsx')
   const axData = path.join(ROOT, 'data', 'ax.ts')
+  const projectsPage = path.join(ROOT, 'app', '(portfolio)', 'projects', 'page.tsx')
 
+  assert.ok(existsSync(homePage), 'missing AX resume home route: app/(portfolio)/page.tsx')
   assert.ok(existsSync(axPage), 'missing AX resume route: app/(portfolio)/ax/page.tsx')
   assert.ok(existsSync(axData), 'missing AX data source: data/ax.ts')
+  assert.ok(existsSync(projectsPage), 'missing projects index route: app/(portfolio)/projects/page.tsx')
 })
 
 test('AX case studies reference existing portfolio projects', () => {

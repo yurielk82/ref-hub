@@ -19,10 +19,16 @@ export function PortfolioNav() {
         </Link>
         <div className="flex items-center gap-3">
           <Link
-            href="/ax"
+            href="/"
             className="text-xs font-medium text-[var(--accent)] transition-colors hover:text-[var(--accent-light)]"
           >
             AX
+          </Link>
+          <Link
+            href="/projects"
+            className="text-xs text-stone-500 transition-colors hover:text-[var(--accent)]"
+          >
+            Projects
           </Link>
           <Link
             href="/about"

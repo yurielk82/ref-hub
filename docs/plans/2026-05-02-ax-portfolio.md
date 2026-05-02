@@ -4,7 +4,7 @@
 
 **Goal:** Add an AX-focused resume reference page that positions the portfolio owner as a practitioner who turns field operations into AI workflows.
 
-**Architecture:** Keep the existing Ref Hub home and docs intact. Add a dedicated `/ax` route backed by a new `data/ax.ts` source so the AX story is isolated from synced Nextra docs and existing project metadata.
+**Architecture:** Make `/` the AX-focused resume landing page, keep `/ax` as a compatibility alias, and move the existing project grid to `/projects`. Back the AX story with a new `data/ax.ts` source so it remains isolated from synced Nextra docs and existing project metadata.
 
 **Tech Stack:** Next.js App Router, React Server Components, TypeScript, Tailwind CSS, existing portfolio layout/components.
 
@@ -23,8 +23,10 @@ The page should emphasize practical transformation work, not generic AI enthusia
 Create:
 - `data/ax.ts`
 - `app/(portfolio)/ax/page.tsx`
+- `app/(portfolio)/projects/page.tsx`
 
 Modify:
+- `app/(portfolio)/page.tsx`
 - `tests/site-integrity.test.mjs`
 - `components/portfolio/nav.tsx`
 - `app/(docs)/[[...mdxPath]]/page.tsx` route shape if Next dev/build reports root route conflict
@@ -90,7 +92,7 @@ Metrics can be upgraded later when exact numbers are safe to disclose.
 
 ## Verification
 
-1. Add a failing integrity test for `/ax` route and `data/ax.ts`.
+1. Add a failing integrity test for the AX home route, `/ax` compatibility route, `/projects` index, and `data/ax.ts`.
 2. Run `npm test` and verify the new test fails before implementation.
 3. Implement data and page.
 4. Run `npm test`.
@@ -100,9 +102,11 @@ Metrics can be upgraded later when exact numbers are safe to disclose.
 
 ## Rollback
 
-Because v1 is isolated to `/ax`, rollback is simple:
-- remove `app/(portfolio)/ax/page.tsx`
+Because v1 keeps the project grid at `/projects` and AX data isolated, rollback is simple:
+- restore `app/(portfolio)/page.tsx` to the project grid
+- remove `app/(portfolio)/ax/page.tsx` if the compatibility alias is no longer needed
 - remove `data/ax.ts`
-- remove the nav link and integrity test additions
+- remove `app/(portfolio)/projects/page.tsx`
+- remove the nav/test additions
 
 Existing project pages and docs remain untouched.

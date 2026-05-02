@@ -119,11 +119,11 @@ export const AX_CASE_STUDIES: AxCaseStudy[] = [
     projectSlug: 'claude-dotfiles',
     label: 'Claude/Codex AX Delivery Harness',
     problem:
-      'AX 프로젝트를 빠르게 구현해도 품질, 리뷰, 배포 안전장치, 반복 실수 방지가 남지 않으면 현업 적용 속도가 지속되지 않았습니다.',
+      '코드는 싸지 않다. AX 프로젝트를 빠르게 구현해도 품질, 리뷰, 배포 안전장치, 반복 실수 방지, 맥락 기억이 남지 않으면 현업 적용 속도는 유지되지 않았습니다.',
     intervention:
-      'Claude Code와 Codex 작업 방식을 규칙, 훅, 에이전트, 스킬로 묶어 기획·구현·검증·배포를 반복 가능한 AX Delivery Harness로 만들었습니다.',
+      'mattpocock/skills의 작은 스킬·공유 언어·피드백 루프 철학을 참고해 Claude Code와 Codex 작업 방식을 규칙, 훅, 에이전트, 온디맨드 스킬로 묶고, wiki·그래프·문서 검색 기반 RAG 기억으로 프로젝트 맥락을 계속 회수하게 만들었습니다.',
     outcome:
-      '개인 생산성 도구를 AX 프로젝트를 계속 납품할 수 있는 재사용 가능한 운영 규칙과 자동화 체계로 바꿨습니다.',
+      '개인 생산성 도구를 AX 프로젝트를 계속 납품할 수 있는 재사용 가능한 운영 규칙, 검증 루프, 장기 기억 체계로 바꿨습니다.',
     disclosure: 'public',
     evidenceLabel: '프로젝트 상세',
   },

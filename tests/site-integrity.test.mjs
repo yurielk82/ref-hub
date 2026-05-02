@@ -108,6 +108,9 @@ test('AX case studies are ordered by AX relevance and delivery proof', () => {
   assert.match(erpSpecBlock, /인수사 IT팀|ERP 구조 분석/, 'ERP Spec project copy should reflect the AX positioning')
   assert.match(axData, /Claude\/Codex AX Delivery Harness/, 'AX page should frame the final case as a Claude/Codex harness')
   assert.match(harnessBlock, /Claude\/Codex|Codex/, 'Harness project copy should include Codex')
+  assert.match(axData + harnessBlock, /코드는 싸지 않다/, 'Harness copy should carry the core cost-of-code message')
+  assert.match(axData + harnessBlock, /mattpocock\/skills|작은 스킬/, 'Harness copy should reflect the skills philosophy reference')
+  assert.match(axData + harnessBlock, /RAG 기억|wiki|그래프/, 'Harness copy should explain persistent RAG-style memory')
 })
 
 test('portfolio project summaries are AX-current and substantial', () => {

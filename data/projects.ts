@@ -158,7 +158,7 @@ export const PROJECTS: Project[] = [
     category: 'web',
     liveUrl: 'https://erp-spec.dvsharp.com',
     githubUrl: 'https://github.com/yurielk82/erp-spec',
-    screenshot: '/images/portfolio/erp-spec/hero.png',
+    screenshot: '/images/portfolio/erp-spec/barcode-graph.png',
     emoji: '🗄️',
     gradient: 'from-stone-600/15 to-stone-400/15',
     features: [
@@ -200,7 +200,7 @@ export const PROJECTS: Project[] = [
     name: 'Claude/Codex Harness',
     tagline: '코드는 싸지 않다. AX Delivery 자동화 하네스 (규칙 22 + 훅 48 + 스킬 128)',
     description:
-      'Claude Code와 Codex 기반 작업 방식을 규칙·훅·에이전트·스킬·RAG 기억으로 계층화하여 관리하는 AX Delivery 자동화 하네스. mattpocock/skills의 작은 스킬, 공유 언어, 피드백 루프 철학을 녹여 코드 품질 강제, 배포 안전장치, 리뷰 자동화, 프로젝트 맥락 회수를 운영 체계로 고정합니다.',
+      'Claude Code와 Codex 기반 작업 방식을 규칙·훅·에이전트·스킬·RAG 기억으로 계층화하여 관리하는 AX Delivery 자동화 하네스. 작은 스킬, 공유 언어, 피드백 루프라는 방향은 mattpocock/skills와 결과적으로 맞닿지만, 현업 배포·리뷰·RAG 기억까지 포함한 더 고도화된 운영 체계로 확장했습니다.',
     tech: ['Bash', 'Markdown', 'YAML', 'Claude Code', 'Codex', 'Git Hooks', 'RAG Memory'],
     category: 'tool',
     githubUrl: 'https://github.com/yurielk82/claude-dotfiles',
@@ -208,7 +208,7 @@ export const PROJECTS: Project[] = [
     gradient: 'from-amber-500/15 to-orange-500/15',
     features: [
       '코드는 싸지 않다라는 원칙을 앞에 두고 생성 속도보다 요구 정렬, 검증, 유지보수 비용 통제를 우선',
-      'mattpocock/skills처럼 작은 온디맨드 스킬을 조합해 기획, TDD, 진단, 아키텍처 개선, 배포 대응을 상황별 호출',
+      '작은 온디맨드 스킬, 공유 언어, 피드백 루프가 현업 AX 운영 속에서 자연스럽게 수렴한 원칙임을 구조화',
       'CONTEXT, ADR, 작업 로그, wiki, 그래프 기반 RAG 기억을 연결해 프로젝트 용어와 의사결정을 다음 세션에서도 회수',
       'Claude Code와 Codex 작업 규칙을 계층화해 코드 원칙, 보안, DDD, 디자인, 배포 기준을 자동 주입',
       '48개 훅으로 커밋 전 검증, 테스트/빌드 가드, 배포 안전장치, 반복 실수 방지 흐름 구성',

@@ -153,6 +153,26 @@ test('KPIS DSR portfolio screenshot is a real captured UI image', () => {
   assert.ok(image.byteLength >= 50_000, 'KPIS screenshot should not be a blank placeholder image')
 })
 
+test('ERP Spec portfolio screenshot uses the barcode relationship graph image', () => {
+  const image = readFileSync(path.join(ROOT, 'public', 'images', 'portfolio', 'erp-spec', 'barcode-graph.png'))
+  const pngSignature = image.subarray(0, 8).toString('hex')
+  const width = image.readUInt32BE(16)
+  const height = image.readUInt32BE(20)
+  const projectData = readFileSync(path.join(ROOT, 'data', 'projects.ts'), 'utf8')
+
+  assert.match(projectData, /screenshot: '\/images\/portfolio\/erp-spec\/barcode-graph\.png'/)
+  assert.equal(pngSignature, '89504e470d0a1a0a', 'ERP Spec screenshot should be a PNG image')
+  assert.ok(width >= 1000, `ERP Spec screenshot width is too small: ${width}`)
+  assert.ok(height >= 600, `ERP Spec screenshot height is too small: ${height}`)
+  assert.ok(image.byteLength >= 50_000, 'ERP Spec screenshot should not be a blank placeholder image')
+})
+
+test('portfolio screenshots are rendered from the visual center', () => {
+  const thumbnail = readFileSync(path.join(ROOT, 'components', 'portfolio', 'project-thumbnail.tsx'), 'utf8')
+
+  assert.match(thumbnail, /object-cover object-center/, 'portfolio screenshots should be centered inside their frame')
+})
+
 test('About route is removed from the portfolio surface', () => {
   const aboutPage = path.join(ROOT, 'app', '(portfolio)', 'about', 'page.tsx')
   const nav = readFileSync(path.join(ROOT, 'components', 'portfolio', 'nav.tsx'), 'utf8')

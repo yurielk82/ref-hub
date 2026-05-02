@@ -4,14 +4,14 @@ import { cn } from '@/lib/utils'
 
 const config = {
   card: {
-    imageClass: 'object-cover transition-transform duration-500 group-hover:scale-105',
+    imageClass: 'object-cover object-center transition-transform duration-500 group-hover:scale-105',
     sizes: '(max-width: 768px) 100vw, 50vw',
     priority: false,
     emojiSize: 'text-5xl',
     wrapperClass: 'h-full',
   },
   detail: {
-    imageClass: 'object-cover',
+    imageClass: 'object-cover object-center',
     sizes: '(max-width: 1024px) 100vw, 40vw',
     priority: true,
     emojiSize: 'text-6xl',
@@ -30,7 +30,7 @@ export function ProjectThumbnail({
 
   if (project.screenshot) {
     return (
-      <div className="relative aspect-video">
+      <div className="relative flex aspect-video items-center justify-center overflow-hidden bg-stone-950">
         <Image
           src={project.screenshot}
           alt={`${project.name} 스크린샷`}

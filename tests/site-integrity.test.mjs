@@ -85,3 +85,16 @@ test('AX case studies reference existing portfolio projects', () => {
     assert.ok(projectSlugs.has(slug), `AX case references unknown project slug: ${slug}`)
   }
 })
+
+test('standalone build script copies runtime static assets', () => {
+  const packageJson = JSON.parse(
+    readFileSync(path.join(ROOT, 'package.json'), 'utf8')
+  )
+  const buildScript = packageJson.scripts?.build ?? ''
+
+  assert.match(buildScript, /next build/)
+  assert.match(buildScript, /\.next\/static/)
+  assert.match(buildScript, /\.next\/standalone\/\.next/)
+  assert.match(buildScript, /public/)
+  assert.match(buildScript, /\.next\/standalone/)
+})

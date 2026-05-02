@@ -31,12 +31,6 @@ export function PortfolioNav() {
             Projects
           </Link>
           <Link
-            href="/about"
-            className="text-xs text-stone-500 transition-colors hover:text-[var(--accent)]"
-          >
-            About
-          </Link>
-          <Link
             href="/csoweb"
             className="text-xs text-stone-500 transition-colors hover:text-[var(--accent)]"
           >

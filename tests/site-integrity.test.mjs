@@ -86,6 +86,38 @@ test('AX case studies reference existing portfolio projects', () => {
   }
 })
 
+test('portfolio project summaries are AX-current and substantial', () => {
+  const projectData = readFileSync(path.join(ROOT, 'data', 'projects.ts'), 'utf8')
+  const projectBlocks = [...projectData.matchAll(/(\{\n\s+slug:\s*'([^']+)'[\s\S]*?\n\s+\},)/g)]
+
+  assert.ok(projectBlocks.length > 0, 'portfolio projects should not be empty')
+
+  for (const [, block, slug] of projectBlocks) {
+    assert.match(block, /year:\s*'2026'/, `${slug} should display 2026 as portfolio year`)
+
+    const featuresMatch = block.match(/features:\s*\[([\s\S]*?)\],/)
+    assert.ok(featuresMatch, `${slug} should define feature bullets`)
+
+    const features = [...featuresMatch[1].matchAll(/'([^']+)'/g)].map((match) => match[1])
+    assert.ok(features.length >= 6, `${slug} should describe at least 6 major features`)
+    for (const feature of features) {
+      assert.ok(
+        feature.length >= 24,
+        `${slug} feature is too terse: ${feature}`
+      )
+    }
+  }
+})
+
+test('About route is removed from the portfolio surface', () => {
+  const aboutPage = path.join(ROOT, 'app', '(portfolio)', 'about', 'page.tsx')
+  const nav = readFileSync(path.join(ROOT, 'components', 'portfolio', 'nav.tsx'), 'utf8')
+
+  assert.ok(!existsSync(aboutPage), 'About page should be removed because AX home replaces it')
+  assert.doesNotMatch(nav, /href=["{']\/about/, 'portfolio nav should not link to /about')
+  assert.doesNotMatch(nav, />\s*About\s*</, 'portfolio nav should not render About')
+})
+
 test('standalone build script copies runtime static assets', () => {
   const packageJson = JSON.parse(
     readFileSync(path.join(ROOT, 'package.json'), 'utf8')

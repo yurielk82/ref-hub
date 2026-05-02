@@ -34,7 +34,7 @@ export const PROJECTS: Project[] = [
     category: 'web',
     liveUrl: 'https://kpi.dvsharp.com',
     docsPath: '/pharmkpi',
-    screenshot: '/images/portfolio/pharmkpi/internal-dashboard.png',
+    screenshot: '/images/portfolio/pharmkpi/hero.png',
     emoji: '📊',
     gradient: 'from-blue-600/20 to-cyan-600/20',
     features: [

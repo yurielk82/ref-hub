@@ -167,14 +167,23 @@ test('ERP Spec portfolio screenshot uses the barcode relationship graph image', 
   assert.ok(image.byteLength >= 50_000, 'ERP Spec screenshot should not be a blank placeholder image')
 })
 
-test('portfolio uses logged-in internal screenshots where available', () => {
+test('portfolio uses the strongest screenshot for each project context', () => {
   const projectData = readFileSync(path.join(ROOT, 'data', 'projects.ts'), 'utf8')
+  const pharmKpiLogin = readFileSync(path.join(ROOT, 'public', 'images', 'portfolio', 'pharmkpi', 'hero.png'))
+  const pharmKpiSignature = pharmKpiLogin.subarray(0, 8).toString('hex')
+
+  assert.match(
+    projectData,
+    /screenshot: '\/images\/portfolio\/pharmkpi\/hero\.png'/,
+    'PharmKPI should use the stronger login-screen screenshot',
+  )
+  assert.equal(pharmKpiSignature, '89504e470d0a1a0a', 'PharmKPI login screenshot should be a PNG image')
+  assert.ok(
+    pharmKpiLogin.byteLength >= 50_000,
+    'PharmKPI login screenshot should not be a blank placeholder image',
+  )
+
   const internalScreenshots = [
-    {
-      name: 'PharmKPI',
-      path: path.join(ROOT, 'public', 'images', 'portfolio', 'pharmkpi', 'internal-dashboard.png'),
-      source: /screenshot: '\/images\/portfolio\/pharmkpi\/internal-dashboard\.png'/,
-    },
     {
       name: 'SRT',
       path: path.join(ROOT, 'public', 'images', 'portfolio', 'srt', 'internal-dashboard.png'),

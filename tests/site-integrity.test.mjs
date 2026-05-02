@@ -167,10 +167,43 @@ test('ERP Spec portfolio screenshot uses the barcode relationship graph image', 
   assert.ok(image.byteLength >= 50_000, 'ERP Spec screenshot should not be a blank placeholder image')
 })
 
+test('portfolio uses logged-in internal screenshots where available', () => {
+  const projectData = readFileSync(path.join(ROOT, 'data', 'projects.ts'), 'utf8')
+  const internalScreenshots = [
+    {
+      name: 'PharmKPI',
+      path: path.join(ROOT, 'public', 'images', 'portfolio', 'pharmkpi', 'internal-dashboard.png'),
+      source: /screenshot: '\/images\/portfolio\/pharmkpi\/internal-dashboard\.png'/,
+    },
+    {
+      name: 'SRT',
+      path: path.join(ROOT, 'public', 'images', 'portfolio', 'srt', 'internal-dashboard.png'),
+      source: /screenshot: '\/images\/portfolio\/srt\/internal-dashboard\.png'/,
+    },
+  ]
+
+  for (const shot of internalScreenshots) {
+    const image = readFileSync(shot.path)
+    const pngSignature = image.subarray(0, 8).toString('hex')
+    const width = image.readUInt32BE(16)
+    const height = image.readUInt32BE(20)
+
+    assert.match(projectData, shot.source, `${shot.name} should point to the logged-in screenshot`)
+    assert.equal(pngSignature, '89504e470d0a1a0a', `${shot.name} screenshot should be a PNG image`)
+    assert.ok(width >= 1000, `${shot.name} screenshot width is too small: ${width}`)
+    assert.ok(height >= 600, `${shot.name} screenshot height is too small: ${height}`)
+    assert.ok(image.byteLength >= 50_000, `${shot.name} screenshot should not be a blank placeholder image`)
+  }
+})
+
 test('portfolio screenshots are rendered from the visual center', () => {
   const thumbnail = readFileSync(path.join(ROOT, 'components', 'portfolio', 'project-thumbnail.tsx'), 'utf8')
+  const projectPage = readFileSync(path.join(ROOT, 'app', '(portfolio)', 'projects', '[slug]', 'page.tsx'), 'utf8')
+  const axPage = readFileSync(path.join(ROOT, 'app', '(portfolio)', 'ax', 'page.tsx'), 'utf8')
 
   assert.match(thumbnail, /object-cover object-center/, 'portfolio screenshots should be centered inside their frame')
+  assert.match(projectPage, /lg:items-center/, 'project detail hero should vertically center the screenshot column')
+  assert.match(axPage, /items-center justify-center/, 'AX case screenshots should be centered inside their grid cell')
 })
 
 test('About route is removed from the portfolio surface', () => {

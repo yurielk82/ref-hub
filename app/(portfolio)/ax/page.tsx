@@ -169,7 +169,7 @@ export default function AxPage() {
                 <FadeInUp key={study.projectSlug} delay={index * 0.06}>
                   <div className="overflow-hidden rounded-lg border border-stone-200 bg-white dark:border-stone-800 dark:bg-stone-900">
                     <div className="grid lg:grid-cols-[0.44fr_0.56fr]">
-                      <div className="border-b border-stone-200 bg-stone-50 dark:border-stone-800 dark:bg-stone-950 lg:border-b-0 lg:border-r">
+                      <div className="flex items-center justify-center border-b border-stone-200 bg-stone-50 dark:border-stone-800 dark:bg-stone-950 lg:border-b-0 lg:border-r">
                         <ProjectThumbnail project={project} variant="detail" />
                       </div>
                       <div className="p-6">

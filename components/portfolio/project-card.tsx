@@ -15,7 +15,7 @@ export function ProjectCard({ project }: { project: Project }) {
       )}
     >
       {/* 스크린샷 또는 그라데이션 플레이스홀더 */}
-      <div className="relative aspect-video overflow-hidden">
+      <div className="relative flex aspect-video items-center justify-center overflow-hidden bg-stone-950">
         <ProjectThumbnail project={project} variant="card" />
 
         {/* NEW 뱃지 */}

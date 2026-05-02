@@ -34,7 +34,7 @@ export const PROJECTS: Project[] = [
     category: 'web',
     liveUrl: 'https://kpi.dvsharp.com',
     docsPath: '/pharmkpi',
-    screenshot: '/images/portfolio/pharmkpi/hero.png',
+    screenshot: '/images/portfolio/pharmkpi/internal-dashboard.png',
     emoji: '📊',
     gradient: 'from-blue-600/20 to-cyan-600/20',
     features: [
@@ -181,7 +181,7 @@ export const PROJECTS: Project[] = [
     tech: ['Next.js 16', 'FastAPI', 'Redis', 'Tailwind', 'Base UI'],
     category: 'web',
     liveUrl: 'https://srt.dvsharp.com',
-    screenshot: '/images/portfolio/srt/hero.png',
+    screenshot: '/images/portfolio/srt/internal-dashboard.png',
     emoji: '🚄',
     gradient: 'from-sky-500/15 to-teal-500/15',
     features: [

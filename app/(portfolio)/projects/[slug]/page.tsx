@@ -44,7 +44,7 @@ export default async function ProjectPage(
         </Link>
 
         {/* 히어로: 60/40 스플릿 */}
-        <div className="flex flex-col gap-10 lg:flex-row lg:items-start">
+        <div className="flex flex-col gap-10 lg:flex-row lg:items-center">
           {/* 좌측 60% — 텍스트 */}
           <div className="lg:w-3/5">
             <div className="flex items-center gap-3">

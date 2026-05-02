@@ -202,6 +202,7 @@ test('portfolio screenshots are rendered from the visual center', () => {
   const axPage = readFileSync(path.join(ROOT, 'app', '(portfolio)', 'ax', 'page.tsx'), 'utf8')
 
   assert.match(thumbnail, /object-cover object-center/, 'portfolio screenshots should be centered inside their frame')
+  assert.match(thumbnail, /aspect-video w-full/, 'portfolio screenshot wrapper should fill flex/grid image frames')
   assert.match(projectPage, /lg:items-center/, 'project detail hero should vertically center the screenshot column')
   assert.match(axPage, /items-center justify-center/, 'AX case screenshots should be centered inside their grid cell')
 })

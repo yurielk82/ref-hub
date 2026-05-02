@@ -8,7 +8,7 @@ const config = {
     sizes: '(max-width: 768px) 100vw, 50vw',
     priority: false,
     emojiSize: 'text-5xl',
-    wrapperClass: 'h-full',
+    wrapperClass: 'h-full w-full',
   },
   detail: {
     imageClass: 'object-cover object-center',
@@ -30,7 +30,7 @@ export function ProjectThumbnail({
 
   if (project.screenshot) {
     return (
-      <div className="relative flex aspect-video items-center justify-center overflow-hidden bg-stone-950">
+      <div className="relative flex aspect-video w-full items-center justify-center overflow-hidden bg-stone-950">
         <Image
           src={project.screenshot}
           alt={`${project.name} 스크린샷`}
@@ -46,7 +46,7 @@ export function ProjectThumbnail({
   return (
     <div
       className={cn(
-        'flex items-center justify-center bg-gradient-to-br',
+        'flex w-full items-center justify-center bg-gradient-to-br',
         v.wrapperClass,
         project.gradient,
       )}

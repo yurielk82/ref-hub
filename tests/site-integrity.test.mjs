@@ -141,6 +141,18 @@ test('portfolio project summaries are AX-current and substantial', () => {
   }
 })
 
+test('KPIS DSR portfolio screenshot is a real captured UI image', () => {
+  const image = readFileSync(path.join(ROOT, 'public', 'images', 'portfolio', 'kpis-dsr-api', 'hero.png'))
+  const pngSignature = image.subarray(0, 8).toString('hex')
+  const width = image.readUInt32BE(16)
+  const height = image.readUInt32BE(20)
+
+  assert.equal(pngSignature, '89504e470d0a1a0a', 'KPIS screenshot should be a PNG image')
+  assert.ok(width >= 1000, `KPIS screenshot width is too small: ${width}`)
+  assert.ok(height >= 600, `KPIS screenshot height is too small: ${height}`)
+  assert.ok(image.byteLength >= 50_000, 'KPIS screenshot should not be a blank placeholder image')
+})
+
 test('About route is removed from the portfolio surface', () => {
   const aboutPage = path.join(ROOT, 'app', '(portfolio)', 'about', 'page.tsx')
   const nav = readFileSync(path.join(ROOT, 'components', 'portfolio', 'nav.tsx'), 'utf8')

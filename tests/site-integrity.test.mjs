@@ -86,25 +86,28 @@ test('AX case studies reference existing portfolio projects', () => {
   }
 })
 
-test('ERP Spec is promoted as the lead AX case for IT handover', () => {
+test('AX case studies are ordered by AX relevance and delivery proof', () => {
   const axData = readFileSync(path.join(ROOT, 'data', 'ax.ts'), 'utf8')
   const projectData = readFileSync(path.join(ROOT, 'data', 'projects.ts'), 'utf8')
   const axSlugs = [...axData.matchAll(/projectSlug:\s*'([^']+)'/g)].map(
     (match) => match[1]
   )
   const erpSpecBlock = projectData.match(/\{\n\s+slug:\s*'erp-spec'[\s\S]*?\n\s+\},/)?.[0] ?? ''
+  const harnessBlock = projectData.match(/\{\n\s+slug:\s*'claude-dotfiles'[\s\S]*?\n\s+\},/)?.[0] ?? ''
   const expectedAxOrder = [
-    'erp-spec',
     'pharmkpi',
     'kpis-dsr-api',
     'csoweb',
+    'erp-spec',
     'claude-dotfiles',
   ]
 
-  assert.deepEqual(axSlugs, expectedAxOrder, 'AX case studies should lead with ERP/data workflow cases')
+  assert.deepEqual(axSlugs, expectedAxOrder, 'AX case studies should lead with highest AX relevance')
   assert.match(axData, /인수사 IT팀/, 'ERP Spec AX case should name the acquirer IT-team context')
   assert.match(axData, /785개 테이블/, 'ERP Spec AX case should show ERP analysis scale')
   assert.match(erpSpecBlock, /인수사 IT팀|ERP 구조 분석/, 'ERP Spec project copy should reflect the AX positioning')
+  assert.match(axData, /Claude\/Codex AX Delivery Harness/, 'AX page should frame the final case as a Claude/Codex harness')
+  assert.match(harnessBlock, /Claude\/Codex|Codex/, 'Harness project copy should include Codex')
 })
 
 test('portfolio project summaries are AX-current and substantial', () => {

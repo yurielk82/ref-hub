@@ -68,18 +68,6 @@ export const AX_PILLARS: AxPillar[] = [
 
 export const AX_CASE_STUDIES: AxCaseStudy[] = [
   {
-    projectSlug: 'erp-spec',
-    label: 'ERP Discovery + IT Handover',
-    problem:
-      '인수사 IT팀은 내부 Oracle ERP 구조, 테이블 관계, 데이터 출처를 빠르게 파악해야 했지만 구두 설명과 원본 DB 접근만으로는 공통 기준을 만들기 어려웠습니다.',
-    intervention:
-      'Oracle ERP 785개 테이블의 스키마·컬럼·인덱스·관계를 검색 가능한 웹 문서와 React Flow 관계 그래프로 전환해 ERP 구조 분석 포털로 제공했습니다.',
-    outcome:
-      '개인에게 묶여 있던 ERP 구조 지식을 인수사 IT팀과 현업이 함께 탐색할 수 있는 웹 레퍼런스로 바꿔 인계, 영향 범위 검토, 커뮤니케이션 기준을 만들었습니다.',
-    disclosure: 'withheld',
-    evidenceLabel: '프로젝트 상세',
-  },
-  {
     projectSlug: 'pharmkpi',
     label: 'ERP + Multi-AI Analytics',
     problem:
@@ -93,13 +81,13 @@ export const AX_CASE_STUDIES: AxCaseStudy[] = [
   },
   {
     projectSlug: 'kpis-dsr-api',
-    label: 'Rule Learning + Report File',
+    label: 'Rule Learning + Web Submission',
     problem:
-      'ERP에서 내려온 의약품 공급내역 테이블에는 형식 오류, 업무 규칙 위반, 보고 파일 기준과 맞지 않는 값이 섞여 있어 사람이 반복 수정해야 했습니다.',
+      'ERP에서 내려온 의약품 공급내역 테이블에는 형식 오류, 업무 규칙 위반, 제출 기준과 맞지 않는 값이 섞여 있어 사람이 반복 수정해야 했습니다.',
     intervention:
       '잘못된 테이블 데이터를 바로잡기 위한 수정 규칙과 학습 기능을 구현하고, 검증 결과를 다시 테이블 편집 흐름에 연결해 보고 기준에 맞는 데이터로 정리했습니다.',
     outcome:
-      'ERP 원천 데이터의 오류를 규칙·학습 기반 보정 대상으로 전환해, 최종적으로 제출 가능한 완성도 높은 보고용 파일이 나오도록 만들었습니다.',
+      'ERP 원천 데이터의 오류를 규칙·학습 기반 보정 대상으로 전환해, 웹에서 검증된 제출 가능 데이터와 API 제출 흐름으로 연결했습니다.',
     disclosure: 'withheld',
     evidenceLabel: '프로젝트 상세',
   },
@@ -116,14 +104,26 @@ export const AX_CASE_STUDIES: AxCaseStudy[] = [
     evidenceLabel: '프로젝트 상세',
   },
   {
-    projectSlug: 'claude-dotfiles',
-    label: 'Agentic DevOps Harness',
+    projectSlug: 'erp-spec',
+    label: 'ERP Discovery + IT Handover',
     problem:
-      'AI 코딩 도구를 빠르게 쓰는 것만으로는 품질, 리뷰, 배포 안전장치, 반복 실수 방지가 안정적으로 남지 않았습니다.',
+      '인수사 IT팀은 내부 Oracle ERP 구조, 테이블 관계, 데이터 출처를 빠르게 파악해야 했지만 구두 설명과 원본 DB 접근만으로는 공통 기준을 만들기 어려웠습니다.',
     intervention:
-      '규칙, 훅, 에이전트, 스킬을 계층화해 AI 페어 프로그래밍의 검토·테스트·배포 가드를 하네스로 만들었습니다.',
+      'Oracle ERP 785개 테이블의 스키마·컬럼·인덱스·관계를 검색 가능한 웹 문서와 React Flow 관계 그래프로 전환해 ERP 구조 분석 포털로 제공했습니다.',
     outcome:
-      '개인 생산성 도구를 재사용 가능한 운영 규칙과 자동화 체계로 바꿨습니다.',
+      '개인에게 묶여 있던 ERP 구조 지식을 인수사 IT팀과 현업이 함께 탐색할 수 있는 웹 레퍼런스로 바꿔 인계, 영향 범위 검토, 커뮤니케이션 기준을 만들었습니다.',
+    disclosure: 'withheld',
+    evidenceLabel: '프로젝트 상세',
+  },
+  {
+    projectSlug: 'claude-dotfiles',
+    label: 'Claude/Codex AX Delivery Harness',
+    problem:
+      'AX 프로젝트를 빠르게 구현해도 품질, 리뷰, 배포 안전장치, 반복 실수 방지가 남지 않으면 현업 적용 속도가 지속되지 않았습니다.',
+    intervention:
+      'Claude Code와 Codex 작업 방식을 규칙, 훅, 에이전트, 스킬로 묶어 기획·구현·검증·배포를 반복 가능한 AX Delivery Harness로 만들었습니다.',
+    outcome:
+      '개인 생산성 도구를 AX 프로젝트를 계속 납품할 수 있는 재사용 가능한 운영 규칙과 자동화 체계로 바꿨습니다.',
     disclosure: 'public',
     evidenceLabel: '프로젝트 상세',
   },

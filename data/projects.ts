@@ -151,9 +151,9 @@ export const PROJECTS: Project[] = [
   {
     slug: 'erp-spec',
     name: 'ERP Spec',
-    tagline: 'Oracle ERP 785개 테이블 명세 웹 문서 (v2.9)',
+    tagline: '인수사 IT팀 인계를 위한 ERP 구조 분석 포털 (v2.9)',
     description:
-      'Oracle ERP의 785개 테이블 구조를 웹에서 검색·조회할 수 있는 명세 사이트. 테이블 간 관계를 인터랙티브 그래프(React Flow + dagre)로 시각화하여 개발자·DBA의 스키마 탐색을 지원합니다.',
+      '인수사 IT팀 요청에 대응해 자사 Oracle ERP 785개 테이블 구조를 웹에서 검색·분석할 수 있게 정리한 포털. 테이블 간 관계를 인터랙티브 그래프(React Flow + dagre)로 시각화하여 인계, 영향 범위 검토, 스키마 탐색을 지원합니다.',
     tech: ['Next.js 15', 'Nextra', 'React Flow', 'dagre', 'TypeScript'],
     category: 'web',
     liveUrl: 'https://erp-spec.dvsharp.com',
@@ -162,14 +162,14 @@ export const PROJECTS: Project[] = [
     emoji: '🗄️',
     gradient: 'from-stone-600/15 to-stone-400/15',
     features: [
-      'Oracle ERP 785개 테이블의 컬럼 타입, 제약조건, 인덱스, 설명을 웹 문서로 정리',
-      '테이블명·컬럼명 검색으로 ERP 스키마를 빠르게 탐색하고 개발/운영 문의 대응 속도 개선',
-      'React Flow와 dagre 자동 레이아웃으로 테이블 간 참조 관계를 인터랙티브 그래프로 시각화',
-      '대형 ERP 구조를 Nextra 기반 정적 문서로 배포해 DBA·개발자·현업이 같은 기준을 참조',
+      '인수사 IT팀 요청에 맞춰 자사 Oracle ERP 785개 테이블 구조를 웹 분석 포털로 제공',
+      '컬럼 타입, 제약조건, 인덱스, 설명을 표준화해 ERP 구조 인계와 신규 담당자 온보딩 지원',
+      '테이블명·컬럼명 검색으로 ERP 스키마를 빠르게 탐색하고 개발/운영 문의 대응 기준 마련',
+      'React Flow와 dagre 자동 레이아웃으로 테이블 간 참조 관계와 의존도를 인터랙티브하게 시각화',
       '개별 테이블 상세와 관계 그래프를 연결해 영향 범위 파악과 데이터 출처 추적 지원',
-      '외부 GitHub 공개 저장소와 라이브 문서 사이트를 분리해 레퍼런스와 코드 증거 제공',
+      'Nextra 기반 웹 레퍼런스로 DBA·개발자·현업·인수사 IT팀이 같은 구조 기준을 공유',
     ],
-    highlight: 'React Flow 기반 ERP 스키마 관계 시각화',
+    highlight: '인수사 IT팀 인계를 위한 ERP 구조 분석 포털',
     year: '2026',
   },
   {

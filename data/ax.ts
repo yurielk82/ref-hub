@@ -68,6 +68,18 @@ export const AX_PILLARS: AxPillar[] = [
 
 export const AX_CASE_STUDIES: AxCaseStudy[] = [
   {
+    projectSlug: 'erp-spec',
+    label: 'ERP Discovery + IT Handover',
+    problem:
+      '인수사 IT팀은 내부 Oracle ERP 구조, 테이블 관계, 데이터 출처를 빠르게 파악해야 했지만 구두 설명과 원본 DB 접근만으로는 공통 기준을 만들기 어려웠습니다.',
+    intervention:
+      'Oracle ERP 785개 테이블의 스키마·컬럼·인덱스·관계를 검색 가능한 웹 문서와 React Flow 관계 그래프로 전환해 ERP 구조 분석 포털로 제공했습니다.',
+    outcome:
+      '개인에게 묶여 있던 ERP 구조 지식을 인수사 IT팀과 현업이 함께 탐색할 수 있는 웹 레퍼런스로 바꿔 인계, 영향 범위 검토, 커뮤니케이션 기준을 만들었습니다.',
+    disclosure: 'withheld',
+    evidenceLabel: '프로젝트 상세',
+  },
+  {
     projectSlug: 'csoweb',
     label: 'AI Vision + HITL',
     problem:

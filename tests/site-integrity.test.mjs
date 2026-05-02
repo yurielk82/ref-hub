@@ -105,6 +105,11 @@ test('portfolio project summaries are AX-current and substantial', () => {
         feature.length >= 24,
         `${slug} feature is too terse: ${feature}`
       )
+      assert.doesNotMatch(
+        feature,
+        /엑셀|Excel|내보내기|Export|PDF|PNG|SVG|파일\s*생성|파일명|템플릿 다운로드/,
+        `${slug} feature should emphasize web-native workflows, not file export: ${feature}`
+      )
     }
   }
 })

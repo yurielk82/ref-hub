@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { existsSync, readdirSync } from 'node:fs'
+import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
 
@@ -56,4 +56,28 @@ test('embed mode keeps CSP frame-ancestors protection', async () => {
   assert.match(cspHeader.value, /frame-ancestors/)
   assert.match(cspHeader.value, /'self'/)
   assert.match(cspHeader.value, /https:\/\/example\.dev/)
+})
+
+test('AX resume route and data source are present', () => {
+  const axPage = path.join(ROOT, 'app', '(portfolio)', 'ax', 'page.tsx')
+  const axData = path.join(ROOT, 'data', 'ax.ts')
+
+  assert.ok(existsSync(axPage), 'missing AX resume route: app/(portfolio)/ax/page.tsx')
+  assert.ok(existsSync(axData), 'missing AX data source: data/ax.ts')
+})
+
+test('AX case studies reference existing portfolio projects', () => {
+  const axData = readFileSync(path.join(ROOT, 'data', 'ax.ts'), 'utf8')
+  const projectData = readFileSync(path.join(ROOT, 'data', 'projects.ts'), 'utf8')
+  const axSlugs = [...axData.matchAll(/projectSlug:\s*'([^']+)'/g)].map(
+    (match) => match[1]
+  )
+  const projectSlugs = new Set(
+    [...projectData.matchAll(/slug:\s*'([^']+)'/g)].map((match) => match[1])
+  )
+
+  assert.ok(axSlugs.length > 0, 'AX case studies should not be empty')
+  for (const slug of axSlugs) {
+    assert.ok(projectSlugs.has(slug), `AX case references unknown project slug: ${slug}`)
+  }
 })

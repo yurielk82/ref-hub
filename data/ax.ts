@@ -80,18 +80,6 @@ export const AX_CASE_STUDIES: AxCaseStudy[] = [
     evidenceLabel: '프로젝트 상세',
   },
   {
-    projectSlug: 'csoweb',
-    label: 'AI Vision + HITL',
-    problem:
-      'CSO 정산과 EDI 문서 확인은 이미지 품질, 위변조 가능성, 승인 흐름이 섞여 수작업 검토 부담이 큰 업무였습니다.',
-    intervention:
-      'Claude Vision OCR, ELA, EXIF, Perceptual Hash를 묶어 1차 검증을 자동화하고, 위험 판단은 사람이 최종 검수하는 구조로 나눴습니다.',
-    outcome:
-      '문서 검토를 단순 확인 업무에서 증거 기반 검수 워크플로우로 바꾸는 기반을 만들었습니다.',
-    disclosure: 'range',
-    evidenceLabel: '프로젝트 상세',
-  },
-  {
     projectSlug: 'pharmkpi',
     label: 'ERP + Multi-AI Analytics',
     problem:
@@ -100,6 +88,30 @@ export const AX_CASE_STUDIES: AxCaseStudy[] = [
       'Oracle ERP 데이터를 Supabase 기반 분석 흐름으로 정리하고, Claude·Gemini·GPT 분석을 붙여 KPI 해석과 리포트 생성을 자동화했습니다.',
     outcome:
       '영업관리 데이터를 조회용 표에서 의사결정용 대시보드와 AI 분석 흐름으로 확장했습니다.',
+    disclosure: 'range',
+    evidenceLabel: '프로젝트 상세',
+  },
+  {
+    projectSlug: 'kpis-dsr-api',
+    label: 'Rule Learning + Report File',
+    problem:
+      'ERP에서 내려온 의약품 공급내역 테이블에는 형식 오류, 업무 규칙 위반, 보고 파일 기준과 맞지 않는 값이 섞여 있어 사람이 반복 수정해야 했습니다.',
+    intervention:
+      '잘못된 테이블 데이터를 바로잡기 위한 수정 규칙과 학습 기능을 구현하고, 검증 결과를 다시 테이블 편집 흐름에 연결해 보고 기준에 맞는 데이터로 정리했습니다.',
+    outcome:
+      'ERP 원천 데이터의 오류를 규칙·학습 기반 보정 대상으로 전환해, 최종적으로 제출 가능한 완성도 높은 보고용 파일이 나오도록 만들었습니다.',
+    disclosure: 'withheld',
+    evidenceLabel: '프로젝트 상세',
+  },
+  {
+    projectSlug: 'csoweb',
+    label: 'AI Vision + HITL',
+    problem:
+      'CSO 정산과 EDI 문서 확인은 이미지 품질, 위변조 가능성, 승인 흐름이 섞여 수작업 검토 부담이 큰 업무였습니다.',
+    intervention:
+      'Claude Vision OCR, ELA, EXIF, Perceptual Hash를 묶어 1차 검증을 자동화하고, 위험 판단은 사람이 최종 검수하는 구조로 나눴습니다.',
+    outcome:
+      '문서 검토를 단순 확인 업무에서 증거 기반 검수 워크플로우로 바꾸는 기반을 만들었습니다.',
     disclosure: 'range',
     evidenceLabel: '프로젝트 상세',
   },
@@ -113,18 +125,6 @@ export const AX_CASE_STUDIES: AxCaseStudy[] = [
     outcome:
       '개인 생산성 도구를 재사용 가능한 운영 규칙과 자동화 체계로 바꿨습니다.',
     disclosure: 'public',
-    evidenceLabel: '프로젝트 상세',
-  },
-  {
-    projectSlug: 'kpis-dsr-api',
-    label: 'Rule Learning + Report File',
-    problem:
-      'ERP에서 내려온 의약품 공급내역 테이블에는 형식 오류, 업무 규칙 위반, 보고 파일 기준과 맞지 않는 값이 섞여 있어 사람이 반복 수정해야 했습니다.',
-    intervention:
-      '잘못된 테이블 데이터를 바로잡기 위한 수정 규칙과 학습 기능을 구현하고, 검증 결과를 다시 테이블 편집 흐름에 연결해 보고 기준에 맞는 데이터로 정리했습니다.',
-    outcome:
-      'ERP 원천 데이터의 오류를 규칙·학습 기반 보정 대상으로 전환해, 최종적으로 제출 가능한 완성도 높은 보고용 파일이 나오도록 만들었습니다.',
-    disclosure: 'withheld',
     evidenceLabel: '프로젝트 상세',
   },
 ]

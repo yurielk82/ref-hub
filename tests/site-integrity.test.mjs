@@ -93,8 +93,15 @@ test('ERP Spec is promoted as the lead AX case for IT handover', () => {
     (match) => match[1]
   )
   const erpSpecBlock = projectData.match(/\{\n\s+slug:\s*'erp-spec'[\s\S]*?\n\s+\},/)?.[0] ?? ''
+  const expectedAxOrder = [
+    'erp-spec',
+    'pharmkpi',
+    'kpis-dsr-api',
+    'csoweb',
+    'claude-dotfiles',
+  ]
 
-  assert.equal(axSlugs[0], 'erp-spec', 'ERP Spec should lead the AX case studies')
+  assert.deepEqual(axSlugs, expectedAxOrder, 'AX case studies should lead with ERP/data workflow cases')
   assert.match(axData, /인수사 IT팀/, 'ERP Spec AX case should name the acquirer IT-team context')
   assert.match(axData, /785개 테이블/, 'ERP Spec AX case should show ERP analysis scale')
   assert.match(erpSpecBlock, /인수사 IT팀|ERP 구조 분석/, 'ERP Spec project copy should reflect the AX positioning')

@@ -67,9 +67,12 @@ commit-msg:
 
 pre-push:
   commands:
-    full-lint:
-      # push 전에 전체 lint 한 번 더 — CI 왕복 비용 절약
-      run: npx eslint . --max-warnings 0
+    changed-lint:
+      # push 직전 — 새 commit이 건드린 파일만 strict check (Boy Scout)
+      # 누적 위반은 CI 또는 정리 스프린트에서. 여기는 회귀 방지만.
+      run: |
+        files=$(git diff --name-only origin/{push_branch}..HEAD 2>/dev/null | grep -E '\.(ts|tsx|js|jsx|mjs|cjs)$' || true)
+        if [ -n "$files" ]; then npx eslint --max-warnings 0 $files; fi
       skip:
         - merge
         - rebase

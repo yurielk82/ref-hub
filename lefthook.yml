@@ -22,14 +22,9 @@ pre-commit:
         - merge
         - rebase
 
-    typecheck:
-      glob: '*.{ts,tsx}'
-      # 프로젝트 전체 tsc — 증분 불가 (tsc는 파일 단위 검사 불가)
-      # tsc 느리면 이 블록 제거하고 CI만 의존
-      run: npx tsc --noEmit --pretty false
-      skip:
-        - merge
-        - rebase
+    # typecheck는 pre-commit에서 제거 — tsc는 파일 단위 검사 불가라 staged file 1개만 변경해도
+    # 누적된 다른 파일 위반이 다 같이 잡혀 commit 차단. Boy Scout과 어긋남.
+    # CI(quality-gate.yml)에서 전체 typecheck 강제 + pre-push의 changed-lint가 staged 변경만 strict.
 
     format:
       glob: '*.{ts,tsx,js,jsx,json,md,css,scss}'

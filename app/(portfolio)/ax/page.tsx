@@ -1,114 +1,36 @@
-import type { Metadata } from 'next'
-import Link from 'next/link'
+import type { Metadata } from 'next';
+import { BookOpen, Bot, ShieldCheck, Workflow } from 'lucide-react';
+
+import { AX_METHOD, AX_PILLARS, AX_STACK, AX_CASE_STUDIES } from '@/data/ax';
+import { getProject } from '@/data/projects';
+import { FadeInUp } from '@/components/portfolio/motion';
+import { TechTags } from '@/components/portfolio/tech-tags';
 import {
-  ArrowRight,
-  BookOpen,
-  Bot,
-  CheckCircle2,
-  ExternalLink,
-  ShieldCheck,
-  Workflow,
-} from 'lucide-react'
-import {
-  AX_CASE_STUDIES,
-  AX_HERO,
-  AX_METHOD,
-  AX_PILLARS,
-  AX_STACK,
-  type MetricDisclosure,
-} from '@/data/ax'
-import { getProject } from '@/data/projects'
-import { ProjectThumbnail } from '@/components/portfolio/project-thumbnail'
-import { TechTags } from '@/components/portfolio/tech-tags'
-import { FadeInUp } from '@/components/portfolio/motion'
+  AxCasesSection,
+  AxContactSection,
+  AxHeroSection,
+} from '@/components/portfolio/ax-sections';
 
 export const metadata: Metadata = {
   title: 'AX Reference',
   description:
     '현업 프로세스를 AI 워크플로우로 전환하는 AX 실무자 권대환의 이력서용 레퍼런스 페이지',
-}
+};
 
-const disclosureLabel: Record<MetricDisclosure, string> = {
-  public: '공개 지표',
-  range: '범위 공개',
-  withheld: '비공개 업무',
-}
-
-const pillarIcons = [Workflow, BookOpen, Bot, ShieldCheck]
+const pillarIcons = [Workflow, BookOpen, Bot, ShieldCheck];
 
 export default function AxPage() {
   const cases = AX_CASE_STUDIES.map((study) => ({
     ...study,
     project: getProject(study.projectSlug),
-  })).filter((study) => study.project)
+  })).filter((study) => study.project !== undefined) as Array<
+    (typeof AX_CASE_STUDIES)[number] & { project: NonNullable<ReturnType<typeof getProject>> }
+  >;
 
   return (
     <article className="px-6 pb-28 pt-20 sm:pt-24">
       <div className="mx-auto max-w-6xl">
-        <FadeInUp>
-          <section className="grid gap-10 border-b border-stone-200 pb-14 dark:border-stone-800 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
-            <div>
-              <p className="font-[family-name:var(--font-mono)] text-xs uppercase text-[var(--accent)]">
-                {AX_HERO.eyebrow}
-              </p>
-              <h1
-                className="mt-4 max-w-3xl font-[family-name:var(--font-display)] text-3xl font-bold leading-tight text-stone-950 dark:text-stone-50 sm:text-5xl"
-                style={{ textWrap: 'balance' }}
-              >
-                {AX_HERO.title}
-              </h1>
-              <p className="mt-6 max-w-3xl text-base leading-8 text-stone-600 dark:text-stone-300">
-                {AX_HERO.summary}
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <a
-                  href="#cases"
-                  className="inline-flex items-center gap-2 rounded-lg bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-                >
-                  대표 사례
-                  <ArrowRight className="h-4 w-4" />
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/yurielk82"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-lg border border-stone-200 bg-white px-5 py-2.5 text-sm font-semibold text-stone-700 transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)] dark:border-stone-800 dark:bg-stone-900 dark:text-stone-300"
-                >
-                  <ExternalLink className="h-4 w-4" />
-                  LinkedIn
-                </a>
-                <a
-                  href="https://github.com/yurielk82"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-lg border border-stone-200 bg-white px-5 py-2.5 text-sm font-semibold text-stone-700 transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)] dark:border-stone-800 dark:bg-stone-900 dark:text-stone-300"
-                >
-                  <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z" />
-                  </svg>
-                  GitHub
-                </a>
-              </div>
-            </div>
-
-            <div className="rounded-lg border border-stone-200 bg-white p-5 dark:border-stone-800 dark:bg-stone-900">
-              <p className="font-[family-name:var(--font-mono)] text-xs uppercase text-stone-500">
-                AX Focus
-              </p>
-              <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
-                {AX_HERO.focus.map((item) => (
-                  <div
-                    key={item}
-                    className="flex items-center gap-3 rounded-lg bg-stone-50 px-4 py-3 text-sm font-medium text-stone-700 dark:bg-stone-950 dark:text-stone-300"
-                  >
-                    <CheckCircle2 className="h-4 w-4 shrink-0 text-[var(--accent)]" />
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-        </FadeInUp>
+        <AxHeroSection />
 
         <section className="mt-16">
           <FadeInUp>
@@ -122,14 +44,15 @@ export default function AxPage() {
                 </h2>
               </div>
               <p className="max-w-xl text-sm leading-6 text-stone-500 dark:text-stone-400">
-                현업 이해, 데이터 기준화, AI 자동화, 운영 가드레일을 한 흐름으로 묶는 역할에 초점을 둡니다.
+                현업 이해, 데이터 기준화, AI 자동화, 운영 가드레일을 한 흐름으로 묶는 역할에 초점을
+                둡니다.
               </p>
             </div>
           </FadeInUp>
 
           <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {AX_PILLARS.map((pillar, index) => {
-              const Icon = pillarIcons[index] ?? Workflow
+              const Icon = pillarIcons[index] ?? Workflow;
               return (
                 <FadeInUp key={pillar.title} delay={index * 0.06}>
                   <div className="h-full rounded-lg border border-stone-200 bg-white p-5 dark:border-stone-800 dark:bg-stone-900">
@@ -147,92 +70,12 @@ export default function AxPage() {
                     </p>
                   </div>
                 </FadeInUp>
-              )
+              );
             })}
           </div>
         </section>
 
-        <section id="cases" className="mt-20 scroll-mt-20">
-          <FadeInUp>
-            <p className="font-[family-name:var(--font-mono)] text-xs uppercase text-[var(--accent)]">
-              Featured Cases
-            </p>
-            <h2 className="mt-2 text-2xl font-bold text-stone-950 dark:text-stone-50">
-              AX 대표 사례
-            </h2>
-          </FadeInUp>
-
-          <div className="mt-8 space-y-5">
-            {cases.map((study, index) => {
-              const project = study.project!
-              return (
-                <FadeInUp key={study.projectSlug} delay={index * 0.06}>
-                  <div className="overflow-hidden rounded-lg border border-stone-200 bg-white dark:border-stone-800 dark:bg-stone-900">
-                    <div className="grid lg:grid-cols-[0.44fr_0.56fr]">
-                      <div className="flex items-center justify-center border-b border-stone-200 bg-stone-50 dark:border-stone-800 dark:bg-stone-950 lg:border-b-0 lg:border-r">
-                        <ProjectThumbnail project={project} variant="detail" />
-                      </div>
-                      <div className="p-6">
-                        <div className="flex flex-wrap items-center gap-2">
-                          <span className="rounded-md bg-[var(--accent-muted)] px-2.5 py-1 font-[family-name:var(--font-mono)] text-[11px] uppercase text-[var(--accent)]">
-                            {study.label}
-                          </span>
-                          <span className="rounded-md bg-stone-100 px-2.5 py-1 text-[11px] font-medium text-stone-500 dark:bg-stone-800 dark:text-stone-400">
-                            {disclosureLabel[study.disclosure]}
-                          </span>
-                        </div>
-                        <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-                          <div>
-                            <h3 className="text-xl font-bold text-stone-950 dark:text-stone-50">
-                              {project.name}
-                            </h3>
-                            <p className="mt-1 text-sm text-stone-500">
-                              {project.highlight}
-                            </p>
-                          </div>
-                          <Link
-                            href={`/projects/${project.slug}`}
-                            className="inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-[var(--accent)] hover:text-[var(--accent-light)]"
-                          >
-                            {study.evidenceLabel}
-                            <ArrowRight className="h-3.5 w-3.5" />
-                          </Link>
-                        </div>
-
-                        <dl className="mt-6 grid gap-4">
-                          <div>
-                            <dt className="text-xs font-semibold uppercase text-stone-400">
-                              Problem
-                            </dt>
-                            <dd className="mt-1 text-sm leading-6 text-stone-700 dark:text-stone-300">
-                              {study.problem}
-                            </dd>
-                          </div>
-                          <div>
-                            <dt className="text-xs font-semibold uppercase text-stone-400">
-                              AX Intervention
-                            </dt>
-                            <dd className="mt-1 text-sm leading-6 text-stone-700 dark:text-stone-300">
-                              {study.intervention}
-                            </dd>
-                          </div>
-                          <div>
-                            <dt className="text-xs font-semibold uppercase text-stone-400">
-                              Outcome
-                            </dt>
-                            <dd className="mt-1 text-sm leading-6 text-stone-700 dark:text-stone-300">
-                              {study.outcome}
-                            </dd>
-                          </div>
-                        </dl>
-                      </div>
-                    </div>
-                  </div>
-                </FadeInUp>
-              )
-            })}
-          </div>
-        </section>
+        <AxCasesSection cases={cases} />
 
         <section className="mt-20 grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <FadeInUp>
@@ -244,7 +87,8 @@ export default function AxPage() {
                 AX를 진행하는 방식
               </h2>
               <p className="mt-4 text-sm leading-7 text-stone-600 dark:text-stone-400">
-                자동화 대상을 먼저 정하지 않습니다. 업무가 실제로 어디서 막히는지, 어떤 기준이 암묵지로 남아 있는지, 어느 지점에서 사람이 책임져야 하는지부터 나눕니다.
+                자동화 대상을 먼저 정하지 않습니다. 업무가 실제로 어디서 막히는지, 어떤 기준이
+                암묵지로 남아 있는지, 어느 지점에서 사람이 책임져야 하는지부터 나눕니다.
               </p>
             </div>
           </FadeInUp>
@@ -294,46 +138,8 @@ export default function AxPage() {
           </div>
         </section>
 
-        <FadeInUp>
-          <section className="mt-20 rounded-lg border border-[color-mix(in_srgb,var(--accent)_24%,transparent)] bg-[color-mix(in_srgb,var(--accent)_5%,white)] p-6 dark:bg-[color-mix(in_srgb,var(--accent)_10%,black)]">
-            <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <p className="font-[family-name:var(--font-mono)] text-xs uppercase text-[var(--accent)]">
-                  Contact
-                </p>
-                <h2 className="mt-2 text-xl font-bold text-stone-950 dark:text-stone-50">
-                  AX 사례와 구현 세부 내용을 더 설명할 수 있습니다.
-                </h2>
-                <p className="mt-2 text-sm leading-6 text-stone-600 dark:text-stone-400">
-                  공개 가능한 범위 안에서 문제 정의, 구현 방식, 운영상 배운 점을 중심으로 이야기하겠습니다.
-                </p>
-              </div>
-              <div className="flex shrink-0 flex-wrap gap-3">
-                <a
-                  href="https://www.linkedin.com/in/yurielk82"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-lg bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-                >
-                  <ExternalLink className="h-4 w-4" />
-                  LinkedIn
-                </a>
-                <a
-                  href="https://github.com/yurielk82"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-lg border border-stone-200 bg-white px-5 py-2.5 text-sm font-semibold text-stone-700 transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)] dark:border-stone-800 dark:bg-stone-900 dark:text-stone-300"
-                >
-                  <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z" />
-                  </svg>
-                  GitHub
-                </a>
-              </div>
-            </div>
-          </section>
-        </FadeInUp>
+        <AxContactSection />
       </div>
     </article>
-  )
+  );
 }

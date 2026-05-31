@@ -1,0 +1,14 @@
+// Sentry server config — Next.js (Node runtime)
+
+import * as Sentry from '@sentry/nextjs';
+
+const dsn = process.env.SENTRY_DSN;
+
+if (dsn) {
+  Sentry.init({
+    dsn,
+    environment: process.env.NODE_ENV || 'production',
+    tracesSampleRate: 0.1,
+    sendDefaultPii: false,
+  });
+}

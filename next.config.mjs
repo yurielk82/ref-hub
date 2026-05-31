@@ -1,4 +1,6 @@
+import { withSentryConfig } from '@sentry/nextjs';
 import nextra from 'nextra'
+import process from 'node:process'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 
@@ -13,13 +15,17 @@ const FRAME_ANCESTORS = [
 ].filter(Boolean).join(' ')
 
 const withNextra = nextra({
-  // Nextra 옵션
+  codeHighlight: false,
 })
 
-export default withNextra({
+const nextConfig = withNextra({
   output: 'standalone',
   reactStrictMode: true,
   outputFileTracingRoot: __dirname,
+  webpack(config) {
+    config.cache = false
+    return config
+  },
   async headers() {
     return [
       {
@@ -33,5 +39,12 @@ export default withNextra({
         ],
       },
     ]
+  },
+})
+
+export default withSentryConfig(nextConfig, {
+  silent: true,
+  sourcemaps: {
+    disable: !process.env.SENTRY_AUTH_TOKEN,
   },
 })

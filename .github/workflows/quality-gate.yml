@@ -29,7 +29,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0  # 전체 히스토리 스캔
       # TruffleHog v3.94.3 — verified secrets만 리포트 (strictest, lowest FP)
@@ -39,7 +39,7 @@ jobs:
       # 트레이드오프: verified만은 API 검증된 실제 유효 키만 차단. 엄격 모드는
       #   `--results=verified,unknown`으로 전환 (FP 증가, 망검증 실패 포함)
       - name: TruffleHog OSS
-        uses: trufflesecurity/trufflehog@47e7b7cd74f578e1e3145d48f669f22fd1330ca6  # v3.94.3
+        uses: trufflesecurity/trufflehog@d411fff7b8879a62509f3fa98c07f247ac089a51  # v3.95.5
         with:
           extra_args: >-
             --results=verified
@@ -60,7 +60,7 @@ jobs:
       has-node: ${{ steps.detect.outputs.has-node }}
       has-pip: ${{ steps.detect.outputs.has-pip }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - id: detect
         run: |
           {
@@ -83,10 +83,10 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: '20'
           cache: 'npm'
@@ -118,7 +118,7 @@ jobs:
 
       - name: Upload ESLint report on failure
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: eslint-report
           path: eslint-report.json
@@ -131,9 +131,9 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       # SHA pinning: v3.6.1 (2026-04 확인). 업데이트 시 SHA와 tag 동시 갱신 필수.
-      - uses: astral-sh/ruff-action@4919ec5cf1f49eff0871dbcea0da843445b837e6  # v3.6.1
+      - uses: astral-sh/ruff-action@0ce1b0bf8b818ef400413f810f8a11cdbda0034b  # v4.0.0
         with:
           args: 'check --output-format=github'
 
@@ -147,8 +147,8 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version: '20'
           cache: 'npm'
@@ -164,7 +164,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       # pip-audit v2.10.0 via pypa/gh-action-pip-audit v1.1.0
       # 스코프: requirements.txt / pyproject.toml / pylock.*.toml
       # poetry.lock / uv.lock / Pipfile.lock은 osv-scanner-lockfile job이 커버
@@ -180,7 +180,7 @@ jobs:
       actions: read
       contents: read
       security-events: write
-    uses: google/osv-scanner-action/.github/workflows/osv-scanner-reusable-pr.yml@c51854704019a247608d928f370c98740469d4b5  # v2.3.5
+    uses: google/osv-scanner-action/.github/workflows/osv-scanner-reusable-pr.yml@9a498708959aeaef5ef730655706c5a1df1edbc2  # v2.3.8
 
   supply-chain-lockfile-full:
     if: github.event_name == 'push'
@@ -188,7 +188,7 @@ jobs:
       actions: read
       contents: read
       security-events: write
-    uses: google/osv-scanner-action/.github/workflows/osv-scanner-reusable.yml@c51854704019a247608d928f370c98740469d4b5  # v2.3.5
+    uses: google/osv-scanner-action/.github/workflows/osv-scanner-reusable.yml@9a498708959aeaef5ef730655706c5a1df1edbc2  # v2.3.8
 
   # ─────────────────────────────────────────────────────────
   # 5. 커밋 메시지 린트 (Conventional Commits, PR 전용)
@@ -202,7 +202,7 @@ jobs:
       contents: read
       pull-requests: read
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - uses: wagoid/commitlint-github-action@b948419dd99f3fd78a6548d48f94e3df7f6bf3ed  # v6.2.1
@@ -219,8 +219,8 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v4
-      - uses: reviewdog/action-actionlint@be0761e4c1bab7cfdfca56cd03d4bb6253e39a4a  # v1.72.0
+      - uses: actions/checkout@v6
+      - uses: reviewdog/action-actionlint@6fb7acc99f4a1008869fa8a0f09cfca740837d9d  # v1.72.0
         with:
           reporter: github-check
           fail_level: error
@@ -237,8 +237,8 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version: '20'
           cache: 'npm'
@@ -269,10 +269,10 @@ jobs:
       contents: read
     # 차단 전환: 신규 중복 코드 금지. 레거시는 .jscpd.json 화이트리스트로 관리.
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: '20'
       - name: Run jscpd on changed files

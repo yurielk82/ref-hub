@@ -20,7 +20,7 @@ pre-commit:
       # eslint config 있는 레포만 검사 (Python 레포 등 자동 skip)
       run: |
         if [ -f eslint.config.mjs ] || [ -f eslint.config.cjs ] || [ -f eslint.config.js ] || [ -f .eslintrc.json ] || [ -f .eslintrc.js ] || [ -f .eslintrc.cjs ]; then
-          npx eslint --max-warnings 0 {staged_files}
+          npx eslint --max-warnings 0 --no-warn-ignored {staged_files}
         fi
       skip:
         - merge
@@ -80,7 +80,7 @@ pre-push:
       run: |
         if [ ! -f eslint.config.mjs ] && [ ! -f eslint.config.cjs ] && [ ! -f eslint.config.js ] && [ ! -f .eslintrc.json ] && [ ! -f .eslintrc.js ] && [ ! -f .eslintrc.cjs ]; then exit 0; fi
         files=$(git diff --name-only origin/{push_branch}..HEAD 2>/dev/null | grep -E '\.(ts|tsx|js|jsx|mjs|cjs)$' || true)
-        if [ -n "$files" ]; then npx eslint --max-warnings 0 $files; fi
+        if [ -n "$files" ]; then npx eslint --max-warnings 0 --no-warn-ignored $files; fi
       skip:
         - merge
         - rebase

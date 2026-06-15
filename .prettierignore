@@ -1,0 +1,7 @@
+# submodule docs/manual/ → content/*/ 로 verbatim 동기화되는 생성물.
+# 소스(SSOT)는 각 프로젝트 리포의 docs/manual/ 이므로 포털 포맷 게이트 대상 아님.
+# (scripts/sync-docs.mjs PROJECTS 목록과 일치)
+content/csoweb/
+content/kpis-dsr-api/
+content/studiogo/
+content/ev-motor-reliability/

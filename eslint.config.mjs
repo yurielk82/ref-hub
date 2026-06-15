@@ -10,9 +10,23 @@
 
 import base from './eslint.config.base.mjs';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
+import globals from 'globals';
 
 export default [
   ...base,
+
+  {
+    // Node 빌드/동기화 스크립트 — Node 글로벌 허용 + console 출력이 인터페이스
+    files: ['scripts/**/*.{mjs,cjs,js}'],
+    languageOptions: { globals: { ...globals.node } },
+    rules: { 'no-console': 'off' },
+  },
+
+  {
+    // 데이터 모듈 — 카드/태그 리터럴 반복은 정상 (로직 아님)
+    files: ['data/**/*.{ts,tsx}'],
+    rules: { 'sonarjs/no-duplicate-string': 'off' },
+  },
 
   // JSX/TSX 파일에 jsx-a11y 규칙 적용 (접근성 WCAG 2.2 기본선)
   {

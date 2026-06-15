@@ -34,6 +34,10 @@ const meta: MetaRecord = {
     title: 'EV Motor Reliability',
     type: 'page',
   },
+  'har-eval': {
+    title: 'har_eval',
+    type: 'page',
+  },
 }
 
 export default meta

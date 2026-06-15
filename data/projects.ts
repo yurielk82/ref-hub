@@ -219,6 +219,29 @@ export const PROJECTS: Project[] = [
     highlight: '코드는 싸지 않다. Claude/Codex 기반 AX Delivery 자동화 하네스',
     year: '2026',
   },
+  {
+    slug: 'har-eval',
+    name: 'har_eval',
+    tagline: '증거-게이트 역량 결정 하네스 (build/adopt/keep)',
+    description:
+      '"도구·기능·시스템 X를 만들·도입·유지할까?"를 의견·열정이 아니라 측정과 적대 감사로 결정하는 메타-하네스. 수개월 실 결정(메모리 도구 빌드-안함, serena keep/retire)에서 증류한 7단계 방법론과 자기 실패에서 파생된 가드레일 10개로 구성됩니다.',
+    tech: ['Markdown', 'Claude Code', 'Codex', 'Skill', 'Evidence-Gate'],
+    category: 'tool',
+    githubUrl: 'https://github.com/yurielk82/har_eval',
+    docsPath: '/har-eval',
+    emoji: '⚖️',
+    gradient: 'from-slate-600/15 to-zinc-400/15',
+    features: [
+      '7단계(Frame·Inventory·Design·Adversarial audit·Buy-before-build·Measure·Decide+Cleanup)로 잘못된 yes의 빌드 시간 낭비를 차단',
+      '교차모델 적대 감사 — 자기감사 위에 다른 벤더(Codex) 모델로 단일모델 구조적 맹점을 포착(실사례 13건 추가 발견)',
+      'buy-before-build + 싼것부터 게이팅 — 만들어서 확인하지 않고 기성 도구를 Control에 붙여 실토큰·정답률을 측정',
+      '자기 실패에서 파생된 반증가능 가드레일 10개(n≥6, 미측정 arm 추론금지, 모델 고정, 신뢰도 라벨)',
+      '모든 판정에 measured(n)/inferred/mechanism-backed 신뢰도 라벨을 붙여 측정과 추론을 분리',
+      '첫 임무는 "만들 이유 찾기"가 아니라 "안 만들어도 되는지 싸게 확인" — 흔한 정직한 결과는 "현재로 충분"',
+    ],
+    highlight: '측정 + 교차모델 적대감사로 내리는 역량 결정 하네스',
+    year: '2026',
+  },
 ]
 
 export function getProject(slug: string): Project | undefined {

@@ -4,6 +4,7 @@ const meta: MetaRecord = {
   'getting-started': '시작하기',
   'data-upload': '데이터 업로드',
   analysis: '분석 실행',
+  'sample-analysis': '실측 데이터 분석',
   visualization: '시각화',
 }
 

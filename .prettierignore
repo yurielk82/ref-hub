@@ -5,3 +5,6 @@ content/csoweb/
 content/kpis-dsr-api/
 content/studiogo/
 content/ev-motor-reliability/
+
+# 일회성/이력 플랜 문서 — plans-archive.sh 가 관리(30일 → archive/). 포맷 게이트 비대상.
+docs/plans/

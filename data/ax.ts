@@ -92,6 +92,18 @@ export const AX_CASE_STUDIES: AxCaseStudy[] = [
     evidenceLabel: '프로젝트 상세',
   },
   {
+    projectSlug: 'pharmkpi-exec',
+    label: 'Executive iPad BI + Metric Reframe',
+    problem:
+      '경영진이 매출·채권·KPI 정기보고를 회의실 PC가 아니라 손에 든 태블릿으로 바로 보고 싶어 했습니다. 기존 PharmKPI는 실무자용 화면이라 임원이 보려는 숫자·흐름과 맞지 않았고, 그대로 태블릿에 올리는 것만으로는 답이 아니었습니다.',
+    intervention:
+      'PharmKPI를 기반으로 임원용을 따로 세우되 세 가지를 의식적으로 결정했습니다. ① iPad 우선이라 iOS 네이티브(애플 개발자 비용·macOS 빌드)를 버리고 홈 화면에 추가하는 PWA로 앱 경험을 비용 없이 냈고, ② 라이브 사이트를 얇게 감싸 웹 배포가 곧 앱 갱신이 되게 했으며, ③ 숫자를 그대로 옮기지 않고 경영진 기준으로 재정의 — 채권 회전일을 납기 기준으로 보정하고 실청구액(VAT 포함)으로 통일하고 소송채권을 별도로 분리해, 승인 아래 지표 정의 자체를 바로잡았습니다.',
+    outcome:
+      '실무자용 대시보드를 임원이 태블릿에서 바로 보는 읽기 전용 KPI 보고로 재구성하고, 역할(대표·영업임원)별로 보는 숫자를 나눴습니다. exec.dvsharp.com 라이브이며, 웹 한 번 배포로 임원 단말까지 갱신됩니다.',
+    disclosure: 'withheld',
+    evidenceLabel: '프로젝트 상세',
+  },
+  {
     projectSlug: 'kpis-dsr-api',
     label: 'Excel Labor → Automated Compliance Reporting',
     problem:

@@ -28,18 +28,27 @@ export interface AxStackGroup {
 
 export const AX_HERO = {
   eyebrow: 'AI Transformation Reference',
-  title: '현업 프로세스를 AI 워크플로우로 전환하는 AX 실무자',
+  title: '현업이 못 풀던 문제를 AI로 풀어, 프로덕션 서비스로 만들고 직접 운영합니다.',
+  subhead: 'AI를 빌려 매번 토큰을 쓰는 게 아니라, AI로 만들어 자산으로 소유합니다.',
   summary:
     '영업관리 현장에서 반복 정산, 데이터 검증, 리포트 작성의 병목을 직접 겪었고, 업무 외 시간까지 활용해 AI 기반 자동화와 데이터 시스템을 자발적으로 설계·검증했습니다. 단순 학습용 프로젝트가 아니라 실제 운영 문제를 구조화하고, 사람이 검수할 지점과 시스템이 처리할 지점을 나누는 AX 실험으로 확장했습니다.',
-  operatingModel: {
-    label: '운영 방식',
-    text: '보통은 AI를 빌려 매번 토큰을 쓰지만, 저는 AI로 웹서비스를 직접 만들어 코드가 실제로 도는 OCI 서버에 자산으로 올립니다 — 어디서든 SSH로 구현·검증·배포를 그 자리에서 끝냅니다. Cloudflare·Nginx·systemd·Docker 위에서 self-host Supabase를 포함한 프로덕션 서비스 20여 개를 단독 운영하며, 모든 변경은 빌드 검증·헬스체크·실패 시 자동 롤백 게이트를 통과해야 라이브가 됩니다.',
-  },
-  focus: [
-    '현업 병목 진단',
-    'ERP·운영 데이터 정리',
-    'LLM/Vision 기반 자동화',
-    'Human-in-the-loop 운영 설계',
+  evidence: [
+    {
+      label: '단독 운영',
+      text: 'Cloudflare·Nginx·systemd·Docker 위에서 self-host Supabase를 포함한 프로덕션 서비스 20여 개를 혼자 운영합니다.',
+    },
+    {
+      label: '안전한 배포',
+      text: '모든 변경은 빌드 검증·헬스체크·실패 시 자동 롤백 게이트를 통과해야 라이브가 됩니다.',
+    },
+    {
+      label: '비용 규율',
+      text: '대시보드 숫자는 미리 계산된 스냅샷으로 토큰 없이 돌고, AI 해석은 필요한 화면·질문에만 얹힙니다.',
+    },
+    {
+      label: '서버 상주',
+      text: '코드가 실제로 도는 OCI 서버에서, 어디서든 SSH로 구현·검증·배포를 그 자리에서 끝냅니다.',
+    },
   ],
 }
 

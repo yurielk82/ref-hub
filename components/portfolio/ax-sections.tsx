@@ -29,17 +29,12 @@ export function AxHeroSection() {
           >
             {AX_HERO.title}
           </h1>
-          <p className="mt-6 max-w-3xl text-base leading-8 text-stone-600 dark:text-stone-300">
+          <p className="mt-5 max-w-3xl text-lg font-semibold leading-8 text-stone-900 dark:text-stone-100">
+            {AX_HERO.subhead}
+          </p>
+          <p className="mt-4 max-w-3xl text-base leading-8 text-stone-600 dark:text-stone-300">
             {AX_HERO.summary}
           </p>
-          <div className="mt-6 max-w-3xl rounded-lg border border-[color-mix(in_srgb,var(--accent)_24%,transparent)] bg-[color-mix(in_srgb,var(--accent)_5%,white)] p-4 dark:bg-[color-mix(in_srgb,var(--accent)_10%,black)]">
-            <p className="font-[family-name:var(--font-mono)] text-xs uppercase text-[var(--accent)]">
-              {AX_HERO.operatingModel.label}
-            </p>
-            <p className="mt-2 text-sm leading-7 text-stone-700 dark:text-stone-300">
-              {AX_HERO.operatingModel.text}
-            </p>
-          </div>
           <div className="mt-8 flex flex-wrap gap-3">
             <a
               href="#cases"
@@ -71,16 +66,18 @@ export function AxHeroSection() {
 
         <div className="rounded-lg border border-stone-200 bg-white p-5 dark:border-stone-800 dark:bg-stone-900">
           <p className="font-[family-name:var(--font-mono)] text-xs uppercase text-stone-500">
-            AX Focus
+            Operating Model
           </p>
           <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
-            {AX_HERO.focus.map((item) => (
-              <div
-                key={item}
-                className="flex items-center gap-3 rounded-lg bg-stone-50 px-4 py-3 text-sm font-medium text-stone-700 dark:bg-stone-950 dark:text-stone-300"
-              >
-                <CheckCircle2 className="h-4 w-4 shrink-0 text-[var(--accent)]" />
-                {item}
+            {AX_HERO.evidence.map((item) => (
+              <div key={item.label} className="rounded-lg bg-stone-50 px-4 py-3 dark:bg-stone-950">
+                <p className="flex items-center gap-2 font-[family-name:var(--font-mono)] text-[11px] uppercase text-[var(--accent)]">
+                  <CheckCircle2 className="h-3.5 w-3.5 shrink-0" />
+                  {item.label}
+                </p>
+                <p className="mt-1.5 text-sm leading-6 text-stone-700 dark:text-stone-300">
+                  {item.text}
+                </p>
               </div>
             ))}
           </div>

@@ -31,6 +31,10 @@ export const AX_HERO = {
   title: '현업 프로세스를 AI 워크플로우로 전환하는 AX 실무자',
   summary:
     '영업관리 현장에서 반복 정산, 데이터 검증, 리포트 작성의 병목을 직접 겪었고, 업무 외 시간까지 활용해 AI 기반 자동화와 데이터 시스템을 자발적으로 설계·검증했습니다. 단순 학습용 프로젝트가 아니라 실제 운영 문제를 구조화하고, 사람이 검수할 지점과 시스템이 처리할 지점을 나누는 AX 실험으로 확장했습니다.',
+  operatingModel: {
+    label: '운영 방식',
+    text: '보통은 AI를 노트북 옆 조수처럼 쓰지만, 저는 서비스가 실제로 배포되는 OCI 서버에 Claude Code를 상주시켜 — 어디서든 SSH로 접속해 구현·검증·배포를 그 자리에서 끝냅니다.',
+  },
   focus: [
     '현업 병목 진단',
     'ERP·운영 데이터 정리',
@@ -74,8 +78,7 @@ export const AX_CASE_STUDIES: AxCaseStudy[] = [
       '매출, 수금, 마진, 흡수율 지표가 ERP와 업무 문맥에 흩어져 있어 추세 파악과 보고가 개인 경험에 의존했습니다.',
     intervention:
       'Oracle ERP 데이터를 Supabase 기반 분석 흐름으로 정리하고, Claude·Gemini·GPT 분석을 붙여 KPI 해석과 리포트 생성을 자동화했습니다.',
-    outcome:
-      '영업관리 데이터를 조회용 표에서 의사결정용 대시보드와 AI 분석 흐름으로 확장했습니다.',
+    outcome: '영업관리 데이터를 조회용 표에서 의사결정용 대시보드와 AI 분석 흐름으로 확장했습니다.',
     disclosure: 'range',
     evidenceLabel: '프로젝트 상세',
   },

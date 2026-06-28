@@ -80,10 +80,13 @@ function Q1Section() {
       </p>
       <Link
         href="/"
+        target="_blank"
+        rel="noopener noreferrer"
         className="mt-4 inline-flex items-center gap-2 rounded-md px-4 py-2.5 text-[14px] font-semibold text-white outline-none transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#1A2230] motion-reduce:transition-none"
         style={{ background: TEAL }}
       >
         포트폴리오 보기 → ref.dvsharp.com
+        <span aria-hidden="true">↗</span>
       </Link>
       <p className="mt-2 text-[12.5px]" style={{ color: INK_MUTED }}>
         버튼을 누르면 같은 사이트의 포트폴리오 첫 화면으로 이동합니다.

@@ -3,8 +3,7 @@
 import { useEffect, useState } from 'react'
 import { type AttendanceCard } from './sample-data'
 import { T, RING } from './tokens'
-import { LockIcon } from './icons'
-import { Meta, LegalPanel } from './shared'
+import { Meta, LegalPanel, TrackHeader } from './shared'
 
 export function ReviewCard({ card }: { card: AttendanceCard }) {
   const [done, setDone] = useState(false)
@@ -18,27 +17,19 @@ export function ReviewCard({ card }: { card: AttendanceCard }) {
   return (
     <div className="space-y-4">
       <section
-        className="rounded-lg p-4"
-        style={{ background: T.tealTint, border: `1px solid ${T.teal}33` }}
+        className="rounded-xl p-5"
+        style={{ background: T.tealTint, border: `1px solid ${T.teal}26` }}
       >
-        <div className="mb-2 flex items-center gap-1.5">
-          <LockIcon />
-          <span className="text-[12px] font-semibold" style={{ color: T.teal }}>
-            시스템 자동 측정 (수정 불가)
-          </span>
-        </div>
-        <div
-          className="grid grid-cols-2 gap-2 border-b pb-2"
-          style={{ borderColor: `${T.teal}22` }}
-        >
+        <TrackHeader track="measure" note="수정 불가" />
+        <div className="grid grid-cols-2 gap-3 pb-1">
           <Meta label="사번" value={card.empNo} />
           <Meta label="성명" value={card.employee} />
         </div>
-        <p className="mt-2 font-mono text-[13.5px] leading-relaxed" style={{ color: T.ink }}>
+        <p className="mt-3 font-mono text-[15px] leading-relaxed" style={{ color: T.ink }}>
           {card.measure}
         </p>
         {card.trend ? (
-          <p className="mt-1 text-[12px]" style={{ color: T.inkMuted }}>
+          <p className="mt-1.5 text-[13.5px]" style={{ color: T.inkMuted }}>
             추세 · {card.trend}
           </p>
         ) : null}
@@ -46,11 +37,11 @@ export function ReviewCard({ card }: { card: AttendanceCard }) {
 
       <LegalPanel legal={card.legal} />
 
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2.5">
         <button
           type="button"
           onClick={() => setDone((v) => !v)}
-          className={`rounded-md px-4 py-2.5 text-[14px] font-semibold text-white transition-colors motion-reduce:transition-none ${RING}`}
+          className={`rounded-xl px-5 py-3 text-[15px] font-semibold text-white transition-transform hover:-translate-y-0.5 motion-reduce:transform-none ${RING}`}
           style={{ background: done ? T.inkMuted : T.teal }}
         >
           {done ? '✓ 검토 완료됨' : '검토 완료 표시'}
@@ -58,15 +49,15 @@ export function ReviewCard({ card }: { card: AttendanceCard }) {
         <button
           type="button"
           onClick={() => setRequested(true)}
-          className={`rounded-md border px-4 py-2.5 text-[14px] font-semibold transition-colors motion-reduce:transition-none ${RING}`}
-          style={{ borderColor: T.violet, color: T.violet, background: '#fff' }}
+          className={`rounded-xl border px-5 py-3 text-[15px] font-semibold transition-colors ${RING}`}
+          style={{ borderColor: T.violet, color: T.violet, background: T.card }}
         >
           노무 검토 요청
         </button>
       </div>
       {requested ? (
         <p
-          className="rounded-md px-3 py-2 text-[12.5px]"
+          className="rounded-lg px-4 py-2.5 text-[13.5px] font-medium"
           style={{ background: T.violetTint, color: T.violet, border: `1px solid ${T.violet}55` }}
           role="status"
         >

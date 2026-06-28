@@ -9,16 +9,58 @@ import { DraftForm } from './draft-form'
 import { ReviewCard } from './review-card'
 
 function Legend() {
+  const items = [
+    { Icon: LockIcon, color: T.teal, text: '측정 (시스템 자동·수정 불가)' },
+    { Icon: PencilIcon, color: T.ink, text: '선언 (본인 작성)' },
+    { Icon: ScaleIcon, color: T.violet, text: '자문 (법령 참고·자동판정 아님)' },
+  ]
   return (
-    <div className="mb-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-[11.5px]">
-      <span className="flex items-center gap-1.5" style={{ color: T.teal }}>
-        <LockIcon /> 측정 (시스템 자동·수정 불가)
-      </span>
-      <span className="flex items-center gap-1.5" style={{ color: T.ink }}>
-        <PencilIcon /> 선언 (본인 작성)
-      </span>
-      <span className="flex items-center gap-1.5" style={{ color: T.violet }}>
-        <ScaleIcon /> 자문 (법령 참고·자동판정 아님)
+    <div className="mb-5 flex flex-wrap items-center gap-x-5 gap-y-2">
+      {items.map(({ Icon, color, text }) => (
+        <span
+          key={text}
+          className="flex items-center gap-1.5 text-[13px] font-semibold"
+          style={{ color }}
+        >
+          <Icon />
+          {text}
+        </span>
+      ))}
+    </div>
+  )
+}
+
+function PanelHeader({
+  kind,
+  employee,
+  category,
+}: {
+  kind: string
+  employee: string
+  category: string
+}) {
+  const isInput = kind === 'input'
+  return (
+    <div
+      className="mb-4 flex items-center justify-between gap-2 border-b pb-4"
+      style={{ borderColor: T.hairline }}
+    >
+      <div>
+        <span className="text-[17px] font-bold" style={{ color: T.ink }}>
+          {isInput ? '기안서' : '관리자 검토'}
+        </span>
+        <span className="ml-2 text-[14px]" style={{ color: T.inkMuted }}>
+          {employee} · {category}
+        </span>
+      </div>
+      <span
+        className="rounded-md px-2.5 py-1 text-[12px] font-bold"
+        style={{
+          background: isInput ? T.tealTint : T.violetTint,
+          color: isInput ? T.tealDeep : T.violet,
+        }}
+      >
+        {isInput ? '입력형' : '분석형'}
       </span>
     </div>
   )
@@ -42,18 +84,21 @@ export function LiveSample() {
 
   return (
     <div
-      className="rounded-xl p-4 md:p-5"
+      className="rounded-2xl p-5 md:p-6"
       style={{
-        background: T.base,
+        background: T.page,
         border: `1px solid ${T.hairline}`,
         printColorAdjust: 'exact',
         WebkitPrintColorAdjust: 'exact',
       }}
     >
       <Legend />
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-[minmax(280px,360px)_1fr]">
-        <div aria-label="특이사항 카드 목록" className="flex flex-col gap-2.5">
-          <span className="text-[12px] font-semibold" style={{ color: T.inkMuted }}>
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-[minmax(300px,380px)_1fr]">
+        <div aria-label="특이사항 카드 목록" className="flex flex-col gap-3">
+          <span
+            className="text-[13px] font-bold uppercase tracking-wider"
+            style={{ color: T.inkMuted }}
+          >
             특이사항 {ATTENDANCE_CARDS.length}건
           </span>
           {ATTENDANCE_CARDS.map((c) => (
@@ -68,32 +113,18 @@ export function LiveSample() {
 
         <div
           ref={panelRef}
-          className="scroll-mt-4 rounded-lg p-4 md:p-5"
-          style={{ background: T.card, border: `1px solid ${T.hairline}` }}
+          className="scroll-mt-20 rounded-2xl p-5 md:p-6"
+          style={{
+            background: T.card,
+            border: `1px solid ${T.hairline}`,
+            boxShadow: '0 1px 3px rgba(21,32,46,0.04)',
+          }}
         >
-          <div
-            className="mb-3 flex items-center justify-between gap-2 border-b pb-3"
-            style={{ borderColor: T.hairline }}
-          >
-            <div>
-              <span className="text-[15px] font-semibold" style={{ color: T.ink }}>
-                {selected.kind === 'input' ? '기안서' : '관리자 검토'}
-              </span>
-              <span className="ml-2 text-[12.5px]" style={{ color: T.inkMuted }}>
-                {selected.employee} · {selected.category}
-              </span>
-            </div>
-            <span
-              className="rounded px-2 py-0.5 text-[10.5px] font-medium"
-              style={{
-                background: selected.kind === 'input' ? T.tealTint : T.violetTint,
-                color: selected.kind === 'input' ? T.teal : T.violet,
-              }}
-            >
-              {selected.kind === 'input' ? '입력형' : '분석형'}
-            </span>
-          </div>
-
+          <PanelHeader
+            kind={selected.kind}
+            employee={selected.employee}
+            category={selected.category}
+          />
           {selected.kind === 'input' ? (
             <DraftForm card={selected} />
           ) : (

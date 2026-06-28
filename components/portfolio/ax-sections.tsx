@@ -1,7 +1,7 @@
 import Link from 'next/link'
-import { ArrowRight, CheckCircle2, ExternalLink } from 'lucide-react'
+import { ArrowRight, CheckCircle2, ExternalLink, ShieldCheck } from 'lucide-react'
 
-import { AX_HERO, type AxCaseStudy, type MetricDisclosure } from '@/data/ax'
+import { AX_HERO, type AxCaseStudy, type AxGrounding, type MetricDisclosure } from '@/data/ax'
 import type { Project } from '@/data/projects'
 
 import { FadeInUp } from './motion'
@@ -101,7 +101,7 @@ export function AxCasesSection({ cases }: { cases: AxCase[] }) {
 
       <div className="mt-8 space-y-5">
         {cases.map((study, index) => (
-          <FadeInUp key={study.label} delay={index * CASE_STAGGER_DELAY}>
+          <FadeInUp key={study.projectSlug} delay={index * CASE_STAGGER_DELAY}>
             <div className="group relative overflow-hidden rounded-lg border border-stone-200 bg-white transition-colors hover:border-[var(--accent)] dark:border-stone-800 dark:bg-stone-900 dark:hover:border-[var(--accent)]">
               <div className="grid lg:grid-cols-[0.44fr_0.56fr]">
                 <div className="flex items-center justify-center border-b border-stone-200 bg-stone-50 dark:border-stone-800 dark:bg-stone-950 lg:border-b-0 lg:border-r">
@@ -119,11 +119,9 @@ export function AxCasesSection({ cases }: { cases: AxCase[] }) {
                   <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
                     <div>
                       <h3 className="text-xl font-bold text-stone-950 dark:text-stone-50">
-                        {study.caseTitle ?? study.project.name}
+                        {study.project.name}
                       </h3>
-                      <p className="mt-1 text-sm text-stone-500">
-                        {study.caseSubhead ?? study.project.highlight}
-                      </p>
+                      <p className="mt-1 text-sm text-stone-500">{study.project.highlight}</p>
                     </div>
                     <Link
                       href={`/projects/${study.project.slug}`}
@@ -145,6 +143,44 @@ export function AxCasesSection({ cases }: { cases: AxCase[] }) {
           </FadeInUp>
         ))}
       </div>
+    </section>
+  )
+}
+
+export function AxGroundingSection({ data }: { data: AxGrounding }) {
+  return (
+    <section className="mt-20">
+      <FadeInUp>
+        <div className="overflow-hidden rounded-lg border border-[color-mix(in_srgb,var(--accent)_24%,transparent)] bg-[color-mix(in_srgb,var(--accent)_5%,white)] p-6 dark:bg-[color-mix(in_srgb,var(--accent)_10%,black)] sm:p-8">
+          <div className="flex items-center gap-2">
+            <ShieldCheck className="h-4 w-4 text-[var(--accent)]" />
+            <p className="font-[family-name:var(--font-mono)] text-xs uppercase text-[var(--accent)]">
+              {data.eyebrow}
+            </p>
+          </div>
+          <h2 className="mt-3 max-w-3xl text-2xl font-bold text-stone-950 dark:text-stone-50">
+            {data.title}
+          </h2>
+          <p className="mt-4 max-w-3xl text-sm leading-7 text-stone-600 dark:text-stone-300">
+            {data.summary}
+          </p>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            {data.examples.map((example) => (
+              <div
+                key={example.label}
+                className="rounded-lg border border-stone-200 bg-white p-5 dark:border-stone-800 dark:bg-stone-900"
+              >
+                <span className="rounded-md bg-[var(--accent-muted)] px-2.5 py-1 font-[family-name:var(--font-mono)] text-[11px] uppercase text-[var(--accent)]">
+                  {example.label}
+                </span>
+                <p className="mt-3 text-sm leading-6 text-stone-700 dark:text-stone-300">
+                  {example.text}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </FadeInUp>
     </section>
   )
 }

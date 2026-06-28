@@ -2,11 +2,23 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, BookOpen, Bot, ShieldCheck, Workflow } from 'lucide-react'
 
-import { AX_METHOD, AX_PILLARS, AX_STACK, AX_CASE_STUDIES, FEATURED_CASE_SLUGS } from '@/data/ax'
+import {
+  AX_METHOD,
+  AX_PILLARS,
+  AX_STACK,
+  AX_CASE_STUDIES,
+  AX_GROUNDING,
+  FEATURED_CASE_SLUGS,
+} from '@/data/ax'
 import { getProject } from '@/data/projects'
 import { FadeInUp } from '@/components/portfolio/motion'
 import { TechTags } from '@/components/portfolio/tech-tags'
-import { AxCasesSection, AxContactSection, AxHeroSection } from '@/components/portfolio/ax-sections'
+import {
+  AxCasesSection,
+  AxContactSection,
+  AxGroundingSection,
+  AxHeroSection,
+} from '@/components/portfolio/ax-sections'
 
 export const metadata: Metadata = {
   title: 'AX Reference',
@@ -88,6 +100,8 @@ export default function AxPage() {
             </Link>
           </div>
         </FadeInUp>
+
+        <AxGroundingSection data={AX_GROUNDING} />
 
         <section className="mt-20 grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <FadeInUp>

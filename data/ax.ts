@@ -15,10 +15,18 @@ export interface AxCaseStudy {
   outcome: string
   disclosure: MetricDisclosure
   evidenceLabel: string
-  /** 한 프로젝트로 사례가 둘 이상일 때 카드 제목을 구분 (없으면 project.name) */
-  caseTitle?: string
-  /** 카드 부제 override (없으면 project.highlight) */
-  caseSubhead?: string
+}
+
+export interface AxGroundingExample {
+  label: string
+  text: string
+}
+
+export interface AxGrounding {
+  eyebrow: string
+  title: string
+  summary: string
+  examples: AxGroundingExample[]
 }
 
 export interface AxMethodStep {
@@ -94,20 +102,6 @@ export const AX_CASE_STUDIES: AxCaseStudy[] = [
       '팀장과 함께 세 가지를 정했습니다. ① ERP를 매번 직접 조회하면 느리고 부하가 커, ERP 데이터를 우리 DB에 스냅샷으로 떠두고 그 위에서 KPI를 즉시 보게 했습니다. ② 상용 BI(Metabase/Superset)를 도입하는 대신 제약 지표·업무 문맥에 맞춘 자체 BI 툴을 만들고, PMI 때 들은 경영진의 일·주·월 보고 주기를 그 안에 녹였습니다. ③ AI는 매번 토큰을 쓰는 대신 과거 월은 토큰 0 스냅샷으로 렌더하고 필요한 화면에서만 Claude·Gemini·GPT 인사이트(월간 요약·이상치 탐지·자연어 질의)를 호출하도록 규율했습니다.',
     outcome:
       'ERP를 매번 뒤지던 경영진 보고를, 스냅샷 위에서 즉시 보는 자체 BI 대시보드로 바꿔 일·주·월 보고 주기를 그대로 지원하고, 필요할 때만 AI 분석을 얹었습니다.',
-    disclosure: 'range',
-    evidenceLabel: '프로젝트 상세',
-  },
-  {
-    projectSlug: 'pharmkpi',
-    label: 'AI Trust · Law Grounding',
-    caseTitle: 'PharmKPI · 법령 Grounding',
-    caseSubhead: 'AI가 거짓 법령을 못 짓게 실제 약사법·고시에 묶음',
-    problem:
-      '제약 영업·전략 판단에는 약사법·고시 같은 법령이 직결됩니다. 그런데 인사이트의 AI에게 법령을 그냥 물으면, 존재하지 않는 조문이나 사례를 그럴듯하게 지어냈습니다(환각). 그대로 믿고 의사결정에 쓰면 위험했습니다.',
-    intervention:
-      '근본 원인은 "AI가 자기 기억으로 답한다"였습니다. 그래서 모델을 믿어 보려 애쓰는 대신 환경을 바꿨습니다. 인사이트의 AI 질의에 한국 법령 데이터(법령 MCP)를 직접 물려, 답할 때 실제 약사법·고시 원문과 사례를 가져와 그 안에서만 인용하게 했습니다. 출처 없는 법령은 답할 수 없게 막아, 모델이 거짓말할 수 없는 환경 자체를 설계한 것입니다 — 하네스 엔지니어링과 같은 발상입니다.',
-    outcome:
-      'AI가 지어낸 법령을 믿고 움직일 위험을, 실제 법령 원문에 묶인 답으로 바꿨습니다. 같은 grounding 방식은 약사법뿐 아니라 다른 규정·근거가 필요한 질의로도 그대로 확장됩니다.',
     disclosure: 'range',
     evidenceLabel: '프로젝트 상세',
   },
@@ -266,6 +260,24 @@ export const FEATURED_CASE_SLUGS = [
   'pharmkpi-exec',
   'team-pulse',
 ] as const
+
+// 프로젝트 횡단 원칙 — AI를 믿지 않고, 거짓말 못 하는 환경을 설계 (grounding)
+export const AX_GROUNDING: AxGrounding = {
+  eyebrow: 'Trust by Design',
+  title: 'AI를 믿지 않고, 거짓말 못 하는 환경을 만듭니다',
+  summary:
+    'AI는 모르는 것도 그럴듯하게 지어냅니다(환각). 그래서 모델을 잘 타이르는 대신, 사실을 실제 소스에 묶어 애초에 지어낼 수 없는 환경을 설계합니다 — 하네스 엔지니어링. 특정 프로젝트가 아니라 챗봇·대시보드 등 AI를 쓰는 모든 화면에 적용하는 방식입니다.',
+  examples: [
+    {
+      label: '법령',
+      text: '제약은 약사법·고시 같은 법령이 의사결정에 직결됩니다. 그냥 물으면 없는 조문을 지어내므로, 한국 법령 데이터(법령 MCP)를 직접 물려 실제 원문·사례만 인용하게 했습니다.',
+    },
+    {
+      label: '숫자·금액',
+      text: '매출·수금·마진 같은 계산은 AI에게 맡기지 않습니다. 수치는 DB·스냅샷에서 계산해 확정하고, AI는 만들어진 숫자를 해석·요약만 하도록 역할을 가둡니다.',
+    },
+  ],
+}
 
 export const AX_METHOD: AxMethodStep[] = [
   {

@@ -8,9 +8,9 @@ import { FadeInUp } from './motion'
 import { ProjectThumbnail } from './project-thumbnail'
 
 const disclosureLabel: Record<MetricDisclosure, string> = {
-  public: '공개 지표',
-  range: '범위 공개',
-  withheld: '비공개 업무',
+  public: '공개',
+  range: '범위 한정 공개',
+  withheld: '비공개',
 }
 
 const CASE_STAGGER_DELAY = 0.06
@@ -131,6 +131,12 @@ export function AxCasesSection({ cases }: { cases: AxCase[] }) {
                       <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                     </Link>
                   </div>
+
+                  {study.impact && (
+                    <p className="mt-5 border-l-2 border-l-[var(--accent)] pl-3 text-sm font-semibold leading-6 text-stone-900 dark:text-stone-100">
+                      {study.impact}
+                    </p>
+                  )}
 
                   <dl className="mt-6 grid gap-4">
                     <AxCaseFact term="Problem" value={study.problem} />

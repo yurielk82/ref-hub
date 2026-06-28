@@ -32,9 +32,8 @@ export const EXPERIENCES: Experience[] = [
     period: '2024',
     title: '프리랜서 개발',
     role: '외부 프로젝트',
-    description:
-      '라이브커머스 스튜디오 예약 모바일 앱(Expo + Hono)과 전기차 구동 모터 신뢰성 시험 데이터 분석 도구(Python + C DSP)를 개발했습니다.',
-    projects: ['studiogo', 'ev-motor-reliability'],
+    description: '전기차 구동 모터 신뢰성 시험 데이터 분석 도구(Python + C DSP)를 개발했습니다.',
+    projects: ['ev-motor-reliability'],
   },
 ]
 

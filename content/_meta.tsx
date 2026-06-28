@@ -14,10 +14,6 @@ const meta: MetaRecord = {
     title: 'KPIS DSR API',
     type: 'page',
   },
-  studiogo: {
-    title: 'StudioGo',
-    type: 'page',
-  },
   pharmkpi: {
     title: 'PharmKPI',
     type: 'page',

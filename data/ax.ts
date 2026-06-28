@@ -164,18 +164,6 @@ export const AX_CASE_STUDIES: AxCaseStudy[] = [
     evidenceLabel: '프로젝트 상세',
   },
   {
-    projectSlug: 'studiogo',
-    label: 'Booking Integrity + Tiered Approval',
-    problem:
-      '의류 창고를 라이브커머스 스튜디오로 빌려주는데, 인기 시간대는 여러 BJ가 같은 슬롯을 동시에 노려 중복 예약이 나고, 운영자는 현장에서 승인·체크인·출고를 빠르게 처리해야 했습니다.',
-    intervention:
-      '세 가지를 결정했습니다. ① 클릭 즉시 확정 대신 2분 임시 점유(Hold)를 두고 DB 유니크 인덱스로 이중 예약을 원천 차단 — 느린 네트워크에서도 먼저 누른 사람이 안전하게 확정됩니다. ② 신뢰도 티어가 높은 BJ는 자동 승인, 나머지만 운영자 승인으로 보내 승인 부담을 신뢰도에 비례시켰습니다. ③ 체크인은 QR·PIN·수동 중 현장 상황에 맞게 고르고, 출고는 단방향 상태머신으로 추적, 알림은 카카오 알림톡·푸시·인앱 3중으로 깔아 한 채널이 막혀도 전달되게 했습니다.',
-    outcome:
-      '중복 예약·수동 승인 과부하·현장 체크인을 예약 → 승인 → 체크인 → 출고 한 흐름으로 묶어, BJ·운영자·관리자가 같은 상태를 보는 크로스플랫폼(iOS·Android·Web) 운영 도구로 만들었습니다.',
-    disclosure: 'public',
-    evidenceLabel: '프로젝트 상세',
-  },
-  {
     projectSlug: 'ev-motor-reliability',
     label: 'Reliability Automation + Auditable Stats',
     problem:

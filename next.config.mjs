@@ -20,6 +20,10 @@ const withNextra = nextra({
 
 const nextConfig = withNextra({
   output: 'standalone',
+  // verify/CI builds use an isolated output dir so an in-place `next build` can't
+  // clobber the live `.next/standalone` (2026-06-28 incident). Env set by
+  // verify_workspace.py for the build step only; real deploys build into `.next`.
+  distDir: process.env.WORKSPACE_VERIFY_BUILD === '1' ? '.next-verify' : '.next',
   reactStrictMode: true,
   outputFileTracingRoot: __dirname,
   webpack(config) {

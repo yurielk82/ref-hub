@@ -187,6 +187,42 @@ export const AX_CASE_STUDIES: AxCaseStudy[] = [
     disclosure: 'public',
     evidenceLabel: '프로젝트 상세',
   },
+  {
+    projectSlug: 'team-pulse',
+    label: 'Stigma-Safe Diagnostics + RLS',
+    problem:
+      '심리·성향 진단은 "회사가 내 약점을 들여다본다"는 낙인 두려움이 큽니다. HR 평가로 오인되면 솔직한 응답이 안 나오고 팀 심리 안전이 깨져, 도구 자체가 무용해집니다.',
+    intervention:
+      '세 가지를 의식적으로 결정했습니다. ① 문항을 추상적 성격이 아니라 일터 행동("새 협업 툴 시도", "팀 갈등 상황")으로 한정해 평가가 아닌 협업 맥락임을 드러냈습니다. ② 노출을 계층화 — 개인 결과는 RLS로 본인만, 팀 집계는 최소 3명이 응답하기 전엔 개인 역산이 불가능하도록 구간으로만 보이고 소유자 화이트리스트만 접근하게 했습니다. ③ 동의 모달·결과 고지·용어("진단" 대신 "협업 카테고리 추정")로 "HR·임상 평가가 아니다"를 일관되게 반복했습니다.',
+    outcome:
+      '진단의 낙인 위험을 기능 설계로 눌러, 개인은 본인 결과만 보고 팀은 역산이 불가능한 집계만 보는 협업 워크숍용 자가진단 SaaS로 운영 중입니다.',
+    disclosure: 'public',
+    evidenceLabel: '프로젝트 상세',
+  },
+  {
+    projectSlug: 'naver-place-collector',
+    label: 'Block-Resilient Collection + Auto Grading',
+    problem:
+      '업종별 B2B 영업 타겟을 네이버 플레이스에서 모으려면 장시간(24시간+) 수집이 필요한데, 한 서버 IP로 계속 조회하면 속도 제한·봇 탐지로 IP가 통째로 차단돼 잡 전체가 재시작됩니다.',
+    intervention:
+      '세 가지를 결정했습니다. ① 공식 API용 클라이언트와 크롤링용 클라이언트를 분리하고, 크롤링은 TLS 핑거프린트(JA3)를 위장하는 라이브러리로 봇 탐지를 우회했습니다. ② 동시 워커 수를 고정 상수가 아니라 가용 IP 풀 크기 기반으로 동적 산출해 IP 고갈을 막았습니다. ③ 세션 교체 시점을 요청 수가 아니라 wall-clock 랜덤(분 단위)으로 바꿔 예측 가능하게 만들어 반복 차단을 줄였습니다.',
+    outcome:
+      '장시간 수집의 차단 문제를 구체적 회피 규칙으로 풀어, 검색→활동성 판정→노출·체인 분류→등급(A/B/C/F) 스코어링까지 자동화하고 이전 수집 대비 증감까지 추적하는 영업 타겟 DB SaaS로 운영 중입니다.',
+    disclosure: 'public',
+    evidenceLabel: '프로젝트 상세',
+  },
+  {
+    projectSlug: 'apinfy-lab',
+    label: 'Actor Model + Execution Isolation',
+    problem:
+      '여러 조직·여러 액터·스케줄·동시 실행·장시간 작업이 모두 필요한 크롤링 플랫폼을 self-host로 만들되, 나중에 분산 워커(Docker/k8s)로 확장할 수 있게 설계해야 했습니다.',
+    intervention:
+      '세 가지를 결정했습니다. ① 액터를 코드가 아니라 선언식 메타데이터(진입점·입출력 스키마·CPU/메모리/타임아웃)로 추상화해 컴파일 없이 추가·버전 관리되게 했습니다. ② 실행(run)마다 dataset·KV·요청 큐를 즉시 격리 프로비저닝하고, 동시성은 DB 유니크 제약으로 lock-free 처리해 run 간 결과가 섞이지 않게 했습니다. ③ Local·Docker 실행기를 같은 인터페이스의 전략 패턴으로 두어, 개발은 in-process·운영은 컨테이너로 바꾸고 향후 k8s 실행기를 코드 변경 최소로 붙일 확장점을 고정했습니다.',
+    outcome:
+      '단일 노드에서 멀티테넌시·동시성·스케줄·웹훅·재시도·프록시 풀을 갖춘, 분산 크롤링 플랫폼의 레퍼런스 구현으로 만들었습니다.',
+    disclosure: 'public',
+    evidenceLabel: '프로젝트 상세',
+  },
 ]
 
 export const AX_METHOD: AxMethodStep[] = [

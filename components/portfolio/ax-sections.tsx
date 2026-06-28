@@ -179,6 +179,22 @@ export function AxGroundingSection({ data }: { data: AxGrounding }) {
               </div>
             ))}
           </div>
+
+          <div className="mt-6 border-t border-[color-mix(in_srgb,var(--accent)_18%,transparent)] pt-6">
+            <p className="max-w-3xl text-sm leading-7 text-stone-600 dark:text-stone-300">
+              {data.spreadLead}
+            </p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {data.spreadTags.map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-full border border-stone-200 bg-white px-3 py-1 text-xs font-medium text-stone-600 dark:border-stone-700 dark:bg-stone-900 dark:text-stone-300"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
       </FadeInUp>
     </section>

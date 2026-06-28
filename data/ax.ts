@@ -27,6 +27,9 @@ export interface AxGrounding {
   title: string
   summary: string
   examples: AxGroundingExample[]
+  /** 같은 원칙이 관통하는 기법 — 설명 한 줄 + 라벨 태그 */
+  spreadLead: string
+  spreadTags: string[]
 }
 
 export interface AxMethodStep {
@@ -276,6 +279,17 @@ export const AX_GROUNDING: AxGrounding = {
       label: '숫자·금액',
       text: '매출·수금·마진 같은 계산은 AI에게 맡기지 않습니다. 수치는 DB·스냅샷에서 계산해 확정하고, AI는 만들어진 숫자를 해석·요약만 하도록 역할을 가둡니다.',
     },
+  ],
+  spreadLead:
+    '이 한 가지 원칙이 제가 쓰는 AI 기법 전체를 관통합니다 — 프롬프트로 행동을 제약하고, 스킬로 절차를 고정하고, 하네스로 검증을 강제하고, 루프로 스스로 고치게 하고, 기억과 위키로 맥락을 남깁니다. 모두 "AI가 제멋대로 못 하게 환경을 설계한다"는 한 뿌리입니다.',
+  spreadTags: [
+    '프롬프트 엔지니어링',
+    '스킬(절차 고정)',
+    '하네스',
+    '루프 엔지니어링',
+    'RAG 기억',
+    '지식 그래프',
+    '위키·문서화',
   ],
 }
 

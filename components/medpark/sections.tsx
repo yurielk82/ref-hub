@@ -25,20 +25,41 @@ export function GreetingSection() {
         관점(Q2)과, 이미 만들어 운영 중인 시스템들(Q1), 그리고 실제로 어떻게 보일지(샘플)를
         담았습니다.
       </p>
-      <div className="mt-8 flex flex-wrap items-center gap-3">
-        <Link
-          href="/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-[16px] font-semibold text-white shadow-sm outline-none transition-transform hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0E7C7B] motion-reduce:transform-none"
-          style={{ background: T.teal }}
+      <div
+        className="mt-10 max-w-2xl rounded-2xl p-6"
+        style={{
+          background: T.card,
+          border: `1px solid ${T.hairline}`,
+          boxShadow: '0 1px 3px rgba(21,32,46,0.04)',
+        }}
+      >
+        <div
+          className="mb-3 inline-flex items-center rounded-md px-2.5 py-1 text-[13px] font-bold"
+          style={{ background: T.ink, color: '#fff' }}
         >
-          AI 업무 시스템 경험 — 포트폴리오 보기
-          <span aria-hidden="true">↗</span>
-        </Link>
-        <span className="text-[14px]" style={{ color: T.inkMuted }}>
-          Q1 답변은 새 탭의 포트폴리오로 대신합니다.
-        </span>
+          Q1 · AI 기반 업무 시스템 구축 및 운영
+        </div>
+        <p className="text-[16.5px] leading-[1.85]" style={{ color: T.inkSoft }}>
+          이력서의 “AI 기반 업무 시스템 구축 및 운영”은{' '}
+          <strong style={{ color: T.ink }}>별도 포트폴리오 사이트로 갈음</strong>합니다. Q2에서
+          언급한 KPIS를 비롯해, 실제 구축·운영 중인 시스템들의 배경과 구조를 정리해 두었습니다.
+          추가로 확인하실 부분이 있으면 언제든 연락 주십시오.
+        </p>
+        <div className="mt-5 flex flex-wrap items-center gap-3">
+          <Link
+            href="/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-[16px] font-semibold text-white shadow-sm outline-none transition-transform hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0E7C7B] motion-reduce:transform-none"
+            style={{ background: T.teal }}
+          >
+            포트폴리오 보기 → ref.dvsharp.com
+            <span aria-hidden="true">↗</span>
+          </Link>
+          <span className="text-[14px]" style={{ color: T.inkMuted }}>
+            새 탭으로 열립니다.
+          </span>
+        </div>
       </div>
     </section>
   )

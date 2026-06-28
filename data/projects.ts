@@ -274,6 +274,7 @@ export const PROJECTS: Project[] = [
     tech: ['Next.js 15', 'FastAPI', 'ARQ + Redis', 'curl_cffi', 'PostgreSQL'],
     category: 'web',
     liveUrl: 'https://coll.dvsharp.com',
+    screenshot: '/images/portfolio/naver-place-collector/hero.png',
     emoji: '📍',
     gradient: 'from-green-600/20 to-emerald-500/20',
     features: [
@@ -300,6 +301,7 @@ export const PROJECTS: Project[] = [
     category: 'tool',
     liveUrl: 'https://apin.dvsharp.com',
     githubUrl: 'https://github.com/yurielk82/apinfy-lab',
+    screenshot: '/images/portfolio/apinfy-lab/hero.png',
     emoji: '🕸️',
     gradient: 'from-violet-600/20 to-fuchsia-600/20',
     features: [

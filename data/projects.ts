@@ -1,27 +1,6 @@
-export interface Project {
-  slug: string
-  name: string
-  tagline: string
-  description: string
-  tech: string[]
-  category: 'web' | 'mobile' | 'api' | 'tool'
-  liveUrl?: string
-  githubUrl?: string
-  docsPath?: string
-  screenshot?: string
-  emoji: string
-  gradient: string
-  features: string[]
-  highlight: string
-  year: string
-  badge?: string
-  featuredModule?: {
-    name: string
-    description: string
-    path: string
-    emoji: string
-  }
-}
+import type { Project } from './project-types'
+
+export type { Project }
 
 export const PROJECTS: Project[] = [
   {
@@ -38,12 +17,17 @@ export const PROJECTS: Project[] = [
     emoji: '📊',
     gradient: 'from-blue-600/20 to-cyan-600/20',
     features: [
-      'ERP Relay → Supabase 동기화로 도매·CSO·수금·마진·흡수율 KPI를 통합',
+      'ERP Relay → Supabase 동기화(배치·자동·크론 + ERP 이중화)로 도매·CSO·수금·마진·흡수율 KPI 통합',
       '도매/CSO 매출, 제품별 실적, 전월·전년 대비 추이, 3M·6M·12M 흡수율 분석',
-      '과거 월 데이터 불변 캐시와 당월 수동 동기화로 보고 기준 안정화',
-      'Claude·Gemini 기반 AI 채팅으로 현재 대시보드 데이터 질의와 추세 해석 지원',
-      '웹 관리자 콘솔에서 동기화 상태, 데이터 기준월, DB 연결 상태를 한 번에 점검',
-      '지역 분포, Sankey, 영업활동, 공급현황, 준수율까지 확장 가능한 KPI 메뉴 구조',
+      '공공데이터 시장분석 — HIRA 처방, MFDS 약가·허가·특허·생산/수입, 시장점유율·UBIST',
+      '임원 보고서(UKP) 6개 섹션 자동 생성과 경쟁·집중도·유통·성장 4각도 전략 리포트',
+      '다차원 ERP 피벗 리포트빌더 — 제품·ATC·성분·제형·투여경로·급여구분 × 연/반기/분기/월',
+      '거래처·품목·병원·약국 마스터 데이터 조회·편집·내보내기와 방문보고·거래처 차원 분석',
+      '원본 엑셀 추출 → 자동 매핑·검증 → 배치 업로드 데이터 파이프라인',
+      '마진·영업활동 전용 대시보드(KPI 캐시·5축 레이더)와 지역분포·Sankey·준수율 메뉴',
+      'AI 인사이트 — 월간 요약, ±20% 이상치 탐지, 자연어 질의(Claude·Gemini·GPT 3종, 스트리밍)',
+      '과거 월 불변 캐시와 자동/크론 스냅샷으로 보고 기준 안정화, 관리자 콘솔에서 동기화·DB 상태 점검',
+      'PDF·Excel·대용량 CSV 스트리밍 내보내기',
     ],
     highlight: 'Oracle ERP 연동 + 멀티 AI 분석 대시보드',
     year: '2026',
@@ -69,12 +53,16 @@ export const PROJECTS: Project[] = [
     emoji: '📈',
     gradient: 'from-indigo-600/20 to-violet-600/20',
     features: [
-      'iPad 우선 — iOS 네이티브 앱(애플 개발자 비용·macOS 빌드 필요) 대신 홈 화면에 추가하는 PWA로 비용·빌드 0의 앱 경험',
-      '라이브 사이트를 얇게 감싼 WebView 래퍼 — 웹 배포가 곧 앱 갱신이라 임원 요청 변경을 재설치 없이 즉시 반영',
-      '채권 회전일을 송장일 기준에서 납기 기준으로 보정하고 실청구액(VAT 포함)으로 통일 — 경영진 승인 하에 지표 정의 재정렬',
-      '소송채권을 별도 세그먼트로 분리하고 역할(대표·영업임원)별로 보는 숫자를 분리',
-      '미리 계산된 스냅샷으로 대시보드 숫자는 토큰 없이 렌더, AI 해석은 브리핑·거래처 분석·질문 화면에만 호출',
-      'OAuth 딥링크 웜·콜드 복귀 양 경로 처리로 모바일 로그인 안정화',
+      'iPad 우선 — iOS 네이티브 앱(애플 개발자 비용·macOS 빌드 필요) 대신 홈 화면 추가 PWA로 비용·빌드 0의 앱 경험',
+      '라이브 사이트를 얇게 감싼 WebView 래퍼 — 웹 배포가 곧 앱 갱신이라 임원 요청을 재설치 없이 즉시 반영',
+      '브리핑 화면 — AI 야간 요약과 오늘 결정 대기(Action Items)를 시작 대시보드에 제시',
+      'KPI 보드 — 도매 6채널 분해(주사제·경구전납·경구일반·기타·위탁·수출)와 제품·지역·사원 드릴다운',
+      '채권 화면 — Aging 분포(30/60/90/90+), 90+ 추이, 미수·부도·악성거래처 top, 소송채권 별도 세그먼트',
+      '거래처 분석(매출·미수순 정렬/검색 + 거래처별 AI 분석)과 방문자료(거래처별 품목 판매실적·할인·반품)',
+      '채권 회전일을 송장일→납기 기준으로 보정하고 실청구액(VAT 포함)으로 통일 — 경영진 승인 하 지표 재정의',
+      '역할(대표·영업임원)별 숫자 분리와 Google OAuth 로그인(웹/네이티브 경로 분리)',
+      '미리 계산된 스냅샷으로 숫자는 토큰 없이 렌더, AI 해석은 브리핑·거래처·질문 화면에만 호출',
+      'iPad/폰 반응형(폰 전용 하단 탭)·라이트/다크/시스템 테마·iOS 홈 화면 추가 안내',
     ],
     highlight: '경영진용 iPad KPI 대시보드 — PWA + 지표 재정의',
     year: '2026',
@@ -127,14 +115,20 @@ export const PROJECTS: Project[] = [
     emoji: '📋',
     gradient: 'from-stone-500/15 to-stone-400/15',
     features: [
-      '갑지·을지 원천 데이터를 웹 화면에서 불러오고 공급구분별 탭으로 자동 분류',
-      '코드매핑, 마스터 자동매칭, 단가학습, 규격보정, 규칙엔진으로 ERP 오류 데이터를 단계별 보정',
-      '조건·액션 기반 배치 규칙과 사용 이력 학습으로 반복 수정 패턴을 다음 업로드에 재적용',
-      'DataGrid 셀 편집, 총액 불변 수량·단가 역산, 수정 이력(manual/rule/correction/auto_match) 추적',
-      '필수값·형식·비즈니스 3단계 검증과 DC/DE/DH 오류 가이드로 제출 불가 행 식별',
-      '최종 규칙 적용 후 웹 화면에서 KPIS 제출 전 상태를 확인하고 MA111~MA114 API로 자동 제출',
+      '표준코드 자동매칭 — 갑지·을지를 연번(seqNo) 기준 자동 매칭(1:n 지원)하고 마스터 데이터로 코드 정합',
+      '규격 불일치 보정과 거기서 파생되는 단가·수량을 총액 불변으로 자동 역산 수정',
+      '단가학습 — 상한가 대비 단가비율 학습으로 DC(단가오류)·DE(단가범위)·DH(할증) 분류별 자동 채움, 반송사유 입력 시 재학습',
+      '4단계 검증(필수값 → 형식 → 유효값 범위 → 비즈니스 규칙)과 DC/DE/DH 오류 가이드로 제출 불가 행 식별',
+      '공공데이터 표준코드 비교 — odcloud.kr 마스터와 전체 컬럼 비교·강제 업데이트로 무결성 보장',
+      '조건·액션 기반 배치 규칙 관리(우선순위·실행 미리보기)와 사용 이력 학습으로 반복 수정 패턴 재적용',
+      '대시보드 — 총 건수·보고율·오류율·대기 KPI 카드, 월간 보고현황 차트, 공급구분 도넛, Top 거래처/제품',
+      '파일 업로드 — 갑지/을지 Excel 드래그앤드롭과 파일명 기반 날짜·유형 자동 분류',
+      'ERP 자동 수집 — VPN 직접연결 vs Relay(Cloudflare Tunnel) 이중 모드, MSSQL 저장 프로시저, 스케줄러·자동 재시작·실시간 로그',
+      '반송 관리(반송코드별 원인 분석 + 수정 후 MA113 재제출)와 인증서 관리(공동인증서 AES-256 암호화·만료경고 D-30/7/1)',
+      '수정 이력 추적(manual/rule/correction/auto_match 종류별·이전값 대비·타임스탬프)과 DataGrid 셀 편집',
+      '내보내기(갑지/을지 탭별·전체 Excel)·마스터DB(MA101 표준코드·바코드·ATC 조회) + MA111~MA114 API 자동 제출',
     ],
-    highlight: 'Express 5 + React 19 + MSSQL 풀스택',
+    highlight: '표준코드·규격·단가·수량 불일치 자동 무결화',
     year: '2026',
   },
   {
@@ -151,9 +145,15 @@ export const PROJECTS: Project[] = [
     features: [
       '스튜디오 검색, 날짜·설비 필터, 슬롯 선택, 2분 Hold로 중복 예약을 방지하는 예약 위자드',
       '운영자 웹/모바일 대시보드에서 승인 대기·승인·거절·완료·노쇼 상태를 관리',
-      'QR 스캔, PIN, 수동 입력 기반 체크인·체크아웃과 중복 스캔 방지 흐름',
-      '방송 후 대기→포장 중→발송 준비→발송됨→완료까지 출고 상태와 운송장 관리',
-      '카카오 로그인, 카카오 알림톡, Expo Push, 인앱 알림을 통한 예약·취소·노쇼 알림',
+      '신뢰도 티어 자동 계산(방송 횟수 기반 자동 승격)과 티어별 자동 승인',
+      'QR 스캔·PIN·수동 입력 체크인/체크아웃과 중복 스캔 방지',
+      '방송 후 대기→포장→발송 준비→발송됨→완료까지 출고 상태머신과 운송장 관리',
+      '정산 — 서비스금액·위약금 정산 상태머신과 취소 정책(마감시간 기준)',
+      '예약 대기열, 블랙아웃(폐쇄 시간대), 부가서비스 관리',
+      '회원 정지·승인, 운영자 권한 제어, 시스템 감사 로그',
+      '공지/공시 관리, 자산·이미지 관리, 기능 플래그(A/B 테스트)',
+      '예약·운영 통계/분석 대시보드',
+      '카카오 로그인·알림톡, Expo Push, 인앱 알림으로 예약·취소·노쇼 통지',
       'Hono API, Neon PostgreSQL, Drizzle, TanStack Query/Zustand로 모바일·웹 운영 도구 분리',
     ],
     highlight: 'Expo + Hono 크로스플랫폼 모바일 앱',
@@ -173,11 +173,18 @@ export const PROJECTS: Project[] = [
     gradient: 'from-yellow-600/20 to-lime-600/20',
     features: [
       'TMS320F2838x DSP 펌웨어, SMC300 모터제어 보드, PMSM/BLDC 시험 데이터 통합',
-      'pyserial UART와 WebSocket으로 속도·전류·온도·토크를 실시간 수집하고 임계치 알림 처리',
+      'pyserial UART(장기 수집)와 WebSocket(실시간 모니터링) 분리 수집, 임계 초과 시 자동 정지 + 비상정지 버튼 + 안전 게이지',
       'UniFlash/JTAG 자동 플래시와 build→flash→acquire→analyze→report 시험 파이프라인',
-      'Weibull 모수, MTTF, B10 Life, 고장률, 잔여 수명 예측을 Python 도메인 로직으로 계산',
-      '확률 플롯, 욕조 곡선, 신뢰도/CDF, 시계열, 히트맵을 웹 대시보드에서 즉시 탐색',
-      'Claude API 채팅으로 시험 결과 해석, 시뮬레이션 파라미터 추천, 문서 질의 지원',
+      '배치·스윕 시뮬레이션과 PID/FOC 제어 게인 자동 최적화(Nelder-Mead)',
+      'Weibull 모수·MTTF·B10 Life·고장률·잔여 수명 추정을 Python 도메인 로직으로 직접 구현(감사 추적성)',
+      'Rainflow 피로 사이클 추출(ASTM E1049), Coffin-Manson 열피로, Palmgren-Miner 누적손상',
+      '열 프로파일(모터·IGBT·히트싱크 3채널) 분석과 열한계 마진 판정(CRITICAL/HIGH/MARGINAL/PASS)',
+      '성능 저하(degradation)·토크-속도 곡선 분석과 시뮬 vs 실측 비교 리포트',
+      'FMEA 자동 생성(RPN 기반 위험 등급)과 Weibull·FMEA·비교 통합 PDF 보고서',
+      '확률 플롯·욕조 곡선·신뢰도/CDF·시계열·히트맵을 웹 대시보드에서 탐색',
+      'AVL XML 측정 프로파일 변환, 시험 히스토리 관리, 하드웨어 상태(DSP·UART·JTAG) 실시간 조회',
+      'Monaco 코드 에디터 + Git 패널(펌웨어·스크립트 브라우징), Admin 권한 관리',
+      '로컬 Claude AI 에이전트로 결과 해석·시뮬 파라미터 추천·문서 질의(채팅 이력 저장)',
     ],
     highlight: 'Python + C 하이브리드 DSP + AI 해석',
     year: '2026',
@@ -220,11 +227,15 @@ export const PROJECTS: Project[] = [
     gradient: 'from-sky-500/15 to-teal-500/15',
     features: [
       'SRT 매진 좌석을 주기적으로 감시하고 조건에 맞는 열차가 열리면 자동 예매 시도',
-      'Next.js 웹 UI와 FastAPI 백엔드를 분리해 검색 조건, 작업 상태, 결과 알림 관리',
-      'Redis 큐로 예약 시도 작업을 직렬화하고 타이밍 제어·중복 실행 방지·재시도 전략 구성',
-      'SRT API 호출에 Rate Limiting과 백오프를 적용해 안정적인 폴링/예매 흐름 유지',
-      '텔레그램 봇으로 예매 성공, 실패, 대기 상태를 실시간 알림',
-      '개인 자동화 요구를 풀스택 백그라운드 작업 시스템으로 구조화한 실전 자동화 사례',
+      'Redis 전역 FIFO 큐로 작업 직렬화·최소 1초 간격 강제·중복 실행 방지, 큐 혼잡도 모니터링',
+      'Sticky IP 프록시(Bright Data ISP) — 동시 매크로가 있을 때만 계정별 고정 IP로 IP 충돌·차단 회피',
+      '동시 6개 + 대기열 5개 슬롯으로 직원 간 공정성과 차단 한도를 동시에 관리',
+      '0.1~0.5초 랜덤 간격으로 탐지 패턴 분산, 50회마다 세션 갱신(재로그인)',
+      '저장된 카드(AES-256 암호화)로 좌석 확보 시 자동 결제',
+      'SSE 실시간 상태 스트림과 사용자별 매크로 작업 목록·상태 조회',
+      '텔레그램 봇(웹훅 자동 설정)으로 예매 성공·실패·대기 실시간 알림',
+      '즐겨찾기 역 관리, 프록시 토글 상태 조회, 브라우저 확장(srt-extension) 보조',
+      'Next.js 웹 UI와 FastAPI 백엔드 분리로 검색 조건·작업 상태·결과 관리',
     ],
     highlight: 'Next.js + FastAPI + Redis 풀스택 자동화',
     year: '2026',

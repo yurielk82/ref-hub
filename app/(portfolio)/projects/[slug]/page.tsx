@@ -116,6 +116,11 @@ export default async function ProjectPage(props: { params: Promise<{ slug: strin
             <h2 className="mt-2 text-2xl font-bold tracking-tight text-stone-900 dark:text-stone-100">
               문제 → 해결 → 결과
             </h2>
+            {caseStudy.impact && (
+              <p className="mt-5 border-l-2 border-l-[var(--accent)] pl-3 text-sm font-semibold leading-6 text-stone-900 dark:text-stone-100">
+                {caseStudy.impact}
+              </p>
+            )}
             <dl className="mt-8 space-y-6">
               <div>
                 <dt className="text-xs font-semibold uppercase text-stone-400">Problem</dt>

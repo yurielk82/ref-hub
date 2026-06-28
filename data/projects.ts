@@ -33,16 +33,15 @@ export const PROJECTS: Project[] = [
     name: '영업전략포털',
     tagline: '전략기획 셀프서비스 데이터 기반 (pharmkpi 내 · 분리 예정)',
     description:
-      '전략기획팀이 분석에 필요한 데이터를 매번 타부서에 요청하던 걸 없애려고, pharmkpi 안에 만든 전략기획 워크스페이스. ERP와 외부 13개 API를 연결해 품목 raw·거래처·담당자·병원-약국 등 분석 기반 데이터를 셀프서비스로 통합하고, 반복 분석을 리포트 규칙으로 자동화합니다. 현재 pharmkpi 프로젝트 안에 있으며 향후 별도 포털로 분리할 예정입니다.',
-    tech: ['Next.js 16', 'Prisma 7', 'Supabase', 'Oracle ERP · 외부 13 API', 'Recharts'],
+      '전략기획팀이 분석에 필요한 데이터를 매번 타부서에 요청하던 걸 없애려고, pharmkpi 안에 만든 전략기획 워크스페이스. ERP와 외부 공공 API 약 10종(식약처·심평원·공공데이터포털)을 연결해 품목 raw·거래처·담당자·병원-약국 등 분석 기반 데이터를 셀프서비스로 통합하고, 반복 분석을 리포트 규칙으로 자동화합니다. 현재 pharmkpi 프로젝트 안에 있으며(같은 사이트), 향후 별도 포털로 분리할 예정입니다.',
+    tech: ['Next.js 16', 'Prisma 7', 'Supabase', 'Oracle ERP · 공공 API', 'Recharts'],
     category: 'web',
-    liveUrl: 'https://kpi.dvsharp.com',
     docsPath: '/pharmkpi',
     emoji: '🎯',
     gradient: 'from-sky-700/20 to-blue-600/20',
     features: [
       'pharmkpi 안 전략기획 워크스페이스 — 전략기획팀이 타부서 요청 없이 직접 보는 셀프서비스 분석 환경',
-      'ERP와 외부 13개 API를 연결해 품목 raw·거래처·담당자·병원-약국 등 분석 기반 데이터를 통합(ERP는 읽기 전용 조회)',
+      'ERP와 외부 공공 API 약 10종(식약처·심평원·공공데이터포털)을 연결해 품목 raw·거래처·담당자·병원-약국 등 분석 기반 데이터를 통합(ERP는 읽기 전용 조회)',
       '공공데이터 시장분석 — HIRA 처방, MFDS 약가·허가·특허·생산/수입, 시장점유율·UBIST',
       '다차원 ERP 피벗 리포트빌더 — 제품·ATC·성분·제형·투여경로·급여구분 × 연/반기/분기/월',
       '임원 보고서(UKP) 등 전략 리포트 규칙 3종을 우선 구현해 반복 분석을 자동화(확장 중)',
@@ -316,7 +315,7 @@ export const PROJECTS: Project[] = [
   {
     slug: 'claude-dotfiles',
     name: 'Claude/Codex Harness',
-    tagline: '코드는 싸지 않다. AX Delivery 자동화 하네스 (규칙 22 + 훅 48 + 스킬 128)',
+    tagline: '코드는 싸지 않다 — 하네스 · 루프 엔지니어링 · RAG 기억 AX 운영 체계',
     description:
       'Claude Code와 Codex 기반 작업 방식을 규칙·훅·에이전트·스킬·RAG 기억으로 계층화하여 관리하는 AX Delivery 자동화 하네스. 작은 스킬, 공유 언어, 피드백 루프라는 방향은 mattpocock/skills와 결과적으로 맞닿지만, 현업 배포·리뷰·RAG 기억까지 포함한 더 고도화된 운영 체계로 확장했습니다.',
     tech: ['Bash', 'Markdown', 'YAML', 'Claude Code', 'Codex', 'Git Hooks', 'RAG Memory'],

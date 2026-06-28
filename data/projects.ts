@@ -40,6 +40,7 @@ export const PROJECTS: Project[] = [
     tech: ['Next.js 16', 'Prisma 7', 'Supabase', 'Oracle ERP · 공공 API', 'Recharts'],
     category: 'web',
     docsPath: '/pharmkpi',
+    screenshot: '/images/portfolio/sales-strategy-portal/hero.png',
     emoji: '🎯',
     gradient: 'from-sky-700/20 to-blue-600/20',
     features: [

@@ -101,7 +101,7 @@ export function AxCasesSection({ cases }: { cases: AxCase[] }) {
 
       <div className="mt-8 space-y-5">
         {cases.map((study, index) => (
-          <FadeInUp key={study.projectSlug} delay={index * CASE_STAGGER_DELAY}>
+          <FadeInUp key={study.label} delay={index * CASE_STAGGER_DELAY}>
             <div className="group relative overflow-hidden rounded-lg border border-stone-200 bg-white transition-colors hover:border-[var(--accent)] dark:border-stone-800 dark:bg-stone-900 dark:hover:border-[var(--accent)]">
               <div className="grid lg:grid-cols-[0.44fr_0.56fr]">
                 <div className="flex items-center justify-center border-b border-stone-200 bg-stone-50 dark:border-stone-800 dark:bg-stone-950 lg:border-b-0 lg:border-r">
@@ -119,9 +119,11 @@ export function AxCasesSection({ cases }: { cases: AxCase[] }) {
                   <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
                     <div>
                       <h3 className="text-xl font-bold text-stone-950 dark:text-stone-50">
-                        {study.project.name}
+                        {study.caseTitle ?? study.project.name}
                       </h3>
-                      <p className="mt-1 text-sm text-stone-500">{study.project.highlight}</p>
+                      <p className="mt-1 text-sm text-stone-500">
+                        {study.caseSubhead ?? study.project.highlight}
+                      </p>
                     </div>
                     <Link
                       href={`/projects/${study.project.slug}`}

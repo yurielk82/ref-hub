@@ -243,10 +243,11 @@ export const PROJECTS: Project[] = [
     name: 'Team Pulse',
     tagline: '팀 협업 스타일 진단 미니 SaaS',
     description:
-      '서로의 업무 방식을 이해하도록 돕는 팀용 자가진단 도구. 방어기제(Vaillant)부터 의사소통 유형(사티어)·성향(Big Five)까지 협업에 도움이 되는 심리 기법을 자체 문항으로 적용하고, 결과는 단정적 평가가 아니라 쎄지 않은 부드러운 말투로 풀어 줍니다. HR 평가가 아니라 대면 협업 워크숍 참고용이며, "거울로 나를 들여다본 것 같다"는 사용자 피드백을 받았습니다.',
+      '서로의 업무 방식을 이해하도록 돕는 팀용 자가진단 도구. 방어기제(Vaillant)부터 의사소통 유형(사티어)·성향(Big Five)까지 협업에 도움이 되는 심리 기법을 자체 문항으로 적용하고, 결과는 단정적 평가가 아니라 위압적이지 않고 부드러운 말투로 풀어 줍니다. HR 평가가 아니라 대면 협업 워크숍 참고용이며, "거울로 나를 들여다본 것 같다"는 사용자 피드백을 받았습니다.',
     tech: ['Next.js 16', 'Supabase (RLS)', 'TypeScript', 'Tailwind 4', 'Framer Motion'],
     category: 'web',
     liveUrl: 'https://pulse.dvsharp.com',
+    screenshot: '/images/portfolio/team-pulse/hero.png',
     emoji: '🧭',
     gradient: 'from-rose-500/20 to-pink-600/20',
     features: [

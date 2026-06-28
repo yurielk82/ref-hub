@@ -82,13 +82,13 @@ export const AX_PILLARS: AxPillar[] = [
 export const AX_CASE_STUDIES: AxCaseStudy[] = [
   {
     projectSlug: 'pharmkpi',
-    label: 'BI Dashboard Replacement + Multi-AI Insight',
+    label: 'PMI Exec Reporting + Snapshot BI',
     problem:
-      '매출·수금·마진·흡수율 같은 핵심 지표를 한눈에 보는 시각 대시보드가 없었습니다. 지표가 ERP와 업무 문맥에 흩어져 있어, 추세 파악과 보고가 개인의 엑셀 작업과 경험에 의존했습니다.',
+      'PMI(인수합병 후 통합) 과정에서 경영진이 일·주·월 단위 보고를 원했는데, 핵심 지표(매출·수금·마진·흡수율)를 빠르게 한눈에 보는 시각 대시보드가 없었습니다. 매번 ERP에서 데이터를 뽑아 엑셀로 정리해야 해 느렸고, 추세 파악도 개인 경험에 의존했습니다.',
     intervention:
-      '두 가지를 결정했습니다. ① 상용 BI(Metabase/Superset)를 도입하는 대신, 제약 지표와 업무 문맥에 맞춘 자체 시각 대시보드를 만들어 도매·CSO 매출부터 흡수율·마진까지 한 화면에 올렸습니다 — 도구를 우리 업무에 맞추는 대신 우리 업무에 맞는 도구를 만든 쪽입니다. ② AI는 매번 토큰을 쓰는 대신, 과거 월은 토큰 0 스냅샷으로 렌더하고 필요한 화면에서만 Claude·Gemini·GPT 인사이트(월간 요약·이상치 탐지·자연어 질의)를 호출하도록 비용을 규율했습니다.',
+      '팀장과 함께 세 가지를 정했습니다. ① ERP를 매번 직접 조회하면 느리고 부하가 커, ERP 데이터를 우리 DB에 스냅샷으로 떠두고 그 위에서 KPI를 즉시 보게 했습니다. ② 상용 BI(Metabase/Superset)를 도입하는 대신 제약 지표·업무 문맥에 맞춘 자체 BI 툴을 만들고, PMI 때 들은 경영진의 일·주·월 보고 주기를 그 안에 녹였습니다. ③ AI는 매번 토큰을 쓰는 대신 과거 월은 토큰 0 스냅샷으로 렌더하고 필요한 화면에서만 Claude·Gemini·GPT 인사이트(월간 요약·이상치 탐지·자연어 질의)를 호출하도록 규율했습니다.',
     outcome:
-      '조회용 표에 머물던 데이터를, 의사결정용 시각 KPI 대시보드와 필요할 때만 부르는 AI 분석으로 바꿔 상용 BI 도구를 대체했습니다.',
+      'ERP를 매번 뒤지던 경영진 보고를, 스냅샷 위에서 즉시 보는 자체 BI 대시보드로 바꿔 일·주·월 보고 주기를 그대로 지원하고, 필요할 때만 AI 분석을 얹었습니다.',
     disclosure: 'range',
     evidenceLabel: '프로젝트 상세',
   },
@@ -108,7 +108,7 @@ export const AX_CASE_STUDIES: AxCaseStudy[] = [
     projectSlug: 'pharmkpi-exec',
     label: 'Executive iPad BI + Metric Reframe',
     problem:
-      '경영진이 매출·채권·KPI 정기보고를 회의실 PC가 아니라 손에 든 태블릿으로 바로 보고 싶어 했습니다. 기존 PharmKPI는 실무자용 화면이라 임원이 보려는 숫자·흐름과 맞지 않았고, 그대로 태블릿에 올리는 것만으로는 답이 아니었습니다.',
+      '새로 부임한 대표님이 직접, 매출·채권·KPI 정기보고를 회의실 PC가 아니라 손에 든 태블릿으로 바로 보고 싶다고 단독 지시했습니다. 기존 PharmKPI는 실무자용 화면이라 임원이 보려는 숫자·흐름과 맞지 않았고, 그대로 태블릿에 올리는 것만으로는 답이 아니었습니다.',
     intervention:
       'PharmKPI를 기반으로 임원용을 따로 세우되, 임원이 진짜 보는 게 뭔지부터 좁혀 세 가지를 정했습니다. ① iPad 우선이라 iOS 네이티브(애플 개발자 비용·macOS 빌드)를 버리고 홈 화면에 추가하는 PWA로 앱 경험을 비용 없이 냈고, ② 라이브 사이트를 얇게 감싸 웹 배포가 곧 앱 갱신이 되게 했으며, ③ 숫자를 그대로 옮기지 않고 경영진 기준으로 재정의 — 채권 회전일을 납기 기준으로 보정하고 실청구액(VAT 포함)으로 통일하고 소송채권을 별도로 분리해, 승인 아래 지표 정의 자체를 바로잡았습니다.',
     outcome:
@@ -240,6 +240,7 @@ export const AX_CASE_STUDIES: AxCaseStudy[] = [
 
 // 랜딩에 노출할 대표 사례 (나머지는 /projects 상세에서 서사 노출)
 export const FEATURED_CASE_SLUGS = [
+  'pharmkpi',
   'kpis-dsr-api',
   'csoweb',
   'sales-strategy-portal',

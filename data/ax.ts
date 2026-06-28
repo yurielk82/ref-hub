@@ -238,6 +238,15 @@ export const AX_CASE_STUDIES: AxCaseStudy[] = [
   },
 ]
 
+// 랜딩에 노출할 대표 사례 (나머지는 /projects 상세에서 서사 노출)
+export const FEATURED_CASE_SLUGS = [
+  'kpis-dsr-api',
+  'csoweb',
+  'sales-strategy-portal',
+  'pharmkpi-exec',
+  'team-pulse',
+] as const
+
 export const AX_METHOD: AxMethodStep[] = [
   {
     title: '현업을 먼저 관찰',

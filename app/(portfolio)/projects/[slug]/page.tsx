@@ -3,6 +3,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import { ArrowLeft, ExternalLink, BookOpen } from 'lucide-react'
 import { PROJECTS, getProject } from '@/data/projects'
+import { AX_CASE_STUDIES } from '@/data/ax'
 import { NewBadge } from '@/components/portfolio/badge'
 import { ProjectThumbnail } from '@/components/portfolio/project-thumbnail'
 import { TechTags } from '@/components/portfolio/tech-tags'
@@ -27,6 +28,8 @@ export default async function ProjectPage(props: { params: Promise<{ slug: strin
   const { slug } = await props.params
   const project = getProject(slug)
   if (!project) notFound()
+
+  const caseStudy = AX_CASE_STUDIES.find((c) => c.projectSlug === slug)
 
   return (
     <article className="px-6 pb-28 pt-12">
@@ -103,6 +106,38 @@ export default async function ProjectPage(props: { params: Promise<{ slug: strin
             </div>
           </div>
         </div>
+
+        {/* 케이스 서사 — 문제 → 해결 → 결과 */}
+        {caseStudy && (
+          <section className="mt-16">
+            <p className="font-[family-name:var(--font-mono)] text-xs uppercase tracking-widest text-[var(--accent)]">
+              Case
+            </p>
+            <h2 className="mt-2 text-2xl font-bold tracking-tight text-stone-900 dark:text-stone-100">
+              문제 → 해결 → 결과
+            </h2>
+            <dl className="mt-8 space-y-6">
+              <div>
+                <dt className="text-xs font-semibold uppercase text-stone-400">Problem</dt>
+                <dd className="mt-1 text-sm leading-7 text-stone-700 dark:text-stone-300">
+                  {caseStudy.problem}
+                </dd>
+              </div>
+              <div>
+                <dt className="text-xs font-semibold uppercase text-stone-400">AX Intervention</dt>
+                <dd className="mt-1 text-sm leading-7 text-stone-700 dark:text-stone-300">
+                  {caseStudy.intervention}
+                </dd>
+              </div>
+              <div>
+                <dt className="text-xs font-semibold uppercase text-stone-400">Outcome</dt>
+                <dd className="mt-1 text-sm leading-7 text-stone-700 dark:text-stone-300">
+                  {caseStudy.outcome}
+                </dd>
+              </div>
+            </dl>
+          </section>
+        )}
 
         {/* 핵심 모듈 콜아웃 */}
         {project.featuredModule && (

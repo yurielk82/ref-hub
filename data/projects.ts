@@ -82,10 +82,10 @@ export const PROJECTS: Project[] = [
   {
     slug: 'csoweb',
     name: 'CSO Web',
-    tagline: 'B2B 제약 CSO 정산 + AI Vision EDI (v1.20)',
+    tagline: 'B2B 제약 CSO 정산 + OCR·위변조 검증 EDI (v1.20)',
     description:
-      'CSO(위탁영업조직) 수수료 정산 내역을 조회·관리하는 B2B 포털. 거래처별 수수료 정산, 승인 워크플로우에 더해 AI Vision 기반 EDI 문서 자동 검토 기능을 구축 중입니다.',
-    tech: ['Next.js 16', 'Prisma', 'Supabase Auth', 'Anthropic SDK', 'Sharp'],
+      'CSO(위탁영업조직) 수수료 정산 내역을 조회·관리하는 B2B 포털. 거래처별 수수료 정산, 승인 워크플로우에 더해 방향 보정 → 모델 선택형 OCR → 위변조 검증으로 이어지는 EDI 문서 자동 검토 기능을 구축 중입니다.',
+    tech: ['Next.js 16', 'Prisma', 'Supabase Auth', 'OCR (GPT·Claude 선택형)', 'Sharp'],
     category: 'web',
     liveUrl: 'https://cso.dvsharp.com',
     docsPath: '/csoweb',
@@ -100,13 +100,13 @@ export const PROJECTS: Project[] = [
       'Resend API와 하이웍스 SMTP 워커를 병행한 승인·업로드·메일머지 알림 발송',
       'Supabase PostgreSQL, 자체 JWT, 서버측 권한 필터링으로 일반회원은 자사 데이터만 접근',
     ],
-    highlight: 'Anthropic Vision API + EDI 문서 자동화',
+    highlight: '방향 보정 + 모델 선택형 OCR + 4단계 위변조 검증',
     year: '2026',
     badge: 'NEW',
     featuredModule: {
       name: 'EDI 검증 시스템',
       description:
-        '처방통계 이미지를 Claude Vision OCR로 자동 추출하고, ELA·EXIF·Perceptual Hash로 위변조를 탐지하며, 사람이 최종 검수하는 Human-in-the-loop 자동 검증 모듈',
+        '처방통계 이미지를 먼저 방향 보정한 뒤 OCR(환경설정으로 GPT·Claude·파인튜닝 모델 선택, 한글 처방전 정확도 위해 GPT 기본)로 추출하고, ELA·EXIF·SHA-256·지각 해시 4기법으로 위변조를 탐지하며, 위험·금액 의심 건만 사람이 최종 검수하는 Human-in-the-loop 모듈',
       path: '/edi-verification',
       emoji: '🔍',
     },

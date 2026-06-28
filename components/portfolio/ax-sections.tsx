@@ -102,7 +102,7 @@ export function AxCasesSection({ cases }: { cases: AxCase[] }) {
       <div className="mt-8 space-y-5">
         {cases.map((study, index) => (
           <FadeInUp key={study.projectSlug} delay={index * CASE_STAGGER_DELAY}>
-            <div className="overflow-hidden rounded-lg border border-stone-200 bg-white dark:border-stone-800 dark:bg-stone-900">
+            <div className="group relative overflow-hidden rounded-lg border border-stone-200 bg-white transition-colors hover:border-[var(--accent)] dark:border-stone-800 dark:bg-stone-900 dark:hover:border-[var(--accent)]">
               <div className="grid lg:grid-cols-[0.44fr_0.56fr]">
                 <div className="flex items-center justify-center border-b border-stone-200 bg-stone-50 dark:border-stone-800 dark:bg-stone-950 lg:border-b-0 lg:border-r">
                   <ProjectThumbnail project={study.project} variant="detail" />
@@ -125,10 +125,10 @@ export function AxCasesSection({ cases }: { cases: AxCase[] }) {
                     </div>
                     <Link
                       href={`/projects/${study.project.slug}`}
-                      className="inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-[var(--accent)] hover:text-[var(--accent-light)]"
+                      className="inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-[var(--accent)] after:absolute after:inset-0 after:content-[''] hover:text-[var(--accent-light)] group-hover:gap-2"
                     >
                       {study.evidenceLabel}
-                      <ArrowRight className="h-3.5 w-3.5" />
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                     </Link>
                   </div>
 

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowRight, CheckCircle2, ExternalLink, ShieldCheck } from 'lucide-react'
+import { ArrowRight, CheckCircle2, ExternalLink, Mail, ShieldCheck } from 'lucide-react'
 
 import { AX_HERO, type AxCaseStudy, type AxGrounding, type MetricDisclosure } from '@/data/ax'
 import type { Project } from '@/data/projects'
@@ -235,10 +235,17 @@ export function AxContactSection() {
           </div>
           <div className="flex shrink-0 flex-wrap gap-3">
             <a
+              href="mailto:ssmtransite@gmail.com"
+              className="inline-flex items-center gap-2 rounded-lg bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+            >
+              <Mail className="h-4 w-4" />
+              이메일 문의
+            </a>
+            <a
               href="https://www.linkedin.com/in/yurielk82"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+              className="inline-flex items-center gap-2 rounded-lg border border-stone-200 bg-white px-5 py-2.5 text-sm font-semibold text-stone-700 transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)] dark:border-stone-800 dark:bg-stone-900 dark:text-stone-300"
             >
               <ExternalLink className="h-4 w-4" />
               LinkedIn

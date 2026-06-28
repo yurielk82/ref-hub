@@ -82,13 +82,26 @@ export const AX_PILLARS: AxPillar[] = [
 export const AX_CASE_STUDIES: AxCaseStudy[] = [
   {
     projectSlug: 'pharmkpi',
-    label: 'ERP + Multi-AI Analytics',
+    label: 'BI Dashboard Replacement + Multi-AI Insight',
     problem:
-      '매출, 수금, 마진, 흡수율 지표가 ERP와 업무 문맥에 흩어져 있어 추세 파악과 보고가 개인 경험에 의존했습니다.',
+      '매출·수금·마진·흡수율 같은 핵심 지표를 한눈에 보는 시각 대시보드가 없었습니다. 지표가 ERP와 업무 문맥에 흩어져 있어, 추세 파악과 보고가 개인의 엑셀 작업과 경험에 의존했습니다.',
     intervention:
-      'Oracle ERP 데이터를 Supabase 기반 분석 흐름으로 정리하고, Claude·Gemini·GPT 분석을 붙여 KPI 해석과 리포트 생성을 자동화했습니다.',
-    outcome: '영업관리 데이터를 조회용 표에서 의사결정용 대시보드와 AI 분석 흐름으로 확장했습니다.',
+      '두 가지를 결정했습니다. ① 상용 BI(Metabase/Superset)를 도입하는 대신, 제약 지표와 업무 문맥에 맞춘 자체 시각 대시보드를 만들어 도매·CSO 매출부터 흡수율·마진까지 한 화면에 올렸습니다 — 도구를 우리 업무에 맞추는 대신 우리 업무에 맞는 도구를 만든 쪽입니다. ② AI는 매번 토큰을 쓰는 대신, 과거 월은 토큰 0 스냅샷으로 렌더하고 필요한 화면에서만 Claude·Gemini·GPT 인사이트(월간 요약·이상치 탐지·자연어 질의)를 호출하도록 비용을 규율했습니다.',
+    outcome:
+      '조회용 표에 머물던 데이터를, 의사결정용 시각 KPI 대시보드와 필요할 때만 부르는 AI 분석으로 바꿔 상용 BI 도구를 대체했습니다.',
     disclosure: 'range',
+    evidenceLabel: '프로젝트 상세',
+  },
+  {
+    projectSlug: 'sales-strategy-portal',
+    label: 'Self-Service Data Foundation',
+    problem:
+      '전략기획팀 업무를 들여다보니, 분석에 필요한 데이터(품목·거래처·담당자·병원-약국)를 매번 타부서에 요청해 받아야 했습니다. 요청·취합에 시간이 들고, 데이터가 ERP와 여러 시스템에 흩어져 있어 전략기획이 스스로 들여다볼 길이 없었습니다.',
+    intervention:
+      '진짜 원인은 "분석 기반 데이터가 한 곳에 모여 있지 않다"였습니다. 그래서 세 가지를 결정했습니다. ① pharmkpi 안에 전략기획 전용 워크스페이스를 두어 셀프서비스 분석 환경을 만들고, ② ERP와 외부 13개 API를 연결해 품목 raw·거래처·담당자·병원-약국 등 분석 기반을 한곳에 통합했습니다(ERP는 손대지 않고 읽기 전용 조회). ③ 반복되는 분석은 리포트 규칙으로 박아, 현재 3종을 우선 구현하고 넓혀 가는 중입니다.',
+    outcome:
+      '타부서에 데이터를 요청해 받던 전략기획 업무를, ERP와 13개 API로 통합된 셀프서비스 분석 기반과 리포트 규칙으로 바꿨습니다. 현재 pharmkpi 안에 있으며 향후 별도 포털로 분리할 예정입니다.',
+    disclosure: 'withheld',
     evidenceLabel: '프로젝트 상세',
   },
   {

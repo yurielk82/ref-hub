@@ -75,6 +75,7 @@ export const PROJECTS: Project[] = [
     ],
     category: 'mobile',
     liveUrl: 'https://exec.dvsharp.com',
+    screenshot: '/images/portfolio/pharmkpi-exec/hero.png',
     emoji: '📈',
     gradient: 'from-indigo-600/20 to-violet-600/20',
     features: [

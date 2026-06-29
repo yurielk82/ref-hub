@@ -70,7 +70,7 @@ export function Cover() {
         <div className="rule" />
         <p className="thesis">
           결론부터 말씀드립니다. 이 문제의 <strong>대부분은 AI를 쓰면 안 되는 영역</strong>이며,
-          AI는 단 한 곳(법 판단 보조)에만 사용합니다. 그리고 이것은 가설이 아닙니다. 같은 구조의
+          AI는 단 한 곳(법 판단 보조)에만 사용합니다. 그리고 이것은 가설이 아닙니다. 구조가 비슷한
           시스템(KPIS)을 직접 구축·운영해 본 경험을 근태에 옮긴 것입니다(근거는 06장).
         </p>
         <Summary />

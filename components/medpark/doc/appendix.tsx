@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { CASES, type CaseItem } from './cases'
 
 const sevColor = (s: CaseItem['sev']) => (s === '심각' ? 'var(--crit)' : 'var(--warn)')
@@ -180,6 +180,19 @@ function Panel({ c }: { c: CaseItem }) {
 export function AppendixSample() {
   const [activeId, setActiveId] = useState(CASES[0].id)
   const active = CASES.find((c) => c.id === activeId) ?? CASES[0]
+  const panelRef = useRef<HTMLDivElement>(null)
+
+  const onSelect = (id: string) => {
+    setActiveId(id)
+    // 모바일(단일 컬럼)에선 패널이 카드 목록 아래에 있어, 탭 시 패널로 스크롤
+    if (typeof window !== 'undefined' && window.matchMedia('(max-width: 820px)').matches) {
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      requestAnimationFrame(() =>
+        panelRef.current?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }),
+      )
+    }
+  }
+
   return (
     <div className="sbox">
       <div className="scols">
@@ -189,11 +202,13 @@ export function AppendixSample() {
               key={c.id}
               c={c}
               active={c.id === activeId}
-              onSelect={() => setActiveId(c.id)}
+              onSelect={() => onSelect(c.id)}
             />
           ))}
         </div>
-        <Panel c={active} />
+        <div ref={panelRef} style={{ scrollMarginTop: '12px' }}>
+          <Panel c={active} />
+        </div>
       </div>
     </div>
   )

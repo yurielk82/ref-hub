@@ -413,4 +413,16 @@
   .mpdoc .sechd h2 {
     font-size: 20px;
   }
+  /* 모바일에서 표 글자 키우고, 좁은 폭 확보 위해 좌우 여백 축소 */
+  .mpdoc table.doc {
+    font-size: 17px;
+  }
+  .mpdoc table.doc th {
+    padding: 9px 8px;
+    font-size: 16px;
+  }
+  .mpdoc table.doc td {
+    padding: 9px 8px;
+    font-size: 17px;
+  }
 }

@@ -423,7 +423,10 @@
   margin-top: 14px;
 }
 .mpdoc .scols {
-  display: block;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 16px;
+  align-items: start;
 }
 .mpdoc .clist {
   display: block;
@@ -472,7 +475,7 @@
   color: var(--ink-2);
 }
 .mpdoc .panel {
-  margin-top: 14px;
+  margin-top: 0;
   padding: 14px;
   border: 1px solid var(--line);
   border-radius: 6px;
@@ -678,6 +681,16 @@
   .mpdoc a[href] {
     color: inherit;
     text-decoration: underline;
+  }
+}
+
+/* 좁은 화면: 예시 화면 2분할 -> 단일 컬럼 (별첨 탭 스크롤 로직과 동일 기준) */
+@media (max-width: 820px) {
+  .mpdoc .scols {
+    grid-template-columns: 1fr;
+  }
+  .mpdoc .panel {
+    margin-top: 14px;
   }
 }
 

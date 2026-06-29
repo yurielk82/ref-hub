@@ -833,14 +833,143 @@
   }
 }
 
-@media (max-width: 820px) {
+/* 화면(웹) 전용 — 인쇄/PDF는 위 A4 양식 유지, 화면에선 종이틀 없이
+   한 흐름으로 이어지는 문서 + 시원시원한 큰 글씨. */
+@media screen {
+  .mpdoc {
+    background: var(--paper);
+    font-size: 17.5px;
+    line-height: 1.85;
+  }
   .mpdoc .sheet {
-    min-height: auto;
-    padding: 32px 22px;
-    margin: 16px auto;
+    width: auto;
+    max-width: 940px;
+    min-height: 0;
+    margin: 0 auto;
+    padding: 28px 36px;
+    background: transparent;
+    box-shadow: none;
+  }
+  .mpdoc .sheet:first-of-type {
+    margin-top: 0;
+    padding-top: 44px;
+  }
+  .mpdoc .sheet + .sheet {
+    border-top: 1px solid var(--line);
+  }
+  /* 페이지 머리말·쪽번호는 인쇄용 — 화면에선 숨김 */
+  .mpdoc .rhead,
+  .mpdoc .rfoot {
+    display: none;
+  }
+  .mpdoc .sec {
+    padding-top: 48px;
+  }
+  /* 본문·제목 키움 */
+  .mpdoc p {
+    font-size: 17.5px;
+    line-height: 1.9;
+    margin-top: 14px;
+  }
+  .mpdoc .cover .kicker {
+    font-size: 14px;
   }
   .mpdoc .cover h1 {
-    font-size: 30px;
+    font-size: 44px;
+  }
+  .mpdoc .cover .meta {
+    font-size: 15.5px;
+  }
+  .mpdoc .thesis {
+    font-size: 19px;
+    line-height: 1.78;
+  }
+  .mpdoc .summary li {
+    font-size: 16.5px;
+    line-height: 1.68;
+    padding: 12px 0;
+  }
+  .mpdoc .toc a {
+    font-size: 16px;
+    padding: 11px 0;
+  }
+  .mpdoc .q1 .t {
+    font-size: 16px;
+  }
+  .mpdoc .q1 a {
+    font-size: 15px;
+    padding: 10px 18px;
+  }
+  .mpdoc .sechd h2 {
+    font-size: 28px;
+    padding-bottom: 12px;
+  }
+  .mpdoc h3 {
+    font-size: 20.5px;
+    margin-top: 30px;
+  }
+  .mpdoc ul.li > li {
+    font-size: 17.5px;
+    line-height: 1.78;
+    margin-top: 10px;
+    padding-left: 20px;
+  }
+  .mpdoc ul.li > li::before {
+    top: 12px;
+  }
+  .mpdoc table.doc {
+    font-size: 15.5px;
+    margin-top: 20px;
+  }
+  .mpdoc table.doc th {
+    font-size: 14px;
+    padding: 11px 14px;
+  }
+  .mpdoc table.doc td {
+    padding: 10px 14px;
+  }
+  .mpdoc .qa h4 {
+    font-size: 17.5px;
+  }
+  .mpdoc .qa .b,
+  .mpdoc .qa .a {
+    font-size: 16px;
+  }
+  .mpdoc .note p {
+    font-size: 16px;
+  }
+  .mpdoc .steps .s {
+    padding: 18px;
+  }
+  .mpdoc .steps .s h4 {
+    font-size: 18px;
+  }
+  .mpdoc .steps .s .w {
+    font-size: 15px;
+  }
+  .mpdoc .road .r p {
+    font-size: 17.5px;
+    line-height: 1.78;
+  }
+}
+
+@media screen and (max-width: 820px) {
+  .mpdoc .sheet {
+    padding: 4px 20px 28px;
+  }
+  .mpdoc .sheet:first-of-type {
+    padding-top: 28px;
+  }
+  .mpdoc p,
+  .mpdoc ul.li > li,
+  .mpdoc .road .r p {
+    font-size: 16px;
+  }
+  .mpdoc .cover h1 {
+    font-size: 31px;
+  }
+  .mpdoc .sechd h2 {
+    font-size: 23px;
   }
   .mpdoc .toolbar {
     top: auto;

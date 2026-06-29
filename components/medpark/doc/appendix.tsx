@@ -207,7 +207,8 @@ export function AppendixSample() {
           ))}
         </div>
         <div ref={panelRef} style={{ scrollMarginTop: '12px' }}>
-          <Panel c={active} />
+          {/* key로 케이스 전환 시 Panel을 remount - 비제어 입력폼의 이전 값 잔류 방지 */}
+          <Panel key={active.id} c={active} />
         </div>
       </div>
     </div>

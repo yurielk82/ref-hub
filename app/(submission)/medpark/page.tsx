@@ -2,16 +2,13 @@ import type { Metadata } from 'next'
 import './medpark.css'
 import { MedparkNav } from '@/components/medpark/doc/nav'
 import { Cover } from '@/components/medpark/doc/cover'
-import { SheetBackground } from '@/components/medpark/doc/sheet-background'
-import { SheetPerspective } from '@/components/medpark/doc/sheet-perspective'
-import { SheetStructure } from '@/components/medpark/doc/sheet-structure'
-import { SheetResult } from '@/components/medpark/doc/sheet-result'
-import { SheetClosing } from '@/components/medpark/doc/sheet-closing'
-import { SheetAppendix } from '@/components/medpark/doc/sheet-appendix'
+import { Section01, Section02, Section03, Section04 } from '@/components/medpark/doc/sections-core'
+import { Section05, Section06, Section07, Section08 } from '@/components/medpark/doc/sections-flow'
+import { Section09, Section10, Section11 } from '@/components/medpark/doc/sections-impact'
 
 export const metadata: Metadata = {
   title: '메드파크 사전과제 - 근태 자동화',
-  description: 'AI를 활용한 일일 근태현황 자동화 방안 (A4 보고서)',
+  description: 'AI를 활용한 일일 근태현황 자동화 방안',
   robots: { index: false, follow: false },
 }
 
@@ -21,12 +18,17 @@ export default function MedparkAssignmentPage() {
       <MedparkNav />
       <main className="mpmain">
         <Cover />
-        <SheetPerspective />
-        <SheetStructure />
-        <SheetResult />
-        <SheetClosing />
-        <SheetBackground />
-        <SheetAppendix />
+        <Section01 />
+        <Section02 />
+        <Section03 />
+        <Section04 />
+        <Section05 />
+        <Section06 />
+        <Section07 />
+        <Section08 />
+        <Section09 />
+        <Section10 />
+        <Section11 />
       </main>
     </div>
   )

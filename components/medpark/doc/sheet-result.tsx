@@ -33,9 +33,9 @@ function CaseTable() {
 export function SheetResult() {
   return (
     <Sheet>
-      <RHead right="05 · 매일의 결과물" />
-      <section id="s05" className="sec">
-        <SecHead n="05" title="매일의 결과물 - 근무현황표" />
+      <RHead right="04 · 매일의 결과물" />
+      <section id="s04" className="sec">
+        <SecHead n="04" title="매일의 결과물 - 근무현황표" />
         <p>
           담당자가 지금 2~3시간씩 손으로 만들던 현황표가 <strong>버튼 한 번에 몇 분 만에</strong>{' '}
           나옵니다. 출퇴근 시각·실근무시간·초과근무·자리비움 누적·이상 표시가 들어가고, 각 숫자가
@@ -70,7 +70,7 @@ export function SheetResult() {
           </p>
         </div>
       </section>
-      <RFoot page="5 / 7" />
+      <RFoot page="4 / 7" />
     </Sheet>
   )
 }

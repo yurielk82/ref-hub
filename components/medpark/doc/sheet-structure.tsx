@@ -9,9 +9,9 @@ const STEPS = [
 export function SheetStructure() {
   return (
     <Sheet>
-      <RHead right="03-04 · 구조와 법률MCP" />
-      <section id="s03" className="sec">
-        <SecHead n="03" title="문제를 세 단계로 나눴습니다" />
+      <RHead right="02-03 · 구조와 법률MCP" />
+      <section id="s02" className="sec">
+        <SecHead n="02" title="문제를 세 단계로 나눴습니다" />
         <div className="steps">
           {STEPS.map(([k, name, w, who]) => (
             <div className="s" key={k}>
@@ -25,8 +25,8 @@ export function SheetStructure() {
         <p>STEP 1·2에는 AI가 들어가지 않습니다. AI는 오직 STEP 3, 법 판단 보조에만 쓰입니다.</p>
       </section>
 
-      <section id="s04" className="sec">
-        <SecHead n="04" title="AI가 정당하게 쓰이는 단 한 곳 - 법률MCP" />
+      <section id="s03" className="sec">
+        <SecHead n="03" title="AI가 정당하게 쓰이는 단 한 곳 - 법률MCP" />
         <p>
           노동법은 복잡하고 자주 바뀝니다. 그래서 <strong>항상 최신 법전을 든 보조 변호사</strong>{' '}
           역할로 AI를 씁니다. 시스템이 “이 직원, 이번 주 근무가 이상한데?” 하고 표시하면 AI가 관련
@@ -64,7 +64,7 @@ export function SheetStructure() {
           정확한 법적 근거를 챙겨 주는 역할까지이며, 최종 결정은 담당자와 노무가 내립니다.
         </p>
       </section>
-      <RFoot page="4 / 7" />
+      <RFoot page="3 / 7" />
     </Sheet>
   )
 }

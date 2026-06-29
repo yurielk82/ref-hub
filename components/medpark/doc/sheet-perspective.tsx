@@ -3,9 +3,9 @@ import { Sheet, RHead, RFoot, SecHead } from './chrome'
 export function SheetPerspective() {
   return (
     <Sheet>
-      <RHead right="02 · 핵심 관점" />
-      <section id="s02" className="sec">
-        <SecHead n="02" title="핵심 관점 - AI에 다 맡기지 않습니다" />
+      <RHead right="01 · 핵심 관점" />
+      <section id="s01" className="sec">
+        <SecHead n="01" title="핵심 관점 - AI에 다 맡기지 않습니다" />
         <p>
           근태 자동화라고 하면 흔히 “AI에게 시키자”고 생각하기 쉽습니다. 저는 다르게 봤습니다. 이
           문제의 <strong>대부분은 AI를 쓰면 안 되는 영역</strong>이고, 잘못 적용하면 오히려
@@ -58,7 +58,7 @@ export function SheetPerspective() {
           </ul>
         </div>
       </section>
-      <RFoot page="3 / 7" />
+      <RFoot page="2 / 7" />
     </Sheet>
   )
 }

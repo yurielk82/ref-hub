@@ -20,11 +20,11 @@ export default function MedparkAssignmentPage() {
     <div className="mpdoc" lang="ko">
       <Toolbar />
       <Cover />
-      <SheetBackground />
       <SheetPerspective />
       <SheetStructure />
       <SheetResult />
       <SheetClosing />
+      <SheetBackground />
       <SheetAppendix />
     </div>
   )

@@ -17,9 +17,9 @@ const ROADMAP = [
 export function SheetClosing() {
   return (
     <Sheet>
-      <RHead right="06-07 · 로드맵과 마무리" />
-      <section id="s06" className="sec">
-        <SecHead n="06" title="장점과 도입 로드맵" />
+      <RHead right="05 · 장점과 도입 로드맵" />
+      <section id="s05" className="sec">
+        <SecHead n="05" title="장점과 도입 로드맵" />
         <ul className="li">
           {BENEFITS.map(([k, v]) => (
             <li key={k}>
@@ -43,28 +43,7 @@ export function SheetClosing() {
           })}
         </div>
       </section>
-
-      <section id="s07" className="sec">
-        <SecHead n="07" title="마무리 의견" />
-        <p>
-          앞의 시스템은 “근태를 정확하고 빠르게 파악한다”는 당면 문제의 답입니다. 여기에 한 가지
-          관점을 덧붙입니다.
-        </p>
-        <p>
-          근태 관리의 방식은 결국 회사가 정하는 기조입니다. 전통적으로는 “같은 시각에 와서 같은
-          시간을 채웠는가”를 봅니다. 다만 정해진 업무량을 각자의 속도로 처리하는 사무·기획
-          직무에서는, <strong>들인 시간보다 맡은 일을 해냈는가</strong>를 함께 보는 것이 더 맞을 수
-          있습니다(반면 생산·현장 직무는 시간 기반 관리가 여전히 적합합니다).
-        </p>
-        <p>
-          어느 방향이든 전제는 하나입니다.{' '}
-          <strong>기준이 먼저 서야 하고, 기준을 재려면 정확한 측정이 먼저 있어야</strong> 합니다.
-          그래서 이 시스템은 두 의미를 가집니다 - 지금의 시간 기반 관리를 자동화·정확화하는 답인
-          동시에, <strong>회사가 향후 어떤 근태 기조를 택하더라도 그 판단의 정확한 토대</strong>가
-          됩니다.
-        </p>
-      </section>
-      <RFoot page="6 / 7" />
+      <RFoot page="5 / 7" />
     </Sheet>
   )
 }

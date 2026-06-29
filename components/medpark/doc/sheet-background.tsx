@@ -13,11 +13,10 @@ export function SheetBackground() {
     <Sheet>
       <RHead right="06-07 · 실제 경험과 마무리" />
       <section id="s06" className="sec">
-        <SecHead n="06" title="이건 가설이 아닙니다 - 실제 경험" />
+        <SecHead n="06" title="직접 구축·운영한 KPIS 경험" />
         <p>
-          앞의 설계는 책상에서 그린 그림이 아닙니다. 제가 이미 구축해 운영 중인{' '}
-          <strong>KPIS</strong>가 구조적으로 비슷한 문제였고, 지금까지의 방안은 그때의 경험을 근태에
-          옮긴 것입니다.
+          앞의 설계는 제가 이미 구축해 운영 중인 <strong>KPIS</strong> 경험에서 나왔습니다.
+          구조적으로 비슷한 문제였고, 지금까지의 방안은 그때의 경험을 근태에 옮긴 것입니다.
         </p>
         <p>
           KPIS는 ERP 값을 그대로 믿고 쓸 수 없어 담당자가 매번 엑셀로 손수 가공·검증하던

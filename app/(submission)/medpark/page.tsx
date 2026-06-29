@@ -1,45 +1,31 @@
 import type { Metadata } from 'next'
-import { PageNav } from '@/components/medpark/page-nav'
-import { GreetingSection, SampleSection } from '@/components/medpark/sections'
-import { AssignmentSection } from '@/components/medpark/assignment-section'
+import './medpark.css'
+import { Toolbar } from '@/components/medpark/doc/toolbar'
+import { Cover } from '@/components/medpark/doc/cover'
+import { SheetBackground } from '@/components/medpark/doc/sheet-background'
+import { SheetPerspective } from '@/components/medpark/doc/sheet-perspective'
+import { SheetStructure } from '@/components/medpark/doc/sheet-structure'
+import { SheetResult } from '@/components/medpark/doc/sheet-result'
+import { SheetClosing } from '@/components/medpark/doc/sheet-closing'
+import { SheetAppendix } from '@/components/medpark/doc/sheet-appendix'
 
 export const metadata: Metadata = {
-  title: '메드파크 사전과제',
-  description: 'AX 직무 사전과제 — 인사말 · 근태 자동화 설계(Q2) · 라이브 샘플',
+  title: '메드파크 사전과제 답안 — 근태 자동화',
+  description: 'AI를 활용한 일일 근태현황 자동화 방안 — Q2 답안 (A4 보고서)',
   robots: { index: false, follow: false },
 }
 
-const INK = '#15202E'
-const INK_MUTED = '#5A6573'
-const HAIRLINE = '#E3E7EC'
-
 export default function MedparkAssignmentPage() {
   return (
-    <div
-      lang="ko"
-      className="min-h-dvh font-[family-name:var(--font-sans)]"
-      style={{
-        background: '#F5F7F9',
-        color: INK,
-        printColorAdjust: 'exact',
-        WebkitPrintColorAdjust: 'exact',
-      }}
-    >
-      <PageNav />
-      <main className="mx-auto max-w-5xl px-5 pb-24 md:px-8">
-        <GreetingSection />
-        <AssignmentSection />
-        <SampleSection />
-      </main>
-      <footer style={{ borderTop: `1px solid ${HAIRLINE}` }}>
-        <p
-          className="mx-auto max-w-5xl px-5 py-8 text-[14px] leading-[1.8] md:px-8"
-          style={{ color: INK_MUTED }}
-        >
-          본 페이지의 모든 직원명·사번·시각·수치는 100% 합성·가명 예시 데이터입니다. 실제 직원
-          정보나 실데이터, 외부 시스템 실연동은 포함되어 있지 않습니다.
-        </p>
-      </footer>
+    <div className="mpdoc" lang="ko">
+      <Toolbar />
+      <Cover />
+      <SheetBackground />
+      <SheetPerspective />
+      <SheetStructure />
+      <SheetResult />
+      <SheetClosing />
+      <SheetAppendix />
     </div>
   )
 }

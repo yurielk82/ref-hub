@@ -96,7 +96,7 @@
 }
 .mpnav .pdf {
   width: 100%;
-  margin-top: 22px;
+  margin-bottom: 18px;
   padding: 8px 12px;
   border: 1px solid var(--line);
   border-radius: 6px;
@@ -738,12 +738,26 @@
     border-bottom: 1px solid var(--line);
     background: var(--paper);
   }
-  .mpnav .brand,
-  .mpnav .pdf {
+  .mpnav .brand {
     display: none;
+  }
+  .mpnav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .mpnav .pdf {
+    flex: none;
+    order: 2;
+    width: auto;
+    margin-bottom: 0;
+    padding: 6px 12px;
+    font-size: 12.5px;
+    white-space: nowrap;
   }
   .mpnav ul {
     display: flex;
+    flex: 1 1 auto;
     gap: 4px;
     overflow-x: auto;
   }

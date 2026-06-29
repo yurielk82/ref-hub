@@ -48,6 +48,9 @@ export function MedparkNav() {
         <br />
         근태 자동화 방안
       </div>
+      <button type="button" className="pdf" onClick={print} title="인쇄 / PDF로 저장">
+        ⎙ 인쇄 · PDF 저장
+      </button>
       <ul>
         {NAV.map((e) => (
           <li key={e.id}>
@@ -58,9 +61,6 @@ export function MedparkNav() {
           </li>
         ))}
       </ul>
-      <button type="button" className="pdf" onClick={print} title="PDF로 저장">
-        ↓ PDF로 저장
-      </button>
     </nav>
   )
 }

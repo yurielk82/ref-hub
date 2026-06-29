@@ -7,8 +7,8 @@ export function SheetPerspective() {
       <section id="s02" className="sec">
         <SecHead n="02" title="핵심 관점 — AI에 다 맡기지 않습니다" />
         <p>
-          근태 자동화라고 하면 흔히 “AI에게 시키자”고 생각하기 쉽습니다. 저는 반대로 봤습니다. 이
-          문제의 <strong>대부분은 AI를 쓰면 안 되는 영역</strong>이고, 잘못 갖다 대면 더
+          근태 자동화라고 하면 흔히 “AI에게 시키자”고 생각하기 쉽습니다. 저는 다르게 봤습니다. 이
+          문제의 <strong>대부분은 AI를 쓰면 안 되는 영역</strong>이고, 잘못 적용하면 오히려
           부정확해집니다.
         </p>
         <div className="qa">
@@ -17,8 +17,8 @@ export function SheetPerspective() {
           </h4>
           <p className="b">
             출입 태그를 안 찍었거나 결재를 안 올렸을 때 AI가 “아마 외출이었겠지” 하고 채우면 그
-            기록은 가짜가 됩니다. 그 가짜로 월급과 주 52시간을 계산하니, 분쟁이 나면 근거가 통째로
-            무너집니다.
+            기록은 사실이 아니게 됩니다. 그 잘못된 기록으로 월급과 주 52시간을 계산하면, 분쟁이 나면
+            근거가 통째로 무너집니다.
           </p>
           <p className="a">AI가 메우는 게 아니라, 사람이 직접 찍게 만듭니다.</p>
         </div>

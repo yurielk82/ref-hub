@@ -9,7 +9,7 @@ export function Sheet({ children }: { children: ReactNode }) {
 export function RHead({ right }: { right: string }) {
   return (
     <div className="rhead">
-      <span>Q2 답안 · 근태 자동화 방안</span>
+      <span>메드파크 사전과제 · 근태 자동화 방안</span>
       <span>{right}</span>
     </div>
   )

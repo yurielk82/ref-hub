@@ -1,7 +1,7 @@
 import { Sheet, RFoot } from './chrome'
 
 const TOC = [
-  { n: '01', t: '이미 풀어 본 문제입니다', href: '#s01' },
+  { n: '01', t: '같은 구조를 직접 풀어 본 경험', href: '#s01' },
   { n: '02', t: '핵심 관점 — AI에 다 맡기지 않습니다', href: '#s02' },
   { n: '03', t: '문제를 세 단계로 나눴습니다', href: '#s03' },
   { n: '04', t: 'AI가 정당하게 쓰이는 단 한 곳 — 법률MCP', href: '#s04' },
@@ -58,7 +58,7 @@ export function Cover() {
   return (
     <Sheet>
       <div className="cover">
-        <div className="kicker">메드파크 사전과제 · Q2 답안</div>
+        <div className="kicker">메드파크 사전과제</div>
         <h1>
           AI를 활용한
           <br />
@@ -71,7 +71,7 @@ export function Cover() {
         <p className="thesis">
           결론부터 말씀드립니다. 이 문제의 <strong>대부분은 AI를 쓰면 안 되는 영역</strong>이며,
           AI는 단 한 곳(법 판단 보조)에만 사용합니다. 이미 같은 구조의 시스템(KPIS)을 직접
-          구축·운영해 본 경험을 근태에 그대로 옮기는 이야기입니다.
+          구축·운영해 본 경험을 근태에 적용하는 방안입니다.
         </p>
         <Summary />
         <Toc />

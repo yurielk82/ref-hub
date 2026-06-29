@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import './medpark.css'
-import { Toolbar } from '@/components/medpark/doc/toolbar'
+import { MedparkNav } from '@/components/medpark/doc/nav'
 import { Cover } from '@/components/medpark/doc/cover'
 import { SheetBackground } from '@/components/medpark/doc/sheet-background'
 import { SheetPerspective } from '@/components/medpark/doc/sheet-perspective'
@@ -18,14 +18,16 @@ export const metadata: Metadata = {
 export default function MedparkAssignmentPage() {
   return (
     <div className="mpdoc" lang="ko">
-      <Toolbar />
-      <Cover />
-      <SheetPerspective />
-      <SheetStructure />
-      <SheetResult />
-      <SheetClosing />
-      <SheetBackground />
-      <SheetAppendix />
+      <MedparkNav />
+      <main className="mpmain">
+        <Cover />
+        <SheetPerspective />
+        <SheetStructure />
+        <SheetResult />
+        <SheetClosing />
+        <SheetBackground />
+        <SheetAppendix />
+      </main>
     </div>
   )
 }

@@ -29,9 +29,98 @@
   line-height: 1.85;
   word-break: keep-all;
   -webkit-font-smoothing: antialiased;
+
+  /* 좌측 사이드바 목차 + 우측 본문 */
+  display: flex;
+  align-items: flex-start;
 }
 .mpdoc * {
   box-sizing: border-box;
+}
+
+/* 좌측 사이드바 목차 (Nextra 매뉴얼 톤) */
+.mpnav {
+  position: sticky;
+  top: 0;
+  flex: none;
+  width: 280px;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 32px 22px 24px;
+  border-right: 1px solid var(--line);
+}
+.mpnav .brand {
+  margin-bottom: 18px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+.mpnav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.mpnav a {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  padding: 7px 10px;
+  border-left: 2px solid transparent;
+  border-radius: 6px;
+  font-size: 14.5px;
+  line-height: 1.4;
+  color: var(--ink-2);
+  text-decoration: none;
+}
+.mpnav a:hover {
+  background: var(--ac-tint);
+  color: var(--ink);
+}
+.mpnav a.on {
+  border-left-color: var(--ac);
+  background: var(--ac-tint);
+  color: var(--ac-2);
+  font-weight: 700;
+}
+.mpnav .n {
+  flex: none;
+  min-width: 26px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+.mpnav a.on .n {
+  color: var(--ac);
+}
+.mpnav .pdf {
+  width: 100%;
+  margin-top: 22px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  font: inherit;
+  font-size: 13.5px;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+.mpnav .pdf:hover {
+  border-color: var(--ac);
+  color: var(--ac);
+}
+
+/* 우측 본문 컬럼 */
+.mpmain {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* 사이드바 점프 시 제목이 상단에 가리지 않도록 */
+.mpdoc .sec,
+.mpdoc #mptop {
+  scroll-margin-top: 72px;
 }
 .mpdoc .mono {
   font-family: 'JetBrains Mono', ui-monospace, monospace;
@@ -115,38 +204,6 @@
 }
 .mpdoc .summary li strong {
   font-weight: 700;
-}
-
-/* 목차 - 단순 목록 */
-.mpdoc .toc {
-  margin-top: 22px;
-  border: none;
-}
-.mpdoc .toc a {
-  display: flex;
-  gap: 8px;
-  align-items: baseline;
-  padding: 5px 0;
-  border: none;
-  text-decoration: none;
-  color: var(--ink-2);
-  font-size: 15.5px;
-}
-.mpdoc .toc a:hover {
-  color: var(--ac);
-  text-decoration: underline;
-}
-.mpdoc .toc .tn {
-  flex: none;
-  min-width: 30px;
-  color: var(--ink-3);
-  font-variant-numeric: tabular-nums;
-}
-.mpdoc .toc .tt {
-  font-weight: 500;
-}
-.mpdoc .toc .dots {
-  display: none;
 }
 
 /* Q1 줄 */
@@ -639,36 +696,15 @@
   cursor: default;
 }
 
-/* 인쇄·PDF 도구막대 */
-.mpdoc .toolbar {
-  position: fixed;
-  top: 14px;
-  right: 14px;
-  z-index: 10;
-  display: flex;
-  gap: 8px;
-}
-.mpdoc .toolbar button {
-  padding: 7px 12px;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  background: #fff;
-  color: var(--ink-2);
-  font: inherit;
-  font-size: 13px;
-  cursor: pointer;
-}
-.mpdoc .toolbar button:hover {
-  border-color: var(--ac);
-  color: var(--ac);
-}
-
-/* 인쇄 - 자연스러운 흐름으로 페이지네이션 (A4 강제 분할 없음) */
+/* 인쇄 - 사이드바 숨기고 본문만 자연스러운 흐름으로 (A4 강제 분할 없음) */
 @page {
   margin: 18mm;
 }
 @media print {
-  .mpdoc .toolbar {
+  .mpdoc {
+    display: block;
+  }
+  .mpnav {
     display: none !important;
   }
   .mpdoc .sheet {
@@ -678,9 +714,51 @@
   .mpdoc .sec {
     break-inside: avoid;
   }
+  .mpdoc h2,
+  .mpdoc h3 {
+    break-after: avoid;
+  }
   .mpdoc a[href] {
     color: inherit;
     text-decoration: underline;
+  }
+}
+
+/* 좁은 화면: 좌측 사이드바 -> 상단 가로 스크롤 바 */
+@media (max-width: 960px) {
+  .mpdoc {
+    display: block;
+  }
+  .mpnav {
+    z-index: 20;
+    width: auto;
+    height: auto;
+    padding: 10px 14px;
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+    background: var(--paper);
+  }
+  .mpnav .brand,
+  .mpnav .pdf {
+    display: none;
+  }
+  .mpnav ul {
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+  }
+  .mpnav li {
+    flex: none;
+  }
+  .mpnav a {
+    padding: 6px 10px;
+    border-left: none;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+  }
+  .mpnav a.on {
+    border-left: none;
+    border-bottom-color: var(--ac);
   }
 }
 

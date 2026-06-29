@@ -5,8 +5,8 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: {
-    default: 'Ref Hub — 개발자 포트폴리오',
-    template: '%s — Ref Hub',
+    default: 'Ref Hub - 개발자 포트폴리오',
+    template: '%s - Ref Hub',
   },
   description: '제약·물류·라이브커머스 도메인 엔터프라이즈 웹 솔루션 포트폴리오',
   icons: {
@@ -18,9 +18,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ko" dir="ltr" suppressHydrationWarning>
       <body className="antialiased">
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   )

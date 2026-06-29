@@ -10,7 +10,7 @@ import { SheetClosing } from '@/components/medpark/doc/sheet-closing'
 import { SheetAppendix } from '@/components/medpark/doc/sheet-appendix'
 
 export const metadata: Metadata = {
-  title: { absolute: '메드파크 사전과제 - 근태 자동화' },
+  title: '메드파크 사전과제 - 근태 자동화',
   description: 'AI를 활용한 일일 근태현황 자동화 방안 (A4 보고서)',
   robots: { index: false, follow: false },
 }

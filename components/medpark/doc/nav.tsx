@@ -16,6 +16,7 @@ const NAV = [
   { id: 's09', n: '09', t: '기대 효과' },
   { id: 's10', n: '10', t: 'KPIS 경험' },
   { id: 's11', n: '11', t: '마무리 의견' },
+  { id: 'sap', n: '별첨', t: '예시 화면' },
 ] as const
 
 function useActiveSection(): string {

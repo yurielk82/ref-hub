@@ -426,3 +426,248 @@
     font-size: 17px;
   }
 }
+
+/* ===== 별첨(부록) 예시 화면 - 복원 =====
+   medpark.css 800줄판에서 분리, 11섹션 문서 하단 예시 목업용 */
+/* 별첨 - 예시 화면 */
+.mpdoc .legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin: 12px 0;
+  font-size: 14px;
+  color: var(--ink-2);
+}
+.mpdoc .fcap {
+  margin-top: 12px;
+  font-size: 14px;
+  color: var(--ink-3);
+}
+.mpdoc .sbox {
+  margin-top: 14px;
+}
+.mpdoc .scols {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+.mpdoc .clist {
+  display: block;
+}
+.mpdoc .ccard {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.mpdoc .ccard:first-child {
+  margin-top: 0;
+}
+.mpdoc .ccard.active {
+  border-color: var(--ac);
+  border-left-width: 3px;
+}
+.mpdoc .ccard .top {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: baseline;
+}
+.mpdoc .ccard .nm {
+  font-weight: 700;
+}
+.mpdoc .ccard .cat {
+  margin-left: 6px;
+  font-size: 13.5px;
+  color: var(--ink-3);
+}
+.mpdoc .ccard .sev {
+  flex: none;
+  font-size: 13px;
+  font-weight: 600;
+}
+.mpdoc .ccard .meas {
+  margin: 6px 0 0;
+  font-size: 13.5px;
+  color: var(--ink-2);
+}
+.mpdoc .panel {
+  margin-top: 0;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+.mpdoc .phead {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: baseline;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+.mpdoc .phead .tt {
+  font-weight: 700;
+}
+.mpdoc .phead .ss {
+  margin-left: 6px;
+  font-size: 13.5px;
+  color: var(--ink-3);
+}
+.mpdoc .phead .kind {
+  flex: none;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+.mpdoc .track {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+.mpdoc .th {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13.5px;
+  font-weight: 700;
+}
+.mpdoc .th .lk {
+  font-weight: 500;
+  color: var(--ink-3);
+}
+.mpdoc .metarow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+.mpdoc .metarow .k {
+  font-size: 12.5px;
+  color: var(--ink-3);
+}
+.mpdoc .metarow .v {
+  margin-top: 2px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  color: var(--ink);
+}
+.mpdoc .timerow {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  border-top: 1px solid var(--line-2);
+  font-size: 14px;
+  color: var(--ink-2);
+}
+.mpdoc .timerow .t {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--ink);
+}
+.mpdoc .metarow + div {
+  margin-top: 6px;
+}
+.mpdoc label.fl {
+  display: block;
+  margin: 8px 0 4px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.mpdoc select.fl,
+.mpdoc textarea.fl {
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 7px 10px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: #fff;
+  font: inherit;
+  font-size: 14.5px;
+  color: var(--ink-2);
+}
+.mpdoc .approval {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  font-size: 13.5px;
+  color: var(--ink-2);
+}
+.mpdoc .approval .step {
+  padding: 3px 8px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+.mpdoc .legal {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: none;
+}
+.mpdoc .legal .lh {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--warn);
+}
+.mpdoc .legal .ref {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 2px 6px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+.mpdoc .legal .lt {
+  margin: 8px 0 0;
+  font-size: 14.5px;
+  line-height: 1.7;
+}
+.mpdoc .legal .disc {
+  margin: 8px 0 0;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--ink-3);
+}
+.mpdoc .pfoot2 {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+}
+.mpdoc .pfoot2 p {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--ink-3);
+}
+.mpdoc .btn {
+  padding: 7px 14px;
+  border: 1px solid var(--ac);
+  border-radius: 6px;
+  background: var(--ac);
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+.mpdoc .btn:disabled {
+  border-color: var(--line);
+  background: #fff;
+  color: var(--ink-3);
+  cursor: default;
+}
+
+@media (max-width: 820px) {
+  .mpdoc .scols {
+    grid-template-columns: 1fr;
+  }
+  .mpdoc .panel {
+    margin-top: 14px;
+  }
+}

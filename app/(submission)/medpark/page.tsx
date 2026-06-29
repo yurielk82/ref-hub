@@ -5,6 +5,7 @@ import { Cover } from '@/components/medpark/doc/cover'
 import { Section01, Section02, Section03, Section04 } from '@/components/medpark/doc/sections-core'
 import { Section05, Section06, Section07, Section08 } from '@/components/medpark/doc/sections-flow'
 import { Section09, Section10, Section11 } from '@/components/medpark/doc/sections-impact'
+import { AppendixSection } from '@/components/medpark/doc/appendix-section'
 
 export const metadata: Metadata = {
   title: '메드파크 사전과제 - 근태 자동화',
@@ -29,6 +30,7 @@ export default function MedparkAssignmentPage() {
         <Section09 />
         <Section10 />
         <Section11 />
+        <AppendixSection />
       </main>
     </div>
   )

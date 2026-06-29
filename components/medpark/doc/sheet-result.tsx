@@ -11,7 +11,7 @@ const CASES5 = [
 function CaseTable() {
   return (
     <table className="doc">
-      <caption>표 2. 자동 감지하는 다섯 가지 이상 케이스</caption>
+      <caption>표 2. 자동 감지하는 주요 이상 유형</caption>
       <thead>
         <tr>
           <th style={{ width: '150px' }}>유형</th>

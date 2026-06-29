@@ -5,7 +5,7 @@ export function SheetPerspective() {
     <Sheet>
       <RHead right="02 · 핵심 관점" />
       <section id="s02" className="sec">
-        <SecHead n="02" title="핵심 관점 — AI에 다 맡기지 않습니다" />
+        <SecHead n="02" title="핵심 관점 - AI에 다 맡기지 않습니다" />
         <p>
           근태 자동화라고 하면 흔히 “AI에게 시키자”고 생각하기 쉽습니다. 저는 다르게 봤습니다. 이
           문제의 <strong>대부분은 AI를 쓰면 안 되는 영역</strong>이고, 잘못 적용하면 오히려
@@ -36,7 +36,7 @@ export function SheetPerspective() {
           </p>
         </div>
         <div className="note">
-          <div className="h">역할 경계 — 시스템은 사실을 만들지 않습니다</div>
+          <div className="h">역할 경계 - 시스템은 사실을 만들지 않습니다</div>
           <ul className="li">
             <li>
               <span>

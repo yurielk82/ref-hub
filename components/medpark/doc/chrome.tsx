@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 
-const DOC_TITLE = '메드파크 사전과제 — 근태 자동화 방안'
+const DOC_TITLE = '메드파크 사전과제 - 근태 자동화 방안'
 
 export function Sheet({ children }: { children: ReactNode }) {
   return <div className="sheet">{children}</div>

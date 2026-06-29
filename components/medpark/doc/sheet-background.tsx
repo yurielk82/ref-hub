@@ -24,7 +24,7 @@ export function SheetBackground() {
           업무였습니다. 이것을 다섯 단계에 걸쳐 사람 손과 실수를 걷어내며 자동화했습니다.
         </p>
         <table className="doc">
-          <caption>표 1. KPIS 자동화 단계 — 현장 속도에 맞춰 단계적으로</caption>
+          <caption>표 1. KPIS 자동화 단계 - 현장 속도에 맞춰 단계적으로</caption>
           <thead>
             <tr>
               <th style={{ width: '48px' }}>단계</th>
@@ -47,7 +47,7 @@ export function SheetBackground() {
           <strong>현장이 소화할 수 있는 속도에 맞춰 단계적으로</strong> 진행해야 한다는 점입니다.
           2차의 VBA 방식이 직원들에게 어려워, 3차에서는 오히려 더 단순한 방식으로 되돌리기도
           했습니다. 둘째, 마지막 단계의 핵심은 속도가 아니라 <strong>무결성 검증</strong>이라는
-          점입니다. 근태도 구조는 같습니다 — 원본 기록(ADT캡스 출입·더존 전자결재)을 자동으로 모아
+          점입니다. 근태도 구조는 같습니다 - 원본 기록(ADT캡스 출입·더존 전자결재)을 자동으로 모아
           정해진 규칙으로 무결성을 검증한 뒤, 현황표로 정리하면 됩니다.
         </p>
       </section>

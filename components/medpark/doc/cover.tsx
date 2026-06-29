@@ -2,13 +2,13 @@ import { Sheet, RFoot } from './chrome'
 
 const TOC = [
   { n: '01', t: '같은 구조를 직접 풀어 본 경험', href: '#s01' },
-  { n: '02', t: '핵심 관점 — AI에 다 맡기지 않습니다', href: '#s02' },
+  { n: '02', t: '핵심 관점 - AI에 다 맡기지 않습니다', href: '#s02' },
   { n: '03', t: '문제를 세 단계로 나눴습니다', href: '#s03' },
-  { n: '04', t: 'AI가 정당하게 쓰이는 단 한 곳 — 법률MCP', href: '#s04' },
-  { n: '05', t: '매일의 결과물 — 근무현황표', href: '#s05' },
+  { n: '04', t: 'AI가 정당하게 쓰이는 단 한 곳 - 법률MCP', href: '#s04' },
+  { n: '05', t: '매일의 결과물 - 근무현황표', href: '#s05' },
   { n: '06', t: '장점과 도입 로드맵', href: '#s06' },
   { n: '07', t: '마무리 의견', href: '#s07' },
-  { n: '별첨', t: '예시 화면 — 특이사항 처리 흐름', href: '#sap' },
+  { n: '별첨', t: '예시 화면 - 특이사항 처리 흐름', href: '#sap' },
 ]
 
 function Summary() {
@@ -26,7 +26,7 @@ function Summary() {
         <li>
           <span>
             <strong>AI는 단 한 곳, 법 판단 보조.</strong> 법률MCP로 법제처 현행 법령을 실시간 조회해
-            근거를 붙입니다 — 판정이 아니라 근거 제시까지.
+            근거를 붙입니다 - 판정이 아니라 근거 제시까지.
           </span>
         </li>
         <li>
@@ -77,7 +77,7 @@ export function Cover() {
         <Toc />
         <div className="q1">
           <span className="t">
-            <b>Q1.</b> AI 기반 업무 시스템 구축·운영 — 별도 포트폴리오로 갈음합니다.
+            <b>Q1.</b> AI 기반 업무 시스템 구축·운영 - 별도 포트폴리오로 갈음합니다.
           </span>
           <a href="https://ref.dvsharp.com" target="_blank" rel="noopener noreferrer">
             포트폴리오 ↗

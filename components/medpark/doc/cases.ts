@@ -1,4 +1,4 @@
-// 별첨 예시 화면 데이터 — 100% 합성·가명. Claude Design 시안 CASES 포팅.
+// 별첨 예시 화면 데이터 - 100% 합성·가명. Claude Design 시안 CASES 포팅.
 
 export type Severity = '심각' | '주의'
 export type Kind = '입력형' | '분석형'
@@ -12,7 +12,7 @@ export interface CaseItem {
   readonly meas: string
   readonly sabun: string
   readonly date: string
-  /** [라벨, 시각] — 시스템 측정(잠금) 트랙 */
+  /** [라벨, 시각] - 시스템 측정(잠금) 트랙 */
   readonly times: readonly (readonly [string, string])[]
   readonly ref: string
   readonly legal: string
@@ -27,7 +27,7 @@ export const CASES: readonly CaseItem[] = [
     cat: '결재 불일치',
     sev: '심각',
     kind: '입력형',
-    meas: '외출 결재 없음 · 출입 14:03–15:38 (1h35m)',
+    meas: '외출 결재 없음 · 출입 14:03-15:38 (1h35m)',
     sabun: 'M-2041',
     date: D_THU,
     times: [
@@ -53,7 +53,7 @@ export const CASES: readonly CaseItem[] = [
       ['당일 출입 기록', '없음'],
       ['전자결재', '없음'],
     ],
-    ref: '근로기준법 — 무단결근 판단',
+    ref: '근로기준법 - 무단결근 판단',
     legal:
       '무단결근은 출입·결재 부재만으로 단정할 수 없습니다. 시스템이 본인에게 확인을 요청하고, 사유 확인 후 담당자가 판단합니다.',
   },
@@ -101,7 +101,7 @@ export const CASES: readonly CaseItem[] = [
     cat: '심야 출입',
     sev: '주의',
     kind: '분석형',
-    meas: '23:47 출입 · 평소 18–19시 퇴근 패턴 이탈',
+    meas: '23:47 출입 · 평소 18-19시 퇴근 패턴 이탈',
     sabun: 'M-2207',
     date: D_THU,
     times: [
@@ -120,7 +120,7 @@ export const CASES: readonly CaseItem[] = [
     cat: '휴일근무 미신청',
     sev: '주의',
     kind: '입력형',
-    meas: '토 09:05–13:10 출입 · 결재 없음',
+    meas: '토 09:05-13:10 출입 · 결재 없음',
     sabun: 'M-1842',
     date: '2026-06-27 (토)',
     times: [

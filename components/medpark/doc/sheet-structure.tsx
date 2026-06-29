@@ -9,7 +9,7 @@ const STEPS = [
 export function SheetStructure() {
   return (
     <Sheet>
-      <RHead right="03–04 · 구조와 법률MCP" />
+      <RHead right="03-04 · 구조와 법률MCP" />
       <section id="s03" className="sec">
         <SecHead n="03" title="문제를 세 단계로 나눴습니다" />
         <div className="steps">
@@ -26,7 +26,7 @@ export function SheetStructure() {
       </section>
 
       <section id="s04" className="sec">
-        <SecHead n="04" title="AI가 정당하게 쓰이는 단 한 곳 — 법률MCP" />
+        <SecHead n="04" title="AI가 정당하게 쓰이는 단 한 곳 - 법률MCP" />
         <p>
           노동법은 복잡하고 자주 바뀝니다. 그래서 <strong>항상 최신 법전을 든 보조 변호사</strong>{' '}
           역할로 AI를 씁니다. 시스템이 “이 직원, 이번 주 근무가 이상한데?” 하고 표시하면 AI가 관련
@@ -42,19 +42,19 @@ export function SheetStructure() {
         <ul className="li">
           <li>
             <span>
-              <strong>정확함</strong> — 근로기준법 조항·대법원 판례를 원문 그대로 인용합니다. 지어낼
+              <strong>정확함</strong> - 근로기준법 조항·대법원 판례를 원문 그대로 인용합니다. 지어낼
               여지가 없습니다.
             </span>
           </li>
           <li>
             <span>
-              <strong>항상 최신</strong> — 법이 개정되면 공식 DB가 갱신되고, 시스템은 자동으로 최신
+              <strong>항상 최신</strong> - 법이 개정되면 공식 DB가 갱신되고, 시스템은 자동으로 최신
               기준을 따릅니다.
             </span>
           </li>
           <li>
             <span>
-              <strong>저렴함</strong> — 이상이 발견된 건에만 조회합니다. 매일 모든 직원을 AI로
+              <strong>저렴함</strong> - 이상이 발견된 건에만 조회합니다. 매일 모든 직원을 AI로
               돌리지 않아 운영비(토큰)가 거의 없습니다.
             </span>
           </li>

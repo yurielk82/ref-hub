@@ -91,7 +91,7 @@ export function Cover() {
   return (
     <Sheet>
       <div className="cover" id="mptop">
-        <div className="kicker">메드파크 사전과제</div>
+        <div className="kicker">메드파크 과제</div>
         <h1>
           AI를 활용한
           <br />

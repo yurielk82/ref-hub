@@ -48,7 +48,7 @@ export function MedparkNav() {
   return (
     <nav className="mpnav" aria-label="목차">
       <div className="brand">
-        메드파크 사전과제
+        메드파크 과제
         <br />
         근태 자동화 방안
       </div>

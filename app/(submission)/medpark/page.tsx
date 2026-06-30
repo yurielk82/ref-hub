@@ -8,7 +8,7 @@ import { Section09, Section10, Section11 } from '@/components/medpark/doc/sectio
 import { AppendixSection } from '@/components/medpark/doc/appendix-section'
 
 export const metadata: Metadata = {
-  title: '메드파크 사전과제 - 근태 자동화',
+  title: '메드파크 과제 - 근태 자동화',
   description: 'AI를 활용한 일일 근태현황 자동화 방안',
   robots: { index: false, follow: false },
 }

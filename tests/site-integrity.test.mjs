@@ -6,6 +6,16 @@ import { pathToFileURL } from 'node:url'
 
 const ROOT = path.resolve(import.meta.dirname, '..')
 
+// PROJECTS is assembled in data/projects.ts from these cohesive registry
+// modules; read them together so text-based assertions see every project block.
+const PROJECT_REGISTRY_FILES = [
+  path.join(ROOT, 'data', 'projects', 'delivery.ts'),
+  path.join(ROOT, 'data', 'projects', 'tooling.ts'),
+]
+function readProjectData() {
+  return PROJECT_REGISTRY_FILES.map((file) => readFileSync(file, 'utf8')).join('\n')
+}
+
 const SYNCED_PROJECTS = [
   { repo: 'csoweb', content: 'csoweb' },
   { repo: 'kpis-dsr-api', content: 'kpis-dsr-api' },
@@ -72,7 +82,7 @@ test('AX resume home route and data source are present', () => {
 
 test('AX case studies reference existing portfolio projects', () => {
   const axData = readFileSync(path.join(ROOT, 'data', 'ax.ts'), 'utf8')
-  const projectData = readFileSync(path.join(ROOT, 'data', 'projects.ts'), 'utf8')
+  const projectData = readProjectData()
   const axSlugs = [...axData.matchAll(/projectSlug:\s*'([^']+)'/g)].map(
     (match) => match[1]
   )
@@ -88,7 +98,7 @@ test('AX case studies reference existing portfolio projects', () => {
 
 test('AX case studies are ordered by AX relevance and delivery proof', () => {
   const axData = readFileSync(path.join(ROOT, 'data', 'ax.ts'), 'utf8')
-  const projectData = readFileSync(path.join(ROOT, 'data', 'projects.ts'), 'utf8')
+  const projectData = readProjectData()
   const axSlugs = [...axData.matchAll(/projectSlug:\s*'([^']+)'/g)].map(
     (match) => match[1]
   )
@@ -128,7 +138,7 @@ test('AX case studies are ordered by AX relevance and delivery proof', () => {
 })
 
 test('portfolio project summaries are AX-current and substantial', () => {
-  const projectData = readFileSync(path.join(ROOT, 'data', 'projects.ts'), 'utf8')
+  const projectData = readProjectData()
   const projectBlocks = [...projectData.matchAll(/(\{\n\s+slug:\s*'([^']+)'[\s\S]*?\n\s+\},)/g)]
 
   assert.ok(projectBlocks.length > 0, 'portfolio projects should not be empty')
@@ -172,7 +182,7 @@ test('ERP Spec portfolio screenshot uses the barcode relationship graph image', 
   const pngSignature = image.subarray(0, 8).toString('hex')
   const width = image.readUInt32BE(16)
   const height = image.readUInt32BE(20)
-  const projectData = readFileSync(path.join(ROOT, 'data', 'projects.ts'), 'utf8')
+  const projectData = readProjectData()
 
   assert.match(projectData, /screenshot: '\/images\/portfolio\/erp-spec\/barcode-graph\.png'/)
   assert.equal(pngSignature, '89504e470d0a1a0a', 'ERP Spec screenshot should be a PNG image')
@@ -182,7 +192,7 @@ test('ERP Spec portfolio screenshot uses the barcode relationship graph image', 
 })
 
 test('portfolio uses the strongest screenshot for each project context', () => {
-  const projectData = readFileSync(path.join(ROOT, 'data', 'projects.ts'), 'utf8')
+  const projectData = readProjectData()
   const pharmKpiLogin = readFileSync(path.join(ROOT, 'public', 'images', 'portfolio', 'pharmkpi', 'hero.png'))
   const pharmKpiSignature = pharmKpiLogin.subarray(0, 8).toString('hex')
 

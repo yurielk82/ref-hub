@@ -94,22 +94,36 @@ test('AX case studies are ordered by AX relevance and delivery proof', () => {
   )
   const erpSpecBlock = projectData.match(/\{\n\s+slug:\s*'erp-spec'[\s\S]*?\n\s+\},/)?.[0] ?? ''
   const harnessBlock = projectData.match(/\{\n\s+slug:\s*'claude-dotfiles'[\s\S]*?\n\s+\},/)?.[0] ?? ''
+  // All portfolio projects are AX case studies; lead with the highest-relevance
+  // ones (pharmkpi line, kpis/csoweb/erp-spec/claude-dotfiles) and keep the
+  // delivery order set in data/ax.ts.
   const expectedAxOrder = [
     'pharmkpi',
+    'sales-strategy-portal',
+    'pharmkpi-exec',
     'kpis-dsr-api',
     'csoweb',
     'erp-spec',
     'claude-dotfiles',
+    'har-eval',
+    'ev-motor-reliability',
+    'srt',
+    'team-pulse',
+    'naver-place-collector',
+    'apinfy-lab',
   ]
 
   assert.deepEqual(axSlugs, expectedAxOrder, 'AX case studies should lead with highest AX relevance')
   assert.match(axData, /인수사 IT팀/, 'ERP Spec AX case should name the acquirer IT-team context')
   assert.match(axData, /785개 테이블/, 'ERP Spec AX case should show ERP analysis scale')
   assert.match(erpSpecBlock, /인수사 IT팀|ERP 구조 분석/, 'ERP Spec project copy should reflect the AX positioning')
-  assert.match(axData, /Claude\/Codex AX Delivery Harness/, 'AX page should frame the final case as a Claude/Codex harness')
+  // Intent-based (not exact taglines): the harness case is framed as a
+  // Claude/Codex agentic harness, carries cost/measurement discipline, and the
+  // skills philosophy. Per workspace test rules (avoid snapshot string pins).
+  assert.match(axData, /Agentic Harness|Claude Code·Codex/, 'AX page should frame the final case as a Claude/Codex agentic harness')
   assert.match(harnessBlock, /Claude\/Codex|Codex/, 'Harness project copy should include Codex')
-  assert.match(axData + harnessBlock, /코드는 싸지 않다/, 'Harness copy should carry the core cost-of-code message')
-  assert.match(axData + harnessBlock, /mattpocock\/skills|작은 스킬/, 'Harness copy should reflect the skills philosophy reference')
+  assert.match(axData + harnessBlock, /측정으로 만들 것과 안 만들|빌드 시간/, 'Harness copy should carry the cost/measurement-discipline message')
+  assert.match(axData + harnessBlock, /온디맨드 스킬|스킬로 묶/, 'Harness copy should reflect the skills philosophy')
   assert.match(axData + harnessBlock, /RAG 기억|wiki|그래프/, 'Harness copy should explain persistent RAG-style memory')
 })
 

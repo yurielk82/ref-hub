@@ -331,6 +331,10 @@
 @media print {
   .mpdoc {
     display: block;
+    /* 배경색·색 구분(측정/선언/자문·배지·짙은 버튼)이 인쇄 시 사라지지 않게.
+       --paper 가 순백이라 페이지 전체가 회색으로 깔리지 않음. */
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
   .mpnav {
     display: none !important;
@@ -349,6 +353,20 @@
   .mpdoc a[href] {
     color: inherit;
     text-decoration: underline;
+  }
+  /* 별첨(예시 화면)은 새 페이지에서 시작 - 부록 섹션은 본문보다 길어
+     .sec break-inside 가 무시되므로 내부 블록 단위로 깨짐을 막는다. */
+  .mpdoc #sap {
+    break-before: page;
+  }
+  .mpdoc .ccard,
+  .mpdoc .panel,
+  .mpdoc .track,
+  .mpdoc .legal,
+  .mpdoc .approval,
+  .mpdoc .note,
+  .mpdoc table.doc {
+    break-inside: avoid;
   }
 }
 

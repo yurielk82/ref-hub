@@ -96,11 +96,17 @@ export default tseslint.config(
       '**/dist/**',
       '**/build/**',
       '**/.next/**',
+      '**/.next-verify/**',
+      // Vendored project sources (git submodules synced via scripts/sync-docs.mjs);
+      // each is linted in its own repo, not here.
+      '**/repos/**',
       '**/out/**',
       '**/coverage/**',
       '**/*.generated.{ts,tsx,js,jsx}',
       '**/*.pb.{ts,js}',
       '**/migrations/**',
+      'next-env.d.ts',
+      '**/ecosystem.config.cjs',
       'eslint.config.{mjs,js,cjs,ts}',
       'eslint.config.*.{mjs,js,cjs,ts}',
     ],

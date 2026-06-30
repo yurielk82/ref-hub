@@ -23,6 +23,13 @@ export default [
   },
 
   {
+    // Node 테스트 (node:test 러너) — process/__dirname 등 Node 글로벌 허용.
+    // base의 test 글롭은 .mjs/.cjs를 빼므로 여기서 보강한다.
+    files: ['tests/**/*.{mjs,cjs,js}', '**/*.{test,spec}.{mjs,cjs}'],
+    languageOptions: { globals: { ...globals.node } },
+  },
+
+  {
     // 데이터 모듈 — 카드/태그 리터럴 반복은 정상 (로직 아님)
     files: ['data/**/*.{ts,tsx}'],
     rules: { 'sonarjs/no-duplicate-string': 'off' },

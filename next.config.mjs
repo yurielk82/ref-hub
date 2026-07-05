@@ -20,6 +20,8 @@ const withNextra = nextra({
 
 const nextConfig = withNextra({
   output: 'standalone',
+  // 개발 서버 외부 미리보기(dev-preview 터널) HMR 허용 — dev 전용, 빌드 무영향
+  allowedDevOrigins: ['dev-ref-hub.dvsharp.com'],
   // verify/CI builds use an isolated output dir so an in-place `next build` can't
   // clobber the live `.next/standalone` (2026-06-28 incident). Env set by
   // verify_workspace.py for the build step only; real deploys build into `.next`.

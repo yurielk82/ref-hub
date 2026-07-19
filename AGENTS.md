@@ -1,22 +1,4 @@
-<!-- AUTO-HISTORY:START -->
-
-_자동 생성 — `.claude/scripts/sync-claude-md.sh`. 수동 편집 금지 (append-only 로 .claude/SESSION_LOG.md 가 원본)._
-
-## 최근 세션 히스토리
-
-- `2026-06-28` _session_ — uncommitted edits: 1, new files: 1
-- `2026-06-28` `2b1b2ac` — feat(ax): sharpen team-pulse — mutual-understanding purpose, gentle tone, mirror feedback _(files: 2)_
-- `2026-06-28` _session_ — uncommitted edits: 1, new files: 1
-- `2026-06-28` `7c679ca` — feat(portfolio): split pharmkpi into KPI dashboard + Sales Strategy Portal _(files: 2)_
-- `2026-06-28` _session_ — uncommitted edits: 1, new files: 1
-- `2026-06-28` `772d7ce` — feat(ax): reframe claude-dotfiles as harness + loop engineering + measured memory _(files: 2)_
-- `2026-06-28` _session_ — uncommitted edits: 1, new files: 1
-
-원본: `.claude/SESSION_LOG.md` (append-only)
-
-<!-- AUTO-HISTORY:END -->
-
-<!-- agent-governance:managed:start source=ref-hub-claude hash=8e8476c69cd63b8df36f188ce8e70c067166280b084efb603805a0a853b41876 -->
+<!-- agent-governance:managed:start source=ref-hub-codex hash=a0d52e2d95dc25f0afc1769bf0af84555f550918509b56f7237858b85d2b14ed -->
 # GitHub 워크스페이스 공통 규칙
 
 ## 범위
@@ -164,7 +146,7 @@ systemd 유닛: `github-ref-hub.service` (target `github-ref-hub.target`). 관�
 
 <!-- 반복 장애 발생 시 1줄씩 추가: 증상 → 원인 → 해결책 -->
 
-# ref-hub Claude adapter
+# ref-hub Codex adapter
 
-- Apply the shared project layer using Claude Code native project discovery.
+- Apply the shared project layer from this repository's `AGENTS.md`.
 <!-- agent-governance:managed:end -->

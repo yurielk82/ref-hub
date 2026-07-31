@@ -1,22 +1,5 @@
-<!-- AUTO-HISTORY:START -->
 
-_자동 생성 — `.claude/scripts/sync-claude-md.sh`. 수동 편집 금지 (append-only 로 .claude/SESSION_LOG.md 가 원본)._
-
-## 최근 세션 히스토리
-
-- `2026-06-28` _session_ — uncommitted edits: 1, new files: 1
-- `2026-06-28` `2b1b2ac` — feat(ax): sharpen team-pulse — mutual-understanding purpose, gentle tone, mirror feedback _(files: 2)_
-- `2026-06-28` _session_ — uncommitted edits: 1, new files: 1
-- `2026-06-28` `7c679ca` — feat(portfolio): split pharmkpi into KPI dashboard + Sales Strategy Portal _(files: 2)_
-- `2026-06-28` _session_ — uncommitted edits: 1, new files: 1
-- `2026-06-28` `772d7ce` — feat(ax): reframe claude-dotfiles as harness + loop engineering + measured memory _(files: 2)_
-- `2026-06-28` _session_ — uncommitted edits: 1, new files: 1
-
-원본: `.claude/SESSION_LOG.md` (append-only)
-
-<!-- AUTO-HISTORY:END -->
-
-<!-- agent-governance:managed:start source=ref-hub-claude hash=8e8476c69cd63b8df36f188ce8e70c067166280b084efb603805a0a853b41876 -->
+<!-- agent-governance:managed:start source=ref-hub-claude hash=5a4f891c290af6b87d237623b562fbcf456c7856e8d38c59d8d781a33f325e76 -->
 # GitHub 워크스페이스 공통 규칙
 
 ## 범위
@@ -48,6 +31,10 @@ _자동 생성 — `.claude/scripts/sync-claude-md.sh`. 수동 편집 금지 (ap
   연결은 각 어댑터가 책임진다.
 - 완료 보고 전 실행한 명령과 결과를 다시 확인한다. 핵심 검사가 실패했거나 실행 불가하면
   완료라고 부르지 않는다.
+- 사용자 질문이 데이터 값·시스템 상태·동작 여부에 관한 것이면 추측으로 답하지 않는다.
+  조회 가능한 원천(서비스 로그, DB, 생성 산출물, 접속 기록)을 먼저 실측하고 그 결과로 답한다.
+  실측 불가한 미래 동작은 예측임을 명시하고 검증 시점과 방법을 함께 제시한다. 관측 시점이
+  다른 두 값의 차이는 원인을 추측하기 전에 시점 차이부터 확인한다. (오너 지시 2026-07-29)
 - 운영 상태 점검은 `bin/verify-ops.sh`, 거버넌스 결정 일관성 점검은
   `bin/decision_audit.py`의 현재 help와 안전 모드를 확인해 사용한다.
 
@@ -134,7 +121,7 @@ systemd 유닛: `github-ref-hub.service` (target `github-ref-hub.target`). 관�
 # Conventions
 
 - MDX 문서 중심 — 일반 React 컴포넌트 분리 불필요
-- 파일 구조·콘텐츠 스타일·\_meta.tsx 관리 등 문서 작성 규칙: @.claude/rules/docs-style.md
+- 문서는 기존 MDX의 파일 구조·문체를 따르고, 탐색 항목을 바꿀 때 같은 디렉터리의 `_meta.tsx`도 함께 검증한다.
 - Tailwind 직접 사용 없음 (Nextra 테마가 스타일 제공)
 - 문서 수정 흐름(submodule 프로젝트): 각 프로젝트 리포의 `docs/manual/` 수정·커밋·푸시 → 포털에서 `git submodule update --remote repos/<project>` → `npm run sync` → 커밋·푸시 → 배포
 - 직접 관리(submodule 아님): `content/pharmkpi/`·`content/corerx/`·`content/edi-verification/` 는 포털 리포에서 직접 편집 (private/내부)
@@ -168,3 +155,19 @@ systemd 유닛: `github-ref-hub.service` (target `github-ref-hub.target`). 관�
 
 - Apply the shared project layer using Claude Code native project discovery.
 <!-- agent-governance:managed:end -->
+
+<!-- AUTO-HISTORY:START -->
+_자동 생성 — `.claude/scripts/sync-claude-md.sh`. 수동 편집 금지 (append-only 로 .claude/SESSION_LOG.md 가 원본)._
+
+## 최근 세션 히스토리
+
+- `2026-06-30` `4726cc9` — test(site-integrity): accept all AX case studies + intent-based harness checks _(files: 1)_
+- `2026-06-30` _session_ — uncommitted edits: 1, new files: 1
+- `2026-07-01` _session_ — uncommitted edits: 1, new files: 1
+- `2026-07-01` `edf53c7` — refactor(data): split oversized projects/ax data files into cohesive modules _(files: 7)_
+- `2026-07-01` `c831dd5` — refactor(data): split oversized projects/ax data files into cohesive modules _(files: 7)_
+- `2026-07-05` `436770b` — chore(next): allow dev-preview tunnel host for dev HMR _(files: 1)_
+- `2026-07-19` `8bcb7bf` — chore(agent-governance): activate shared runtime rules _(files: 3)_
+
+원본: `.claude/SESSION_LOG.md` (append-only)
+<!-- AUTO-HISTORY:END -->

@@ -1,4 +1,4 @@
-<!-- agent-governance:managed:start source=ref-hub-codex hash=a0d52e2d95dc25f0afc1769bf0af84555f550918509b56f7237858b85d2b14ed -->
+<!-- agent-governance:managed:start source=ref-hub-codex hash=68be595bfae9449f942306a4e081a98fc8e3061f516f96b34ea9ecd67c8a3866 -->
 # GitHub 워크스페이스 공통 규칙
 
 ## 범위
@@ -30,6 +30,10 @@
   연결은 각 어댑터가 책임진다.
 - 완료 보고 전 실행한 명령과 결과를 다시 확인한다. 핵심 검사가 실패했거나 실행 불가하면
   완료라고 부르지 않는다.
+- 사용자 질문이 데이터 값·시스템 상태·동작 여부에 관한 것이면 추측으로 답하지 않는다.
+  조회 가능한 원천(서비스 로그, DB, 생성 산출물, 접속 기록)을 먼저 실측하고 그 결과로 답한다.
+  실측 불가한 미래 동작은 예측임을 명시하고 검증 시점과 방법을 함께 제시한다. 관측 시점이
+  다른 두 값의 차이는 원인을 추측하기 전에 시점 차이부터 확인한다. (오너 지시 2026-07-29)
 - 운영 상태 점검은 `bin/verify-ops.sh`, 거버넌스 결정 일관성 점검은
   `bin/decision_audit.py`의 현재 help와 안전 모드를 확인해 사용한다.
 
@@ -116,7 +120,7 @@ systemd 유닛: `github-ref-hub.service` (target `github-ref-hub.target`). 관�
 # Conventions
 
 - MDX 문서 중심 — 일반 React 컴포넌트 분리 불필요
-- 파일 구조·콘텐츠 스타일·\_meta.tsx 관리 등 문서 작성 규칙: @.claude/rules/docs-style.md
+- 문서는 기존 MDX의 파일 구조·문체를 따르고, 탐색 항목을 바꿀 때 같은 디렉터리의 `_meta.tsx`도 함께 검증한다.
 - Tailwind 직접 사용 없음 (Nextra 테마가 스타일 제공)
 - 문서 수정 흐름(submodule 프로젝트): 각 프로젝트 리포의 `docs/manual/` 수정·커밋·푸시 → 포털에서 `git submodule update --remote repos/<project>` → `npm run sync` → 커밋·푸시 → 배포
 - 직접 관리(submodule 아님): `content/pharmkpi/`·`content/corerx/`·`content/edi-verification/` 는 포털 리포에서 직접 편집 (private/내부)

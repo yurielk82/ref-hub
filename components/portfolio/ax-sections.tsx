@@ -1,10 +1,17 @@
 import Link from 'next/link'
 import { ArrowRight, CheckCircle2, ExternalLink, Mail, ShieldCheck } from 'lucide-react'
 
-import { AX_HERO, type AxCaseStudy, type AxGrounding, type MetricDisclosure } from '@/data/ax'
+import {
+  AX_CONTACT,
+  AX_HERO,
+  type AxCaseStudy,
+  type AxGrounding,
+  type MetricDisclosure,
+} from '@/data/ax'
 import type { Project } from '@/data/projects'
 
 import { FadeInUp } from './motion'
+import { PrintButton } from './print-button'
 import { ProjectThumbnail } from './project-thumbnail'
 
 const disclosureLabel: Record<MetricDisclosure, string> = {
@@ -20,7 +27,15 @@ export function AxHeroSection() {
     <FadeInUp>
       <section className="grid gap-10 border-b border-stone-200 pb-14 dark:border-stone-800 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
         <div>
-          <p className="font-[family-name:var(--font-mono)] text-xs uppercase text-[var(--accent)]">
+          <p className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
+            <span className="text-xl font-bold tracking-tight text-stone-950 dark:text-stone-50">
+              {AX_HERO.name}
+            </span>
+            <span className="text-sm font-medium text-stone-500 dark:text-stone-400">
+              {AX_HERO.role}
+            </span>
+          </p>
+          <p className="mt-4 font-[family-name:var(--font-mono)] text-xs uppercase text-[var(--accent)]">
             {AX_HERO.eyebrow}
           </p>
           <h1
@@ -44,7 +59,7 @@ export function AxHeroSection() {
               <ArrowRight className="h-4 w-4" />
             </a>
             <a
-              href="https://www.linkedin.com/in/yurielk82"
+              href={AX_CONTACT.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg border border-stone-200 bg-white px-5 py-2.5 text-sm font-semibold text-stone-700 transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)] dark:border-stone-800 dark:bg-stone-900 dark:text-stone-300"
@@ -53,7 +68,7 @@ export function AxHeroSection() {
               LinkedIn
             </a>
             <a
-              href="https://github.com/yurielk82"
+              href={AX_CONTACT.github}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg border border-stone-200 bg-white px-5 py-2.5 text-sm font-semibold text-stone-700 transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)] dark:border-stone-800 dark:bg-stone-900 dark:text-stone-300"
@@ -61,6 +76,7 @@ export function AxHeroSection() {
               <GitHubIcon />
               GitHub
             </a>
+            <PrintButton />
           </div>
         </div>
 
@@ -232,17 +248,25 @@ export function AxContactSection() {
               공개 가능한 범위 안에서 문제 정의, 구현 방식, 운영상 배운 점을 중심으로
               이야기하겠습니다.
             </p>
+            {/* 주소를 화면에 노출 — 버튼의 mailto 만으로는 복사도 검색도 안 된다 */}
+            <a
+              href={`mailto:${AX_CONTACT.email}`}
+              className="mt-4 inline-flex items-center gap-2 font-[family-name:var(--font-mono)] text-sm text-stone-700 underline-offset-4 hover:text-[var(--accent)] hover:underline dark:text-stone-300"
+            >
+              <Mail className="h-3.5 w-3.5 shrink-0" />
+              {AX_CONTACT.email}
+            </a>
           </div>
           <div className="flex shrink-0 flex-wrap gap-3">
             <a
-              href="mailto:ssmtransite@gmail.com"
+              href={`mailto:${AX_CONTACT.email}`}
               className="inline-flex items-center gap-2 rounded-lg bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
             >
               <Mail className="h-4 w-4" />
               이메일 문의
             </a>
             <a
-              href="https://www.linkedin.com/in/yurielk82"
+              href={AX_CONTACT.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg border border-stone-200 bg-white px-5 py-2.5 text-sm font-semibold text-stone-700 transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)] dark:border-stone-800 dark:bg-stone-900 dark:text-stone-300"
@@ -251,7 +275,7 @@ export function AxContactSection() {
               LinkedIn
             </a>
             <a
-              href="https://github.com/yurielk82"
+              href={AX_CONTACT.github}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg border border-stone-200 bg-white px-5 py-2.5 text-sm font-semibold text-stone-700 transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)] dark:border-stone-800 dark:bg-stone-900 dark:text-stone-300"

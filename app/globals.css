@@ -63,3 +63,59 @@ body {
   box-shadow: 0 4px 16px var(--glass-shadow);
   border-color: var(--accent);
 }
+
+/* 이력서를 PDF 로 내보내기 위한 인쇄 레이아웃 */
+@media print {
+  /* motion 의 whileInView 는 화면 밖 요소를 opacity:0 · translateY 로 둔다.
+     그대로 인쇄하면 스크롤하지 않은 영역이 통째로 백지로 나온다. */
+  *,
+  *::before,
+  *::after {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* 네비게이션·푸터·인쇄 버튼은 지면에서 의미가 없다 */
+  header,
+  footer,
+  [data-print-hide] {
+    display: none !important;
+  }
+
+  main {
+    padding-top: 0 !important;
+  }
+
+  /* 다크 테마 그대로 인쇄하면 잉크만 소모된다 — 인쇄는 항상 밝게 */
+  html.dark {
+    color-scheme: light;
+  }
+
+  html.dark body,
+  html.dark body * {
+    background-image: none !important;
+    background-color: transparent !important;
+    color: #1c1917 !important;
+    border-color: #d6d3d1 !important;
+  }
+
+  body {
+    background: #fff !important;
+  }
+
+  /* 카드·경력 항목이 페이지 경계에서 잘리지 않게 */
+  section,
+  li {
+    break-inside: avoid;
+  }
+
+  /* 지면에는 링크 주소가 남아야 확인이 가능하다 */
+  a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-size: 9px;
+    color: #57534e;
+    word-break: break-all;
+  }
+}

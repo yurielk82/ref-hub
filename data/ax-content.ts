@@ -1,6 +1,9 @@
 import type { AxGrounding, AxMethodStep, AxPillar, AxStackGroup } from './ax-types'
 
 export const AX_HERO = {
+  /** 이력서 사이트라 누구의 것인지 첫 화면에서 보여야 한다 (푸터 저작권만으로는 부족). */
+  name: '권대환',
+  role: 'AX 실무자 · 시스템 기획·구축',
   eyebrow: 'AI Transformation Reference',
   title: '현업이 못 풀던 문제를 AI로 풀어, 프로덕션 서비스로 만들고 직접 운영합니다.',
   subhead: 'AI를 빌려 매번 토큰(AI 호출 비용)을 쓰는 게 아니라, AI로 만들어 자산으로 소유합니다.',
@@ -24,6 +27,13 @@ export const AX_HERO = {
       text: '코드가 실제로 도는 OCI 서버에서, 어디서든 SSH로 구현·검증·배포를 그 자리에서 끝냅니다.',
     },
   ],
+}
+
+/** 연락처 단일 출처 — 히어로·연락 섹션이 같은 값을 쓴다. */
+export const AX_CONTACT = {
+  email: 'ssmtransite@gmail.com',
+  linkedin: 'https://www.linkedin.com/in/yurielk82',
+  github: 'https://github.com/yurielk82',
 }
 
 export const AX_PILLARS: AxPillar[] = [

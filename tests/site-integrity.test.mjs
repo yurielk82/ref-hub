@@ -3,18 +3,7 @@ import assert from 'node:assert/strict'
 import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
-
-const ROOT = path.resolve(import.meta.dirname, '..')
-
-// PROJECTS is assembled in data/projects.ts from these cohesive registry
-// modules; read them together so text-based assertions see every project block.
-const PROJECT_REGISTRY_FILES = [
-  path.join(ROOT, 'data', 'projects', 'delivery.ts'),
-  path.join(ROOT, 'data', 'projects', 'tooling.ts'),
-]
-function readProjectData() {
-  return PROJECT_REGISTRY_FILES.map((file) => readFileSync(file, 'utf8')).join('\n')
-}
+import { ROOT, readProjectData } from './helpers.mjs'
 
 const SYNCED_PROJECTS = [
   { repo: 'csoweb', content: 'csoweb' },
@@ -27,7 +16,7 @@ test('synced source docs exist for every registered project', () => {
     const sourceDir = path.join(ROOT, 'repos', project.repo, 'docs', 'manual')
     assert.ok(
       existsSync(sourceDir),
-      `missing sync source directory: ${path.relative(ROOT, sourceDir)}`
+      `missing sync source directory: ${path.relative(ROOT, sourceDir)}`,
     )
   }
 })
@@ -59,114 +48,17 @@ test('embed mode keeps CSP frame-ancestors protection', async () => {
   const embedHeaders = headers.find((entry) => entry.source === '/:path*')
   assert.ok(embedHeaders, 'embed header rule must exist')
 
-  const cspHeader = embedHeaders.headers.find(
-    (header) => header.key === 'Content-Security-Policy'
-  )
+  const cspHeader = embedHeaders.headers.find((header) => header.key === 'Content-Security-Policy')
   assert.ok(cspHeader, 'Content-Security-Policy header must exist')
   assert.match(cspHeader.value, /frame-ancestors/)
   assert.match(cspHeader.value, /'self'/)
   assert.match(cspHeader.value, /https:\/\/example\.dev/)
 })
 
-test('AX resume home route and data source are present', () => {
-  const homePage = path.join(ROOT, 'app', '(portfolio)', 'page.tsx')
-  const axPage = path.join(ROOT, 'app', '(portfolio)', 'ax', 'page.tsx')
-  const axData = path.join(ROOT, 'data', 'ax.ts')
-  const projectsPage = path.join(ROOT, 'app', '(portfolio)', 'projects', 'page.tsx')
-
-  assert.ok(existsSync(homePage), 'missing AX resume home route: app/(portfolio)/page.tsx')
-  assert.ok(existsSync(axPage), 'missing AX resume route: app/(portfolio)/ax/page.tsx')
-  assert.ok(existsSync(axData), 'missing AX data source: data/ax.ts')
-  assert.ok(existsSync(projectsPage), 'missing projects index route: app/(portfolio)/projects/page.tsx')
-})
-
-test('AX case studies reference existing portfolio projects', () => {
-  const axData = readFileSync(path.join(ROOT, 'data', 'ax.ts'), 'utf8')
-  const projectData = readProjectData()
-  const axSlugs = [...axData.matchAll(/projectSlug:\s*'([^']+)'/g)].map(
-    (match) => match[1]
-  )
-  const projectSlugs = new Set(
-    [...projectData.matchAll(/slug:\s*'([^']+)'/g)].map((match) => match[1])
-  )
-
-  assert.ok(axSlugs.length > 0, 'AX case studies should not be empty')
-  for (const slug of axSlugs) {
-    assert.ok(projectSlugs.has(slug), `AX case references unknown project slug: ${slug}`)
-  }
-})
-
-test('AX case studies are ordered by AX relevance and delivery proof', () => {
-  const axData = readFileSync(path.join(ROOT, 'data', 'ax.ts'), 'utf8')
-  const projectData = readProjectData()
-  const axSlugs = [...axData.matchAll(/projectSlug:\s*'([^']+)'/g)].map(
-    (match) => match[1]
-  )
-  const erpSpecBlock = projectData.match(/\{\n\s+slug:\s*'erp-spec'[\s\S]*?\n\s+\},/)?.[0] ?? ''
-  const harnessBlock = projectData.match(/\{\n\s+slug:\s*'claude-dotfiles'[\s\S]*?\n\s+\},/)?.[0] ?? ''
-  // All portfolio projects are AX case studies; lead with the highest-relevance
-  // ones (pharmkpi line, kpis/csoweb/erp-spec/claude-dotfiles) and keep the
-  // delivery order set in data/ax.ts.
-  const expectedAxOrder = [
-    'pharmkpi',
-    'sales-strategy-portal',
-    'pharmkpi-exec',
-    'kpis-dsr-api',
-    'csoweb',
-    'erp-spec',
-    'claude-dotfiles',
-    'har-eval',
-    'ev-motor-reliability',
-    'srt',
-    'team-pulse',
-    'naver-place-collector',
-    'apinfy-lab',
-  ]
-
-  assert.deepEqual(axSlugs, expectedAxOrder, 'AX case studies should lead with highest AX relevance')
-  assert.match(axData, /인수사 IT팀/, 'ERP Spec AX case should name the acquirer IT-team context')
-  assert.match(axData, /785개 테이블/, 'ERP Spec AX case should show ERP analysis scale')
-  assert.match(erpSpecBlock, /인수사 IT팀|ERP 구조 분석/, 'ERP Spec project copy should reflect the AX positioning')
-  // Intent-based (not exact taglines): the harness case is framed as a
-  // Claude/Codex agentic harness, carries cost/measurement discipline, and the
-  // skills philosophy. Per workspace test rules (avoid snapshot string pins).
-  assert.match(axData, /Agentic Harness|Claude Code·Codex/, 'AX page should frame the final case as a Claude/Codex agentic harness')
-  assert.match(harnessBlock, /Claude\/Codex|Codex/, 'Harness project copy should include Codex')
-  assert.match(axData + harnessBlock, /측정으로 만들 것과 안 만들|빌드 시간/, 'Harness copy should carry the cost/measurement-discipline message')
-  assert.match(axData + harnessBlock, /온디맨드 스킬|스킬로 묶/, 'Harness copy should reflect the skills philosophy')
-  assert.match(axData + harnessBlock, /RAG 기억|wiki|그래프/, 'Harness copy should explain persistent RAG-style memory')
-})
-
-test('portfolio project summaries are AX-current and substantial', () => {
-  const projectData = readProjectData()
-  const projectBlocks = [...projectData.matchAll(/(\{\n\s+slug:\s*'([^']+)'[\s\S]*?\n\s+\},)/g)]
-
-  assert.ok(projectBlocks.length > 0, 'portfolio projects should not be empty')
-
-  for (const [, block, slug] of projectBlocks) {
-    assert.match(block, /year:\s*'2026'/, `${slug} should display 2026 as portfolio year`)
-
-    const featuresMatch = block.match(/features:\s*\[([\s\S]*?)\],/)
-    assert.ok(featuresMatch, `${slug} should define feature bullets`)
-
-    const features = [...featuresMatch[1].matchAll(/'([^']+)'/g)].map((match) => match[1])
-    assert.ok(features.length >= 6, `${slug} should describe at least 6 major features`)
-    for (const feature of features) {
-      assert.ok(
-        feature.length >= 24,
-        `${slug} feature is too terse: ${feature}`
-      )
-      assert.doesNotMatch(
-        feature,
-        /엑셀|Excel|내보내기|Export|PDF|PNG|SVG|파일\s*생성|파일명|템플릿 다운로드/,
-        `${slug} feature should emphasize web-native workflows, not file export: ${feature}`
-      )
-    }
-  }
-})
-
 test('KPIS DSR portfolio screenshot is a real captured UI image', () => {
-  const image = readFileSync(path.join(ROOT, 'public', 'images', 'portfolio', 'kpis-dsr-api', 'hero.png'))
+  const image = readFileSync(
+    path.join(ROOT, 'public', 'images', 'portfolio', 'kpis-dsr-api', 'hero.png'),
+  )
   const pngSignature = image.subarray(0, 8).toString('hex')
   const width = image.readUInt32BE(16)
   const height = image.readUInt32BE(20)
@@ -178,7 +70,9 @@ test('KPIS DSR portfolio screenshot is a real captured UI image', () => {
 })
 
 test('ERP Spec portfolio screenshot uses the barcode relationship graph image', () => {
-  const image = readFileSync(path.join(ROOT, 'public', 'images', 'portfolio', 'erp-spec', 'barcode-graph.png'))
+  const image = readFileSync(
+    path.join(ROOT, 'public', 'images', 'portfolio', 'erp-spec', 'barcode-graph.png'),
+  )
   const pngSignature = image.subarray(0, 8).toString('hex')
   const width = image.readUInt32BE(16)
   const height = image.readUInt32BE(20)
@@ -188,12 +82,17 @@ test('ERP Spec portfolio screenshot uses the barcode relationship graph image', 
   assert.equal(pngSignature, '89504e470d0a1a0a', 'ERP Spec screenshot should be a PNG image')
   assert.ok(width >= 1000, `ERP Spec screenshot width is too small: ${width}`)
   assert.ok(height >= 600, `ERP Spec screenshot height is too small: ${height}`)
-  assert.ok(image.byteLength >= 50_000, 'ERP Spec screenshot should not be a blank placeholder image')
+  assert.ok(
+    image.byteLength >= 50_000,
+    'ERP Spec screenshot should not be a blank placeholder image',
+  )
 })
 
 test('portfolio uses the strongest screenshot for each project context', () => {
   const projectData = readProjectData()
-  const pharmKpiLogin = readFileSync(path.join(ROOT, 'public', 'images', 'portfolio', 'pharmkpi', 'hero.png'))
+  const pharmKpiLogin = readFileSync(
+    path.join(ROOT, 'public', 'images', 'portfolio', 'pharmkpi', 'hero.png'),
+  )
   const pharmKpiSignature = pharmKpiLogin.subarray(0, 8).toString('hex')
 
   assert.match(
@@ -201,7 +100,11 @@ test('portfolio uses the strongest screenshot for each project context', () => {
     /screenshot: '\/images\/portfolio\/pharmkpi\/hero\.png'/,
     'PharmKPI should use the stronger login-screen screenshot',
   )
-  assert.equal(pharmKpiSignature, '89504e470d0a1a0a', 'PharmKPI login screenshot should be a PNG image')
+  assert.equal(
+    pharmKpiSignature,
+    '89504e470d0a1a0a',
+    'PharmKPI login screenshot should be a PNG image',
+  )
   assert.ok(
     pharmKpiLogin.byteLength >= 50_000,
     'PharmKPI login screenshot should not be a blank placeholder image',
@@ -225,124 +128,48 @@ test('portfolio uses the strongest screenshot for each project context', () => {
     assert.equal(pngSignature, '89504e470d0a1a0a', `${shot.name} screenshot should be a PNG image`)
     assert.ok(width >= 1000, `${shot.name} screenshot width is too small: ${width}`)
     assert.ok(height >= 600, `${shot.name} screenshot height is too small: ${height}`)
-    assert.ok(image.byteLength >= 50_000, `${shot.name} screenshot should not be a blank placeholder image`)
+    assert.ok(
+      image.byteLength >= 50_000,
+      `${shot.name} screenshot should not be a blank placeholder image`,
+    )
   }
 })
 
 test('portfolio screenshots are rendered from the visual center', () => {
-  const thumbnail = readFileSync(path.join(ROOT, 'components', 'portfolio', 'project-thumbnail.tsx'), 'utf8')
-  const projectPage = readFileSync(path.join(ROOT, 'app', '(portfolio)', 'projects', '[slug]', 'page.tsx'), 'utf8')
+  const thumbnail = readFileSync(
+    path.join(ROOT, 'components', 'portfolio', 'project-thumbnail.tsx'),
+    'utf8',
+  )
+  const projectPage = readFileSync(
+    path.join(ROOT, 'app', '(portfolio)', 'projects', '[slug]', 'page.tsx'),
+    'utf8',
+  )
   const axPage = readFileSync(path.join(ROOT, 'app', '(portfolio)', 'ax', 'page.tsx'), 'utf8')
 
-  assert.match(thumbnail, /object-cover object-center/, 'portfolio screenshots should be centered inside their frame')
-  assert.match(thumbnail, /aspect-video w-full/, 'portfolio screenshot wrapper should fill flex/grid image frames')
-  assert.match(projectPage, /lg:items-center/, 'project detail hero should vertically center the screenshot column')
-  assert.match(axPage, /items-center justify-center/, 'AX case screenshots should be centered inside their grid cell')
-})
-
-test('career history is rendered instead of a separate About route', () => {
-  const aboutPage = path.join(ROOT, 'app', '(portfolio)', 'about', 'page.tsx')
-  const nav = readFileSync(path.join(ROOT, 'components', 'portfolio', 'nav.tsx'), 'utf8')
-  const careerSection = path.join(ROOT, 'components', 'portfolio', 'career-section.tsx')
-  const homePage = readFileSync(path.join(ROOT, 'app', '(portfolio)', 'page.tsx'), 'utf8')
-
-  assert.ok(!existsSync(aboutPage), 'About page stays removed — career lives on the landing')
-  assert.doesNotMatch(nav, /href=["{']\/about/, 'portfolio nav should not link to /about')
-  assert.ok(existsSync(careerSection), 'missing career surface: components/portfolio/career-section.tsx')
-
-  // data/experience.ts was dead code while /about existed; it must now be rendered.
-  const career = readFileSync(careerSection, 'utf8')
-  assert.match(career, /EXPERIENCES/, 'career section should render EXPERIENCES')
-  assert.match(career, /SKILL_CATEGORIES/, 'career section should render SKILL_CATEGORIES')
-  assert.match(career, /from '@\/data\/experience'/, 'career section should import data/experience')
-  assert.match(homePage, /CareerSection/, 'landing should mount the career section')
-  assert.match(nav, /href="\/#career"/, 'portfolio nav should reach the career section')
-})
-
-test('landing is its own page and lists every portfolio project', () => {
-  const homePage = readFileSync(path.join(ROOT, 'app', '(portfolio)', 'page.tsx'), 'utf8')
-  const projectData = readProjectData()
-  const projectCount = [...projectData.matchAll(/slug:\s*'([^']+)'/g)].length
-
-  // Regression guard: the landing used to be `export { default } from './ax/page'`,
-  // which made / and /ax byte-identical and hid every non-featured project.
-  assert.doesNotMatch(
-    homePage,
-    /export\s*\{[^}]*default[^}]*\}\s*from\s*'\.\/ax\/page'/,
-    'landing must not re-export the AX page',
+  assert.match(
+    thumbnail,
+    /object-cover object-center/,
+    'portfolio screenshots should be centered inside their frame',
   )
-  assert.match(homePage, /PROJECTS/, 'landing should read the full project registry')
-  assert.match(homePage, /SortableGrid/, 'landing should render the full project grid')
-  assert.ok(projectCount >= 13, `portfolio should keep at least 13 projects, found ${projectCount}`)
-})
-
-test('AX deep-dive route stays distinct from the landing', () => {
-  const homePage = readFileSync(path.join(ROOT, 'app', '(portfolio)', 'page.tsx'), 'utf8')
-  const axPage = readFileSync(path.join(ROOT, 'app', '(portfolio)', 'ax', 'page.tsx'), 'utf8')
-
-  for (const section of ['AX_METHOD', 'AX_STACK', 'AX_GROUNDING', 'AX_PILLARS']) {
-    assert.match(axPage, new RegExp(section), `/ax should keep the ${section} deep-dive section`)
-    assert.doesNotMatch(
-      homePage,
-      new RegExp(section),
-      `landing should summarize, not duplicate, the ${section} deep-dive section`,
-    )
-  }
-  assert.match(homePage, /href="\/ax"/, 'landing should link through to the AX deep dive')
-})
-
-test('docs index covers every manual directory under content/', () => {
-  const docsPage = path.join(ROOT, 'app', '(portfolio)', 'docs', 'page.tsx')
-  const manuals = readFileSync(path.join(ROOT, 'data', 'manuals.ts'), 'utf8')
-  const nav = readFileSync(path.join(ROOT, 'components', 'portfolio', 'nav.tsx'), 'utf8')
-  const contentDirs = readdirSync(path.join(ROOT, 'content'), { withFileTypes: true })
-    .filter((entry) => entry.isDirectory())
-    .map((entry) => entry.name)
-
-  assert.ok(existsSync(docsPage), 'missing docs index route: app/(portfolio)/docs/page.tsx')
-  assert.match(nav, /href="\/docs"/, 'portfolio nav should link to the docs index')
-
-  const registered = new Set(
-    [...manuals.matchAll(/^\s{2}'?([a-z0-9-]+)'?:\s*\{$/gm)].map((match) => match[1])
+  assert.match(
+    thumbnail,
+    /aspect-video w-full/,
+    'portfolio screenshot wrapper should fill flex/grid image frames',
   )
-  for (const dir of contentDirs) {
-    assert.ok(registered.has(dir), `docs index is missing the content/${dir} manual`)
-  }
-  assert.equal(
-    registered.size,
-    contentDirs.length,
-    'docs index should not register manuals that have no content/ directory',
+  assert.match(
+    projectPage,
+    /lg:items-center/,
+    'project detail hero should vertically center the screenshot column',
   )
-})
-
-test('retired projects do not advertise dead live URLs', () => {
-  const projectData = readProjectData()
-  const axData = readFileSync(path.join(ROOT, 'data', 'ax.ts'), 'utf8')
-  const retired = [
-    { slug: 'pharmkpi-exec', host: 'exec.dvsharp.com' },
-    { slug: 'apinfy-lab', host: 'apin.dvsharp.com' },
-  ]
-
-  for (const { slug, host } of retired) {
-    const block = projectData.match(new RegExp(`\\{\\n\\s+slug:\\s*'${slug}'[\\s\\S]*?\\n\\s+\\},`))?.[0]
-    assert.ok(block, `missing project block for ${slug}`)
-    assert.doesNotMatch(
-      block,
-      /^\s*liveUrl:/m,
-      `${slug} is retired — it must not advertise a liveUrl (${host} no longer serves)`,
-    )
-  }
-  assert.doesNotMatch(
-    axData,
-    /exec\.dvsharp\.com 라이브/,
-    'AX case copy should not claim the archived exec deployment is live',
+  assert.match(
+    axPage,
+    /items-center justify-center/,
+    'AX case screenshots should be centered inside their grid cell',
   )
 })
 
 test('standalone build script copies runtime static assets', () => {
-  const packageJson = JSON.parse(
-    readFileSync(path.join(ROOT, 'package.json'), 'utf8')
-  )
+  const packageJson = JSON.parse(readFileSync(path.join(ROOT, 'package.json'), 'utf8'))
   const buildScript = packageJson.scripts?.build ?? ''
 
   assert.match(buildScript, /next build/)

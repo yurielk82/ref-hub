@@ -8,6 +8,7 @@ import {
   AX_STACK,
   AX_CASE_STUDIES,
   AX_GROUNDING,
+  AX_HERO,
   FEATURED_CASE_SLUGS,
 } from '@/data/ax'
 import { getProject } from '@/data/projects'
@@ -21,7 +22,7 @@ import {
 } from '@/components/portfolio/ax-sections'
 
 export const metadata: Metadata = {
-  title: 'AX Reference',
+  title: `AX 접근 방식 — ${AX_HERO.name}`,
   description:
     '현업 프로세스를 AI 워크플로우로 전환하는 AX 실무자 권대환의 이력서용 레퍼런스 페이지',
 }

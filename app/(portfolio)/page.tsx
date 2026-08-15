@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, BookOpen } from 'lucide-react'
 
-import { AX_CASE_STUDIES, FEATURED_CASE_SLUGS } from '@/data/ax'
+import { AX_CASE_STUDIES, AX_HERO, FEATURED_CASE_SLUGS } from '@/data/ax'
 import { getProject, PROJECTS } from '@/data/projects'
 import { MANUALS } from '@/data/manuals'
 import { AxCasesSection, AxContactSection, AxHeroSection } from '@/components/portfolio/ax-sections'
@@ -13,10 +13,10 @@ import { SortableGrid } from '@/components/portfolio/sortable-grid'
 /** 랜딩은 대표 사례만 요약하고, 나머지 서사는 /ax 심화 페이지가 맡는다. */
 const LANDING_CASE_COUNT = 3
 
+// 이력서 링크를 공유했을 때 탭·미리보기에 이름이 먼저 보여야 한다.
 export const metadata: Metadata = {
-  title: { absolute: 'Ref Hub — AX · 프로덕션 시스템 레퍼런스' },
-  description:
-    '현업 프로세스를 AI 워크플로우로 전환하고 프로덕션 서비스로 직접 운영해 온 기록 — 프로젝트 13건, 경력, 프로젝트별 매뉴얼.',
+  title: { absolute: `${AX_HERO.name} — ${AX_HERO.role}` },
+  description: `${AX_HERO.name} · ${AX_HERO.role}. 현업 프로세스를 AI 워크플로우로 전환하고 프로덕션 서비스로 직접 운영해 온 기록 — 프로젝트 ${PROJECTS.length}건, 경력, 프로젝트별 매뉴얼.`,
 }
 
 export default function HomePage() {

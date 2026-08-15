@@ -44,3 +44,6 @@ graphify-out/
 
 # verify/CI isolated build output (verify_workspace.py distDir)
 .next-verify/
+
+# kdh 증거 아티팩트 (세션별 receipt·PTY·로그 — 저장소에 넣지 않는다)
+.kdh/

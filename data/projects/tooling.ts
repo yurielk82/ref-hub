@@ -89,7 +89,7 @@ export const TOOLING_PROJECTS: Project[] = [
       '조직·API키 RBAC가 내장된 단일 노드 크롤링 플랫폼 커널. 액터(재사용 크롤링 유닛)를 버전 관리로 등록하고, 실행마다 dataset·KV·요청 큐를 격리해 동시 실행을 안전하게 처리합니다. 스케줄·웹훅·프록시 풀·재시도까지 SaaS 계약을 갖춰 분산 워커로 확장할 기초를 만든 레퍼런스 구현입니다.',
     tech: ['Python', 'FastAPI', 'SQLAlchemy async', 'Docker', 'curl_cffi'],
     category: 'tool',
-    liveUrl: 'https://apin.dvsharp.com',
+    // 공개 인스턴스(apin.dvsharp.com)는 2026-06 은퇴 — 코드만 공개 유지
     githubUrl: 'https://github.com/yurielk82/apinfy-lab',
     screenshot: '/images/portfolio/apinfy-lab/hero.png',
     emoji: '🕸️',

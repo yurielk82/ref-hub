@@ -72,7 +72,7 @@ export const DELIVERY_PROJECTS: Project[] = [
       'Anthropic SDK',
     ],
     category: 'mobile',
-    liveUrl: 'https://exec.dvsharp.com',
+    // 임원 배포본(exec.dvsharp.com)은 2026-07 아카이브 — 비공개 운영 종료
     screenshot: '/images/portfolio/pharmkpi-exec/hero.png',
     emoji: '📈',
     gradient: 'from-indigo-600/20 to-violet-600/20',

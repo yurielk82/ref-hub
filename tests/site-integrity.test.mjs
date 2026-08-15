@@ -240,13 +240,103 @@ test('portfolio screenshots are rendered from the visual center', () => {
   assert.match(axPage, /items-center justify-center/, 'AX case screenshots should be centered inside their grid cell')
 })
 
-test('About route is removed from the portfolio surface', () => {
+test('career history is rendered instead of a separate About route', () => {
   const aboutPage = path.join(ROOT, 'app', '(portfolio)', 'about', 'page.tsx')
   const nav = readFileSync(path.join(ROOT, 'components', 'portfolio', 'nav.tsx'), 'utf8')
+  const careerSection = path.join(ROOT, 'components', 'portfolio', 'career-section.tsx')
+  const homePage = readFileSync(path.join(ROOT, 'app', '(portfolio)', 'page.tsx'), 'utf8')
 
-  assert.ok(!existsSync(aboutPage), 'About page should be removed because AX home replaces it')
+  assert.ok(!existsSync(aboutPage), 'About page stays removed — career lives on the landing')
   assert.doesNotMatch(nav, /href=["{']\/about/, 'portfolio nav should not link to /about')
-  assert.doesNotMatch(nav, />\s*About\s*</, 'portfolio nav should not render About')
+  assert.ok(existsSync(careerSection), 'missing career surface: components/portfolio/career-section.tsx')
+
+  // data/experience.ts was dead code while /about existed; it must now be rendered.
+  const career = readFileSync(careerSection, 'utf8')
+  assert.match(career, /EXPERIENCES/, 'career section should render EXPERIENCES')
+  assert.match(career, /SKILL_CATEGORIES/, 'career section should render SKILL_CATEGORIES')
+  assert.match(career, /from '@\/data\/experience'/, 'career section should import data/experience')
+  assert.match(homePage, /CareerSection/, 'landing should mount the career section')
+  assert.match(nav, /href="\/#career"/, 'portfolio nav should reach the career section')
+})
+
+test('landing is its own page and lists every portfolio project', () => {
+  const homePage = readFileSync(path.join(ROOT, 'app', '(portfolio)', 'page.tsx'), 'utf8')
+  const projectData = readProjectData()
+  const projectCount = [...projectData.matchAll(/slug:\s*'([^']+)'/g)].length
+
+  // Regression guard: the landing used to be `export { default } from './ax/page'`,
+  // which made / and /ax byte-identical and hid every non-featured project.
+  assert.doesNotMatch(
+    homePage,
+    /export\s*\{[^}]*default[^}]*\}\s*from\s*'\.\/ax\/page'/,
+    'landing must not re-export the AX page',
+  )
+  assert.match(homePage, /PROJECTS/, 'landing should read the full project registry')
+  assert.match(homePage, /SortableGrid/, 'landing should render the full project grid')
+  assert.ok(projectCount >= 13, `portfolio should keep at least 13 projects, found ${projectCount}`)
+})
+
+test('AX deep-dive route stays distinct from the landing', () => {
+  const homePage = readFileSync(path.join(ROOT, 'app', '(portfolio)', 'page.tsx'), 'utf8')
+  const axPage = readFileSync(path.join(ROOT, 'app', '(portfolio)', 'ax', 'page.tsx'), 'utf8')
+
+  for (const section of ['AX_METHOD', 'AX_STACK', 'AX_GROUNDING', 'AX_PILLARS']) {
+    assert.match(axPage, new RegExp(section), `/ax should keep the ${section} deep-dive section`)
+    assert.doesNotMatch(
+      homePage,
+      new RegExp(section),
+      `landing should summarize, not duplicate, the ${section} deep-dive section`,
+    )
+  }
+  assert.match(homePage, /href="\/ax"/, 'landing should link through to the AX deep dive')
+})
+
+test('docs index covers every manual directory under content/', () => {
+  const docsPage = path.join(ROOT, 'app', '(portfolio)', 'docs', 'page.tsx')
+  const manuals = readFileSync(path.join(ROOT, 'data', 'manuals.ts'), 'utf8')
+  const nav = readFileSync(path.join(ROOT, 'components', 'portfolio', 'nav.tsx'), 'utf8')
+  const contentDirs = readdirSync(path.join(ROOT, 'content'), { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name)
+
+  assert.ok(existsSync(docsPage), 'missing docs index route: app/(portfolio)/docs/page.tsx')
+  assert.match(nav, /href="\/docs"/, 'portfolio nav should link to the docs index')
+
+  const registered = new Set(
+    [...manuals.matchAll(/^\s{2}'?([a-z0-9-]+)'?:\s*\{$/gm)].map((match) => match[1])
+  )
+  for (const dir of contentDirs) {
+    assert.ok(registered.has(dir), `docs index is missing the content/${dir} manual`)
+  }
+  assert.equal(
+    registered.size,
+    contentDirs.length,
+    'docs index should not register manuals that have no content/ directory',
+  )
+})
+
+test('retired projects do not advertise dead live URLs', () => {
+  const projectData = readProjectData()
+  const axData = readFileSync(path.join(ROOT, 'data', 'ax.ts'), 'utf8')
+  const retired = [
+    { slug: 'pharmkpi-exec', host: 'exec.dvsharp.com' },
+    { slug: 'apinfy-lab', host: 'apin.dvsharp.com' },
+  ]
+
+  for (const { slug, host } of retired) {
+    const block = projectData.match(new RegExp(`\\{\\n\\s+slug:\\s*'${slug}'[\\s\\S]*?\\n\\s+\\},`))?.[0]
+    assert.ok(block, `missing project block for ${slug}`)
+    assert.doesNotMatch(
+      block,
+      /^\s*liveUrl:/m,
+      `${slug} is retired — it must not advertise a liveUrl (${host} no longer serves)`,
+    )
+  }
+  assert.doesNotMatch(
+    axData,
+    /exec\.dvsharp\.com 라이브/,
+    'AX case copy should not claim the archived exec deployment is live',
+  )
 })
 
 test('standalone build script copies runtime static assets', () => {

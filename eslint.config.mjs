@@ -27,6 +27,13 @@ export default [
     // base의 test 글롭은 .mjs/.cjs를 빼므로 여기서 보강한다.
     files: ['tests/**/*.{mjs,cjs,js}', '**/*.{test,spec}.{mjs,cjs}'],
     languageOptions: { globals: { ...globals.node } },
+    // 단언 임계값(최소 너비 1000, 최소 바이트 50_000 …)과 반복 경로 문자열은
+    // 테스트에서 상수로 빼면 오히려 무엇을 검증하는지 읽기 어려워진다.
+    // data/** 에 이미 적용된 것과 같은 판단.
+    rules: {
+      'no-magic-numbers': 'off',
+      'sonarjs/no-duplicate-string': 'off',
+    },
   },
 
   {

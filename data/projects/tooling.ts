@@ -5,9 +5,9 @@ export const TOOLING_PROJECTS: Project[] = [
   {
     slug: 'srt',
     name: 'SRT 자동예매',
-    tagline: 'SRT 열차 자동 예매 시스템 (v1.3)',
+    tagline: '휴가철 기차표를 새로고침으로 잡던 동료들을 위해 만든 팀 복지용 예매 자동화 (v1.3)',
     description:
-      'SRT 열차 매진 좌석을 자동으로 감시하고 예매하는 풀스택 웹 애플리케이션. Redis 큐 기반 타이밍 제어, Rate Limiting 준수, 텔레그램 알림을 통해 안정적으로 운영합니다.',
+      '휴가 때 지방으로 내려가는 팀 동료들이 기차 예매가 힘들어, 사이트를 매번 새로고침하며 좌석이 열리기를 기다리던 걸 대신하려고 만든 팀 복지용 도구. 매진 좌석을 자동으로 감시하다 조건에 맞는 열차가 열리면 예매를 시도하고, Redis 큐 기반 타이밍 제어와 Rate Limiting 준수, 텔레그램 알림으로 안정적으로 운영합니다.',
     tech: ['Next.js 16', 'FastAPI', 'Redis', 'Tailwind', 'Base UI'],
     category: 'web',
     liveUrl: 'https://srt.dvsharp.com',
@@ -26,7 +26,7 @@ export const TOOLING_PROJECTS: Project[] = [
       '즐겨찾기 역 관리, 프록시 토글 상태 조회, 브라우저 확장(srt-extension) 보조',
       'Next.js 웹 UI와 FastAPI 백엔드 분리로 검색 조건·작업 상태·결과 관리',
     ],
-    highlight: 'Next.js + FastAPI + Redis 풀스택 자동화',
+    highlight: '팀 복지용 예매 자동화 — 새로고침 대기를 없앰',
     year: '2026',
   },
   {

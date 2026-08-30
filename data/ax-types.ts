@@ -6,6 +6,14 @@ export interface AxPillar {
   description: string
 }
 
+/** 시간순 진화 단계 — 무엇을 어떤 순서로 효율화했는지 */
+export interface AxCaseStep {
+  /** 시점 라벨 — '이전', '1단계', '지금' 등 */
+  phase: string
+  title: string
+  body: string
+}
+
 export interface AxCaseStudy {
   projectSlug: string
   label: string
@@ -13,7 +21,11 @@ export interface AxCaseStudy {
   impact?: string
   problem: string
   intervention: string
+  /** 있으면 상세 페이지에서 intervention 대신 시간순 단계로 렌더 */
+  steps?: AxCaseStep[]
   outcome: string
+  /** 이 일이 가능했던 조직적 조건 (경영진 지원 등) */
+  sponsorship?: string
   disclosure: MetricDisclosure
   evidenceLabel: string
 }

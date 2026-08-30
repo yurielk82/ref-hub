@@ -5,9 +5,9 @@ export const DELIVERY_PROJECTS: Project[] = [
   {
     slug: 'pharmkpi',
     name: 'PharmKPI',
-    tagline: '제약 경영 KPI 시각 대시보드 (v1.16)',
+    tagline: 'ERP·CSO·외부 API를 하나의 raw 데이터로 통합해 경영 KPI로 전환 (v1.16)',
     description:
-      'PMI(인수합병 후 통합) 과정에서 경영진의 일·주·월 보고 요구를 듣고, ERP 데이터를 우리 DB에 스냅샷으로 떠 그 위에서 핵심 지표를 빠르게 보는 자체 BI 대시보드. 상용 BI(Metabase/Superset)를 대체하고, 필요한 화면에서만 Claude·Gemini·GPT 인사이트를 호출합니다.',
+      '분석할 때마다 ERP에서 추출본을 여러 개 받아 손으로 이어붙이던 방식을 걷어냈습니다. ERP 판매 데이터, CSO 처방액·수수료액, 외부 API로 받는 품목 정보를 DB에서 조합해 주문서 단위의 완성된 단일 raw 데이터로 통합했고, 그 위에서 도매(CSO/비CSO)·수출·CMO 등 자사 매출 구조에 맞춘 축으로 Power BI 수준의 상세 분석까지 되도록 만들었습니다. 일반적인 지표 나열이 아니라, PMI(인수합병 후 통합) 때 들은 경영진의 일·주·월 보고 주기를 그대로 담은 자체 BI입니다. AI 인사이트는 필요한 화면에서만 호출합니다.',
     tech: ['Next.js 16', 'Prisma 7', 'Supabase', 'Anthropic SDK', 'Recharts'],
     category: 'web',
     liveUrl: 'https://kpi.dvsharp.com',
@@ -16,7 +16,8 @@ export const DELIVERY_PROJECTS: Project[] = [
     emoji: '📊',
     gradient: 'from-blue-600/20 to-cyan-600/20',
     features: [
-      'ERP 데이터를 우리 DB에 스냅샷(미리 계산해 저장한 데이터)으로 떠 그 위에서 KPI를 즉시 조회 — 매번 ERP를 직접 뒤지지 않아 빠름',
+      'ERP 판매·CSO 처방액/수수료액·외부 API 품목 정보를 DB에서 조합해 주문서 단위 단일 raw 데이터로 통합 — 추출본을 받아 수작업으로 이어붙이던 과정 자체를 제거',
+      '통합 raw 위에 KPI 스냅샷(미리 계산해 저장한 데이터)을 떠 즉시 조회 — 매번 ERP를 직접 뒤지지 않아 빠름',
       'PMI 때 들은 경영진 일·주·월 보고 주기를 자체 BI 툴에 녹임',
       '매출·수금·마진·흡수율(판매량과 실제 처방액(EDI)을 견줘 정산 누수를 막는 지표, 보통 3개월 누적) 시각화 — 도매/CSO 매출, 제품별 실적, 전월·전년 대비 추이, 3M·6M·12M 흡수율',
       '마진·영업활동 전용 대시보드(KPI 캐시·5축 레이더)와 지역분포·Sankey·준수율 시각화',
@@ -24,15 +25,17 @@ export const DELIVERY_PROJECTS: Project[] = [
       '법령 그라운딩(실가동) — 약사법·고시 등 법령 질의 시 국가법령정보센터의 실제 현행 법령을 먼저 조회해 그것만 인용하도록 묶어 환각 차단(하네스 엔지니어링). 모든 법령 적용',
       '필요한 화면에서만 AI 호출, 과거 월은 토큰(AI 호출 비용) 0 스냅샷으로 렌더해 비용 규율',
       '관리자 콘솔에서 동기화 상태·데이터 기준월·DB 연결을 점검',
+      '도매(CSO/비CSO)·수출·CMO 등 자사 매출 구조에 맞춘 축으로 드릴다운 — 일반 지표 나열이 아니라 Power BI 수준의 상세 분석까지',
       'Metabase/Superset 같은 상용 BI를 대체하는 자체 시각 KPI 대시보드',
     ],
-    highlight: '스냅샷 기반 경영 KPI BI — PMI 일·주·월 보고',
+    highlight: '분석 프로세스 AX 전환 — ERP·CSO·외부 API 통합 raw → 셀프서비스 BI',
     year: '2026',
   },
   {
     slug: 'sales-strategy-portal',
     name: '영업전략포털',
-    tagline: '전략기획 셀프서비스 데이터 기반 (pharmkpi 내 · 분리 예정)',
+    tagline:
+      '전략기획팀이 타부서 요청 없이 직접 분석하도록 만든 데이터 기반 (pharmkpi 내 · 분리 예정)',
     description:
       '전략기획팀이 분석에 필요한 데이터를 매번 타부서에 요청하던 걸 없애려고, pharmkpi 안에 만든 전략기획 워크스페이스. ERP와 외부 공공 API 약 10종(식약처·심평원·공공데이터포털)을 연결해 품목 raw·거래처·담당자·병원-약국 등 분석 기반 데이터를 셀프서비스로 통합하고, 반복 분석을 리포트 규칙으로 자동화합니다. 현재 pharmkpi 프로젝트 안에 있으며(같은 사이트), 향후 별도 포털로 분리할 예정입니다.',
     tech: ['Next.js 16', 'Prisma 7', 'Supabase', 'Oracle ERP · 공공 API', 'Recharts'],
@@ -51,14 +54,14 @@ export const DELIVERY_PROJECTS: Project[] = [
       '원본 데이터 추출 → 자동 매핑·검증 → 배치 업로드 데이터 파이프라인',
       '대용량 결과를 스트리밍으로 비동기 생성해 메모리 한계 없이 다운로드',
     ],
-    highlight: '전략기획 셀프서비스 데이터 기반 — ERP+공공 API 약 10종',
+    highlight: '분석 요청 병목 제거 — ERP+공공 API 약 10종 셀프서비스 통합',
     year: '2026',
     badge: 'NEW',
   },
   {
     slug: 'pharmkpi-exec',
     name: 'PharmKPI Exec',
-    tagline: '경영진용 iPad KPI 대시보드 (PWA)',
+    tagline: '경영진 정기보고를 회의실 PC에서 손 안의 iPad로 옮긴 읽기 전용 대시보드 (PWA)',
     description:
       '대표·영업임원이 매출·채권·KPI 정기보고를 회의실 PC가 아니라 손에 든 태블릿에서 바로 보도록, PharmKPI를 기반으로 세운 읽기 전용 경영 대시보드. iOS 네이티브 대신 PWA로 앱 경험을 내고, 숫자는 경영진 기준으로 재정의했습니다.',
     tech: [
@@ -88,15 +91,15 @@ export const DELIVERY_PROJECTS: Project[] = [
       '미리 계산된 스냅샷으로 숫자는 토큰 없이 렌더, AI 해석은 브리핑·거래처·질문 화면에만 호출',
       'iPad/폰 반응형(폰 전용 하단 탭)·라이트/다크/시스템 테마·iOS 홈 화면 추가 안내',
     ],
-    highlight: '경영진용 iPad KPI 대시보드 — PWA + 지표 재정의',
+    highlight: '경영 보고 접근 경로 전환 — iPad PWA + 경영진 기준 지표 재정의',
     year: '2026',
   },
   {
     slug: 'csoweb',
     name: 'CSO Web',
-    tagline: 'B2B 제약 CSO 정산 + OCR·위변조 검증 EDI (v1.20)',
+    tagline: 'SIT 엑셀·카카오톡 정산 업무를 포털 한 곳으로 옮긴 B2B CSO 정산 시스템 (v1.20)',
     description:
-      'CSO(위탁영업조직) 수수료 정산을 ① OCR 자료검토 → ② 추가 수수료 반영 자동 정산서 → ③ 조회·발송·공지(메일머지) → ④ 필터링(개발 중)으로 잇는 B2B 정산 포털. 직접 만든 이 시스템이 업계 상용 프로그램과 비교 가능한 수준에 이르러, 회사의 상용 도입 결정 후 개발 파트너로 기능을 함께 만들고 있습니다.',
+      '기존에는 SIT 솔루션에서 매번 엑셀을 내려받아 정산서를 만들고, 필터링 요청은 카카오톡으로 받아 엑셀로 관리하다 다시 SIT에 반영하는 방식이었습니다. 그 전 과정을 사이트 안에서 돌아가게 옮긴 B2B 정산 포털로, CSO(위탁영업조직) 수수료 정산을 ① OCR 자료검토 → ② 추가 수수료 반영 자동 정산서 → ③ 조회·발송·공지(메일머지) → ④ 필터링(개발 중)으로 잇습니다. 직접 만든 이 시스템이 업계 상용 프로그램과 비교 가능한 수준에 이르러, 회사의 상용 도입 결정 후 개발 파트너로 기능을 함께 만들고 있습니다.',
     tech: ['Next.js 16', 'Prisma', 'Supabase Auth', 'OCR (GPT·Claude 선택형)', 'Sharp'],
     category: 'web',
     liveUrl: 'https://cso.dvsharp.com',
@@ -115,7 +118,7 @@ export const DELIVERY_PROJECTS: Project[] = [
       'Resend API와 하이웍스 SMTP 워커를 병행한 승인·업로드·메일머지 알림 발송',
       'Supabase PostgreSQL, 자체 JWT, 서버측 권한 필터링으로 일반회원은 자사 데이터만 접근',
     ],
-    highlight: '방향 보정 + 모델 선택형 OCR + 4단계 위변조 검증',
+    highlight: '엑셀·카카오톡 정산 흐름의 시스템 전환 — OCR + 4단계 위변조 검증',
     year: '2026',
     badge: 'NEW',
     featuredModule: {
@@ -129,9 +132,9 @@ export const DELIVERY_PROJECTS: Project[] = [
   {
     slug: 'kpis-dsr-api',
     name: 'KPIS DSR',
-    tagline: '의약품 공급내역 가공·조회 시스템 (v1.29)',
+    tagline: '엑셀 수기 검증·반송 수정을 클릭 한 번으로 줄인 공급내역 보고 자동화 (v1.29)',
     description:
-      '의약품관리종합정보센터(KPIS) 공급내역(갑지) 데이터를 가공·검증·조회하는 풀스택 시스템. 커스텀 검증 규칙 엔진으로 데이터 무결성을 보장하고, 일일 리포트를 자동 생성합니다.',
+      '의약품관리종합정보센터(KPIS) 공급내역(갑지) 보고는 원래 엑셀에서 수기로 검증하고, 반송 정보를 받으면 다시 수기로 고치는 반복 작업이었습니다. 이를 먼저 엑셀 자동화로 옮기고 다시 사이트 자동화까지 끌어올려, 지금은 업로드 후 클릭 한 번으로 검증·보정이 끝나고 다운로드 클릭 한 번으로 제출본이 나옵니다. 커스텀 검증 규칙 엔진과 단가학습이 그 자동화의 핵심입니다.',
     tech: ['Express 5', 'React 19', 'Vite 7', 'MSSQL', 'TanStack Table'],
     category: 'web',
     liveUrl: 'https://kpis.dvsharp.com',
@@ -153,7 +156,7 @@ export const DELIVERY_PROJECTS: Project[] = [
       '수정 이력 추적(manual/rule/correction/auto_match 종류별·이전값 대비·타임스탬프)과 DataGrid 셀 편집',
       '갑지·을지 탭별·전체 결과 다운로드·마스터DB(MA101 표준코드·바코드·ATC 조회) + MA111~MA114 API 자동 제출',
     ],
-    highlight: '표준코드·규격·단가·수량 불일치 자동 무결화',
+    highlight: '수기 검증·반송 수정 → 클릭 한 번 자동 무결화',
     year: '2026',
   },
   {
@@ -190,7 +193,7 @@ export const DELIVERY_PROJECTS: Project[] = [
   {
     slug: 'erp-spec',
     name: 'ERP Spec',
-    tagline: '인수사 IT팀 인계를 위한 ERP 구조 분석 포털 (v2.9)',
+    tagline: '인수사 IT팀 인계 요청에 대응해 만든 Oracle ERP 785개 테이블 구조 포털 (v2.9)',
     description:
       '인수사 IT팀 요청에 대응해 자사 Oracle ERP 785개 테이블 구조를 웹에서 검색·분석할 수 있게 정리한 포털. 테이블 간 관계를 인터랙티브 그래프(React Flow + dagre)로 시각화하여 인계, 영향 범위 검토, 스키마 탐색을 지원합니다.',
     tech: ['Next.js 15', 'Nextra', 'React Flow', 'dagre', 'TypeScript'],

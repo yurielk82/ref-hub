@@ -5,6 +5,7 @@ import { ArrowLeft, ExternalLink, BookOpen } from 'lucide-react'
 import { PROJECTS, getProject } from '@/data/projects'
 import { AX_CASE_STUDIES } from '@/data/ax'
 import { NewBadge } from '@/components/portfolio/badge'
+import { CaseNarrative } from '@/components/portfolio/case-narrative'
 import { ProjectThumbnail } from '@/components/portfolio/project-thumbnail'
 import { TechTags } from '@/components/portfolio/tech-tags'
 
@@ -107,42 +108,8 @@ export default async function ProjectPage(props: { params: Promise<{ slug: strin
           </div>
         </div>
 
-        {/* 케이스 서사 — 문제 → 해결 → 결과 */}
-        {caseStudy && (
-          <section className="mt-16">
-            <p className="font-[family-name:var(--font-mono)] text-xs uppercase tracking-widest text-[var(--accent)]">
-              Case
-            </p>
-            <h2 className="mt-2 text-2xl font-bold tracking-tight text-stone-900 dark:text-stone-100">
-              문제 → 해결 → 결과
-            </h2>
-            {caseStudy.impact && (
-              <p className="mt-5 border-l-2 border-l-[var(--accent)] pl-3 text-sm font-semibold leading-6 text-stone-900 dark:text-stone-100">
-                {caseStudy.impact}
-              </p>
-            )}
-            <dl className="mt-8 space-y-6">
-              <div>
-                <dt className="text-xs font-semibold uppercase text-stone-400">Problem</dt>
-                <dd className="mt-1 text-sm leading-7 text-stone-700 dark:text-stone-300">
-                  {caseStudy.problem}
-                </dd>
-              </div>
-              <div>
-                <dt className="text-xs font-semibold uppercase text-stone-400">AX Intervention</dt>
-                <dd className="mt-1 text-sm leading-7 text-stone-700 dark:text-stone-300">
-                  {caseStudy.intervention}
-                </dd>
-              </div>
-              <div>
-                <dt className="text-xs font-semibold uppercase text-stone-400">Outcome</dt>
-                <dd className="mt-1 text-sm leading-7 text-stone-700 dark:text-stone-300">
-                  {caseStudy.outcome}
-                </dd>
-              </div>
-            </dl>
-          </section>
-        )}
+        {/* 케이스 서사 — 문제 → 시간순 단계 → 결과 */}
+        {caseStudy && <CaseNarrative caseStudy={caseStudy} />}
 
         {/* 핵심 모듈 콜아웃 */}
         {project.featuredModule && (

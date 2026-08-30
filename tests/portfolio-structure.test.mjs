@@ -2,7 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import path from 'node:path'
-import { ROOT, readProjectData } from './helpers.mjs'
+import { ROOT, readAxData, readProjectData } from './helpers.mjs'
 
 test('AX resume home route and data source are present', () => {
   const homePage = path.join(ROOT, 'app', '(portfolio)', 'page.tsx')
@@ -19,8 +19,23 @@ test('AX resume home route and data source are present', () => {
   )
 })
 
+test('AX registry composes every case module in render order', () => {
+  // readAxData()는 파일을 직접 읽으므로, 런타임 등록부가 같은 모듈을 같은
+  // 순서로 결합하는지 여기서 함께 못 박는다 (모듈 누락·순서 뒤바뀜 회귀 방지).
+  const axIndex = readFileSync(path.join(ROOT, 'data', 'ax.ts'), 'utf8')
+
+  assert.match(
+    axIndex,
+    /AX_CASE_STUDIES[^=]*=\s*\[\s*\.\.\.DELIVERY_CASE_STUDIES,\s*\.\.\.TOOLING_CASE_STUDIES\s*\]/,
+    'data/ax.ts should compose delivery then tooling case registries',
+  )
+  for (const module of ['./ax-cases/delivery', './ax-cases/tooling']) {
+    assert.ok(axIndex.includes(module), `data/ax.ts should import ${module}`)
+  }
+})
+
 test('AX case studies reference existing portfolio projects', () => {
-  const axData = readFileSync(path.join(ROOT, 'data', 'ax.ts'), 'utf8')
+  const axData = readAxData()
   const projectData = readProjectData()
   const axSlugs = [...axData.matchAll(/projectSlug:\s*'([^']+)'/g)].map((match) => match[1])
   const projectSlugs = new Set(
@@ -34,7 +49,7 @@ test('AX case studies reference existing portfolio projects', () => {
 })
 
 test('AX case studies are ordered by AX relevance and delivery proof', () => {
-  const axData = readFileSync(path.join(ROOT, 'data', 'ax.ts'), 'utf8')
+  const axData = readAxData()
   const projectData = readProjectData()
   const axSlugs = [...axData.matchAll(/projectSlug:\s*'([^']+)'/g)].map((match) => match[1])
   const erpSpecBlock = projectData.match(/\{\n\s+slug:\s*'erp-spec'[\s\S]*?\n\s+\},/)?.[0] ?? ''
@@ -180,7 +195,7 @@ test('docs index covers every manual directory under content/', () => {
 
 test('retired projects do not advertise dead live URLs', () => {
   const projectData = readProjectData()
-  const axData = readFileSync(path.join(ROOT, 'data', 'ax.ts'), 'utf8')
+  const axData = readAxData()
   const retired = [
     { slug: 'pharmkpi-exec', host: 'exec.dvsharp.com' },
     { slug: 'apinfy-lab', host: 'apin.dvsharp.com' },

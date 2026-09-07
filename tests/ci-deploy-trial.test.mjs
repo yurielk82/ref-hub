@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 
 import { createProductionCommands } from '../scripts/ci-deploy-adapters.mjs'
-import { runTrial } from '../scripts/ci-deploy-trial.mjs'
+import { controllerLockInvocation, runTrial } from '../scripts/ci-deploy-trial.mjs'
 
 const SHA = '0123456789abcdef0123456789abcdef01234567'
 const NOW = new Date('2026-09-08T12:00:00+09:00')
@@ -36,15 +36,13 @@ function harness({
   dirtyFiles = [],
   changedFiles = ['app/page.tsx'],
   localSha = 'abcdef0123456789abcdef0123456789abcdef01',
+  localShas = null,
 } = {}) {
   const calls = []
   const writes = []
   const commands = {}
-  const simple = {
-    fetchOrigin: undefined,
-    deploy: undefined,
-    rollback: undefined,
-  }
+  let currentSha = localSha
+  const simple = { fetchOrigin: undefined }
 
   for (const name of Object.keys(simple)) {
     commands[name] = async () => {
@@ -52,13 +50,18 @@ function harness({
       if (fail === name) throw new Error(`${name} failed`)
     }
   }
+  commands.deploy = async () => {
+    calls.push('deploy')
+    if (fail === 'deploy') throw new Error('deploy failed')
+    if (!localShas) currentSha = SHA
+  }
   commands.remoteSha = async () => {
     calls.push('remoteSha')
     return SHA
   }
   commands.localSha = async () => {
     calls.push('localSha')
-    return localSha
+    return localShas?.shift() ?? currentSha
   }
   commands.currentBranch = async () => {
     calls.push('currentBranch')
@@ -80,8 +83,8 @@ function harness({
     calls.push('changedFiles')
     return changedFiles
   }
-  commands.smoke = async (phase) => {
-    calls.push(`smoke:${phase}`)
+  commands.smoke = async (phase, expectedSha) => {
+    calls.push(`smoke:${phase}:${expectedSha}`)
     if (smokeFails.includes(phase)) throw new Error(`${phase} smoke failed`)
     return { reportPath: `/tmp/${phase}.json` }
   }
@@ -153,7 +156,7 @@ test('should_report_without_mutation_in_dry_run', async () => {
   assert.equal(trial.calls.includes('deploy'), false)
 })
 
-test('should_record_success_after_exact_fast_forward_deploy_and_production_smoke', async () => {
+test('should_record_success_after_the_locked_gateway_completes_its_production_smoke', async () => {
   const trial = harness()
   const result = await runTrial({
     now: NOW,
@@ -162,7 +165,7 @@ test('should_record_success_after_exact_fast_forward_deploy_and_production_smoke
   })
 
   assert.equal(result.status, 'deployed')
-  assert.deepEqual(trial.calls.slice(-2), ['deploy', 'smoke:deployed'])
+  assert.deepEqual(trial.calls.slice(-2), ['deploy', 'localSha'])
   assert.equal(trial.writes[0].status, 'attempting')
   assert.equal(trial.writes.at(-1).status, 'deployed')
   assert.equal(trial.writes.at(-1).lastAttemptedSha, SHA)
@@ -178,7 +181,7 @@ test('should_adopt_an_already_deployed_exact_SHA_only_after_SHA_aware_smoke', as
   })
 
   assert.equal(result.status, 'already-deployed')
-  assert.equal(trial.calls.includes('smoke:deployed'), true)
+  assert.equal(trial.calls.includes(`smoke:deployed:${SHA}`), true)
   assert.equal(trial.calls.includes('deploy'), false)
   assert.equal(trial.writes.at(-1).status, 'deployed')
   assert.equal(trial.writes.at(-1).details.adoptedCurrent, true)
@@ -198,7 +201,7 @@ test('should_fail_closed_when_current_SHA_cannot_be_verified_as_deployed', async
   assert.deepEqual(trial.writes, [])
 })
 
-test('should_record_deploy_failure_and_verify_the_existing_live_site', async () => {
+test('should_record_gateway_failure_without_an_out_of_lock_smoke_or_rollback', async () => {
   const trial = harness({ fail: 'deploy' })
   const result = await runTrial({
     now: NOW,
@@ -207,35 +210,30 @@ test('should_record_deploy_failure_and_verify_the_existing_live_site', async () 
   })
 
   assert.equal(result.status, 'deploy-failed')
-  assert.equal(trial.calls.includes('smoke:deploy-failure'), true)
+  assert.equal(
+    trial.calls.some((call) => call.startsWith('smoke:')),
+    false,
+  )
+  assert.equal(trial.calls.includes('rollback'), false)
   assert.equal(trial.writes.at(-1).lastAttemptedSha, SHA)
   assert.equal(trial.writes.at(-1).status, 'deploy-failed')
 })
 
-test('should_rollback_when_deploy_and_post_failure_smoke_both_fail', async () => {
-  const trial = harness({ fail: 'deploy', smokeFails: ['deploy-failure'] })
+test('should_not_record_success_when_live_SHA_changes_after_the_locked_gateway_returns', async () => {
+  const racedSha = 'fedcba9876543210fedcba9876543210fedcba98'
+  const trial = harness({
+    localShas: ['abcdef0123456789abcdef0123456789abcdef01', racedSha],
+  })
   const result = await runTrial({
     now: NOW,
     commands: trial.commands,
     stateStore: trial.stateStore,
   })
 
-  assert.equal(result.status, 'rolled-back')
-  assert.deepEqual(trial.calls.slice(-3), ['smoke:deploy-failure', 'rollback', 'smoke:rollback'])
-  assert.equal(trial.writes.at(-1).status, 'rolled-back')
-})
-
-test('should_rollback_and_recheck_when_deployed_browser_smoke_fails', async () => {
-  const trial = harness({ smokeFails: ['deployed'] })
-  const result = await runTrial({
-    now: NOW,
-    commands: trial.commands,
-    stateStore: trial.stateStore,
-  })
-
-  assert.equal(result.status, 'rolled-back')
-  assert.deepEqual(trial.calls.slice(-3), ['smoke:deployed', 'rollback', 'smoke:rollback'])
-  assert.equal(trial.writes.at(-1).status, 'rolled-back')
+  assert.equal(result.status, 'deployment-raced')
+  assert.equal(result.observedSha, racedSha)
+  assert.equal(trial.calls.includes('rollback'), false)
+  assert.equal(trial.writes.at(-1).status, 'deployment-raced')
 })
 
 test('should_never_retry_the_same_attempted_SHA', async () => {
@@ -285,6 +283,23 @@ test('should_deploy_the_same_offline_content_snapshot_that_CI_verified', async (
   assert.equal(calls[0].options.env.REF_HUB_OFFLINE_CONTENT, '1')
   assert.deepEqual(calls[0].args, ['ref-hub', '--no-merge', '--expected-ref', SHA])
 
-  await commands.smoke('deployed')
-  assert.equal(calls[2].options.env.SMOKE_EXPECTED_SHA, SHA)
+  await commands.smoke('deployed', SHA)
+  assert.equal(calls[1].options.env.SMOKE_EXPECTED_SHA, SHA)
+})
+
+test('should_reenter_the_controller_through_a_nonblocking_single_process_flock', () => {
+  const invocation = controllerLockInvocation(['--dry-run'], '/tmp/controller.mjs')
+
+  assert.equal(invocation.command, 'flock')
+  assert.deepEqual(invocation.args.slice(0, 4), [
+    '-n',
+    '-E',
+    '75',
+    '/tmp/ref-hub-ci-deploy-trial-controller.lock',
+  ])
+  assert.deepEqual(invocation.args.slice(-3), [
+    process.execPath,
+    '/tmp/controller.mjs',
+    '--dry-run',
+  ])
 })

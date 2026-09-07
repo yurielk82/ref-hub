@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 
+import { runDeployAuthedHealth } from '../scripts/deploy-authed-health.mjs'
 import { SMOKE_ROUTES, classifyRouteResult } from '../scripts/production-smoke.mjs'
 
 const SHA = '0123456789abcdef0123456789abcdef01234567'
@@ -72,4 +73,19 @@ test('should_fail_when_rendered_assets_do_not_match_the_expected_deployment_SHA'
     ok: false,
     failures: ['deployment-marker-mismatch'],
   })
+})
+
+test('should_bind_the_locked_deploy_health_audit_to_the_exact_live_SHA', async () => {
+  const calls = []
+  const result = await runDeployAuthedHealth({
+    getSha: async () => SHA,
+    smoke: async (options) => {
+      calls.push(options)
+      return { ok: true, reportPath: '/tmp/report.json' }
+    },
+  })
+
+  assert.equal(result.ok, true)
+  assert.equal(calls[0].expectedSha, SHA)
+  assert.match(calls[0].artifactDir, new RegExp(`${SHA}-deploy-gateway$`))
 })

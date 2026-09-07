@@ -4,7 +4,7 @@
 
 **Goal:** Run a seven-day, fail-closed trial in which only a `main` SHA with successful GitHub `CI` and `Quality Gate` push runs can be deployed to `ref.dvsharp.com`.
 
-**Architecture:** GitHub-hosted Actions perform deterministic build and test checks without production credentials. A time-bounded controller on the existing OCI host polls the exact `main` SHA and both required workflow results, rejects dirty/diverged/dependency-changing candidates, fast-forwards to that immutable SHA, invokes the registered workspace deploy command with the same committed content snapshot CI verified, and runs a Firefox browser smoke test. It records every attempted SHA so a failed deployment is not retried automatically.
+**Architecture:** GitHub-hosted Actions perform deterministic build and test checks without production credentials. A time-bounded, single-process controller on the existing OCI host polls the exact `main` SHA and both required workflow results, rejects dirty/diverged/dependency-changing candidates, and invokes the registered workspace deploy command with the same committed content snapshot CI verified. The gateway fast-forwards, builds, reloads, runs the exact-SHA Firefox smoke test, and conditionally rolls back while holding the project deploy lock. The controller records every attempted SHA so a failed deployment is not retried automatically.
 
 **Tech Stack:** GitHub Actions, Node.js 24, GitHub CLI, Next.js 16, Playwright Firefox, workspace `bin/deploy.sh`, cron.
 
@@ -54,7 +54,7 @@
 
 1. Write failing tests using injected command and state adapters.
 2. Cover fetch failure, non-fast-forward history, CI failure, deploy failure, browser failure, rollback, and success state recording.
-3. Implement the controller using `gh run list`, `/home/ubuntu/GitHub/bin/deploy.sh ref-hub --expected-ref <SHA>` for exact-SHA fast-forward under the registered project lock, atomic attempt-history writes, and one-attempt-per-SHA behavior. Dependency manifest changes remain manual during the trial so package installation cannot race the registered deploy lock.
+3. Implement the controller using `gh run list`, a non-blocking controller `flock`, `/home/ubuntu/GitHub/bin/deploy.sh ref-hub --expected-ref <SHA>` for exact-SHA fast-forward under the registered project lock, atomic attempt-history writes, and one-attempt-per-SHA behavior. Dependency manifest changes remain manual during the trial so package installation cannot race the registered deploy lock.
 4. Run focused and full tests.
 
 ### Task 5: Implement production browser smoke verification
@@ -64,7 +64,7 @@
 - Test: `tests/production-smoke.test.mjs`
 
 1. Write failing tests for route definitions and console/page/network failure classification.
-2. Implement Firefox checks for `/`, `/projects`, and `/docs`, including screenshots and a JSON report.
+2. Implement Firefox checks for `/`, `/projects`, and `/docs`, including screenshots and a JSON report, and connect them through `scripts/deploy-authed-health.mjs` so smoke failure and rollback stay inside the registered project lock.
 3. Run unit tests and a live smoke test against `https://ref.dvsharp.com`.
 
 ### Task 6: Verify, deliver, and activate the bounded trial

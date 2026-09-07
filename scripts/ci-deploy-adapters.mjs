@@ -10,7 +10,8 @@ const STATE_PATH = '/home/ubuntu/backups/ci-deploy/ref-hub-trial.json'
 const REPOSITORY = 'yurielk82/ref-hub'
 const REMOTE_MAIN = 'origin/main'
 const GIT_NAME_ONLY = '--name-only'
-const NOISE_PATH = /(^|\/)\.serena\/|\.md$|(^|\/)docs\/|(^|\/)\.claude\/|\.log$|\.tsbuildinfo$/
+const NOISE_PATH =
+  /(^|\/)\.serena\/|(^|\/)\.claude\/|\.log$|\.tsbuildinfo$|(^|\/)(AGENTS|CLAUDE)(\.local)?\.md$/
 
 async function run(command, args, options = {}) {
   const { stdout = '' } = await execFileAsync(command, args, {
@@ -73,15 +74,13 @@ export function createProductionCommands(execute = run) {
       execute(DEPLOY_COMMAND, ['ref-hub', '--no-merge', '--expected-ref', sha], {
         env: { ...process.env, REF_HUB_OFFLINE_CONTENT: '1' },
       }),
-    rollback: () => execute(DEPLOY_COMMAND, ['ref-hub', '--rollback', '--no-merge']),
-    smoke: async (phase) => {
-      const sha = await execute('git', ['rev-parse', 'HEAD'])
-      const artifactDir = `/home/ubuntu/backups/ci-deploy/ref-hub-smoke/${sha}-${phase}`
+    smoke: async (phase, expectedSha) => {
+      const artifactDir = `/home/ubuntu/backups/ci-deploy/ref-hub-smoke/${expectedSha}-${phase}`
       await execute('node', ['scripts/production-smoke.mjs'], {
         env: {
           ...process.env,
           SMOKE_ARTIFACT_DIR: artifactDir,
-          SMOKE_EXPECTED_SHA: phase === 'deployed' ? sha : '',
+          SMOKE_EXPECTED_SHA: expectedSha,
         },
       })
       return { reportPath: path.join(artifactDir, 'report.json') }

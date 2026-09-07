@@ -1,18 +1,20 @@
 #!/usr/bin/env node
 
 import path from 'node:path'
+import { spawnSync } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
 
 import { createProductionCommands, productionStateStore } from './ci-deploy-adapters.mjs'
 import { evaluateDeployment, isTrialActive } from './ci-deploy-policy.mjs'
 
 const DEPENDENCY_FILES = new Set(['package.json', 'package-lock.json', 'npm-shrinkwrap.json'])
+const CONTROLLER_LOCK = '/tmp/ref-hub-ci-deploy-trial-controller.lock'
+const CONTROLLER_BUSY_EXIT = 75
 const STATUS = Object.freeze({
   deployed: 'deployed',
   deployFailed: 'deploy-failed',
-  rolledBack: 'rolled-back',
-  rollbackFailed: 'rollback-failed',
-  rollbackSmokeFailed: 'rollback-smoke-failed',
+  deploymentRaced: 'deployment-raced',
+  unverifiedLiveSha: 'unverified-live-sha-requires-manual',
 })
 
 function errorMessage(error) {
@@ -81,13 +83,23 @@ async function assessCandidate({ now, commands, stateStore, dryRun }) {
   }
   if (localSha === sha) {
     if (dryRun) return { result: { status: 'would-adopt-current', sha } }
-    const deployedSmoke = await capture(() => commands.smoke(STATUS.deployed))
+    const deployedSmoke = await capture(() => commands.smoke(STATUS.deployed, sha))
     if (deployedSmoke.error) {
       return {
         result: {
-          status: 'unverified-live-sha-requires-manual',
+          status: STATUS.unverifiedLiveSha,
           sha,
           error: deployedSmoke.error,
+        },
+      }
+    }
+    const verifiedSha = await commands.localSha()
+    if (verifiedSha !== sha) {
+      return {
+        result: {
+          status: STATUS.unverifiedLiveSha,
+          sha,
+          observedSha: verifiedSha,
         },
       }
     }
@@ -128,76 +140,41 @@ async function failAttempt({ stateStore, attempting, status, now, sha, details =
   return { status, sha, ...details }
 }
 
-async function handleDeployFailure({ commands, stateStore, attempting, now, sha, error }) {
-  const liveSmoke = await capture(() => commands.smoke('deploy-failure'))
-  if (liveSmoke.error) {
-    return handleSmokeFailure({
-      commands,
-      stateStore,
-      attempting,
-      now,
-      sha,
-      error: `deploy failed: ${error}; post-failure smoke failed: ${liveSmoke.error}`,
-    })
-  }
-  return failAttempt({
-    stateStore,
-    attempting,
-    status: STATUS.deployFailed,
-    now,
-    sha,
-    details: { error, liveSmoke: liveSmoke.value ?? { error: liveSmoke.error } },
-  })
-}
-
-async function handleSmokeFailure({ commands, stateStore, attempting, now, sha, error }) {
-  const rollback = await capture(() => commands.rollback())
-  const rollbackSmoke = rollback.error ? null : await capture(() => commands.smoke('rollback'))
-  const status = rollback.error
-    ? STATUS.rollbackFailed
-    : rollbackSmoke?.error
-      ? STATUS.rollbackSmokeFailed
-      : STATUS.rolledBack
-  return failAttempt({
-    stateStore,
-    attempting,
-    status,
-    now,
-    sha,
-    details: {
-      deployedSmokeError: error,
-      rollbackError: rollback.error ?? null,
-      rollbackSmoke:
-        rollbackSmoke?.value ?? (rollbackSmoke?.error ? { error: rollbackSmoke.error } : null),
-    },
-  })
-}
-
 async function executeDeployment({ now, commands, stateStore, previous, sha, runs }) {
   const attempting = stateForAttempt({ previous, sha, runs, now })
   await stateStore.write(attempting)
 
   const deploy = await capture(() => commands.deploy(sha))
   if (deploy.error) {
-    return handleDeployFailure({ commands, stateStore, attempting, now, sha, error: deploy.error })
-  }
-
-  const deployedSmoke = await capture(() => commands.smoke(STATUS.deployed))
-  if (deployedSmoke.error) {
-    return handleSmokeFailure({
-      commands,
+    return failAttempt({
       stateStore,
       attempting,
+      status: STATUS.deployFailed,
       now,
       sha,
-      error: deployedSmoke.error,
+      details: { error: deploy.error, rollbackOwner: 'workspace-deploy-gateway' },
+    })
+  }
+
+  const observedSha = await commands.localSha()
+  if (observedSha !== sha) {
+    return failAttempt({
+      stateStore,
+      attempting,
+      status: STATUS.deploymentRaced,
+      now,
+      sha,
+      details: {
+        observedSha,
+        rollbackOwner: 'none-after-gateway-lock-release',
+      },
     })
   }
 
   await finishAttempt(stateStore, attempting, STATUS.deployed, now, {
-    deployedSmoke: deployedSmoke.value,
+    deployGateway: deploy.value,
   })
-  return { status: STATUS.deployed, sha, deployedSmoke: deployedSmoke.value }
+  return { status: STATUS.deployed, sha, deployGateway: deploy.value }
 }
 
 export async function runTrial({ now = new Date(), commands, stateStore, dryRun = false }) {
@@ -207,8 +184,37 @@ export async function runTrial({ now = new Date(), commands, stateStore, dryRun 
   return executeDeployment({ now, commands, stateStore, ...candidate })
 }
 
+export function controllerLockInvocation(args, scriptPath = fileURLToPath(import.meta.url)) {
+  return {
+    command: 'flock',
+    args: [
+      '-n',
+      '-E',
+      String(CONTROLLER_BUSY_EXIT),
+      CONTROLLER_LOCK,
+      process.execPath,
+      scriptPath,
+      ...args,
+    ],
+  }
+}
+
 async function main() {
   const args = process.argv.slice(2)
+  if (process.env.REF_HUB_TRIAL_CONTROLLER_LOCKED !== '1') {
+    const invocation = controllerLockInvocation(args)
+    const child = spawnSync(invocation.command, invocation.args, {
+      env: { ...process.env, REF_HUB_TRIAL_CONTROLLER_LOCKED: '1' },
+      stdio: 'inherit',
+    })
+    if (child.error) throw child.error
+    if (child.status === CONTROLLER_BUSY_EXIT) {
+      console.log(JSON.stringify({ status: 'controller-already-running' }))
+      return
+    }
+    process.exitCode = child.status ?? 1
+    return
+  }
   if (args.some((arg) => arg !== '--dry-run')) {
     throw new Error('usage: node scripts/ci-deploy-trial.mjs [--dry-run]')
   }
@@ -225,8 +231,8 @@ async function main() {
     'wrong-live-branch',
     'dirty-live-checkout',
     'dependency-change-requires-manual',
-    'unverified-live-sha-requires-manual',
-    'rolled-back',
+    STATUS.unverifiedLiveSha,
+    'deployment-raced',
   ]
   if (failed || blocked.includes(result.status)) {
     process.exitCode = 1

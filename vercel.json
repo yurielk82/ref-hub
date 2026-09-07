@@ -1,0 +1,4 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "REF_HUB_OFFLINE_CONTENT=1 npm run build"
+}

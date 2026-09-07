@@ -9,39 +9,46 @@ function snapshotIsComplete(root, content) {
   )
 }
 
+function verifySnapshot(root, content, logger) {
+  if (!snapshotIsComplete(root, content)) {
+    throw new Error(`tracked snapshot is incomplete: content/${content}`)
+  }
+  logger.info(`[sync-docs] snapshot verified: content/${content}`)
+}
+
+function copyProjectDocs(root, { repo, content }, logger) {
+  const source = path.join(root, 'repos', repo, 'docs', 'manual')
+  const destination = path.join(root, 'content', content)
+  if (!existsSync(source)) {
+    logger.error(`[sync-docs] source missing: ${source}`)
+    return false
+  }
+
+  try {
+    if (existsSync(destination)) rmSync(destination, { recursive: true })
+    cpSync(source, destination, { recursive: true })
+    logger.info(`[sync-docs] ${repo}/docs/manual/ -> content/${content}/`)
+    return true
+  } catch (error) {
+    logger.error(`[sync-docs] failed: ${repo}: ${error.message}`)
+    return false
+  }
+}
+
 export function syncDocs({ root, projects, offline = false, logger = console }) {
   let synced = 0
   let snapshots = 0
   let failed = 0
 
-  for (const { repo, content } of projects) {
-    const source = path.join(root, 'repos', repo, 'docs', 'manual')
-    const destination = path.join(root, 'content', content)
-
+  for (const project of projects) {
     if (offline) {
-      if (!snapshotIsComplete(root, content)) {
-        throw new Error(`tracked snapshot is incomplete: content/${content}`)
-      }
+      verifySnapshot(root, project.content, logger)
       snapshots += 1
-      logger.info(`[sync-docs] snapshot verified: content/${content}`)
       continue
     }
-
-    if (!existsSync(source)) {
-      logger.error(`[sync-docs] source missing: ${source}`)
-      failed += 1
-      continue
-    }
-
-    try {
-      if (existsSync(destination)) {
-        rmSync(destination, { recursive: true })
-      }
-      cpSync(source, destination, { recursive: true })
+    if (copyProjectDocs(root, project, logger)) {
       synced += 1
-      logger.info(`[sync-docs] ${repo}/docs/manual/ -> content/${content}/`)
-    } catch (error) {
-      logger.error(`[sync-docs] failed: ${repo}: ${error.message}`)
+    } else {
       failed += 1
     }
   }

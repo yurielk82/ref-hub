@@ -55,6 +55,59 @@ async function capture(operation) {
   }
 }
 
+async function preflightLiveCheckout({ commands, sha }) {
+  const branch = await commands.currentBranch()
+  if (branch !== 'main') {
+    return { result: { status: 'wrong-live-branch', sha, branch } }
+  }
+  const localSha = await commands.localSha()
+  const dirtyFiles = await commands.buildRelevantDirty()
+  if (dirtyFiles.length > 0) {
+    return { result: { status: 'dirty-live-checkout', sha, dirtyFiles } }
+  }
+  return { localSha }
+}
+
+async function adoptCurrentDeployment({ now, commands, stateStore, previous, sha, runs, dryRun }) {
+  if (dryRun) return { status: 'would-adopt-current', sha }
+  const deployedSmoke = await capture(() => commands.smoke(STATUS.deployed, sha))
+  if (deployedSmoke.error) {
+    return { status: STATUS.unverifiedLiveSha, sha, error: deployedSmoke.error }
+  }
+  const verifiedSha = await commands.localSha()
+  if (verifiedSha !== sha) {
+    return { status: STATUS.unverifiedLiveSha, sha, observedSha: verifiedSha }
+  }
+  const attempting = stateForAttempt({ previous, sha, runs, now })
+  await stateStore.write(attempting)
+  await finishAttempt(stateStore, attempting, STATUS.deployed, now, {
+    adoptedCurrent: true,
+    deployedSmoke: deployedSmoke.value,
+  })
+  return { status: 'already-deployed', sha, deployedSmoke: deployedSmoke.value }
+}
+
+async function assessUpgrade({ commands, sha, localSha, decision, dryRun }) {
+  if (!(await commands.isAncestor(localSha, sha))) {
+    return { result: { status: 'non-fast-forward', sha, localSha } }
+  }
+  const changedFiles = await commands.changedFiles(localSha, sha)
+  const dependencyFiles = changedFiles.filter((file) => DEPENDENCY_FILES.has(file))
+  if (dependencyFiles.length > 0) {
+    return { result: { status: 'dependency-change-requires-manual', sha, dependencyFiles } }
+  }
+  if (dryRun) {
+    return {
+      result: {
+        status: 'would-deploy',
+        sha,
+        ciRunIds: decision.runs.map((run) => run.databaseId),
+      },
+    }
+  }
+  return null
+}
+
 async function assessCandidate({ now, commands, stateStore, dryRun }) {
   const previous = await stateStore.read()
   await commands.fetchOrigin()
@@ -72,66 +125,24 @@ async function assessCandidate({ now, commands, stateStore, dryRun }) {
     return { result: { status: decision.reason, sha } }
   }
 
-  const branch = await commands.currentBranch()
-  if (branch !== 'main') {
-    return { result: { status: 'wrong-live-branch', sha, branch } }
-  }
-  const localSha = await commands.localSha()
-  const dirtyFiles = await commands.buildRelevantDirty()
-  if (dirtyFiles.length > 0) {
-    return { result: { status: 'dirty-live-checkout', sha, dirtyFiles } }
-  }
+  const preflight = await preflightLiveCheckout({ commands, sha })
+  if (preflight.result) return preflight
+  const { localSha } = preflight
   if (localSha === sha) {
-    if (dryRun) return { result: { status: 'would-adopt-current', sha } }
-    const deployedSmoke = await capture(() => commands.smoke(STATUS.deployed, sha))
-    if (deployedSmoke.error) {
-      return {
-        result: {
-          status: STATUS.unverifiedLiveSha,
-          sha,
-          error: deployedSmoke.error,
-        },
-      }
-    }
-    const verifiedSha = await commands.localSha()
-    if (verifiedSha !== sha) {
-      return {
-        result: {
-          status: STATUS.unverifiedLiveSha,
-          sha,
-          observedSha: verifiedSha,
-        },
-      }
-    }
-    const attempting = stateForAttempt({ previous, sha, runs: decision.runs, now })
-    await stateStore.write(attempting)
-    await finishAttempt(stateStore, attempting, STATUS.deployed, now, {
-      adoptedCurrent: true,
-      deployedSmoke: deployedSmoke.value,
-    })
     return {
-      result: { status: 'already-deployed', sha, deployedSmoke: deployedSmoke.value },
-    }
-  }
-  if (!(await commands.isAncestor(localSha, sha))) {
-    return { result: { status: 'non-fast-forward', sha, localSha } }
-  }
-  const changedFiles = await commands.changedFiles(localSha, sha)
-  const dependencyFiles = changedFiles.filter((file) => DEPENDENCY_FILES.has(file))
-  if (dependencyFiles.length > 0) {
-    return {
-      result: { status: 'dependency-change-requires-manual', sha, dependencyFiles },
-    }
-  }
-  if (dryRun) {
-    return {
-      result: {
-        status: 'would-deploy',
+      result: await adoptCurrentDeployment({
+        now,
+        commands,
+        stateStore,
+        previous,
         sha,
-        ciRunIds: decision.runs.map((run) => run.databaseId),
-      },
+        runs: decision.runs,
+        dryRun,
+      }),
     }
   }
+  const upgrade = await assessUpgrade({ commands, sha, localSha, decision, dryRun })
+  if (upgrade) return upgrade
   return { previous, sha, runs: decision.runs }
 }
 

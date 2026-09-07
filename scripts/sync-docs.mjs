@@ -2,9 +2,9 @@
  * submodule의 docs/manual/ → content/{project}/ 동기화
  * prebuild, predev에서 자동 실행
  */
-import { cpSync, rmSync, existsSync } from 'node:fs'
 import { resolve, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { syncDocs } from './sync-docs-lib.mjs'
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 
@@ -14,31 +14,16 @@ const PROJECTS = [
   { repo: 'ev-motor-reliability', content: 'ev-motor-reliability' },
 ]
 
-let synced = 0
-let failed = 0
-
-for (const { repo, content } of PROJECTS) {
-  const src = resolve(ROOT, 'repos', repo, 'docs', 'manual')
-  const dest = resolve(ROOT, 'content', content)
-
-  if (!existsSync(src)) {
-    console.error(`[sync-docs] 오류: ${src} 없음`)
-    failed++
-    continue
-  }
-
-  try {
-    if (existsSync(dest)) {
-      rmSync(dest, { recursive: true })
-    }
-    cpSync(src, dest, { recursive: true })
-    synced++
-    console.log(`[sync-docs] ${repo}/docs/manual/ → content/${content}/`)
-  } catch (err) {
-    console.error(`[sync-docs] 실패: ${repo}`, err.message)
-    failed++
-  }
+try {
+  const result = syncDocs({
+    root: ROOT,
+    projects: PROJECTS,
+    offline: process.env.REF_HUB_OFFLINE_CONTENT === '1',
+  })
+  console.log(
+    `[sync-docs] complete: ${result.synced} synced, ${result.snapshots} snapshots, ${result.failed} failed`,
+  )
+} catch (error) {
+  console.error(`[sync-docs] fatal: ${error.message}`)
+  process.exitCode = 1
 }
-
-console.log(`[sync-docs] 완료: ${synced}개 동기화, ${failed}개 실패`)
-if (failed > 0 && synced === 0 && !process.env.VERCEL) process.exit(1)

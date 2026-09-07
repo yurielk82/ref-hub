@@ -8,16 +8,30 @@ import { ROOT, readProjectData } from './helpers.mjs'
 const SYNCED_PROJECTS = [
   { repo: 'csoweb', content: 'csoweb' },
   { repo: 'kpis-dsr-api', content: 'kpis-dsr-api' },
-  { repo: 'studiogo', content: 'studiogo' },
+  { repo: 'ev-motor-reliability', content: 'ev-motor-reliability' },
 ]
 
-test('synced source docs exist for every registered project', () => {
+test('sync inputs exist for every registered project', () => {
+  const offline = process.env.REF_HUB_OFFLINE_CONTENT === '1'
+
   for (const project of SYNCED_PROJECTS) {
-    const sourceDir = path.join(ROOT, 'repos', project.repo, 'docs', 'manual')
-    assert.ok(
-      existsSync(sourceDir),
-      `missing sync source directory: ${path.relative(ROOT, sourceDir)}`,
-    )
+    if (offline) {
+      const contentDir = path.join(ROOT, 'content', project.content)
+      assert.ok(
+        existsSync(path.join(contentDir, 'index.mdx')),
+        `missing ${project.content}/index.mdx`,
+      )
+      assert.ok(
+        existsSync(path.join(contentDir, '_meta.tsx')),
+        `missing ${project.content}/_meta.tsx`,
+      )
+    } else {
+      const sourceDir = path.join(ROOT, 'repos', project.repo, 'docs', 'manual')
+      assert.ok(
+        existsSync(sourceDir),
+        `missing sync source directory: ${path.relative(ROOT, sourceDir)}`,
+      )
+    }
   }
 })
 
@@ -172,9 +186,18 @@ test('standalone build script copies runtime static assets', () => {
   const packageJson = JSON.parse(readFileSync(path.join(ROOT, 'package.json'), 'utf8'))
   const buildScript = packageJson.scripts?.build ?? ''
 
-  assert.match(buildScript, /next build/)
+  assert.match(
+    buildScript,
+    /node --disable-wasm-trap-handler \.\/node_modules\/next\/dist\/bin\/next build --webpack/,
+    'Next.js must use the Webpack builder supported by the ARM production host',
+  )
   assert.match(buildScript, /\.next\/static/)
   assert.match(buildScript, /\.next\/standalone\/\.next/)
   assert.match(buildScript, /public/)
   assert.match(buildScript, /\.next\/standalone/)
+  assert.doesNotMatch(
+    buildScript,
+    /NODE_OPTIONS="[^"]*disable-wasm-trap-handler/,
+    'Next.js workers must not inherit disable-wasm-trap-handler through NODE_OPTIONS',
+  )
 })

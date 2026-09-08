@@ -43,6 +43,36 @@ const FRAME_ANCESTORS = [
   .filter(Boolean)
   .join(' ')
 
+/**
+ * 기본 보안 헤더 — embed 규칙이 걸리지 않는 모든 응답에 적용된다.
+ *
+ * 이전에는 프레임 정책이 `?embed=true` 요청에만 붙었다. 그래서 쿼리를 붙이지
+ * 않은 요청 — 공격자가 iframe 에 넣는 바로 그 요청 — 은 아무 제한도 받지
+ * 않았다. allowlist 가 통제로 동작하려면 기본이 거부여야 한다.
+ */
+const SECURITY_HEADERS = [
+  { key: 'Content-Security-Policy', value: "frame-ancestors 'none'" },
+  { key: 'X-Frame-Options', value: 'DENY' },
+  { key: 'X-Content-Type-Options', value: 'nosniff' },
+  { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+]
+
+/**
+ * 문서(HTML) 응답의 CDN 캐시 상한.
+ *
+ * Next 기본값은 `s-maxage=31536000` 이고 404 도 같은 값을 달고 나간다. 배포가
+ * 중간에 멈춰 404 가 한 번 캐시되면 1년을 간다 (2026-08-30 사고). deploymentId
+ * 는 정적 자산만 보호하므로 문서 응답의 상한을 따로 낮춘다. `_next/` 아래
+ * 빌드 해시 자산은 이 규칙에서 제외해 기존 immutable 캐시를 유지한다.
+ */
+const DOCUMENT_CACHE_CONTROL = {
+  key: 'Cache-Control',
+  value: 'public, max-age=0, s-maxage=300, stale-while-revalidate=86400',
+}
+
+/** `_next/` 이하(빌드 해시 자산)를 제외한 모든 경로 — 문서 캐시 상한 대상. */
+const DOCUMENT_PATHS = '/:path((?!_next/).*)'
+
 const withNextra = nextra({
   codeHighlight: false,
 })
@@ -63,9 +93,13 @@ const nextConfig = withNextra({
     return config
   },
   async headers() {
+    // 뒤 규칙이 같은 key 를 덮는다 — 기본 거부를 먼저 깔고 embed 에서만 완화한다.
     return [
+      { source: '/', headers: [...SECURITY_HEADERS, DOCUMENT_CACHE_CONTROL] },
+      { source: '/:path*', headers: SECURITY_HEADERS },
+      { source: DOCUMENT_PATHS, headers: [DOCUMENT_CACHE_CONTROL] },
       {
-        // embed 모드 요청 시 iframe 임베딩 허용
+        // embed 모드 요청 시에만 allowlist 로 완화
         source: '/:path*',
         has: [{ type: 'query', key: 'embed', value: 'true' }],
         headers: [

@@ -23,7 +23,7 @@
 ## Tech Stack
 
 - **Frontend**: Next.js (app router), TypeScript
-- **Deployment**: PM2 (ecosystem.config.cjs 존재)
+- **Deployment**: systemd standalone (`github-ref-hub.service`, 포트 3007)
 - **Data**: `data/projects.ts`, `data/experience.ts` (정적)
 
 ## Success Criteria

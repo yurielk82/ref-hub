@@ -110,12 +110,9 @@ ref-hub/  (28 files)
 CLAUDE.md
 PROJECT.md
 README.md
-RULE_AUDIT_REPORT.md
 commitlint.config.mjs
-ecosystem.config.cjs
 eslint.config.base.mjs
 eslint.config.mjs
-evaluation-report.md
 instrumentation.ts
 lefthook.yml
 mdx-components.tsx

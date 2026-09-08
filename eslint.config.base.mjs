@@ -106,7 +106,6 @@ export default tseslint.config(
       '**/*.pb.{ts,js}',
       '**/migrations/**',
       'next-env.d.ts',
-      '**/ecosystem.config.cjs',
       'eslint.config.{mjs,js,cjs,ts}',
       'eslint.config.*.{mjs,js,cjs,ts}',
     ],

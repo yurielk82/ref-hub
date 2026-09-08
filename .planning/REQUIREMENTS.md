@@ -13,5 +13,5 @@
 ## Constraints
 
 - Next.js app router
-- PM2로 배포 (ecosystem.config.cjs)
+- systemd standalone 으로 배포 (`github-ref-hub.service`, 포트 3007)
 - 정적 데이터 중심 (`data/*.ts`)

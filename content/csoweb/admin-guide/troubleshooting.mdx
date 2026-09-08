@@ -54,7 +54,7 @@ CSO 정산 포털 운영 중 발생할 수 있는 주요 문제와 해결 방법
 
 **확인 절차**:
 
-1. `/admin/integrity` 페이지에서 무결성 검사를 실행합니다.
+1. `/admin/members?tab=mapping` 페이지에서 무결성 검사를 실행합니다.
 2. `missing_match` 상태의 업체를 확인합니다.
 3. 해당 업체의 실제 사업자번호를 확인합니다.
 4. 매칭 데이터를 추가합니다 (사업자번호 입력).
@@ -63,7 +63,7 @@ CSO 정산 포털 운영 중 발생할 수 있는 주요 문제와 해결 방법
 
 | 상태 | 조치 |
 |------|------|
-| `missing_match` | `/admin/integrity`에서 사업자번호 매핑 추가 |
+| `missing_match` | `/admin/members?tab=mapping`에서 사업자번호 매핑 추가 |
 | `unregistered` | 해당 업체에 회원가입 안내. 사업자번호가 올바른지 확인 |
 | `pending_join` | `/admin/members`에서 해당 회원 승인 처리 |
 | `normal` | 정상 — 조치 불필요 |

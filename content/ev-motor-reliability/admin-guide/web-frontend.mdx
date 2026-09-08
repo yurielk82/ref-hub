@@ -114,13 +114,13 @@ npm start
 
 ### Python API 서버와 동시 실행
 
-프로덕션 환경에서는 두 서버를 모두 프로세스 관리자로 실행하는 것을 권장합니다.
+프로덕션 환경에서는 workspace systemd 서비스로 실행합니다.
 
 ```bash
-# PM2 사용 예시
-pm2 start "uvicorn app.main:app --host 0.0.0.0 --port 8000" --name ev-api
-pm2 start "cd web && npm start" --name ev-web
-pm2 save
+cd /home/ubuntu/GitHub
+./bin/deploy.sh ev-motor-reliability
+systemctl status github-ev-motor-api.service
+journalctl -u github-ev-motor-api.service -n 50 --no-pager
 ```
 
 ### 프록시 설정

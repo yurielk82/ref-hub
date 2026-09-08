@@ -10,7 +10,7 @@
 | **스택** | Vite 7 + React 19 SPA + Express 5 API + TypeScript 5.9 |
 | **UI** | Tailwind CSS 4 + shadcn/ui (Radix UI) + Lucide Icons |
 | **DB** | Supabase (PostgreSQL) + better-sqlite3 (인증서 저장) |
-| **호스팅** | Vercel (프론트엔드 SPA) + Oracle Cloud PM2 (Express API) |
+| **호스팅** | Vercel (프론트엔드 SPA) + Oracle Cloud systemd (Express API) |
 | **인증** | Google OAuth (Supabase Auth) + Basic Auth 대체 모드 |
 
 ## 도메인
@@ -57,7 +57,7 @@ KPIS OpenAPI는 인증 방식에 따라 두 가지로 나뉩니다.
 | 계층 | 플랫폼 | 역할 |
 |------|--------|------|
 | **프론트엔드** | Vercel | React SPA 정적 호스팅 |
-| **API 서버** | Oracle Cloud PM2 | Express API, KPIS 프록시, 인증서 관리 |
+| **API 서버** | Oracle Cloud systemd | Express API, KPIS 프록시, 인증서 관리 |
 
 > **주의**: KPIS API는 IP 화이트리스트 기반으로 접근을 제한합니다. API 서버가 Oracle Cloud에 고정 IP로 배포되어야 KPIS 서버와 통신할 수 있습니다. Vercel에서 직접 KPIS API를 호출할 수 없습니다.
 

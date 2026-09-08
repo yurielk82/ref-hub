@@ -283,9 +283,9 @@ pg_restore -h sb.dvsharp.com -U postgres -d postgres \
 cp data/local.db data/local_backup_$(date +%Y%m%d).db
 
 # 복원
-pm2 stop kpis-dsr-api
+systemctl stop github-kpis-dsr-api.service
 cp /backup/local_backup.db data/local.db
-pm2 restart kpis-dsr-api
+systemctl start github-kpis-dsr-api.service
 ```
 
 > 복원 시 반드시 서버를 중지한 후 진행합니다.

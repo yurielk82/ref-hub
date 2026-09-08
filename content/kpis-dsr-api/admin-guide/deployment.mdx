@@ -7,7 +7,7 @@ KPIS DSR API 배포 가이드입니다.
 | 컴포넌트 | 호스팅 | 이유 |
 |---------|--------|------|
 | 프론트엔드 (React 19 + Vite) | Vercel | 자동 배포, CDN |
-| API 서버 (Express 5) | Oracle Cloud (PM2) | KPIS IP 화이트리스트 요구 |
+| API 서버 (Express 5) | Oracle Cloud (systemd) | KPIS IP 화이트리스트 요구 |
 
 KPIS API는 등록 요청(MA111~MA114) 시 특정 IP에서만 호출을 허용합니다. 따라서 API 서버는 고정 IP를 가진 Oracle Cloud에서 운영합니다.
 
@@ -21,15 +21,13 @@ KPIS API는 등록 요청(MA111~MA114) 시 특정 IP에서만 호출을 허용�
 # SSH 접속
 ssh user@oracle-server-ip
 
-# 업데이트
-cd /path/to/kpis-dsr-api
-git pull origin main
-npm install --production
+# workspace 배포 진입점 사용
+cd /home/ubuntu/GitHub
+./bin/deploy.sh kpis-dsr-api
 
-# PM2 재시작
-pm2 restart kpis-dsr-api
-pm2 status
-pm2 logs kpis-dsr-api --lines 20
+# 상태/로그 확인
+systemctl status github-kpis-dsr-api.service
+journalctl -u github-kpis-dsr-api.service -n 20 --no-pager
 ```
 
 ## 환경 변수

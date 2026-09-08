@@ -173,11 +173,11 @@ MA112 결과에서 반송된 건의 코드별 대응 방법입니다.
 ### 서버 상태 확인
 
 ```bash
-# PM2 프로세스 상태 확인
-pm2 status
+# systemd 서비스 상태 확인
+systemctl status github-kpis-dsr-api.service
 
 # Express 서버 로그 확인
-pm2 logs kpis-dsr-api --lines 50
+journalctl -u github-kpis-dsr-api.service -n 50 --no-pager
 
 # 서버 리소스 확인
 df -h          # 디스크 용량
@@ -187,11 +187,12 @@ free -m        # 메모리
 ### 서버 재시작
 
 ```bash
-# PM2로 재시작
-pm2 restart kpis-dsr-api
+# workspace 배포 경로로 재시작
+cd /home/ubuntu/GitHub
+./bin/deploy.sh kpis-dsr-api --skip-build
 
 # 재시작 후 상태 확인
-pm2 status
+systemctl status github-kpis-dsr-api.service
 curl -s http://localhost:3002/api/health
 ```
 
@@ -221,7 +222,7 @@ stat data/local.db
 
 | 증상 | 원인 | 해결 |
 |------|------|------|
-| 502 Bad Gateway | Express 서버 다운 | `pm2 restart kpis-dsr-api` |
+| 502 Bad Gateway | Express 서버 다운 | `cd /home/ubuntu/GitHub && ./bin/deploy.sh kpis-dsr-api --skip-build` |
 | 504 Gateway Timeout | Express 응답 지연 | 대량 데이터 처리 중일 수 있음 — 로그 확인 |
 | 413 Request Entity Too Large | 업로드 파일 크기 초과 | Nginx `client_max_body_size` 값 증가 |
 
@@ -236,8 +237,8 @@ stat data/local.db
 
 문제 발생 시 아래 순서로 진단합니다.
 
-1. **PM2 상태 확인**: `pm2 status` — 서버가 실행 중인지 확인
-2. **서버 로그 확인**: `pm2 logs kpis-dsr-api --lines 100` — 에러 메시지 확인
+1. **systemd 상태 확인**: `systemctl status github-kpis-dsr-api.service` — 서버가 실행 중인지 확인
+2. **서버 로그 확인**: `journalctl -u github-kpis-dsr-api.service -n 100 --no-pager` — 에러 메시지 확인
 3. **API 응답 테스트**: `curl http://localhost:3002/api/health` — 서버 정상 동작 확인
 4. **Supabase 연결**: 브라우저에서 `sb.dvsharp.com` 접근 가능 여부
 5. **네트워크**: `curl -s ifconfig.me` — 외부 IP 확인, KPIS 연결 테스트

@@ -88,7 +88,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'npm'
       - run: npm ci --prefer-offline --no-audit
 
@@ -150,7 +150,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'npm'
       # --audit-level=high: high/critical만 차단 (moderate 이하는 통과)
       # dev 포함: CI/빌드 툴체인 취약점도 잡아야 함 (Codex 리뷰 피드백)
@@ -240,7 +240,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'npm'
       - run: npm ci --prefer-offline --no-audit
       # knip 설정 없으면 스킵 (워크플로 실패 방지)
@@ -274,7 +274,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
       - name: Run jscpd on changed files
         run: |
           mapfile -t FILES < <(git diff --name-only --diff-filter=AM "origin/${{ github.base_ref }}...HEAD" | grep -E '\.(ts|tsx|js|jsx|py)$' || true)

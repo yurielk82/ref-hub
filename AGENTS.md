@@ -1,4 +1,4 @@
-<!-- agent-governance:managed:start source=ref-hub-codex hash=68be595bfae9449f942306a4e081a98fc8e3061f516f96b34ea9ecd67c8a3866 -->
+<!-- agent-governance:managed:start source=ref-hub-codex hash=85c0e8565bd3426d1bb7b0ff1f03ef9931301501362d29eec4ca330184df4595 -->
 # GitHub 워크스페이스 공통 규칙
 
 ## 범위
@@ -54,9 +54,15 @@
 
 ## Git 안전
 
-- `main`/`master` 직접 push는 워크스페이스 guard의 보호 대상이다. 자동 완료에서 direct-main과
-  feature branch 중 무엇을 기본으로 할지는 C-009 승인 전까지 공통 원본이 바꾸지 않고 각
-  런타임의 현재 정책을 유지한다.
+- 승인된 구현은 검증 → 자기 변경만 commit → feature branch push → PR 생성 또는 기존 PR 확인
+  → 필수 검사·승인 충족 확인 → PR 머지 → 원격 merged 상태 확인까지 에이전트가 직접 실행한다.
+  사용자에게 머지 명령어 복붙을 넘기거나 branch push만으로 완료하지 않는다. 사용자가 PR까지만
+  요청했거나 저장소에 별도 머지 승인 경계가 있으면 그 제한을 따른다.
+- `main`/`master` 직접 push는 계속 guard의 보호 대상이다. worktree 존재는 PR 머지 차단
+  사유가 아니다. 직접 push와 PR 머지를 구분하고 정상 PR 경로에서 guard override를 쓰지 않는다.
+  충돌, 실패한 필수 검사, 부족한 권한·필수 승인, 대상 불명확은 구체적 증거와 함께 보고한다.
+  대기 중인 검사는 계속 조회하고, 통과 후 head SHA를 다시 확인해 머지한다. merge queue에
+  들어가면 예약을 완료로 보고하지 않고 원격 merged 상태까지 확인한다.
 - 공유·병렬 저장소에서는 파일을 선별 staging한다. 삭제/rename이나 force push는 별도 검토한다.
 - 자세한 방식은 `[topic:workspace/git]`을 따른다.
 

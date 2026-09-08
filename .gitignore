@@ -47,3 +47,13 @@ graphify-out/
 
 # kdh 증거 아티팩트 (세션별 receipt·PTY·로그 — 저장소에 넣지 않는다)
 .kdh/
+
+# Generated tool output — regenerated on demand, never reviewed.
+.serena/cache/
+.serena/memories/
+.serena/project.local.yml
+.claude/logs/
+.playwright-cli/
+dist/
+output/
+coverage/

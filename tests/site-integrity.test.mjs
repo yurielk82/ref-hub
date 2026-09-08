@@ -52,21 +52,69 @@ test('content directories keep required entry files', () => {
   }
 })
 
-test('embed mode keeps CSP frame-ancestors protection', async () => {
+/** next.config.mjs 의 headers() 를 EMBED_ORIGIN_DEV 를 세운 상태로 읽는다. */
+async function readHeaderRules() {
   process.env.EMBED_ORIGIN_DEV = 'https://example.dev'
   const configModule = await import(pathToFileURL(path.join(ROOT, 'next.config.mjs')).href)
-  const nextConfig = configModule.default
-  const headers = await nextConfig.headers()
-
+  const headers = await configModule.default.headers()
   assert.ok(Array.isArray(headers), 'headers() should return an array')
-  const embedHeaders = headers.find((entry) => entry.source === '/:path*')
-  assert.ok(embedHeaders, 'embed header rule must exist')
+  return headers
+}
 
-  const cspHeader = embedHeaders.headers.find((header) => header.key === 'Content-Security-Policy')
-  assert.ok(cspHeader, 'Content-Security-Policy header must exist')
-  assert.match(cspHeader.value, /frame-ancestors/)
-  assert.match(cspHeader.value, /'self'/)
-  assert.match(cspHeader.value, /https:\/\/example\.dev/)
+const valueOf = (rule, key) => rule.headers.find((header) => header.key === key)?.value
+
+test('embed mode keeps CSP frame-ancestors protection', async () => {
+  const headers = await readHeaderRules()
+
+  // embed 규칙은 source 가 아니라 embed 쿼리 술어로 특정한다 — source 만으로는
+  // 기본 보안 규칙과 구분되지 않는다.
+  const embedRule = headers.find((entry) =>
+    entry.has?.some((condition) => condition.type === 'query' && condition.key === 'embed'),
+  )
+  assert.ok(embedRule, 'embed header rule must exist')
+
+  const csp = valueOf(embedRule, 'Content-Security-Policy')
+  assert.ok(csp, 'Content-Security-Policy header must exist')
+  assert.match(csp, /frame-ancestors/)
+  assert.match(csp, /'self'/)
+  assert.match(csp, /https:\/\/example\.dev/)
+})
+
+test('requests without the embed query are denied framing by default', async () => {
+  const headers = await readHeaderRules()
+
+  const defaultRules = headers.filter((entry) => !entry.has)
+  assert.ok(defaultRules.length > 0, 'a rule must apply when no embed query is present')
+
+  // 기본 경로(/ 와 그 하위) 양쪽에 프레임 거부가 걸려야 한다. 하나라도 비면
+  // 공격자는 쿼리를 붙이지 않는 것만으로 통제를 우회한다.
+  for (const source of ['/', '/:path*']) {
+    const rule = defaultRules.find((entry) => entry.source === source)
+    assert.ok(rule, `default rule for ${source} must exist`)
+    assert.equal(valueOf(rule, 'Content-Security-Policy'), "frame-ancestors 'none'")
+    assert.equal(valueOf(rule, 'X-Frame-Options'), 'DENY')
+    assert.equal(valueOf(rule, 'X-Content-Type-Options'), 'nosniff')
+  }
+})
+
+test('document responses cap the shared cache below the incident threshold', async () => {
+  const headers = await readHeaderRules()
+
+  const cacheRules = headers.filter((entry) => valueOf(entry, 'Cache-Control'))
+  assert.ok(cacheRules.length > 0, 'a Cache-Control rule must exist for document responses')
+
+  for (const rule of cacheRules) {
+    const value = valueOf(rule, 'Cache-Control')
+    const sMaxAge = Number(/s-maxage=(\d+)/.exec(value)?.[1])
+    assert.ok(Number.isFinite(sMaxAge), `Cache-Control must set s-maxage: ${value}`)
+    // 2026-08-30 사고: 404 가 s-maxage=31536000 으로 CDN 에 1년 박혔다.
+    assert.ok(sMaxAge <= 300, `s-maxage must stay bounded, got ${sMaxAge} in ${rule.source}`)
+    // 빌드 해시 자산은 상한 대상이 아니다 — immutable 장기 캐시를 유지해야 한다.
+    assert.ok(
+      !rule.source.startsWith('/_next/'),
+      `build-hashed assets must keep their immutable cache, but ${rule.source} was capped`,
+    )
+  }
 })
 
 test('KPIS DSR portfolio screenshot is a real captured UI image', () => {

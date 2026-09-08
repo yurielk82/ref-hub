@@ -17,7 +17,7 @@ export default [
 
   {
     // Node 빌드/동기화 스크립트 — Node 글로벌 허용 + console 출력이 인터페이스
-    files: ['scripts/**/*.{mjs,cjs,js}'],
+    files: ['scripts/**/*.{mjs,cjs,js}', '.kdh/**/*.{mjs,cjs,js}'],
     languageOptions: { globals: { ...globals.node } },
     rules: { 'no-console': 'off' },
   },

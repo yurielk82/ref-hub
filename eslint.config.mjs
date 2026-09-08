@@ -16,6 +16,13 @@ export default [
   ...base,
 
   {
+    // .kdh/ 는 gitignore 된 KDH 실행 상태(영수증·증거 수집 스크립트)다. flat config 는
+    // .gitignore 를 자동으로 따르지 않아 여기서 명시하지 않으면 추적되지도 않는 파일이
+    // 품질 게이트를 막는다 — capture-evidence.mjs 의 no-undef 5건이 그랬다.
+    ignores: ['.kdh/**'],
+  },
+
+  {
     // Node 빌드/동기화 스크립트 — Node 글로벌 허용 + console 출력이 인터페이스
     files: ['scripts/**/*.{mjs,cjs,js}'],
     languageOptions: { globals: { ...globals.node } },

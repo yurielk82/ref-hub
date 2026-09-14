@@ -1,4 +1,4 @@
-<!-- agent-governance:managed:start source=ref-hub-codex hash=85c0e8565bd3426d1bb7b0ff1f03ef9931301501362d29eec4ca330184df4595 -->
+<!-- agent-governance:managed:start source=ref-hub-codex hash=d16e082d10d13455f5bdf52125e05623512df7cc8df1171433952855b8ba7320 -->
 # GitHub 워크스페이스 공통 규칙
 
 ## 범위
@@ -26,8 +26,11 @@
 
 - 먼저 프로젝트 자체의 focused test를 실행하고, 필요할 때 workspace 표준 검증
   `bin/verify.sh --changed`를 더한다. 검증을 repo cleanup으로 확대하지 않는다.
-- 복잡한 다단계 작업은 `[topic:workspace/kdh]`의 증거 게이트를 적용한다. 런타임별 시작·종료
-  연결은 각 어댑터가 책임진다.
+- 명확한 단건 작업은 직접 처리하고 관련 검사만 실행한다. 복잡하거나 모호하거나 여러 파일을
+  가로지르는 작업은 양쪽 런타임이 같은 로컬 Ouroboros CLI를 사용한다. 런타임별 실행 인자와
+  종료 확인은 각 어댑터가 책임진다.
+- KDH를 자동 적용하지 않는다. 사용자가 명시하거나, 정상 검증을 거쳤는데도 같은 종류의 완료
+  누락이 반복되어 더 엄격한 증거 검사가 필요할 때만 `[topic:workspace/kdh]`를 수동으로 적용한다.
 - 완료 보고 전 실행한 명령과 결과를 다시 확인한다. 핵심 검사가 실패했거나 실행 불가하면
   완료라고 부르지 않는다.
 - 사용자 질문이 데이터 값·시스템 상태·동작 여부에 관한 것이면 추측으로 답하지 않는다.
@@ -36,6 +39,8 @@
   다른 두 값의 차이는 원인을 추측하기 전에 시점 차이부터 확인한다. (오너 지시 2026-07-29)
 - 운영 상태 점검은 `bin/verify-ops.sh`, 거버넌스 결정 일관성 점검은
   `bin/decision_audit.py`의 현재 help와 안전 모드를 확인해 사용한다.
+- 빌드·전수 테스트·스캔처럼 무거운 작업은 `/home/ubuntu/GitHub/bin/batch <명령>`으로 실행한다. 직접
+  실행하면 자원 상한이 없어 디스크가 포화되고 다른 세션의 터미널이 멈춘다.
 
 ## 배포와 live checkout
 
@@ -45,7 +50,7 @@
 - live `/home/ubuntu/GitHub/*` checkout에서 `.next` 같은 runtime artifact를 쓰는 build는 승인된
   배포 흐름이 즉시 reload와 health check까지 수행할 때만 실행한다. build-only 검증은 격리
   worktree/clone에서 한다.
-- PM2, Docker, Nginx, Cloudflare, systemd, Supabase, ports, domains, health check, 배포 자격증명을
+- Docker, Nginx, Cloudflare, systemd, Supabase, ports, domains, health check, 배포 자격증명을
   새로 만들거나 바꾸는 일은 자동 배포 범위가 아니며 별도 승인이 필요하다.
 - 배포·infra 전에 `[topic:workspace/deploy]`와 `[topic:workspace/infra]`를 로드한다. DB/schema
   작업은 별도 승인을 받은 뒤에도 `[topic:workspace/database]`를 먼저 로드하고 적용 직전
@@ -88,7 +93,7 @@
 - 보안·의존성 작업 전: `[topic:workspace/security]`
 - Git·병렬 worktree 작업 전: `[topic:workspace/git]`
 - 테스트·자동 fixer 작업 전: `[topic:workspace/testing]`
-- 복잡 작업 완료 증거: `[topic:workspace/kdh]`
+- KDH 수동 재검증: 사용자 명시 또는 반복된 완료 누락이 확인된 경우 `[topic:workspace/kdh]`
 - Review·Implementation·Incident 보고: `[topic:workspace/reporting]`
 
 이 ID는 원본 위치를 가리키는 상대경로가 아니다. renderer가 각 런타임에서 실제 발견 가능한

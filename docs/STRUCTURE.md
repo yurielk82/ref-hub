@@ -7,7 +7,7 @@ _Auto-generated. Do NOT edit between AUTO markers - content will be regenerated.
 ## Directory Tree (max-depth 3)
 
 ```
-tmp.gMjtTLrEDv/  (29 files)
+tmp.em6NX2xcAa/  (30 files)
   .github/  (1 files)
     workflows/  (2 files)
   .serena/  (2 files)
@@ -48,7 +48,7 @@ tmp.gMjtTLrEDv/  (29 files)
   data/  (7 files)
     ax-cases/  (2 files)
     projects/  (2 files)
-  docs/  (1 files)
+  docs/  (2 files)
     plans/  (1 files)
       archive/  (0 files)
   lib/  (1 files)
@@ -72,6 +72,7 @@ tmp.gMjtTLrEDv/  (29 files)
 .gitmodules
 .prettierignore
 .prettierrc
+.shared-modules.json
 AGENTS.md
 CLAUDE.md
 PROJECT.md

@@ -1,4 +1,4 @@
-<!-- agent-governance:managed:start source=ref-hub-codex hash=d16e082d10d13455f5bdf52125e05623512df7cc8df1171433952855b8ba7320 -->
+<!-- agent-governance:managed:start source=ref-hub-codex hash=beb1b08f07291f32edaef52e86e604ffaf0732609709478688fa1a0af15a7d76 -->
 # GitHub 워크스페이스 공통 규칙
 
 ## 범위
@@ -95,13 +95,10 @@
 - 테스트·자동 fixer 작업 전: `[topic:workspace/testing]`
 - KDH 수동 재검증: 사용자 명시 또는 반복된 완료 누락이 확인된 경우 `[topic:workspace/kdh]`
 - Review·Implementation·Incident 보고: `[topic:workspace/reporting]`
+- 새 helper·여러 화면 공통 동작 전: `[topic:workspace/reuse]`
+- 진입·위임·대기·마무리 절차: `[topic:workspace/workflow]`
 
-이 ID는 원본 위치를 가리키는 상대경로가 아니다. renderer가 각 런타임에서 실제 발견 가능한
-skill로 투영하고 canary가 통과한 경우에만 활성 상태로 표시한다. 차단 의무는 topic에만 두지
-않고 항상 로드되는 글로벌·워크스페이스 핵심에도 남긴다.
-
-각 런타임의 탐색·기억·확장·종료 연결 명령은 공통 규칙이 아니다. 같은 목적을 수행하는
-방법을 `adapters/`에서 연결한다.
+ID는 경로가 아니라 각 런타임의 rule·skill로 투영된다. 차단 의무는 항상 로드되는 핵심에도 남긴다.
 
 # Role
 

@@ -1,5 +1,5 @@
 
-<!-- agent-governance:managed:start source=ref-hub-claude hash=d79b79f077c96ce1bfcdfd39eb0ae32174cbba555166a053ad785249e0b8fc6a -->
+<!-- agent-governance:managed:start source=ref-hub-claude hash=d2ace9e09fcd9953cd0d66eda491502b9d9b5f677d1106a7bef3c3e863952fd6 -->
 # GitHub 워크스페이스 공통 규칙
 
 ## 범위
@@ -45,7 +45,7 @@
 
 ## 배포와 live checkout
 
-- 등록 서비스 배포의 단일 진입점은 `/home/ubuntu/GitHub/bin/deploy.sh <project>`이고 등록부는
+- 등록 서비스 배포는 `[topic:workspace/deploy]` 절차(기본 `bin/deploy-main <project>`)만 쓰고 등록부는
   `bin/projects.tsv`다. 직접 서비스 재시작으로 build, artifact 검증, health probe, rollback을
   우회하지 않는다.
 - live `/home/ubuntu/GitHub/*` checkout에서 `.next` 같은 runtime artifact를 쓰는 build는 승인된
@@ -121,9 +121,9 @@ AX 포트폴리오 + 프로젝트 통합 레퍼런스 사이트. 랜딩(`/`)은 
 | `npm run dev`                                       | 로컬 개발 (predev가 sync 자동 실행) |
 | `npm run sync`                                      | submodule docs 동기화               |
 | `git submodule update --remote && npm run sync`     | 최신 문서 가져오기 + 동기화         |
-| `cd /home/ubuntu/GitHub && ./bin/deploy.sh ref-hub` | 프로덕션 배포                       |
 
 Health URL: http://127.0.0.1:3007/
+배포: `[topic:workspace/deploy]`
 systemd 유닛: `github-ref-hub.service` (target `github-ref-hub.target`). 관리: `./bin/pmx logs ref-hub`, `./bin/pmx restart ref-hub`
 
 # Conventions

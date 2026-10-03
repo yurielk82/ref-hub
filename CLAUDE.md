@@ -1,5 +1,5 @@
 
-<!-- agent-governance:managed:start source=ref-hub-claude hash=3bb1c48a5c16bb0c69f9ac297ba595d644070cf64237cb13a5cd9e1c3c099f56 -->
+<!-- agent-governance:managed:start source=ref-hub-claude hash=37837f6ee2f405a01f36d4046ba8283361abfa0bfb30326603f96f184d4d4c7f -->
 # GitHub 워크스페이스 공통 규칙
 
 ## 범위
@@ -92,20 +92,20 @@
 
 ID는 경로가 아니라 각 런타임의 규칙·스킬로 투영된다. 차단 의무는 항상 로드되는 핵심에도 남긴다.
 
-# Role
+# 역할
 
 AX 포트폴리오 + 프로젝트 통합 레퍼런스 사이트. 랜딩(`/`)은 쇼케이스 포트폴리오(`data/projects.ts` 카드 + `data/ax.ts`), 하위 경로는 프로젝트별 Nextra 매뉴얼(csoweb · kpis-dsr-api · pharmkpi · ev-motor-reliability · corerx · edi-verification). studiogo는 숨김(카드·문서·nav 제거, repos submodule만 보존). ref.dvsharp.com 공개 서빙.
 
-# Stack
+# 기술 구성
 
 - 언어: TypeScript
 - 프레임워크: Next.js 15 + Nextra v4 (App Router, MDX 중심)
-- DB: 없음 (정적 사이트)
+- 데이터베이스(DB): 없음 (정적 사이트)
 - 문서 수집: Git submodule (`repos/*/docs/manual/`) + `scripts/sync-docs.mjs` → `content/*/` 복사
 - 호스팅: systemd standalone (`github-ref-hub.service`, Next.js standalone, 포트 3007) + Nginx (ref.dvsharp.com)
 - 인증: 없음 (공개)
 
-# Entry Points
+# 진입점
 
 | 명령                                                | 용도                                |
 | --------------------------------------------------- | ----------------------------------- |
@@ -117,7 +117,7 @@ Health URL: http://127.0.0.1:3007/
 배포: `[topic:workspace/deploy]`
 systemd 유닛: `github-ref-hub.service` (target `github-ref-hub.target`). 관리: `./bin/pmx logs ref-hub`, `./bin/pmx restart ref-hub`
 
-# Conventions
+# 관례
 
 - MDX 문서 중심 — 일반 React 컴포넌트 분리 불필요
 - 문서는 기존 MDX의 파일 구조·문체를 따르고, 탐색 항목을 바꿀 때 같은 디렉터리의 `_meta.tsx`도 함께 검증한다.
@@ -125,12 +125,12 @@ systemd 유닛: `github-ref-hub.service` (target `github-ref-hub.target`). 관�
 - 문서 수정 흐름(submodule 프로젝트): 각 프로젝트 리포의 `docs/manual/` 수정·커밋·푸시 → 포털에서 `git submodule update --remote repos/<project>` → `npm run sync` → 커밋·푸시 → 배포
 - 직접 관리(submodule 아님): `content/pharmkpi/`·`content/corerx/`·`content/edi-verification/` 는 포털 리포에서 직접 편집 (private/내부)
 
-# Overrides
+# 예외
 
 - design-constraints(Tailwind): 미적용 — Nextra 테마가 스타일링 담당
 - code-principles(컴포넌트 분리): 미적용 — MDX 문서 중심
 
-# Domain
+# 도메인
 
 - 사이트 구성: 랜딩(`/`) = AX 포트폴리오, 하위 경로 = 프로젝트별 Nextra 매뉴얼
 - 포트폴리오 레이어:

@@ -169,13 +169,13 @@ _자동 생성 — `.claude/scripts/sync-claude-md.sh`. 수동 편집 금지 (ap
 
 ## 최근 세션 히스토리
 
-- `2026-09-09` `fe37512` — fix(next): default-deny framing and bound the document cache lifetime _(files: 1)_
 - `2026-09-09` `6402ad8` — chore(gitignore): ignore .env.production in the shared ignore list _(files: 1)_
 - `2026-09-09` `8039899` — ci: pin every workflow job to Node 24 _(files: 1)_
 - `2026-09-09` `86b462f` — chore: drop the unused PM2 config and stale one-off reports _(files: 7)_
 - `2026-09-09` `f3bbda6` — chore(content): refresh synced manuals from current submodule heads _(files: 18)_
 - `2026-09-09` `9ea71e9` — docs: propose the nginx defence-in-depth headers for ref.dvsharp.com _(files: 1)_
 - `2026-09-09` `8094773` — test(site-integrity): pin the default-deny frame policy and the cache bound _(files: 1)_
+- `2026-09-27` `574083a` — chore: add a generated shared-module catalog _(files: 2)_
 
 원본: `.claude/SESSION_LOG.md` (append-only)
 <!-- AUTO-HISTORY:END -->

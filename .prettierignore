@@ -9,6 +9,6 @@ content/ev-motor-reliability/
 # 일회성/이력 플랜 문서 — plans-archive.sh 가 관리(30일 → archive/). 포맷 게이트 비대상.
 docs/plans/
 
-# agent-governance owns these byte-stable runtime instruction files.
+# Agent instruction files (CLAUDE.md, AGENTS.md) are edited by hand; keep formatters off them.
 AGENTS.md
 CLAUDE.md

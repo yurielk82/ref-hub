@@ -1,14 +1,21 @@
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 import { ThemeProvider } from '@/components/theme-provider'
+import { AX_HERO, SITE_URL } from '@/data/ax-content'
 import './globals.css'
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Ref Hub - 개발자 포트폴리오',
+    default: `Ref Hub - ${AX_HERO.name} 포트폴리오`,
     template: '%s - Ref Hub',
   },
-  description: '제약·물류·라이브커머스 도메인 엔터프라이즈 웹 솔루션 포트폴리오',
+  description: `${AX_HERO.name} · ${AX_HERO.role} — 영업 데이터·정산·법정 보고 시스템 포트폴리오와 매뉴얼`,
+  openGraph: {
+    type: 'website',
+    locale: 'ko_KR',
+    siteName: 'Ref Hub',
+  },
   icons: {
     icon: 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>',
   },

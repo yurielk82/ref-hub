@@ -21,7 +21,7 @@ export function CareerSection() {
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="font-[family-name:var(--font-mono)] text-xs uppercase text-[var(--accent)]">
-              Career
+              경력
             </p>
             <h2 className="mt-2 text-2xl font-bold text-stone-950 dark:text-stone-50">경력</h2>
           </div>
@@ -43,9 +43,11 @@ export function CareerSection() {
             </FadeInUp>
             <ol className="mt-4 space-y-4">
               {entries.map((experience, index) => (
-                <FadeInUp key={experience.title} delay={index * ENTRY_STAGGER_DELAY}>
-                  <CareerEntry experience={experience} />
-                </FadeInUp>
+                <li key={experience.title}>
+                  <FadeInUp delay={index * ENTRY_STAGGER_DELAY}>
+                    <CareerEntry experience={experience} />
+                  </FadeInUp>
+                </li>
               ))}
             </ol>
           </div>
@@ -75,7 +77,7 @@ export function CareerSection() {
 
 function CareerEntry({ experience }: { experience: Experience }) {
   return (
-    <li className="grid gap-4 rounded-lg border border-stone-200 bg-white p-5 dark:border-stone-800 dark:bg-stone-900 sm:grid-cols-[8rem_1fr]">
+    <div className="grid gap-4 rounded-lg border border-stone-200 bg-white p-5 dark:border-stone-800 dark:bg-stone-900 sm:grid-cols-[8rem_1fr]">
       <p className="font-[family-name:var(--font-mono)] text-xs text-stone-400">
         {experience.period}
       </p>
@@ -115,6 +117,6 @@ function CareerEntry({ experience }: { experience: Experience }) {
           })}
         </div>
       </div>
-    </li>
+    </div>
   )
 }

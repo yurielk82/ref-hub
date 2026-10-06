@@ -23,8 +23,7 @@ import {
 
 export const metadata: Metadata = {
   title: `AX 접근 방식 — ${AX_HERO.name}`,
-  description:
-    '현업 프로세스를 AI 워크플로우로 전환하는 AX 실무자 권대환의 이력서용 레퍼런스 페이지',
+  description: `${AX_HERO.name} — ${AX_HERO.role}. 영업 데이터 시스템을 만들 때 쓰는 AI 활용 방식과 원칙`,
 }
 
 const pillarIcons = [Workflow, BookOpen, Bot, ShieldCheck]

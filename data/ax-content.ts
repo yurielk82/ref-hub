@@ -3,31 +3,38 @@ import type { AxGrounding, AxMethodStep, AxPillar, AxStackGroup } from './ax-typ
 export const AX_HERO = {
   /** 이력서 사이트라 누구의 것인지 첫 화면에서 보여야 한다 (푸터 저작권만으로는 부족). */
   name: '권대환',
-  role: 'AX 실무자 · 시스템 기획·구축',
-  eyebrow: 'AI Transformation Reference',
-  title: '현업이 못 풀던 문제를 AI로 풀어, 프로덕션 서비스로 만들고 직접 운영합니다.',
-  subhead: 'AI를 빌려 매번 토큰(AI 호출 비용)을 쓰는 게 아니라, AI로 만들어 자산으로 소유합니다.',
+  role: '제약 영업관리 · 영업 분석·기획',
+  /** 구조화 데이터(Person)용 — 경력 표(data/experience.ts)와 같은 사실 */
+  jobTitle: '영업관리팀 과장 · 영업본부 겸직(분석·기획)',
+  employer: '부광유니파마',
+  eyebrow: '영업관리 · 회생 · 인수 통합 · 영업 분석',
+  title: '회생과 인수, ERP 교체를 지나는 동안 영업관리를 멈추지 않게 했습니다.',
+  subhead:
+    '2025년 3월 인력이 크게 빠진 영업관리팀에 들어가 계약·주문·법정 보고를 다시 세웠습니다. 회생 절차와 부광약품 인수 뒤 통합(PMI)을 실무로 거쳤고, 지금은 영업본부를 겸직하며 SFE(영업력 분석)를 맡고 있습니다.',
   summary:
-    '영업관리 현장에서 반복 정산, 데이터 검증, 리포트 작성의 병목을 직접 겪었습니다. 그 문제를 현업 팀장·담당자와 함께 AI 기반 자동화와 데이터 시스템으로 풀었고, 업무 외 시간까지 들여 직접 설계·검증했습니다. 같은 접근을 제약 영업관리에서 시작해 엔지니어링 시험·팀 진단·사내 복지 같은 다른 도메인으로, 그리고 그 작업을 돌리는 자기 운영 도구로 넓혔습니다. 핵심은 사람이 검수할 지점과 시스템이 처리할 지점을 나누는 것입니다.',
+    '필요한 도구는 직접 만들었습니다. 법정 보고가 늦어 처분을 받은 뒤에는 보고를 업로드 한 번으로 줄였고, ERP가 바뀔 때는 원장을 전수 대조해 영업 숫자를 이어 붙였습니다. 아래에 업무마다 상황, 내가 한 일, 결과를 적었습니다.',
   evidence: [
     {
-      label: '단독 구축·운영',
-      text: 'Cloudflare·Nginx·systemd·Docker 위에서 self-host Supabase를 포함한 프로덕션 서비스 20여 개를 직접 구축·운영합니다. 대부분 현업 팀장·담당자와 함께 시작한 일입니다.',
+      label: '현장부터 정리',
+      text: '인원이 빠진 자리에서 계약·주문·반품이 어디로 흘러야 하는지부터 다시 정했습니다.',
     },
     {
-      label: '안전한 배포',
-      text: '모든 변경은 빌드 검증·헬스체크·실패 시 자동 롤백 게이트를 통과해야 라이브가 됩니다.',
+      label: '사고는 구조로 막음',
+      text: '법정 보고 지연 뒤 경위·감경을 정리하고, 사람 손을 거치는 구간을 도구로 없앴습니다.',
     },
     {
-      label: '비용 규율',
-      text: '대시보드 숫자는 미리 계산해 저장한 스냅샷으로 토큰 없이 돌고, AI 해석은 필요한 화면·질문에만 얹힙니다.',
+      label: '통합의 실무 창구',
+      text: '부광 영업관리·기획·정보전략팀을 상대로 사전 점검부터 ERP 전환과 숫자 기준 맞추기까지 맡았습니다.',
     },
     {
-      label: '서버 상주',
-      text: '코드가 실제로 도는 OCI 서버에서, 어디서든 SSH로 구현·검증·배포를 그 자리에서 끝냅니다.',
+      label: '도구는 직접',
+      text: '기획·구현·배포·운영을 혼자 합니다. 숫자는 DB에서 계산하고, AI에는 해석만 맡깁니다.',
     },
   ],
 }
+
+/** 공개 주소 — metadataBase·구조화 데이터가 같은 값을 쓴다. */
+export const SITE_URL = 'https://ref.dvsharp.com'
 
 /** 연락처 단일 출처 — 히어로·연락 섹션이 같은 값을 쓴다. */
 export const AX_CONTACT = {
@@ -47,7 +54,7 @@ export const AX_PILLARS: AxPillar[] = [
     label: '02',
     title: '데이터·ERP 통합',
     description:
-      'Oracle ERP, Supabase, MSSQL, 수기 문서처럼 흩어진 업무 데이터를 분석 가능한 기준과 조회 흐름으로 연결합니다.',
+      'ERP 조회 인터페이스, 공공 데이터, 업무 시트처럼 흩어진 자료를 정의가 같은 하나의 원천으로 묶습니다.',
   },
   {
     label: '03',
@@ -66,11 +73,11 @@ export const AX_PILLARS: AxPillar[] = [
 // 랜딩에 노출할 대표 사례 (나머지는 /projects 상세에서 서사 노출)
 export const FEATURED_CASE_SLUGS = [
   'pharmkpi',
+  'sales-hq-sfe',
   'kpis-dsr-api',
-  'csoweb',
   'sales-strategy-portal',
   'pharmkpi-exec',
-  'team-pulse',
+  'csoweb',
 ] as const
 
 // 프로젝트 횡단 원칙 — AI를 믿지 않고, 거짓말 못 하는 환경을 설계 (grounding)
@@ -137,7 +144,7 @@ export const AX_STACK: AxStackGroup[] = [
   },
   {
     label: 'Data Systems',
-    items: ['Oracle ERP', 'Supabase', 'MSSQL', 'Prisma', 'ETL'],
+    items: ['ERP BI 인터페이스', 'Supabase', 'MSSQL', 'Prisma', '공공 데이터 API'],
   },
   {
     label: 'Product Build',

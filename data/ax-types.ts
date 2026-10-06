@@ -14,9 +14,29 @@ export interface AxCaseStep {
   body: string
 }
 
+/** 지금 상태 — 운영 중 / 다른 시스템으로 이어짐 / 운영 종료. 끝난 일도 기록으로 남긴다. */
+export type CaseStatusKind = 'live' | 'evolved' | 'retired'
+
+export const CASE_STATUS_LABEL: Readonly<Record<CaseStatusKind, string>> = {
+  live: '운영 중',
+  evolved: '다음 시스템으로 이어짐',
+  retired: '운영 종료',
+}
+
+export interface CaseStatus {
+  kind: CaseStatusKind
+  /** 무엇으로 이어졌는지·왜 멈췄는지 한 문장 */
+  note: string
+}
+
 export interface AxCaseStudy {
   projectSlug: string
   label: string
+  /** 내가 맡은 일과 결정권 범위 — 팀·후원자가 아니라 본인 몫을 쓴다 */
+  role: string
+  /** 'YYYY-MM ~ YYYY-MM' 또는 'YYYY-MM ~ 지금' — 저장소 첫·마지막 커밋 근거 */
+  period: string
+  status: CaseStatus
   /** 스캔용 임팩트 헤드라인 1줄: before → after + 핵심 기법 */
   impact?: string
   problem: string
@@ -24,8 +44,6 @@ export interface AxCaseStudy {
   /** 있으면 상세 페이지에서 intervention 대신 시간순 단계로 렌더 */
   steps?: AxCaseStep[]
   outcome: string
-  /** 이 일이 가능했던 조직적 조건 (경영진 지원 등) */
-  sponsorship?: string
   disclosure: MetricDisclosure
   evidenceLabel: string
 }

@@ -16,7 +16,7 @@ export default function ProjectsPage() {
             </h1>
           </div>
         </FadeInUp>
-        <SortableGrid projects={PROJECTS} />
+        <SortableGrid projects={PROJECTS} storageKey="ref-hub-all-project-order" />
       </div>
     </section>
   )

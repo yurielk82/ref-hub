@@ -95,3 +95,31 @@ test('print stylesheet makes the resume printable', () => {
   assert.match(printBlock, /\[data-print-hide\]/, 'print must hide print-only controls')
   assert.ok(existsSync(button), 'missing print entry point: components/portfolio/print-button.tsx')
 })
+
+test('다크 테마 클래스가 dark: 유틸리티를 켠다', () => {
+  const css = readFileSync(path.join(ROOT, 'app', 'globals.css'), 'utf8')
+  const provider = readFileSync(path.join(ROOT, 'components', 'theme-provider.tsx'), 'utf8')
+
+  // 테마는 <html class="dark">로 바뀌는데 Tailwind v4 dark: 기본값은 OS 설정(미디어 쿼리)이다.
+  // 둘이 어긋나면 밝은 OS 방문자에게 어두운 카드 위 검은 제목이 찍혀 보이지 않는다(2026-10-07 실측).
+  assert.match(provider, /attribute="class"/, 'theme provider should switch themes by class')
+  assert.match(
+    css,
+    /@custom-variant dark \(&:where\(\.dark, \.dark \*\)\);/,
+    'globals.css should bind dark: utilities to the .dark class',
+  )
+})
+
+test('경력 목록은 ol 바로 아래에 li를 둔다', () => {
+  const section = readFileSync(
+    path.join(ROOT, 'components', 'portfolio', 'career-section.tsx'),
+    'utf8',
+  )
+
+  // 애니메이션 래퍼(div)가 ol과 li 사이에 끼면 목록 구조가 깨진다(Lighthouse list·listitem).
+  assert.match(
+    section,
+    /entries\.map\(\(experience, index\) => \(\s*<li/,
+    'career entries should render li as the direct child of ol',
+  )
+})

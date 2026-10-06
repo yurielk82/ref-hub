@@ -9,34 +9,26 @@ import {
   useSensors,
   type DragEndEvent,
 } from '@dnd-kit/core'
-import {
-  arrayMove,
-  SortableContext,
-  rectSortingStrategy,
-  useSortable,
-} from '@dnd-kit/sortable'
+import { arrayMove, SortableContext, rectSortingStrategy, useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { GripVertical } from 'lucide-react'
 import type { Project } from '@/data/projects'
 import { ProjectCard } from './project-card'
 
-const STORAGE_KEY = 'ref-hub-project-order'
+/** 끌고 있는 카드는 반투명하게, 다른 카드 위에 그린다 */
+const DRAGGING_OPACITY = 0.5
+const DRAGGING_Z_INDEX = 50
 
 function SortableCard({ project }: { project: Project }) {
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({ id: project.slug })
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id: project.slug,
+  })
 
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-    opacity: isDragging ? 0.5 : 1,
-    zIndex: isDragging ? 50 : 'auto' as const,
+    opacity: isDragging ? DRAGGING_OPACITY : 1,
+    zIndex: isDragging ? DRAGGING_Z_INDEX : ('auto' as const),
   }
 
   return (
@@ -54,12 +46,19 @@ function SortableCard({ project }: { project: Project }) {
   )
 }
 
-export function SortableGrid({ projects }: { projects: Project[] }) {
-  const [ordered, setOrdered] = useState(projects)
+/** storageKey — 묶음마다 따로 둬야 한 묶음의 순서 저장이 다른 묶음을 덮지 않는다 */
+export function SortableGrid({
+  projects,
+  storageKey,
+}: {
+  projects: readonly Project[]
+  storageKey: string
+}) {
+  const [ordered, setOrdered] = useState<readonly Project[]>(projects)
   const [isCustomOrder, setIsCustomOrder] = useState(false)
 
   useEffect(() => {
-    const saved = localStorage.getItem(STORAGE_KEY)
+    const saved = localStorage.getItem(storageKey)
     if (!saved) return
     try {
       const slugOrder: string[] = JSON.parse(saved)
@@ -75,11 +74,9 @@ export function SortableGrid({ projects }: { projects: Project[] }) {
     } catch {
       /* 손상된 데이터 무시 */
     }
-  }, [projects])
+  }, [projects, storageKey])
 
-  const sensors = useSensors(
-    useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
-  )
+  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 8 } }))
 
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event
@@ -88,15 +85,15 @@ export function SortableGrid({ projects }: { projects: Project[] }) {
     setOrdered((prev) => {
       const oldIdx = prev.findIndex((p) => p.slug === active.id)
       const newIdx = prev.findIndex((p) => p.slug === over.id)
-      const next = arrayMove(prev, oldIdx, newIdx)
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(next.map((p) => p.slug)))
+      const next = arrayMove([...prev], oldIdx, newIdx)
+      localStorage.setItem(storageKey, JSON.stringify(next.map((p) => p.slug)))
       setIsCustomOrder(true)
       return next
     })
   }
 
   function handleReset() {
-    localStorage.removeItem(STORAGE_KEY)
+    localStorage.removeItem(storageKey)
     setOrdered(projects)
     setIsCustomOrder(false)
   }
@@ -113,15 +110,8 @@ export function SortableGrid({ projects }: { projects: Project[] }) {
           </button>
         </div>
       )}
-      <DndContext
-        sensors={sensors}
-        collisionDetection={closestCenter}
-        onDragEnd={handleDragEnd}
-      >
-        <SortableContext
-          items={ordered.map((p) => p.slug)}
-          strategy={rectSortingStrategy}
-        >
+      <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+        <SortableContext items={ordered.map((p) => p.slug)} strategy={rectSortingStrategy}>
           <div className="grid gap-6 sm:grid-cols-2">
             {ordered.map((project) => (
               <SortableCard key={project.slug} project={project} />

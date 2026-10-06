@@ -5,6 +5,8 @@ export interface Project {
   description: string
   tech: string[]
   category: 'web' | 'mobile' | 'api' | 'tool'
+  /** 랜딩 묶음 — 회사 업무(company)와 그 밖의 작업(개인 도구·외부 의뢰, other) */
+  scope: 'company' | 'other'
   liveUrl?: string
   githubUrl?: string
   docsPath?: string

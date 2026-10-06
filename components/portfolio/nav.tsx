@@ -5,6 +5,8 @@ import { Moon, Sun } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
+import { AX_HERO } from '@/data/ax-content'
+
 export function PortfolioNav() {
   const { resolvedTheme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
@@ -21,9 +23,15 @@ export function PortfolioNav() {
           href="/"
           className="font-[family-name:var(--font-display)] text-sm font-bold tracking-tight text-stone-900 dark:text-stone-100"
         >
-          Ref Hub
+          {AX_HERO.name}
         </Link>
         <div className="flex items-center gap-3">
+          <Link
+            href="/#work"
+            className="text-xs text-stone-500 transition-colors hover:text-[var(--accent)]"
+          >
+            맡은 일
+          </Link>
           <Link
             href="/projects"
             className="text-xs text-stone-500 transition-colors hover:text-[var(--accent)]"

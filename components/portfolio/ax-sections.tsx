@@ -52,10 +52,10 @@ export function AxHeroSection() {
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a
-              href="#cases"
+              href="#work"
               className="inline-flex items-center gap-2 rounded-lg bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
             >
-              대표 사례
+              맡아 온 일
               <ArrowRight className="h-4 w-4" />
             </a>
             <a
@@ -82,7 +82,7 @@ export function AxHeroSection() {
 
         <div className="rounded-lg border border-stone-200 bg-white p-5 dark:border-stone-800 dark:bg-stone-900">
           <p className="font-[family-name:var(--font-mono)] text-xs uppercase text-stone-500">
-            Operating Model
+            일하는 방식
           </p>
           <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
             {AX_HERO.evidence.map((item) => (
@@ -110,7 +110,7 @@ export function AxCasesSection({ cases }: { cases: AxCase[] }) {
     <section id="cases" className="mt-20 scroll-mt-20">
       <FadeInUp>
         <p className="font-[family-name:var(--font-mono)] text-xs uppercase text-[var(--accent)]">
-          Featured Cases
+          업무를 받친 시스템
         </p>
         <h2 className="mt-2 text-2xl font-bold text-stone-950 dark:text-stone-50">대표 사례</h2>
       </FadeInUp>
@@ -242,7 +242,7 @@ export function AxContactSection() {
         <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="font-[family-name:var(--font-mono)] text-xs uppercase text-[var(--accent)]">
-              Contact
+              연락
             </p>
             <h2 className="mt-2 text-xl font-bold text-stone-950 dark:text-stone-50">
               AX 사례와 구현 세부 내용을 더 설명할 수 있습니다.

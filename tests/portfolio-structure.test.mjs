@@ -248,3 +248,51 @@ test('랜딩은 회사 업무와 그 밖의 작업을 나눠 보여 준다', () 
   assert.match(homePage, /COMPANY_PROJECTS/, 'landing should render the company work grid')
   assert.match(homePage, /OTHER_PROJECTS/, 'landing should render the other work grid')
 })
+
+test('랜딩은 맡아 온 업무와 예외 상황을 시스템 목록보다 먼저 보여 준다', () => {
+  const homePage = readFileSync(path.join(ROOT, 'app', '(portfolio)', 'page.tsx'), 'utf8')
+  const workPath = path.join(ROOT, 'data', 'work-history.ts')
+  assert.ok(existsSync(workPath), 'missing work history data: data/work-history.ts')
+  const work = readFileSync(workPath, 'utf8')
+
+  const body = homePage.slice(homePage.indexOf('export default function'))
+  const workAt = body.indexOf('<WorkSection')
+  const edgeAt = body.indexOf('<EdgeCaseSection')
+  const gridAt = body.indexOf('PROJECT_GROUPS.map')
+  assert.ok(workAt > 0, 'landing should render WorkSection')
+  assert.ok(edgeAt > workAt, 'edge cases should follow the work chapters')
+  assert.ok(gridAt > edgeAt, 'system grids should come after the work narrative')
+
+  for (const id of ['stabilize', 'audit', 'rehabilitation', 'pmi', 'sales-hq']) {
+    assert.match(work, new RegExp(`id: '${id}'`), `work history should cover ${id}`)
+  }
+  const chapters = [
+    ...work.matchAll(/situation:[\s\S]*?actions:\s*\[([\s\S]*?)\],\s*results:\s*\[([\s\S]*?)\]/g),
+  ]
+  assert.ok(
+    chapters.length >= 5,
+    `each chapter needs situation·actions·results, found ${chapters.length}`,
+  )
+  for (const [, actions, results] of chapters) {
+    assert.match(actions, /'[^']+'/, 'each chapter should list what I did')
+    assert.match(results, /'[^']+'/, 'each chapter should state an outcome')
+  }
+  const edgeCases = [...work.matchAll(/problem:[\s\S]*?handling:/g)]
+  assert.ok(
+    edgeCases.length >= 6,
+    `edge cases should pair problem and handling, found ${edgeCases.length}`,
+  )
+})
+
+test('사이트 이름과 라벨은 소유자 이름과 한국어로 보인다', () => {
+  const nav = readFileSync(path.join(ROOT, 'components', 'portfolio', 'nav.tsx'), 'utf8')
+  const homePage = readFileSync(path.join(ROOT, 'app', '(portfolio)', 'page.tsx'), 'utf8')
+  const axContent = readFileSync(path.join(ROOT, 'data', 'ax-content.ts'), 'utf8')
+
+  assert.doesNotMatch(nav, />\s*Ref Hub\s*</, 'nav brand should be the owner, not "Ref Hub"')
+  assert.match(nav, /AX_HERO\.name/, 'nav brand should read the owner name')
+  assert.match(nav, /href="\/#work"/, 'nav should reach the work section')
+  assert.doesNotMatch(homePage, /eyebrow: '[A-Za-z ]+'/, 'landing group labels should be Korean')
+  const heroEyebrow = axContent.match(/AX_HERO = \{[\s\S]*?eyebrow: '([^']+)'/)?.[1] ?? ''
+  assert.match(heroEyebrow, /[가-힣]/, 'hero label should be Korean')
+})

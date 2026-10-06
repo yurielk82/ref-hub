@@ -21,7 +21,7 @@ export function CareerSection() {
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="font-[family-name:var(--font-mono)] text-xs uppercase text-[var(--accent)]">
-              Career
+              경력
             </p>
             <h2 className="mt-2 text-2xl font-bold text-stone-950 dark:text-stone-50">경력</h2>
           </div>

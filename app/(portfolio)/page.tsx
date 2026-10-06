@@ -9,13 +9,14 @@ import { AxCasesSection, AxContactSection, AxHeroSection } from '@/components/po
 import { CareerSection } from '@/components/portfolio/career-section'
 import { FadeInUp } from '@/components/portfolio/motion'
 import { SortableGrid } from '@/components/portfolio/sortable-grid'
+import { EdgeCaseSection, WorkSection } from '@/components/portfolio/work-section'
 
 /** 랜딩은 대표 사례만 요약하고, 나머지 서사는 /ax 심화 페이지가 맡는다. */
 const LANDING_CASE_COUNT = 3
 
 // 이력서 링크를 공유했을 때 탭·미리보기에 이름이 먼저 보여야 한다.
 const LANDING_TITLE = `${AX_HERO.name} — ${AX_HERO.role}`
-const LANDING_DESCRIPTION = `${AX_HERO.name} · ${AX_HERO.role}. 영업 현장의 정산·법정 보고·영업 데이터 문제를 직접 만든 시스템으로 풀고 운영해 온 기록 — 프로젝트 ${PROJECTS.length}건, 경력, 프로젝트별 매뉴얼.`
+const LANDING_DESCRIPTION = `${AX_HERO.name} · ${AX_HERO.role}. 인력이 빠진 영업관리 정상화, 법정 보고 사고 수습과 감사 대응, 회생 절차, 부광약품 인수 뒤 통합, 영업본부 SFE까지 맡아 온 업무와 그 일을 받친 시스템 ${PROJECTS.length}건.`
 const LANDING_PREVIEW_IMAGE = '/images/portfolio/pharmkpi/hero.png'
 
 export const metadata: Metadata = {
@@ -58,15 +59,15 @@ const PROJECT_GROUPS = [
     id: 'projects',
     // 묶음을 나누기 전 키 — 방문자가 저장해 둔 순서를 이어 쓴다
     storageKey: 'ref-hub-project-order',
-    eyebrow: 'Company Work',
-    title: `회사 업무 ${COMPANY_PROJECTS.length}건`,
-    lead: '영업관리팀과 영업본부에서 직접 기획·구축·운영한 시스템입니다. 운영을 마친 것도 어디로 이어졌는지와 함께 남깁니다.',
+    eyebrow: '회사 업무',
+    title: `업무에 쓴 시스템 ${COMPANY_PROJECTS.length}건`,
+    lead: '위 업무를 하면서 직접 기획·구축·운영한 시스템입니다. 운영을 마친 것도 어디로 이어졌는지와 함께 남깁니다.',
     projects: COMPANY_PROJECTS,
   },
   {
     id: 'other-projects',
     storageKey: 'ref-hub-other-project-order',
-    eyebrow: 'Other Work',
+    eyebrow: '그 밖',
     title: `그 밖의 작업 ${OTHER_PROJECTS.length}건`,
     lead: '외부 의뢰와 개인 도구입니다. 회사 업무를 만들고 운영하는 작업 환경도 여기 있습니다.',
     projects: OTHER_PROJECTS,
@@ -95,6 +96,10 @@ export default function HomePage() {
       />
       <div className="mx-auto max-w-6xl">
         <AxHeroSection />
+
+        <WorkSection />
+
+        <EdgeCaseSection />
 
         <AxCasesSection cases={cases} />
 
@@ -142,7 +147,7 @@ export default function HomePage() {
               <div className="flex items-center gap-2">
                 <BookOpen className="h-4 w-4 text-[var(--accent)]" />
                 <p className="font-[family-name:var(--font-mono)] text-xs uppercase text-[var(--accent)]">
-                  Documentation
+                  매뉴얼
                 </p>
               </div>
               <h2 className="mt-3 text-2xl font-bold text-stone-950 dark:text-stone-50">

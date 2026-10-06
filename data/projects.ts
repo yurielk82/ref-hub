@@ -7,6 +7,9 @@ export type { Project }
 // 쇼케이스 등록부 — 엔터프라이즈 딜리버리 → 사내 도구·하네스 순 (랜딩 카드 노출 순서)
 export const PROJECTS: Project[] = [...DELIVERY_PROJECTS, ...TOOLING_PROJECTS]
 
+export const COMPANY_PROJECTS: Project[] = PROJECTS.filter((p) => p.scope === 'company')
+export const OTHER_PROJECTS: Project[] = PROJECTS.filter((p) => p.scope === 'other')
+
 export function getProject(slug: string): Project | undefined {
   return PROJECTS.find((p) => p.slug === slug)
 }

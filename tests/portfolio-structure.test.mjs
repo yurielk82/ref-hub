@@ -60,6 +60,7 @@ test('AX case studies are ordered by AX relevance and delivery proof', () => {
   // delivery order set in data/ax.ts.
   const expectedAxOrder = [
     'pharmkpi',
+    'sales-hq-sfe',
     'sales-strategy-portal',
     'pharmkpi-exec',
     'kpis-dsr-api',
@@ -79,13 +80,11 @@ test('AX case studies are ordered by AX relevance and delivery proof', () => {
     expectedAxOrder,
     'AX case studies should lead with highest AX relevance',
   )
-  assert.match(axData, /인수사 IT팀/, 'ERP Spec AX case should name the acquirer IT-team context')
+  // erp-spec 저장소 PROJECT.md 기준: 목적은 MariaDB 이관 선행 작업, 사용자는 사내 IT·ERP 이관 담당.
+  // "인수사 IT팀"은 근거가 없어 2026-10-07 문구에서 뺐다.
+  assert.match(axData, /ERP 이관|MariaDB/, 'ERP Spec AX case should name the migration context')
   assert.match(axData, /785개 테이블/, 'ERP Spec AX case should show ERP analysis scale')
-  assert.match(
-    erpSpecBlock,
-    /인수사 IT팀|ERP 구조 분석/,
-    'ERP Spec project copy should reflect the AX positioning',
-  )
+  assert.match(erpSpecBlock, /ERP 구조/, 'ERP Spec project copy should reflect the AX positioning')
   // Intent-based (not exact taglines): the harness case is framed as a
   // Claude/Codex agentic harness, carries cost/measurement discipline, and the
   // skills philosophy. Per workspace test rules (avoid snapshot string pins).
@@ -199,6 +198,8 @@ test('retired projects do not advertise dead live URLs', () => {
   const retired = [
     { slug: 'pharmkpi-exec', host: 'exec.dvsharp.com' },
     { slug: 'apinfy-lab', host: 'apin.dvsharp.com' },
+    // 2026-09-29 운영 중지 — 상용 정산 플랫폼 도입으로 개발을 멈췄다.
+    { slug: 'csoweb', host: 'cso.dvsharp.com' },
   ]
 
   for (const { slug, host } of retired) {
@@ -217,4 +218,33 @@ test('retired projects do not advertise dead live URLs', () => {
     /exec\.dvsharp\.com 라이브/,
     'AX case copy should not claim the archived exec deployment is live',
   )
+})
+
+test('사례마다 내 역할·기간·현재 상태를 밝히고 후원자 공로 문장은 쓰지 않는다', () => {
+  const axData = readAxData()
+  const caseCount = [...axData.matchAll(/projectSlug:\s*'/g)].length
+
+  // 사례 서사는 본인이 무엇을 맡고 결정했는지가 중심이다. 예전 sponsorship 칸은 모든 회사 사례에
+  // "대표이사가 밀어준 과제"를 반복해 정작 본인 몫을 가렸다(오너 지적 2026-10-06).
+  for (const field of ['role', 'period', 'status']) {
+    const count = [...axData.matchAll(new RegExp(`^\\s+${field}:`, 'gm'))].length
+    assert.equal(count, caseCount, `every case study should state its ${field}`)
+  }
+  assert.doesNotMatch(axData, /sponsorship/, 'case studies should not carry a sponsor-credit field')
+  assert.doesNotMatch(
+    axData,
+    /대표이사가 (밀어|직접 지시)|대표이사의 지원/,
+    'case copy should credit the owner’s own decisions, not the CEO’s backing',
+  )
+})
+
+test('랜딩은 회사 업무와 그 밖의 작업을 나눠 보여 준다', () => {
+  const homePage = readFileSync(path.join(ROOT, 'app', '(portfolio)', 'page.tsx'), 'utf8')
+  const projectData = readProjectData()
+  const projectCount = [...projectData.matchAll(/^\s+slug:\s*'/gm)].length
+  const scopeCount = [...projectData.matchAll(/^\s+scope:\s*'(company|other)'/gm)].length
+
+  assert.equal(scopeCount, projectCount, 'every project should declare company or other scope')
+  assert.match(homePage, /COMPANY_PROJECTS/, 'landing should render the company work grid')
+  assert.match(homePage, /OTHER_PROJECTS/, 'landing should render the other work grid')
 })

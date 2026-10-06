@@ -112,7 +112,7 @@ export function AxCasesSection({ cases }: { cases: AxCase[] }) {
         <p className="font-[family-name:var(--font-mono)] text-xs uppercase text-[var(--accent)]">
           Featured Cases
         </p>
-        <h2 className="mt-2 text-2xl font-bold text-stone-950 dark:text-stone-50">AX 대표 사례</h2>
+        <h2 className="mt-2 text-2xl font-bold text-stone-950 dark:text-stone-50">대표 사례</h2>
       </FadeInUp>
 
       <div className="mt-8 space-y-5">
@@ -137,7 +137,9 @@ export function AxCasesSection({ cases }: { cases: AxCase[] }) {
                       <h3 className="text-xl font-bold text-stone-950 dark:text-stone-50">
                         {study.project.name}
                       </h3>
-                      <p className="mt-1 text-sm text-stone-500">{study.project.highlight}</p>
+                      <p className="mt-1 text-sm text-stone-600 dark:text-stone-400">
+                        {study.project.highlight}
+                      </p>
                     </div>
                     <Link
                       href={`/projects/${study.project.slug}`}
@@ -155,9 +157,10 @@ export function AxCasesSection({ cases }: { cases: AxCase[] }) {
                   )}
 
                   <dl className="mt-6 grid gap-4">
-                    <AxCaseFact term="Problem" value={study.problem} />
-                    <AxCaseFact term="AX Intervention" value={study.intervention} />
-                    <AxCaseFact term="Outcome" value={study.outcome} />
+                    <AxCaseFact term="내 역할" value={`${study.role} · ${study.period}`} />
+                    <AxCaseFact term="문제" value={study.problem} />
+                    <AxCaseFact term="내가 한 일" value={study.intervention} />
+                    <AxCaseFact term="결과" value={study.outcome} />
                   </dl>
                 </div>
               </div>
@@ -226,7 +229,7 @@ export function AxGroundingSection({ data }: { data: AxGrounding }) {
 function AxCaseFact({ term, value }: { term: string; value: string }) {
   return (
     <div>
-      <dt className="text-xs font-semibold uppercase text-stone-400">{term}</dt>
+      <dt className="text-xs font-semibold text-stone-500 dark:text-stone-400">{term}</dt>
       <dd className="mt-1 text-sm leading-6 text-stone-700 dark:text-stone-300">{value}</dd>
     </div>
   )

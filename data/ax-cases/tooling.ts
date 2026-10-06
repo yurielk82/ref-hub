@@ -5,6 +5,12 @@ export const TOOLING_CASE_STUDIES: AxCaseStudy[] = [
   {
     projectSlug: 'claude-dotfiles',
     label: 'Agentic Harness + Loop Engineering + Measured Memory',
+    role: '개인 프로젝트 — 설계·구현·운영 전부를 맡았습니다.',
+    period: '2026-04 ~ 지금',
+    status: {
+      kind: 'live',
+      note: '회사 업무 시스템을 만들고 운영하는 Claude Code·Codex 작업 환경으로 매일 사용',
+    },
     problem:
       'AX 프로젝트를 빠르게 구현해도 품질·리뷰·배포 안전장치·반복 실수 방지·맥락 기억이 남지 않으면 현업 적용 속도가 유지되지 않습니다. 요즘 유튜브에 도는 에이전트 하네스·루프 엔지니어링·RAG 기억은 데모로는 흔하지만, 실제 납품 현장에서 굴러가는 형태로 만드는 건 다른 문제였습니다.',
     intervention:
@@ -17,6 +23,9 @@ export const TOOLING_CASE_STUDIES: AxCaseStudy[] = [
   {
     projectSlug: 'har-eval',
     label: 'Evidence-Gated Build/Buy Decisions',
+    role: '개인 프로젝트 — 평가 절차 설계와 실제 도입·유지 결정에 썼습니다.',
+    period: '2026-06 ~ 지금',
+    status: { kind: 'live', note: '새 도구를 들일지·유지할지 정할 때마다 사용' },
     problem:
       '"이거 만들까, 도입할까"를 의견과 열정으로 결정하면 잘못된 yes가 실제 빌드 시간을 통째로 태웁니다. 정직한 답이 "지금 것으로 충분"일 때가 많은데, 측정 없이는 그걸 지나치기 쉬웠습니다.',
     intervention:
@@ -29,6 +38,9 @@ export const TOOLING_CASE_STUDIES: AxCaseStudy[] = [
   {
     projectSlug: 'ev-motor-reliability',
     label: 'Reliability Automation + Auditable Stats',
+    role: '외부 의뢰 — 시험 파이프라인 설계·구현과 신뢰성 통계 구현을 맡았습니다.',
+    period: '2026-02 ~ 2026-06',
+    status: { kind: 'live', note: '2026-06 이후 기능 개발 없이 유지' },
     problem:
       '전기차 구동 모터 신뢰성 시험은 시뮬 검증 → 펌웨어 → 빌드 → 플래싱 → 장기 수집 → 분석 → 리포트가 전부 순차 수작업이라, 시험 엔지니어가 24시간 시험을 지키고 수명·고장모드를 매번 수기로 판정해야 했습니다. 병목은 "각 단계가 끊겨 사람이 매번 손으로 이어붙인다"였습니다.',
     intervention:
@@ -41,6 +53,9 @@ export const TOOLING_CASE_STUDIES: AxCaseStudy[] = [
   {
     projectSlug: 'srt',
     label: 'Internal Benefit + Concurrency-Safe Engineering',
+    role: '개인 프로젝트 — 동료 복지용으로 기획·구현·운영했습니다.',
+    period: '2022-01 ~ 지금',
+    status: { kind: 'live', note: '동료들이 휴가철 예매에 쓰는 중' },
     problem:
       '직원들이 주말 기차표(SRT)를 구하기 힘들어했습니다 — 인기 노선은 판매 직후 몇 초 만에 매진이라 손으로는 못 잡고, 여러 직원이 한 서버에서 동시에 자동 조회하면 SRT의 속도 제한·봇 탐지에 IP가 통째로 차단돼 모두가 막힙니다.',
     intervention:
@@ -85,20 +100,26 @@ export const TOOLING_CASE_STUDIES: AxCaseStudy[] = [
   {
     projectSlug: 'team-pulse',
     label: 'Stigma-Safe Diagnostics + RLS',
+    role: '개인 프로젝트 — 문항 설계 원칙, 공개 범위, 구현·운영을 맡았습니다.',
+    period: '2026-05 ~ 지금',
+    status: { kind: 'live', note: '팀 워크숍용 자가진단으로 운영 중' },
     impact:
-      'HR 평가 오인 시 솔직한 응답 붕괴 위험 → 본인만 결과·3명 미만 집계 차단(역산 불가)으로 낙인 제거',
+      'HR 평가 오인 시 솔직한 응답 붕괴 위험 → 개인 결과는 본인 동의로만 공개·3명 미만 집계 차단(역산 불가)으로 낙인 제거',
     problem:
       '목표는 평가가 아니라 "서로의 업무 방식을 이해하는 것"인데, 심리·성향 진단은 "회사가 내 약점을 들여다본다"는 낙인 두려움이 큽니다. HR 평가로 오인되면 솔직한 응답이 안 나오고 팀 심리 안전이 깨져, 도구 자체가 무용해집니다.',
     intervention:
-      '낙인을 어떻게 없애느냐가 전부라, 세 가지를 박았습니다. ① 방어기제(Vaillant)부터 의사소통 유형(사티어)·성향(Big Five)까지 협업에 도움이 되는 기법을 쓰되, 문항을 추상적 성격이 아니라 일터 행동("새 협업 툴 시도", "팀 갈등 상황")으로 한정해 평가가 아닌 협업 맥락임을 드러냈습니다. ② 노출을 계층화했습니다. 개인 결과는 RLS(행 단위 접근 제어)로 본인만 보고, 팀 집계는 최소 3명이 응답하기 전엔 개인을 역산할 수 없도록 구간으로만 보이며, 소유자 화이트리스트만 접근하게 했습니다. ③ 동의 모달·결과 고지·위압적이지 않고 부드러운 말투와 용어("진단" 대신 "협업 카테고리 추정")로 "HR·임상 평가가 아니다"를 일관되게 반복했습니다.',
+      '낙인을 어떻게 없애느냐가 전부라, 세 가지를 박았습니다. ① 방어기제(Vaillant)부터 의사소통 유형(사티어)·성향(Big Five)까지 협업에 도움이 되는 기법을 쓰되, 문항을 추상적 성격이 아니라 일터 행동("새 협업 툴 시도", "팀 갈등 상황")으로 한정해 평가가 아닌 협업 맥락임을 드러냈습니다. ② 노출을 계층화했습니다. 개인 결과는 RLS(행 단위 접근 제어)로 기본은 본인만 봅니다. 실사용 피드백 뒤에는 본인이 동의할 때만 팀원도 열람하게 바꿨습니다. 팀 집계는 최소 3명이 응답하기 전엔 구간으로만 보여 개인을 역산할 수 없고, 소유자 화이트리스트만 접근합니다. ③ 동의 모달·결과 고지·위압적이지 않고 부드러운 말투와 용어("진단" 대신 "협업 카테고리 추정")로 "HR·임상 평가가 아니다"를 일관되게 반복했습니다.',
     outcome:
-      '진단의 낙인 위험을 기능 설계로 눌러, 개인은 본인 결과만 보고 팀은 역산이 불가능한 집계만 보는 협업 워크숍용 자가진단 SaaS로 만들었습니다. 한 팀 5인이 참여했고, 평가가 아니라 서로를 이해하는 톤이 닿아 "거울로 나를 들여다본 것 같다"는 피드백을 받았습니다.',
+      '진단의 낙인 위험을 기능 설계로 눌러, 개인 결과는 본인 동의로만 공개하고 팀은 역산이 불가능한 집계만 보는 협업 워크숍용 자가진단 SaaS로 만들었습니다.',
     disclosure: 'public',
     evidenceLabel: '프로젝트 상세',
   },
   {
     projectSlug: 'naver-place-collector',
     label: 'Block-Resilient Collection + Auto Grading',
+    role: '개인 프로젝트 — 수집·판정 규칙 설계와 구현·운영을 맡았습니다.',
+    period: '2026-04 ~ 지금',
+    status: { kind: 'live', note: '영업 타깃 DB 수집 도구로 운영 중' },
     problem:
       '업종별 B2B 영업 타겟을 네이버 플레이스에서 모으려면 장시간(24시간+) 수집이 필요한데, 한 서버 IP로 계속 조회하면 속도 제한·봇 탐지로 IP가 통째로 차단돼 잡 전체가 재시작됩니다.',
     intervention:
@@ -111,6 +132,9 @@ export const TOOLING_CASE_STUDIES: AxCaseStudy[] = [
   {
     projectSlug: 'apinfy-lab',
     label: 'Actor Model + Execution Isolation',
+    role: '개인 프로젝트 — 실행 구조 설계와 레퍼런스 구현을 맡았습니다.',
+    period: '2026-05',
+    status: { kind: 'retired', note: '2026-06 공개 인스턴스를 내리고 코드만 공개' },
     problem:
       '크롤러를 하나 늘릴 때마다 스케줄·동시성·격리·재시도를 매번 새로 짜야 했고, 여러 크롤러가 한 노드에서 결과·상태·요청을 섞어 충돌했습니다. 진짜 걸림돌은 "실행 단위가 재사용·격리되지 않는다"였고, 나중에 분산 워커(Docker/k8s)로 키우려면 그 토대부터 필요했습니다.',
     intervention:

@@ -1,4 +1,27 @@
-import type { AxCaseStep, AxCaseStudy } from '@/data/ax'
+import { CASE_STATUS_LABEL, type AxCaseStep, type AxCaseStudy } from '@/data/ax'
+
+/** 사례 첫머리 — 내 역할·기간·지금 상태. 읽는 사람이 "이 사람이 무엇을 했나"부터 보게 한다. */
+function CaseOwnership({ caseStudy }: { caseStudy: AxCaseStudy }) {
+  const rows = [
+    { term: '내 역할', value: caseStudy.role },
+    { term: '기간', value: caseStudy.period },
+    {
+      term: '지금',
+      value: `${CASE_STATUS_LABEL[caseStudy.status.kind]} — ${caseStudy.status.note}`,
+    },
+  ]
+
+  return (
+    <dl className="glass-card mt-6 grid gap-3 rounded-xl p-5 sm:grid-cols-[6rem_1fr]">
+      {rows.map((row) => (
+        <div key={row.term} className="contents">
+          <dt className="text-xs font-semibold text-stone-600 dark:text-stone-400">{row.term}</dt>
+          <dd className="text-sm leading-6 text-stone-800 dark:text-stone-200">{row.value}</dd>
+        </div>
+      ))}
+    </dl>
+  )
+}
 
 /** 시간순 단계 타임라인 — 첫 단계가 문제(이전), 마지막 단계가 결과(지금)를 담는다 */
 function CaseTimeline({ steps }: { steps: readonly AxCaseStep[] }) {
@@ -26,9 +49,9 @@ function CaseTimeline({ steps }: { steps: readonly AxCaseStep[] }) {
 /** 단계 서사가 없는 케이스의 폴백 — 문제 / 개입 / 결과 문단 */
 function CaseSummary({ caseStudy }: { caseStudy: AxCaseStudy }) {
   const facts = [
-    { term: 'Problem', value: caseStudy.problem },
-    { term: 'AX Intervention', value: caseStudy.intervention },
-    { term: 'Outcome', value: caseStudy.outcome },
+    { term: '문제', value: caseStudy.problem },
+    { term: '내가 한 일', value: caseStudy.intervention },
+    { term: '결과', value: caseStudy.outcome },
   ]
 
   return (
@@ -62,6 +85,8 @@ export function CaseNarrative({ caseStudy }: { caseStudy: AxCaseStudy }) {
       <h2 className="mt-2 text-2xl font-bold tracking-tight text-stone-900 dark:text-stone-100">
         {hasSteps ? '이전 → 단계별 개선 → 지금' : '문제 → 해결 → 결과'}
       </h2>
+      <CaseOwnership caseStudy={caseStudy} />
+
       {caseStudy.impact && (
         <p className="mt-5 border-l-2 border-l-[var(--accent)] pl-3 text-sm font-semibold leading-6 text-stone-900 dark:text-stone-100">
           {caseStudy.impact}
@@ -72,17 +97,6 @@ export function CaseNarrative({ caseStudy }: { caseStudy: AxCaseStudy }) {
         <CaseTimeline steps={caseStudy.steps} />
       ) : (
         <CaseSummary caseStudy={caseStudy} />
-      )}
-
-      {caseStudy.sponsorship && (
-        <div className="glass-card mt-8 rounded-xl border-l-4 border-l-[var(--accent-warm)] p-5">
-          <p className="font-[family-name:var(--font-mono)] text-xs uppercase tracking-wider text-stone-500">
-            추진 배경
-          </p>
-          <p className="mt-1.5 text-sm leading-7 text-stone-700 dark:text-stone-300">
-            {caseStudy.sponsorship}
-          </p>
-        </div>
       )}
     </section>
   )

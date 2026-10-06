@@ -8,6 +8,10 @@
 
 @import 'tailwindcss' source(none);
 
+/* 테마는 next-themes 가 <html class="dark"> 로 바꾼다. dark: 를 OS 설정이 아니라 이 클래스에 묶어야
+   밝은 OS 방문자에게 어두운 카드 위 검은 글자가 찍히지 않는다. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @source "../app";
 @source "../components";
 @source "../data";

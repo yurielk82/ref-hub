@@ -4,6 +4,10 @@
 새 helper·여러 화면 공통 동작을 만들기 전에 여기서 먼저 찾는다([topic:workspace/reuse]).
 대상 공통 층(`.shared-modules.json`): `lib`
 
+### `lib/sentry-tunnel.ts`
+
+- `resolveTunnelTarget`
+
 ### `lib/utils.ts`
 
 - `cn`

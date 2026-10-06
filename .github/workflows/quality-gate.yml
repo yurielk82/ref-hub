@@ -113,6 +113,13 @@ jobs:
             exit 1
           }
 
+      # Prisma 를 쓰는 저장소는 타입 검사 전에 클라이언트를 만든다(접속은 하지 않는다).
+      - name: Prisma generate
+        if: hashFiles('prisma/schema.prisma') != ''
+        run: npx prisma generate
+        env:
+          DATABASE_URL: postgresql://ci:ci@localhost:5432/ci
+
       - name: TypeScript check
         run: npx tsc --noEmit --pretty false
 
@@ -154,8 +161,42 @@ jobs:
           cache: 'npm'
       # --audit-level=high: high/critical만 차단 (moderate 이하는 통과)
       # dev 포함: CI/빌드 툴체인 취약점도 잡아야 함 (Codex 리뷰 피드백)
+      # osv-scanner.toml 의 기한 안 지난 예외(IgnoredVulns)만 빼고, 남은 높음·심각 공지가 있으면 막는다.
       - name: npm audit
-        run: npm audit --audit-level=high
+        run: |
+          npm audit --json > npm-audit.json || true
+          python3 - <<'PY'
+          import datetime, json, pathlib, sys, tomllib
+
+          def allowed_ids(path: pathlib.Path) -> set[str]:
+              if not path.exists():
+                  return set()
+              now = datetime.datetime.now(datetime.timezone.utc)
+              ids = set()
+              for vuln in tomllib.loads(path.read_text()).get("IgnoredVulns", []):
+                  until = vuln.get("ignoreUntil")
+                  if isinstance(until, datetime.date) and not isinstance(until, datetime.datetime):
+                      until = datetime.datetime.combine(until, datetime.time(), datetime.timezone.utc)
+                  if isinstance(until, datetime.datetime) and until.tzinfo is None:
+                      until = until.replace(tzinfo=datetime.timezone.utc)
+                  if until is None or until > now:
+                      ids.add(vuln["id"])
+              return ids
+
+          report = json.loads(pathlib.Path("npm-audit.json").read_text())
+          if "vulnerabilities" not in report:
+              sys.exit(f"npm audit 결과를 읽지 못했다: {report.get('error', report)}")
+          allowed = allowed_ids(pathlib.Path("osv-scanner.toml"))
+          blocked = sorted(
+              f"{via['severity']} {name} {via['url'].rsplit('/', 1)[-1]} {via.get('title', '')}"
+              for name, vuln in report["vulnerabilities"].items()
+              for via in vuln.get("via", [])
+              if isinstance(via, dict) and via.get("severity") in ("high", "critical")
+              and via.get("url", "").rsplit("/", 1)[-1] not in allowed
+          )
+          print("\n".join(blocked) or "막을 높음·심각 공지 없음(예외: " + ", ".join(sorted(allowed)) + ")")
+          sys.exit(1 if blocked else 0)
+          PY
 
   supply-chain-pip:
     needs: detect
@@ -181,6 +222,9 @@ jobs:
       contents: read
       security-events: write
     uses: google/osv-scanner-action/.github/workflows/osv-scanner-reusable-pr.yml@c51854704019a247608d928f370c98740469d4b5  # v2.3.5
+    with:
+      # 비공개 저장소는 Code scanning(SARIF 업로드)을 못 쓴다 — 업로드만 끄고 취약점 발견 시 실패(fail-on-vuln)는 유지한다.
+      upload-sarif: ${{ !github.event.repository.private }}
 
   supply-chain-lockfile-full:
     if: github.event_name == 'push'
@@ -189,6 +233,9 @@ jobs:
       contents: read
       security-events: write
     uses: google/osv-scanner-action/.github/workflows/osv-scanner-reusable.yml@c51854704019a247608d928f370c98740469d4b5  # v2.3.5
+    with:
+      # 비공개 저장소는 Code scanning(SARIF 업로드)을 못 쓴다 — 업로드만 끄고 취약점 발견 시 실패(fail-on-vuln)는 유지한다.
+      upload-sarif: ${{ !github.event.repository.private }}
 
   # ─────────────────────────────────────────────────────────
   # 5. 커밋 메시지 린트 (Conventional Commits, PR 전용)

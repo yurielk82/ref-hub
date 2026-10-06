@@ -1,0 +1,4 @@
+[[IgnoredVulns]]
+id = "GHSA-vfj7-8cjw-p6xm"
+ignoreUntil = 2027-01-06T00:00:00Z
+reason = "braces 3.0.3까지 고친 판 없음. 빌드·정적 검사 도구의 자기 설정 패턴만 처리(사용자 입력 안 닿음). 새 판 나오면 지운다."

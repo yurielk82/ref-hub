@@ -59,19 +59,3 @@ systemd 유닛: `github-ref-hub.service` (target `github-ref-hub.target`). 관�
 # ref-hub Claude 어댑터
 
 - Claude Code 기본 프로젝트 탐색으로 공통 프로젝트 규칙을 적용한다.
-
-<!-- AUTO-HISTORY:START -->
-_자동 생성 — `.claude/scripts/sync-claude-md.sh`. 수동 편집 금지 (append-only 로 .claude/SESSION_LOG.md 가 원본)._
-
-## 최근 세션 히스토리
-
-- `2026-09-09` `6402ad8` — chore(gitignore): ignore .env.production in the shared ignore list _(files: 1)_
-- `2026-09-09` `8039899` — ci: pin every workflow job to Node 24 _(files: 1)_
-- `2026-09-09` `86b462f` — chore: drop the unused PM2 config and stale one-off reports _(files: 7)_
-- `2026-09-09` `f3bbda6` — chore(content): refresh synced manuals from current submodule heads _(files: 18)_
-- `2026-09-09` `9ea71e9` — docs: propose the nginx defence-in-depth headers for ref.dvsharp.com _(files: 1)_
-- `2026-09-09` `8094773` — test(site-integrity): pin the default-deny frame policy and the cache bound _(files: 1)_
-- `2026-09-27` `574083a` — chore: add a generated shared-module catalog _(files: 2)_
-
-원본: `.claude/SESSION_LOG.md` (append-only)
-<!-- AUTO-HISTORY:END -->

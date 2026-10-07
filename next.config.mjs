@@ -50,6 +50,10 @@ const withNextra = nextra({
 const nextConfig = withNextra({
   output: 'standalone',
   ...(DEPLOYMENT_ID ? { deploymentId: DEPLOYMENT_ID } : {}),
+  // deploymentId 를 넣으면 Next 는 BUILD_ID 를 상수(build-TfctsWXpff2fKS)로 고정한다. 운영 릴리스 폴더 이름
+  // (워크스페이스 bin/deploy.sh)이 빌드마다 바뀌는 BUILD_ID 에 기대므로 기본값(빌드마다 무작위)을 명시해 유지한다.
+  // null = Next 기본 생성기. 16.4 부터 명시하면 상수를 쓰지 않는다(16.3.8 은 무시했다).
+  generateBuildId: async () => null,
   // 개발 서버 외부 미리보기(dev-preview 터널) HMR 허용 — dev 전용, 빌드 무영향
   allowedDevOrigins: ['dev-ref-hub.dvsharp.com'],
   // verify/CI builds use an isolated output dir so an in-place `next build` can't

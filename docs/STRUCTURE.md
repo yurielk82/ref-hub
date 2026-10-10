@@ -7,7 +7,7 @@ _Auto-generated. Do NOT edit between AUTO markers - content will be regenerated.
 ## Directory Tree (max-depth 3)
 
 ```
-tmp.SyGLMEQObb/  (30 files)
+tmp.pjoOj8c3oc/  (31 files)
   .github/  (1 files)
     workflows/  (2 files)
   .serena/  (2 files)
@@ -22,10 +22,12 @@ tmp.SyGLMEQObb/  (30 files)
       projects/  (1 files)
     (submission)/  (0 files)
       medpark/  (2 files)
+    api/  (0 files)
+      monitoring/  (1 files)
   components/  (1 files)
     medpark/  (0 files)
       doc/  (9 files)
-    portfolio/  (12 files)
+    portfolio/  (14 files)
   content/  (1 files)
     corerx/  (2 files)
       admin-guide/  (5 files)
@@ -45,13 +47,13 @@ tmp.SyGLMEQObb/  (30 files)
     pharmkpi/  (2 files)
       admin-guide/  (5 files)
       user-guide/  (6 files)
-  data/  (7 files)
+  data/  (8 files)
     ax-cases/  (2 files)
     projects/  (2 files)
   docs/  (2 files)
-    plans/  (1 files)
+    plans/  (0 files)
       archive/  (0 files)
-  lib/  (1 files)
+  lib/  (2 files)
   public/  (0 files)
     images/  (0 files)
       portfolio/  (0 files)
@@ -61,7 +63,7 @@ tmp.SyGLMEQObb/  (30 files)
     kpis-dsr-api/  (0 files)
     studiogo/  (0 files)
   scripts/  (8 files)
-  tests/  (10 files)
+  tests/  (11 files)
 ```
 
 ## Top-Level Files
@@ -87,6 +89,7 @@ instrumentation.ts
 lefthook.yml
 mdx-components.tsx
 next.config.mjs
+osv-scanner.toml
 package-lock.json
 package.json
 paseo.json

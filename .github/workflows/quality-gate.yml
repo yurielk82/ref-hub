@@ -338,6 +338,8 @@ jobs:
   # ─────────────────────────────────────────────────────────
   build-test:
     name: build + test
+    # 빌드·테스트는 코드가 바뀔 때만 돈다 — 예약 실행에서 빼 둔다(2026-09-07 매일 밤 실행 제거 결정).
+    if: github.event_name != 'schedule'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:

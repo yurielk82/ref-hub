@@ -7,9 +7,9 @@ _Auto-generated. Do NOT edit between AUTO markers - content will be regenerated.
 ## Directory Tree (max-depth 3)
 
 ```
-tmp.7gtoB5GykZ/  (31 files)
+tmp.CXtE12oOyR/  (30 files)
   .github/  (1 files)
-    workflows/  (2 files)
+    workflows/  (1 files)
   .serena/  (2 files)
   .stitch/  (1 files)
     designs/  (8 files)
@@ -86,7 +86,6 @@ eslint.config.base.mjs
 eslint.config.mjs
 evaluation-report.md
 instrumentation.ts
-lefthook.yml
 mdx-components.tsx
 next.config.mjs
 osv-scanner.toml

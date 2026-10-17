@@ -4,10 +4,12 @@
 
 _Auto-generated. Do NOT edit between AUTO markers - content will be regenerated._
 
+파일 수에서 자동 생성된 이 문서와 저장소 연결 파일은 제외합니다.
+
 ## Directory Tree (max-depth 3)
 
 ```
-tmp.xQ0onNrh4P/  (30 files)
+ref-hub/  (29 files)
   .github/  (1 files)
     workflows/  (1 files)
   .serena/  (2 files)
@@ -50,7 +52,7 @@ tmp.xQ0onNrh4P/  (30 files)
   data/  (8 files)
     ax-cases/  (2 files)
     projects/  (2 files)
-  docs/  (2 files)
+  docs/  (1 files)
     plans/  (0 files)
       archive/  (0 files)
   lib/  (2 files)
@@ -69,7 +71,6 @@ tmp.xQ0onNrh4P/  (30 files)
 ## Top-Level Files
 
 ```
-.git
 .gitignore
 .gitmodules
 .prettierignore
@@ -101,6 +102,7 @@ vercel.json
 ```
 
 <!-- AUTO:END -->
+
 <!-- MANUAL:BEGIN -->
 
 _Add manual notes below this line. Auto-sync preserves this section._

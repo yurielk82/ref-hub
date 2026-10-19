@@ -57,3 +57,6 @@ graphify-out/
 dist/
 output/
 coverage/
+
+# Serena 가 실행 중 다시 쓰는 설정 — 기본값뿐이라 추적하지 않는다. 없으면 serena 가 만든다(2026-10-20).
+.serena/project.yml

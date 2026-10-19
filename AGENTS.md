@@ -14,3 +14,13 @@ AX 포트폴리오 + 프로젝트 레퍼런스 사이트(ref.dvsharp.com, 공개
 - 확인용 빌드는 `WORKSPACE_VERIFY_BUILD=1`로 돌려 `.next-verify`에 쓴다. 이 변수가 빠지면 운영 `.next`를 덮어 `.next/standalone`이 지워지고 사이트 CSS·JS가 500이 된다(2026-10-07 사고). 빌드 전후로 운영 `.next/BUILD_ID` 시각을 비교한다.
 - 빌드는 `package.json` `build`처럼 `--disable-wasm-trap-handler`와 `--max-old-space-size=4096`을 유지한다. 빼면 `WebAssembly.Instance(): Out of memory`가 난다.
 - 원본은 없는 `/_next/static/*` 요청에 1년 캐시가 붙은 404를 낸다(Nextra catch-all이 받음). 배포 중 옛 청크 404가 Cloudflare에 1년 캐시된 사고(2026-08-30) 뒤로 `next.config.mjs`의 `deploymentId`가 자산 URL에 `?dpl=`을 붙인다. 404 TTL 자체는 Nginx/Cloudflare 소관이라 바꾸려면 별도 승인이 필요하다.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+## This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

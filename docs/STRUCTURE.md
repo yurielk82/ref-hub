@@ -9,10 +9,10 @@ _Auto-generated. Do NOT edit between AUTO markers - content will be regenerated.
 ## Directory Tree (max-depth 3)
 
 ```
-ref-hub/  (29 files)
+ref-hub/  (26 files)
+  .circleci/  (1 files)
   .github/  (1 files)
-    workflows/  (1 files)
-  .serena/  (2 files)
+  .serena/  (1 files)
   .stitch/  (1 files)
     designs/  (8 files)
   app/  (2 files)
@@ -53,6 +53,7 @@ ref-hub/  (29 files)
     ax-cases/  (2 files)
     projects/  (2 files)
   docs/  (1 files)
+    agents/  (3 files)
     plans/  (0 files)
       archive/  (0 files)
   lib/  (2 files)
@@ -71,10 +72,9 @@ ref-hub/  (29 files)
 ## Top-Level Files
 
 ```
+.deepsource.toml
 .gitignore
 .gitmodules
-.prettierignore
-.prettierrc
 .shared-modules.json
 AGENTS.md
 CLAUDE.md
@@ -83,8 +83,6 @@ README.md
 RULE_AUDIT_REPORT.md
 commitlint.config.mjs
 ecosystem.config.cjs
-eslint.config.base.mjs
-eslint.config.mjs
 evaluation-report.md
 instrumentation.ts
 mdx-components.tsx

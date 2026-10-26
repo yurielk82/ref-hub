@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { Head } from "nextra/components";
 import { ThemeProvider } from "@/components/theme-provider";
 import { AX_HERO, SITE_URL } from "@/data/ax-content";
 import "./globals.css";
@@ -24,6 +25,8 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ko" dir="ltr" suppressHydrationWarning>
+      {/* Nextra Head는 실제 head 요소이므로 body 밖 루트에 둔다. */}
+      <Head />
       <body className="antialiased">
         <ThemeProvider>{children}</ThemeProvider>
       </body>

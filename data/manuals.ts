@@ -19,7 +19,8 @@ const MANUAL_DETAILS: Record<string, Omit<Manual, "slug" | "title">> = {
     projectSlug: "csoweb",
   },
   "kpis-dsr-api": {
-    description: "의약품 공급내역(갑지·을지) 가공·검증·조회 시스템 매뉴얼",
+    description:
+      "엑셀 수작업 자동화, ERP 전환 후 업무 대응, 갑지·을지 다운로드와 API 공급내역보고 흐름",
     projectSlug: "kpis-dsr-api",
   },
   pharmkpi: {

@@ -1,5 +1,11 @@
-import Link from 'next/link'
-import { ArrowRight, CheckCircle2, ExternalLink, Mail, ShieldCheck } from 'lucide-react'
+import Link from "next/link";
+import {
+  ArrowRight,
+  CheckCircle2,
+  ExternalLink,
+  Mail,
+  ShieldCheck,
+} from "lucide-react";
 
 import {
   AX_CONTACT,
@@ -7,21 +13,21 @@ import {
   type AxCaseStudy,
   type AxGrounding,
   type MetricDisclosure,
-} from '@/data/ax'
-import type { Project } from '@/data/projects'
+} from "@/data/ax";
+import type { Project } from "@/data/projects";
 
-import { FadeInUp } from './motion'
-import { GitHubIcon } from './github-icon'
-import { PrintButton } from './print-button'
-import { ProjectThumbnail } from './project-thumbnail'
+import { FadeInUp } from "./motion";
+import { GitHubIcon } from "./github-icon";
+import { PrintButton } from "./print-button";
+import { ProjectThumbnail } from "./project-thumbnail";
 
 const disclosureLabel: Record<MetricDisclosure, string> = {
-  public: '공개',
-  range: '범위 한정 공개',
-  withheld: '비공개',
-}
+  public: "공개",
+  range: "범위 한정 공개",
+  withheld: "비공개",
+};
 
-const CASE_STAGGER_DELAY = 0.06
+const CASE_STAGGER_DELAY = 0.06;
 
 export function AxHeroSection() {
   return (
@@ -36,12 +42,9 @@ export function AxHeroSection() {
               {AX_HERO.role}
             </span>
           </p>
-          <p className="mt-4 font-[family-name:var(--font-mono)] text-xs uppercase text-[var(--accent)]">
-            {AX_HERO.eyebrow}
-          </p>
           <h1
             className="mt-4 max-w-3xl font-[family-name:var(--font-display)] text-3xl font-bold leading-tight text-stone-950 dark:text-stone-50 sm:text-5xl"
-            style={{ textWrap: 'balance' }}
+            style={{ textWrap: "balance" }}
           >
             {AX_HERO.title}
           </h1>
@@ -53,10 +56,10 @@ export function AxHeroSection() {
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a
-              href="#work"
+              href="/#work"
               className="inline-flex items-center gap-2 rounded-lg bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
             >
-              맡아 온 일
+              주요 업무
               <ArrowRight className="h-4 w-4" />
             </a>
             <a
@@ -83,11 +86,14 @@ export function AxHeroSection() {
 
         <div className="rounded-lg border border-stone-200 bg-white p-5 dark:border-stone-800 dark:bg-stone-900">
           <p className="font-[family-name:var(--font-mono)] text-xs uppercase text-stone-500">
-            일하는 방식
+            주요 역량
           </p>
           <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
             {AX_HERO.evidence.map((item) => (
-              <div key={item.label} className="rounded-lg bg-stone-50 px-4 py-3 dark:bg-stone-950">
+              <div
+                key={item.label}
+                className="rounded-lg bg-stone-50 px-4 py-3 dark:bg-stone-950"
+              >
                 <p className="flex items-center gap-2 font-[family-name:var(--font-mono)] text-[11px] uppercase text-[var(--accent)]">
                   <CheckCircle2 className="h-3.5 w-3.5 shrink-0" />
                   {item.label}
@@ -101,19 +107,18 @@ export function AxHeroSection() {
         </div>
       </section>
     </FadeInUp>
-  )
+  );
 }
 
-type AxCase = AxCaseStudy & { project: Project }
+type AxCase = AxCaseStudy & { project: Project };
 
 export function AxCasesSection({ cases }: { cases: AxCase[] }) {
   return (
     <section id="cases" className="mt-20 scroll-mt-20">
       <FadeInUp>
-        <p className="font-[family-name:var(--font-mono)] text-xs uppercase text-[var(--accent)]">
-          업무를 받친 시스템
-        </p>
-        <h2 className="mt-2 text-2xl font-bold text-stone-950 dark:text-stone-50">대표 사례</h2>
+        <h2 className="mt-2 text-2xl font-bold text-stone-950 dark:text-stone-50">
+          대표 사례
+        </h2>
       </FadeInUp>
 
       <div className="mt-8 space-y-5">
@@ -158,10 +163,13 @@ export function AxCasesSection({ cases }: { cases: AxCase[] }) {
                   )}
 
                   <dl className="mt-6 grid gap-4">
-                    <AxCaseFact term="내 역할" value={`${study.role} · ${study.period}`} />
+                    <AxCaseFact
+                      term="내 역할"
+                      value={`${study.role} · ${study.period}`}
+                    />
                     <AxCaseFact term="문제" value={study.problem} />
-                    <AxCaseFact term="내가 한 일" value={study.intervention} />
-                    <AxCaseFact term="결과" value={study.outcome} />
+                    <AxCaseFact term="수행 업무" value={study.intervention} />
+                    <AxCaseFact term="성과·진행 현황" value={study.outcome} />
                   </dl>
                 </div>
               </div>
@@ -170,7 +178,7 @@ export function AxCasesSection({ cases }: { cases: AxCase[] }) {
         ))}
       </div>
     </section>
-  )
+  );
 }
 
 export function AxGroundingSection({ data }: { data: AxGrounding }) {
@@ -224,16 +232,20 @@ export function AxGroundingSection({ data }: { data: AxGrounding }) {
         </div>
       </FadeInUp>
     </section>
-  )
+  );
 }
 
 function AxCaseFact({ term, value }: { term: string; value: string }) {
   return (
     <div>
-      <dt className="text-xs font-semibold text-stone-500 dark:text-stone-400">{term}</dt>
-      <dd className="mt-1 text-sm leading-6 text-stone-700 dark:text-stone-300">{value}</dd>
+      <dt className="text-xs font-semibold text-stone-500 dark:text-stone-400">
+        {term}
+      </dt>
+      <dd className="mt-1 text-sm leading-6 text-stone-700 dark:text-stone-300">
+        {value}
+      </dd>
     </div>
-  )
+  );
 }
 
 export function AxContactSection() {
@@ -246,10 +258,10 @@ export function AxContactSection() {
               연락
             </p>
             <h2 className="mt-2 text-xl font-bold text-stone-950 dark:text-stone-50">
-              AX 사례와 구현 세부 내용을 더 설명할 수 있습니다.
+              영업 데이터 분석과 업무 개선 경험을 소개합니다.
             </h2>
             <p className="mt-2 text-sm leading-6 text-stone-600 dark:text-stone-400">
-              공개 가능한 범위 안에서 문제 정의, 구현 방식, 운영상 배운 점을 중심으로
+              담당 업무와 데이터 분석, 시스템을 활용한 업무 개선 경험에 관해
               이야기하겠습니다.
             </p>
             {/* 주소를 화면에 노출 — 버튼의 mailto 만으로는 복사도 검색도 안 된다 */}
@@ -291,5 +303,5 @@ export function AxContactSection() {
         </div>
       </section>
     </FadeInUp>
-  )
+  );
 }

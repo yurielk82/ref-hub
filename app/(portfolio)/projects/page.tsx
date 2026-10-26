@@ -1,6 +1,6 @@
-import { PROJECTS } from '@/data/projects'
-import { SortableGrid } from '@/components/portfolio/sortable-grid'
-import { FadeInUp } from '@/components/portfolio/motion'
+import { COMPANY_PROJECTS } from "@/data/projects";
+import { SortableGrid } from "@/components/portfolio/sortable-grid";
+import { FadeInUp } from "@/components/portfolio/motion";
 
 export default function ProjectsPage() {
   return (
@@ -8,16 +8,16 @@ export default function ProjectsPage() {
       <div className="mx-auto max-w-5xl">
         <FadeInUp>
           <div className="mb-10">
-            <p className="font-[family-name:var(--font-mono)] text-xs uppercase tracking-widest text-[var(--accent)]">
-              Projects
-            </p>
             <h1 className="mt-2 text-2xl font-bold tracking-tight text-stone-900 dark:text-stone-100">
-              프로젝트
+              회사 업무 개선 사례
             </h1>
           </div>
         </FadeInUp>
-        <SortableGrid projects={PROJECTS} storageKey="ref-hub-all-project-order" />
+        <SortableGrid
+          projects={COMPANY_PROJECTS}
+          storageKey="ref-hub-all-project-order"
+        />
       </div>
     </section>
-  )
+  );
 }

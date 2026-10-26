@@ -5,7 +5,7 @@ import {
 } from "@/data/ax";
 
 /** 사례 첫머리 — 내 역할·기간·지금 상태. 읽는 사람이 "이 사람이 무엇을 했나"부터 보게 한다. */
-function CaseOwnership({ caseStudy }: { caseStudy: AxCaseStudy }) {
+export function CaseOwnership({ caseStudy }: { caseStudy: AxCaseStudy }) {
   const rows = [
     { term: "내 역할", value: caseStudy.role },
     { term: "기간", value: caseStudy.period },

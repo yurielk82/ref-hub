@@ -57,7 +57,7 @@ export default function DocsIndexPage() {
                   </span>
                   {manual.projectSlug && (
                     <Link
-                      href={`/projects/${manual.projectSlug}`}
+                      href={`/ax/cases/${manual.projectSlug}`}
                       className="relative z-10 text-xs text-stone-500 underline-offset-4 hover:text-[var(--accent)] hover:underline"
                     >
                       프로젝트 상세

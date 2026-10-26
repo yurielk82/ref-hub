@@ -3,10 +3,10 @@ import { ArrowRight, CheckCircle2, Mail, ShieldCheck } from "lucide-react";
 
 import {
   AX_CONTACT,
-  AX_HERO,
   type AxCaseStudy,
   type AxGrounding,
-  type MetricDisclosure,
+  type AxTrackView,
+  type HeroContent,
 } from "@/data/ax";
 import type { Project } from "@/data/projects";
 
@@ -15,78 +15,86 @@ import { GitHubIcon } from "./github-icon";
 import { PrintButton } from "./print-button";
 import { ProjectThumbnail } from "./project-thumbnail";
 
-const disclosureLabel: Record<MetricDisclosure, string> = {
-  public: "공개",
-  range: "범위 한정 공개",
-  withheld: "비공개",
-};
-
 const CASE_STAGGER_DELAY = 0.06;
 
-export function AxHeroSection() {
+const SECONDARY_BUTTON =
+  "inline-flex items-center gap-2 rounded-lg border border-stone-200 bg-white px-5 py-2.5 text-sm font-semibold text-stone-700 transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)] dark:border-stone-800 dark:bg-stone-900 dark:text-stone-300";
+
+/**
+ * 첫 화면. 영업관리 트랙은 GitHub를 앞세우지 않고(개발 이력보다 업무 역량이 먼저),
+ * AX 트랙은 GitHub를 함께 보여 준다.
+ */
+export function AxHeroSection({
+  hero,
+  primary,
+  showGithub,
+}: {
+  hero: HeroContent;
+  primary: { href: string; label: string };
+  showGithub: boolean;
+}) {
   return (
     <FadeInUp>
       <section className="grid gap-10 border-b border-stone-200 pb-14 dark:border-stone-800 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
         <div>
           <p className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
             <span className="text-xl font-bold tracking-tight text-stone-950 dark:text-stone-50">
-              {AX_HERO.name}
+              {hero.name}
             </span>
             <span className="text-sm font-medium text-stone-500 dark:text-stone-400">
-              {AX_HERO.role}
+              {hero.role}
             </span>
           </p>
           <h1
             className="mt-4 max-w-3xl font-[family-name:var(--font-display)] text-3xl font-bold leading-tight text-stone-950 dark:text-stone-50 sm:text-5xl"
             style={{ textWrap: "balance" }}
           >
-            {AX_HERO.title}
+            {hero.title}
           </h1>
           <p className="mt-5 max-w-3xl text-lg font-semibold leading-8 text-stone-900 dark:text-stone-100">
-            {AX_HERO.subhead}
+            {hero.subhead}
           </p>
           <p className="mt-4 max-w-3xl text-base leading-8 text-stone-600 dark:text-stone-300">
-            {AX_HERO.summary}
+            {hero.summary}
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a
-              href="/#work"
+              href={primary.href}
               className="inline-flex items-center gap-2 rounded-lg bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
             >
-              주요 업무
+              {primary.label}
               <ArrowRight className="h-4 w-4" />
             </a>
-            <a
-              href={`mailto:${AX_CONTACT.email}`}
-              className="inline-flex items-center gap-2 rounded-lg border border-stone-200 bg-white px-5 py-2.5 text-sm font-semibold text-stone-700 transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)] dark:border-stone-800 dark:bg-stone-900 dark:text-stone-300"
-            >
+            <a href={`mailto:${AX_CONTACT.email}`} className={SECONDARY_BUTTON}>
               <Mail className="h-4 w-4" />
               이메일
             </a>
-            <a
-              href={AX_CONTACT.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg border border-stone-200 bg-white px-5 py-2.5 text-sm font-semibold text-stone-700 transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)] dark:border-stone-800 dark:bg-stone-900 dark:text-stone-300"
-            >
-              <GitHubIcon />
-              GitHub
-            </a>
+            {showGithub && (
+              <a
+                href={AX_CONTACT.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={SECONDARY_BUTTON}
+              >
+                <GitHubIcon />
+                GitHub
+              </a>
+            )}
             <PrintButton />
           </div>
         </div>
 
         <div className="rounded-lg border border-stone-200 bg-white p-5 dark:border-stone-800 dark:bg-stone-900">
-          <p className="font-[family-name:var(--font-mono)] text-xs uppercase text-stone-500">
-            주요 역량
-          </p>
-          <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
-            {AX_HERO.evidence.map((item) => (
+          <h2 className="text-sm font-semibold text-stone-700 dark:text-stone-300">
+            {hero.evidenceTitle}
+          </h2>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+            {hero.evidence.map((item) => (
               <div
                 key={item.label}
                 className="rounded-lg bg-stone-50 px-4 py-3 dark:bg-stone-950"
               >
-                <p className="flex items-center gap-2 font-[family-name:var(--font-mono)] text-[11px] uppercase text-[var(--accent)]">
+                <p className="flex items-center gap-2 text-xs font-semibold text-[var(--accent)]">
                   <CheckCircle2 className="h-3.5 w-3.5 shrink-0" />
                   {item.label}
                 </p>
@@ -102,15 +110,20 @@ export function AxHeroSection() {
   );
 }
 
-type AxCase = AxCaseStudy & { project: Project };
+type AxCase = AxCaseStudy & { project: Project; ax: AxTrackView };
 
+/** AX 트랙 대표 사례 — 같은 사례를 문제 → 구축 → 자동화 → 운영 순서로 읽는다 */
 export function AxCasesSection({ cases }: { cases: AxCase[] }) {
   return (
     <section id="cases" className="mt-20 scroll-mt-20">
       <FadeInUp>
-        <h2 className="mt-2 text-2xl font-bold text-stone-950 dark:text-stone-50">
+        <h2 className="text-2xl font-bold text-stone-950 dark:text-stone-50">
           대표 사례
         </h2>
+        <p className="mt-3 max-w-2xl text-sm leading-6 text-stone-600 dark:text-stone-400">
+          회사 업무에서 직접 기획·구축·운영한 시스템입니다. 기간과 지금 운영
+          상태를 함께 적었습니다.
+        </p>
       </FadeInUp>
 
       <div className="mt-8 space-y-5">
@@ -122,47 +135,29 @@ export function AxCasesSection({ cases }: { cases: AxCase[] }) {
                   <ProjectThumbnail project={study.project} variant="detail" />
                 </div>
                 <div className="p-6">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="rounded-md bg-[var(--accent-muted)] px-2.5 py-1 font-[family-name:var(--font-mono)] text-[11px] uppercase text-[var(--accent)]">
-                      {study.label}
-                    </span>
-                    <span className="rounded-md bg-stone-100 px-2.5 py-1 text-[11px] font-medium text-stone-500 dark:bg-stone-800 dark:text-stone-400">
-                      {disclosureLabel[study.disclosure]}
-                    </span>
-                  </div>
-                  <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+                  <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
                     <div>
                       <h3 className="text-xl font-bold text-stone-950 dark:text-stone-50">
                         {study.project.name}
                       </h3>
-                      <p className="mt-1 text-sm text-stone-600 dark:text-stone-400">
-                        {study.project.highlight}
+                      <p className="mt-1 text-sm text-stone-500 dark:text-stone-400">
+                        {study.period} · {study.status.note}
                       </p>
                     </div>
                     <Link
-                      href={`/projects/${study.project.slug}`}
+                      href={`/ax/cases/${study.project.slug}`}
                       className="inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-[var(--accent)] after:absolute after:inset-0 after:content-[''] hover:text-[var(--accent-light)] group-hover:gap-2"
                     >
-                      {study.evidenceLabel}
+                      사례 상세
                       <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                     </Link>
                   </div>
 
-                  {study.impact && (
-                    <p className="mt-5 border-l-2 border-l-[var(--accent)] pl-3 text-sm font-semibold leading-6 text-stone-900 dark:text-stone-100">
-                      {study.impact}
-                    </p>
-                  )}
+                  <p className="mt-5 text-base font-semibold leading-7 text-stone-900 dark:text-stone-100">
+                    {study.ax.headline}
+                  </p>
 
-                  <dl className="mt-6 grid gap-4">
-                    <AxCaseFact
-                      term="내 역할"
-                      value={`${study.role} · ${study.period}`}
-                    />
-                    <AxCaseFact term="문제" value={study.problem} />
-                    <AxCaseFact term="수행 업무" value={study.intervention} />
-                    <AxCaseFact term="성과·진행 현황" value={study.outcome} />
-                  </dl>
+                  <AxTrackFacts view={study.ax} className="mt-5" />
                 </div>
               </div>
             </div>
@@ -173,18 +168,31 @@ export function AxCasesSection({ cases }: { cases: AxCase[] }) {
   );
 }
 
+/** AX 요약 네 칸 — 사례 목록과 상세가 같은 틀을 쓴다 */
+export function AxTrackFacts({
+  view,
+  className = "",
+}: {
+  view: AxTrackView;
+  className?: string;
+}) {
+  return (
+    <dl className={`grid gap-4 ${className}`}>
+      <AxCaseFact term="문제" value={view.problem} />
+      <AxCaseFact term="구축" value={view.build} />
+      <AxCaseFact term="자동화" value={view.automation} />
+      <AxCaseFact term="운영·검증" value={view.operation} />
+    </dl>
+  );
+}
+
 export function AxGroundingSection({ data }: { data: AxGrounding }) {
   return (
     <section className="mt-20">
       <FadeInUp>
         <div className="overflow-hidden rounded-lg border border-[color-mix(in_srgb,var(--accent)_24%,transparent)] bg-[color-mix(in_srgb,var(--accent)_5%,white)] p-6 dark:bg-[color-mix(in_srgb,var(--accent)_10%,black)] sm:p-8">
-          <div className="flex items-center gap-2">
-            <ShieldCheck className="h-4 w-4 text-[var(--accent)]" />
-            <p className="font-[family-name:var(--font-mono)] text-xs uppercase text-[var(--accent)]">
-              {data.eyebrow}
-            </p>
-          </div>
-          <h2 className="mt-3 max-w-3xl text-2xl font-bold text-stone-950 dark:text-stone-50">
+          <h2 className="flex max-w-3xl items-center gap-2.5 text-2xl font-bold text-stone-950 dark:text-stone-50">
+            <ShieldCheck className="h-5 w-5 shrink-0 text-[var(--accent)]" />
             {data.title}
           </h2>
           <p className="mt-4 max-w-3xl text-sm leading-7 text-stone-600 dark:text-stone-300">
@@ -196,10 +204,10 @@ export function AxGroundingSection({ data }: { data: AxGrounding }) {
                 key={example.label}
                 className="rounded-lg border border-stone-200 bg-white p-5 dark:border-stone-800 dark:bg-stone-900"
               >
-                <span className="rounded-md bg-[var(--accent-muted)] px-2.5 py-1 font-[family-name:var(--font-mono)] text-[11px] uppercase text-[var(--accent)]">
+                <h3 className="text-sm font-semibold text-[var(--accent)]">
                   {example.label}
-                </span>
-                <p className="mt-3 text-sm leading-6 text-stone-700 dark:text-stone-300">
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-stone-700 dark:text-stone-300">
                   {example.text}
                 </p>
               </div>
@@ -240,21 +248,28 @@ function AxCaseFact({ term, value }: { term: string; value: string }) {
   );
 }
 
-export function AxContactSection() {
+export function AxContactSection({
+  title,
+  lead,
+  showGithub,
+}: {
+  title: string;
+  lead: string;
+  showGithub: boolean;
+}) {
   return (
     <FadeInUp>
-      <section className="mt-20 rounded-lg border border-[color-mix(in_srgb,var(--accent)_24%,transparent)] bg-[color-mix(in_srgb,var(--accent)_5%,white)] p-6 dark:bg-[color-mix(in_srgb,var(--accent)_10%,black)]">
+      <section
+        id="contact"
+        className="mt-20 scroll-mt-20 rounded-lg border border-[color-mix(in_srgb,var(--accent)_24%,transparent)] bg-[color-mix(in_srgb,var(--accent)_5%,white)] p-6 dark:bg-[color-mix(in_srgb,var(--accent)_10%,black)]"
+      >
         <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="font-[family-name:var(--font-mono)] text-xs uppercase text-[var(--accent)]">
-              연락
-            </p>
-            <h2 className="mt-2 text-xl font-bold text-stone-950 dark:text-stone-50">
-              영업 데이터 분석과 업무 개선 경험을 소개합니다.
+            <h2 className="text-xl font-bold text-stone-950 dark:text-stone-50">
+              {title}
             </h2>
             <p className="mt-2 text-sm leading-6 text-stone-600 dark:text-stone-400">
-              담당 업무와 데이터 분석, 시스템을 활용한 업무 개선 경험에 관해
-              이야기하겠습니다.
+              {lead}
             </p>
             {/* 주소를 화면에 노출 — 버튼의 mailto 만으로는 복사도 검색도 안 된다 */}
             <a
@@ -273,15 +288,17 @@ export function AxContactSection() {
               <Mail className="h-4 w-4" />
               이메일 문의
             </a>
-            <a
-              href={AX_CONTACT.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg border border-stone-200 bg-white px-5 py-2.5 text-sm font-semibold text-stone-700 transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)] dark:border-stone-800 dark:bg-stone-900 dark:text-stone-300"
-            >
-              <GitHubIcon />
-              GitHub
-            </a>
+            {showGithub && (
+              <a
+                href={AX_CONTACT.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={SECONDARY_BUTTON}
+              >
+                <GitHubIcon />
+                GitHub
+              </a>
+            )}
           </div>
         </div>
       </section>

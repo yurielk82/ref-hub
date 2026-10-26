@@ -1,11 +1,5 @@
 import Link from "next/link";
-import {
-  ArrowRight,
-  CheckCircle2,
-  ExternalLink,
-  Mail,
-  ShieldCheck,
-} from "lucide-react";
+import { ArrowRight, CheckCircle2, Mail, ShieldCheck } from "lucide-react";
 
 import {
   AX_CONTACT,
@@ -63,13 +57,11 @@ export function AxHeroSection() {
               <ArrowRight className="h-4 w-4" />
             </a>
             <a
-              href={AX_CONTACT.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={`mailto:${AX_CONTACT.email}`}
               className="inline-flex items-center gap-2 rounded-lg border border-stone-200 bg-white px-5 py-2.5 text-sm font-semibold text-stone-700 transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)] dark:border-stone-800 dark:bg-stone-900 dark:text-stone-300"
             >
-              <ExternalLink className="h-4 w-4" />
-              LinkedIn
+              <Mail className="h-4 w-4" />
+              이메일
             </a>
             <a
               href={AX_CONTACT.github}
@@ -280,15 +272,6 @@ export function AxContactSection() {
             >
               <Mail className="h-4 w-4" />
               이메일 문의
-            </a>
-            <a
-              href={AX_CONTACT.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg border border-stone-200 bg-white px-5 py-2.5 text-sm font-semibold text-stone-700 transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)] dark:border-stone-800 dark:bg-stone-900 dark:text-stone-300"
-            >
-              <ExternalLink className="h-4 w-4" />
-              LinkedIn
             </a>
             <a
               href={AX_CONTACT.github}

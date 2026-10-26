@@ -54,7 +54,7 @@ const PROFILE_JSON_LD = {
     worksFor: { "@type": "Organization", name: AX_HERO.employer },
     description: AX_HERO.subhead,
     email: `mailto:${AX_CONTACT.email}`,
-    sameAs: [AX_CONTACT.linkedin, AX_CONTACT.github],
+    sameAs: [AX_CONTACT.github],
   },
 } as const;
 

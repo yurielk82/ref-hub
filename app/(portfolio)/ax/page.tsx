@@ -3,13 +3,13 @@ import Link from "next/link";
 import { ArrowRight, BookOpen, Bot, ShieldCheck, Workflow } from "lucide-react";
 
 import {
-  AX_CASE_STUDIES,
   AX_GROUNDING,
   AX_METHOD,
   AX_PILLARS,
   AX_STACK,
   AX_TRACK_CASE_SLUGS,
   AX_TRACK_HERO,
+  getAxCase,
 } from "@/data/ax";
 import { OTHER_PROJECTS, getProject } from "@/data/projects";
 import { FadeInUp } from "@/components/portfolio/motion";
@@ -24,7 +24,7 @@ import {
 
 /**
  * AX 트랙 — 업무 자동화·AX 직무 지원용 포트폴리오. 영업관리 트랙(/)과 같은 사례를
- * 문제 → 구축 → 자동화·AI → 운영 관점으로 보여 주고, 개인·외부 작업과 기술을 함께 싣는다.
+ * 문제 → 구축 → 자동화 → 운영 관점으로 보여 주고, 개인·외부 작업과 기술을 함께 싣는다.
  */
 export const metadata: Metadata = {
   // 문서 페이지 지도가 이 제목을 문자열로 읽는다 — { absolute } 객체를 쓰면 문서 빌드가 깨진다.
@@ -44,7 +44,7 @@ const STAGGER_DELAY = 0.05;
 
 export default function AxPage() {
   const cases = AX_TRACK_CASE_SLUGS.flatMap((slug) => {
-    const study = AX_CASE_STUDIES.find((c) => c.projectSlug === slug);
+    const study = getAxCase(slug);
     const project = getProject(slug);
     return study?.ax && project ? [{ ...study, project, ax: study.ax }] : [];
   });

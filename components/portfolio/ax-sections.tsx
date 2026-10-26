@@ -112,7 +112,7 @@ export function AxHeroSection({
 
 type AxCase = AxCaseStudy & { project: Project; ax: AxTrackView };
 
-/** AX 트랙 대표 사례 — 같은 사례를 문제 → 구축 → 자동화·AI → 운영 순서로 읽는다 */
+/** AX 트랙 대표 사례 — 같은 사례를 문제 → 구축 → 자동화 → 운영 순서로 읽는다 */
 export function AxCasesSection({ cases }: { cases: AxCase[] }) {
   return (
     <section id="cases" className="mt-20 scroll-mt-20">
@@ -180,7 +180,7 @@ export function AxTrackFacts({
     <dl className={`grid gap-4 ${className}`}>
       <AxCaseFact term="문제" value={view.problem} />
       <AxCaseFact term="구축" value={view.build} />
-      <AxCaseFact term="자동화·AI" value={view.automation} />
+      <AxCaseFact term="자동화" value={view.automation} />
       <AxCaseFact term="운영·검증" value={view.operation} />
     </dl>
   );

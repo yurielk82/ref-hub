@@ -1,12 +1,15 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { PROJECTS, getProject } from "@/data/projects";
-import { AX_CASE_STUDIES } from "@/data/ax";
+import { COMPANY_PROJECTS, getProject } from "@/data/projects";
+import { getAxCase } from "@/data/ax";
 import { CaseNarrative } from "@/components/portfolio/case-narrative";
 import { ProjectDetail } from "@/components/portfolio/project-detail";
 
+/** 영업관리 트랙은 회사 사례만 연다. 개인·외부 작업은 AX 트랙(/ax/cases/*)에서만 보인다. */
+export const dynamicParams = false;
+
 export function generateStaticParams() {
-  return PROJECTS.map((p) => ({ slug: p.slug }));
+  return COMPANY_PROJECTS.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata(props: {
@@ -28,14 +31,14 @@ export default async function ProjectPage(props: {
   const project = getProject(slug);
   if (!project) notFound();
 
-  const caseStudy = AX_CASE_STUDIES.find((c) => c.projectSlug === slug);
+  const caseStudy = getAxCase(slug);
 
   return (
     <ProjectDetail
       project={project}
       narrative={caseStudy && <CaseNarrative caseStudy={caseStudy} />}
       back={{ href: "/#projects", label: "사례 목록" }}
-      showTech={false}
+      track="sales"
     />
   );
 }

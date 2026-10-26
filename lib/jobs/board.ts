@@ -1,4 +1,4 @@
-import type { JobStore, StoredPosting } from "./types.ts";
+import { DAY_MS, type JobStore, type StoredPosting } from "./types.ts";
 
 /** 마감까지 이 날수 이하이면 '마감 임박'이다 */
 export const CLOSING_SOON_DAYS = 3;
@@ -9,7 +9,6 @@ const KST_DATE = new Intl.DateTimeFormat("en-CA", {
   month: "2-digit",
   day: "2-digit",
 });
-const DAY_MS = 24 * 60 * 60 * 1000;
 
 function kstDayNumber(date: Date): number {
   return Date.parse(`${KST_DATE.format(date)}T00:00:00Z`) / DAY_MS;

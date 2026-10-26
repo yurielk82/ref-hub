@@ -127,6 +127,7 @@ export const WORK_CHAPTERS: readonly WorkChapter[] = [
     results: [
       "구 ERP 원장을 월·전표 기준 806개 그룹으로 대조해 차이 없음 확인",
       "ERP 전환 후에도 실적 조회와 공급내역보고 업무에 활용",
+      "문서·외래키가 없던 구 ERP 785개 테이블 중 648개(82.5%)의 관계를 정리해 이관 자료로 제공",
     ],
     projects: ["pharmkpi", "erp-spec"],
   },

@@ -5,22 +5,24 @@ import type { Project } from "@/data/projects";
 import { NewBadge } from "@/components/portfolio/badge";
 import { ProjectThumbnail } from "@/components/portfolio/project-thumbnail";
 import { TechTags } from "@/components/portfolio/tech-tags";
+import { showsDeveloperLinks, type Track } from "@/components/portfolio/track";
 
 /**
  * 사례 상세의 공용 틀. 영업관리 트랙(/projects/*)과 AX 트랙(/ax/cases/*)이 함께 쓰고,
- * 서사(narrative)·돌아가기 링크·기술 표시만 트랙마다 다르다.
+ * 서사(narrative)·돌아가기 링크와 개발자용 정보(GitHub·사용 기술) 표시만 트랙마다 다르다.
  */
 export function ProjectDetail({
   project,
   narrative,
   back,
-  showTech,
+  track,
 }: {
   project: Project;
   narrative: ReactNode;
   back: { href: string; label: string };
-  showTech: boolean;
+  track: Track;
 }) {
+  const developer = showsDeveloperLinks(track);
   return (
     <article className="px-6 pb-28 pt-12">
       <div className="mx-auto max-w-5xl">
@@ -73,7 +75,7 @@ export function ProjectDetail({
                   문서 보기
                 </Link>
               )}
-              {project.githubUrl && (
+              {developer && project.githubUrl && (
                 <a
                   href={project.githubUrl}
                   target="_blank"
@@ -136,7 +138,7 @@ export function ProjectDetail({
         )}
 
         {/* 기술 스택 — 영업관리 트랙은 업무 내용이 먼저라 AX 트랙에서만 보여 준다 */}
-        {showTech && (
+        {developer && (
           <section className="mt-16">
             <h2 className="mb-4 text-sm font-semibold text-stone-700 dark:text-stone-300">
               사용 기술

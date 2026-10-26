@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
-import { AX_CASE_STUDIES, AX_TRACK_CASE_SLUGS } from "@/data/ax";
+import { AX_TRACK_CASE_SLUGS, getAxCase } from "@/data/ax";
 import { OTHER_PROJECTS, getProject } from "@/data/projects";
 import { AxCaseDetail } from "@/components/portfolio/ax-case-detail";
 import { CaseNarrative } from "@/components/portfolio/case-narrative";
@@ -38,7 +38,7 @@ export default async function AxCasePage(props: {
   const project = getProject(slug);
   if (!project || !AX_DETAIL_SLUGS.includes(slug)) notFound();
 
-  const caseStudy = AX_CASE_STUDIES.find((c) => c.projectSlug === slug);
+  const caseStudy = getAxCase(slug);
   const isOwnWork = project.scope === "other";
 
   return (
@@ -56,7 +56,7 @@ export default async function AxCasePage(props: {
         href: isOwnWork ? "/ax#tools" : "/ax#cases",
         label: isOwnWork ? "개인 작업 목록" : "AX 사례 목록",
       }}
-      showTech
+      track="ax"
     />
   );
 }

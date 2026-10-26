@@ -6,16 +6,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { AX_HERO } from "@/data/ax-content";
+import { AX_CONTACT, AX_HERO } from "@/data/ax-content";
 
 import { GitHubIcon } from "./github-icon";
-
-/**
- * 포트폴리오는 두 트랙이다. 영업관리 지원용(/)과 AX 직무용(/ax). 지원처에 따라 다른 링크를 보내고,
- * 각 트랙은 자기 메뉴만 보여 준다. 시스템 매뉴얼(/docs)은 AX 트랙에 속한다.
- * 사례 상세(/projects/*)는 영업관리 트랙, AX 사례 상세는 /ax/cases/*다.
- */
-type Track = "sales" | "ax";
+import { showsDeveloperLinks, trackOf, type Track } from "./track";
 
 interface NavLink {
   href: string;
@@ -43,14 +37,6 @@ const TRACK_NAV: Readonly<Record<Track, { home: string; links: NavLink[] }>> = {
     ],
   },
 };
-
-function trackOf(pathname: string): Track {
-  return pathname === "/ax" ||
-    pathname.startsWith("/ax/") ||
-    pathname === "/docs"
-    ? "ax"
-    : "sales";
-}
 
 /** 로그인한 허용 계정에만 '공고 모음'을 보여 준다. 공개 페이지는 정적이라 브라우저가 묻는다. */
 function useCanViewJobs(): boolean {
@@ -122,9 +108,9 @@ export function PortfolioNav() {
               공고 모음
             </Link>
           )}
-          {track === "ax" && (
+          {showsDeveloperLinks(track) && (
             <a
-              href="https://github.com/yurielk82"
+              href={AX_CONTACT.github}
               target="_blank"
               rel="noopener noreferrer"
               className={`${LINK_CLASS} shrink-0`}

@@ -1,11 +1,15 @@
 import { scoreFit } from "./fit.ts";
-import type { JobPosting, JobStore, StoredPosting } from "./types.ts";
+import {
+  DAY_MS,
+  type JobPosting,
+  type JobStore,
+  type StoredPosting,
+} from "./types.ts";
 
 /** 마감 뒤 이 기간이 지나면 목록에서 지운다 */
 const EXPIRED_RETENTION_DAYS = 14;
 /** 마감일이 없는 공고(상시·수시)는 이 기간 동안 다시 안 보이면 지운다 */
 const UNSEEN_RETENTION_DAYS = 30;
-const DAY_MS = 24 * 60 * 60 * 1000;
 
 export function emptyStore(): JobStore {
   return { version: 1, lastSuccessAt: null, lastRun: null, postings: [] };

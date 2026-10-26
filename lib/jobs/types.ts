@@ -74,3 +74,6 @@ export interface SearchQuery {
   label: string;
   params: Record<string, string>;
 }
+
+/** 하루(밀리초) — 수집 기간·정리 기준·마감 계산이 함께 쓴다. */
+export const DAY_MS = 24 * 60 * 60 * 1000;

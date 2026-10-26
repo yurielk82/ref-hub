@@ -16,11 +16,15 @@ import {
   parseSaraminResponse,
 } from "../lib/jobs/saramin.ts";
 import { mergeCollection, recordFailure } from "../lib/jobs/store.ts";
-import { readStore, writeStore } from "../lib/jobs/store-file.ts";
-import type { JobPosting, JobStore, SearchQuery } from "../lib/jobs/types.ts";
+import { jobsDataDir, readStore, writeStore } from "../lib/jobs/store-file.ts";
+import {
+  DAY_MS,
+  type JobPosting,
+  type JobStore,
+  type SearchQuery,
+} from "../lib/jobs/types.ts";
 
 const REQUEST_TIMEOUT_MS = 15_000;
-const DAY_MS = 24 * 60 * 60 * 1000;
 /** 종료 코드 — 1: 수집 실패(실패 기록은 남김), 2: 실행 설정 누락 */
 const EXIT_FAILED = 1;
 const EXIT_MISCONFIGURED = 2;
@@ -74,7 +78,7 @@ async function collect(accessKey: string, now: Date): Promise<JobPosting[]> {
 
 async function main(): Promise<number> {
   const accessKey = process.env.SARAMIN_ACCESS_KEY?.trim();
-  const dir = process.env.JOBS_DATA_DIR?.trim();
+  const dir = jobsDataDir();
   if (!dir) {
     console.error("JOBS_DATA_DIR가 없습니다");
     return EXIT_MISCONFIGURED;
@@ -94,7 +98,7 @@ async function main(): Promise<number> {
       recordFailure(previous, now, "사람인 access-key가 아직 없습니다"),
     );
     console.error("SARAMIN_ACCESS_KEY가 없습니다");
-    return EXIT_FAILED;
+    return EXIT_MISCONFIGURED;
   }
 
   try {

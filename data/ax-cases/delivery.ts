@@ -104,7 +104,7 @@ export const DELIVERY_CASE_STUDIES: AxCaseStudy[] = [
     period: "2025 ~ 현재",
     status: {
       kind: "live",
-      note: "공급내역보고 시스템 구축·활용 및 API 연계 기능 개선",
+      note: "공급내역보고에 활용 중 · API 연계 구축, 운영 전송 검증 별도 확인 필요",
     },
     impact: "엑셀 수작업의 단계적 자동화와 ERP 전환 후 보고 업무 유지",
     problem:

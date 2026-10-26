@@ -119,11 +119,11 @@ async function inspectRoute({
 
   let structureErrors = [];
   let responseStatus = null;
-  let mainVisible = false;
-  let title = "";
-  let headingVisible = false;
+  let mainVisible;
+  let title;
+  let headingVisible;
   let headingText = "";
-  let deploymentMarkers = [];
+  let deploymentMarkers;
   const url = new URL(route.path, baseURL).toString();
   const screenshotPath = path.join(artifactDir, `${route.slug}.png`);
 

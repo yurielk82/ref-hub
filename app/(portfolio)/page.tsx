@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, BookOpen } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import { AX_CONTACT, AX_HERO, SITE_URL } from "@/data/ax";
 import { COMPANY_PROJECTS } from "@/data/projects";
-import { MANUALS } from "@/data/manuals";
 import {
   AxContactSection,
   AxHeroSection,
@@ -122,44 +121,6 @@ export default function HomePage() {
         ))}
 
         <CareerSection />
-
-        <section id="docs" className="mt-20 scroll-mt-20">
-          <FadeInUp>
-            <div className="rounded-lg border border-stone-200 bg-white p-6 dark:border-stone-800 dark:bg-stone-900 sm:p-8">
-              <div className="flex items-center gap-2">
-                <BookOpen className="h-4 w-4 text-[var(--accent)]" />
-                <p className="font-[family-name:var(--font-mono)] text-xs uppercase text-[var(--accent)]">
-                  매뉴얼
-                </p>
-              </div>
-              <h2 className="mt-3 text-2xl font-bold text-stone-950 dark:text-stone-50">
-                프로젝트별 매뉴얼 {MANUALS.length}종
-              </h2>
-              <p className="mt-4 max-w-3xl text-sm leading-7 text-stone-600 dark:text-stone-300">
-                구축한 시스템의 사용자·관리자 문서입니다. 운영이 종료된 시스템의
-                문서는 당시 업무와 구현 내용을 확인하는 참고 자료로 보존합니다.
-              </p>
-              <div className="mt-6 flex flex-wrap gap-2">
-                {MANUALS.map((manual) => (
-                  <Link
-                    key={manual.slug}
-                    href={`/${manual.slug}`}
-                    className="rounded-full border border-stone-200 bg-stone-50 px-3 py-1 text-xs font-medium text-stone-600 transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)] dark:border-stone-700 dark:bg-stone-950 dark:text-stone-300"
-                  >
-                    {manual.title}
-                  </Link>
-                ))}
-              </div>
-              <Link
-                href="/docs"
-                className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[var(--accent)] hover:text-[var(--accent-light)]"
-              >
-                문서 전체 보기
-                <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
-            </div>
-          </FadeInUp>
-        </section>
 
         <AxContactSection />
       </div>

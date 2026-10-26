@@ -1,7 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-
 import { AX_CONTACT, AX_HERO, SITE_URL } from "@/data/ax";
 import { REFERENCE_PROJECTS } from "@/data/projects";
 import {
@@ -80,21 +77,13 @@ export default function HomePage() {
         }}
       />
       <div className="mx-auto max-w-6xl">
-        <AxHeroSection />
+        <AxHeroSection
+          hero={AX_HERO}
+          primary={{ href: "/#work", label: "주요 업무" }}
+          showGithub={false}
+        />
 
         <WorkSection />
-
-        <FadeInUp>
-          <div className="mt-8 flex justify-center">
-            <Link
-              href="/ax"
-              className="inline-flex items-center gap-2 rounded-xl border border-stone-200 bg-white px-5 py-2.5 text-sm font-semibold text-[var(--accent)] transition-colors hover:border-[var(--accent)] dark:border-stone-800 dark:bg-stone-900"
-            >
-              업무 개선 사례 자세히 보기
-              <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
-          </div>
-        </FadeInUp>
 
         {PROJECT_GROUPS.map((group) => (
           <section key={group.id} id={group.id} className="mt-20 scroll-mt-20">
@@ -122,7 +111,11 @@ export default function HomePage() {
 
         <CareerSection />
 
-        <AxContactSection />
+        <AxContactSection
+          title="영업 데이터 분석과 업무 개선 경험을 소개합니다."
+          lead="담당 업무와 데이터 분석, 시스템을 활용한 업무 개선 경험에 관해 이야기하겠습니다."
+          showGithub={false}
+        />
       </div>
     </article>
   );

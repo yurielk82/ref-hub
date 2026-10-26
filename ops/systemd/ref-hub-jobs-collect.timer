@@ -1,0 +1,11 @@
+# ref-hub 공고 모음 수집 — 매일 07:00 KST. 서버가 꺼져 있던 날은 켜진 뒤 한 번 돈다.
+[Unit]
+Description=ref-hub jobs board collection daily at 07:00 KST
+
+[Timer]
+OnCalendar=*-*-* 07:00:00 Asia/Seoul
+Persistent=true
+RandomizedDelaySec=120
+
+[Install]
+WantedBy=timers.target

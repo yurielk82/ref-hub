@@ -62,6 +62,22 @@ test("공고 주소는 https로 바꾼다", () => {
   assert.match(first.companyUrl ?? "", /^https:\/\/www\.saramin\.co\.kr\//);
 });
 
+test("http(s)가 아닌 공고 주소는 버리고 회사 주소는 비운다", () => {
+  const job = structuredClone(SAMPLE.jobs.job[0]);
+  job.company.detail.href = "javascript:alert(1)";
+  const ok = parseSaraminResponse({
+    jobs: { count: 1, start: 0, total: "1", job: [job] },
+  });
+  assert.equal(ok.postings[0].companyUrl, null);
+
+  job.url = "javascript:alert(1)";
+  const dropped = parseSaraminResponse({
+    jobs: { count: 1, start: 0, total: "1", job: [job] },
+  });
+  assert.equal(dropped.postings.length, 0);
+  assert.equal(dropped.skipped, 1);
+});
+
 test("상시·수시 공고는 마감 시각을 비우고 마감 방식만 남긴다", () => {
   const job = structuredClone(SAMPLE.jobs.job[0]);
   job["close-type"] = { code: "3", name: "상시" };

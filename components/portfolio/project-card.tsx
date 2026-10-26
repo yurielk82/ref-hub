@@ -5,10 +5,17 @@ import { NewBadge } from "./badge";
 import { ProjectThumbnail } from "./project-thumbnail";
 import { TechTags } from "./tech-tags";
 
-export function ProjectCard({ project }: { project: Project }) {
+/** href를 주면 그 트랙의 상세로 간다(AX 트랙은 /ax/cases/*). 기본은 영업관리 트랙 상세. */
+export function ProjectCard({
+  project,
+  href = `/projects/${project.slug}`,
+}: {
+  project: Project;
+  href?: string;
+}) {
   return (
     <Link
-      href={`/projects/${project.slug}`}
+      href={href}
       className={cn(
         "glass-card group block overflow-hidden rounded-2xl",
         project.badge &&

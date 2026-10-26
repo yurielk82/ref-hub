@@ -1,26 +1,34 @@
-import { CASE_STATUS_LABEL, type AxCaseStep, type AxCaseStudy } from '@/data/ax'
+import {
+  CASE_STATUS_LABEL,
+  type AxCaseStep,
+  type AxCaseStudy,
+} from "@/data/ax";
 
 /** 사례 첫머리 — 내 역할·기간·지금 상태. 읽는 사람이 "이 사람이 무엇을 했나"부터 보게 한다. */
 function CaseOwnership({ caseStudy }: { caseStudy: AxCaseStudy }) {
   const rows = [
-    { term: '내 역할', value: caseStudy.role },
-    { term: '기간', value: caseStudy.period },
+    { term: "내 역할", value: caseStudy.role },
+    { term: "기간", value: caseStudy.period },
     {
-      term: '지금',
+      term: "운영 현황",
       value: `${CASE_STATUS_LABEL[caseStudy.status.kind]} — ${caseStudy.status.note}`,
     },
-  ]
+  ];
 
   return (
     <dl className="glass-card mt-6 grid gap-3 rounded-xl p-5 sm:grid-cols-[6rem_1fr]">
       {rows.map((row) => (
         <div key={row.term} className="contents">
-          <dt className="text-xs font-semibold text-stone-600 dark:text-stone-400">{row.term}</dt>
-          <dd className="text-sm leading-6 text-stone-800 dark:text-stone-200">{row.value}</dd>
+          <dt className="text-xs font-semibold text-stone-600 dark:text-stone-400">
+            {row.term}
+          </dt>
+          <dd className="text-sm leading-6 text-stone-800 dark:text-stone-200">
+            {row.value}
+          </dd>
         </div>
       ))}
     </dl>
-  )
+  );
 }
 
 /** 시간순 단계 타임라인 — 첫 단계가 문제(이전), 마지막 단계가 결과(지금)를 담는다 */
@@ -39,33 +47,37 @@ function CaseTimeline({ steps }: { steps: readonly AxCaseStep[] }) {
           <p className="mt-1 text-base font-semibold text-stone-900 dark:text-stone-100">
             {step.title}
           </p>
-          <p className="mt-1.5 text-sm leading-7 text-stone-600 dark:text-stone-400">{step.body}</p>
+          <p className="mt-1.5 text-sm leading-7 text-stone-600 dark:text-stone-400">
+            {step.body}
+          </p>
         </li>
       ))}
     </ol>
-  )
+  );
 }
 
 /** 단계 서사가 없는 케이스의 폴백 — 문제 / 개입 / 결과 문단 */
 function CaseSummary({ caseStudy }: { caseStudy: AxCaseStudy }) {
   const facts = [
-    { term: '문제', value: caseStudy.problem },
-    { term: '내가 한 일', value: caseStudy.intervention },
-    { term: '결과', value: caseStudy.outcome },
-  ]
+    { term: "문제", value: caseStudy.problem },
+    { term: "수행 업무", value: caseStudy.intervention },
+    { term: "성과·진행 현황", value: caseStudy.outcome },
+  ];
 
   return (
     <dl className="mt-8 space-y-6">
       {facts.map((fact) => (
         <div key={fact.term}>
-          <dt className="text-xs font-semibold uppercase text-stone-400">{fact.term}</dt>
+          <dt className="text-xs font-semibold uppercase text-stone-400">
+            {fact.term}
+          </dt>
           <dd className="mt-1 text-sm leading-7 text-stone-700 dark:text-stone-300">
             {fact.value}
           </dd>
         </div>
       ))}
     </dl>
-  )
+  );
 }
 
 /**
@@ -75,15 +87,12 @@ function CaseSummary({ caseStudy }: { caseStudy: AxCaseStudy }) {
  */
 export function CaseNarrative({ caseStudy }: { caseStudy: AxCaseStudy }) {
   // 빈 배열도 truthy — 작성 중인 사례가 조용히 사라지지 않도록 길이로 판정한다
-  const hasSteps = Boolean(caseStudy.steps?.length)
+  const hasSteps = Boolean(caseStudy.steps?.length);
 
   return (
     <section className="mt-16">
-      <p className="font-[family-name:var(--font-mono)] text-xs uppercase tracking-widest text-[var(--accent)]">
-        Case
-      </p>
       <h2 className="mt-2 text-2xl font-bold tracking-tight text-stone-900 dark:text-stone-100">
-        {hasSteps ? '이전 → 단계별 개선 → 지금' : '문제 → 해결 → 결과'}
+        업무 개선 내용
       </h2>
       <CaseOwnership caseStudy={caseStudy} />
 
@@ -99,5 +108,5 @@ export function CaseNarrative({ caseStudy }: { caseStudy: AxCaseStudy }) {
         <CaseSummary caseStudy={caseStudy} />
       )}
     </section>
-  )
+  );
 }

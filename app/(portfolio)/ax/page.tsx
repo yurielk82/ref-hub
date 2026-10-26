@@ -1,6 +1,6 @@
-import type { Metadata } from 'next'
-import Link from 'next/link'
-import { ArrowRight, BookOpen, Bot, ShieldCheck, Workflow } from 'lucide-react'
+import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight, BookOpen, Bot, ShieldCheck, Workflow } from "lucide-react";
 
 import {
   AX_METHOD,
@@ -10,34 +10,38 @@ import {
   AX_GROUNDING,
   AX_HERO,
   FEATURED_CASE_SLUGS,
-} from '@/data/ax'
-import { getProject } from '@/data/projects'
-import { FadeInUp } from '@/components/portfolio/motion'
-import { TechTags } from '@/components/portfolio/tech-tags'
+} from "@/data/ax";
+import { getProject } from "@/data/projects";
+import { FadeInUp } from "@/components/portfolio/motion";
+import { TechTags } from "@/components/portfolio/tech-tags";
 import {
   AxCasesSection,
   AxContactSection,
   AxGroundingSection,
   AxHeroSection,
-} from '@/components/portfolio/ax-sections'
+} from "@/components/portfolio/ax-sections";
 
 export const metadata: Metadata = {
-  title: `AX 접근 방식 — ${AX_HERO.name}`,
-  description: `${AX_HERO.name} — ${AX_HERO.role}. 영업 데이터 시스템을 만들 때 쓰는 AI 활용 방식과 원칙`,
-}
+  title: `업무 개선 방식 — ${AX_HERO.name}`,
+  description: `${AX_HERO.name} — ${AX_HERO.role}. 영업 데이터 분석과 업무 시스템 구축 사례, 자료 검증 및 업무 개선 방식`,
+};
 
-const pillarIcons = [Workflow, BookOpen, Bot, ShieldCheck]
-const PILLAR_STAGGER_DELAY = 0.06
-const STEP_STAGGER_DELAY = 0.05
+const pillarIcons = [Workflow, BookOpen, Bot, ShieldCheck];
+const PILLAR_STAGGER_DELAY = 0.06;
+const STEP_STAGGER_DELAY = 0.05;
 
 export default function AxPage() {
-  const featured = new Set<string>(FEATURED_CASE_SLUGS)
+  const featured = new Set<string>(FEATURED_CASE_SLUGS);
   const cases = AX_CASE_STUDIES.map((study) => ({
     ...study,
     project: getProject(study.projectSlug),
-  })).filter((study) => study.project !== undefined && featured.has(study.projectSlug)) as Array<
-    (typeof AX_CASE_STUDIES)[number] & { project: NonNullable<ReturnType<typeof getProject>> }
-  >
+  })).filter(
+    (study) => study.project !== undefined && featured.has(study.projectSlug),
+  ) as Array<
+    (typeof AX_CASE_STUDIES)[number] & {
+      project: NonNullable<ReturnType<typeof getProject>>;
+    }
+  >;
 
   return (
     <article className="px-6 pb-28 pt-20 sm:pt-24">
@@ -48,25 +52,25 @@ export default function AxPage() {
           <FadeInUp>
             <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
               <div>
-                <p className="font-[family-name:var(--font-mono)] text-xs uppercase text-[var(--accent)]">
-                  AX Fit
-                </p>
                 <h2 className="mt-2 text-2xl font-bold text-stone-950 dark:text-stone-50">
-                  직무 적합 신호
+                  업무 역량
                 </h2>
               </div>
               <p className="max-w-xl text-sm leading-6 text-stone-500 dark:text-stone-400">
-                현업 이해, 데이터 기준화, AI 자동화, 운영 가드레일을 한 흐름으로 묶는 역할에 초점을
-                둡니다.
+                영업관리 실무와 데이터 분석을 바탕으로 자료 취합·조회·보고
+                업무를 개선합니다.
               </p>
             </div>
           </FadeInUp>
 
           <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {AX_PILLARS.map((pillar, index) => {
-              const Icon = pillarIcons[index] ?? Workflow
+              const Icon = pillarIcons[index] ?? Workflow;
               return (
-                <FadeInUp key={pillar.title} delay={index * PILLAR_STAGGER_DELAY}>
+                <FadeInUp
+                  key={pillar.title}
+                  delay={index * PILLAR_STAGGER_DELAY}
+                >
                   <div className="h-full rounded-lg border border-stone-200 bg-white p-5 dark:border-stone-800 dark:bg-stone-900">
                     <div className="flex items-center justify-between gap-3">
                       <span className="font-[family-name:var(--font-mono)] text-xs text-stone-400">
@@ -82,7 +86,7 @@ export default function AxPage() {
                     </p>
                   </div>
                 </FadeInUp>
-              )
+              );
             })}
           </div>
         </section>
@@ -95,7 +99,7 @@ export default function AxPage() {
               href="/projects"
               className="inline-flex items-center gap-2 rounded-xl border border-stone-200 bg-white px-5 py-2.5 text-sm font-semibold text-[var(--accent)] transition-colors hover:border-[var(--accent)] dark:border-stone-800 dark:bg-stone-900"
             >
-              전체 프로젝트 보기
+              회사 업무 개선 사례 보기
               <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
@@ -106,15 +110,12 @@ export default function AxPage() {
         <section className="mt-20 grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <FadeInUp>
             <div>
-              <p className="font-[family-name:var(--font-mono)] text-xs uppercase text-[var(--accent)]">
-                Operating Method
-              </p>
               <h2 className="mt-2 text-2xl font-bold text-stone-950 dark:text-stone-50">
-                AX를 진행하는 방식
+                업무를 개선하는 방식
               </h2>
               <p className="mt-4 text-sm leading-7 text-stone-600 dark:text-stone-400">
-                자동화 대상을 먼저 정하지 않습니다. 업무가 실제로 어디서 막히는지, 어떤 기준이
-                암묵지로 남아 있는지, 어느 지점에서 사람이 책임져야 하는지부터 나눕니다.
+                반복되는 자료 취합과 확인 작업을 파악하고, 자료의 출처와 집계
+                기준을 정리한 뒤 실제 업무에 필요한 기능을 구축합니다.
               </p>
             </div>
           </FadeInUp>
@@ -124,7 +125,7 @@ export default function AxPage() {
               <FadeInUp key={step.title} delay={index * STEP_STAGGER_DELAY}>
                 <div className="grid gap-4 rounded-lg border border-stone-200 bg-white p-4 dark:border-stone-800 dark:bg-stone-900 sm:grid-cols-[3rem_1fr]">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-stone-100 font-[family-name:var(--font-mono)] text-xs font-semibold text-[var(--accent)] dark:bg-stone-800">
-                    {String(index + 1).padStart(2, '0')}
+                    {String(index + 1).padStart(2, "0")}
                   </div>
                   <div>
                     <h3 className="text-sm font-bold text-stone-950 dark:text-stone-50">
@@ -142,11 +143,8 @@ export default function AxPage() {
 
         <section className="mt-20">
           <FadeInUp>
-            <p className="font-[family-name:var(--font-mono)] text-xs uppercase text-[var(--accent)]">
-              Proof Stack
-            </p>
             <h2 className="mt-2 text-2xl font-bold text-stone-950 dark:text-stone-50">
-              AX 관점의 기술 스택
+              시스템 구축에 활용한 도구
             </h2>
           </FadeInUp>
 
@@ -167,5 +165,5 @@ export default function AxPage() {
         <AxContactSection />
       </div>
     </article>
-  )
+  );
 }

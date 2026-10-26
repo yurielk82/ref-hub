@@ -1,16 +1,16 @@
-import type { Metadata } from 'next'
-import Link from 'next/link'
-import { ArrowRight, BookOpen } from 'lucide-react'
+import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight, BookOpen } from "lucide-react";
 
-import { MANUALS } from '@/data/manuals'
-import { FadeInUp } from '@/components/portfolio/motion'
+import { MANUALS } from "@/data/manuals";
+import { FadeInUp } from "@/components/portfolio/motion";
 
-const MANUAL_STAGGER_DELAY = 0.05
+const MANUAL_STAGGER_DELAY = 0.05;
 
 export const metadata: Metadata = {
-  title: '문서',
-  description: '프로젝트별 사용자·관리자 매뉴얼 모음',
-}
+  title: "문서",
+  description: "영업관리 업무 개선 사례와 관련 시스템 문서",
+};
 
 export default function DocsIndexPage() {
   return (
@@ -25,8 +25,9 @@ export default function DocsIndexPage() {
               문서
             </h1>
             <p className="mt-4 max-w-2xl text-sm leading-7 text-stone-600 dark:text-stone-400">
-              각 프로젝트의 사용자·관리자 매뉴얼입니다. 실제 운영 중인 시스템의 화면과 절차를 그대로
-              담고 있습니다.
+              영업 자료 관리·분석·보고 업무를 개선한 사례와 관련 문서입니다.
+              운영 중인 시스템과 이전 구현 사례를 구분했으며, 운영 종료·이관
+              상태는 각 문서에서 확인할 수 있습니다.
             </p>
           </div>
         </FadeInUp>
@@ -69,5 +70,5 @@ export default function DocsIndexPage() {
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -4,8 +4,8 @@ import type { Project } from "../project-types";
 export const DELIVERY_PROJECTS: Project[] = [
   {
     slug: "pharmkpi",
-    name: "영업 데이터 관리·분석",
-    tagline: "영업 데이터 조회·분석과 월간 보고를 한곳에서 지원",
+    name: "영업 실적 취합·보고 업무 개선",
+    tagline: "엑셀·스프레드시트로 취합하던 영업 자료의 조회·분석·보고 개선",
     description:
       "매출·수금·채권·재고 자료를 연계하고, 월간 KPI와 거래처·품목별 조회·분석 기능을 구축했습니다. ERP 전환 전후 자료도 대조했습니다. 사내 영업 데이터 시스템 운영 중.",
     category: "web",
@@ -21,13 +21,13 @@ export const DELIVERY_PROJECTS: Project[] = [
       "기준월·비교 기간·대상 조건별 표와 그래프",
       "원본 자료 대조와 매출·반품·매출할인 집계 기준 관리",
     ],
-    highlight: "영업 데이터 조회·분석과 월간 보고를 한곳에서 지원",
+    highlight: "엑셀·스프레드시트로 취합하던 영업 자료의 조회·분석·보고 개선",
     year: "2026",
     tech: ["Next.js 16", "Prisma 7", "Supabase", "Anthropic SDK", "Recharts"],
   },
   {
     slug: "sales-hq-sfe",
-    name: "영업 활동·실적 분석(SFE)",
+    name: "방문 기록과 매출을 연계한 영업 활동 분석(SFE)",
     tagline: "방문 기록과 실적을 연계해 담당자·거래처별 영업 활동 분석",
     description:
       "일보의 방문 기록을 ERP 매출·목표와 연결하고, 방문 현황·목표 달성률·핵심 거래처 관리 현황을 분석하도록 구성했습니다. 월간 영업회의 자료로 활용하며 개선 중.",
@@ -52,7 +52,7 @@ export const DELIVERY_PROJECTS: Project[] = [
   },
   {
     slug: "sales-hq-snop",
-    name: "판매·운영 계획(S&OP)",
+    name: "판매 계획·재고 검토 업무 개선(S&OP)",
     tagline: "매출 예측과 수요·공급·재고 검토를 연결하는 계획 업무 개선",
     description:
       "매출 예측·시나리오 비교·계획 저장과 수요·공급·재고 검토 화면을 구축했습니다. 유통재고 관리 업무의 효율화도 함께 진행하고 있습니다. 기능 배포 후 업무 적용·검증 진행 중.",

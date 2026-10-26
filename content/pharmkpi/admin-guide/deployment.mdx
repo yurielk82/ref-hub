@@ -1,15 +1,17 @@
 # 배포
 
+> **이전 버전 참고 자료** — 현재 운영 화면의 사용 안내가 아닙니다. [현재 업무 개선 사례](/pharmkpi)에서 적용 범위와 진행 상태를 확인하세요.
+
 PharmKPI의 배포 환경과 운영 방법을 설명합니다.
 
 ## 배포 환경
 
-| 항목 | 값 |
-|------|-----|
-| **호스팅** | Coolify (Oracle Cloud ARM) |
-| **URL** | [kpi.dvsharp.com](https://kpi.dvsharp.com) |
-| **DB** | Supabase 셀프호스팅 (sb.dvsharp.com, pkpi_ 접두사) |
-| **프레임워크** | Next.js 16 (App Router) |
+| 항목           | 값                                                  |
+| -------------- | --------------------------------------------------- |
+| **호스팅**     | Coolify (Oracle Cloud ARM)                          |
+| **URL**        | [kpi.dvsharp.com](https://kpi.dvsharp.com)          |
+| **DB**         | Supabase 셀프호스팅 (sb.dvsharp.com, pkpi\_ 접두사) |
+| **프레임워크** | Next.js 16 (App Router)                             |
 
 ## Coolify 배포
 
@@ -21,13 +23,13 @@ Coolify UI 또는 API를 통해 배포합니다:
 
 ## 환경변수
 
-| 변수 | 설명 |
-|------|------|
-| `DATABASE_URL` | Supabase PostgreSQL 연결 문자열 (pgbouncer) |
-| `DIRECT_URL` | Prisma 마이그레이션용 직접 연결 |
-| `NEXT_PUBLIC_SUPABASE_URL` | Supabase API 엔드포인트 |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase 공개 키 |
-| `SUPABASE_SERVICE_ROLE_KEY` | 서버 사이드 전용 서비스 키 |
+| 변수                            | 설명                                        |
+| ------------------------------- | ------------------------------------------- |
+| `DATABASE_URL`                  | Supabase PostgreSQL 연결 문자열 (pgbouncer) |
+| `DIRECT_URL`                    | Prisma 마이그레이션용 직접 연결             |
+| `NEXT_PUBLIC_SUPABASE_URL`      | Supabase API 엔드포인트                     |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase 공개 키                            |
+| `SUPABASE_SERVICE_ROLE_KEY`     | 서버 사이드 전용 서비스 키                  |
 
 > **주의**: 환경변수는 Coolify 프로젝트 설정에서 관리합니다. 코드에 하드코딩하지 않습니다.
 

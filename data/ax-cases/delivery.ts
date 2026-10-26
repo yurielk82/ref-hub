@@ -4,14 +4,14 @@ import type { AxCaseStudy } from "../ax-types";
 export const DELIVERY_CASE_STUDIES: AxCaseStudy[] = [
   {
     projectSlug: "pharmkpi",
-    label: "영업 데이터 관리·분석",
+    label: "영업 실적 취합·보고 업무 개선",
     role: "영업 자료 조회와 분석에 필요한 지표·데이터·화면을 설계하고 시스템을 구축·운영했습니다.",
     period: "2026-03 ~ 현재",
     status: {
       kind: "live",
       note: "사내 영업 데이터 시스템 운영 중",
     },
-    impact: "영업 데이터 조회·분석과 월간 보고를 한곳에서 지원",
+    impact: "엑셀·스프레드시트로 취합하던 영업 자료의 조회·분석·보고 개선",
     problem:
       "ERP와 엑셀에 자료가 나뉘어 있어 실적을 취합하고 집계 기준을 확인하는 작업이 필요했습니다.",
     intervention:
@@ -23,7 +23,7 @@ export const DELIVERY_CASE_STUDIES: AxCaseStudy[] = [
   },
   {
     projectSlug: "sales-hq-sfe",
-    label: "영업 활동·실적 분석(SFE)",
+    label: "방문 기록과 매출을 연계한 영업 활동 분석(SFE)",
     role: "영업본부 분석·기획 업무로 분석 지표와 회의 자료를 구성하고 관련 기능을 구현했습니다.",
     period: "2026-09 ~ 현재",
     status: {
@@ -42,7 +42,7 @@ export const DELIVERY_CASE_STUDIES: AxCaseStudy[] = [
   },
   {
     projectSlug: "sales-hq-snop",
-    label: "판매·운영 계획(S&OP)",
+    label: "판매 계획·재고 검토 업무 개선(S&OP)",
     role: "판매·운영 계획 기능을 구축하고 업무 적용을 위한 개선을 진행하고 있습니다.",
     period: "2026-10 ~ 현재",
     status: {

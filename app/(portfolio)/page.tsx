@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { AX_CONTACT, AX_HERO, SITE_URL } from "@/data/ax";
-import { COMPANY_PROJECTS } from "@/data/projects";
+import { REFERENCE_PROJECTS } from "@/data/projects";
 import {
   AxContactSection,
   AxHeroSection,
@@ -15,7 +15,7 @@ import { WorkSection } from "@/components/portfolio/work-section";
 
 // 이력서 링크를 공유했을 때 탭·미리보기에 이름이 먼저 보여야 한다.
 const LANDING_TITLE = `${AX_HERO.name} — ${AX_HERO.role}`;
-const LANDING_DESCRIPTION = `${AX_HERO.name} · ${AX_HERO.role}. SFE·S&OP·유통재고 관리 개선, 영업 데이터 분석, 자료 취합·보고 자동화 경험.`;
+const LANDING_DESCRIPTION = `${AX_HERO.name} · ${AX_HERO.role}. 엑셀·스프레드시트 자료 관리·분석·보고 개선 경험. SFE·S&OP·유통재고 관리 업무 효율화.`;
 const LANDING_PREVIEW_IMAGE = "/images/portfolio/pharmkpi/hero.png";
 
 export const metadata: Metadata = {
@@ -63,9 +63,9 @@ const PROJECT_GROUPS = [
     id: "projects",
     // 묶음을 나누기 전 키 — 방문자가 저장해 둔 순서를 이어 쓴다
     storageKey: "ref-hub-project-order",
-    title: `업무 개선에 활용한 시스템 ${COMPANY_PROJECTS.length}건`,
-    lead: "직접 구축한 회사 업무 시스템입니다. 운영 중·개선 중·이관·종료 상태를 사례별로 표시했습니다.",
-    projects: COMPANY_PROJECTS,
+    title: `업무 개선 레퍼런스 ${REFERENCE_PROJECTS.length}건`,
+    lead: "엑셀·스프레드시트 업무를 개선한 경험과 현재 진행 중인 SFE·S&OP·유통재고 관리 사례입니다. 각 사례에서 수행 범위와 진행 상태를 확인할 수 있습니다.",
+    projects: REFERENCE_PROJECTS,
   },
 ] as const;
 

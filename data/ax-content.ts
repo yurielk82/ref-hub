@@ -1,3 +1,4 @@
+import { REFERENCE_PROJECT_SLUGS } from "./project-types";
 import type {
   AxGrounding,
   AxMethodStep,
@@ -10,11 +11,12 @@ export const AX_HERO = {
   role: "제약 영업관리 · 데이터 분석 · 업무 효율화",
   jobTitle: "영업관리팀 과장 · 영업본부 분석·기획 겸직",
   employer: "부광유니파마",
-  title: "영업 데이터 분석과 업무 개선으로 영업관리의 효율을 높이고 있습니다.",
+  title:
+    "영업관리 실무를 바탕으로, 엑셀 중심의 자료 관리·분석·보고 업무를 개선해 왔습니다.",
   subhead:
-    "제약회사 영업관리팀에서 근무하며 영업본부 분석·기획 업무를 겸하고 있습니다. 현재는 영업 활동·실적 분석(SFE), 판매·운영 계획(S&OP), 유통재고 관리 업무를 개선하고 있습니다.",
+    "제약회사 영업관리팀에서 근무하며 영업본부 분석·기획 업무를 겸하고 있습니다. 스프레드시트와 엑셀로 취합·관리하던 영업 자료의 조회·분석·보고 방식을 개선해 왔습니다.",
   summary:
-    "매출·수금·채권 등 영업 데이터를 정리·분석하고, 반복되는 자료 취합과 보고 작업을 개선해 왔습니다. 필요한 시스템을 직접 구축하고 운영하며, CSO 관련 업무에서는 데이터 처리와 시스템 구축을 수행했습니다.",
+    "실무에서 반복되는 작업과 확인이 필요한 항목을 파악하고, 필요한 시스템을 직접 구축해 업무에 활용했습니다. 현재는 영업 활동·실적 분석(SFE), 판매·운영 계획(S&OP), 유통재고 관리로 개선 범위를 넓히고 있습니다.",
   evidence: [
     {
       label: "영업 데이터 분석",
@@ -25,8 +27,8 @@ export const AX_HERO = {
       text: "SFE·S&OP·유통재고 관리 업무의 효율화를 추진하고 있습니다.",
     },
     {
-      label: "업무 자동화",
-      text: "자료 취합·검증·보고의 반복 작업을 줄이는 시스템을 직접 구축합니다.",
+      label: "엑셀·스프레드시트 업무 개선",
+      text: "자료를 취합하고 대조하던 반복 작업을 조회·검증·보고 기능으로 개선합니다.",
     },
     {
       label: "데이터 점검·부서 협업",
@@ -72,15 +74,7 @@ export const AX_PILLARS: AxPillar[] = [
   },
 ];
 
-export const FEATURED_CASE_SLUGS = [
-  "pharmkpi",
-  "sales-hq-sfe",
-  "sales-hq-snop",
-  "csoweb",
-  "kpis-dsr-api",
-  "sales-strategy-portal",
-  "pharmkpi-exec",
-] as const;
+export const FEATURED_CASE_SLUGS = REFERENCE_PROJECT_SLUGS;
 
 export const AX_GROUNDING: AxGrounding = {
   eyebrow: "자료 검증",

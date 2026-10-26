@@ -1,4 +1,4 @@
-import { COMPANY_PROJECTS } from "@/data/projects";
+import { REFERENCE_PROJECTS } from "@/data/projects";
 import { SortableGrid } from "@/components/portfolio/sortable-grid";
 import { FadeInUp } from "@/components/portfolio/motion";
 
@@ -9,12 +9,12 @@ export default function ProjectsPage() {
         <FadeInUp>
           <div className="mb-10">
             <h1 className="mt-2 text-2xl font-bold tracking-tight text-stone-900 dark:text-stone-100">
-              회사 업무 개선 사례
+              영업관리 업무 개선 사례
             </h1>
           </div>
         </FadeInUp>
         <SortableGrid
-          projects={COMPANY_PROJECTS}
+          projects={REFERENCE_PROJECTS}
           storageKey="ref-hub-all-project-order"
         />
       </div>

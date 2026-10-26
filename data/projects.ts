@@ -1,15 +1,27 @@
-import type { Project } from './project-types'
-import { DELIVERY_PROJECTS } from './projects/delivery'
-import { TOOLING_PROJECTS } from './projects/tooling'
+import { REFERENCE_PROJECT_SLUGS, type Project } from "./project-types";
+import { DELIVERY_PROJECTS } from "./projects/delivery";
+import { TOOLING_PROJECTS } from "./projects/tooling";
 
-export type { Project }
+export type { Project };
 
 // 쇼케이스 등록부 — 엔터프라이즈 딜리버리 → 사내 도구·하네스 순 (랜딩 카드 노출 순서)
-export const PROJECTS: Project[] = [...DELIVERY_PROJECTS, ...TOOLING_PROJECTS]
+export const PROJECTS: Project[] = [...DELIVERY_PROJECTS, ...TOOLING_PROJECTS];
 
-export const COMPANY_PROJECTS: Project[] = PROJECTS.filter((p) => p.scope === 'company')
-export const OTHER_PROJECTS: Project[] = PROJECTS.filter((p) => p.scope === 'other')
+export const COMPANY_PROJECTS: Project[] = PROJECTS.filter(
+  (p) => p.scope === "company",
+);
+export const OTHER_PROJECTS: Project[] = PROJECTS.filter(
+  (p) => p.scope === "other",
+);
 
 export function getProject(slug: string): Project | undefined {
-  return PROJECTS.find((p) => p.slug === slug)
+  return PROJECTS.find((p) => p.slug === slug);
 }
+
+/** 회사 업무 중 채용 담당자에게 보여줄 대표 업무 사례. */
+export const REFERENCE_PROJECTS: Project[] = REFERENCE_PROJECT_SLUGS.flatMap(
+  (slug) => {
+    const project = getProject(slug);
+    return project ? [project] : [];
+  },
+);

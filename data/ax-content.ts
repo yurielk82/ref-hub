@@ -42,8 +42,7 @@ export const SITE_URL = "https://ref.dvsharp.com";
 
 /** 연락처 단일 출처 — 히어로·연락 섹션이 같은 값을 쓴다. */
 export const AX_CONTACT = {
-  email: "ssmtransite@gmail.com",
-  linkedin: "https://www.linkedin.com/in/yurielk82",
+  email: "yurielk82@gmail.com",
   github: "https://github.com/yurielk82",
 };
 

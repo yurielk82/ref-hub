@@ -205,7 +205,6 @@ KPIS 13자리 의약품 식별코드 마스터 테이블입니다. 바코드 데
 | kpis_app_settings | 앱 설정 (KEY-VALUE) |
 | kpis_jwt_tokens | KPIS JWT 토큰 캐싱 |
 | kpis_price_learn | 단가 학습 데이터 |
-| kpis_holidays | 공휴일/회사 휴일 |
 | kpis_config | 시스템 설정 |
 | kpis_dashboard_cache | 대시보드 캐시 |
 | kpis_master_barcode | 바코드 마스터 소스 |
@@ -255,7 +254,7 @@ Supabase RPC를 통해 복합 데이터 조작을 수행합니다.
 | 006_reorder_gap_columns.sql | gap_rows 컬럼 순서 변경 |
 | 007_atc_drop_unique_add_clear.sql | ATC 마스터 스키마 변경 |
 | 008_master_clear_and_sync.sql | 마스터 동기화 |
-| 009_create_kpis_holidays.sql | 공휴일 테이블 |
+| 009_create_kpis_holidays.sql | 공휴일 테이블(071에서 제거 — 휴일은 pharmkpi 휴일 관리) |
 | 010_create_kpis_config.sql | 시스템 설정 테이블 |
 
 ## 데이터 백업 및 복원
@@ -283,9 +282,9 @@ pg_restore -h sb.dvsharp.com -U postgres -d postgres \
 cp data/local.db data/local_backup_$(date +%Y%m%d).db
 
 # 복원
-pm2 stop kpis-dsr-api
+systemctl stop github-kpis-dsr-api.service
 cp /backup/local_backup.db data/local.db
-pm2 restart kpis-dsr-api
+systemctl start github-kpis-dsr-api.service
 ```
 
 > 복원 시 반드시 서버를 중지한 후 진행합니다.

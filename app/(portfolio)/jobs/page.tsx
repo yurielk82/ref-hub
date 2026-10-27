@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { LogOut } from "lucide-react";
 
-import { jobsViewer, signOut } from "@/auth";
+import { jobsViewer } from "@/auth";
 import { toBoardItems } from "@/lib/jobs/board";
 import { SEARCH_QUERIES } from "@/lib/jobs/queries";
 import { jobsDataDir, readStore } from "@/lib/jobs/store-file";
@@ -28,11 +28,6 @@ const KST_DATE_TIME = new Intl.DateTimeFormat("ko-KR", {
   minute: "2-digit",
   hour12: false,
 });
-
-async function signOutToHome() {
-  "use server";
-  await signOut({ redirectTo: "/" });
-}
 
 async function loadStore(): Promise<{
   store: JobStore | null;
@@ -99,7 +94,7 @@ export default async function JobsPage() {
               storedCount={store?.postings.length ?? 0}
               queries={SEARCH_QUERIES.map((query) => query.label)}
             />
-            <form action={signOutToHome}>
+            <form action="/auth/logout" method="post">
               <button
                 type="submit"
                 className="inline-flex items-center gap-1.5 rounded-lg border border-stone-200 bg-white px-3 py-2 text-xs font-semibold text-stone-600 transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] dark:border-stone-800 dark:bg-stone-900 dark:text-stone-300"

@@ -3,26 +3,21 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { ArrowLeft, LogIn } from "lucide-react";
 
-import { isAuthConfigured, jobsViewer, signIn } from "@/auth";
+import { isAuthConfigured, jobsViewer } from "@/auth";
 
 export const metadata: Metadata = {
   title: "로그인",
   robots: { index: false, follow: false },
 };
 
-/** Auth.js가 /login?error=… 로 돌려보내는 오류 코드 */
+/** /auth/google·/auth/callback이 /login?error=… 로 돌려보내는 오류 코드 */
 const ERROR_MESSAGES: Readonly<Record<string, string>> = {
-  AccessDenied:
+  forbidden:
     "이 계정으로는 공고 모음을 볼 수 없습니다. 허용된 Google 계정으로 다시 로그인하세요.",
-  Configuration:
+  config:
     "로그인 설정에 문제가 있어 로그인하지 못했습니다. 서버의 로그인 설정을 확인하세요.",
 };
 const DEFAULT_ERROR = "로그인하지 못했습니다. 잠시 뒤 다시 시도하세요.";
-
-async function signInWithGoogle() {
-  "use server";
-  await signIn("google", { redirectTo: "/jobs" });
-}
 
 export default async function LoginPage(props: {
   searchParams: Promise<{ error?: string | string[] }>;
@@ -56,7 +51,7 @@ export default async function LoginPage(props: {
           </p>
         )}
 
-        <form action={signInWithGoogle} className="mt-8">
+        <form action="/auth/google" method="get" className="mt-8">
           <button
             type="submit"
             disabled={!configured}

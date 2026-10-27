@@ -11,9 +11,10 @@
 
 ## 비밀 파일 (git에 올리지 않는다, 소유자 전용 0600)
 
-- `~/.config/secrets/ref-hub-auth.env`: `AUTH_SECRET`, `AUTH_URL=https://ref.dvsharp.com`, `AUTH_GOOGLE_ID`, `AUTH_GOOGLE_SECRET`,
-  `JOBS_ALLOWED_EMAILS`(쉼표 구분). Google OAuth 클라이언트의 승인된 리디렉션 URI는
-  `https://ref.dvsharp.com/api/auth/callback/google`이다.
+- `~/.config/secrets/ref-hub-auth.env`: `SUPABASE_URL=https://sb.dvsharp.com`, `SUPABASE_ANON_KEY`(공용 Supabase의 공개 키),
+  `JOBS_ALLOWED_EMAILS`(쉼표 구분). 로그인은 공용 Supabase의 Google 로그인을 거치므로 Google 콘솔에는 따로 넣지 않는다.
+  대신 공용 Supabase 설정(`/home/ubuntu/supabase/docker/.env`)의 `ADDITIONAL_REDIRECT_URLS`에
+  `https://ref.dvsharp.com/auth/callback`이 있어야 한다. 바꾼 뒤 `docker compose up -d auth`로 반영한다.
 - `~/.config/secrets/saramin-api.env`: `SARAMIN_ACCESS_KEY`. 이 파일이 없으면 수집 작업은 건너뛴다.
 
 저장 파일은 `~/.local/share/ref-hub/jobs/postings.json`(폴더 0700, 파일 0600)이다. 사람인 이용 조건에 저장 범위가

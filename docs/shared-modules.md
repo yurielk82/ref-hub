@@ -7,7 +7,35 @@
 ### `lib/auth/allowlist.ts`
 
 - `parseAllowlist`
-- `isAllowedSignIn`
+- `isAllowedUser` — 공용 로그인 서버는 여러 앱 회원(이메일로 누구나 가입하는 앱 포함)이 함께 쓴다.
+- `isOAuthSession` — 이번 세션이 Google(OAuth)로 받은 것인가.
+
+### `lib/auth/config.ts`
+
+- `PRODUCTION_ORIGIN` — 공고 모음 로그인 상수.
+- `HOME_PATH`
+- `LOGIN_PATH`
+- `JOBS_PATH`
+- `CALLBACK_PATH`
+- `CODE_VERIFIER_SUFFIX`
+- `SEE_OTHER` — 로그아웃(POST) 뒤 GET으로 이동
+- `AUTH_REQUEST_TIMEOUT_MS` — 로그인 서버 호출 시간 제한.
+
+### `lib/auth/cookies.ts`
+
+- `hardenAuthCookie` — Supabase 인증 쿠키 속성 강화(ASVS 5.0 V3.3).
+
+### `lib/auth/origin.ts`
+
+- `publicOrigin` — 돌아올 주소를 만들 공개 출처.
+- `isSameOriginRequest` — 상태를 바꾸는 요청이 우리 화면에서 왔는가(OWASP CSRF 치트시트: Origin, 없으면 Sec-Fetch-Site)
+- `loginErrorUrl` — 로그인 화면에 오류를 띄워 돌려보낼 주소
+
+### `lib/auth/supabase-server.ts`
+
+- `supabaseEnv` — 공용 Supabase 주소와 공개(anon) 키.
+- `createSupabaseServer` — 페이지·라우트 핸들러용 클라이언트(세션은 쿠키)
+- `refreshSession` — proxy.ts에서 세션을 갱신한다.
 
 ### `lib/jobs/board.ts`
 

@@ -4,10 +4,10 @@ import { usePathname } from "next/navigation";
 
 import { AX_CONTACT } from "@/data/ax-content";
 
-import { showsDeveloperLinks, trackOf } from "./track";
+import { TRACKS, trackOf } from "./track";
 
 export function PortfolioFooter() {
-  const developer = showsDeveloperLinks(trackOf(usePathname() ?? "/"));
+  const developer = TRACKS[trackOf(usePathname() ?? "/")].developerLinks;
   return (
     <footer
       className="border-t py-8"

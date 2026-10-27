@@ -4,18 +4,19 @@ import { cn } from "@/lib/utils";
 import { NewBadge } from "./badge";
 import { ProjectThumbnail } from "./project-thumbnail";
 import { TechTags } from "./tech-tags";
+import { caseHref, type Track } from "./track";
 
-/** href를 주면 그 트랙의 상세로 간다(AX 트랙은 /ax/cases/*). 기본은 영업관리 트랙 상세. */
+/** 카드는 그 트랙의 사례 상세로 간다. 기본은 영업관리 트랙. */
 export function ProjectCard({
   project,
-  href = `/projects/${project.slug}`,
+  track = "sales",
 }: {
   project: Project;
-  href?: string;
+  track?: Track;
 }) {
   return (
     <Link
-      href={href}
+      href={caseHref(track, project.slug)}
       className={cn(
         "glass-card group block overflow-hidden rounded-2xl",
         project.badge &&

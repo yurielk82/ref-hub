@@ -4,6 +4,7 @@ import { ArrowRight, BookOpen } from "lucide-react";
 
 import { MANUALS } from "@/data/manuals";
 import { FadeInUp } from "@/components/portfolio/motion";
+import { caseHref } from "@/components/portfolio/track";
 
 const MANUAL_STAGGER_DELAY = 0.05;
 
@@ -57,7 +58,7 @@ export default function DocsIndexPage() {
                   </span>
                   {manual.projectSlug && (
                     <Link
-                      href={`/ax/cases/${manual.projectSlug}`}
+                      href={caseHref("ax", manual.projectSlug)}
                       className="relative z-10 text-xs text-stone-500 underline-offset-4 hover:text-[var(--accent)] hover:underline"
                     >
                       프로젝트 상세

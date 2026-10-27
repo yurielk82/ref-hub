@@ -80,7 +80,7 @@ export default function HomePage() {
         <AxHeroSection
           hero={AX_HERO}
           primary={{ href: "/#work", label: "주요 업무" }}
-          showGithub={false}
+          track="sales"
         />
 
         <WorkSection />
@@ -114,7 +114,7 @@ export default function HomePage() {
         <AxContactSection
           title="영업 데이터 분석과 업무 개선 경험을 소개합니다."
           lead="담당 업무와 데이터 분석, 시스템을 활용한 업무 개선 경험에 관해 이야기하겠습니다."
-          showGithub={false}
+          track="sales"
         />
       </div>
     </article>

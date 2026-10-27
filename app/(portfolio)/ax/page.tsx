@@ -59,7 +59,7 @@ export default function AxPage() {
         <AxHeroSection
           hero={AX_TRACK_HERO}
           primary={{ href: "/ax#cases", label: "대표 사례" }}
-          showGithub
+          track="ax"
         />
 
         <section id="method" className="mt-16 scroll-mt-20">
@@ -147,10 +147,7 @@ export default function AxPage() {
           <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {tools.map((project, index) => (
               <FadeInUp key={project.slug} delay={index * STAGGER_DELAY}>
-                <ProjectCard
-                  project={project}
-                  href={`/ax/cases/${project.slug}`}
-                />
+                <ProjectCard project={project} track="ax" />
               </FadeInUp>
             ))}
           </div>
@@ -189,7 +186,7 @@ export default function AxPage() {
         <AxContactSection
           title="업무 자동화와 데이터 시스템 구축 경험을 소개합니다."
           lead="현업 문제를 찾아 시스템으로 바꾸고 운영해 온 과정을 사례와 함께 이야기하겠습니다."
-          showGithub
+          track="ax"
         />
       </div>
     </article>

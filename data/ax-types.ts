@@ -46,7 +46,7 @@ export interface AxCaseStudy {
   outcome: string;
   disclosure: MetricDisclosure;
   evidenceLabel: string;
-  /** AX 트랙(/ax)에서 같은 사례를 다시 읽는 요약. 기간·상태·성과 같은 사실은 위 칸과 공유한다 */
+  /** AX 트랙(/ax)에서 같은 사례를 다시 읽는 요약. 기간·상태는 위 칸을 그대로 보여 주므로 되풀이하지 않는다 */
   ax?: AxTrackView;
 }
 
@@ -56,6 +56,7 @@ export interface AxTrackView {
   problem: string;
   build: string;
   automation: string;
+  /** 상태 문구(status.note)와 함께 보이므로, 거기 없는 운영 방식·검증 결과만 쓴다 */
   operation: string;
 }
 

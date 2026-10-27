@@ -9,34 +9,7 @@ import { useEffect, useState } from "react";
 import { AX_CONTACT, AX_HERO } from "@/data/ax-content";
 
 import { GitHubIcon } from "./github-icon";
-import { showsDeveloperLinks, trackOf, type Track } from "./track";
-
-interface NavLink {
-  href: string;
-  label: string;
-}
-
-const TRACK_NAV: Readonly<Record<Track, { home: string; links: NavLink[] }>> = {
-  sales: {
-    home: "/",
-    links: [
-      { href: "/#work", label: "주요 업무" },
-      { href: "/#projects", label: "사례" },
-      { href: "/#career", label: "경력" },
-      { href: "/#contact", label: "연락" },
-    ],
-  },
-  ax: {
-    home: "/ax",
-    links: [
-      { href: "/ax#method", label: "일하는 방식" },
-      { href: "/ax#cases", label: "사례" },
-      { href: "/ax#tools", label: "개인 작업" },
-      { href: "/ax#stack", label: "기술" },
-      { href: "/docs", label: "문서" },
-    ],
-  },
-};
+import { TRACKS, trackOf } from "./track";
 
 /** 로그인한 허용 계정에만 '공고 모음'을 보여 준다. 공개 페이지는 정적이라 브라우저가 묻는다. */
 function useCanViewJobs(): boolean {
@@ -64,7 +37,7 @@ export function PortfolioNav() {
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname() ?? "/";
   const track = trackOf(pathname);
-  const nav = TRACK_NAV[track];
+  const nav = TRACKS[track];
   const canViewJobs = useCanViewJobs();
 
   useEffect(() => setMounted(true), []);
@@ -75,7 +48,7 @@ export function PortfolioNav() {
       style={{ borderColor: "var(--glass-border)" }}
     >
       <nav
-        aria-label={track === "ax" ? "AX 포트폴리오 메뉴" : "포트폴리오 메뉴"}
+        aria-label={nav.menuLabel}
         className="mx-auto flex h-14 max-w-5xl items-center justify-between gap-4 px-6"
       >
         <Link
@@ -83,9 +56,9 @@ export function PortfolioNav() {
           className="shrink-0 font-[family-name:var(--font-display)] text-sm font-bold tracking-tight text-stone-900 dark:text-stone-100"
         >
           {AX_HERO.name}
-          {track === "ax" && (
+          {nav.badge && (
             <span className="ml-1.5 font-sans text-xs font-semibold text-[var(--accent)]">
-              AX
+              {nav.badge}
             </span>
           )}
         </Link>
@@ -108,7 +81,7 @@ export function PortfolioNav() {
               공고 모음
             </Link>
           )}
-          {showsDeveloperLinks(track) && (
+          {nav.developerLinks && (
             <a
               href={AX_CONTACT.github}
               target="_blank"

@@ -257,8 +257,8 @@ test("AX deep-dive route stays distinct from the landing", () => {
 test("docs index covers every manual directory under content/", () => {
   const docsPage = path.join(ROOT, "app", "(portfolio)", "docs", "page.tsx");
   const manuals = readFileSync(path.join(ROOT, "data", "manuals.ts"), "utf8");
-  const nav = readFileSync(
-    path.join(ROOT, "components", "portfolio", "nav.tsx"),
+  const tracks = readFileSync(
+    path.join(ROOT, "components", "portfolio", "track.ts"),
     "utf8",
   );
   const contentDirs = readdirSync(path.join(ROOT, "content"), {
@@ -272,8 +272,8 @@ test("docs index covers every manual directory under content/", () => {
     "missing docs index route: app/(portfolio)/docs/page.tsx",
   );
   assert.match(
-    nav,
-    /href="\/docs"/,
+    tracks,
+    /href: "\/docs"/,
     "portfolio nav should link to the docs index",
   );
 
@@ -454,7 +454,11 @@ test("사이트 이름과 라벨은 소유자 이름과 한국어로 보인다",
     'nav brand should be the owner, not "Ref Hub"',
   );
   assert.match(nav, /AX_HERO\.name/, "nav brand should read the owner name");
-  assert.match(nav, /href="\/#work"/, "nav should reach the work section");
+  const tracks = readFileSync(
+    path.join(ROOT, "components", "portfolio", "track.ts"),
+    "utf8",
+  );
+  assert.match(tracks, /href: "\/#work"/, "nav should reach the work section");
   assert.doesNotMatch(
     homePage,
     /eyebrow: '[A-Za-z ]+'/,

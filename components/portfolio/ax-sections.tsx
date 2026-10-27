@@ -14,6 +14,7 @@ import { FadeInUp } from "./motion";
 import { GitHubIcon } from "./github-icon";
 import { PrintButton } from "./print-button";
 import { ProjectThumbnail } from "./project-thumbnail";
+import { caseHref, TRACKS, type Track } from "./track";
 
 const CASE_STAGGER_DELAY = 0.06;
 
@@ -27,11 +28,11 @@ const SECONDARY_BUTTON =
 export function AxHeroSection({
   hero,
   primary,
-  showGithub,
+  track,
 }: {
   hero: HeroContent;
   primary: { href: string; label: string };
-  showGithub: boolean;
+  track: Track;
 }) {
   return (
     <FadeInUp>
@@ -69,7 +70,7 @@ export function AxHeroSection({
               <Mail className="h-4 w-4" />
               이메일
             </a>
-            {showGithub && (
+            {TRACKS[track].developerLinks && (
               <a
                 href={AX_CONTACT.github}
                 target="_blank"
@@ -145,7 +146,7 @@ export function AxCasesSection({ cases }: { cases: AxCase[] }) {
                       </p>
                     </div>
                     <Link
-                      href={`/ax/cases/${study.project.slug}`}
+                      href={caseHref("ax", study.project.slug)}
                       className="inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-[var(--accent)] after:absolute after:inset-0 after:content-[''] hover:text-[var(--accent-light)] group-hover:gap-2"
                     >
                       사례 상세
@@ -251,11 +252,11 @@ function AxCaseFact({ term, value }: { term: string; value: string }) {
 export function AxContactSection({
   title,
   lead,
-  showGithub,
+  track,
 }: {
   title: string;
   lead: string;
-  showGithub: boolean;
+  track: Track;
 }) {
   return (
     <FadeInUp>
@@ -288,7 +289,7 @@ export function AxContactSection({
               <Mail className="h-4 w-4" />
               이메일 문의
             </a>
-            {showGithub && (
+            {TRACKS[track].developerLinks && (
               <a
                 href={AX_CONTACT.github}
                 target="_blank"

@@ -5,7 +5,7 @@ import type { Project } from "@/data/projects";
 import { NewBadge } from "@/components/portfolio/badge";
 import { ProjectThumbnail } from "@/components/portfolio/project-thumbnail";
 import { TechTags } from "@/components/portfolio/tech-tags";
-import { showsDeveloperLinks, type Track } from "@/components/portfolio/track";
+import { TRACKS, type Track } from "@/components/portfolio/track";
 
 /**
  * 사례 상세의 공용 틀. 영업관리 트랙(/projects/*)과 AX 트랙(/ax/cases/*)이 함께 쓰고,
@@ -22,7 +22,7 @@ export function ProjectDetail({
   back: { href: string; label: string };
   track: Track;
 }) {
-  const developer = showsDeveloperLinks(track);
+  const developer = TRACKS[track].developerLinks;
   return (
     <article className="px-6 pb-28 pt-12">
       <div className="mx-auto max-w-5xl">

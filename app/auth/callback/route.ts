@@ -1,9 +1,8 @@
 import { NextResponse, type NextRequest } from "next/server";
 
-import { allowedEmails } from "@/auth";
-import { isAllowedUser } from "@/lib/auth/allowlist";
-import { JOBS_PATH, LOGIN_PATH } from "@/lib/auth/config";
-import { publicOrigin } from "@/lib/auth/origin";
+import { isJobsSession } from "@/auth";
+import { JOBS_PATH, type LoginError } from "@/lib/auth/config";
+import { loginErrorUrl, publicOrigin } from "@/lib/auth/origin";
 import { createSupabaseServer } from "@/lib/auth/supabase-server";
 
 /**
@@ -12,8 +11,8 @@ import { createSupabaseServer } from "@/lib/auth/supabase-server";
  */
 export async function GET(request: NextRequest) {
   const origin = publicOrigin(request.url);
-  const toLogin = (error: string) =>
-    NextResponse.redirect(new URL(`${LOGIN_PATH}?error=${error}`, origin));
+  const toLogin = (error: LoginError) =>
+    NextResponse.redirect(loginErrorUrl(origin, error));
 
   const code = request.nextUrl.searchParams.get("code");
   const supabase = await createSupabaseServer();
@@ -22,7 +21,7 @@ export async function GET(request: NextRequest) {
 
   const { data, error } = await supabase.auth.exchangeCodeForSession(code);
   if (error) return toLogin("oauth");
-  if (!isAllowedUser(data.user, allowedEmails())) {
+  if (!isJobsSession(data.user, data.session?.access_token)) {
     await supabase.auth.signOut({ scope: "local" });
     return toLogin("forbidden");
   }

@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 
-import { SEE_OTHER } from "@/lib/auth/config";
+import { HOME_PATH, SEE_OTHER } from "@/lib/auth/config";
 import { isSameOriginRequest, publicOrigin } from "@/lib/auth/origin";
 import { createSupabaseServer } from "@/lib/auth/supabase-server";
 
@@ -12,5 +12,5 @@ export async function POST(request: NextRequest) {
   }
   const supabase = await createSupabaseServer();
   await supabase?.auth.signOut({ scope: "local" });
-  return NextResponse.redirect(new URL("/", origin), SEE_OTHER);
+  return NextResponse.redirect(new URL(HOME_PATH, origin), SEE_OTHER);
 }

@@ -1,8 +1,8 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 import { isAuthConfigured } from "@/auth";
-import { CALLBACK_PATH, LOGIN_PATH } from "@/lib/auth/config";
-import { publicOrigin } from "@/lib/auth/origin";
+import { CALLBACK_PATH } from "@/lib/auth/config";
+import { loginErrorUrl, publicOrigin } from "@/lib/auth/origin";
 import { createSupabaseServer } from "@/lib/auth/supabase-server";
 
 /**
@@ -23,9 +23,9 @@ export async function GET(request: NextRequest) {
       })
     : null;
   if (!started || started.error || !started.data.url) {
-    const login = new URL(LOGIN_PATH, origin);
-    login.searchParams.set("error", supabase ? "oauth" : "config");
-    return NextResponse.redirect(login);
+    return NextResponse.redirect(
+      loginErrorUrl(origin, supabase ? "oauth" : "config"),
+    );
   }
   return NextResponse.redirect(started.data.url);
 }

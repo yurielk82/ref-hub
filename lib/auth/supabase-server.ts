@@ -2,6 +2,7 @@ import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import type { NextRequest, NextResponse } from "next/server";
 
+import { AUTH_REQUEST_TIMEOUT_MS } from "./config.ts";
 import { hardenAuthCookie } from "./cookies.ts";
 
 /**
@@ -14,12 +15,20 @@ export function supabaseEnv(): { url: string; anonKey: string } | null {
   return url && anonKey ? { url, anonKey } : null;
 }
 
+/** 로그인 서버가 멈춰도 화면 요청이 같이 멈추지 않게 모든 호출에 시간 제한을 건다 */
+const timedFetch: typeof fetch = (input, init) =>
+  fetch(input, {
+    ...init,
+    signal: init?.signal ?? AbortSignal.timeout(AUTH_REQUEST_TIMEOUT_MS),
+  });
+
 /** 페이지·라우트 핸들러용 클라이언트(세션은 쿠키) */
 export async function createSupabaseServer() {
   const env = supabaseEnv();
   if (!env) return null;
   const store = await cookies();
   return createServerClient(env.url, env.anonKey, {
+    global: { fetch: timedFetch },
     cookies: {
       getAll: () => store.getAll(),
       setAll: (toSet) => {
@@ -47,6 +56,7 @@ export async function refreshSession(
   const env = supabaseEnv();
   if (!env) return response;
   const supabase = createServerClient(env.url, env.anonKey, {
+    global: { fetch: timedFetch },
     cookies: {
       getAll: () => request.cookies.getAll(),
       setAll: (toSet) => {
@@ -58,7 +68,12 @@ export async function refreshSession(
       },
     },
   });
-  // getUser가 만료된 접근 토큰을 갱신하면서 setAll을 부른다. 로그인 서버 오류는 페이지의 확인이 처리한다.
-  await supabase.auth.getUser();
+  // getUser가 만료된 접근 토큰을 갱신하면서 setAll을 부른다.
+  // 로그인 서버 오류·시간 초과는 여기서 삼키고, 접근 판정은 화면의 jobsViewer()가 닫힌 쪽으로 한다.
+  try {
+    await supabase.auth.getUser();
+  } catch {
+    // 위 주석대로 화면 쪽 판정에 맡긴다.
+  }
   return response;
 }

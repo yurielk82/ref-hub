@@ -39,3 +39,32 @@ export function isAllowedUser(
   }
   return allowlist.has(user.email.toLowerCase());
 }
+
+/** JWT 내용(가운데 부분)을 읽는다. 서명 확인은 getUser가 로그인 서버에서 이미 했다 */
+function readJwtPayload(accessToken: string): unknown {
+  const parts = accessToken.split(".");
+  if (parts.length !== 3) return null;
+  try {
+    return JSON.parse(Buffer.from(parts[1], "base64url").toString("utf8"));
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * 이번 세션이 Google(OAuth)로 받은 것인가. 같은 계정에 비밀번호 로그인이 함께 걸려 있어도
+ * 공고 모음은 Google로 받은 세션만 연다(GoTrue 접근 토큰의 amr).
+ */
+export function isOAuthSession(
+  accessToken: string | null | undefined,
+): boolean {
+  if (!accessToken) return false;
+  const payload = readJwtPayload(accessToken);
+  const amr = (payload as { amr?: unknown } | null)?.amr;
+  return (
+    Array.isArray(amr) &&
+    amr.some(
+      (entry) => (entry as { method?: unknown } | null)?.method === "oauth",
+    )
+  );
+}

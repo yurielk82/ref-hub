@@ -1,4 +1,4 @@
-import { PRODUCTION_ORIGIN } from "./config.ts";
+import { LOGIN_PATH, PRODUCTION_ORIGIN, type LoginError } from "./config.ts";
 
 /**
  * 돌아올 주소를 만들 공개 출처. 운영은 고정값만 쓴다(Host 헤더로 바뀌지 않게, RFC 9700 정확 일치).
@@ -17,4 +17,11 @@ export function isSameOriginRequest(
   const origin = headers.get("origin");
   if (origin) return origin === expectedOrigin;
   return headers.get("sec-fetch-site") === "same-origin";
+}
+
+/** 로그인 화면에 오류를 띄워 돌려보낼 주소 */
+export function loginErrorUrl(origin: string, error: LoginError): URL {
+  const login = new URL(LOGIN_PATH, origin);
+  login.searchParams.set("error", error);
+  return login;
 }

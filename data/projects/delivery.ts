@@ -187,10 +187,22 @@ export const DELIVERY_PROJECTS: Project[] = [
     category: "web",
     scope: "company",
     docsPath: "/pharmkpi",
-    screenshot: "/images/portfolio/sales-strategy-portal/orders.webp",
+    screenshot: "/images/portfolio/sales-strategy-portal/home.webp",
     screensNote:
       "공개용 화면이라 거래처·사람 이름·사업자번호는 가짜 값으로, 금액·수량은 실제와 다른 값으로 바꿔 찍었습니다.",
     screens: [
+      {
+        src: "/images/portfolio/sales-strategy-portal/home.webp",
+        title: "영업지원 홈",
+        caption:
+          "오늘의 마감(청구서·판매·수금·물류·공급내역보고) 상태부터 실매출·판매·반품·매출할인·수금 현황, 채권 잔고·회전일까지 영업지원 업무 순서대로 한 화면에 모았습니다. 각 지표는 전년 같은 달의 같은 영업일과 비교합니다.",
+      },
+      {
+        src: "/images/portfolio/sales-strategy-portal/home-workflow.webp",
+        title: "판매·수금 추이와 구성",
+        caption:
+          "일별 판매·반품·수금 추이와 실매출 누계를 확인하고, 거래처별 채권 잔고와 품목·생산 구분별 실매출 구성을 이어서 봅니다.",
+      },
       {
         src: "/images/portfolio/sales-strategy-portal/orders.webp",
         title: "주문 내역",
@@ -202,12 +214,6 @@ export const DELIVERY_PROJECTS: Project[] = [
         title: "채권 조회",
         caption:
           "기준월의 거래처별 순잔고·에이징·90일 이상 채권과 회전일을 사업자번호·거래처코드 기준으로 조회합니다.",
-      },
-      {
-        src: "/images/portfolio/sales-strategy-portal/closings.webp",
-        title: "마감 현황",
-        caption:
-          "청구서·판매·수금·물류의 일자별 마감 여부와 공급내역보고 상태를 확인합니다.",
       },
       {
         src: "/images/portfolio/sales-strategy-portal/inventory-lot.webp",

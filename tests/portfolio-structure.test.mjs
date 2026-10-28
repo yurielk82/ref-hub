@@ -468,3 +468,38 @@ test("사이트 이름과 라벨은 소유자 이름과 한국어로 보인다",
     axContent.match(/AX_HERO = \{[\s\S]*?eyebrow: '([^']+)'/)?.[1] ?? "";
   assert.match(heroEyebrow, /[가-힣]/, "hero label should be Korean");
 });
+
+test("사례마다 주요 화면 3~6장을 이미지와 제목·설명으로 싣는다", () => {
+  const projectData = readProjectData();
+  const blocks = projectData.split(/\n\s{2}\{\n/).slice(1);
+  const q = `["']`;
+
+  assert.ok(blocks.length > 0, "project blocks should be found");
+  for (const block of blocks) {
+    const slug = block.match(new RegExp(`slug:\\s*${q}([^"']+)${q}`))?.[1];
+    const screens = [
+      ...block.matchAll(
+        new RegExp(
+          `src:\\s*${q}([^"']+)${q},\\s*title:\\s*${q}([^"']*)${q},\\s*caption:\\s*\\n?\\s*${q}([^"']*)${q}`,
+          "g",
+        ),
+      ),
+    ].map(([, src, title, caption]) => ({ src, title, caption }));
+
+    assert.ok(
+      screens.length >= 3 && screens.length <= 6,
+      `${slug}: 주요 화면은 3~6장이어야 한다 (지금 ${screens.length}장)`,
+    );
+    for (const { src, title, caption } of screens) {
+      assert.ok(
+        existsSync(path.join(ROOT, "public", src)),
+        `${slug}: 이미지 파일이 없다 — ${src}`,
+      );
+      assert.ok(title.trim(), `${slug}: ${src} 화면 제목이 비었다`);
+      assert.ok(
+        caption.trim().length >= 20,
+        `${slug}: ${src} 화면 설명이 너무 짧다`,
+      );
+    }
+  }
+});

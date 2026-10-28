@@ -105,6 +105,40 @@ export const DELIVERY_PROJECTS: Project[] = [
     category: "web",
     scope: "company",
     screenshot: "/images/portfolio/pharmkpi-exec/hero.png",
+    screensNote:
+      "공개용 화면이라 거래처·금액은 시험용 합성 자료로 채워 찍었습니다.",
+    screens: [
+      {
+        src: "/images/portfolio/pharmkpi-exec/forecast.webp",
+        title: "연간 매출 전망",
+        caption:
+          "연 누적 실적에 최근 3개월 평균을 이어 붙여 연말 예상치를 내고, 작년 추세·증감률 방식의 참고값과 목표까지 남은 금액을 함께 보여 줍니다. 전망이 바뀐 이유도 항목별로 나눠 적습니다.",
+      },
+      {
+        src: "/images/portfolio/pharmkpi-exec/daily.webp",
+        title: "데일리 리포트",
+        caption:
+          "아침마다 여는 첫 화면입니다. 판매 실적과 목표 달성률, 수금 실적, 월별 판매 추이와 채널 구성을 한 화면에서 보고 날짜를 넘겨 지난 날도 확인합니다.",
+      },
+      {
+        src: "/images/portfolio/pharmkpi-exec/item-detail.webp",
+        title: "품목 판매 분석",
+        caption:
+          "품목을 누르면 12개월 판매 추이와 전년 동월 비교가 열리고, 같은 기간 거래처·담당자별 실적으로 바로 내려가 볼 수 있습니다. 기간 단위와 담당 기준도 바꿀 수 있습니다.",
+      },
+      {
+        src: "/images/portfolio/pharmkpi-exec/monthly.webp",
+        title: "월간 리포트",
+        caption:
+          "끝난 달의 판매·반품·매출할인·수금과 실매출을 전년 동월과 비교하고, 월말 채권 잔고를 함께 봅니다. 거래처·브랜드 범위를 골라 같은 표를 다시 계산합니다.",
+      },
+      {
+        src: "/images/portfolio/pharmkpi-exec/visits.webp",
+        title: "거래처 방문 준비",
+        caption:
+          "방문할 거래처를 고르면 연도별 순매출, 품목별 매출 순위와 할인율을 한 장에 모아 보여 줍니다. 방문 전에 거래 현황을 확인하는 용도입니다.",
+      },
+    ],
     emoji: "📊",
     gradient: "from-blue-600/20 to-cyan-600/20",
     features: [

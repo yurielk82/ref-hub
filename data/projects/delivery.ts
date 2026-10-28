@@ -244,6 +244,27 @@ export const DELIVERY_PROJECTS: Project[] = [
     liveUrl: "https://avl.dvsharp.com",
     docsPath: "/ev-motor-reliability",
     screenshot: "/images/portfolio/ev-motor-reliability/hero.png",
+    screensNote: "공개용 화면이라 합성 운전 프로파일로 찍었습니다.",
+    screens: [
+      {
+        src: "/images/portfolio/ev-motor-reliability/avl-converter-review.webp",
+        title: "AVL 변환 — 자동 매칭 검토",
+        caption:
+          "운전 프로파일 CSV 열을 AVL PUMA 시험기 XML의 속도·토크·추가 명령 변수와 동의어 사전으로 자동 매칭하고 점수로 보여 줍니다. 목표 step 수와 기록 설정(저장 간격·최대 기록 시간·샘플링 주파수)을 정한 뒤 변환합니다.",
+      },
+      {
+        src: "/images/portfolio/ev-motor-reliability/avl-converter-upload.webp",
+        title: "AVL 변환 — CSV 업로드",
+        caption:
+          "운전 프로파일 CSV를 한 개 또는 여러 개 고르면 서버에 내장된 AVL XML 템플릿을 기준으로 변환을 준비합니다. 필요하면 다른 기준 XML을 올려 쓸 수 있습니다.",
+      },
+      {
+        src: "/images/portfolio/ev-motor-reliability/avl-converter-result.webp",
+        title: "AVL 변환 — 일괄 결과",
+        caption:
+          "여러 CSV를 한 번에 XML 시험 프로파일로 바꾼 결과를 파일별로 보여 주고, 개별 XML이나 ZIP으로 내려받습니다. 원본 XML 형식은 유지하고 명령값만 바꿉니다.",
+      },
+    ],
     emoji: "⚡",
     gradient: "from-yellow-600/20 to-lime-600/20",
     features: [

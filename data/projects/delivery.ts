@@ -12,7 +12,7 @@ export const DELIVERY_PROJECTS: Project[] = [
     scope: "company",
     liveUrl: "https://kpi.dvsharp.com",
     docsPath: "/pharmkpi",
-    screenshot: "/images/portfolio/pharmkpi/hero.png",
+    screenshot: "/images/portfolio/pharmkpi/overview.webp",
     screensNote:
       "공개용 화면이라 거래처·사람 이름·사업자번호는 가짜 값으로, 금액·수량은 실제와 다른 값으로 바꿔 찍었습니다.",
     screens: [
@@ -66,6 +66,41 @@ export const DELIVERY_PROJECTS: Project[] = [
       "일보의 방문 기록을 ERP 매출·목표와 연결하고, 방문 현황·목표 달성률·핵심 거래처 관리 현황을 분석하도록 구성했습니다. 월간 영업회의 자료로 활용하며 개선 중.",
     category: "web",
     scope: "company",
+    screenshot: "/images/portfolio/sales-hq-sfe/effort-value-quadrant.webp",
+    screensNote:
+      "공개용 화면이라 거래처·담당자 이름은 가짜 값으로, 금액은 실제와 다른 값으로 바꿔 찍었습니다.",
+    screens: [
+      {
+        src: "/images/portfolio/sales-hq-sfe/effort-value-quadrant.webp",
+        title: "노력-가치 사분면",
+        caption:
+          "도매상마다 한 달 평균 방문 횟수와 실매출을 한 점으로 올리고 중위수 선으로 네 칸을 나눕니다. 매출은 큰데 방문이 적은 곳과 자주 가는데 매출이 작은 곳을 찾아 방문 시간 배분을 바꿀 후보로 봅니다.",
+      },
+      {
+        src: "/images/portfolio/sales-hq-sfe/summary.webp",
+        title: "SFE 요약",
+        caption:
+          "실매출 세 기간과 활동·도달·성과 계층별 핵심 지표를 한 화면에 모읍니다. 카드마다 해당 분석 메뉴로 이어져 '얼마나 다녔나 → 맞는 곳을 다녔나 → 다닌 만큼 나왔나' 순서로 따라가며 봅니다.",
+      },
+      {
+        src: "/images/portfolio/sales-hq-sfe/grade-targeting.webp",
+        title: "거래처 등급·타겟팅",
+        caption:
+          "도매상을 12개월 매출 순으로 A·B·C 등급과 매출 순위 구간으로 나누고, 등급별 매출 비중과 최근 3개월 방문 비중을 나란히 놓습니다. 방문이 등급에 맞게 배분되는지 확인합니다.",
+      },
+      {
+        src: "/images/portfolio/sales-hq-sfe/visit-productivity.webp",
+        title: "방문 성과",
+        caption:
+          "방문이 주문으로 이어진 비율과 방문 없을 때의 주문률, 주문당 품목 수를 월별로 비교합니다. 방문 뒤 첫 주문까지 걸린 영업일 분포로 방문의 몫을 따로 읽습니다.",
+      },
+      {
+        src: "/images/portfolio/sales-hq-sfe/metric-guide.webp",
+        title: "SFE 분석 안내",
+        caption:
+          "제약 SFE 3계층(활동 → 중간 → 성과)에 도매 채널 지표를 더한 분석 메뉴의 읽는 법과 공통 기준을 정리한 안내 화면입니다. 메뉴별 질문·그림·공식을 처음 보는 사람도 따라 읽을 수 있게 둡니다.",
+      },
+    ],
     emoji: "📊",
     gradient: "from-blue-600/20 to-cyan-600/20",
     features: [
@@ -91,6 +126,47 @@ export const DELIVERY_PROJECTS: Project[] = [
       "매출 예측·시나리오 비교·계획 저장과 수요·공급·재고 검토 화면을 구축했습니다. 유통재고 관리 업무의 효율화도 함께 진행하고 있습니다. 기능 배포 후 업무 적용·검증 진행 중.",
     category: "web",
     scope: "company",
+    screenshot: "/images/portfolio/sales-hq-snop/monthly-overview.webp",
+    screensNote:
+      "공개용 화면이라 금액·수량은 실제와 다른 값으로 바꿔 찍었습니다.",
+    screens: [
+      {
+        src: "/images/portfolio/sales-hq-snop/monthly-overview.webp",
+        title: "이번 달 S&OP",
+        caption:
+          "월간 계획 주기 다섯 단계(자료 마감 → 수요 → 공급·재고 → 통합 조정 → 경영 승인)의 진행과 기한을 보여 줍니다. 이번 단계에서 할 일과 금액이 가장 큰 예외 품목을 먼저 띄웁니다.",
+      },
+      {
+        src: "/images/portfolio/sales-hq-snop/demand-review.webp",
+        title: "수요 검토",
+        caption:
+          "월별 도매 매출 실적과 기준 예측을 한 차트에 이어 보고, 지난달 예측 오차(WAPE)와 편향, 오차가 큰 품목을 확인합니다. 실적과 기준 예측은 보존하고 영업 조정만 계획 버전에 더합니다.",
+      },
+      {
+        src: "/images/portfolio/sales-hq-snop/supply-inventory.webp",
+        title: "공급·재고 검토",
+        caption:
+          "3개월 안에 부족이 예상되는 품목을 부족 금액 순으로 보여 주고, 품목별 예상 재고를 안전재고 선과 함께 월말 기준으로 그립니다. 입고 예정은 담당자 입력으로 받습니다.",
+      },
+      {
+        src: "/images/portfolio/sales-hq-snop/forecast-lab.webp",
+        title: "예측 모델 실험실",
+        caption:
+          "예측 기간·모델·학습 구간을 골라 기준 예측을 계산하고, 성장률·수량·가격 가정으로 영업 조정을 해 봅니다. 월 매출 수준이 크게 바뀐 시점을 알려 주며, 새 계획의 기본 모델은 과거 평가에서 고른 지수평활 자동 모형(AutoETS)입니다.",
+      },
+      {
+        src: "/images/portfolio/sales-hq-snop/finance-reconcile.webp",
+        title: "통합 조정",
+        caption:
+          "월별 매출과 수금(부가세 포함)을 함께 보고 저장된 계획 버전을 최근 실적과 비교합니다. 경영 승인에 올릴 안건을 정리하는 단계입니다.",
+      },
+      {
+        src: "/images/portfolio/sales-hq-snop/data-close.webp",
+        title: "자료 마감 확인",
+        caption:
+          "지난달 판매 마감, 수금 반영, 현재 로트 재고가 모두 들어왔는지 확인하는 첫 단계입니다. 세 자료가 통과해야 수요 검토로 넘어갑니다.",
+      },
+    ],
     emoji: "📊",
     gradient: "from-blue-600/20 to-cyan-600/20",
     features: [
@@ -111,7 +187,7 @@ export const DELIVERY_PROJECTS: Project[] = [
     category: "web",
     scope: "company",
     docsPath: "/pharmkpi",
-    screenshot: "/images/portfolio/sales-strategy-portal/hero.png",
+    screenshot: "/images/portfolio/sales-strategy-portal/orders.webp",
     screensNote:
       "공개용 화면이라 거래처·사람 이름·사업자번호는 가짜 값으로, 금액·수량은 실제와 다른 값으로 바꿔 찍었습니다.",
     screens: [
@@ -171,7 +247,7 @@ export const DELIVERY_PROJECTS: Project[] = [
       "매출·수금·채권 조회 화면을 구성하고, 확인 가능한 자료를 기준으로 보고 항목을 정리했습니다. 2026년 7월 경영진용 BI로 이관.",
     category: "web",
     scope: "company",
-    screenshot: "/images/portfolio/pharmkpi-exec/hero.png",
+    screenshot: "/images/portfolio/pharmkpi-exec/forecast.webp",
     screensNote:
       "공개용 화면이라 거래처·금액은 시험용 합성 자료로 채워 찍었습니다.",
     screens: [
@@ -258,7 +334,7 @@ export const DELIVERY_PROJECTS: Project[] = [
     category: "web",
     scope: "company",
     docsPath: "/csoweb",
-    screenshot: "/images/portfolio/csoweb/hero.png",
+    screenshot: "/images/portfolio/csoweb/edi-review-detail.webp",
     screensNote:
       "운영 종료 뒤 기록용으로 찍은 화면입니다. 업체·병의원 이름과 금액은 가짜 값이고, 처방 문서 이미지는 자리표시로 바꿨습니다.",
     screens: [
@@ -344,7 +420,8 @@ export const DELIVERY_PROJECTS: Project[] = [
     scope: "other",
     liveUrl: "https://avl.dvsharp.com",
     docsPath: "/ev-motor-reliability",
-    screenshot: "/images/portfolio/ev-motor-reliability/hero.png",
+    screenshot:
+      "/images/portfolio/ev-motor-reliability/avl-converter-review.webp",
     screensNote: "공개용 화면이라 합성 운전 프로파일로 찍었습니다.",
     screens: [
       {

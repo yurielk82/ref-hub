@@ -13,7 +13,7 @@ export const TOOLING_PROJECTS: Project[] = [
     category: "web",
     scope: "other",
     liveUrl: "https://srt.dvsharp.com",
-    screenshot: "/images/portfolio/srt/internal-dashboard.png",
+    screenshot: "/images/portfolio/srt/train-results.webp",
     screensNote:
       "공개용 화면이라 열차 조회 결과·예약·승차권·결제 정보는 가짜 응답으로 채워 찍었습니다.",
     screens: [
@@ -81,7 +81,7 @@ export const TOOLING_PROJECTS: Project[] = [
     category: "web",
     scope: "other",
     liveUrl: "https://pulse.dvsharp.com",
-    screenshot: "/images/portfolio/team-pulse/hero.png",
+    screenshot: "/images/portfolio/team-pulse/archetype-poster.webp",
     screensNote: "실제 응답 대신 가상 팀 자료로 찍은 화면입니다.",
     screens: [
       {
@@ -147,7 +147,7 @@ export const TOOLING_PROJECTS: Project[] = [
     category: "web",
     scope: "other",
     liveUrl: "https://coll.dvsharp.com",
-    screenshot: "/images/portfolio/naver-place-collector/hero.png",
+    screenshot: "/images/portfolio/naver-place-collector/job-results.webp",
     screensNote: "수집 결과의 업체명·주소·전화는 가짜 값으로 바꿔 찍었습니다.",
     screens: [
       {
@@ -214,7 +214,7 @@ export const TOOLING_PROJECTS: Project[] = [
     scope: "other",
     // 공개 인스턴스(apin.dvsharp.com)는 2026-06 은퇴 — 코드만 공개 유지
     githubUrl: "https://github.com/yurielk82/apinfy-lab",
-    screenshot: "/images/portfolio/apinfy-lab/hero.png",
+    screenshot: "/images/portfolio/apinfy-lab/dashboard.webp",
     screensNote: "실행·데이터셋은 외부 수집 없이 만든 합성 자료입니다.",
     screens: [
       {
@@ -289,6 +289,7 @@ export const TOOLING_PROJECTS: Project[] = [
     ],
     category: "tool",
     scope: "other",
+    screenshot: "/images/portfolio/claude-dotfiles/hook-guard.webp",
     screensNote:
       "화면이 없는 설정 저장소라 실제 명령 실행 결과를 터미널 화면으로 옮겼습니다.",
     screens: [
@@ -344,6 +345,7 @@ export const TOOLING_PROJECTS: Project[] = [
     tech: ["Markdown", "Claude Code", "Codex", "Skill", "Evidence-Gate"],
     category: "tool",
     scope: "other",
+    screenshot: "/images/portfolio/har-eval/overview.webp",
     screens: [
       {
         src: "/images/portfolio/har-eval/overview.webp",

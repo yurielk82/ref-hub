@@ -13,6 +13,39 @@ export const DELIVERY_PROJECTS: Project[] = [
     liveUrl: "https://kpi.dvsharp.com",
     docsPath: "/pharmkpi",
     screenshot: "/images/portfolio/pharmkpi/hero.png",
+    screensNote:
+      "공개용 화면이라 거래처·사람 이름·사업자번호는 가짜 값으로, 금액·수량은 실제와 다른 값으로 바꿔 찍었습니다.",
+    screens: [
+      {
+        src: "/images/portfolio/pharmkpi/overview.webp",
+        title: "종합 현황",
+        caption:
+          "기준월의 매출·수금·채권 잔고·할인율·재고·반품 대표 지표와 전사 매출 월별 추세를 한 화면에서 확인합니다.",
+      },
+      {
+        src: "/images/portfolio/pharmkpi/sales-causes.webp",
+        title: "매출 증감 원인",
+        caption:
+          "전년 같은 달 대비 매출 증감을 품목·거래처·팀 등 기준별 기여도로 나눠 폭포 차트로 보여 줍니다. 당월과 당년 누계를 바꿔 볼 수 있습니다.",
+      },
+      {
+        src: "/images/portfolio/pharmkpi/sales-comparison.webp",
+        title: "매출 목표·기간 비교",
+        caption: "매출 실적을 입력 목표, 전년 같은 기간과 나란히 비교합니다.",
+      },
+      {
+        src: "/images/portfolio/pharmkpi/verification.webp",
+        title: "데이터 대조",
+        caption:
+          "지표별·월별로 원본 자료와 집계 값의 대조 상태를 표시해 일치 여부와 확인이 필요한 달을 구분합니다.",
+      },
+      {
+        src: "/images/portfolio/pharmkpi/data-architecture.webp",
+        title: "데이터 구조도",
+        caption:
+          "원천 수집부터 검증·반영, 저장 계층, 조회 화면까지 운영 중인 데이터 흐름을 한 장으로 보여 줍니다.",
+      },
+    ],
     emoji: "📊",
     gradient: "from-blue-600/20 to-cyan-600/20",
     features: [
@@ -79,6 +112,40 @@ export const DELIVERY_PROJECTS: Project[] = [
     scope: "company",
     docsPath: "/pharmkpi",
     screenshot: "/images/portfolio/sales-strategy-portal/hero.png",
+    screensNote:
+      "공개용 화면이라 거래처·사람 이름·사업자번호는 가짜 값으로, 금액·수량은 실제와 다른 값으로 바꿔 찍었습니다.",
+    screens: [
+      {
+        src: "/images/portfolio/sales-strategy-portal/orders.webp",
+        title: "주문 내역",
+        caption:
+          "ERP 주문 내역을 기간·구분별로 조회하고, 열 머리의 엑셀식 필터로 값을 골라 거릅니다. 월·분기·연 누계를 함께 확인하고 내려받을 수 있습니다.",
+      },
+      {
+        src: "/images/portfolio/sales-strategy-portal/credit-query.webp",
+        title: "채권 조회",
+        caption:
+          "기준월의 거래처별 순잔고·에이징·90일 이상 채권과 회전일을 사업자번호·거래처코드 기준으로 조회합니다.",
+      },
+      {
+        src: "/images/portfolio/sales-strategy-portal/closings.webp",
+        title: "마감 현황",
+        caption:
+          "청구서·판매·수금·물류의 일자별 마감 여부와 공급내역보고 상태를 확인합니다.",
+      },
+      {
+        src: "/images/portfolio/sales-strategy-portal/inventory-lot.webp",
+        title: "LOT별 재고",
+        caption:
+          "품목별 LOT 재고 수량과 제조일·사용기한·잔여 사용기한 구간을 조회합니다.",
+      },
+      {
+        src: "/images/portfolio/sales-strategy-portal/accounting.webp",
+        title: "회계 제출용 실매출",
+        caption:
+          "판매에서 반품·매출할인을 뺀 실매출과 수금 방법별 누적, 채권 잔액을 회계 제출용으로 정리합니다.",
+      },
+    ],
     emoji: "📊",
     gradient: "from-blue-600/20 to-cyan-600/20",
     features: [

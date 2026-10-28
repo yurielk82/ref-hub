@@ -314,7 +314,7 @@ export const DELIVERY_PROJECTS: Project[] = [
     docsPath: "/kpis-dsr-api",
     screenshot: "/images/portfolio/kpis-dsr-api/dashboard.webp",
     screensNote:
-      "공개용 화면이라 거래처·사업자번호·접수번호는 가짜 값으로, 금액·건수는 실제와 다른 값으로 바꿔 찍었습니다.",
+      "공개용 화면이라 거래처·사업자번호·접수번호는 가짜 값으로, 금액·건수는 실제와 다른 값으로 바꿔 찍었습니다. 반송·누락 줄과 운영 기록은 오류 대응 흐름을 보이려고 넣은 예시 자료입니다.",
     screens: [
       {
         src: "/images/portfolio/kpis-dsr-api/dashboard.webp",
@@ -329,22 +329,28 @@ export const DELIVERY_PROJECTS: Project[] = [
           "선택한 날짜의 공급구분별 갑지·을지·API 접수·수기 완료·반송·미보고 건수를 정리하고, 공급구분별 전체 보고 → 틀린 줄만 빼고 재보고 → 남은 줄 개별 보고 순서로 보고를 진행합니다.",
       },
       {
-        src: "/images/portfolio/kpis-dsr-api/report-history.webp",
-        title: "보고 이력",
+        src: "/images/portfolio/kpis-dsr-api/error-grid.webp",
+        title: "반송·미보고 줄 구분",
         caption:
-          "보고일별 실행 결과(완료·일부 반송·실패)와 갑지·을지·접수·반송 건수, 실행 시각을 시간순으로 확인합니다.",
+          "접수된 줄은 취소선, 반송된 줄은 노란 배경, 아직 보내지 않은 줄은 그대로 두어 다시 보낼 줄을 그리드에서 바로 구분합니다. 검증 경고가 있는 줄은 왼쪽 테두리로 표시합니다.",
       },
       {
-        src: "/images/portfolio/kpis-dsr-api/supply-chart.webp",
-        title: "공급 현황",
+        src: "/images/portfolio/kpis-dsr-api/return-handling.webp",
+        title: "반송 처리",
         caption:
-          "출고·반품·순매출 합계와 날짜별 출고 금액 막대, 기간별 표를 함께 보여 줍니다. 공급구분(출고·반품·폐기·정정·취소)을 골라 그래프와 표로 전환할 수 있습니다.",
+          "그 달 반송 줄을 반송사유코드에 따라 확인 필요·단가·데이터 수정·결과 미확인으로 나누고 해결 방법을 안내합니다. [그리드에서 고치기]로 그날 반송 줄만 열어 고친 뒤 반송 줄만 다시 보고하고, 반송신청은 신청·승인·완료·반려 상태를 따라갑니다.",
       },
       {
-        src: "/images/portfolio/kpis-dsr-api/yearly-trend.webp",
-        title: "연도별 추이",
+        src: "/images/portfolio/kpis-dsr-api/missing-lines.webp",
+        title: "KPIS에 없는 줄 대조",
         caption:
-          "연도 범위를 골라 전체 건수·순매출·반품률·출고 건수와 월별 순매출 추이(전월·전년 대비 변화율 포함)를 봅니다.",
+          "공급구분별 반송·미보고 건수를 보고, 거래처별 KPIS 접수(줄 수·수량·금액)를 우리 보고분과 견줘 빠진 줄만 골라냅니다. 고른 줄만 보고 계획으로 보내며, 줄을 고를 수 없는 거래처는 까닭을 함께 보여 줍니다.",
+      },
+      {
+        src: "/images/portfolio/kpis-dsr-api/ops-log.webp",
+        title: "운영 로그",
+        caption:
+          "자동 보고·물류 마감·판매 마감 뒤 검사가 한 일과 보류·오류를 메일 대신 기록으로 남깁니다. 위에서 자동 보고 스위치와 바코드 원천 연결 상태를 보고, 확인·오류만 걸러 볼 수 있습니다.",
       },
     ],
     emoji: "📊",

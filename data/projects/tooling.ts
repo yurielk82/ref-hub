@@ -148,6 +148,45 @@ export const TOOLING_PROJECTS: Project[] = [
     scope: "other",
     liveUrl: "https://coll.dvsharp.com",
     screenshot: "/images/portfolio/naver-place-collector/hero.png",
+    screensNote: "수집 결과의 업체명·주소·전화는 가짜 값으로 바꿔 찍었습니다.",
+    screens: [
+      {
+        src: "/images/portfolio/naver-place-collector/job-results.webp",
+        title: "수집 결과와 등급",
+        caption:
+          "한 번의 수집에서 모은 업체를 점수에 따라 A·B·C·F 등급으로 나누고, 이전 수집과 비교한 신규·제외·점수 변동을 함께 보여 줍니다. 결과는 플랫폼·등급·필터로 좁혀 보고 내려받을 수 있습니다.",
+      },
+      {
+        src: "/images/portfolio/naver-place-collector/job-pipeline.webp",
+        title: "수집 파이프라인 진행",
+        caption:
+          "네이버 검색·상세, 활동성 보강, 카페 노출, 당근 검색·상세처럼 단계별로 처리 건수와 소요 시간, 완료 여부를 확인합니다. 완료된 수집은 고객 화면에 공개하거나 공개를 취소할 수 있습니다.",
+      },
+      {
+        src: "/images/portfolio/naver-place-collector/jobs-list.webp",
+        title: "관리자 수집 현황",
+        caption:
+          "실행 중이거나 끝난 수집을 프로필·지역·플랫폼·진행 건수·소요 시간과 함께 한 목록에서 보고, 상태별로 걸러 결과를 내려받습니다.",
+      },
+      {
+        src: "/images/portfolio/naver-place-collector/profile-keywords.webp",
+        title: "업종 프로필 설정",
+        caption:
+          "업종마다 검색 키워드와 네이버·카페·당근·숨고별 포함 카테고리를 정해 두고, 수집할 때 이 기준으로 업체를 걸러 냅니다.",
+      },
+      {
+        src: "/images/portfolio/naver-place-collector/job-new.webp",
+        title: "새 수집 시작",
+        caption:
+          "업종 프로필을 고르고 시·도 또는 시·군·구 단위로 수집 지역을 선택해 새 수집을 준비하는 화면입니다.",
+      },
+      {
+        src: "/images/portfolio/naver-place-collector/db-interview.webp",
+        title: "공개 소개 페이지",
+        caption:
+          "로그인 없이 볼 수 있는 소개 페이지로, 영업 타깃 데이터를 만드는 방식을 설명하고 설문 참여로 이어집니다.",
+      },
+    ],
     emoji: "📍",
     gradient: "from-green-600/20 to-emerald-500/20",
     features: [

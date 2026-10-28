@@ -259,6 +259,40 @@ export const DELIVERY_PROJECTS: Project[] = [
     scope: "company",
     docsPath: "/csoweb",
     screenshot: "/images/portfolio/csoweb/hero.png",
+    screensNote:
+      "운영 종료 뒤 기록용으로 찍은 화면입니다. 업체·병의원 이름과 금액은 가짜 값이고, 처방 문서 이미지는 자리표시로 바꿨습니다.",
+    screens: [
+      {
+        src: "/images/portfolio/csoweb/edi-review-detail.webp",
+        title: "EDI 정산서 검토",
+        caption:
+          "CSO 업체·거래처별로 처방 문서 이미지와 OCR로 읽은 품목·수량을 나란히 놓고, 정산서 수량과 다른 품목만 '검토 필요'로 띄워 확인하거나 고칩니다. 일치하는 품목은 자동 PASS로 넘어갑니다.",
+      },
+      {
+        src: "/images/portfolio/csoweb/edi-review-workbench.webp",
+        title: "리뷰 큐 검토표",
+        caption:
+          "부서 → CSO 업체 → 거래처 트리에서 대상을 고르면 품목별 정산 수량과 OCR 수량, 단가, 합계금액을 한 표에서 대조합니다. 정산서에 없는 품목이나 수량이 다른 행은 비교 열에서 바로 구분됩니다.",
+      },
+      {
+        src: "/images/portfolio/csoweb/admin-stats.webp",
+        title: "관리자 통계 분석",
+        caption:
+          "정산월 기준으로 수수료·수량의 전월·전년 대비 성장률, 상위 CSO 업체의 제품 구성, 상위 제품의 월별 수량 추이를 차트로 봅니다.",
+      },
+      {
+        src: "/images/portfolio/csoweb/settlement-master.webp",
+        title: "정산서 마스터 조회",
+        caption:
+          "전체 CSO 업체의 월별 정산 내역을 거래처·제품 단위로 조회하고, 거래처별 소계와 CSO 업체별 총합계를 함께 보여 줍니다. 조회 결과는 엑셀로 내려받거나 복사할 수 있습니다.",
+      },
+      {
+        src: "/images/portfolio/csoweb/member-settlement.webp",
+        title: "회원사 정산서 조회",
+        caption:
+          "CSO 회원사는 자기 업체의 정산월별 제약수수료 합계와 거래처·제품별 상세 내역을 조회하고 엑셀로 내려받습니다. 공지 사항은 화면 위에 함께 표시됩니다.",
+      },
+    ],
     emoji: "📊",
     gradient: "from-blue-600/20 to-cyan-600/20",
     features: [

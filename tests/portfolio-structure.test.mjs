@@ -477,14 +477,16 @@ test("사례마다 주요 화면 3~6장을 이미지와 제목·설명으로 싣
   assert.ok(blocks.length > 0, "project blocks should be found");
   for (const block of blocks) {
     const slug = block.match(new RegExp(`slug:\\s*${q}([^"']+)${q}`))?.[1];
+    // 문자열 안에 반대 따옴표나 \" 가 있어도 끝 따옴표까지 읽는다
+    const str = (n) => `(["'])((?:\\\\.|(?!\\${n}).)*)\\${n}`;
     const screens = [
       ...block.matchAll(
         new RegExp(
-          `src:\\s*${q}([^"']+)${q},\\s*title:\\s*${q}([^"']*)${q},\\s*caption:\\s*\\n?\\s*${q}([^"']*)${q}`,
+          `src:\\s*${str(1)},\\s*title:\\s*${str(3)},\\s*caption:\\s*${str(5)}`,
           "g",
         ),
       ),
-    ].map(([, src, title, caption]) => ({ src, title, caption }));
+    ].map((m) => ({ src: m[2], title: m[4], caption: m[6] }));
 
     assert.ok(
       screens.length >= 3 && screens.length <= 6,

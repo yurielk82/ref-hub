@@ -312,7 +312,41 @@ export const DELIVERY_PROJECTS: Project[] = [
     scope: "company",
     liveUrl: "https://kpis.dvsharp.com",
     docsPath: "/kpis-dsr-api",
-    screenshot: "/images/portfolio/kpis-dsr-api/hero.png",
+    screenshot: "/images/portfolio/kpis-dsr-api/dashboard.webp",
+    screensNote:
+      "공개용 화면이라 거래처·사업자번호·접수번호는 가짜 값으로, 금액·건수는 실제와 다른 값으로 바꿔 찍었습니다.",
+    screens: [
+      {
+        src: "/images/portfolio/kpis-dsr-api/dashboard.webp",
+        title: "공급내역 현황판",
+        caption:
+          "분기 적기보고율과 목표 대비 차이, 이번 주 날짜별 보고 상태를 한 화면에서 확인합니다. 날짜 카드에서 수기 완료 표시·API 접수 확인 여부를 구분해 남은 할 일을 봅니다.",
+      },
+      {
+        src: "/images/portfolio/kpis-dsr-api/kpis-report.webp",
+        title: "API 공급내역보고",
+        caption:
+          "선택한 날짜의 공급구분별 갑지·을지·API 접수·수기 완료·반송·미보고 건수를 정리하고, 공급구분별 전체 보고 → 틀린 줄만 빼고 재보고 → 남은 줄 개별 보고 순서로 보고를 진행합니다.",
+      },
+      {
+        src: "/images/portfolio/kpis-dsr-api/report-history.webp",
+        title: "보고 이력",
+        caption:
+          "보고일별 실행 결과(완료·일부 반송·실패)와 갑지·을지·접수·반송 건수, 실행 시각을 시간순으로 확인합니다.",
+      },
+      {
+        src: "/images/portfolio/kpis-dsr-api/supply-chart.webp",
+        title: "공급 현황",
+        caption:
+          "출고·반품·순매출 합계와 날짜별 출고 금액 막대, 기간별 표를 함께 보여 줍니다. 공급구분(출고·반품·폐기·정정·취소)을 골라 그래프와 표로 전환할 수 있습니다.",
+      },
+      {
+        src: "/images/portfolio/kpis-dsr-api/yearly-trend.webp",
+        title: "연도별 추이",
+        caption:
+          "연도 범위를 골라 전체 건수·순매출·반품률·출고 건수와 월별 순매출 추이(전월·전년 대비 변화율 포함)를 봅니다.",
+      },
+    ],
     emoji: "📊",
     gradient: "from-blue-600/20 to-cyan-600/20",
     features: [
@@ -396,7 +430,46 @@ export const DELIVERY_PROJECTS: Project[] = [
     category: "web",
     scope: "company",
     liveUrl: "https://erp-spec.dvsharp.com",
-    screenshot: "/images/portfolio/erp-spec/barcode-graph.png",
+    screenshot: "/images/portfolio/erp-spec/overview.webp",
+    screensNote: "테이블별 행 수는 실제와 다른 값으로 바꿔 찍었습니다.",
+    screens: [
+      {
+        src: "/images/portfolio/erp-spec/overview.webp",
+        title: "UNION_ERP 개요",
+        caption:
+          "기존 Oracle ERP(UNION_ERP, KUP 스키마) 테이블 명세의 전체 통계와 마이그레이션 우선순위를 정리한 첫 화면입니다. 왼쪽 메뉴에서 컬럼 검색·매핑 체크리스트·카테고리별 테이블 명세로 이동합니다.",
+      },
+      {
+        src: "/images/portfolio/erp-spec/volume-chart.webp",
+        title: "데이터 볼륨",
+        caption:
+          "카테고리별 총 행 수를 막대로 비교해 대용량 카테고리부터 이관 순서를 정하는 데 씁니다. 카테고리 이름을 누르면 해당 테이블 명세로 이동합니다.",
+      },
+      {
+        src: "/images/portfolio/erp-spec/category-erd.webp",
+        title: "카테고리 관계도",
+        caption:
+          "카테고리 문서 안에 PK 컬럼명 매칭으로 추정한 테이블 관계를 ERD로 띄워, 확대·이동하며 어떤 테이블이 서로 이어지는지 확인합니다.",
+      },
+      {
+        src: "/images/portfolio/erp-spec/table-spec.webp",
+        title: "테이블 상세 명세",
+        caption:
+          "테이블마다 PK, 컬럼명·타입·NULL 허용·설명과 인덱스를 표로 정리하고, MariaDB DDL을 함께 제공합니다.",
+      },
+      {
+        src: "/images/portfolio/erp-spec/column-search.webp",
+        title: "컬럼 검색",
+        caption:
+          "컬럼명을 입력하면 그 컬럼을 쓰는 모든 테이블을 타입·NULL 허용·설명과 함께 찾아 줍니다.",
+      },
+      {
+        src: "/images/portfolio/erp-spec/mapping-checklist.webp",
+        title: "매핑 체크리스트",
+        caption:
+          "테이블별 마이그레이션 매핑 상태(미완료·완료·제외)와 메모를 추적하고 전체 진행률을 봅니다. 상태와 메모는 서버에 저장되어 팀원과 공유됩니다.",
+      },
+    ],
     githubUrl: "https://github.com/yurielk82/erp-spec",
     emoji: "📊",
     gradient: "from-blue-600/20 to-cyan-600/20",

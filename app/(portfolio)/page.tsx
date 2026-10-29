@@ -62,7 +62,7 @@ const PROJECT_GROUPS = [
     // 묶음을 나누기 전 키 — 방문자가 저장해 둔 순서를 이어 쓴다
     storageKey: "ref-hub-project-order",
     title: `업무 개선 레퍼런스 ${REFERENCE_PROJECTS.length}건`,
-    lead: "엑셀·스프레드시트 업무를 개선한 경험과 현재 진행 중인 SFE·S&OP·유통재고 관리 사례입니다. 각 사례에서 수행 범위와 진행 상태를 확인할 수 있습니다.",
+    lead: "영업지원팀·회계팀·영업본부의 업무 화면과 엑셀 보고 자동화, 시장 분석, 현재 진행 중인 SFE·S&OP 사례입니다. 각 사례에서 수행 범위와 진행 상태를 확인할 수 있습니다.",
     projects: REFERENCE_PROJECTS,
   },
 ] as const;

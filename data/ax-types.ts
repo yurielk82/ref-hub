@@ -90,6 +90,11 @@ export interface AxMethodStep {
   description: string;
 }
 
+/** 영업관리 트랙 일하는 방식 — 단계마다 실제로 한 일(data/work-history.ts 근거)을 붙인다 */
+export interface WorkMethodStep extends AxMethodStep {
+  example: string;
+}
+
 export interface AxStackGroup {
   label: string;
   items: string[];

@@ -28,6 +28,7 @@ export const TRACKS: Readonly<Record<Track, TrackConfig>> = {
     menuLabel: "포트폴리오 메뉴",
     home: "/",
     links: [
+      { href: "/#method", label: "일하는 방식" },
       { href: "/#work", label: "주요 업무" },
       { href: "/#projects", label: "사례" },
       { href: "/#career", label: "경력" },

@@ -4,6 +4,7 @@ import type {
   AxPillar,
   AxStackGroup,
   HeroContent,
+  WorkMethodStep,
 } from "./ax-types";
 
 /**
@@ -22,7 +23,7 @@ export const AX_HERO = {
   subhead:
     "제약회사 영업관리팀에서 근무하며 영업본부 분석·기획 업무를 겸하고 있습니다. 스프레드시트와 엑셀로 취합·관리하던 영업 자료의 조회·분석·보고 방식을 개선해 왔습니다.",
   summary:
-    "실무에서 반복되는 작업과 확인이 필요한 항목을 파악하고, 필요한 시스템을 직접 구축해 업무에 활용했습니다. 현재는 영업 활동·실적 분석(SFE), 판매·운영 계획(S&OP), 유통재고 관리로 개선 범위를 넓히고 있습니다.",
+    "실무에서 반복되는 작업과 확인이 필요한 항목을 파악하고, 필요한 시스템을 직접 구축해 업무에 활용했습니다. 현재는 영업 활동·실적 분석(SFE), 판매·운영 계획(S&OP), 유통재고 관리로 개선 범위를 넓히고 있습니다. 직접 만든 시스템이 개인 도구로 끝나지 않도록, 경영진 지원 아래 전산팀과 사내 서버 이전에 합의했습니다. 경영진용 BI 이관에 이어 회사 운영 체계로 옮기는 과정을 협의하고 있습니다.",
   evidenceTitle: "주요 역량",
   evidence: [
     {
@@ -43,6 +44,42 @@ export const AX_HERO = {
     },
   ],
 } satisfies HeroContent & { jobTitle: string; employer: string };
+
+/**
+ * 영업관리 트랙 일하는 방식. AX 트랙의 AX_METHOD를 복사하지 않고, 절차를 세우고 정착시키는 관점으로 쓴다.
+ * 사례 문구는 data/work-history.ts에 이미 실린 사실만 쓴다.
+ */
+export const SALES_METHOD: WorkMethodStep[] = [
+  {
+    title: "반복 업무와 확인 지점 파악",
+    description:
+      "자료를 누가 어떤 순서로 취합·확인하는지 살펴보고, 시간이 많이 드는 반복 작업과 실수가 생기는 지점을 찾습니다.",
+    example: "엑셀로 수작업하던 공급내역보고와 영업 실적 취합",
+  },
+  {
+    title: "처리 기준 정리와 부서 협의",
+    description:
+      "집계 기준과 처리 순서를 정리하고, 관련 부서와 필요한 데이터 항목과 보고 기준을 맞춥니다.",
+    example:
+      "ERP 전환 때 영업관리·기획·전산 부서와 매출·수금·채권 집계 기준 협의",
+  },
+  {
+    title: "반복 작업은 시스템으로, 판단은 담당자에게",
+    description:
+      "취합·대조·보고처럼 반복되는 일은 시스템이 처리하고, 판단이 필요한 항목만 담당자가 확인하도록 나눕니다.",
+    example: "자동 검증 뒤 불일치·의심 자료만 담당자가 확인",
+  },
+  {
+    title: "업무 절차와 문서로 정착",
+    description:
+      "처리 순서와 확인 시점을 업무 절차로 정하고, 다른 담당자도 이어 쓸 수 있도록 운영 문서를 남깁니다.",
+    example:
+      "공급내역보고: 물류 마감 → 자료 수집 → API 보고 → 다음 날 아침 오류 확인",
+  },
+];
+
+/** 영업관리 트랙에서 바로 여는 운영 문서 — 운영 중인 시스템만 둔다 */
+export const SALES_MANUAL_SLUGS = ["pharmkpi", "kpis-dsr-api"] as const;
 
 /** 공개 주소 — metadataBase·구조화 데이터가 같은 값을 쓴다. */
 export const SITE_URL = "https://ref.dvsharp.com";

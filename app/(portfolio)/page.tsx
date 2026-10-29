@@ -6,6 +6,7 @@ import {
   AxHeroSection,
 } from "@/components/portfolio/ax-sections";
 import { CareerSection } from "@/components/portfolio/career-section";
+import { MethodSection } from "@/components/portfolio/method-section";
 import { FadeInUp } from "@/components/portfolio/motion";
 import { SortableGrid } from "@/components/portfolio/sortable-grid";
 import { WorkSection } from "@/components/portfolio/work-section";
@@ -82,6 +83,8 @@ export default function HomePage() {
           primary={{ href: "/#work", label: "주요 업무" }}
           track="sales"
         />
+
+        <MethodSection />
 
         <WorkSection />
 

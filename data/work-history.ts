@@ -28,6 +28,7 @@ export const WORK_CHAPTERS: readonly WorkChapter[] = [
     results: [
       "사내 영업 데이터 시스템 운영 중",
       "자료 조회·분석과 월간 보고 업무 개선 진행 중",
+      "전산팀과 사내 서버 이전에 합의, 서버 사양과 이전 시점 협의 중",
     ],
     projects: ["pharmkpi", "sales-strategy-portal"],
   },

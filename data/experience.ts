@@ -23,12 +23,17 @@ export const EXPERIENCES: Experience[] = [
     highlights: [
       "매출·수금·채권 자료 분석 및 월간 KPI·영업회의 자료 작성",
       "SFE를 통한 영업 활동·실적 분석, S&OP 및 유통재고 관리 업무 개선",
+      "영업지원팀·회계팀·영업본부 부서별 업무 화면 구축과 엑셀 월 보고서 자동화",
+      "공공 데이터 기반 시장·경쟁 분석",
       "CSO 관련 데이터 처리와 조회·검증 시스템 구축",
       "엑셀 수작업 공급내역보고를 웹 시스템으로 개선하고, ERP 전환 후 보고 업무 유지 및 API 연계 시스템 구축",
       "ERP 전환 전후 데이터 대조 및 영업관리·기획·전산 부서 협업",
     ],
     projects: [
       "pharmkpi",
+      "accounting-ledger",
+      "monthly-sales-reports",
+      "market-analysis",
       "sales-hq-sfe",
       "sales-hq-snop",
       "csoweb",
@@ -45,6 +50,7 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
       "월간 KPI",
       "영업 활동 분석(SFE)",
       "보고 자료 작성",
+      "시장·경쟁 분석",
     ],
   },
   {

@@ -4,6 +4,7 @@ import { ArrowLeft, ExternalLink, BookOpen } from "lucide-react";
 import type { Project } from "@/data/projects";
 import { NewBadge } from "@/components/portfolio/badge";
 import { ProjectThumbnail } from "@/components/portfolio/project-thumbnail";
+import { ScreenGallery } from "@/components/portfolio/screen-gallery";
 import { TechTags } from "@/components/portfolio/tech-tags";
 import { TRACKS, type Track } from "@/components/portfolio/track";
 
@@ -105,6 +106,11 @@ export function ProjectDetail({
 
         {/* 케이스 서사 — 트랙마다 다른 관점 */}
         {narrative}
+
+        {/* 주요 화면 — 화면별 스크린샷과 업무 설명 */}
+        {project.screens && project.screens.length > 0 && (
+          <ScreenGallery screens={project.screens} note={project.screensNote} />
+        )}
 
         {/* 핵심 모듈 콜아웃 */}
         {project.featuredModule && (

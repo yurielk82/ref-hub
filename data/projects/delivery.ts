@@ -12,7 +12,40 @@ export const DELIVERY_PROJECTS: Project[] = [
     scope: "company",
     liveUrl: "https://kpi.dvsharp.com",
     docsPath: "/pharmkpi",
-    screenshot: "/images/portfolio/pharmkpi/hero.png",
+    screenshot: "/images/portfolio/pharmkpi/overview.webp",
+    screensNote:
+      "공개용 화면이라 거래처·사람 이름·사업자번호는 가짜 값으로, 금액·수량은 실제와 다른 값으로 바꿔 찍었습니다.",
+    screens: [
+      {
+        src: "/images/portfolio/pharmkpi/overview.webp",
+        title: "종합 현황",
+        caption:
+          "기준월의 매출·수금·채권 잔고·할인율·재고·반품 대표 지표와 전사 매출 월별 추세를 한 화면에서 확인합니다.",
+      },
+      {
+        src: "/images/portfolio/pharmkpi/sales-causes.webp",
+        title: "매출 증감 원인",
+        caption:
+          "전년 같은 달 대비 매출 증감을 품목·거래처·팀 등 기준별 기여도로 나눠 폭포 차트로 보여 줍니다. 당월과 당년 누계를 바꿔 볼 수 있습니다.",
+      },
+      {
+        src: "/images/portfolio/pharmkpi/sales-comparison.webp",
+        title: "매출 목표·기간 비교",
+        caption: "매출 실적을 입력 목표, 전년 같은 기간과 나란히 비교합니다.",
+      },
+      {
+        src: "/images/portfolio/pharmkpi/verification.webp",
+        title: "데이터 대조",
+        caption:
+          "지표별·월별로 원본 자료와 집계 값의 대조 상태를 표시해 일치 여부와 확인이 필요한 달을 구분합니다.",
+      },
+      {
+        src: "/images/portfolio/pharmkpi/data-architecture.webp",
+        title: "데이터 구조도",
+        caption:
+          "원천 수집부터 검증·반영, 저장 계층, 조회 화면까지 운영 중인 데이터 흐름을 한 장으로 보여 줍니다.",
+      },
+    ],
     emoji: "📊",
     gradient: "from-blue-600/20 to-cyan-600/20",
     features: [
@@ -33,6 +66,41 @@ export const DELIVERY_PROJECTS: Project[] = [
       "일보의 방문 기록을 ERP 매출·목표와 연결하고, 방문 현황·목표 달성률·핵심 거래처 관리 현황을 분석하도록 구성했습니다. 월간 영업회의 자료로 활용하며 개선 중.",
     category: "web",
     scope: "company",
+    screenshot: "/images/portfolio/sales-hq-sfe/effort-value-quadrant.webp",
+    screensNote:
+      "공개용 화면이라 거래처·담당자 이름은 가짜 값으로, 금액은 실제와 다른 값으로 바꿔 찍었습니다.",
+    screens: [
+      {
+        src: "/images/portfolio/sales-hq-sfe/effort-value-quadrant.webp",
+        title: "노력-가치 사분면",
+        caption:
+          "도매상마다 한 달 평균 방문 횟수와 실매출을 한 점으로 올리고 중위수 선으로 네 칸을 나눕니다. 매출은 큰데 방문이 적은 곳과 자주 가는데 매출이 작은 곳을 찾아 방문 시간 배분을 바꿀 후보로 봅니다.",
+      },
+      {
+        src: "/images/portfolio/sales-hq-sfe/summary.webp",
+        title: "SFE 요약",
+        caption:
+          "실매출 세 기간과 활동·도달·성과 계층별 핵심 지표를 한 화면에 모읍니다. 카드마다 해당 분석 메뉴로 이어져 '얼마나 다녔나 → 맞는 곳을 다녔나 → 다닌 만큼 나왔나' 순서로 따라가며 봅니다.",
+      },
+      {
+        src: "/images/portfolio/sales-hq-sfe/grade-targeting.webp",
+        title: "거래처 등급·타겟팅",
+        caption:
+          "도매상을 12개월 매출 순으로 A·B·C 등급과 매출 순위 구간으로 나누고, 등급별 매출 비중과 최근 3개월 방문 비중을 나란히 놓습니다. 방문이 등급에 맞게 배분되는지 확인합니다.",
+      },
+      {
+        src: "/images/portfolio/sales-hq-sfe/visit-productivity.webp",
+        title: "방문 성과",
+        caption:
+          "방문이 주문으로 이어진 비율과 방문 없을 때의 주문률, 주문당 품목 수를 월별로 비교합니다. 방문 뒤 첫 주문까지 걸린 영업일 분포로 방문의 몫을 따로 읽습니다.",
+      },
+      {
+        src: "/images/portfolio/sales-hq-sfe/metric-guide.webp",
+        title: "SFE 분석 안내",
+        caption:
+          "제약 SFE 3계층(활동 → 중간 → 성과)에 도매 채널 지표를 더한 분석 메뉴의 읽는 법과 공통 기준을 정리한 안내 화면입니다. 메뉴별 질문·그림·공식을 처음 보는 사람도 따라 읽을 수 있게 둡니다.",
+      },
+    ],
     emoji: "📊",
     gradient: "from-blue-600/20 to-cyan-600/20",
     features: [
@@ -58,6 +126,47 @@ export const DELIVERY_PROJECTS: Project[] = [
       "매출 예측·시나리오 비교·계획 저장과 수요·공급·재고 검토 화면을 구축했습니다. 유통재고 관리 업무의 효율화도 함께 진행하고 있습니다. 기능 배포 후 업무 적용·검증 진행 중.",
     category: "web",
     scope: "company",
+    screenshot: "/images/portfolio/sales-hq-snop/monthly-overview.webp",
+    screensNote:
+      "공개용 화면이라 금액·수량은 실제와 다른 값으로 바꿔 찍었습니다.",
+    screens: [
+      {
+        src: "/images/portfolio/sales-hq-snop/monthly-overview.webp",
+        title: "이번 달 S&OP",
+        caption:
+          "월간 계획 주기 다섯 단계(자료 마감 → 수요 → 공급·재고 → 통합 조정 → 경영 승인)의 진행과 기한을 보여 줍니다. 이번 단계에서 할 일과 금액이 가장 큰 예외 품목을 먼저 띄웁니다.",
+      },
+      {
+        src: "/images/portfolio/sales-hq-snop/demand-review.webp",
+        title: "수요 검토",
+        caption:
+          "월별 도매 매출 실적과 기준 예측을 한 차트에 이어 보고, 지난달 예측 오차(WAPE)와 편향, 오차가 큰 품목을 확인합니다. 실적과 기준 예측은 보존하고 영업 조정만 계획 버전에 더합니다.",
+      },
+      {
+        src: "/images/portfolio/sales-hq-snop/supply-inventory.webp",
+        title: "공급·재고 검토",
+        caption:
+          "3개월 안에 부족이 예상되는 품목을 부족 금액 순으로 보여 주고, 품목별 예상 재고를 안전재고 선과 함께 월말 기준으로 그립니다. 입고 예정은 담당자 입력으로 받습니다.",
+      },
+      {
+        src: "/images/portfolio/sales-hq-snop/forecast-lab.webp",
+        title: "예측 모델 실험실",
+        caption:
+          "예측 기간·모델·학습 구간을 골라 기준 예측을 계산하고, 성장률·수량·가격 가정으로 영업 조정을 해 봅니다. 월 매출 수준이 크게 바뀐 시점을 알려 주며, 새 계획의 기본 모델은 과거 평가에서 고른 지수평활 자동 모형(AutoETS)입니다.",
+      },
+      {
+        src: "/images/portfolio/sales-hq-snop/finance-reconcile.webp",
+        title: "통합 조정",
+        caption:
+          "월별 매출과 수금(부가세 포함)을 함께 보고 저장된 계획 버전을 최근 실적과 비교합니다. 경영 승인에 올릴 안건을 정리하는 단계입니다.",
+      },
+      {
+        src: "/images/portfolio/sales-hq-snop/data-close.webp",
+        title: "자료 마감 확인",
+        caption:
+          "지난달 판매 마감, 수금 반영, 현재 로트 재고가 모두 들어왔는지 확인하는 첫 단계입니다. 세 자료가 통과해야 수요 검토로 넘어갑니다.",
+      },
+    ],
     emoji: "📊",
     gradient: "from-blue-600/20 to-cyan-600/20",
     features: [
@@ -78,7 +187,47 @@ export const DELIVERY_PROJECTS: Project[] = [
     category: "web",
     scope: "company",
     docsPath: "/pharmkpi",
-    screenshot: "/images/portfolio/sales-strategy-portal/hero.png",
+    screenshot: "/images/portfolio/sales-strategy-portal/home.webp",
+    screensNote:
+      "공개용 화면이라 거래처·사람 이름·사업자번호는 가짜 값으로, 금액·수량은 실제와 다른 값으로 바꿔 찍었습니다.",
+    screens: [
+      {
+        src: "/images/portfolio/sales-strategy-portal/home.webp",
+        title: "영업지원 홈",
+        caption:
+          "오늘의 마감(청구서·판매·수금·물류·공급내역보고) 상태부터 실매출·판매·반품·매출할인·수금 현황, 채권 잔고·회전일까지 영업지원 업무 순서대로 한 화면에 모았습니다. 각 지표는 전년 같은 달의 같은 영업일과 비교합니다.",
+      },
+      {
+        src: "/images/portfolio/sales-strategy-portal/home-workflow.webp",
+        title: "판매·수금 추이와 구성",
+        caption:
+          "일별 판매·반품·수금 추이와 실매출 누계를 확인하고, 거래처별 채권 잔고와 품목·생산 구분별 실매출 구성을 이어서 봅니다.",
+      },
+      {
+        src: "/images/portfolio/sales-strategy-portal/orders.webp",
+        title: "주문 내역",
+        caption:
+          "ERP 주문 내역을 기간·구분별로 조회하고, 열 머리의 엑셀식 필터로 값을 골라 거릅니다. 월·분기·연 누계를 함께 확인하고 내려받을 수 있습니다.",
+      },
+      {
+        src: "/images/portfolio/sales-strategy-portal/credit-query.webp",
+        title: "채권 조회",
+        caption:
+          "기준월의 거래처별 순잔고·에이징·90일 이상 채권과 회전일을 사업자번호·거래처코드 기준으로 조회합니다.",
+      },
+      {
+        src: "/images/portfolio/sales-strategy-portal/inventory-lot.webp",
+        title: "LOT별 재고",
+        caption:
+          "품목별 LOT 재고 수량과 제조일·사용기한·잔여 사용기한 구간을 조회합니다.",
+      },
+      {
+        src: "/images/portfolio/sales-strategy-portal/accounting.webp",
+        title: "회계 제출용 실매출",
+        caption:
+          "판매에서 반품·매출할인을 뺀 실매출과 수금 방법별 누적, 채권 잔액을 회계 제출용으로 정리합니다.",
+      },
+    ],
     emoji: "📊",
     gradient: "from-blue-600/20 to-cyan-600/20",
     features: [
@@ -104,7 +253,41 @@ export const DELIVERY_PROJECTS: Project[] = [
       "매출·수금·채권 조회 화면을 구성하고, 확인 가능한 자료를 기준으로 보고 항목을 정리했습니다. 2026년 7월 경영진용 BI로 이관.",
     category: "web",
     scope: "company",
-    screenshot: "/images/portfolio/pharmkpi-exec/hero.png",
+    screenshot: "/images/portfolio/pharmkpi-exec/forecast.webp",
+    screensNote:
+      "공개용 화면이라 거래처·금액은 시험용 합성 자료로 채워 찍었습니다.",
+    screens: [
+      {
+        src: "/images/portfolio/pharmkpi-exec/forecast.webp",
+        title: "연간 매출 전망",
+        caption:
+          "연 누적 실적에 최근 3개월 평균을 이어 붙여 연말 예상치를 내고, 작년 추세·증감률 방식의 참고값과 목표까지 남은 금액을 함께 보여 줍니다. 전망이 바뀐 이유도 항목별로 나눠 적습니다.",
+      },
+      {
+        src: "/images/portfolio/pharmkpi-exec/daily.webp",
+        title: "데일리 리포트",
+        caption:
+          "아침마다 여는 첫 화면입니다. 판매 실적과 목표 달성률, 수금 실적, 월별 판매 추이와 채널 구성을 한 화면에서 보고 날짜를 넘겨 지난 날도 확인합니다.",
+      },
+      {
+        src: "/images/portfolio/pharmkpi-exec/item-detail.webp",
+        title: "품목 판매 분석",
+        caption:
+          "품목을 누르면 12개월 판매 추이와 전년 동월 비교가 열리고, 같은 기간 거래처·담당자별 실적으로 바로 내려가 볼 수 있습니다. 기간 단위와 담당 기준도 바꿀 수 있습니다.",
+      },
+      {
+        src: "/images/portfolio/pharmkpi-exec/monthly.webp",
+        title: "월간 리포트",
+        caption:
+          "끝난 달의 판매·반품·매출할인·수금과 실매출을 전년 동월과 비교하고, 월말 채권 잔고를 함께 봅니다. 거래처·브랜드 범위를 골라 같은 표를 다시 계산합니다.",
+      },
+      {
+        src: "/images/portfolio/pharmkpi-exec/visits.webp",
+        title: "거래처 방문 준비",
+        caption:
+          "방문할 거래처를 고르면 연도별 순매출, 품목별 매출 순위와 할인율을 한 장에 모아 보여 줍니다. 방문 전에 거래 현황을 확인하는 용도입니다.",
+      },
+    ],
     emoji: "📊",
     gradient: "from-blue-600/20 to-cyan-600/20",
     features: [
@@ -135,7 +318,47 @@ export const DELIVERY_PROJECTS: Project[] = [
     scope: "company",
     liveUrl: "https://kpis.dvsharp.com",
     docsPath: "/kpis-dsr-api",
-    screenshot: "/images/portfolio/kpis-dsr-api/hero.png",
+    screenshot: "/images/portfolio/kpis-dsr-api/dashboard.webp",
+    screensNote:
+      "공개용 화면이라 거래처·사업자번호·접수번호는 가짜 값으로, 금액·건수는 실제와 다른 값으로 바꿔 찍었습니다. 반송·누락 줄과 운영 기록은 오류 대응 흐름을 보이려고 넣은 예시 자료입니다.",
+    screens: [
+      {
+        src: "/images/portfolio/kpis-dsr-api/dashboard.webp",
+        title: "공급내역 현황판",
+        caption:
+          "분기 적기보고율과 목표 대비 차이, 이번 주 날짜별 보고 상태를 한 화면에서 확인합니다. 날짜 카드에서 수기 완료 표시·API 접수 확인 여부를 구분해 남은 할 일을 봅니다.",
+      },
+      {
+        src: "/images/portfolio/kpis-dsr-api/kpis-report.webp",
+        title: "API 공급내역보고",
+        caption:
+          "선택한 날짜의 공급구분별 갑지·을지·API 접수·수기 완료·반송·미보고 건수를 정리하고, 공급구분별 전체 보고 → 틀린 줄만 빼고 재보고 → 남은 줄 개별 보고 순서로 보고를 진행합니다.",
+      },
+      {
+        src: "/images/portfolio/kpis-dsr-api/error-grid.webp",
+        title: "반송·미보고 줄 구분",
+        caption:
+          "접수된 줄은 취소선, 반송된 줄은 노란 배경, 아직 보내지 않은 줄은 그대로 두어 다시 보낼 줄을 그리드에서 바로 구분합니다. 검증 경고가 있는 줄은 왼쪽 테두리로 표시합니다.",
+      },
+      {
+        src: "/images/portfolio/kpis-dsr-api/return-handling.webp",
+        title: "반송 처리",
+        caption:
+          "그 달 반송 줄을 반송사유코드에 따라 확인 필요·단가·데이터 수정·결과 미확인으로 나누고 해결 방법을 안내합니다. [그리드에서 고치기]로 그날 반송 줄만 열어 고친 뒤 반송 줄만 다시 보고하고, 반송신청은 신청·승인·완료·반려 상태를 따라갑니다.",
+      },
+      {
+        src: "/images/portfolio/kpis-dsr-api/missing-lines.webp",
+        title: "KPIS에 없는 줄 대조",
+        caption:
+          "공급구분별 반송·미보고 건수를 보고, 거래처별 KPIS 접수(줄 수·수량·금액)를 우리 보고분과 견줘 빠진 줄만 골라냅니다. 고른 줄만 보고 계획으로 보내며, 줄을 고를 수 없는 거래처는 까닭을 함께 보여 줍니다.",
+      },
+      {
+        src: "/images/portfolio/kpis-dsr-api/ops-log.webp",
+        title: "운영 로그",
+        caption:
+          "자동 보고·물류 마감·판매 마감 뒤 검사가 한 일과 보류·오류를 메일 대신 기록으로 남깁니다. 위에서 자동 보고 스위치와 바코드 원천 연결 상태를 보고, 확인·오류만 걸러 볼 수 있습니다.",
+      },
+    ],
     emoji: "📊",
     gradient: "from-blue-600/20 to-cyan-600/20",
     features: [
@@ -157,7 +380,41 @@ export const DELIVERY_PROJECTS: Project[] = [
     category: "web",
     scope: "company",
     docsPath: "/csoweb",
-    screenshot: "/images/portfolio/csoweb/hero.png",
+    screenshot: "/images/portfolio/csoweb/edi-review-detail.webp",
+    screensNote:
+      "운영 종료 뒤 기록용으로 찍은 화면입니다. 업체·병의원 이름과 금액은 가짜 값이고, 처방 문서 이미지는 자리표시로 바꿨습니다.",
+    screens: [
+      {
+        src: "/images/portfolio/csoweb/edi-review-detail.webp",
+        title: "EDI 정산서 검토",
+        caption:
+          "CSO 업체·거래처별로 처방 문서 이미지와 OCR로 읽은 품목·수량을 나란히 놓고, 정산서 수량과 다른 품목만 '검토 필요'로 띄워 확인하거나 고칩니다. 일치하는 품목은 자동 PASS로 넘어갑니다.",
+      },
+      {
+        src: "/images/portfolio/csoweb/edi-review-workbench.webp",
+        title: "리뷰 큐 검토표",
+        caption:
+          "부서 → CSO 업체 → 거래처 트리에서 대상을 고르면 품목별 정산 수량과 OCR 수량, 단가, 합계금액을 한 표에서 대조합니다. 정산서에 없는 품목이나 수량이 다른 행은 비교 열에서 바로 구분됩니다.",
+      },
+      {
+        src: "/images/portfolio/csoweb/admin-stats.webp",
+        title: "관리자 통계 분석",
+        caption:
+          "정산월 기준으로 수수료·수량의 전월·전년 대비 성장률, 상위 CSO 업체의 제품 구성, 상위 제품의 월별 수량 추이를 차트로 봅니다.",
+      },
+      {
+        src: "/images/portfolio/csoweb/settlement-master.webp",
+        title: "정산서 마스터 조회",
+        caption:
+          "전체 CSO 업체의 월별 정산 내역을 거래처·제품 단위로 조회하고, 거래처별 소계와 CSO 업체별 총합계를 함께 보여 줍니다. 조회 결과는 엑셀로 내려받거나 복사할 수 있습니다.",
+      },
+      {
+        src: "/images/portfolio/csoweb/member-settlement.webp",
+        title: "회원사 정산서 조회",
+        caption:
+          "CSO 회원사는 자기 업체의 정산월별 제약수수료 합계와 거래처·제품별 상세 내역을 조회하고 엑셀로 내려받습니다. 공지 사항은 화면 위에 함께 표시됩니다.",
+      },
+    ],
     emoji: "📊",
     gradient: "from-blue-600/20 to-cyan-600/20",
     features: [
@@ -185,7 +442,46 @@ export const DELIVERY_PROJECTS: Project[] = [
     category: "web",
     scope: "company",
     liveUrl: "https://erp-spec.dvsharp.com",
-    screenshot: "/images/portfolio/erp-spec/barcode-graph.png",
+    screenshot: "/images/portfolio/erp-spec/overview.webp",
+    screensNote: "테이블별 행 수는 실제와 다른 값으로 바꿔 찍었습니다.",
+    screens: [
+      {
+        src: "/images/portfolio/erp-spec/overview.webp",
+        title: "UNION_ERP 개요",
+        caption:
+          "기존 Oracle ERP(UNION_ERP, KUP 스키마) 테이블 명세의 전체 통계와 마이그레이션 우선순위를 정리한 첫 화면입니다. 왼쪽 메뉴에서 컬럼 검색·매핑 체크리스트·카테고리별 테이블 명세로 이동합니다.",
+      },
+      {
+        src: "/images/portfolio/erp-spec/volume-chart.webp",
+        title: "데이터 볼륨",
+        caption:
+          "카테고리별 총 행 수를 막대로 비교해 대용량 카테고리부터 이관 순서를 정하는 데 씁니다. 카테고리 이름을 누르면 해당 테이블 명세로 이동합니다.",
+      },
+      {
+        src: "/images/portfolio/erp-spec/category-erd.webp",
+        title: "카테고리 관계도",
+        caption:
+          "카테고리 문서 안에 PK 컬럼명 매칭으로 추정한 테이블 관계를 ERD로 띄워, 확대·이동하며 어떤 테이블이 서로 이어지는지 확인합니다.",
+      },
+      {
+        src: "/images/portfolio/erp-spec/table-spec.webp",
+        title: "테이블 상세 명세",
+        caption:
+          "테이블마다 PK, 컬럼명·타입·NULL 허용·설명과 인덱스를 표로 정리하고, MariaDB DDL을 함께 제공합니다.",
+      },
+      {
+        src: "/images/portfolio/erp-spec/column-search.webp",
+        title: "컬럼 검색",
+        caption:
+          "컬럼명을 입력하면 그 컬럼을 쓰는 모든 테이블을 타입·NULL 허용·설명과 함께 찾아 줍니다.",
+      },
+      {
+        src: "/images/portfolio/erp-spec/mapping-checklist.webp",
+        title: "매핑 체크리스트",
+        caption:
+          "테이블별 마이그레이션 매핑 상태(미완료·완료·제외)와 메모를 추적하고 전체 진행률을 봅니다. 상태와 메모는 서버에 저장되어 팀원과 공유됩니다.",
+      },
+    ],
     githubUrl: "https://github.com/yurielk82/erp-spec",
     emoji: "📊",
     gradient: "from-blue-600/20 to-cyan-600/20",
@@ -209,7 +505,29 @@ export const DELIVERY_PROJECTS: Project[] = [
     scope: "other",
     liveUrl: "https://avl.dvsharp.com",
     docsPath: "/ev-motor-reliability",
-    screenshot: "/images/portfolio/ev-motor-reliability/hero.png",
+    screenshot:
+      "/images/portfolio/ev-motor-reliability/avl-converter-review.webp",
+    screensNote: "공개용 화면이라 합성 운전 프로파일로 찍었습니다.",
+    screens: [
+      {
+        src: "/images/portfolio/ev-motor-reliability/avl-converter-review.webp",
+        title: "AVL 변환 — 자동 매칭 검토",
+        caption:
+          "운전 프로파일 CSV 열을 AVL PUMA 시험기 XML의 속도·토크·추가 명령 변수와 동의어 사전으로 자동 매칭하고 점수로 보여 줍니다. 목표 step 수와 기록 설정(저장 간격·최대 기록 시간·샘플링 주파수)을 정한 뒤 변환합니다.",
+      },
+      {
+        src: "/images/portfolio/ev-motor-reliability/avl-converter-upload.webp",
+        title: "AVL 변환 — CSV 업로드",
+        caption:
+          "운전 프로파일 CSV를 한 개 또는 여러 개 고르면 서버에 내장된 AVL XML 템플릿을 기준으로 변환을 준비합니다. 필요하면 다른 기준 XML을 올려 쓸 수 있습니다.",
+      },
+      {
+        src: "/images/portfolio/ev-motor-reliability/avl-converter-result.webp",
+        title: "AVL 변환 — 일괄 결과",
+        caption:
+          "여러 CSV를 한 번에 XML 시험 프로파일로 바꾼 결과를 파일별로 보여 주고, 개별 XML이나 ZIP으로 내려받습니다. 원본 XML 형식은 유지하고 명령값만 바꿉니다.",
+      },
+    ],
     emoji: "⚡",
     gradient: "from-yellow-600/20 to-lime-600/20",
     features: [

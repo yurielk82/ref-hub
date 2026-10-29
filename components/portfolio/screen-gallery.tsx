@@ -49,6 +49,18 @@ export function ScreenGallery({
     };
   }, [step]);
 
+  // 모달 dialog는 뒤 페이지 스크롤을 막지 않으므로 열려 있는 동안만 막는다
+  const isOpen = active !== null;
+  useEffect(() => {
+    if (!isOpen) return;
+    const root = document.documentElement;
+    const previous = root.style.overflow;
+    root.style.overflow = "hidden";
+    return () => {
+      root.style.overflow = previous;
+    };
+  }, [isOpen]);
+
   const current = active === null ? null : screens[active];
 
   return (
@@ -103,9 +115,6 @@ export function ScreenGallery({
       <dialog
         ref={dialogRef}
         aria-label={current ? `${current.title} 크게 보기` : "화면 크게 보기"}
-        onClick={(e) => {
-          if (e.target === e.currentTarget) close();
-        }}
         className="m-auto h-dvh max-h-none w-dvw max-w-none bg-transparent p-0 backdrop:bg-stone-950/85 backdrop:backdrop-blur-sm"
       >
         {current && active !== null && (

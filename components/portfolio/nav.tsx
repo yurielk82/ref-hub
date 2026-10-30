@@ -81,6 +81,15 @@ export function PortfolioNav() {
               공고 모음
             </Link>
           )}
+          {canViewJobs && (
+            <Link
+              href="/resume"
+              aria-current={pathname === "/resume" ? "page" : undefined}
+              className="shrink-0 rounded text-xs font-semibold text-[var(--accent)] transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+            >
+              이력서
+            </Link>
+          )}
           {nav.developerLinks && (
             <a
               href={AX_CONTACT.github}

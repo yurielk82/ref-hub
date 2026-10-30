@@ -9,7 +9,7 @@ import {
 import { createSupabaseServer, supabaseEnv } from "@/lib/auth/supabase-server";
 
 /**
- * 공고 모음(/jobs) 전용 로그인. 포트폴리오는 공개이고, 로그인은 공용 Supabase(sb.dvsharp.com)의
+ * 공고 모음(/jobs)·사람인 이력서(/resume) 전용 로그인. 포트폴리오는 공개이고, 로그인은 공용 Supabase(sb.dvsharp.com)의
  * Google 로그인을 거쳐 허용 목록 계정만 통과한다. 흐름: /auth/google → Supabase → Google → /auth/callback.
  * 운영 값(서버 비밀 파일 → github-ref-hub.service EnvironmentFile):
  *   SUPABASE_URL, SUPABASE_ANON_KEY, JOBS_ALLOWED_EMAILS

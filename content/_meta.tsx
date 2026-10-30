@@ -39,12 +39,13 @@ const meta: MetaRecord = {
     type: "page",
   },
   // 포트폴리오 화면(app/(portfolio))도 페이지 지도에 잡힌다. 문서 메뉴에는 매뉴얼만 둔다.
-  // jobs·login은 로그인 전용이라 공개 메뉴에 이름도 드러내지 않는다.
+  // jobs·resume·login은 로그인 전용이라 공개 메뉴에 이름도 드러내지 않는다.
   ax: { display: "hidden", type: "page" },
   docs: { display: "hidden", type: "page" },
   projects: { display: "hidden", type: "page" },
   jobs: { display: "hidden", type: "page" },
   login: { display: "hidden", type: "page" },
+  resume: { display: "hidden", type: "page" },
 };
 
 export default meta;

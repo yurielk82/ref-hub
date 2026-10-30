@@ -15,10 +15,11 @@ const meta: MetaRecord = {
     type: "page",
   },
   csoweb: {
-    title: "CSO 데이터 조회·검증 (운영 종료)",
+    title: "CSO 정산 조회 (운영 종료)",
     type: "page",
   },
   "edi-verification": {
+    display: "hidden",
     title: "처방통계 자료 검증 (이전 사례)",
     type: "page",
   },

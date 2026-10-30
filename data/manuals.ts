@@ -15,7 +15,7 @@ export interface Manual {
 const MANUAL_DETAILS: Record<string, Omit<Manual, "slug" | "title">> = {
   csoweb: {
     description:
-      "CSO 데이터 조회·검증 시스템의 이전 매뉴얼. 자체 포털은 2026년 9월 운영 종료.",
+      "CSO 정산 조회 포털의 이전 매뉴얼. 자체 포털은 2026년 9월 운영 종료.",
     projectSlug: "csoweb",
   },
   "kpis-dsr-api": {
@@ -28,8 +28,7 @@ const MANUAL_DETAILS: Record<string, Omit<Manual, "slug" | "title">> = {
     projectSlug: "pharmkpi",
   },
   "edi-verification": {
-    description:
-      "처방통계 자료 추출과 불일치·의심 자료의 담당자 확인을 지원한 이전 구현 사례",
+    description: "처방통계 이미지·PDF를 OCR로 자료화한 이전 구현 사례",
   },
   corerx: {
     description:

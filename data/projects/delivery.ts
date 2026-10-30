@@ -54,7 +54,8 @@ export const DELIVERY_PROJECTS: Project[] = [
       "기준월·비교 기간·대상 조건별 표와 그래프",
       "원본 자료 대조와 매출·반품·매출할인 집계 기준 관리",
       "마감 감시와 반영 누락 경고, 마감·아침 알림 자동화",
-      "거래처 휴·폐업 매일 점검, 재직자 계정 자동 생성",
+      "거래처 사업자번호 약 2만 4천 개 매일 새벽 국세청 휴·폐업 조회",
+      "재직자 계정 자동 생성",
     ],
     highlight: "엑셀·스프레드시트로 취합하던 영업 자료의 조회·분석·보고 개선",
     year: "2026",
@@ -443,10 +444,10 @@ export const DELIVERY_PROJECTS: Project[] = [
   },
   {
     slug: "csoweb",
-    name: "CSO 데이터 조회·검증",
-    tagline: "CSO 관련 데이터 조회와 처방통계 자료 검증을 지원",
+    name: "CSO 정산 조회·처방 자료 OCR",
+    tagline: "CSO 정산 자료 조회와 처방통계 이미지·PDF의 OCR 자료화",
     description:
-      "정산 자료와 업체 정보를 연결하는 조회 포털을 구축하고, 이미지·PDF 자료 추출 및 불일치·의심 자료 확인 기능을 구현했습니다. 상용 솔루션 도입에 따라 2026년 9월 자체 포털 운영 종료.",
+      "정산 자료와 업체 정보를 연결하는 조회 포털을 구축하고, 처방통계 이미지·PDF를 OCR로 읽어 품목·수량 자료로 만들었습니다. 상용 솔루션 도입에 따라 2026년 9월 자체 포털 운영 종료.",
     category: "web",
     scope: "company",
     docsPath: "/csoweb",
@@ -458,13 +459,13 @@ export const DELIVERY_PROJECTS: Project[] = [
         src: "/images/portfolio/csoweb/edi-review-detail.webp",
         title: "EDI 정산서 검토",
         caption:
-          "CSO 업체·거래처별로 처방 문서 이미지와 OCR로 읽은 품목·수량을 나란히 놓고, 정산서 수량과 다른 품목만 '검토 필요'로 띄워 확인하거나 고칩니다. 일치하는 품목은 자동 PASS로 넘어갑니다.",
+          "CSO 업체·거래처별로 처방 문서 이미지와 OCR로 읽은 품목·수량을 나란히 놓고 확인합니다.",
       },
       {
         src: "/images/portfolio/csoweb/edi-review-workbench.webp",
         title: "리뷰 큐 검토표",
         caption:
-          "부서 → CSO 업체 → 거래처 트리에서 대상을 고르면 품목별 정산 수량과 OCR 수량, 단가, 합계금액을 한 표에서 대조합니다. 정산서에 없는 품목이나 수량이 다른 행은 비교 열에서 바로 구분됩니다.",
+          "부서 → CSO 업체 → 거래처 트리에서 대상을 고르면 품목별 정산 수량과 OCR로 읽은 수량, 단가, 합계금액을 한 표에서 봅니다.",
       },
       {
         src: "/images/portfolio/csoweb/admin-stats.webp",
@@ -490,10 +491,9 @@ export const DELIVERY_PROJECTS: Project[] = [
     features: [
       "정산 데이터와 업체 정보 연결 및 조회",
       "업체별 조회 권한과 정산 자료 발송 기능",
-      "처방통계 이미지·PDF 자료 추출",
-      "불일치·의심 자료의 담당자 확인 기능",
+      "처방통계 이미지·PDF를 OCR로 읽어 품목·수량 자료화",
     ],
-    highlight: "CSO 관련 데이터 조회와 처방통계 자료 검증을 지원",
+    highlight: "CSO 정산 자료 조회와 처방통계 이미지·PDF의 OCR 자료화",
     year: "2026",
     tech: [
       "Next.js 16",

@@ -26,6 +26,8 @@ export function PortfolioEditor({
   const [error, setError] = useState("");
   const [pending, startTransition] = useTransition();
   const saving = useRef(false);
+  const restored = useRef(false);
+  const savedRevision = useRef(initialRevision);
   const [query, setQuery] = useState("");
   const changed = fields.filter((field) => draft[field.id] !== saved[field.id]);
   const dirty = changed.length > 0;
@@ -39,6 +41,8 @@ export function PortfolioEditor({
   // 뒤로가기·탭 복귀에도 미저장 글을 복구한다. 저장 revision은 함께 보존해 충돌 검사를 건너뛰지 않는다.
   const draftKey = `ref-hub-portfolio-draft-${track}`;
   useEffect(() => {
+    if (restored.current) return;
+    restored.current = true;
     try {
       const raw = sessionStorage.getItem(draftKey);
       if (!raw) return;
@@ -149,6 +153,7 @@ export function PortfolioEditor({
         setSaved((previous) => ({ ...previous, ...normalized }));
         setDraft((previous) => ({ ...previous, ...normalized }));
         setRevision(result.revision);
+        savedRevision.current = result.revision;
         setMessage("저장 완료. 공개 홈페이지에 반영했습니다.");
       } catch {
         setError(
@@ -296,6 +301,7 @@ export function PortfolioEditor({
             onClick={() => {
               if (window.confirm("저장하지 않은 수정 내용을 취소할까요?")) {
                 setDraft(saved);
+                setRevision(savedRevision.current);
                 setError("");
                 setMessage("");
               }

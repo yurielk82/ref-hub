@@ -11,6 +11,9 @@ export function WorkSection({
 }: {
   chapters?: readonly WorkChapter[];
 }) {
+  const primaryIds = new Set(["reporting", "sales-analysis", "executive-bi"]);
+  const primary = chapters.filter((chapter) => primaryIds.has(chapter.id));
+  const additional = chapters.filter((chapter) => !primaryIds.has(chapter.id));
   return (
     <section id="work" className="mt-20 scroll-mt-20">
       <FadeInUp>
@@ -20,13 +23,22 @@ export function WorkSection({
         />
       </FadeInUp>
       <ol className="mt-8 space-y-5">
-        {chapters
-          .filter((chapter) =>
-            ["reporting", "sales-analysis", "executive-bi"].includes(
-              chapter.id,
-            ),
-          )
-          .map((chapter) => (
+        {primary.map((chapter) => (
+          <li
+            key={chapter.id}
+            id={`work-${chapter.id}`}
+            className="scroll-mt-20"
+          >
+            <WorkChapterCard chapter={chapter} />
+          </li>
+        ))}
+      </ol>
+      <details className="mt-6 border-y border-stone-200 py-4 dark:border-stone-800">
+        <summary className="cursor-pointer py-2 font-semibold text-[var(--accent)] focus-visible:outline-2 focus-visible:outline-offset-4">
+          그 밖의 업무 {additional.length}건 보기
+        </summary>
+        <ol className="mt-6 space-y-5">
+          {additional.map((chapter) => (
             <li
               key={chapter.id}
               id={`work-${chapter.id}`}
@@ -35,37 +47,6 @@ export function WorkSection({
               <WorkChapterCard chapter={chapter} />
             </li>
           ))}
-      </ol>
-      <details className="mt-6 border-y border-stone-200 py-4 dark:border-stone-800">
-        <summary className="cursor-pointer py-2 font-semibold text-[var(--accent)] focus-visible:outline-2 focus-visible:outline-offset-4">
-          그 밖의 업무{" "}
-          {
-            chapters.filter(
-              (chapter) =>
-                !["reporting", "sales-analysis", "executive-bi"].includes(
-                  chapter.id,
-                ),
-            ).length
-          }
-          건 보기
-        </summary>
-        <ol className="mt-6 space-y-5">
-          {chapters
-            .filter(
-              (chapter) =>
-                !["reporting", "sales-analysis", "executive-bi"].includes(
-                  chapter.id,
-                ),
-            )
-            .map((chapter) => (
-              <li
-                key={chapter.id}
-                id={`work-${chapter.id}`}
-                className="scroll-mt-20"
-              >
-                <WorkChapterCard chapter={chapter} />
-              </li>
-            ))}
         </ol>
       </details>
     </section>

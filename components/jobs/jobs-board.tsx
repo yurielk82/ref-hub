@@ -101,7 +101,7 @@ export function JobsBoard({
           아직 모은 공고가 없습니다.
         </p>
         <p className="mt-2 max-w-xl text-sm leading-7 text-stone-600 dark:text-stone-400">
-          사람인 API 키를 서버에 등록하면 매일 아침 7시에 제약·바이오 업종의
+          매일 아침 7시에 사람인에서 제약·바이오 업종의
           영업관리·영업기획·영업지원 공고를 모아 여기에 보여 줍니다.
         </p>
       </div>

@@ -15,7 +15,9 @@
   `JOBS_ALLOWED_EMAILS`(쉼표 구분). 로그인은 공용 Supabase의 Google 로그인을 거치므로 Google 콘솔에는 따로 넣지 않는다.
   대신 공용 Supabase 설정(`/home/ubuntu/supabase/docker/.env`)의 `ADDITIONAL_REDIRECT_URLS`에
   `https://ref.dvsharp.com/auth/callback`이 있어야 한다. 바꾼 뒤 `docker compose up -d auth`로 반영한다.
-- `~/.config/secrets/saramin-api.env`: `SARAMIN_ACCESS_KEY`. 이 파일이 없으면 수집 작업은 건너뛴다.
+- `~/.config/secrets/saramin-api.env`: `SARAMIN_ACCESS_KEY`(선택). 이 파일이 없으면 수집 작업은 건너뛴다(장치의 `ConditionPathExists`).
+  키 줄이 없으면 사람인 공개 검색 화면을 읽는다(`lib/jobs/saramin-web.ts`, 2026-10-31 오너 결정). 키 발급 전에는 파일만 두고 키 줄을 비운다.
+  검색 화면은 robots.txt가 막지 않은 목록만 읽고 공고 상세는 열지 않으며, 요청 사이 3초를 둔다(하루 10여 회).
 
 저장 파일은 `~/.local/share/ref-hub/jobs/postings.json`(폴더 0700, 파일 0600)이다. 사람인 이용 조건에 저장 범위가
 정해져 있지 않아 본인 열람용으로만 두고 공개 화면·저장소에 싣지 않는다.

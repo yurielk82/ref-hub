@@ -1,3 +1,4 @@
+import { listShares } from "@/lib/resume/shares";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -72,6 +73,9 @@ export default async function ResumePage(props: {
       ? await readVersion(dir, previousSummary.id, platform)
       : null;
 
+  const shares =
+    dir && current ? await listShares(dir, platform, current.id) : [];
+
   return (
     <section className="px-6 pb-28 pt-12 sm:pt-16">
       <div className="mx-auto max-w-4xl">
@@ -137,6 +141,7 @@ export default async function ResumePage(props: {
         {current &&
           (() => {
             const shared = {
+              shares,
               version: {
                 id: current.id,
                 label: current.label,

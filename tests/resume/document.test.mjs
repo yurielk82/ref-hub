@@ -165,3 +165,39 @@ test("DOCX 파일로 만들어진다", async () => {
   assert.equal(buffer.subarray(0, 2).toString(), "PK");
   assert.ok(buffer.length > 1000);
 });
+
+test("포트폴리오도 별도 제출 문서로 선택한다", () => {
+  assert.equal(parseDocKind("portfolio"), "portfolio");
+});
+
+test("실제 경력기술서의 사각 제목과 성과 구분을 문서 제목으로 읽는다", () => {
+  const input = structuredClone(saramin);
+  input.careerDescription.body =
+    "■ 영업 데이터 시스템\n[추진 배경]\n자료가 흩어져 있었음\n[성과]\n* 보고 자동화";
+  const doc = resumeDocument("saramin", input, "career");
+  assert.ok(
+    doc.blocks.some(
+      (b) => b.kind === "heading" && b.text === "영업 데이터 시스템",
+    ),
+  );
+  assert.ok(
+    doc.blocks.some((b) => b.kind === "subheading" && b.text === "성과"),
+  );
+});
+
+test("포트폴리오는 공개 업무 사례·운영 상태·화면을 포함한다", () => {
+  const doc = resumeDocument("saramin", saramin, "portfolio");
+  assert.equal(doc.fileName, "홍길동_포트폴리오.docx");
+  assert.ok(
+    doc.blocks.some(
+      (b) => b.kind === "image" && b.imagePath.startsWith("/images/portfolio/"),
+    ),
+  );
+  assert.ok(doc.blocks.some((b) => b.text.includes("운영 종료")));
+  assert.ok(doc.blocks.some((b) => b.text.includes("개선 진행 중")));
+  assert.ok(
+    doc.blocks.some((b) =>
+      b.text.includes("https://ref.dvsharp.com/projects/pharmkpi"),
+    ),
+  );
+});

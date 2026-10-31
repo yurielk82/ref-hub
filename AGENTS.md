@@ -2,7 +2,7 @@
 
 포트폴리오 + 프로젝트 레퍼런스 사이트(ref.dvsharp.com, 공개). 포트폴리오는 두 트랙이다. `/`는 제약사 영업관리 지원용, `/ax`는 업무 자동화·AX 직무용이며 같은 사실(`data/work-history.ts`·`data/ax-cases/`)을 다른 관점으로 보여 준다. 메뉴는 트랙마다 따로 두고(`components/portfolio/nav.tsx`), 서로 링크하지 않는다. 하위 경로는 프로젝트별 Nextra 매뉴얼이다. DB는 없다.
 
-- 공고 모음(`/jobs`)과 사람인 이력서(`/resume`)만 로그인 전용이다. 공용 Supabase(`sb.dvsharp.com`)의 Google 로그인을 거쳐 허용 목록(`JOBS_ALLOWED_EMAILS`) 계정만 들어오고, 서버가 페이지마다 다시 확인한다(`auth.ts`, `app/auth/`, `proxy.ts`). Google 콘솔은 건드리지 않고 Supabase 허용 주소에 `/auth/callback`만 둔다. 공고는 사람인 API를 하루 한 번 받아 저장소 밖 파일에 둔다(`scripts/collect-jobs.ts`, `lib/jobs/`). 이력서는 사람인에 칸별로 붙여 넣는 원본이며, 개인 정보라 버전별 JSON 파일로 저장소 밖에만 둔다(`lib/resume/`, 저장은 새 버전으로만). 서버 설정·비밀 파일은 `ops/systemd/README.md`.
+- 공고 모음(`/jobs`)과 사람인 이력서(`/resume`)만 로그인 전용이다. 공용 Supabase(`sb.dvsharp.com`)의 Google 로그인을 거쳐 허용 목록(`JOBS_ALLOWED_EMAILS`) 계정만 들어오고, 서버가 페이지마다 다시 확인한다(`auth.ts`, `app/auth/`, `proxy.ts`). Google 콘솔은 건드리지 않고 Supabase 허용 주소에 `/auth/callback`만 둔다. 공고는 하루 한 번 사람인에서 받아 저장소 밖 파일에 둔다. API 키가 있으면 API, 없으면 공개 검색 화면을 읽는다(`scripts/collect-jobs.ts`, `lib/jobs/`). 이력서는 사람인에 칸별로 붙여 넣는 원본이며, 개인 정보라 버전별 JSON 파일로 저장소 밖에만 둔다(`lib/resume/`, 저장은 새 버전으로만). 서버 설정·비밀 파일은 `ops/systemd/README.md`.
 
 ## 문서 흐름
 

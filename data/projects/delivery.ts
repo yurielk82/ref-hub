@@ -469,45 +469,39 @@ export const DELIVERY_PROJECTS: Project[] = [
     scope: "company",
     liveUrl: "https://kpis.dvsharp.com",
     docsPath: "/kpis-dsr-api",
-    screenshot: "/images/portfolio/kpis-dsr-api/dashboard.webp",
+    screenshot: "/images/portfolio/kpis-dsr-api/report-flow.webp",
     screensNote:
-      "공개용 화면이라 거래처·사업자번호·접수번호는 가짜 값으로, 금액·건수는 실제와 다른 값으로 바꿔 찍었습니다. 반송·누락 줄과 운영 기록은 오류 대응 흐름을 보이려고 넣은 예시 자료입니다.",
+      "공개용 화면이라 거래처 이름·사업자번호·거래처코드는 가짜 값으로, 금액·수량은 실제와 다른 값으로 바꿔 찍었습니다. 적기보고율은 실제 값입니다.",
     screens: [
       {
-        src: "/images/portfolio/kpis-dsr-api/dashboard.webp",
-        title: "공급내역 현황판",
+        src: "/images/portfolio/kpis-dsr-api/report-flow.webp",
+        title: "보고 흐름",
         caption:
-          "분기 적기보고율과 목표 대비 차이, 이번 주 날짜별 보고 상태를 한 화면에서 확인합니다. 날짜 카드에서 수기 완료 표시·API 접수 확인 여부를 구분해 남은 할 일을 봅니다.",
+          "원본 수집 → 보내기 전 주문 대조 → 보고 계획·보내기 → 접수 확인 → 반송·정정 → 보낸 뒤 대조 → 적기보고율 일곱 단계와 단계마다 막는 것을 한 장에 정리했습니다. 운영 KPIS로 보낸 보고는 되돌릴 수 없어 그 앞에 확인·잠금·사전 점검을 겹쳐 두었습니다.",
       },
       {
-        src: "/images/portfolio/kpis-dsr-api/kpis-report.webp",
-        title: "API 공급내역보고",
+        src: "/images/portfolio/kpis-dsr-api/order-check.webp",
+        title: "주문·KPIS 대조",
         caption:
-          "선택한 날짜의 공급구분별 갑지·을지·API 접수·수기 완료·반송·미보고 건수를 정리하고, 공급구분별 전체 보고 → 틀린 줄만 빼고 재보고 → 남은 줄 개별 보고 순서로 보고를 진행합니다.",
+          "한 달 주문 내역과 KPIS 접수를 거래처·날짜별로 맞대 수량·금액이 다른 곳만 펼칩니다. 8월은 주문과 KPIS가 다른 거래처가 남아 있어 정정 대상으로 잡혀 있습니다.",
       },
       {
-        src: "/images/portfolio/kpis-dsr-api/error-grid.webp",
-        title: "반송·미보고 줄 구분",
+        src: "/images/portfolio/kpis-dsr-api/kpis-home.webp",
+        title: "KPIS 홈",
         caption:
-          "접수된 줄은 취소선, 반송된 줄은 노란 배경, 아직 보내지 않은 줄은 그대로 두어 다시 보낼 줄을 그리드에서 바로 구분합니다. 검증 경고가 있는 줄은 왼쪽 테두리로 표시합니다.",
+          "한 달 보고를 날짜 줄로 보여 주고 보고 완료 일수, 볼 날, 분기 적기보고율, 주문과 KPIS가 다른 거래처 수를 위에 둡니다. 최근 3개월의 볼 날을 사유와 함께 모아 보고 작업으로 바로 넘어갑니다.",
       },
       {
-        src: "/images/portfolio/kpis-dsr-api/return-handling.webp",
-        title: "반송 처리",
+        src: "/images/portfolio/kpis-dsr-api/report-work.webp",
+        title: "보고 작업",
         caption:
-          "그 달 반송 줄을 반송사유코드에 따라 확인 필요·단가·데이터 수정·결과 미확인으로 나누고 해결 방법을 안내합니다. [그리드에서 고치기]로 그날 반송 줄만 열어 고친 뒤 반송 줄만 다시 보고하고, 반송신청은 신청·승인·완료·반려 상태를 따라갑니다.",
+          "날짜별 보고 상태와 갑지·접수·반송 줄 수, 처리 내용(API 접수 확인·수기 완료 표시)을 한 달치로 보고, 오른쪽에서 오늘 할 일과 반송 처리를 이어서 합니다.",
       },
       {
-        src: "/images/portfolio/kpis-dsr-api/missing-lines.webp",
-        title: "KPIS에 없는 줄 대조",
+        src: "/images/portfolio/kpis-dsr-api/supply-lines.webp",
+        title: "갑지·을지 조회",
         caption:
-          "공급구분별 반송·미보고 건수를 보고, 거래처별 KPIS 접수(줄 수·수량·금액)를 우리 보고분과 견줘 빠진 줄만 골라냅니다. 고른 줄만 보고 계획으로 보내며, 줄을 고를 수 없는 거래처는 까닭을 함께 보여 줍니다.",
-      },
-      {
-        src: "/images/portfolio/kpis-dsr-api/ops-log.webp",
-        title: "운영 로그",
-        caption:
-          "자동 보고·물류 마감·판매 마감 뒤 검사가 한 일과 보류·오류를 메일 대신 기록으로 남깁니다. 위에서 자동 보고 스위치와 바코드 원천 연결 상태를 보고, 확인·오류만 걸러 볼 수 있습니다.",
+          "날짜별 보고 줄 수와 반송 수를 골라, 줄마다 공급구분·보고 상태·공급받은자·제품·표준코드·수량을 엑셀식 필터로 걸러 봅니다.",
       },
     ],
     emoji: "📊",

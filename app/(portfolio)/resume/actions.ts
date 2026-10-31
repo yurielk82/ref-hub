@@ -109,6 +109,9 @@ export async function stopResumeShare(token: string) {
     await serializeShareChange(() => revokeDocumentShares(dir, String(token)));
     return { ok: true };
   } catch {
-    return { error: "공유를 중단하지 못했습니다. 다시 시도해 주세요." };
+    return {
+      error:
+        "공유 상태가 바뀌었거나 중단하지 못했습니다. 새로고침 후 확인해 주세요.",
+    };
   }
 }

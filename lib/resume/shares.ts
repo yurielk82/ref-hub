@@ -119,7 +119,10 @@ export async function revokeDocumentShares(
   token: string,
 ): Promise<void> {
   const selected = await readShare(dir, token);
-  if (!selected) return;
+  if (!selected)
+    throw new Error(
+      "이미 중단되었거나 변경된 공유입니다. 새로고침 후 확인해 주세요.",
+    );
   for (const share of await listShares(
     dir,
     selected.platform,

@@ -24,6 +24,19 @@ export function SaraminFields({
   );
   return (
     <>
+      <Section title="이력서 제목">
+        <Line
+          ctx={ctx}
+          path="title"
+          label="제목"
+          value={draft.title ?? ""}
+          onChange={(v) =>
+            update((n) => {
+              n.title = v;
+            })
+          }
+        />
+      </Section>
       <Section title="기본정보">
         <div className="grid grid-cols-1 gap-x-6 sm:grid-cols-2">
           <Line

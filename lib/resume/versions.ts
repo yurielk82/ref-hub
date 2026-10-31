@@ -161,6 +161,7 @@ export function isResume(value: unknown): value is SaraminResume {
   if (typeof value !== "object" || value === null) return false;
   const r = value as Partial<SaraminResume>;
   return (
+    (r.title === undefined || typeof r.title === "string") &&
     strings(r.basic, [
       "name",
       "careerType",

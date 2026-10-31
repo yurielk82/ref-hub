@@ -81,7 +81,7 @@ async function writeContent(
   const current = await readContent(dir);
   if (input.revision !== current.revision)
     throw new ContentError(
-      "다른 창에서 저장한 내용이 있습니다. 수정한 글을 복사해 둔 뒤 새로고침해 주세요.",
+      "다른 창에서 저장한 내용이 있습니다. 수정한 글을 복사한 뒤 ‘수정 취소’ → 새로고침 → 다시 붙여넣기 순서로 진행해 주세요.",
     );
   if (Object.keys(changes).length === 0) return current;
   const next: ContentSnapshot = {

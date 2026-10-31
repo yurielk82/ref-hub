@@ -58,7 +58,10 @@ export function PortfolioEditor({
           .filter((field) => typeof previous.changes[field.id] === "string")
           .map((field) => [field.id, previous.changes[field.id]]),
       );
-      if (!Object.keys(recovered).length) return;
+      if (!Object.keys(recovered).length) {
+        sessionStorage.removeItem(draftKey);
+        return;
+      }
       setDraft((current) => ({ ...current, ...recovered }));
       setRevision(previous.revision);
       setMessage("이 창에서 저장하지 않은 수정 내용을 복구했습니다.");

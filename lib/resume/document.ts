@@ -17,6 +17,8 @@ export interface DocBlock {
   text: string;
   pageBreakBefore?: boolean;
   imagePath?: string;
+  /** 문서에 넣을 이미지 너비(px). 생략하면 기존 사례 양식을 따른다. */
+  imageWidth?: number;
 }
 
 export interface ResumeDocument {

@@ -404,45 +404,64 @@ export const DELIVERY_PROJECTS: Project[] = [
       "경영진이 판매·수금·채권과 목표 대비 실적을 매일 확인하는 BI(경영 정보 분석) 화면을 구축·운영합니다. 품목에서 거래처·담당자별 실적으로 내려가 확인하고, 마감 후 원천 자료와 검산한 보고 자료를 갱신하도록 구성했습니다.",
     category: "web",
     scope: "company",
-    screenshot: "/images/portfolio/pharmkpi-exec/daily.webp",
+    screenshot: "/images/portfolio/pharmkpi-exec/bin-composition-business.webp",
     screensNote:
-      "거래처·금액은 시험용 합성 자료입니다. 데일리 리포트를 운영하며, 월간 리포트·방문 준비·전망은 확장 기능의 검수 화면입니다. 메뉴 노출은 운영 설정에 따라 다릅니다.",
+      "검수(bin) 화면을 직접 촬영했습니다. 공개를 위해 거래처·담당자 이름과 금액을 바꿨습니다. 전망 등 검수 기능은 운영 화면의 표시 범위와 다를 수 있습니다.",
     screens: [
       {
-        src: "/images/portfolio/pharmkpi-exec/daily.webp",
+        src: "/images/portfolio/pharmkpi-exec/bin-composition-business.webp",
+        title: "사업 구조별 판매 구성",
+        caption:
+          "매출구분은 판매가 발생한 사업 범위를, 도매분류는 유통 경로를 보여 줍니다. CSO 여부와 현재 담당 팀별 비중도 함께 비교합니다. 각 구분의 금액과 비중을 표시하고, 항목을 누르면 해당 범위의 실적으로 좁혀 확인합니다.",
+      },
+      {
+        src: "/images/portfolio/pharmkpi-exec/bin-composition-product.webp",
+        title: "주요품목·약효군별 판매 구성",
+        caption:
+          "주요품목에 실적이 얼마나 집중되는지, 어떤 약효군이 판매를 구성하는지 비교합니다. 전체 합계만으로는 드러나지 않는 제품 포트폴리오의 구성을 확인하는 화면입니다.",
+      },
+      {
+        src: "/images/portfolio/pharmkpi-exec/bin-composition-production.webp",
+        title: "제형·생산구분별 판매 구성",
+        caption:
+          "주사제·경구제 등 제형별 비중과 자사·위탁 등 생산구분별 판매 구성을 비교합니다. 같은 판매 실적을 제품 특성과 생산 방식이라는 다른 기준으로 읽습니다.",
+      },
+      {
+        src: "/images/portfolio/pharmkpi-exec/bin-daily.webp",
         title: "데일리 리포트",
         caption:
-          "아침마다 여는 첫 화면입니다. 판매 실적과 목표 달성률, 수금 실적, 월별 판매 추이와 채널 구성을 한 화면에서 보고 날짜를 넘겨 지난 날도 확인합니다.",
+          "판매와 수금의 자료 기준일, 당일·당월·연 누적 실적, 목표 달성률을 확인합니다. 검수 화면에는 연간 예상 매출과 품목·거래처 증감 카드도 함께 표시됩니다.",
       },
       {
-        src: "/images/portfolio/pharmkpi-exec/item-detail.webp",
-        title: "품목 판매 분석",
+        src: "/images/portfolio/pharmkpi-exec/bin-sales-detail.webp",
+        title: "판매 상세 — 추이와 비교",
         caption:
-          "품목을 누르면 12개월 판매 추이와 전년 동월 비교가 열리고, 같은 기간 거래처·담당자별 실적으로 바로 내려가 볼 수 있습니다. 기간 단위와 담당 기준도 바꿀 수 있습니다.",
+          "일·월·연 단위의 판매 추이와 전월·전분기·전년 비교를 보고, 담당 기준·분석 기준·판매 범위·추가 조건을 바꿔 확인합니다. 아래 구성 차트와 상세 내역도 선택한 조건을 따라갑니다.",
       },
       {
-        src: "/images/portfolio/pharmkpi-exec/monthly.webp",
-        title: "월간 리포트",
+        src: "/images/portfolio/pharmkpi-exec/bin-item-detail.webp",
+        title: "품목 상세 — 거래처·담당자까지 연결",
         caption:
-          "끝난 달의 판매·반품·매출할인·수금과 실매출을 전년 동월과 비교하고, 월말 채권 잔고를 함께 봅니다. 거래처·브랜드 범위를 골라 같은 표를 다시 계산합니다.",
+          "품목 순위에서 하나를 선택해 해당 품목의 기간별 실적과 연결된 거래처·담당자 내역으로 내려갑니다. 전체 실적에서 시작한 질문을 개별 품목과 담당 범위까지 이어서 확인하는 흐름입니다.",
       },
       {
-        src: "/images/portfolio/pharmkpi-exec/visits.webp",
-        title: "거래처 방문 준비",
+        src: "/images/portfolio/pharmkpi-exec/bin-collection-detail.webp",
+        title: "수금 상세",
         caption:
-          "방문할 거래처를 고르면 연도별 순매출, 품목별 매출 순위와 할인율을 한 장에 모아 보여 줍니다. 방문 전에 거래 현황을 확인하는 용도입니다.",
+          "판매와 별도로 수금의 기준일·누적 실적·기간별 추이를 확인하고, 수금 구성과 거래처별 내역을 살펴봅니다. 상단 탭으로 판매·수금·채권 분석을 오갈 수 있습니다.",
       },
       {
-        src: "/images/portfolio/pharmkpi-exec/forecast.webp",
-        title: "연간 매출 전망(검수 화면)",
+        src: "/images/portfolio/pharmkpi-exec/bin-receivables-detail.webp",
+        title: "채권 상세",
         caption:
-          "현재 운영 화면에서는 숨긴 기능입니다. 연 누적 실적에 최근 3개월 평균을 이어 붙여 연말 예상치를 내고, 작년 추세·증감률 방식의 참고값과 목표까지 남은 금액을 함께 보여 줍니다. 전망이 바뀐 이유도 항목별로 나눠 적습니다.",
+          "월별 채권잔고 추이와 채권연령별 분포를 확인합니다. 팀·담당자·소송 등록 여부로 대상을 좁혀, 판매·수금 실적과 별도로 남은 채권을 점검합니다.",
       },
     ],
     emoji: "📊",
     gradient: "from-blue-600/20 to-cyan-600/20",
     features: [
       "판매·수금·채권과 목표 달성률을 한눈에 보는 데일리 리포트",
+      "매출구분·도매분류·CSO·현재 팀·주요품목·약효군·제형·생산구분별 판매 구성",
       "품목별 추이·전년 비교에서 거래처·담당자별 실적으로 상세 조회",
       "판매·수금 마감 후 보고 자료 갱신과 원천 자료 검산",
       "자료 기준일 표시, 과거 보고 자료 보관, 메뉴별 게시 관리",

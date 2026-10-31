@@ -49,9 +49,11 @@ export function portfolioDocument(
     const project = DELIVERY_PROJECTS.find(
       (item) => item.slug === chapter.projects[0],
     );
-    // 유통재고는 아직 진행 중이며 별도 공개 화면이 없어 경영지표 화면을 중복 싣지 않는다.
+    // 유통재고는 별도 공개 화면이 없다. BI 화면은 아래 전용 페이지에서 크게 보여 준다.
     const screen =
-      id === "distribution-inventory" ? undefined : project?.screens?.[0];
+      id === "distribution-inventory" || id === "executive-bi"
+        ? undefined
+        : project?.screens?.[0];
     blocks.push(
       { kind: "heading", text: chapter.title, pageBreakBefore: true },
       { kind: "paragraph", text: chapter.period },
@@ -76,6 +78,41 @@ export function portfolioDocument(
         kind: "paragraph",
         text: `상세 사례: https://ref.dvsharp.com/projects/${project.slug}`,
       });
+    if (id === "executive-bi" && project?.screens) {
+      // 구분별 지표와 상세 화면은 읽을 수 있는 크기로 별도 페이지에 싣는다.
+      const pages = [
+        ["bin-composition-business.webp"],
+        ["bin-composition-product.webp", "bin-composition-production.webp"],
+        ["bin-item-detail.webp"],
+        ["bin-collection-detail.webp"],
+      ];
+      for (const names of pages) {
+        const examples = project.screens.filter((item) =>
+          names.some((name) => item.src.endsWith(name)),
+        );
+        if (!examples.length) continue;
+        blocks.push({
+          kind: "heading",
+          text: `경영진 BI · ${examples[0].title}`,
+          pageBreakBefore: true,
+        });
+        for (const example of examples)
+          blocks.push(
+            { kind: "subheading", text: example.title },
+            {
+              kind: "image",
+              text: example.title,
+              imagePath: example.src,
+              imageWidth: 600,
+            },
+            { kind: "paragraph", text: example.caption },
+          );
+        blocks.push({
+          kind: "paragraph",
+          text: project.screensNote || "공개용 화면입니다.",
+        });
+      }
+    }
   }
   return {
     fileName: `${resume.basic.name}_포트폴리오.docx`,

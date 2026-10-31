@@ -4,7 +4,10 @@ import type { Metadata } from "next";
 import { AX_TRACK_CASE_SLUGS, getAxCase } from "@/data/ax";
 import { OTHER_PROJECTS, getProject } from "@/data/projects";
 import { AxCaseDetail } from "@/components/portfolio/ax-case-detail";
-import { CaseNarrative } from "@/components/portfolio/case-narrative";
+import {
+  CaseNarrative,
+  storyScreenSrcs,
+} from "@/components/portfolio/case-narrative";
 import { ProjectDetail } from "@/components/portfolio/project-detail";
 
 /** AX 트랙에서 여는 사례 — 회사 대표 사례와 개인·외부 작업 */
@@ -49,9 +52,10 @@ export default async function AxCasePage(props: {
         (caseStudy.ax ? (
           <AxCaseDetail caseStudy={caseStudy} view={caseStudy.ax} />
         ) : (
-          <CaseNarrative caseStudy={caseStudy} />
+          <CaseNarrative caseStudy={caseStudy} screens={project.screens} />
         ))
       }
+      storyScreens={caseStudy?.ax ? [] : storyScreenSrcs(caseStudy)}
       back={{
         href: isOwnWork ? "/ax#tools" : "/ax#cases",
         label: isOwnWork ? "개인 작업 목록" : "AX 사례 목록",

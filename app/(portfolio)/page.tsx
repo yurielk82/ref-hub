@@ -13,7 +13,7 @@ import { WorkSection } from "@/components/portfolio/work-section";
 
 // 이력서 링크를 공유했을 때 탭·미리보기에 이름이 먼저 보여야 한다.
 const LANDING_TITLE = `${AX_HERO.name} — ${AX_HERO.role}`;
-const LANDING_DESCRIPTION = `${AX_HERO.name} · ${AX_HERO.role}. 엑셀·스프레드시트 자료 관리·분석·보고 개선 경험. SFE·S&OP·유통재고 관리 업무 효율화.`;
+const LANDING_DESCRIPTION = `${AX_HERO.name} · ${AX_HERO.role}. 엑셀·스프레드시트 자료 관리·분석·보고 개선 경험. 공급내역보고·SFE·유통재고 관리 업무 효율화.`;
 const LANDING_PREVIEW_IMAGE = "/images/portfolio/pharmkpi/hero.png";
 
 export const metadata: Metadata = {
@@ -62,7 +62,7 @@ const PROJECT_GROUPS = [
     // 묶음을 나누기 전 키 — 방문자가 저장해 둔 순서를 이어 쓴다
     storageKey: "ref-hub-project-order",
     title: `업무 개선 레퍼런스 ${REFERENCE_PROJECTS.length}건`,
-    lead: "영업지원팀·회계팀·영업본부의 업무 화면과 엑셀 보고 자동화, 시장 분석, 현재 진행 중인 SFE·S&OP 사례입니다. 각 사례에서 수행 범위와 진행 상태를 확인할 수 있습니다.",
+    lead: "사례마다 어떤 문제가 있었고 무엇을 어떤 순서로 바꿨는지, 그 단계의 화면과 함께 정리했습니다.",
     projects: REFERENCE_PROJECTS,
   },
 ] as const;

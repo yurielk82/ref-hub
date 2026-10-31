@@ -17,13 +17,20 @@ export function ProjectDetail({
   narrative,
   back,
   track,
+  storyScreens = [],
 }: {
   project: Project;
   narrative: ReactNode;
   back: { href: string; label: string };
   track: Track;
+  /** 서사 단계에 이미 붙인 화면 src — 아래 화면 모음에서는 뺀다 */
+  storyScreens?: readonly string[];
 }) {
   const developer = TRACKS[track].developerLinks;
+  const shown = new Set(storyScreens);
+  const restScreens = (project.screens ?? []).filter(
+    (screen) => !shown.has(screen.src),
+  );
   return (
     <article className="px-6 pb-28 pt-12">
       <div className="mx-auto max-w-5xl">
@@ -108,8 +115,12 @@ export function ProjectDetail({
         {narrative}
 
         {/* 주요 화면 — 화면별 스크린샷과 업무 설명 */}
-        {project.screens && project.screens.length > 0 && (
-          <ScreenGallery screens={project.screens} note={project.screensNote} />
+        {restScreens.length > 0 && (
+          <ScreenGallery
+            screens={restScreens}
+            note={project.screensNote}
+            title={shown.size > 0 ? "그 밖의 화면" : "주요 화면"}
+          />
         )}
 
         {/* 핵심 모듈 콜아웃 */}

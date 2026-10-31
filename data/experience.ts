@@ -19,10 +19,10 @@ export const EXPERIENCES: Experience[] = [
     title: "부광유니파마(구 한국유니온제약) 영업관리팀",
     role: "과장 · 2026-08부터 영업본부 분석·기획 겸직",
     description:
-      "영업관리 실무를 바탕으로 스프레드시트·엑셀에서 반복하던 자료 취합·분석·보고 업무를 개선해 왔습니다. 필요한 시스템을 직접 구축해 활용하고 있으며, 현재는 SFE·S&OP·유통재고 관리 업무로 개선 범위를 넓히고 있습니다.",
+      "영업관리 실무를 바탕으로 스프레드시트·엑셀에서 반복하던 자료 취합·분석·보고 업무를 개선해 왔습니다. 필요한 시스템을 직접 구축해 활용하고 있으며, 현재는 영업 활동 분석(SFE)과 유통재고 관리로 개선 범위를 넓히고 있습니다.",
     highlights: [
       "매출·수금·채권 자료 분석 및 월간 KPI·영업회의 자료 작성",
-      "SFE를 통한 영업 활동·실적 분석, S&OP 및 유통재고 관리 업무 개선",
+      "SFE를 통한 영업 활동·실적 분석과 유통재고 관리 개선(진행 중)",
       "영업지원팀·회계팀·영업본부 부서별 업무 화면 구축과 엑셀 월 보고서 자동화",
       "공공 데이터 기반 시장·경쟁 분석",
       "CSO 정산 자료 조회 포털과 처방 자료 OCR 구축",
@@ -35,7 +35,7 @@ export const EXPERIENCES: Experience[] = [
       "monthly-sales-reports",
       "market-analysis",
       "sales-hq-sfe",
-      "sales-hq-snop",
+      "sales-strategy-portal",
       "csoweb",
       "kpis-dsr-api",
     ],
@@ -54,8 +54,8 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
     ],
   },
   {
-    label: "계획·재고 관리 개선",
-    items: ["판매·운영 계획(S&OP)", "유통재고 관리", "수요·공급·재고 검토"],
+    label: "재고 관리 개선",
+    items: ["유통재고 관리", "재고 개월수", "LOT·사용기한 관리"],
   },
   {
     label: "데이터 관리·검증",

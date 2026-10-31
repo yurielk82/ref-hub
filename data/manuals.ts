@@ -24,7 +24,7 @@ const MANUAL_DETAILS: Record<string, Omit<Manual, "slug" | "title">> = {
     projectSlug: "kpis-dsr-api",
   },
   pharmkpi: {
-    description: "매출·수금·채권 자료 취합·분석·보고 개선과 SFE·S&OP 업무 사례",
+    description: "매출·수금·채권 자료 취합·분석·보고 개선과 SFE 업무 사례",
     projectSlug: "pharmkpi",
   },
   "edi-verification": {

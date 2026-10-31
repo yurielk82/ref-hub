@@ -469,7 +469,7 @@ test("사이트 이름과 라벨은 소유자 이름과 한국어로 보인다",
   assert.match(heroEyebrow, /[가-힣]/, "hero label should be Korean");
 });
 
-test("사례마다 주요 화면 3~6장을 이미지와 제목·설명으로 싣는다", () => {
+test("사례마다 주요 화면 3~8장을 이미지와 제목·설명으로 싣는다", () => {
   const projectData = readProjectData();
   const blocks = projectData.split(/\n\s{2}\{\n/).slice(1);
   const q = `["']`;
@@ -489,8 +489,8 @@ test("사례마다 주요 화면 3~6장을 이미지와 제목·설명으로 싣
     ].map((m) => ({ src: m[2], title: m[4], caption: m[6] }));
 
     assert.ok(
-      screens.length >= 3 && screens.length <= 6,
-      `${slug}: 주요 화면은 3~6장이어야 한다 (지금 ${screens.length}장)`,
+      screens.length >= 3 && screens.length <= 8,
+      `${slug}: 주요 화면은 3~8장이어야 한다 (지금 ${screens.length}장)`,
     );
     for (const { src, title, caption } of screens) {
       assert.ok(
@@ -504,4 +504,29 @@ test("사례마다 주요 화면 3~6장을 이미지와 제목·설명으로 싣
       );
     }
   }
+});
+
+test("사례 단계에 붙인 화면은 그 사례의 주요 화면 가운데 하나다", () => {
+  const projectData = readProjectData();
+  const projectBlocks = new Map(
+    projectData
+      .split(/\n\s{2}\{\n/)
+      .slice(1)
+      .map((block) => [block.match(/slug:\s*["']([^"']+)["']/)?.[1], block]),
+  );
+  const caseBlocks = readAxData()
+    .split(/projectSlug:\s*/)
+    .slice(1);
+  let checked = 0;
+  for (const block of caseBlocks) {
+    const slug = block.match(/^["']([^"']+)["']/)?.[1];
+    for (const [, src] of block.matchAll(/\bscreen:\s*["']([^"']+)["']/g)) {
+      checked += 1;
+      assert.ok(
+        projectBlocks.get(slug)?.includes(src),
+        `${slug}: 단계 화면 ${src}이 그 사례의 screens에 없다`,
+      );
+    }
+  }
+  assert.ok(checked > 0, "단계에 화면을 붙인 사례가 하나 이상 있어야 한다");
 });

@@ -68,7 +68,7 @@ export const WORK_CHAPTERS: readonly WorkChapter[] = [
     results: [
       "태블릿용 조회 화면에서 발전시킨 경영진 데일리 리포트 운영 중",
       "일일 현황 확인과 품목·거래처별 상세 조회를 같은 보고 화면에서 제공",
-      "자료 생성·검산에 실패하면 새 자료 게시를 막고 마지막 정상 자료를 유지",
+      "메뉴별 보고 자료의 갱신 여부를 원천 검산 결과에 따라 관리",
     ],
     projects: ["pharmkpi-exec"],
   },

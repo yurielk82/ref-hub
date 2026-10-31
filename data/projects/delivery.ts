@@ -406,7 +406,7 @@ export const DELIVERY_PROJECTS: Project[] = [
     scope: "company",
     screenshot: "/images/portfolio/pharmkpi-exec/daily.webp",
     screensNote:
-      "거래처·금액은 시험용 합성 자료입니다. 데일리 리포트를 운영하며, 아래 월간 리포트·방문 준비·전망은 확장 기능의 검수 화면입니다. 메뉴 노출은 운영 설정에 따라 다릅니다.",
+      "거래처·금액은 시험용 합성 자료입니다. 데일리 리포트를 운영하며, 월간 리포트·방문 준비·전망은 확장 기능의 검수 화면입니다. 메뉴 노출은 운영 설정에 따라 다릅니다.",
     screens: [
       {
         src: "/images/portfolio/pharmkpi-exec/daily.webp",
@@ -445,7 +445,7 @@ export const DELIVERY_PROJECTS: Project[] = [
       "판매·수금·채권과 목표 달성률을 한눈에 보는 데일리 리포트",
       "품목별 추이·전년 비교에서 거래처·담당자별 실적으로 상세 조회",
       "판매·수금 마감 후 보고 자료 갱신과 원천 자료 검산",
-      "자료 기준일 표시, 과거 보고 자료 보관, 실패 시 마지막 정상 자료 유지",
+      "자료 기준일 표시, 과거 보고 자료 보관, 메뉴별 게시 관리",
     ],
     highlight: "판매·수금·채권을 일일 보고와 상세 분석으로 연결",
     year: "2026",

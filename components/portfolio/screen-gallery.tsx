@@ -13,9 +13,11 @@ import { cn } from "@/lib/utils";
 export function ScreenGallery({
   screens,
   note,
+  title = "주요 화면",
 }: {
   screens: ProjectScreen[];
   note?: string;
+  title?: string;
 }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [active, setActive] = useState<number | null>(null);
@@ -69,7 +71,7 @@ export function ScreenGallery({
         id="screens-heading"
         className="text-2xl font-bold tracking-tight text-stone-900 dark:text-stone-100"
       >
-        주요 화면
+        {title}
       </h2>
       {note && (
         <p className="mt-2 max-w-2xl text-sm text-stone-500 dark:text-stone-400">

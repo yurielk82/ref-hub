@@ -70,6 +70,35 @@ export const DELIVERY_PROJECTS: Project[] = [
     category: "web",
     scope: "company",
     docsPath: "/pharmkpi",
+    screenshot: "/images/portfolio/accounting-ledger/accounting-home.webp",
+    screensNote:
+      "공개용 화면이라 거래처·사람 이름·사업자번호·거래처코드는 가짜 값으로, 금액·수량은 실제와 다른 값으로 바꿔 찍었습니다.",
+    screens: [
+      {
+        src: "/images/portfolio/accounting-ledger/accounting-home.webp",
+        title: "회계팀 홈",
+        caption:
+          "월말 실매출(판매−반품−매출할인)을 도매·수출·수탁 구분별 공급가액·부가세로 나눠 회계 제출 양식 그대로 복사하고, 수금 방법별 실적과 도매 채권 잔액을 한 화면에서 봅니다.",
+      },
+      {
+        src: "/images/portfolio/accounting-ledger/customer-ledger.webp",
+        title: "거래처 원장",
+        caption:
+          "사업자 하나에 묶인 거래처코드를 골라 회계 보조원장 형식(전기이월·차변·대변·월계·누계)으로 판매·수금·수금조정 줄을 날짜순으로 쌓고, 월말 잔액을 회계 채권과 대조합니다.",
+      },
+      {
+        src: "/images/portfolio/accounting-ledger/collection-adjustments.webp",
+        title: "수금조정 내역",
+        caption:
+          "월별 도매 채권 증감(전월말+판매−수금±수금조정=월말)을 보고, 원본 판매·수금에 없는 채권 이동을 거래처별 수금조정 줄로 남겨 원장에서 바로 확인합니다.",
+      },
+      {
+        src: "/images/portfolio/accounting-ledger/business-status.webp",
+        title: "사업자 휴·폐업 조회",
+        caption:
+          "기간 안에 판매나 채권 잔고가 있는 사업자를 국세청 상태와 맞춰 휴·폐업 거래처만 골라냅니다. 채권이 남은 폐업 거래처를 마지막 판매일과 함께 확인합니다.",
+      },
+    ],
     emoji: "📒",
     gradient: "from-emerald-600/20 to-teal-600/20",
     features: [
@@ -91,6 +120,29 @@ export const DELIVERY_PROJECTS: Project[] = [
     category: "web",
     scope: "company",
     docsPath: "/pharmkpi",
+    screenshot: "/images/portfolio/monthly-sales-reports/sales-collection.webp",
+    screensNote:
+      "공개용 화면이라 거래처·사람 이름·사업자번호·거래처코드는 가짜 값으로, 금액·수량은 실제와 다른 값으로 바꿔 찍었습니다.",
+    screens: [
+      {
+        src: "/images/portfolio/monthly-sales-reports/sales-collection.webp",
+        title: "판매·수금 요약",
+        caption:
+          "매달 엑셀로 만들던 판매·수금 요약 양식을 같은 모양으로 다시 계산합니다. 지점별 월 판매와 목표·달성률·성장률을 기준월만 고르면 바로 보고, 원본 양식 엑셀로 내려받습니다.",
+      },
+      {
+        src: "/images/portfolio/monthly-sales-reports/brand-sku.webp",
+        title: "브랜드·품목 매출",
+        caption:
+          "브랜드와 품목(SKU)별 월 매출을 약효군·주요품목 구분과 함께 펼치고, 분기 평균과 전년 같은 달 대비 증감을 나란히 봅니다.",
+      },
+      {
+        src: "/images/portfolio/monthly-sales-reports/rep-channel.webp",
+        title: "담당자·유통별 월평균",
+        caption:
+          "부서·담당자·거래처 유통 구분별 공급가액 월평균을 지난해·분기·이번 달로 비교하고, 담당자 안에서 유통 구분별 점유율을 봅니다.",
+      },
+    ],
     emoji: "🗂️",
     gradient: "from-amber-600/20 to-orange-600/20",
     features: [
@@ -114,6 +166,29 @@ export const DELIVERY_PROJECTS: Project[] = [
     category: "web",
     scope: "company",
     docsPath: "/pharmkpi",
+    screenshot: "/images/portfolio/market-analysis/portfolio.webp",
+    screensNote:
+      "시장 화면은 심평원·식약처 공공 데이터라 값을 바꾸지 않았습니다. 경쟁 제품 화면의 업체·제품 표시는 가렸습니다.",
+    screens: [
+      {
+        src: "/images/portfolio/market-analysis/portfolio.webp",
+        title: "자사 포트폴리오",
+        caption:
+          "식약처 허가 품목과 심평원 보험 상한가를 모아 허가 품목 수, 평균 상한가, 전문·일반 비율, 특허 만료 임박 품목을 한 화면에 보여 줍니다. 공공 데이터는 매일 자동으로 다시 받습니다.",
+      },
+      {
+        src: "/images/portfolio/market-analysis/competition.webp",
+        title: "대조약·경쟁 제품",
+        caption:
+          "시장이 큰 성분에서 점유가 높은 제품을 점유율과 성장률 좌표로 찍어, 자사 품목이 들어간 시장에서 누가 크고 누가 빠르게 크는지 봅니다.",
+      },
+      {
+        src: "/images/portfolio/market-analysis/national.webp",
+        title: "전국 시장",
+        caption:
+          "심평원 청구 자료로 성분별 최근 12개월(MAT) 시장 규모와 점유율, 전년비, 5년 연평균 성장률 순위를 매기고, 성분·ATC·상병 기준으로 바꿔 봅니다.",
+      },
+    ],
     emoji: "🧭",
     gradient: "from-indigo-600/20 to-sky-600/20",
     features: [
@@ -190,12 +265,12 @@ export const DELIVERY_PROJECTS: Project[] = [
   },
   {
     slug: "sales-hq-snop",
-    name: "판매 계획·재고 검토 업무 개선(S&OP)",
-    tagline: "매출 예측과 수요·공급·재고 검토를 연결하는 계획 업무 개선",
+    name: "판매·운영 계획(S&OP) 개인 시제품",
+    tagline: "계획 업무 흐름을 익히려고 직접 만들어 본 매출 예측·시나리오 화면",
     description:
-      "매출 예측·시나리오 비교·계획 저장과 수요·공급·재고 검토 화면을 구축했습니다. 유통재고 관리 업무의 효율화도 함께 진행하고 있습니다. 기능 배포 후 업무 적용·검증 진행 중.",
+      "회사가 외부 컨설팅으로 판매·운영 계획(S&OP)을 ERP에 반영하는 동안, 영업 데이터로 매출 예측과 가정별 시나리오 비교, 수요·공급·재고 검토 화면을 직접 만들어 보며 계획 업무의 흐름을 익혔습니다. 업무에는 적용하지 않은 개인 시제품입니다.",
     category: "web",
-    scope: "company",
+    scope: "other",
     screenshot: "/images/portfolio/sales-hq-snop/monthly-overview.webp",
     screensNote:
       "공개용 화면이라 금액·수량은 실제와 다른 값으로 바꿔 찍었습니다.",
@@ -244,16 +319,16 @@ export const DELIVERY_PROJECTS: Project[] = [
       "수요 검토와 공급·재고 검토 화면",
       "계획 조정·승인 절차와 자료 준비 상태 확인",
     ],
-    highlight: "매출 예측과 수요·공급·재고 검토를 연결하는 계획 업무 개선",
+    highlight: "계획 업무 흐름을 익히려고 직접 만들어 본 S&OP 시제품",
     year: "2026",
     tech: ["Next.js", "TypeScript", "Python"],
   },
   {
     slug: "sales-strategy-portal",
-    name: "영업 자료 조회·보고",
-    tagline: "주문·거래처·품목·재고·수금 자료를 직접 조회·분석",
+    name: "영업지원팀 홈과 마감 관리",
+    tagline: "영업지원팀이 매일 챙기는 마감·수치를 한 화면에",
     description:
-      "자료별 검색·필터·내려받기 기능을 구성하고, 월말 마감과 매출할인 반영 상태를 확인하도록 했습니다. PharmKPI 내 영업지원 화면 운영 중.",
+      "영업지원팀이 매일 확인하는 청구서·판매·수금·물류·공급내역보고 마감과 적기보고율(목표 95%), 실매출·수금·채권, 품목 구성을 홈 한 화면에 모았습니다. 주문·채권·LOT 재고 조회와 회계 제출용 실매출 복사도 같은 메뉴에 둡니다. PharmKPI 영업지원팀 메뉴 운영 중.",
     category: "web",
     scope: "company",
     docsPath: "/pharmkpi",
@@ -266,6 +341,12 @@ export const DELIVERY_PROJECTS: Project[] = [
         title: "영업지원 홈",
         caption:
           "오늘의 마감(청구서·판매·수금·물류·공급내역보고) 상태부터 실매출·판매·반품·매출할인·수금 현황, 채권 잔고·회전일까지 영업지원 업무 순서대로 한 화면에 모았습니다. 각 지표는 전년 같은 달의 같은 영업일과 비교합니다.",
+      },
+      {
+        src: "/images/portfolio/sales-strategy-portal/home-donut.webp",
+        title: "실매출 구성 도넛",
+        caption:
+          "영업지원팀에 요구되는 실매출 구성을 CSO·비CSO, 도매 분류, 브랜드, SKU 등으로 나눠 월·분기·연 누계와 전월비로 봅니다. 주요품목 조각은 브랜드로 내려갑니다.",
       },
       {
         src: "/images/portfolio/sales-strategy-portal/home-workflow.webp",

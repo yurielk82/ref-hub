@@ -14,7 +14,7 @@ export function WorkSection() {
       <FadeInUp>
         <SectionHeading
           title="주요 업무 및 개선 사례"
-          lead="현재 진행 중인 SFE·S&OP·유통재고 관리 개선과 영업 데이터 분석·업무 자동화 경험입니다."
+          lead="공급내역보고 오류 대응부터 부서별 업무 화면, SFE 분석까지 문제를 찾아 시스템으로 바꾼 순서대로 정리했습니다."
         />
       </FadeInUp>
       <ol className="mt-8 space-y-5">

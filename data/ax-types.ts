@@ -12,6 +12,8 @@ export interface AxCaseStep {
   phase: string;
   title: string;
   body: string;
+  /** 이 단계를 보여 주는 화면 — 같은 사례 screens의 src 가운데 하나. 상세 페이지에서 단계 바로 아래에 붙는다 */
+  screen?: string;
 }
 
 /** 지금 상태 — 운영 중 / 다른 시스템으로 이어짐 / 운영 종료. 끝난 일도 기록으로 남긴다. */

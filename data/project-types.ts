@@ -44,6 +44,6 @@ export const REFERENCE_PROJECT_SLUGS = [
   "accounting-ledger",
   "monthly-sales-reports",
   "sales-hq-sfe",
-  "sales-hq-snop",
+  "sales-strategy-portal",
   "market-analysis",
 ] as const;

@@ -14,7 +14,7 @@ export function WorkSection() {
       <FadeInUp>
         <SectionHeading
           title="주요 업무 및 개선 사례"
-          lead="공급내역보고 오류 대응부터 부서별 업무 화면, SFE 분석까지 문제를 찾아 시스템으로 바꾼 순서대로 정리했습니다."
+          lead="가장 공들인 공급내역보고 절차를 먼저 두고, 부서별 업무 화면과 영업 분석이 뒤를 잇습니다."
         />
       </FadeInUp>
       <ol className="mt-8 space-y-5">

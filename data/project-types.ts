@@ -38,12 +38,12 @@ export interface Project {
 
 /** 영업관리 지원용 대표 레퍼런스. 화면별 세부 사례는 개별 주소로 보존한다. */
 export const REFERENCE_PROJECT_SLUGS = [
-  "pharmkpi",
   "kpis-dsr-api",
+  "pharmkpi",
+  "sales-strategy-portal",
   "csoweb",
   "accounting-ledger",
   "monthly-sales-reports",
   "sales-hq-sfe",
-  "sales-strategy-portal",
   "market-analysis",
 ] as const;

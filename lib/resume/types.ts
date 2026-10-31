@@ -26,6 +26,8 @@ export interface SaraminEducation {
 }
 
 export interface SaraminResume {
+  /** 이력서 제목 — 예전 버전에는 없다 */
+  title?: string;
   basic: {
     name: string;
     careerType: string;

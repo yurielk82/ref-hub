@@ -138,3 +138,9 @@ test("폴더 지정이 없으면 공고 저장 폴더 옆 resume 폴더를 쓴�
     process.env = saved;
   }
 });
+
+test("사람인 이력서 제목은 없어도 되고, 있으면 글자여야 한다", () => {
+  assert.equal(isResume(resume()), true);
+  assert.equal(isResume(resume({ title: "제약 영업관리 과장" })), true);
+  assert.equal(isResume(resume({ title: 3 })), false);
+});

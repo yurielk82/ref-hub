@@ -55,7 +55,11 @@ export function PortfolioEditor({
         return;
       const recovered = Object.fromEntries(
         fields
-          .filter((field) => typeof previous.changes[field.id] === "string")
+          .filter(
+            (field) =>
+              typeof previous.changes[field.id] === "string" &&
+              previous.changes[field.id].trim() !== field.value,
+          )
           .map((field) => [field.id, previous.changes[field.id]]),
       );
       if (!Object.keys(recovered).length) {

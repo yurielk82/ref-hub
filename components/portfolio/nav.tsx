@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { Moon, Sun } from "lucide-react";
+import { Monitor, Moon, Sun, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -29,11 +29,18 @@ function useCanViewJobs(): boolean {
   return canView;
 }
 
+/** 테마 선택 — 밝게·어둡게·기기 설정 따라가기 */
+const THEMES: { value: string; label: string; Icon: LucideIcon }[] = [
+  { value: "light", label: "밝게", Icon: Sun },
+  { value: "dark", label: "어둡게", Icon: Moon },
+  { value: "system", label: "기기 설정 따라가기", Icon: Monitor },
+];
+
 const LINK_CLASS =
   "rounded text-xs text-stone-500 transition-colors hover:text-[var(--accent)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]";
 
 export function PortfolioNav() {
-  const { resolvedTheme, setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname() ?? "/";
   const track = trackOf(pathname);
@@ -62,59 +69,71 @@ export function PortfolioNav() {
             </span>
           )}
         </Link>
-        <div className="flex min-w-0 items-center gap-3 overflow-x-auto [scrollbar-width:none]">
-          {nav.links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`${LINK_CLASS} shrink-0`}
-            >
-              {link.label}
-            </Link>
-          ))}
-          {canViewJobs && (
-            <Link
-              href="/jobs"
-              aria-current={pathname === "/jobs" ? "page" : undefined}
-              className="shrink-0 rounded text-xs font-semibold text-[var(--accent)] transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
-            >
-              공고 모음
-            </Link>
-          )}
-          {canViewJobs && (
-            <Link
-              href="/resume"
-              aria-current={pathname === "/resume" ? "page" : undefined}
-              className="shrink-0 rounded text-xs font-semibold text-[var(--accent)] transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
-            >
-              이력서
-            </Link>
-          )}
-          {nav.developerLinks && (
-            <a
-              href={AX_CONTACT.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`${LINK_CLASS} shrink-0`}
-              aria-label="GitHub"
-            >
-              <GitHubIcon />
-            </a>
-          )}
+        <div className="flex min-w-0 items-center gap-3">
+          <div className="flex min-w-0 items-center gap-3 overflow-x-auto [scrollbar-width:none]">
+            {nav.links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`${LINK_CLASS} shrink-0`}
+              >
+                {link.label}
+              </Link>
+            ))}
+            {canViewJobs && (
+              <Link
+                href="/jobs"
+                aria-current={pathname === "/jobs" ? "page" : undefined}
+                className="shrink-0 rounded text-xs font-semibold text-[var(--accent)] transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+              >
+                공고 모음
+              </Link>
+            )}
+            {canViewJobs && (
+              <Link
+                href="/resume"
+                aria-current={pathname === "/resume" ? "page" : undefined}
+                className="shrink-0 rounded text-xs font-semibold text-[var(--accent)] transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+              >
+                이력서
+              </Link>
+            )}
+            {nav.developerLinks && (
+              <a
+                href={AX_CONTACT.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${LINK_CLASS} shrink-0`}
+                aria-label="GitHub"
+              >
+                <GitHubIcon />
+              </a>
+            )}
+          </div>
           {mounted && (
-            <button
-              onClick={() =>
-                setTheme(resolvedTheme === "dark" ? "light" : "dark")
-              }
-              className="shrink-0 rounded-md p-1.5 text-stone-500 transition-colors hover:bg-stone-100 hover:text-[var(--accent)] dark:hover:bg-stone-800"
-              aria-label="테마 전환"
+            <div
+              role="group"
+              aria-label="화면 테마"
+              className="flex shrink-0 items-center gap-0.5 rounded-md border border-stone-200 p-0.5 dark:border-stone-800"
             >
-              {resolvedTheme === "dark" ? (
-                <Sun className="h-4 w-4" />
-              ) : (
-                <Moon className="h-4 w-4" />
-              )}
-            </button>
+              {THEMES.map(({ value, label, Icon }) => (
+                <button
+                  key={value}
+                  type="button"
+                  onClick={() => setTheme(value)}
+                  aria-pressed={theme === value}
+                  aria-label={label}
+                  title={label}
+                  className={`rounded p-1 transition-colors focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-[var(--accent)] ${
+                    theme === value
+                      ? "bg-stone-100 text-[var(--accent)] dark:bg-stone-800"
+                      : "text-stone-500 hover:text-[var(--accent)]"
+                  }`}
+                >
+                  <Icon className="h-3.5 w-3.5" />
+                </button>
+              ))}
+            </div>
           )}
         </div>
       </nav>

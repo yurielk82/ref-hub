@@ -13,7 +13,11 @@ const manuals = MANUALS.filter((manual) =>
 );
 
 /** 영업관리 트랙 일하는 방식 — 업무 절차를 세우고 문서로 정착시키는 순서와 그 근거 */
-export function MethodSection() {
+export function MethodSection({
+  steps = SALES_METHOD,
+}: {
+  steps?: typeof SALES_METHOD;
+}) {
   return (
     <section id="method" className="mt-16 scroll-mt-20">
       <FadeInUp>
@@ -30,7 +34,7 @@ export function MethodSection() {
 
       <div className="mt-8 grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
         <ol className="space-y-3">
-          {SALES_METHOD.map((step, index) => (
+          {steps.map((step, index) => (
             <FadeInUp key={step.title} delay={index * STEP_STAGGER_DELAY}>
               <li className="grid gap-4 rounded-lg border border-stone-200 bg-white p-4 dark:border-stone-800 dark:bg-stone-900 sm:grid-cols-[2.5rem_1fr]">
                 <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-stone-100 text-sm font-semibold tabular-nums text-[var(--accent)] dark:bg-stone-800">

@@ -13,7 +13,13 @@ import { TechTags } from "./tech-tags";
 
 const ENTRY_STAGGER_DELAY = 0.06;
 
-export function CareerSection() {
+export function CareerSection({
+  experiences = EXPERIENCES,
+  skills = SKILL_CATEGORIES,
+}: {
+  experiences?: typeof EXPERIENCES;
+  skills?: typeof SKILL_CATEGORIES;
+}) {
   return (
     <section id="career" className="mt-20 scroll-mt-20">
       <FadeInUp>
@@ -31,7 +37,7 @@ export function CareerSection() {
       </FadeInUp>
 
       <ol className="mt-8 space-y-4">
-        {EXPERIENCES.map((experience, index) => (
+        {experiences.map((experience, index) => (
           <li key={experience.title}>
             <FadeInUp delay={index * ENTRY_STAGGER_DELAY}>
               <CareerEntry experience={experience} />
@@ -46,7 +52,7 @@ export function CareerSection() {
         </h3>
       </FadeInUp>
       <div className="mt-4 grid gap-5 md:grid-cols-2">
-        {SKILL_CATEGORIES.map((category, index) => (
+        {skills.map((category, index) => (
           <FadeInUp key={category.label} delay={index * ENTRY_STAGGER_DELAY}>
             <div className="h-full rounded-lg border border-stone-200 bg-white p-5 dark:border-stone-800 dark:bg-stone-900">
               <h4 className="mb-4 font-[family-name:var(--font-mono)] text-xs uppercase text-stone-500">

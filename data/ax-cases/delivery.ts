@@ -353,13 +353,38 @@ export const DELIVERY_CASE_STUDIES: AxCaseStudy[] = [
         phase: "일일 보고",
         title: "매일 확인할 판매·수금·채권을 한곳에 모았습니다",
         body: "목표 대비 판매 실적과 수금, 채권 현황, 월별 추이를 데일리 리포트에서 확인합니다. 판매와 수금의 마지막 자료일을 따로 보여 서로 다른 시점의 숫자를 같은 날의 실적으로 오해하지 않도록 했습니다.",
-        screen: "/images/portfolio/pharmkpi-exec/daily.webp",
+        screen: "/images/portfolio/pharmkpi-exec/bin-daily.webp",
+      },
+      {
+        phase: "사업 구조",
+        title: "매출이 어디에서 발생했는지 구분해서 봅니다",
+        body: "매출구분은 판매가 발생한 사업 범위를, 도매분류는 유통 경로를 보여 줍니다. CSO 여부와 현재 담당 팀별 비중도 함께 비교합니다. 각 구분의 금액과 비중을 표시하고, 항목을 누르면 해당 범위의 실적으로 좁혀 확인합니다.",
+        screen: "/images/portfolio/pharmkpi-exec/bin-composition-business.webp",
+      },
+      {
+        phase: "제품 특성",
+        title: "주요품목과 약효군의 판매 비중을 비교합니다",
+        body: "주요품목에 실적이 얼마나 집중되는지, 어떤 약효군이 판매를 구성하는지 비교합니다. 전체 합계만으로는 드러나지 않는 제품 포트폴리오의 구성을 확인하는 화면입니다.",
+        screen: "/images/portfolio/pharmkpi-exec/bin-composition-product.webp",
+      },
+      {
+        phase: "제품·생산 방식",
+        title: "제형과 생산구분에 따라 실적을 읽습니다",
+        body: "주사제·경구제 등 제형별 비중과 자사·위탁 등 생산구분별 판매 구성을 비교합니다. 같은 판매 실적을 제품 특성과 생산 방식이라는 다른 기준으로 읽습니다.",
+        screen:
+          "/images/portfolio/pharmkpi-exec/bin-composition-production.webp",
+      },
+      {
+        phase: "판매 분석",
+        title: "기간과 분석 기준을 바꿔 실적의 변화를 확인합니다",
+        body: "일·월·연 단위의 판매 추이와 전월·전분기·전년 비교를 보고, 담당 기준·분석 기준·판매 범위·추가 조건을 바꿔 확인합니다. 아래 구성 차트와 상세 내역도 선택한 조건을 따라갑니다.",
+        screen: "/images/portfolio/pharmkpi-exec/bin-sales-detail.webp",
       },
       {
         phase: "상세 확인",
         title: "품목에서 거래처·담당자별 실적까지 확인합니다",
         body: "품목별 판매 추이와 전년 동월 실적을 비교하고, 같은 기간 거래처·담당자별 내역으로 내려가 확인합니다. 전체 합계에서 생긴 질문을 구체적인 실적 내역까지 이어 볼 수 있도록 구성했습니다.",
-        screen: "/images/portfolio/pharmkpi-exec/item-detail.webp",
+        screen: "/images/portfolio/pharmkpi-exec/bin-item-detail.webp",
       },
       {
         phase: "갱신·검산",
@@ -372,7 +397,7 @@ export const DELIVERY_CASE_STUDIES: AxCaseStudy[] = [
       problem:
         "판매·수금·채권을 같은 기준으로 모으고, 전체 실적에서 생긴 질문을 품목·거래처별 내역까지 이어 볼 보고 화면이 필요했습니다.",
       build:
-        "데일리 리포트에 목표 대비 실적과 월별 추이를 모으고, 품목에서 거래처·담당자별 실적으로 내려가는 상세 조회를 구축했습니다.",
+        "데일리 리포트에 목표 대비 실적과 추이를 모았습니다. 사업 구조·제품 특성별 8개 판매 구성 차트와 담당자·품목·거래처 순위를 연결하고, 선택한 항목의 상세 실적으로 내려가도록 구축했습니다.",
       automation:
         "판매·수금 마감 후 보고 자료 생성과 원천 검산을 연결하고, 검산을 통과한 자료로 메뉴별 게시 자료를 갱신하도록 구성했습니다. 숫자는 정해진 계산식으로 산출합니다.",
       operation:

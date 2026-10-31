@@ -22,7 +22,7 @@
 저장 파일은 `~/.local/share/ref-hub/jobs/postings.json`(폴더 0700, 파일 0600)이다. 사람인 이용 조건에 저장 범위가
 정해져 있지 않아 본인 열람용으로만 두고 공개 화면·저장소에 싣지 않는다.
 
-사람인 이력서(`/resume`) 버전은 `~/.local/share/ref-hub/resume/versions/<저장시각-난수>.json`(폴더 0700, 파일 0600)이다.
+사람인 이력서(`/resume`) 버전은 `~/.local/share/ref-hub/resume/versions/<저장시각-난수>.json`, 잡코리아(`/resume?p=jobkorea`)는 같은 폴더의 `jobkorea-versions/`다(폴더 0700, 파일 0600).
 폴더는 `RESUME_DATA_DIR`로 바꿀 수 있고, 없으면 `JOBS_DATA_DIR` 옆 `resume` 폴더를 쓴다(따로 설정할 것 없음).
 화면에서 저장하면 새 파일이 생길 뿐 기존 버전은 고치지 않는다. 개인 정보라 저장소에 올리지 않는다.
 

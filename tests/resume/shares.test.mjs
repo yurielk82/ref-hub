@@ -86,6 +86,9 @@ test("두 탭이 만든 같은 문서 주소는 한 번에 중단하고 다른 �
     assert.equal(await readShare(dir, a.token), null);
     assert.equal(await readShare(dir, b.token), null);
     assert.ok(await readShare(dir, career.token));
+    const replacement = await createShare(dir, input, file);
+    await assert.rejects(revokeDocumentShares(dir, a.token), /새로고침/);
+    assert.ok(await readShare(dir, replacement.token));
   } finally {
     await rm(dir, { recursive: true, force: true });
   }

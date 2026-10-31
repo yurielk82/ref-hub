@@ -1,5 +1,6 @@
 "use client";
 
+import type { ShareSummary } from "@/lib/resume/shares";
 import type { JobkoreaResume, SaraminResume } from "@/lib/resume/types";
 
 import { JobkoreaFields } from "./jobkorea-fields";
@@ -7,6 +8,7 @@ import { ResumeShell, type VersionOption } from "./resume-shell";
 import { SaraminFields } from "./saramin-fields";
 
 interface WorkspaceProps<R> {
+  shares: ShareSummary[];
   version: VersionOption;
   versions: VersionOption[];
   previousLabel: string | null;

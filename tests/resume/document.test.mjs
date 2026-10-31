@@ -184,3 +184,20 @@ test("실제 경력기술서의 사각 제목과 성과 구분을 문서 제목�
     doc.blocks.some((b) => b.kind === "subheading" && b.text === "성과"),
   );
 });
+
+test("포트폴리오는 공개 업무 사례·운영 상태·화면을 포함한다", () => {
+  const doc = resumeDocument("saramin", saramin, "portfolio");
+  assert.equal(doc.fileName, "홍길동_포트폴리오.docx");
+  assert.ok(
+    doc.blocks.some(
+      (b) => b.kind === "image" && b.imagePath.startsWith("/images/portfolio/"),
+    ),
+  );
+  assert.ok(doc.blocks.some((b) => b.text.includes("운영 종료")));
+  assert.ok(doc.blocks.some((b) => b.text.includes("개선 진행 중")));
+  assert.ok(
+    doc.blocks.some((b) =>
+      b.text.includes("https://ref.dvsharp.com/projects/pharmkpi"),
+    ),
+  );
+});

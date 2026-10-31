@@ -1,3 +1,4 @@
+import { portfolioDocument } from "./portfolio.ts";
 import type {
   JobkoreaResume,
   ResumeByPlatform,
@@ -9,26 +10,34 @@ import type {
  * 사람인 '파일로 이력서 만들기'에 올릴 문서. 사람인은 파일마다 종류(이력서·경력기술서·자기소개서)를 골라
  * 칸으로 바꿔 주므로 세 파일로 나눈다. 여기서는 문서 내용만 정하고 DOCX로 굽는 일은 docx.ts가 한다.
  */
-export type DocKind = "resume" | "career" | "cover";
+export type DocKind = "resume" | "career" | "cover" | "portfolio";
 
 export interface DocBlock {
-  kind: "title" | "heading" | "subheading" | "paragraph" | "bullet";
+  kind: "title" | "heading" | "subheading" | "paragraph" | "bullet" | "image";
   text: string;
+  pageBreakBefore?: boolean;
+  imagePath?: string;
 }
 
 export interface ResumeDocument {
   fileName: string;
+  author?: string;
+  kind?: DocKind;
   blocks: DocBlock[];
 }
 
-const KIND_NAMES: Record<DocKind, string> = {
+export const KIND_NAMES: Record<DocKind, string> = {
   resume: "이력서",
   career: "경력기술서",
   cover: "자기소개서",
+  portfolio: "포트폴리오",
 };
 
 export function parseDocKind(value: unknown): DocKind | null {
-  return value === "resume" || value === "career" || value === "cover"
+  return value === "resume" ||
+    value === "career" ||
+    value === "cover" ||
+    value === "portfolio"
     ? value
     : null;
 }
@@ -38,6 +47,7 @@ export function resumeDocument<P extends ResumePlatform>(
   resume: ResumeByPlatform[P],
   kind: DocKind,
 ): ResumeDocument {
+  if (kind === "portfolio") return portfolioDocument(resume);
   const blocks =
     kind === "resume"
       ? platform === "jobkorea"
@@ -48,6 +58,8 @@ export function resumeDocument<P extends ResumePlatform>(
         : coverBlocks(resume.coverLetter);
   return {
     fileName: `${resume.basic.name}_${KIND_NAMES[kind]}.docx`,
+    author: resume.basic.name,
+    kind,
     blocks,
   };
 }
@@ -221,7 +233,16 @@ function careerBlocks(description: {
     const text = raw.trim();
     if (!text) continue;
     const last = blocks.at(-1);
-    if (/^\s/.test(raw) && last && last.kind !== "title") {
+    if (/^■\s*/.test(text)) {
+      blocks.push(heading(text.replace(/^■\s*/, "")));
+    } else if (/^\[[^\]]+\]$/.test(text)) {
+      blocks.push(subheading(text.slice(1, -1)));
+    } else if (
+      /^\s/.test(raw) &&
+      last &&
+      last.kind !== "title" &&
+      !/^[*•-]\s/.test(text)
+    ) {
       last.text = `${last.text} ${text}`;
     } else if (/^\d+\.\s/.test(text)) {
       blocks.push(heading(text));

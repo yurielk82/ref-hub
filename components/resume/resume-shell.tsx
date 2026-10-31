@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState, useTransition, type ReactNode } from "react";
-import { PencilLine, Save, X } from "lucide-react";
+import { Download, PencilLine, Save, X } from "lucide-react";
 
 import {
   saveResumeVersion,
@@ -12,6 +12,18 @@ import type { ResumePlatform } from "@/lib/resume/types";
 import { SITE_NAMES, resumeHref } from "@/lib/resume/platforms";
 
 import { BUTTON, PRIMARY_BUTTON, type FieldContext } from "./fields";
+
+const DOWNLOADS = [
+  ["resume", "이력서"],
+  ["career", "경력기술서"],
+  ["cover", "자기소개서"],
+] as const;
+
+function downloadHref(platform: ResumePlatform, id: string, kind: string) {
+  const params = new URLSearchParams({ kind, v: id });
+  if (platform !== "saramin") params.set("p", platform);
+  return `/resume/download?${params}`;
+}
 
 export interface VersionOption {
   id: string;
@@ -153,6 +165,29 @@ export function ResumeShell<R extends object>({
           ? `'${previousLabel}' 버전과 달라진 칸에 '변경' 표시가 붙습니다. ${SITE_NAMES[platform]}에서는 그 칸만 고치면 됩니다.`
           : "처음 저장한 버전이라 비교할 이전 버전이 없습니다."}
       </p>
+      <div
+        className="mt-3 flex flex-col gap-2 rounded-lg border border-stone-200 bg-white p-4 dark:border-stone-800 dark:bg-stone-900 sm:flex-row sm:items-center sm:justify-between"
+        data-print-hide
+      >
+        <p className="text-xs leading-5 text-stone-600 dark:text-stone-400">
+          사람인 &lsquo;파일로 이력서 만들기&rsquo;에 올릴 워드 파일입니다.
+          저장된 이 버전을 내려받습니다
+          {editing ? "(고치는 중인 내용은 저장해야 들어갑니다)" : ""}.
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {DOWNLOADS.map(([kind, name]) => (
+            <a
+              key={kind}
+              href={downloadHref(platform, version.id, kind)}
+              download
+              className={BUTTON}
+            >
+              <Download className="h-4 w-4" />
+              {name}
+            </a>
+          ))}
+        </div>
+      </div>
       {error && (
         <p
           role="alert"

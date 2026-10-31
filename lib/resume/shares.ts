@@ -112,3 +112,20 @@ export async function revokeShare(dir: string, token: string): Promise<void> {
     if (!missing(error)) throw error;
   }
 }
+
+/** 두 탭에서 만든 주소도 문서·형식 단위로 모두 중단한다. 클라이언트의 목록을 신뢰하지 않는다. */
+export async function revokeDocumentShares(
+  dir: string,
+  token: string,
+): Promise<void> {
+  const selected = await readShare(dir, token);
+  if (!selected) return;
+  for (const share of await listShares(
+    dir,
+    selected.platform,
+    selected.versionId,
+  )) {
+    if (share.kind === selected.kind && share.format === selected.format)
+      await revokeShare(dir, share.token);
+  }
+}

@@ -37,7 +37,7 @@ function textRuns(text: string) {
 }
 
 async function toParagraph(block: DocBlock): Promise<Paragraph> {
-  const common = { pageBreakBefore: block.pageBreakBefore };
+  const common = { pageBreakBefore: block.pageBreakBefore, widowControl: true };
   switch (block.kind) {
     case "title":
       return new Paragraph({
@@ -125,7 +125,7 @@ export async function toDocx(document: ResumeDocument): Promise<Buffer> {
       default: {
         document: {
           run: { font: FONT, size: 20, color: INK },
-          paragraph: { spacing: { after: 110, line: 300 }, widowControl: true },
+          paragraph: { spacing: { after: 110, line: 300 } },
         },
         title: {
           run: { font: FONT, size: 38, bold: true, color: INK },

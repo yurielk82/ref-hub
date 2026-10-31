@@ -30,7 +30,7 @@
 
 `/resume`에서 저장된 버전의 이력서·경력기술서·포트폴리오·자기소개서를 PDF 또는 DOCX로 내려받는다.
 문서 양식은 `lib/resume/docx.ts`, 포트폴리오 사례는 `data/work-history.ts`와 공개 화면 원본을 사용한다.
-PDF는 서버에 설치된 `/usr/bin/libreoffice`로 변환한다. 한글 글꼴은 `Noto Sans CJK KR`을 사용하며
+PDF는 서버에 설치된 `/usr/bin/libreoffice`와 `libreoffice-writer` 패키지로 변환한다. 한글 글꼴은 `Noto Sans CJK KR`을 사용하며
 요청별 임시 프로필과 파일은 변환 뒤 삭제한다. DOCX 생성은 `docx`, 공개 WebP 화면 변환은 기존 `sharp`를 사용한다.
 
 URL 복사 시 로그인·허용 계정을 다시 확인하고 선택 파일을 `RESUME_DATA_DIR/shares/<64자리 난수>.json`에 고정한다.

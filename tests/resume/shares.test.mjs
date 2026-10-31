@@ -8,6 +8,7 @@ import {
   listShares,
   readShare,
   revokeShare,
+  revokeDocumentShares,
 } from "../../lib/resume/shares.ts";
 
 test("제출 파일을 고정하고 버전별로 찾으며 공유 중단 뒤에는 읽을 수 없다", async () => {
@@ -57,6 +58,34 @@ test("제출 파일을 고정하고 버전별로 찾으며 공유 중단 뒤에�
     assert.deepEqual(await listShares(dir, "saramin", input.versionId), []);
     await revokeShare(dir, share.token);
     await assert.rejects(revokeShare(dir, "../versions/private"));
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+});
+
+test("두 탭이 만든 같은 문서 주소는 한 번에 중단하고 다른 문서는 유지한다", async () => {
+  const dir = await mkdtemp(path.join(tmpdir(), "resume-share-test-"));
+  try {
+    const input = {
+      platform: "saramin",
+      versionId: "20261101-010000-abcdef",
+      kind: "resume",
+      format: "docx",
+    };
+    const file = {
+      fileName: "sample.docx",
+      contentType: "application/octet-stream",
+      body: Buffer.from("file"),
+    };
+    const [a, b, career] = await Promise.all([
+      createShare(dir, input, file),
+      createShare(dir, input, file),
+      createShare(dir, { ...input, kind: "career" }, file),
+    ]);
+    await revokeDocumentShares(dir, a.token);
+    assert.equal(await readShare(dir, a.token), null);
+    assert.equal(await readShare(dir, b.token), null);
+    assert.ok(await readShare(dir, career.token));
   } finally {
     await rm(dir, { recursive: true, force: true });
   }

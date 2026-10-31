@@ -17,7 +17,8 @@ const LANDING_TITLE = `${AX_HERO.name} — ${AX_HERO.role}`;
 const LANDING_DESCRIPTION = `${AX_HERO.name} · ${AX_HERO.role}. 엑셀·스프레드시트 자료 관리·분석·보고 개선 경험. 공급내역보고·SFE·유통재고 관리 업무 효율화.`;
 const LANDING_PREVIEW_IMAGE = "/images/portfolio/pharmkpi/hero.png";
 
-const defaultMetadata: Metadata = {
+// Nextra가 빌드 중 문서 메뉴에서 읽으므로 요청별 API를 쓰지 않는다.
+export const metadata: Metadata = {
   title: { absolute: LANDING_TITLE },
   description: LANDING_DESCRIPTION,
   alternates: { canonical: "/" },
@@ -40,22 +41,6 @@ const defaultMetadata: Metadata = {
     images: [LANDING_PREVIEW_IMAGE],
   },
 };
-
-export async function generateMetadata(): Promise<Metadata> {
-  const { hero } = await loadPortfolio("sales");
-  const title = `${hero.name} — ${hero.role}`;
-  return {
-    ...defaultMetadata,
-    title: { absolute: title },
-    description: hero.subhead,
-    openGraph: {
-      ...defaultMetadata.openGraph,
-      title,
-      description: hero.subhead,
-    },
-    twitter: { ...defaultMetadata.twitter, title, description: hero.subhead },
-  };
-}
 
 /** Google ProfilePage 구조화 데이터 — 검색이 이 페이지를 한 사람의 프로필로 읽게 한다. */
 const PROFILE_JSON_LD = {

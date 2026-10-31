@@ -9,7 +9,7 @@ _Auto-generated. Do NOT edit between AUTO markers - content will be regenerated.
 ## Directory Tree (max-depth 3)
 
 ```
-ref-hub/  (26 files)
+ref-hub/  (28 files)
   .circleci/  (1 files)
   .github/  (1 files)
   .serena/  (1 files)
@@ -21,15 +21,25 @@ ref-hub/  (26 files)
     (portfolio)/  (2 files)
       ax/  (1 files)
       docs/  (1 files)
+      jobs/  (1 files)
+      login/  (1 files)
       projects/  (1 files)
+      resume/  (2 files)
     (submission)/  (0 files)
       medpark/  (2 files)
     api/  (0 files)
+      me/  (1 files)
       monitoring/  (1 files)
+    auth/  (0 files)
+      callback/  (1 files)
+      google/  (1 files)
+      logout/  (1 files)
   components/  (1 files)
+    jobs/  (2 files)
     medpark/  (0 files)
       doc/  (9 files)
-    portfolio/  (14 files)
+    portfolio/  (19 files)
+    resume/  (6 files)
   content/  (1 files)
     corerx/  (2 files)
       admin-guide/  (5 files)
@@ -57,6 +67,12 @@ ref-hub/  (26 files)
     plans/  (0 files)
       archive/  (0 files)
   lib/  (2 files)
+    auth/  (5 files)
+    jobs/  (8 files)
+    resume/  (9 files)
+  ops/  (0 files)
+    systemd/  (3 files)
+      github-ref-hub.service.d/  (1 files)
   public/  (0 files)
     images/  (0 files)
       portfolio/  (0 files)
@@ -65,8 +81,11 @@ ref-hub/  (26 files)
     ev-motor-reliability/  (0 files)
     kpis-dsr-api/  (0 files)
     studiogo/  (0 files)
-  scripts/  (8 files)
+  scripts/  (9 files)
   tests/  (11 files)
+    jobs/  (6 files)
+      fixtures/  (2 files)
+    resume/  (4 files)
 ```
 
 ## Top-Level Files
@@ -81,6 +100,7 @@ CLAUDE.md
 PROJECT.md
 README.md
 RULE_AUDIT_REPORT.md
+auth.ts
 commitlint.config.mjs
 ecosystem.config.cjs
 evaluation-report.md
@@ -92,6 +112,7 @@ package-lock.json
 package.json
 paseo.json
 postcss.config.mjs
+proxy.ts
 sentry.client.config.ts
 sentry.edge.config.ts
 sentry.server.config.ts

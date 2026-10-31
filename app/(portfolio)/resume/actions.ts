@@ -2,7 +2,11 @@
 
 import { parseDocKind, resumeDocument } from "@/lib/resume/document";
 import { parseFileFormat, renderFile } from "@/lib/resume/files";
-import { createShare, listShares } from "@/lib/resume/shares";
+import {
+  createShare,
+  listShares,
+  revokeDocumentShares,
+} from "@/lib/resume/shares";
 import { readVersion } from "@/lib/resume/versions";
 import { redirect } from "next/navigation";
 

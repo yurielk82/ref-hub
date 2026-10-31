@@ -146,7 +146,7 @@ export function ResumeDownloads({
                           kind,
                           format,
                         });
-                        if (result.error || !result.share) {
+                        if (!("share" in result)) {
                           setError(result.error || "링크를 만들지 못했습니다.");
                           return;
                         }

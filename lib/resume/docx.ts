@@ -10,6 +10,7 @@ import {
   Header,
   HeadingLevel,
   ImageRun,
+  LineRuleType,
   PageNumber,
   Packer,
   Paragraph,
@@ -87,7 +88,12 @@ async function toParagraph(block: DocBlock): Promise<Paragraph> {
         .toBuffer({ resolveWithObject: true });
       return new Paragraph({
         ...common,
-        spacing: { before: 200, after: 100 },
+        spacing: {
+          before: 200,
+          after: 100,
+          line: 240,
+          lineRule: LineRuleType.AUTO,
+        },
         keepNext: true,
         children: [
           new ImageRun({
@@ -125,11 +131,21 @@ export async function toDocx(document: ResumeDocument): Promise<Buffer> {
       default: {
         document: {
           run: { font: FONT, size: 20, color: INK },
-          paragraph: { spacing: { after: 110, line: 300 } },
+          paragraph: {
+            spacing: { after: 110, line: 300, lineRule: LineRuleType.AUTO },
+          },
         },
         title: {
           run: { font: FONT, size: 38, bold: true, color: INK },
-          paragraph: { spacing: { before: 120, after: 260 }, keepNext: true },
+          paragraph: {
+            spacing: {
+              before: 120,
+              after: 260,
+              line: 290,
+              lineRule: LineRuleType.AUTO,
+            },
+            keepNext: true,
+          },
         },
         heading1: {
           run: { font: FONT, size: 25, bold: true, color: ACCENT },

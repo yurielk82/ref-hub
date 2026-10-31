@@ -40,6 +40,7 @@ export interface Project {
 export const REFERENCE_PROJECT_SLUGS = [
   "kpis-dsr-api",
   "pharmkpi",
+  "pharmkpi-exec",
   "sales-strategy-portal",
   "csoweb",
   "accounting-ledger",

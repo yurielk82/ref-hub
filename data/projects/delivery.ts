@@ -398,22 +398,16 @@ export const DELIVERY_PROJECTS: Project[] = [
   },
   {
     slug: "pharmkpi-exec",
-    name: "경영진 보고 화면",
-    tagline: "매출·수금·채권 현황을 태블릿에서 조회",
+    name: "경영진 데일리 리포트(BI)",
+    tagline: "판매·수금·채권을 일일 보고와 상세 분석으로 연결",
     description:
-      "매출·수금·채권 조회 화면을 구성하고, 확인 가능한 자료를 기준으로 보고 항목을 정리했습니다. 2026년 7월 경영진용 BI로 이관.",
+      "경영진이 판매·수금·채권과 목표 대비 실적을 매일 확인하는 BI(경영 정보 분석) 화면을 구축·운영합니다. 품목에서 거래처·담당자별 실적으로 내려가 확인하고, 마감 후 원천 자료와 검산한 보고 자료를 갱신하도록 구성했습니다.",
     category: "web",
     scope: "company",
-    screenshot: "/images/portfolio/pharmkpi-exec/forecast.webp",
+    screenshot: "/images/portfolio/pharmkpi-exec/daily.webp",
     screensNote:
-      "공개용 화면이라 거래처·금액은 시험용 합성 자료로 채워 찍었습니다.",
+      "거래처·금액은 시험용 합성 자료입니다. 데일리 리포트를 운영하며, 월간 리포트·방문 준비·전망은 확장 기능의 검수 화면입니다. 메뉴 노출은 운영 설정에 따라 다릅니다.",
     screens: [
-      {
-        src: "/images/portfolio/pharmkpi-exec/forecast.webp",
-        title: "연간 매출 전망",
-        caption:
-          "연 누적 실적에 최근 3개월 평균을 이어 붙여 연말 예상치를 내고, 작년 추세·증감률 방식의 참고값과 목표까지 남은 금액을 함께 보여 줍니다. 전망이 바뀐 이유도 항목별로 나눠 적습니다.",
-      },
       {
         src: "/images/portfolio/pharmkpi-exec/daily.webp",
         title: "데일리 리포트",
@@ -438,25 +432,30 @@ export const DELIVERY_PROJECTS: Project[] = [
         caption:
           "방문할 거래처를 고르면 연도별 순매출, 품목별 매출 순위와 할인율을 한 장에 모아 보여 줍니다. 방문 전에 거래 현황을 확인하는 용도입니다.",
       },
+      {
+        src: "/images/portfolio/pharmkpi-exec/forecast.webp",
+        title: "연간 매출 전망(검수 화면)",
+        caption:
+          "현재 운영 화면에서는 숨긴 기능입니다. 연 누적 실적에 최근 3개월 평균을 이어 붙여 연말 예상치를 내고, 작년 추세·증감률 방식의 참고값과 목표까지 남은 금액을 함께 보여 줍니다. 전망이 바뀐 이유도 항목별로 나눠 적습니다.",
+      },
     ],
     emoji: "📊",
     gradient: "from-blue-600/20 to-cyan-600/20",
     features: [
-      "태블릿에서 확인하는 읽기 전용 보고 화면",
-      "매출·수금·채권 현황과 채권 연령별 조회",
-      "경영진용 BI로 이관 후 보고·분석 기능 개선",
+      "판매·수금·채권과 목표 달성률을 한눈에 보는 데일리 리포트",
+      "품목별 추이·전년 비교에서 거래처·담당자별 실적으로 상세 조회",
+      "판매·수금 마감 후 보고 자료 갱신과 원천 자료 검산",
+      "자료 기준일 표시, 과거 보고 자료 보관, 메뉴별 게시 관리",
     ],
-    highlight: "매출·수금·채권 현황을 태블릿에서 조회",
+    highlight: "판매·수금·채권을 일일 보고와 상세 분석으로 연결",
     year: "2026",
     tech: [
+      "Next.js 16",
       "React 19",
       "TypeScript",
-      "Vite",
-      "Capacitor",
-      "PWA",
       "Supabase",
       "Recharts",
-      "Anthropic SDK",
+      "TanStack Query",
     ],
   },
   {

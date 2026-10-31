@@ -6,6 +6,7 @@ import type { SaraminResume, JobkoreaResume } from "./types.ts";
 // 현재 이력서의 업무 흐름에 맞춘 대표 사례. 서술·운영 상태는 공개 원본을 그대로 사용한다.
 const CHAPTERS = [
   "sales-analysis",
+  "executive-bi",
   "sales-hq",
   "distribution-inventory",
   "cso-data",

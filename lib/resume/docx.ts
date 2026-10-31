@@ -100,8 +100,8 @@ async function toParagraph(block: DocBlock): Promise<Paragraph> {
             type: "png",
             data,
             transformation: {
-              width: 490,
-              height: Math.round((490 * info.height) / info.width),
+              width: 400,
+              height: Math.round((400 * info.height) / info.width),
             },
             altText: {
               title: block.text,

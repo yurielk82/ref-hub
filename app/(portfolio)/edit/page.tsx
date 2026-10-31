@@ -14,7 +14,8 @@ export default async function EditPage({
   searchParams: Promise<{ track?: string }>;
 }) {
   if (!(await jobsViewer())) redirect("/login");
-  const track = (await searchParams).track === "ax" ? "ax" : "sales";
+  if ((await searchParams).track === "ax") redirect("/ax/edit");
+  const track = "sales";
   const content = await loadPortfolio(track);
   return (
     <PortfolioEditor

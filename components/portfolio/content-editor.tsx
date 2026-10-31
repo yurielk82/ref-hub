@@ -36,13 +36,92 @@ export function PortfolioEditor({
   );
   const groups = [...new Set(fields.map((field) => field.group))];
   const home = track === "ax" ? "/ax" : "/";
+  // 뒤로가기·탭 복귀에도 미저장 글을 복구한다. 저장 revision은 함께 보존해 충돌 검사를 건너뛰지 않는다.
+  const draftKey = `ref-hub-portfolio-draft-${track}`;
+  useEffect(() => {
+    try {
+      const raw = sessionStorage.getItem(draftKey);
+      if (!raw) return;
+      const previous = JSON.parse(raw);
+      if (
+        typeof previous?.revision !== "string" ||
+        !previous.changes ||
+        typeof previous.changes !== "object"
+      )
+        return;
+      const recovered = Object.fromEntries(
+        fields
+          .filter((field) => typeof previous.changes[field.id] === "string")
+          .map((field) => [field.id, previous.changes[field.id]]),
+      );
+      if (!Object.keys(recovered).length) return;
+      setDraft((current) => ({ ...current, ...recovered }));
+      setRevision(previous.revision);
+      setMessage("이 창에서 저장하지 않은 수정 내용을 복구했습니다.");
+    } catch {
+      /* 브라우저 임시 저장이 차단돼도 편집·서버 저장은 가능하다. */
+    }
+  }, [draftKey, fields]);
+  useEffect(() => {
+    try {
+      if (dirty)
+        sessionStorage.setItem(
+          draftKey,
+          JSON.stringify({
+            revision,
+            changes: Object.fromEntries(
+              fields
+                .filter((field) => draft[field.id] !== saved[field.id])
+                .map((field) => [field.id, draft[field.id]]),
+            ),
+          }),
+        );
+      else sessionStorage.removeItem(draftKey);
+    } catch {
+      /* 브라우저의 저장 용량·권한 실패는 서버 저장에 영향을 주지 않는다. */
+    }
+  }, [draftKey, dirty, draft, saved, revision, fields]);
   useEffect(() => {
     if (!dirty) return;
     const onLeave = (event: BeforeUnloadEvent) => {
       event.preventDefault();
     };
+    const onNavigate = (event: MouseEvent) => {
+      if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      )
+        return;
+      const link =
+        event.target instanceof Element
+          ? event.target.closest("a[href]")
+          : null;
+      if (
+        !(link instanceof HTMLAnchorElement) ||
+        link.target === "_blank" ||
+        link.hasAttribute("download")
+      )
+        return;
+      if (new URL(link.href).href === window.location.href) return;
+      if (
+        !window.confirm(
+          "저장하지 않은 수정 내용이 있습니다. 페이지를 떠날까요?",
+        )
+      ) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+      }
+    };
     window.addEventListener("beforeunload", onLeave);
-    return () => window.removeEventListener("beforeunload", onLeave);
+    document.addEventListener("click", onNavigate, true);
+    return () => {
+      window.removeEventListener("beforeunload", onLeave);
+      document.removeEventListener("click", onNavigate, true);
+    };
   }, [dirty]);
 
   function submit() {
@@ -120,7 +199,7 @@ export function PortfolioEditor({
           const matches = fields.filter(
             (field) =>
               field.group === group &&
-              `${group} ${field.label} ${draft[field.id]}`.includes(query),
+              `${group} ${field.label} ${saved[field.id]}`.includes(query),
           );
           if (!matches.length) return null;
           return (
@@ -181,7 +260,7 @@ export function PortfolioEditor({
         })}
         {fields.every(
           (field) =>
-            !`${field.group} ${field.label} ${draft[field.id]}`.includes(query),
+            !`${field.group} ${field.label} ${saved[field.id]}`.includes(query),
         ) && (
           <p className="py-8 text-stone-600 dark:text-stone-300">
             일치하는 항목이 없습니다. 다른 단어로 찾아보세요.

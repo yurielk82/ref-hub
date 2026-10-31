@@ -87,7 +87,7 @@ export function ResumeDownloads({
       </div>
       <p className="mt-3 text-xs leading-5 text-stone-600 dark:text-stone-400">
         URL을 받은 사람은 로그인 없이 해당 파일을 받습니다. 공유 중단 전까지
-        유효하며, 제출한 파일 내용은 바뀌지 않습니다.
+        유효합니다. 이력서를 수정해도 공유 파일은 자동으로 바뀌지 않습니다.
       </p>
       {editing && (
         <p className="mt-2 text-xs text-amber-800 dark:text-amber-200">

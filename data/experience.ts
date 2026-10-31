@@ -22,6 +22,7 @@ export const EXPERIENCES: Experience[] = [
       "영업관리 실무를 바탕으로 스프레드시트·엑셀에서 반복하던 자료 취합·분석·보고 업무를 개선해 왔습니다. 필요한 시스템을 직접 구축해 활용하고 있으며, 현재는 영업 활동 분석(SFE)과 유통재고 관리로 개선 범위를 넓히고 있습니다.",
     highlights: [
       "매출·수금·채권 자료 분석 및 월간 KPI·영업회의 자료 작성",
+      "경영진 데일리 리포트(BI) 구축·운영: 목표 대비 실적, 품목·거래처 상세 조회, 마감 후 자료 갱신·검산",
       "SFE를 통한 영업 활동·실적 분석과 유통재고 관리 개선(진행 중)",
       "영업지원팀·회계팀·영업본부 부서별 업무 화면 구축과 엑셀 월 보고서 자동화",
       "공공 데이터 기반 시장·경쟁 분석",
@@ -31,6 +32,7 @@ export const EXPERIENCES: Experience[] = [
     ],
     projects: [
       "pharmkpi",
+      "pharmkpi-exec",
       "accounting-ledger",
       "monthly-sales-reports",
       "market-analysis",

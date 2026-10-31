@@ -58,3 +58,9 @@ sudo systemctl restart github-ref-hub.service   # 비밀 파일을 바꾼 뒤에
 되돌리기: `sudo systemctl disable --now ref-hub-jobs-collect.timer`, 위 세 파일을 지우고 `daemon-reload` 뒤 웹 서비스를 다시 시작한다.
 
 수집을 바로 한 번 돌리려면 `sudo systemctl start ref-hub-jobs-collect.service`, 결과는 `journalctl -u ref-hub-jobs-collect -n 50`.
+
+### 홈페이지 문구 편집
+
+허용된 Google 계정으로 로그인하면 상단에 `홈페이지 편집`이 표시된다. `/edit`는 영업관리 트랙, `/ax/edit`는 AX 트랙의 소개·사례·경력 문구를 편집한다. 저장은 공개 홈페이지에 반영하며 제출용 이력서 파일은 `/resume`에서 별도로 관리한다.
+
+문구 수정본은 기존 `RESUME_DATA_DIR`(또는 `JOBS_DATA_DIR` 옆 resume 폴더)의 `portfolio/current.json`에 보관한다. 같은 폴더의 `versions/<revision>.json`에 저장 이력이 남는다. 저장소 밖에 있으므로 배포로 덮어쓰지 않는다. 코드의 기본 문구에 수정한 항목만 덮어 적용한다. 동시 저장은 단일 Node 프로세스 큐와 revision 비교로 보호하며, 다중 인스턴스 전환 시 공유 저장소의 조건부 쓰기로 옮겨야 한다.

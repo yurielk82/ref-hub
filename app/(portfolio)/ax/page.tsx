@@ -1,17 +1,9 @@
+import { loadPortfolio } from "@/lib/portfolio/server";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, BookOpen, Bot, ShieldCheck, Workflow } from "lucide-react";
 
-import {
-  AX_GROUNDING,
-  AX_METHOD,
-  AX_PILLARS,
-  AX_STACK,
-  AX_TRACK_CASE_SLUGS,
-  AX_TRACK_HERO,
-  getAxCase,
-} from "@/data/ax";
-import { OTHER_PROJECTS, getProject } from "@/data/projects";
+import { AX_TRACK_HERO } from "@/data/ax";
 import { FadeInUp } from "@/components/portfolio/motion";
 import { ProjectCard } from "@/components/portfolio/project-card";
 import { TechTags } from "@/components/portfolio/tech-tags";
@@ -42,14 +34,10 @@ const toolRank = (slug: string) => {
 };
 const STAGGER_DELAY = 0.05;
 
-export default function AxPage() {
-  const cases = AX_TRACK_CASE_SLUGS.flatMap((slug) => {
-    const study = getAxCase(slug);
-    const project = getProject(slug);
-    return study?.ax && project ? [{ ...study, project, ax: study.ax }] : [];
-  });
-
-  const tools = [...OTHER_PROJECTS].sort(
+export default async function AxPage() {
+  const copy = await loadPortfolio("ax");
+  const cases = copy.cases;
+  const tools = [...copy.projects].sort(
     (a, b) => toolRank(a.slug) - toolRank(b.slug),
   );
 
@@ -57,10 +45,12 @@ export default function AxPage() {
     <article className="px-6 pb-28 pt-20 sm:pt-24">
       <div className="mx-auto max-w-6xl">
         <AxHeroSection
-          hero={AX_TRACK_HERO}
+          hero={copy.hero}
           primary={{ href: "/ax#cases", label: "대표 사례" }}
           track="ax"
         />
+
+        <AxCasesSection cases={cases} />
 
         <section id="method" className="mt-16 scroll-mt-20">
           <FadeInUp>
@@ -76,7 +66,7 @@ export default function AxPage() {
           </FadeInUp>
 
           <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            {AX_PILLARS.map((pillar, index) => {
+            {copy.pillars.map((pillar, index) => {
               const Icon = pillarIcons[index] ?? Workflow;
               return (
                 <FadeInUp key={pillar.title} delay={index * STAGGER_DELAY}>
@@ -107,7 +97,7 @@ export default function AxPage() {
               </div>
             </FadeInUp>
             <ol className="space-y-3">
-              {AX_METHOD.map((step, index) => (
+              {copy.axMethod.map((step, index) => (
                 <FadeInUp key={step.title} delay={index * STAGGER_DELAY}>
                   <li className="grid gap-4 rounded-lg border border-stone-200 bg-white p-4 dark:border-stone-800 dark:bg-stone-900 sm:grid-cols-[2.5rem_1fr]">
                     <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-stone-100 text-sm font-semibold tabular-nums text-[var(--accent)] dark:bg-stone-800">
@@ -128,9 +118,7 @@ export default function AxPage() {
           </div>
         </section>
 
-        <AxCasesSection cases={cases} />
-
-        <AxGroundingSection data={AX_GROUNDING} />
+        <AxGroundingSection data={copy.grounding} />
 
         <section id="tools" className="mt-20 scroll-mt-20">
           <FadeInUp>
@@ -170,7 +158,7 @@ export default function AxPage() {
           </FadeInUp>
 
           <div className="mt-8 grid gap-5 md:grid-cols-2">
-            {AX_STACK.map((group, index) => (
+            {copy.stack.map((group, index) => (
               <FadeInUp key={group.label} delay={index * STAGGER_DELAY}>
                 <div className="h-full rounded-lg border border-stone-200 bg-white p-5 dark:border-stone-800 dark:bg-stone-900">
                   <h3 className="mb-4 text-sm font-semibold text-stone-700 dark:text-stone-300">
@@ -184,8 +172,8 @@ export default function AxPage() {
         </section>
 
         <AxContactSection
-          title="업무 자동화와 데이터 시스템 구축 경험을 소개합니다."
-          lead="현업 문제를 찾아 시스템으로 바꾸고 운영해 온 과정을 사례와 함께 이야기하겠습니다."
+          title={copy.contact.title}
+          lead={copy.contact.lead}
           track="ax"
         />
       </div>

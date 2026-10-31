@@ -1,3 +1,4 @@
+import { loadPortfolio } from "@/lib/portfolio/server";
 import type { Metadata } from "next";
 import { AX_CONTACT, AX_HERO, SITE_URL } from "@/data/ax";
 import { REFERENCE_PROJECTS } from "@/data/projects";
@@ -16,7 +17,7 @@ const LANDING_TITLE = `${AX_HERO.name} — ${AX_HERO.role}`;
 const LANDING_DESCRIPTION = `${AX_HERO.name} · ${AX_HERO.role}. 엑셀·스프레드시트 자료 관리·분석·보고 개선 경험. 공급내역보고·SFE·유통재고 관리 업무 효율화.`;
 const LANDING_PREVIEW_IMAGE = "/images/portfolio/pharmkpi/hero.png";
 
-export const metadata: Metadata = {
+const defaultMetadata: Metadata = {
   title: { absolute: LANDING_TITLE },
   description: LANDING_DESCRIPTION,
   alternates: { canonical: "/" },
@@ -39,6 +40,22 @@ export const metadata: Metadata = {
     images: [LANDING_PREVIEW_IMAGE],
   },
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { hero } = await loadPortfolio("sales");
+  const title = `${hero.name} — ${hero.role}`;
+  return {
+    ...defaultMetadata,
+    title: { absolute: title },
+    description: hero.subhead,
+    openGraph: {
+      ...defaultMetadata.openGraph,
+      title,
+      description: hero.subhead,
+    },
+    twitter: { ...defaultMetadata.twitter, title, description: hero.subhead },
+  };
+}
 
 /** Google ProfilePage 구조화 데이터 — 검색이 이 페이지를 한 사람의 프로필로 읽게 한다. */
 const PROFILE_JSON_LD = {
@@ -67,26 +84,29 @@ const PROJECT_GROUPS = [
   },
 ] as const;
 
-export default function HomePage() {
+export default async function HomePage() {
+  const copy = await loadPortfolio("sales");
   return (
     <article className="px-6 pb-28 pt-20 sm:pt-24">
       <script
         type="application/ld+json"
         // 정적 데이터지만 </script> 조기 종료를 막으려고 < 를 이스케이프한다
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(PROFILE_JSON_LD).replace(/</g, "\\u003c"),
+          __html: JSON.stringify({
+            ...PROFILE_JSON_LD,
+            mainEntity: {
+              ...PROFILE_JSON_LD.mainEntity,
+              description: copy.hero.subhead,
+            },
+          }).replace(/</g, "\\u003c"),
         }}
       />
       <div className="mx-auto max-w-6xl">
         <AxHeroSection
-          hero={AX_HERO}
+          hero={copy.hero}
           primary={{ href: "/#work", label: "주요 업무" }}
           track="sales"
         />
-
-        <MethodSection />
-
-        <WorkSection />
 
         {PROJECT_GROUPS.map((group) => (
           <section key={group.id} id={group.id} className="mt-20 scroll-mt-20">
@@ -105,18 +125,22 @@ export default function HomePage() {
 
             <div className="mt-8">
               <SortableGrid
-                projects={group.projects}
+                projects={copy.projects}
                 storageKey={group.storageKey}
               />
             </div>
           </section>
         ))}
 
-        <CareerSection />
+        <WorkSection chapters={copy.work} />
+
+        <MethodSection steps={copy.method} />
+
+        <CareerSection experiences={copy.experiences} skills={copy.skills} />
 
         <AxContactSection
-          title="영업 데이터 분석과 업무 개선 경험을 소개합니다."
-          lead="담당 업무와 데이터 분석, 시스템을 활용한 업무 개선 경험에 관해 이야기하겠습니다."
+          title={copy.contact.title}
+          lead={copy.contact.lead}
           track="sales"
         />
       </div>

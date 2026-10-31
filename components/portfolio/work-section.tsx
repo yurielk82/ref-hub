@@ -5,10 +5,15 @@ import { WORK_CHAPTERS, type WorkChapter } from "@/data/work-history";
 
 import { FadeInUp } from "./motion";
 
-const CHAPTER_STAGGER_DELAY = 0.04;
-
 /** 랜딩의 중심 — 무엇을 만들었는지보다 어떤 업무를 맡아 무엇을 바꿨는지를 먼저 보인다. */
-export function WorkSection() {
+export function WorkSection({
+  chapters = WORK_CHAPTERS,
+}: {
+  chapters?: readonly WorkChapter[];
+}) {
+  const primaryIds = new Set(["reporting", "sales-analysis", "executive-bi"]);
+  const primary = chapters.filter((chapter) => primaryIds.has(chapter.id));
+  const additional = chapters.filter((chapter) => !primaryIds.has(chapter.id));
   return (
     <section id="work" className="mt-20 scroll-mt-20">
       <FadeInUp>
@@ -18,18 +23,32 @@ export function WorkSection() {
         />
       </FadeInUp>
       <ol className="mt-8 space-y-5">
-        {WORK_CHAPTERS.map((chapter, index) => (
+        {primary.map((chapter) => (
           <li
             key={chapter.id}
             id={`work-${chapter.id}`}
             className="scroll-mt-20"
           >
-            <FadeInUp delay={index * CHAPTER_STAGGER_DELAY}>
-              <WorkChapterCard chapter={chapter} />
-            </FadeInUp>
+            <WorkChapterCard chapter={chapter} />
           </li>
         ))}
       </ol>
+      <details className="mt-6 border-y border-stone-200 py-4 dark:border-stone-800">
+        <summary className="cursor-pointer py-2 font-semibold text-[var(--accent)] focus-visible:outline-2 focus-visible:outline-offset-4">
+          그 밖의 업무 {additional.length}건 보기
+        </summary>
+        <ol className="mt-6 space-y-5">
+          {additional.map((chapter) => (
+            <li
+              key={chapter.id}
+              id={`work-${chapter.id}`}
+              className="scroll-mt-20"
+            >
+              <WorkChapterCard chapter={chapter} />
+            </li>
+          ))}
+        </ol>
+      </details>
     </section>
   );
 }
@@ -64,12 +83,12 @@ function WorkChapterCard({ chapter }: { chapter: WorkChapter }) {
         </p>
         <div className="mt-5 grid gap-5 lg:grid-cols-[1.4fr_1fr]">
           <ChapterList
-            term="수행 업무"
+            term="해결"
             items={chapter.actions}
             itemClassName="text-stone-700 dark:text-stone-300"
           />
           <ChapterList
-            term="성과·진행 현황"
+            term="결과·현재 상태"
             items={chapter.results}
             itemClassName="font-semibold text-stone-900 dark:text-stone-100"
           />

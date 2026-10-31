@@ -98,6 +98,14 @@ export function PortfolioNav() {
                 이력서
               </Link>
             )}
+            {canViewJobs && (
+              <Link
+                href={track === "ax" ? "/ax/edit" : "/edit"}
+                className="shrink-0 rounded text-sm font-semibold text-[var(--accent)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+              >
+                홈페이지 편집
+              </Link>
+            )}
             {nav.developerLinks && (
               <a
                 href={AX_CONTACT.github}

@@ -483,7 +483,7 @@ export const DELIVERY_PROJECTS: Project[] = [
         src: "/images/portfolio/kpis-dsr-api/order-check.webp",
         title: "주문·KPIS 대조",
         caption:
-          "한 달 주문 내역과 KPIS 접수를 거래처·날짜별로 맞대 수량·금액이 다른 곳만 펼칩니다. 8월은 주문과 KPIS가 다른 거래처가 남아 있어 정정 대상으로 잡혀 있습니다.",
+          "한 달 주문 내역과 KPIS 접수를 거래처·날짜별로 맞대 수량·금액이 다른 곳만 펼칩니다. 정정하기 전 8월 화면으로, 주문과 KPIS가 다른 거래처가 정정 대상으로 잡혀 있습니다.",
       },
       {
         src: "/images/portfolio/kpis-dsr-api/kpis-home.webp",

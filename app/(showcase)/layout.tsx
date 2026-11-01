@@ -3,6 +3,7 @@ import "@once-ui-system/core/css/tokens.css";
 import "@magic/resources/custom.css";
 
 import type { Viewport } from "next";
+import type { CSSProperties } from "react";
 import { MagicOwnerTools } from "@magic/OwnerTools";
 import classNames from "clsx";
 
@@ -25,6 +26,15 @@ import {
   home,
   person,
 } from "@magic/resources";
+
+// Once UI의 기본 :root 변수보다 먼저 읽혀도 Next 글꼴 연결이 유지돼야 한다.
+const fontVariables: CSSProperties &
+  Record<`--font-${"heading" | "body" | "label" | "code"}`, string> = {
+  "--font-heading": fonts.heading.style.fontFamily,
+  "--font-body": fonts.body.style.fontFamily,
+  "--font-label": fonts.label.style.fontFamily,
+  "--font-code": fonts.code.style.fontFamily,
+};
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -54,6 +64,7 @@ export default async function RootLayout({
       suppressHydrationWarning
       as="html"
       lang={person.locale ?? "en"}
+      style={fontVariables}
       fillWidth
       className={classNames(
         fonts.heading.variable,

@@ -26,16 +26,7 @@ export function ProjectRow({
           {featured && study && (
             <ProjectContribution study={study} track={track} />
           )}
-          <div className="folio-row-bottom">
-            <span className="folio-row-action">
-              해결 과정 보기 <ArrowRight size={17} aria-hidden />
-            </span>
-            {study && (
-              <span className="folio-status">
-                {CASE_STATUS_LABEL[study.status.kind]}
-              </span>
-            )}
-          </div>
+          <ProjectRowAction study={study} />
         </div>
         {featured && project.screenshot && (
           <div className="folio-project-image">
@@ -79,5 +70,21 @@ function ProjectContribution({
         </dd>
       </div>
     </dl>
+  );
+}
+
+/** 사례 이동 안내와 현재 운영 상태를 한 줄로 표시한다. */
+function ProjectRowAction({ study }: { study?: AxCaseStudy }) {
+  return (
+    <div className="folio-row-bottom">
+      <span className="folio-row-action">
+        해결 과정 보기 <ArrowRight size={17} aria-hidden />
+      </span>
+      {study && (
+        <span className="folio-status">
+          {CASE_STATUS_LABEL[study.status.kind]}
+        </span>
+      )}
+    </div>
   );
 }

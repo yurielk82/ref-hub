@@ -5,7 +5,13 @@ import type { ProjectScreen } from "@/data/project-types";
 export function MenuGallery({
   groups,
 }: {
-  groups: { id: string; name: string; screens: ProjectScreen[] }[];
+  groups: {
+    id: string;
+    name: string;
+    description?: string;
+    items?: string[];
+    screens: ProjectScreen[];
+  }[];
 }) {
   const [selected, setSelected] = useState(groups[0]?.id ?? "");
   const group = groups.find((g) => g.id === selected) ?? groups[0];
@@ -27,6 +33,12 @@ export function MenuGallery({
       <Heading as="h3" variant="heading-strong-m">
         {group.name}
       </Heading>
+      {group.description && <Text>{group.description}</Text>}
+      {group.items?.length ? (
+        <Text variant="body-default-s" onBackground="neutral-weak">
+          {group.items.join(" · ")}
+        </Text>
+      ) : null}
       {group.screens.length ? (
         group.screens.map((screen) => (
           <Column key={screen.src} fillWidth gap="12">

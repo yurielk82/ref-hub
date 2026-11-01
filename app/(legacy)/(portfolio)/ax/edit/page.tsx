@@ -1,3 +1,4 @@
+import { editableFields } from "@magic/adapter";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { jobsViewer } from "@/auth";
@@ -13,7 +14,7 @@ export default async function AxEditPage() {
   return (
     <PortfolioEditor
       track="ax"
-      fields={content.fields}
+      fields={editableFields(content, "ax")}
       revision={content.snapshot.revision}
       canSave={Boolean(portfolioDataDir())}
     />

@@ -51,3 +51,12 @@ export function allScreens(copy: Copy) {
     for (const s of d.project.screens ?? []) result.set(s.src, s);
   return result;
 }
+
+/** 현재 템플릿에서 표시하는 필드만 편집한다. 기존 키와 과거 저장값은 보존한다. */
+export function editableFields(copy: Copy, track: Track) {
+  const shown =
+    /^(hero\.|career\.|skills\.|contact\.|project\.|detail\.|case\.)/;
+  return copy.fields.filter((field) =>
+    shown.test(field.id.slice(track.length + 1)),
+  );
+}

@@ -30,6 +30,8 @@ export function MagicDetail({
     ? menuDefinition.map((m) => ({
         id: m.id,
         name: m.name,
+        description: m.description,
+        items: [...m.items],
         screens: m.sources.flatMap((src) => {
           const s = screens.get(src);
           return s ? [s] : [];
@@ -45,7 +47,7 @@ export function MagicDetail({
         </SmartLink>
         <Heading variant="display-strong-m">{project.name}</Heading>
         <Text onBackground="neutral-weak" variant="heading-default-m">
-          {project.tagline}
+          {view?.headline ?? project.tagline}
         </Text>
       </Column>
       {project.screenshot && (
@@ -115,6 +117,9 @@ export function MagicDetail({
             <Heading as="h2" variant="heading-strong-l">
               결과와 현재 상태
             </Heading>
+            {study.impact && (
+              <Text variant="heading-strong-m">{study.impact}</Text>
+            )}
             <Text>{view?.operation ?? study.outcome}</Text>
           </Column>
         )}

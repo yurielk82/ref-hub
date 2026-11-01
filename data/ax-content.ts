@@ -18,18 +18,27 @@ export const AX_HERO = {
   role: "제약 영업관리 · 데이터 분석 · 업무 효율화",
   jobTitle: "영업관리팀 과장 · 영업본부 분석·기획 겸직",
   employer: "부광유니파마",
-  title: "영업관리의 문제를 찾아, 데이터와 업무 개선으로 해결합니다.",
-  subhead: "제약 영업관리 실무와 영업본부 분석·기획을 함께 맡고 있습니다.",
+  title: "다른 기준을 맞추고,\n업무가 이어지게.",
+  subhead: "두 회사의 업무 기준을 협의하고, 지표와 시스템으로 구현했습니다.",
   summary:
-    "문제 인식 → 원인 분석 → 핵심 과제 선정 → 해결·업무 적용. 공급내역보고, 경영진 BI, 월 보고서 자동화로 이어 왔습니다.",
-  evidenceTitle: "주요 역량",
+    "회생·인수 통합 과정의 데이터 정비부터 영업관리 실무와 보고 자동화까지 직접 수행합니다.",
+  evidenceTitle: "문제 해결 과정",
   evidence: [
-    { label: "문제 인식", text: "보고 누락·중복과 반복되는 수작업을 발견" },
-    { label: "분석력", text: "ERP 원천 자료 대조와 집계 기준 확인" },
-    { label: "핵심 파악", text: "검증이 필요한 지점과 부서별 보고 항목 선정" },
     {
-      label: "문제 해결",
-      text: "검증·정정·보고 시스템을 직접 구축해 업무에 적용",
+      label: "업무 파악",
+      text: "자료와 실제 처리 흐름을 확인하고, 데이터 불일치와 업무 공백을 파악합니다.",
+    },
+    {
+      label: "기준 합의",
+      text: "서로 다른 업무 기준을 관련 부서와 협의하고 공통 지표를 정합니다.",
+    },
+    {
+      label: "직접 구현",
+      text: "합의한 기준을 데이터 조회·검증·보고 시스템으로 만듭니다.",
+    },
+    {
+      label: "검증·운영",
+      text: "원천 자료와 대조하고 실제 업무에 적용하며 보완합니다.",
     },
   ],
 } satisfies HeroContent & { jobTitle: string; employer: string };
@@ -86,30 +95,12 @@ export const AX_CONTACT = {
 export const AX_TRACK_HERO: HeroContent = {
   name: AX_HERO.name,
   role: "업무 자동화 · 데이터 플랫폼 구축 · AX",
-  title: "현업 문제를 분석하고, 업무에 쓰이는 시스템을 만듭니다.",
-  subhead:
-    "영업 데이터 플랫폼·경영진 BI·법정 보고 자동화를 직접 기획·구축·운영했습니다.",
+  title: AX_HERO.title,
+  subhead: AX_HERO.subhead,
   summary:
-    "업무 기준을 정하고 AI 코딩 도구로 구현합니다. 원천 자료 대조와 검증을 거쳐 현장에 적용합니다.",
-  evidenceTitle: "확인된 결과",
-  evidence: [
-    {
-      label: "ERP 전환 데이터 대조",
-      text: "구 ERP 원장을 월·전표 기준 806개 그룹으로 대조해 차이 없이 새 원천으로 옮겼습니다.",
-    },
-    {
-      label: "법정 보고 유지",
-      text: "ERP 전환 뒤 보고 프로그램 오류가 3개월 넘게 이어지는 동안 자체 시스템으로 보고를 이어갔습니다.",
-    },
-    {
-      label: "구조 파악 자동화",
-      text: "문서·외래키가 없던 ERP 785개 테이블에서 648개(82.5%)의 관계를 추론해 이관 자료로 만들었습니다.",
-    },
-    {
-      label: "문서 자료화",
-      text: "CSO 처방통계 이미지·PDF를 OCR로 읽어, 사람이 한 장씩 옮겨 적던 품목·수량을 자료로 바꿨습니다.",
-    },
-  ],
+    "현업의 문제 정의와 부서 협의부터 AI 개발 도구를 활용한 구현·검증·운영까지 수행합니다.",
+  evidenceTitle: AX_HERO.evidenceTitle,
+  evidence: AX_HERO.evidence,
 };
 
 /** AX 트랙 대표 사례 — 회사 업무 중 자동화·데이터 통합이 드러나는 순서 */
@@ -117,6 +108,10 @@ export const AX_TRACK_CASE_SLUGS = [
   "pharmkpi",
   "pharmkpi-exec",
   "kpis-dsr-api",
+  "monthly-sales-reports",
+  "accounting-ledger",
+  "sales-strategy-portal",
+  "market-analysis",
   "sales-hq-sfe",
   "csoweb",
   "erp-spec",

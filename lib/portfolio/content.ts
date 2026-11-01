@@ -61,6 +61,7 @@ export function portfolioContent(
       "첫 소개",
       originalHero.title,
       100,
+      true,
     ),
     subhead: text(
       "hero.subhead",
@@ -134,7 +135,7 @@ export function portfolioContent(
         : step.example,
   }));
   const work = WORK_CHAPTERS.map((chapter) => {
-    if (track !== "sales") return chapter;
+    if (track !== "sales" && chapter.id !== "pmi") return chapter;
     const group = `업무 · ${chapter.title}`;
     const key = `work.${chapter.id}`;
     return {
@@ -490,8 +491,38 @@ export function portfolioContent(
       study: editedStudy,
     };
   });
+  const proof = [
+    {
+      slug: "pharmkpi",
+      title: "ERP 원장 806개 그룹 대조",
+      summary:
+        "구 ERP 원장을 월·전표 기준으로 대조하고 차이 없음을 확인했습니다.",
+    },
+    {
+      slug: "monthly-sales-reports",
+      title: "월 보고서 4종 자동 작성",
+      summary: "원천 자료에서 다시 계산하고 기존 엑셀 양식으로 제공합니다.",
+    },
+  ].map((item) => ({
+    ...item,
+    title: text(
+      `proof.${item.slug}.title`,
+      "대표 근거 제목",
+      "해결 과정의 근거",
+      item.title,
+      100,
+    ),
+    summary: text(
+      `proof.${item.slug}.summary`,
+      "대표 근거 설명",
+      "해결 과정의 근거",
+      item.summary,
+      300,
+    ),
+  }));
   return {
     hero,
+    proof,
     method,
     work,
     experiences,

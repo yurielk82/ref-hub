@@ -1,10 +1,18 @@
 import Link from "next/link";
-import { ArrowRight, Mail } from "lucide-react";
-import { AX_CONTACT } from "@/data/ax-content";
+import Image from "next/image";
+import {
+  ArrowRight,
+  Mail,
+  Search,
+  ClipboardList,
+  Monitor,
+  ChartNoAxesColumnIncreasing,
+} from "lucide-react";
+import { AX_CONTACT, AX_TRACK_CASE_SLUGS } from "@/data/ax-content";
 import type { portfolioContent } from "@/lib/portfolio/content";
 import { ProjectRow } from "./project-row";
 import { SortableGrid } from "./sortable-grid";
-import type { Track } from "./track";
+import { caseHref, type Track } from "./track";
 
 type Copy = ReturnType<typeof portfolioContent>;
 const SALES_LEAD = ["pharmkpi-exec", "kpis-dsr-api", "monthly-sales-reports"];
@@ -14,14 +22,25 @@ export function PortfolioHome({ copy, track }: { copy: Copy; track: Track }) {
   const sales = track === "sales";
   const caseId = sales ? "projects" : "cases";
   const home = sales ? "/" : "/ax";
-  const career = copy.experiences[0];
+  const leadProject = copy.details.find(
+    (item) => item.project.slug === "pharmkpi-exec",
+  )?.project;
+  const leadScreen = leadProject?.screens?.find((screen) =>
+    screen.src.endsWith("bin-composition-business.webp"),
+  );
+  const processIcons = [
+    Search,
+    ClipboardList,
+    Monitor,
+    ChartNoAxesColumnIncreasing,
+  ];
+  const pmi = copy.work.find((chapter) => chapter.id === "pmi");
   const originalProjects = sales
     ? copy.projects
-    : copy.cases.map(
-        (item) =>
-          copy.details.find(
-            (detail) => detail.project.slug === item.projectSlug,
-          )?.project ?? item.project,
+    : AX_TRACK_CASE_SLUGS.flatMap((slug) =>
+        copy.details
+          .filter((detail) => detail.project.slug === slug)
+          .map((detail) => detail.project),
       );
   const projects = sales
     ? [
@@ -37,46 +56,103 @@ export function PortfolioHome({ copy, track }: { copy: Copy; track: Track }) {
     item.study ? [item.study] : [],
   );
   return (
-    <div className="folio-page">
+    <div className="folio-page folio-home">
       <section className="folio-hero" aria-labelledby="profile-title">
-        <div>
-          <h1 id="profile-title">{copy.hero.title}</h1>
-          <p className="folio-profession">
-            {copy.hero.name} · {copy.hero.role}
-          </p>
+        <div className="folio-hero-copy">
+          <h1 id="profile-title">
+            {copy.hero.title.split("\n").map((line, index) => (
+              <span key={index}>{line}</span>
+            ))}
+          </h1>
           <p className="folio-lead">{copy.hero.subhead}</p>
           <p className="folio-summary">{copy.hero.summary}</p>
-          <Link className="folio-button is-primary" href={`${home}#${caseId}`}>
-            문제 해결 사례 보기 <ArrowRight size={18} aria-hidden />
-          </Link>
-        </div>
-        {career && (
-          <aside
-            className="folio-career-summary"
-            aria-labelledby="career-summary-title"
-          >
-            <h2 id="career-summary-title">경력의 중심</h2>
-            <p className="folio-career-company">{career.title}</p>
-            <p>{career.role}</p>
-            <p className="folio-period">{career.period}</p>
-            <p>{career.description}</p>
-            <Link href={`${home}#career`}>
-              경력과 업무 보기 <ArrowRight size={16} aria-hidden />
+          <div className="folio-hero-actions">
+            <Link className="folio-button is-primary" href="#process">
+              해결 과정 보기 <ArrowRight size={18} aria-hidden />
             </Link>
-          </aside>
+            <Link className="folio-button" href={`${home}#${caseId}`}>
+              전체 작업 <ArrowRight size={18} aria-hidden />
+            </Link>
+          </div>
+          <p className="folio-profession">{copy.hero.role}</p>
+        </div>
+        {leadProject && leadScreen && (
+          <figure className="folio-hero-evidence">
+            <Link
+              href={caseHref(track, leadProject.slug)}
+              aria-label={`${leadProject.name} 사례 보기`}
+            >
+              <div className="folio-hero-evidence-heading">
+                <h2>{leadProject.name}</h2>
+                <ArrowRight size={20} aria-hidden />
+              </div>
+              <Image
+                src={leadScreen.src}
+                alt={leadScreen.title}
+                width={1835}
+                height={1014}
+                sizes="(max-width: 760px) 100vw, 52vw"
+                preload
+              />
+            </Link>
+            <figcaption>
+              공개용 화면 · 거래처·이름·금액은 예시로 바꿨습니다.
+            </figcaption>
+          </figure>
         )}
       </section>
-      <section className="folio-strengths" aria-label={copy.hero.evidenceTitle}>
-        {copy.hero.evidence.map((item) => (
-          <div key={item.label}>
-            <h2>{item.label}</h2>
-            <p>{item.text}</p>
-          </div>
-        ))}
+      <section
+        id="process"
+        className="folio-strengths"
+        aria-label={copy.hero.evidenceTitle}
+      >
+        {copy.hero.evidence.map((item, index) => {
+          const Icon = processIcons[index % processIcons.length];
+          return (
+            <div className="folio-process-step" key={item.label}>
+              <span className="folio-process-icon">
+                <Icon size={25} aria-hidden />
+              </span>
+              <div>
+                <h2>{item.label}</h2>
+                <p>{item.text}</p>
+              </div>
+            </div>
+          );
+        })}
+      </section>
+      <section className="folio-proof-section" aria-label="업무에 적용한 근거">
+        <div className="folio-proof-grid">
+          {copy.proof.map((item) => (
+            <Link
+              className="folio-proof"
+              key={item.slug}
+              href={caseHref(track, item.slug)}
+            >
+              <div>
+                <h2>{item.title}</h2>
+                <p>{item.summary}</p>
+              </div>
+              <ArrowRight size={24} aria-hidden />
+            </Link>
+          ))}
+        </div>
+        {pmi && (
+          <details className="folio-disclosure folio-pmi">
+            <summary>{pmi.title}</summary>
+            <p>{pmi.situation}</p>
+            <ul className="folio-bullets">
+              {pmi.actions.map((line) => (
+                <li key={line}>{line}</li>
+              ))}
+            </ul>
+            <p>{pmi.results[0]}</p>
+          </details>
+        )}
       </section>
       <section id={caseId} className="folio-section">
         <div className="folio-section-heading">
-          <h2>문제 해결 사례</h2>
+          <h2>업무를 바꾼 작업</h2>
           <p>내가 맡은 일과 바꾼 점을 실제 업무 화면과 함께 정리했습니다.</p>
         </div>
         <SortableGrid

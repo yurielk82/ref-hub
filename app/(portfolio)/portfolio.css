@@ -1,33 +1,33 @@
 .portfolio-shell {
-  --folio-ink: #162c4b;
-  --folio-muted: #526580;
-  --folio-line: #dce4ef;
+  --folio-ink: #133c30;
+  --folio-muted: #52675d;
+  --folio-line: #dce5df;
   --folio-paper: #fff;
-  --folio-well: #eef3fb;
-  --folio-accent: #2457cb;
+  --folio-well: #f2f6f2;
+  --folio-accent: #1c5a46;
   --accent: var(--folio-accent);
-  --accent-light: #1644a5;
+  --accent-light: #123e30;
   --glass-border: var(--folio-line);
   --font-display: "Pretendard Variable", "Pretendard", sans-serif;
   background: var(--folio-paper);
   color: var(--folio-ink);
   min-height: 100dvh;
   overflow-wrap: anywhere;
-  scrollbar-color: #8296b5 var(--folio-well);
+  scrollbar-color: #779280 var(--folio-well);
   caret-color: var(--folio-accent);
 }
 .dark .portfolio-shell {
-  --folio-ink: #e6edf8;
-  --folio-muted: #adbdd3;
-  --folio-line: #35455f;
-  --folio-paper: #111e32;
-  --folio-well: #1c2d48;
-  --folio-accent: #9bbcff;
-  --accent-light: #bbd1ff;
+  --folio-ink: #e7f1e9;
+  --folio-muted: #b3c8ba;
+  --folio-line: #354b40;
+  --folio-paper: #0e2018;
+  --folio-well: #193025;
+  --folio-accent: #d2e99a;
+  --accent-light: #e2efb4;
 }
 .portfolio-shell ::selection {
-  background: #c4d6ff;
-  color: #10254b;
+  background: #dceca8;
+  color: #153a2b;
 }
 .portfolio-shell :focus-visible {
   outline: 2px solid var(--folio-accent);
@@ -119,12 +119,12 @@
   background: var(--folio-well);
 }
 .folio-button.is-primary {
-  background: #2457cb;
-  border-color: #2457cb;
+  background: #1c5a46;
+  border-color: #1c5a46;
   color: #fff;
 }
 .folio-button.is-primary:hover {
-  background: #1644a5;
+  background: #123e30;
 }
 .folio-hero .folio-button {
   margin-top: 26px;
@@ -622,27 +622,104 @@
   top: 0;
   z-index: 50;
   width: 100%;
-  background: var(--folio-paper);
-  border-bottom: 1px solid var(--folio-line);
+  background: #12382c;
+  color: #f5faf5;
+  border-bottom: 1px solid #355347;
 }
 .folio-nav nav {
-  max-width: 1224px;
-  height: 80px;
+  max-width: 1536px;
+  height: 76px;
   margin: auto;
-  padding: 0 32px;
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
 }
 .folio-nav a {
-  color: var(--folio-muted);
-  min-height: 44px;
   display: inline-flex;
   align-items: center;
+  min-height: 44px;
+  color: #f5faf5;
 }
-.folio-nav a:first-child {
+.folio-brand {
+  font-size: 1.5rem;
+  font-weight: 750;
+  gap: 18px;
+  flex-shrink: 0;
+}
+.folio-brand span {
+  font-size: 0.9rem;
+  font-weight: 450;
+  color: #d6e6dc;
+}
+.folio-nav-actions,
+.folio-public-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.folio-public-links a {
+  font-size: 0.95rem;
+}
+.folio-nav a:hover {
+  color: #eef18e;
+}
+.folio-theme-slot {
+  width: 44px;
+  height: 44px;
+}
+.folio-theme-toggle {
+  width: 44px;
+  height: 44px;
+  border: 1px solid #789483;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  color: #eef18e;
+}
+.folio-theme-toggle:hover {
+  background: #254b3d;
+}
+.folio-nav :focus-visible {
+  outline-color: #edf18f;
+}
+.folio-owner-menu a:focus-visible {
+  outline-color: var(--folio-accent);
+}
+.folio-owner-menu {
+  position: relative;
+}
+.folio-owner-menu summary {
+  list-style: none;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.folio-owner-menu summary::-webkit-details-marker {
+  display: none;
+}
+.folio-owner-menu > div {
+  position: absolute;
+  right: 0;
+  top: 52px;
+  min-width: 220px;
+  background: var(--folio-paper);
+  border: 1px solid var(--folio-line);
+  padding: 10px;
+  box-shadow: 0 12px 32px #001b2520;
+}
+.folio-owner-menu > div a {
+  display: flex;
+  padding: 8px 12px;
   color: var(--folio-ink);
 }
-.folio-nav button {
-  min-width: 32px;
-  min-height: 36px;
+.folio-owner-menu > div a:hover {
+  background: var(--folio-well);
+  color: var(--folio-accent);
 }
 .folio-footer {
   border-top: 1px solid var(--folio-line);
@@ -813,11 +890,11 @@
 }
 @media print {
   .portfolio-shell {
-    --folio-ink: #162c4b;
-    --folio-muted: #35455f;
+    --folio-ink: #133c30;
+    --folio-muted: #354b40;
     --folio-paper: #fff;
     --folio-well: #f3f6fa;
-    color: #162c4b;
+    color: #133c30;
     background: #fff;
   }
   .folio-page {
@@ -832,5 +909,369 @@
   .folio-story,
   .folio-screen {
     break-inside: avoid;
+  }
+}
+
+/* 선택한 해결 과정 중심 구성: 실제 BI를 첫 화면에서 읽고 근거로 이어간다. */
+.folio-main {
+  padding-top: 76px;
+}
+.folio-home {
+  max-width: none;
+  padding: 0 0 96px;
+}
+.folio-home .folio-hero {
+  position: relative;
+  background: #0e3024;
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 52px;
+  align-items: center;
+  min-height: 500px;
+  padding: 28px max(48px, calc((100vw - 1440px) / 2)) 32px;
+}
+.folio-home .folio-hero h1 {
+  color: #f5faf5;
+  font-size: clamp(2.7rem, 4.25vw, 4.1rem);
+  line-height: 1.28;
+  max-width: none;
+  letter-spacing: -0.035em;
+  font-weight: 780;
+}
+.folio-hero h1 span {
+  display: block;
+}
+.folio-hero h1 span + span {
+  color: #edf18f;
+}
+.folio-home .folio-lead {
+  color: #e0ece3;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-top: 28px;
+  max-width: 48ch;
+}
+.folio-home .folio-summary {
+  color: #bdcfc3;
+  font-size: 0.92rem;
+  line-height: 1.8;
+  margin-top: 12px;
+  max-width: 56ch;
+}
+.folio-home .folio-profession {
+  color: #b8cfc0 !important;
+  font-size: 0.84rem;
+  font-weight: 450;
+  margin-top: 24px;
+}
+.folio-hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+.folio-home .folio-hero .folio-button {
+  margin: 0;
+  min-height: 52px;
+  padding: 12px 24px;
+  border-radius: 12px;
+  color: #f3f8f1;
+  border-color: #8aa697;
+  background: transparent;
+}
+.folio-home .folio-hero .folio-button.is-primary {
+  background: #edf18f;
+  border-color: #edf18f;
+  color: #153a2b;
+}
+.folio-home .folio-hero .folio-button:hover {
+  background: #274e3c;
+}
+.folio-home .folio-hero .folio-button.is-primary:hover {
+  background: #f8fbb7;
+}
+.folio-home .folio-hero :focus-visible {
+  outline-color: #edf18f;
+}
+.folio-hero-evidence {
+  background: #fff;
+  border: 8px solid #e5e9e5;
+  border-radius: 14px;
+  min-width: 0;
+  padding: 8px;
+  box-shadow: 0 12px 28px #031e2e24;
+}
+.folio-hero-evidence a {
+  display: block;
+}
+.folio-hero-evidence-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 12px 12px;
+  color: #153a2b;
+}
+.folio-hero-evidence-heading h2 {
+  color: #153a2b;
+  font-size: 1rem;
+  font-weight: 700;
+}
+.folio-hero-evidence img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.folio-hero-evidence figcaption {
+  color: #58675e;
+  font-size: 0.73rem;
+  padding: 8px 12px 2px;
+}
+.folio-home .folio-strengths {
+  margin: 0;
+  padding: 38px max(48px, calc((100vw - 1440px) / 2));
+  border: none;
+  background: var(--folio-well);
+  gap: 36px;
+  scroll-margin-top: 96px;
+}
+.folio-process-step {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 18px;
+  align-items: start;
+}
+.folio-process-icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #dfe9df;
+  color: #174532;
+}
+.folio-process-step:nth-child(3) .folio-process-icon {
+  background: #eef0b0;
+}
+.folio-home .folio-strengths h2 {
+  font-size: 1.15rem;
+}
+.folio-home .folio-strengths p {
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+.folio-proof-section,
+.folio-home > .folio-section,
+.folio-home > .folio-contact {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  width: calc(100% - 96px);
+}
+.folio-proof-section {
+  padding-top: 32px;
+}
+.folio-proof-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.folio-proof {
+  background: var(--folio-well);
+  border-radius: 12px;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  justify-content: space-between;
+}
+.folio-proof h2 {
+  font-size: 1.45rem;
+}
+.folio-proof p {
+  margin-top: 12px;
+  max-width: 50ch;
+  font-size: 0.96rem;
+}
+.folio-proof:hover {
+  box-shadow: inset 0 0 0 1px var(--folio-accent);
+}
+.folio-pmi {
+  margin-top: 20px;
+}
+.folio-home .folio-contact {
+  padding-bottom: 20px;
+}
+.folio-project-row > a {
+  transition: background-color 0.2s ease-out;
+}
+.folio-project-row > a:hover {
+  background: var(--folio-well);
+}
+.folio-home .folio-section {
+  margin-top: 72px;
+}
+@media (max-width: 1100px) {
+  .folio-brand span {
+    display: none;
+  }
+  .folio-home .folio-hero {
+    padding-left: 32px;
+    padding-right: 32px;
+    gap: 28px;
+  }
+  .folio-home .folio-hero h1 {
+    font-size: 3rem;
+  }
+  .folio-home .folio-strengths {
+    padding: 32px;
+    gap: 24px;
+  }
+  .folio-process-step {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+@media (max-width: 760px) {
+  .folio-main {
+    padding-top: 72px;
+  }
+  .folio-nav nav {
+    height: 72px;
+    padding: 0 20px;
+    flex-wrap: nowrap;
+    gap: 16px;
+  }
+  .folio-nav nav > a {
+    font-size: 1.15rem;
+  }
+  .folio-nav nav > div {
+    flex-basis: auto;
+    gap: 14px;
+  }
+  .folio-public-links {
+    gap: 16px;
+  }
+  .folio-public-links a {
+    font-size: 0.85rem;
+  }
+  .folio-owner-menu summary {
+    font-size: 0.85rem;
+  }
+  .folio-home .folio-hero {
+    grid-template-columns: 1fr;
+    padding: 36px 22px 28px;
+    gap: 28px;
+  }
+  .folio-home .folio-hero h1 {
+    font-size: clamp(2.1rem, 7.4vw, 3rem);
+    max-width: none;
+  }
+  .folio-home .folio-lead {
+    margin-top: 22px;
+    font-size: 1rem;
+  }
+  .folio-home .folio-summary {
+    font-size: 0.88rem;
+  }
+  .folio-home .folio-profession {
+    margin-top: 18px;
+  }
+  .folio-hero-actions {
+    gap: 10px;
+    margin-top: 24px;
+  }
+  .folio-home .folio-hero .folio-button {
+    padding: 10px 18px;
+    min-height: 48px;
+    font-size: 0.9rem;
+  }
+  .folio-hero-evidence {
+    border-width: 5px;
+    border-radius: 10px;
+    padding: 4px;
+  }
+  .folio-hero-evidence-heading {
+    padding: 8px;
+  }
+  .folio-hero-evidence-heading h2 {
+    font-size: 0.88rem;
+  }
+  .folio-hero-evidence figcaption {
+    padding: 8px 4px 4px;
+    font-size: 0.65rem;
+  }
+  .folio-home .folio-strengths {
+    padding: 28px 22px;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .folio-home .folio-strengths h2 {
+    font-size: 1rem;
+  }
+  .folio-home .folio-strengths p {
+    font-size: 0.84rem;
+  }
+  .folio-process-icon {
+    height: 44px;
+    width: 44px;
+  }
+  .folio-proof-section,
+  .folio-home > .folio-section,
+  .folio-home > .folio-contact {
+    width: calc(100% - 44px);
+  }
+  .folio-proof-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .folio-proof {
+    padding: 24px;
+    gap: 16px;
+  }
+  .folio-proof h2 {
+    font-size: 1.2rem;
+  }
+  .folio-proof p {
+    font-size: 0.9rem;
+  }
+  .folio-home .folio-section {
+    margin-top: 52px;
+  }
+}
+@media (max-width: 420px) {
+  .folio-nav-actions:has(.folio-owner-menu) .folio-public-links {
+    gap: 10px;
+  }
+  .folio-nav-actions:has(.folio-owner-menu) {
+    gap: 8px;
+  }
+  .folio-nav nav:has(.folio-owner-menu) {
+    padding: 0 12px;
+    gap: 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-shell *,
+  .portfolio-shell *::before,
+  .portfolio-shell *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
+@media print {
+  .folio-home .folio-hero {
+    background: #fff;
+  }
+  .folio-home .folio-hero h1,
+  .folio-home .folio-hero h1 span,
+  .folio-home .folio-hero p {
+    color: #133c30 !important;
+  }
+  .folio-nav {
+    display: none;
+  }
+  .folio-main {
+    padding-top: 0;
   }
 }

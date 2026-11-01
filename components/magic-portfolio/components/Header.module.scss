@@ -13,7 +13,7 @@
 }
 
 @media (max-width: breakpoints.$s) {
-  .position {
+  header.position {
     top: auto;
     // Clear the home indicator on phones without a home button.
     bottom: calc(var(--static-space-24) + env(safe-area-inset-bottom, 0px));

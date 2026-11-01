@@ -41,24 +41,28 @@ import { Geist_Mono } from "next/font/google";
 const heading = Geist({
   variable: "--font-heading",
   subsets: ["latin"],
+  fallback: ["system-ui", "sans-serif"],
   display: "swap",
 });
 
 const body = Geist({
   variable: "--font-body",
   subsets: ["latin"],
+  fallback: ["system-ui", "sans-serif"],
   display: "swap",
 });
 
 const label = Geist({
   variable: "--font-label",
   subsets: ["latin"],
+  fallback: ["system-ui", "sans-serif"],
   display: "swap",
 });
 
 const code = Geist_Mono({
   variable: "--font-code",
   subsets: ["latin"],
+  fallback: ["system-ui", "sans-serif"],
   display: "swap",
 });
 

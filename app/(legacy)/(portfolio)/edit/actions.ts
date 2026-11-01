@@ -4,6 +4,7 @@ import { jobsViewer } from "@/auth";
 import { portfolioContent } from "@/lib/portfolio/content";
 import { portfolioDataDir } from "@/lib/portfolio/server";
 import { ContentError, saveContent } from "@/lib/portfolio/store";
+import { selectedEditableFields } from "@/lib/selected-portfolio/server";
 
 export async function savePortfolio(input: unknown) {
   if (!(await jobsViewer()))
@@ -17,6 +18,8 @@ export async function savePortfolio(input: unknown) {
     const fields = [
       ...portfolioContent("sales").fields,
       ...portfolioContent("ax").fields,
+      ...selectedEditableFields("sales"),
+      ...selectedEditableFields("ax"),
     ];
     const snapshot = await saveContent(dir, input, fields);
     revalidatePath("/");

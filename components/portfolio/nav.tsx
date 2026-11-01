@@ -51,7 +51,7 @@ export function PortfolioNav() {
 
   return (
     <header
-      className="fixed top-0 z-50 w-full border-b border-transparent bg-white/70 backdrop-blur-xl dark:bg-stone-950/70"
+      className="folio-nav"
       style={{ borderColor: "var(--glass-border)" }}
     >
       <nav

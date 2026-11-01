@@ -15,6 +15,7 @@ import {
   REFERENCE_PROJECTS,
   OTHER_PROJECTS,
   getProject,
+  PROJECTS,
 } from "../../data/projects";
 import type { CopyField } from "./store";
 
@@ -396,6 +397,93 @@ export function portfolioContent(
       200,
     ),
   };
+  // 기존 이름·요약 키를 공유해 홈에서 저장한 문구가 사례에서도 이어지게 한다.
+  const details = PROJECTS.filter(
+    (project) => track === "ax" || project.scope === "company",
+  ).map((original) => {
+    const project =
+      projects.find((item) => item.slug === original.slug) ??
+      projectCopy(original);
+    const study = getAxCase(project.slug);
+    const group = `상세 · ${original.name}`;
+    const key = `detail.${project.slug}`;
+    const screens = project.screens?.map((screen, index) => ({
+      ...screen,
+      title: text(
+        `${key}.screen.${index}.title`,
+        `화면 ${index + 1} 제목`,
+        group,
+        screen.title,
+        120,
+      ),
+      caption: text(
+        `${key}.screen.${index}.caption`,
+        `화면 ${index + 1} 설명`,
+        group,
+        screen.caption,
+        800,
+        true,
+      ),
+    }));
+    const editedStudy = study
+      ? {
+          ...study,
+          role: text(`${key}.role`, "내 역할", group, study.role, 500, true),
+          problem: text(
+            `${key}.problem`,
+            "문제",
+            group,
+            study.problem,
+            800,
+            true,
+          ),
+          intervention: text(
+            `${key}.intervention`,
+            "내가 한 일",
+            group,
+            study.intervention,
+            1000,
+            true,
+          ),
+          outcome: text(
+            `${key}.outcome`,
+            "결과·진행 현황",
+            group,
+            study.outcome,
+            800,
+            true,
+          ),
+          impact: study.impact
+            ? text(`${key}.impact`, "대표 결과", group, study.impact, 300)
+            : undefined,
+          steps: study.steps?.map((step, index) => ({
+            ...step,
+            title: text(
+              `${key}.step.${index}.title`,
+              `과정 ${index + 1} 제목`,
+              group,
+              step.title,
+              160,
+            ),
+            body: text(
+              `${key}.step.${index}.body`,
+              `과정 ${index + 1} 설명`,
+              group,
+              step.body,
+              1200,
+              true,
+            ),
+          })),
+          ax:
+            cases.find((item) => item.projectSlug === project.slug)?.ax ??
+            study.ax,
+        }
+      : undefined;
+    return {
+      project: { ...project, screens },
+      study: editedStudy,
+    };
+  });
   return {
     hero,
     method,
@@ -409,6 +497,7 @@ export function portfolioContent(
     grounding,
     stack,
     contact,
+    details,
     fields,
   };
 }

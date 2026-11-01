@@ -10,7 +10,7 @@ export function PortfolioFooter() {
   const developer = TRACKS[trackOf(usePathname() ?? "/")].developerLinks;
   return (
     <footer
-      className="border-t py-8"
+      className="folio-footer"
       style={{ borderColor: "var(--glass-border)" }}
     >
       <div className="mx-auto flex max-w-5xl items-center justify-between px-6 text-xs text-stone-400 dark:text-stone-500">

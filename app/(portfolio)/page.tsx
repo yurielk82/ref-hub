@@ -1,16 +1,7 @@
 import { loadPortfolio } from "@/lib/portfolio/server";
 import type { Metadata } from "next";
 import { AX_CONTACT, AX_HERO, SITE_URL } from "@/data/ax";
-import { REFERENCE_PROJECTS } from "@/data/projects";
-import {
-  AxContactSection,
-  AxHeroSection,
-} from "@/components/portfolio/ax-sections";
-import { CareerSection } from "@/components/portfolio/career-section";
-import { MethodSection } from "@/components/portfolio/method-section";
-import { FadeInUp } from "@/components/portfolio/motion";
-import { SortableGrid } from "@/components/portfolio/sortable-grid";
-import { WorkSection } from "@/components/portfolio/work-section";
+import { PortfolioHome } from "@/components/portfolio/portfolio-home";
 
 // 이력서 링크를 공유했을 때 탭·미리보기에 이름이 먼저 보여야 한다.
 const LANDING_TITLE = `${AX_HERO.name} — ${AX_HERO.role}`;
@@ -58,24 +49,12 @@ const PROFILE_JSON_LD = {
   },
 } as const;
 
-const PROJECT_GROUPS = [
-  {
-    id: "projects",
-    // 묶음을 나누기 전 키 — 방문자가 저장해 둔 순서를 이어 쓴다
-    storageKey: "ref-hub-project-order",
-    title: `업무 개선 레퍼런스 ${REFERENCE_PROJECTS.length}건`,
-    lead: "사례마다 어떤 문제가 있었고 무엇을 어떤 순서로 바꿨는지, 그 단계의 화면과 함께 정리했습니다.",
-    projects: REFERENCE_PROJECTS,
-  },
-] as const;
-
 export default async function HomePage() {
   const copy = await loadPortfolio("sales");
   return (
-    <article className="px-6 pb-28 pt-20 sm:pt-24">
+    <>
       <script
         type="application/ld+json"
-        // 정적 데이터지만 </script> 조기 종료를 막으려고 < 를 이스케이프한다
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             ...PROFILE_JSON_LD,
@@ -86,49 +65,7 @@ export default async function HomePage() {
           }).replace(/</g, "\\u003c"),
         }}
       />
-      <div className="mx-auto max-w-6xl">
-        <AxHeroSection
-          hero={copy.hero}
-          primary={{ href: "/#work", label: "주요 업무" }}
-          track="sales"
-        />
-
-        {PROJECT_GROUPS.map((group) => (
-          <section key={group.id} id={group.id} className="mt-20 scroll-mt-20">
-            <FadeInUp>
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-                <div>
-                  <h2 className="mt-2 text-2xl font-bold text-stone-950 dark:text-stone-50">
-                    {group.title}
-                  </h2>
-                </div>
-                <p className="max-w-xl text-sm leading-6 text-stone-600 dark:text-stone-400">
-                  {group.lead}
-                </p>
-              </div>
-            </FadeInUp>
-
-            <div className="mt-8">
-              <SortableGrid
-                projects={copy.projects}
-                storageKey={group.storageKey}
-              />
-            </div>
-          </section>
-        ))}
-
-        <WorkSection chapters={copy.work} />
-
-        <MethodSection steps={copy.method} />
-
-        <CareerSection experiences={copy.experiences} skills={copy.skills} />
-
-        <AxContactSection
-          title={copy.contact.title}
-          lead={copy.contact.lead}
-          track="sales"
-        />
-      </div>
-    </article>
+      <PortfolioHome copy={copy} track="sales" />
+    </>
   );
 }

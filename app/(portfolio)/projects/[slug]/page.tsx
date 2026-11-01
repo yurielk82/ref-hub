@@ -1,11 +1,8 @@
+import { loadPortfolio } from "@/lib/portfolio/server";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { COMPANY_PROJECTS, getProject } from "@/data/projects";
-import { getAxCase } from "@/data/ax";
-import {
-  CaseNarrative,
-  storyScreenSrcs,
-} from "@/components/portfolio/case-narrative";
+
 import { ProjectDetail } from "@/components/portfolio/project-detail";
 
 /** 영업관리 트랙은 회사 사례만 연다. 개인·외부 작업은 AX 트랙(/ax/cases/*)에서만 보인다. */
@@ -34,17 +31,12 @@ export default async function ProjectPage(props: {
   const project = getProject(slug);
   if (!project) notFound();
 
-  const caseStudy = getAxCase(slug);
-
+  const copy = await loadPortfolio("sales");
+  const detail = copy.details.find((item) => item.project.slug === slug);
   return (
     <ProjectDetail
-      project={project}
-      narrative={
-        caseStudy && (
-          <CaseNarrative caseStudy={caseStudy} screens={project.screens} />
-        )
-      }
-      storyScreens={storyScreenSrcs(caseStudy)}
+      project={detail?.project ?? project}
+      caseStudy={detail?.study}
       back={{ href: "/#projects", label: "사례 목록" }}
       track="sales"
     />

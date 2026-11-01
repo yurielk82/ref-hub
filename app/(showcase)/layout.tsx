@@ -4,7 +4,7 @@ import "@magic/resources/custom.css";
 
 import type { Viewport } from "next";
 import { MagicOwnerTools } from "@magic/OwnerTools";
-import classNames from "classnames";
+import classNames from "clsx";
 
 import {
   Background,

@@ -1,3 +1,4 @@
+import type { About } from "@magic/types";
 import type { Copy } from "./adapter";
 import { portfolioBase } from "./adapter";
 import type { Track } from "@/components/portfolio/track";
@@ -25,17 +26,24 @@ import styles from "@magic/components/about/about.module.scss";
 import React from "react";
 
 export function MagicProfile({ copy, track }: { copy: Copy; track: Track }) {
-  const about = {
+  const about: About = {
     ...templateAbout,
     path: `${portfolioBase(track)}/about`,
     intro: {
       ...templateAbout.intro,
       description: (
-        <>
-          {copy.hero.subhead}
-          <br />
-          {copy.hero.summary}
-        </>
+        <Column gap="16">
+          <Text>{copy.hero.subhead}</Text>
+          <Text>{copy.hero.summary}</Text>
+          <Heading as="h3" variant="heading-strong-m">
+            {copy.hero.evidenceTitle}
+          </Heading>
+          {copy.hero.evidence.map((e) => (
+            <Text key={e.label}>
+              <strong>{e.label}</strong> · {e.text}
+            </Text>
+          ))}
+        </Column>
       ),
     },
     work: {
@@ -190,7 +198,7 @@ export function MagicProfile({ copy, track }: { copy: Copy; track: Track }) {
               variant="display-default-xs"
               onBackground="neutral-weak"
             >
-              {person.role}
+              {copy.hero.role}
             </Text>
             {social.length > 0 && (
               <Row

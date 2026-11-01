@@ -1,14 +1,13 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { Monitor, Moon, Sun, type LucideIcon } from "lucide-react";
+import { ChevronDown, Moon, Sun } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { AX_CONTACT, AX_HERO } from "@/data/ax-content";
+import { AX_HERO } from "@/data/ax-content";
 
-import { GitHubIcon } from "./github-icon";
 import { TRACKS, trackOf } from "./track";
 
 /** 로그인한 허용 계정에만 '공고 모음'을 보여 준다. 공개 페이지는 정적이라 브라우저가 묻는다. */
@@ -29,121 +28,74 @@ function useCanViewJobs(): boolean {
   return canView;
 }
 
-/** 테마 선택 — 밝게·어둡게·기기 설정 따라가기 */
-const THEMES: { value: string; label: string; Icon: LucideIcon }[] = [
-  { value: "light", label: "밝게", Icon: Sun },
-  { value: "dark", label: "어둡게", Icon: Moon },
-  { value: "system", label: "기기 설정 따라가기", Icon: Monitor },
-];
-
-const LINK_CLASS =
-  "rounded text-xs text-stone-500 transition-colors hover:text-[var(--accent)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]";
-
-/** 현재 트랙의 메뉴와 로그인·테마 선택을 제공한다. */
+/** 공개 탐색과 소유자 관리 메뉴를 구분하고 현재 밝기를 한 버튼으로 전환한다. */
 export function PortfolioNav() {
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname() ?? "/";
   const track = trackOf(pathname);
   const nav = TRACKS[track];
   const canViewJobs = useCanViewJobs();
-
   useEffect(() => setMounted(true), []);
-
+  const dark = resolvedTheme === "dark";
   return (
-    <header
-      className="folio-nav"
-      style={{ borderColor: "var(--glass-border)" }}
-    >
-      <nav
-        aria-label={nav.menuLabel}
-        className="mx-auto flex h-14 max-w-5xl items-center justify-between gap-4 px-6"
-      >
-        <Link
-          href={nav.home}
-          className="shrink-0 font-[family-name:var(--font-display)] text-sm font-bold tracking-tight text-stone-900 dark:text-stone-100"
-        >
+    <header className="folio-nav">
+      <nav aria-label={nav.menuLabel}>
+        <Link href={nav.home} className="folio-brand">
           {AX_HERO.name}
-          {nav.badge && (
-            <span className="ml-1.5 font-sans text-xs font-semibold text-[var(--accent)]">
-              {nav.badge}
-            </span>
-          )}
+          <span>
+            {nav.badge ? "AX · 업무 개선 포트폴리오" : "업무 개선 포트폴리오"}
+          </span>
         </Link>
-        <div className="flex min-w-0 items-center gap-3">
-          <div className="flex min-w-0 items-center gap-3 overflow-x-auto [scrollbar-width:none]">
+        <div className="folio-nav-actions">
+          <div className="folio-public-links">
             {nav.links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`${LINK_CLASS} shrink-0`}
-              >
+              <Link key={link.href} href={link.href}>
                 {link.label}
               </Link>
             ))}
-            {canViewJobs && (
-              <Link
-                href="/jobs"
-                aria-current={pathname === "/jobs" ? "page" : undefined}
-                className="shrink-0 rounded text-xs font-semibold text-[var(--accent)] transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+          </div>
+          {canViewJobs && (
+            <details className="folio-owner-menu" key={pathname}>
+              <summary>
+                관리 <ChevronDown size={14} aria-hidden />
+              </summary>
+              <div aria-label="소유자 전용 관리">
+                <Link href={track === "ax" ? "/ax/edit" : "/edit"}>
+                  홈페이지 편집·저장
+                </Link>
+                <Link
+                  href="/resume"
+                  aria-current={pathname === "/resume" ? "page" : undefined}
+                >
+                  이력서·제출 파일
+                </Link>
+                <Link
+                  href="/jobs"
+                  aria-current={pathname === "/jobs" ? "page" : undefined}
+                >
+                  공고 모음
+                </Link>
+              </div>
+            </details>
+          )}
+          <div className="folio-theme-slot">
+            {mounted && (
+              <button
+                type="button"
+                className="folio-theme-toggle"
+                onClick={() => setTheme(dark ? "light" : "dark")}
+                aria-label={dark ? "라이트 모드로 전환" : "다크 모드로 전환"}
+                title={dark ? "라이트 모드로 전환" : "다크 모드로 전환"}
               >
-                공고 모음
-              </Link>
-            )}
-            {canViewJobs && (
-              <Link
-                href="/resume"
-                aria-current={pathname === "/resume" ? "page" : undefined}
-                className="shrink-0 rounded text-xs font-semibold text-[var(--accent)] transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
-              >
-                이력서
-              </Link>
-            )}
-            {canViewJobs && (
-              <Link
-                href={track === "ax" ? "/ax/edit" : "/edit"}
-                className="shrink-0 rounded text-sm font-semibold text-[var(--accent)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
-              >
-                홈페이지 편집
-              </Link>
-            )}
-            {nav.developerLinks && (
-              <a
-                href={AX_CONTACT.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`${LINK_CLASS} shrink-0`}
-                aria-label="GitHub"
-              >
-                <GitHubIcon />
-              </a>
+                {dark ? (
+                  <Sun size={20} aria-hidden />
+                ) : (
+                  <Moon size={20} aria-hidden />
+                )}
+              </button>
             )}
           </div>
-          {mounted && (
-            <div
-              role="group"
-              aria-label="화면 테마"
-              className="flex shrink-0 items-center gap-0.5 rounded-md border border-stone-200 p-0.5 dark:border-stone-800"
-            >
-              {THEMES.map(({ value, label, Icon }) => (
-                <button
-                  key={value}
-                  type="button"
-                  onClick={() => setTheme(value)}
-                  aria-pressed={theme === value}
-                  aria-label={label}
-                  title={label}
-                  className={`rounded p-1 transition-colors focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-[var(--accent)] ${
-                    theme === value
-                      ? "bg-stone-100 text-[var(--accent)] dark:bg-stone-800"
-                      : "text-stone-500 hover:text-[var(--accent)]"
-                  }`}
-                >
-                  <Icon className="h-3.5 w-3.5" />
-                </button>
-              ))}
-            </div>
-          )}
         </div>
       </nav>
     </header>

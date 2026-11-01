@@ -1,0 +1,18 @@
+{
+  "prompt": "Use case: infographic-diagram. Create one reusable raster illustration matching the approved reference crop, NOT a page mockup. Image 1 is the approved artwork reference. Re-render the same three small rounded rectangular blocks horizontally with thin rightward arrows between them: left light gray-green block, middle deep forest-green block #113028, right light gray-green block. Preserve the exact simple silhouette, modest corner radius, subtle material shading, proportions, and spacing of the reference; no new visual direction. Exact Korean artwork labels: left '구 ERP 원장', middle '기준별 대조', right '검증 결과'. Dark green lettering on outer blocks, white lettering in middle. No other text, icons, numbers, names, borders or page chrome. Composition target 1332 by 312 pixels, wide 4.27:1 framing with only minimal clear margins matching the reference. Opaque uniform very pale green-gray background exactly #f2f6f2, including gaps between blocks and arrows. Clean unbroken edges with absolutely no cutout halo or white fringe. Crisp high resolution production illustration, at least 2x the 333 by 78 reference. Output an opaque PNG. Match the original reference's wide aspect ratio 4.27:1 exactly; three blocks occupy almost the full image height with minimal upper and lower margin.\n",
+  "createdAt": "2026-11-01T08:45:29.695Z",
+  "generator": "image_gen__imagegen",
+  "mode": "built-in",
+  "origin": {
+    "approvedComp": ".impeccable/mocks/story-approved.png",
+    "reference": ".impeccable/build/crops/proof-one-art.png",
+    "region": "proof-one-art",
+    "sourceGeneratedFile": "/home/ubuntu/.codex/generated_images/01a19646-2031-77c1-99a1-8c26fde0eaec/exec-c975df71-56ea-406b-ae60-1691086c011c.png"
+  },
+  "background": "opaque; requested #f2f6f2",
+  "width": 2048,
+  "height": 768,
+  "status": "needs_parent_review",
+  "notes": "Native image aspect 2.67:1 differs from requested 4.27:1; upper and lower margins larger than approved crop. All three permitted labels intact.",
+  "conversion": "PNG to lossless WebP; no resampling, crop, retouch, or redraw"
+}

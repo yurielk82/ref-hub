@@ -1,0 +1,18 @@
+{
+  "prompt": "Use case: productivity-visual. Asset type: small decorative illustration of monthly reports for a portfolio proof card. Image 1 is the approved visual reference. Re-render only the same FOUR overlapping white paper report sheets, crisp production raster, preserving their straight-on view, upright silhouettes, overlapping placement, gentle soft shadows, proportions, sparse light-gray horizontal rules, and restrained off-white / very light gray palette. This is one isolated group of four sheets, not a screenshot or webpage. The front sheet sits slightly higher, two sheets peek behind at the left and right, fourth sheet peeks at far right. Keep all FOUR sheets individually distinguishable. On each sheet use only the exact Korean title '월보고서'; all other contents are light gray placeholder lines without characters, digits, chart data, company names, monetary values or invented facts. Preserve solid opaque white paper and soft natural contact shadows. Opaque uniform very pale green-gray background exactly #f2f6f2 around the papers and in exterior gaps. Clean smooth paper edges, very subtle soft contact shadows, no cutout fringe or irregular shadow edges. Landscape frame with aspect ratio 1.6934, target 928 by 548 pixels or larger. Group fills frame with narrow clean margins as reference. Do not add pencils, devices, clips, charts, logos, extra pages, border, rounded card or surrounding UI. Output opaque PNG. Maintain a flat paper edge on every page, without a folded corner.\n",
+  "createdAt": "2026-11-01T08:45:31.300Z",
+  "generator": "image_gen__imagegen",
+  "mode": "built-in",
+  "origin": {
+    "approvedComp": ".impeccable/mocks/story-approved.png",
+    "reference": ".impeccable/build/crops/proof-two-art.png",
+    "region": "proof-two-art",
+    "sourceGeneratedFile": "/home/ubuntu/.codex/generated_images/01a19646-2031-77c1-99a1-8c26fde0eaec/exec-276911f2-e4af-447b-b961-e6d0b7e13b86.png"
+  },
+  "background": "opaque; requested #f2f6f2",
+  "width": 1631,
+  "height": 964,
+  "status": "needs_parent_review",
+  "notes": "Four overlapping white sheets, permitted 월보고서 title, no factual numbers or names.",
+  "conversion": "PNG to lossless WebP; no resampling, crop, retouch, or redraw"
+}

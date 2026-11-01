@@ -1407,3 +1407,13 @@
     display: none;
   }
 }
+
+.folio-proof-visual {
+  min-width: 0;
+}
+.folio-proof-visual figcaption {
+  margin-top: 4px;
+  color: var(--folio-muted);
+  text-align: right;
+  font-size: 0.7rem;
+}

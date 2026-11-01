@@ -363,22 +363,25 @@ function ProofCase({
           ))}
         </div>
       </div>
-      <Image
-        className="folio-proof-art"
-        src={
-          ledger
-            ? "/images/portfolio/proof-ledger.webp"
-            : "/images/portfolio/proof-reports.webp"
-        }
-        alt={
-          ledger
-            ? "구 ERP 원장 → 기준별 대조 → 검증 결과"
-            : "자동 작성하는 월 보고서 네 종류의 설명용 그림"
-        }
-        width={ledger ? 999 : 696}
-        height={ledger ? 234 : 411}
-        sizes="(max-width: 760px) 70vw, 22vw"
-      />
+      <figure className="folio-proof-visual">
+        <Image
+          className="folio-proof-art"
+          src={
+            ledger
+              ? "/images/portfolio/proof-ledger.webp"
+              : "/images/portfolio/proof-reports.webp"
+          }
+          alt={
+            ledger
+              ? "구 ERP 원장 → 기준별 대조 → 검증 결과"
+              : "자동 작성하는 월 보고서 네 종류의 설명용 그림"
+          }
+          width={ledger ? 2048 : 1631}
+          height={ledger ? 768 : 964}
+          sizes="(max-width: 760px) 70vw, 22vw"
+        />
+        {!ledger && <figcaption>설명용 이미지</figcaption>}
+      </figure>
     </Link>
   );
 }

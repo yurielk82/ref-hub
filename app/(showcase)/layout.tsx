@@ -60,13 +60,12 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <Flex
+    <html
       suppressHydrationWarning
-      as="html"
       lang={person.locale ?? "en"}
       style={fontVariables}
-      fillWidth
       className={classNames(
+        "display-flex position-relative min-width-0 fill-width",
         fonts.heading.variable,
         fonts.body.variable,
         fonts.label.variable,
@@ -203,6 +202,6 @@ export default async function RootLayout({
           <MagicOwnerTools />
         </Column>
       </Providers>
-    </Flex>
+    </html>
   );
 }

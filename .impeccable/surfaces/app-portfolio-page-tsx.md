@@ -2,7 +2,8 @@
 version: 1
 slug: "app-portfolio-page-tsx"
 primary_target: "app/(portfolio)/page.tsx"
-related_targets: ["app/(portfolio)/ax/page.tsx","components/portfolio/project-detail.tsx"]
+related_targets:
+  ["app/(portfolio)/ax/page.tsx", "components/portfolio/project-detail.tsx"]
 ---
 
 # 포트폴리오 홈과 사례

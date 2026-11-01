@@ -8,14 +8,14 @@
 
 ## 근거 대조
 
-| 항목 | 원본과 확인 근거 | 화면에 적용할 내용 |
-| --- | --- | --- |
-| 경력·업무 | `data/experience.ts`, `data/work-history.ts`, 사용자 확인 2026-10-26 | 영업관리 실무와 영업본부 분석·기획, 진행 중 개선을 완료로 표현하지 않음 |
-| 경영진 BI | `data/ax-cases/delivery.ts`, `data/projects/delivery.ts`, pharmkpi-bi README·architecture와 2026-11-01 `cb06a3cc` 계열 이력 | 8개 판매 구성 기준, 일일 보고·상세 분석, 기준일 분리와 메뉴별 원천 검산. 검수 화면의 확장 기능과 운영 상태 구분 |
-| 공급내역보고 | `WORK_CHAPTERS.reporting`, 사례 등록부, KPIS-DSR-API 2026-11-01 `bfe6d41` 보고 흐름 이력 | 분기 94.61%→98.8~99.6%, 장애 기간 월별 96.7~100%는 서로 다른 기간·단위로 표시. 34줄 추가 보고와 중복 정정은 기존 확인 사실만 사용 |
-| 월 보고서 | 사례 등록부, pharmkpi `docs/plans/2026-10-10-monthly-report-verification.md` | 기존 엑셀 4종의 계산 기준 역산·원천 재계산·원형 양식 보존. 원 단위 대사는 판매·수금 요약에서 확인한 범위로 한정 |
-| 공개 화면 | `public/images/portfolio/{pharmkpi-exec,kpis-dsr-api,monthly-sales-reports}/` | 기존 실제 UI 촬영물을 사용하고 가명·변경 금액·검수 환경 주석을 화면 앞에 표시 |
-| 수동 편집 | `lib/portfolio/{content,server,store}.ts` | 기존 키·저장 위치·revision·인가 유지. 기존 요약과 상세가 같은 수정값을 읽음 |
+| 항목         | 원본과 확인 근거                                                                                                            | 화면에 적용할 내용                                                                                                                |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| 경력·업무    | `data/experience.ts`, `data/work-history.ts`, 사용자 확인 2026-10-26                                                        | 영업관리 실무와 영업본부 분석·기획, 진행 중 개선을 완료로 표현하지 않음                                                           |
+| 경영진 BI    | `data/ax-cases/delivery.ts`, `data/projects/delivery.ts`, pharmkpi-bi README·architecture와 2026-11-01 `cb06a3cc` 계열 이력 | 8개 판매 구성 기준, 일일 보고·상세 분석, 기준일 분리와 메뉴별 원천 검산. 검수 화면의 확장 기능과 운영 상태 구분                   |
+| 공급내역보고 | `WORK_CHAPTERS.reporting`, 사례 등록부, KPIS-DSR-API 2026-11-01 `bfe6d41` 보고 흐름 이력                                    | 분기 94.61%→98.8~99.6%, 장애 기간 월별 96.7~100%는 서로 다른 기간·단위로 표시. 34줄 추가 보고와 중복 정정은 기존 확인 사실만 사용 |
+| 월 보고서    | 사례 등록부, pharmkpi `docs/plans/2026-10-10-monthly-report-verification.md`                                                | 기존 엑셀 4종의 계산 기준 역산·원천 재계산·원형 양식 보존. 원 단위 대사는 판매·수금 요약에서 확인한 범위로 한정                   |
+| 공개 화면    | `public/images/portfolio/{pharmkpi-exec,kpis-dsr-api,monthly-sales-reports}/`                                               | 기존 실제 UI 촬영물을 사용하고 가명·변경 금액·검수 환경 주석을 화면 앞에 표시                                                     |
+| 수동 편집    | `lib/portfolio/{content,server,store}.ts`                                                                                   | 기존 키·저장 위치·revision·인가 유지. 기존 요약과 상세가 같은 수정값을 읽음                                                       |
 
 공통 기준: 설치된 Next 16.4.2의 `node_modules/next/dist/docs/01-app/01-getting-started/05-server-and-client-components.md`, Vercel React best practices. 본문·원본은 서버에서 읽고 확대만 클라이언트에 둔다. 확대는 [MDN dialog](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dialog)의 showModal·닫기·Escape를 사용한다. 새 의존성 없이 기존 Next Image·Link·native dialog·lucide와 순서 변경 부품을 재사용한다.
 

@@ -19,7 +19,7 @@
   background: var(--paper);
   color: var(--ink);
   font-family:
-    'Pretendard Variable',
+    "Pretendard Variable",
     Pretendard,
     -apple-system,
     BlinkMacSystemFont,
@@ -123,7 +123,7 @@
   scroll-margin-top: 72px;
 }
 .mpdoc .mono {
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
 }
 
 /* 읽기 좋은 단일 컬럼 */
@@ -570,7 +570,7 @@
 }
 .mpdoc .metarow .v {
   margin-top: 2px;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
   font-size: 14px;
   color: var(--ink);
 }
@@ -583,7 +583,7 @@
   color: var(--ink-2);
 }
 .mpdoc .timerow .t {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
   color: var(--ink);
 }
 .mpdoc .metarow + div {
@@ -639,7 +639,7 @@
   padding: 2px 6px;
   border: 1px solid var(--line);
   border-radius: 4px;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
   font-size: 13px;
   color: var(--ink-2);
 }

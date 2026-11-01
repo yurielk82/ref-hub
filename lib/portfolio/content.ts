@@ -494,17 +494,28 @@ export function portfolioContent(
   const proof = [
     {
       slug: "pharmkpi",
+      tags: ["데이터 정비", "기준 통합", "대조 로직 구현"],
       title: "ERP 원장 806개 그룹 대조",
       summary:
         "구 ERP 원장을 월·전표 기준으로 대조하고 차이 없음을 확인했습니다.",
     },
     {
       slug: "monthly-sales-reports",
+      tags: ["보고서 자동화", "데이터 가공", "업무 효율화"],
       title: "월 보고서 4종 자동 작성",
       summary: "원천 자료에서 다시 계산하고 기존 엑셀 양식으로 제공합니다.",
     },
   ].map((item) => ({
     ...item,
+    tags: item.tags.map((tag, index) =>
+      text(
+        `proof.${item.slug}.tags.${index}`,
+        `대표 근거 · ${item.title}`,
+        `분류 ${index + 1}`,
+        tag,
+        40,
+      ),
+    ),
     title: text(
       `proof.${item.slug}.title`,
       "대표 근거 제목",

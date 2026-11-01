@@ -60,8 +60,8 @@ export function PortfolioHome({ copy, track }: { copy: Copy; track: Track }) {
       <section className="folio-hero" aria-labelledby="profile-title">
         <div className="folio-hero-copy">
           <h1 id="profile-title">
-            {copy.hero.title.split("\n").map((line, index) => (
-              <span key={index}>{line}</span>
+            {copy.hero.title.split("\n").map((line) => (
+              <span key={line}>{line}</span>
             ))}
           </h1>
           <p className="folio-lead">{copy.hero.subhead}</p>
@@ -114,9 +114,19 @@ export function PortfolioHome({ copy, track }: { copy: Copy; track: Track }) {
                 <Icon size={25} aria-hidden />
               </span>
               <div>
+                <span className="folio-step-number">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
                 <h2>{item.label}</h2>
                 <p>{item.text}</p>
               </div>
+              {index < copy.hero.evidence.length - 1 && (
+                <ArrowRight
+                  className="folio-step-arrow"
+                  size={24}
+                  aria-hidden
+                />
+              )}
             </div>
           );
         })}
@@ -124,17 +134,7 @@ export function PortfolioHome({ copy, track }: { copy: Copy; track: Track }) {
       <section className="folio-proof-section" aria-label="업무에 적용한 근거">
         <div className="folio-proof-grid">
           {copy.proof.map((item) => (
-            <Link
-              className="folio-proof"
-              key={item.slug}
-              href={caseHref(track, item.slug)}
-            >
-              <div>
-                <h2>{item.title}</h2>
-                <p>{item.summary}</p>
-              </div>
-              <ArrowRight size={24} aria-hidden />
-            </Link>
+            <ProofCase key={item.slug} item={item} track={track} />
           ))}
         </div>
         {pmi && (
@@ -340,5 +340,45 @@ function AxPractice({ copy }: { copy: Copy }) {
         <p>{copy.grounding.spreadTags.join(" · ")}</p>
       </section>
     </>
+  );
+}
+
+/** 사례의 핵심 근거와 설명용 그림을 함께 보여 주는 링크다. */
+function ProofCase({
+  item,
+  track,
+}: {
+  item: Copy["proof"][number];
+  track: Track;
+}) {
+  const ledger = item.slug === "pharmkpi";
+  return (
+    <Link className="folio-proof" href={caseHref(track, item.slug)}>
+      <div className="folio-proof-copy">
+        <h2>{item.title}</h2>
+        <p>{item.summary}</p>
+        <div className="folio-proof-tags">
+          {item.tags.map((tag) => (
+            <span key={tag}>{tag}</span>
+          ))}
+        </div>
+      </div>
+      <Image
+        className="folio-proof-art"
+        src={
+          ledger
+            ? "/images/portfolio/proof-ledger.webp"
+            : "/images/portfolio/proof-reports.webp"
+        }
+        alt={
+          ledger
+            ? "구 ERP 원장 → 기준별 대조 → 검증 결과"
+            : "자동 작성하는 월 보고서 네 종류의 설명용 그림"
+        }
+        width={ledger ? 999 : 696}
+        height={ledger ? 234 : 411}
+        sizes="(max-width: 760px) 70vw, 22vw"
+      />
+    </Link>
   );
 }

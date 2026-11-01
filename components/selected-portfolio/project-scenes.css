@@ -1,9 +1,29 @@
 .project-scene {
-  --scene-face: color-mix(in srgb, var(--material-paper) 92%, var(--material-ink));
-  --scene-side: color-mix(in srgb, var(--material-paper) 76%, var(--material-ink));
-  --scene-edge: color-mix(in srgb, var(--material-paper) 62%, var(--material-ink));
-  --scene-accent-face: color-mix(in srgb, var(--material-paper) 79%, var(--material-accent));
-  --scene-accent-side: color-mix(in srgb, var(--material-paper) 58%, var(--material-accent));
+  --scene-face: color-mix(
+    in srgb,
+    var(--material-paper) 92%,
+    var(--material-ink)
+  );
+  --scene-side: color-mix(
+    in srgb,
+    var(--material-paper) 76%,
+    var(--material-ink)
+  );
+  --scene-edge: color-mix(
+    in srgb,
+    var(--material-paper) 62%,
+    var(--material-ink)
+  );
+  --scene-accent-face: color-mix(
+    in srgb,
+    var(--material-paper) 79%,
+    var(--material-accent)
+  );
+  --scene-accent-side: color-mix(
+    in srgb,
+    var(--material-paper) 58%,
+    var(--material-accent)
+  );
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -12,106 +32,457 @@
   min-height: 280px;
   margin-top: 8px;
 }
-.project-scene > svg { display: block; flex: 1; width: 100%; height: clamp(270px, 38vh, 470px); min-height: 270px; max-height: 540px; overflow: visible; }
-.project-scene figcaption { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px 20px; padding: 8px 0 18px; color: var(--ink-2); font-size: 11px; }
-.project-scene svg { stroke-linecap: round; stroke-linejoin: round; }
-.scene-shadow { fill: var(--material-ink); opacity: .045; }
-.scene-solid { stroke: color-mix(in srgb, var(--material-ink) 24%, var(--material-paper)); stroke-width: .8; }
-.scene-solid-top { fill: var(--scene-face); }
-.scene-solid-side { fill: var(--scene-side); }
-.scene-solid-edge { fill: var(--scene-edge); }
-.scene-muted .scene-solid-top { fill: var(--material-wash); }
-.scene-muted .scene-solid-side { fill: var(--scene-edge); }
-.scene-accent .scene-solid-top { fill: var(--scene-accent-face); }
-.scene-accent .scene-solid-side { fill: var(--scene-accent-side); }
-.scene-accent .scene-solid-edge { fill: color-mix(in srgb, var(--material-accent) 60%, var(--material-paper)); }
-.scene-sheet-title { fill: var(--material-ink); font-size: 17px; font-weight: 700; letter-spacing: -.02em; }
-.scene-ink, .scene-row, .scene-grid, .scene-document-lines { fill: none; stroke: var(--material-ink); stroke-width: 1.2; }
-.scene-row { stroke-opacity: .22; }
-.scene-row-data { stroke-opacity: .7; stroke-width: 2.5; }
-.scene-grid { stroke-opacity: .13; }
-.scene-row-accent { fill: none; stroke: var(--material-accent); stroke-width: 1.6; }
-.scene-query-window { fill: var(--scene-accent-face); stroke: var(--material-accent); stroke-width: 1.2; }
-.scene-highlight-stroke { fill: none; stroke: var(--material-accent); stroke-width: 2.7; }
-.scene-exception { fill: var(--material-accent); }
-.scene-label { fill: var(--ink-2); font-size: 18px; font-weight: 500; letter-spacing: -.025em; }
-.scene-leader { fill: none; stroke: var(--ink-3); stroke-width: 1; }
-.scene-paper-face { fill: var(--material-paper); stroke: color-mix(in srgb, var(--material-ink) 30%, var(--material-paper)); stroke-width: 1; }
-.scene-paper-depth { fill: var(--scene-side); stroke: var(--scene-side); }
-.scene-paper-fold { fill: var(--material-wash); stroke: var(--material-line); stroke-width: 1; }
-.scene-document-lines { stroke-opacity: .24; }
-.scene-document-lines path { stroke-width: 1.5; }
-.scene-focus-ring { fill: color-mix(in srgb, var(--material-paper) 85%, transparent); stroke: var(--material-accent); stroke-width: 3; }
-.scene-activity-path { fill: none; stroke: var(--material-ink); stroke-width: 3; }
-.scene-plan-demand, .scene-plan-supply { fill: none; stroke-width: 6; }
-.scene-plan-demand { stroke: var(--material-accent); }
-.scene-plan-supply { stroke: var(--material-muted); }
-.scene-plan-join { stroke: var(--ink-3); stroke-width: 2; stroke-dasharray: 4 5; }
-.scene-linking-axis { fill: none; stroke: var(--material-ink); stroke-width: 3; }
-.scene-donut-side { fill: var(--scene-side); stroke: var(--scene-edge); stroke-width: 1; }
-.scene-donut-inner { fill: var(--stage); stroke: var(--scene-edge); stroke-width: 1; }
-.scene-donut-sector { stroke: var(--stage); stroke-width: 1.2; }
-.scene-donut-sector-0 { fill: var(--scene-face); }
-.scene-donut-sector-1 { fill: var(--scene-accent-face); }
-.scene-donut-sector-2 { fill: color-mix(in srgb, var(--material-paper) 74%, var(--material-ink)); }
-.scene-donut-sector-3 { fill: color-mix(in srgb, var(--material-paper) 86%, var(--material-accent)); }
-.scene-donut-sector-4 { fill: var(--material-wash); }
-.scene-donut-selected-edge { fill: var(--scene-accent-side); stroke: var(--scene-accent-side); stroke-width: 1; }
-.scene-selected-sector { transform: translate(18px, -14px); }
-.scene-book-edge { fill: var(--scene-side); stroke: var(--scene-edge); stroke-width: 1; }
-.scene-book-left { fill: var(--scene-face); stroke: var(--material-line); stroke-width: 1; }
-.scene-book-right { fill: var(--material-paper); stroke: var(--material-line); stroke-width: 1; }
-.scene-book-spine { fill: none; stroke: var(--scene-edge); stroke-width: 1.5; }
-.scene-reconcile-rule { fill: none; stroke: var(--material-accent); stroke-width: 3; }
-.scene-review-cell { fill: var(--scene-accent-face); stroke: var(--material-accent); stroke-width: 1.4; }
-.scene-folder-tab { fill: var(--scene-accent-face); stroke: var(--scene-accent-side); stroke-width: 1; }
-.scene-folder-tab-line { stroke: var(--material-accent); stroke-width: 2; }
-.scene-blueprint-face { fill: var(--material-paper); stroke: var(--material-line); stroke-width: 1; }
-.scene-blueprint-side { fill: var(--scene-side); stroke: var(--scene-side); }
-.scene-erd-table { fill: var(--material-paper); stroke: var(--ink-3); stroke-width: 1.2; }
-.scene-erd-table path { fill: none; stroke-opacity: .6; }
-.scene-erd-table text { fill: var(--material-muted); stroke: none; font-size: 15px; font-weight: 600; }
-.scene-erd-main rect { fill: var(--scene-accent-face); stroke: var(--material-accent); }
-.scene-relation { fill: none; stroke: var(--material-accent); stroke-width: 2; }
-.scene-port { fill: var(--material-accent); }
-.scene-privacy-boundary { fill: var(--scene-accent-face); stroke: var(--scene-accent-side); stroke-width: 1; }
-.scene-privacy-depth { fill: var(--scene-accent-side); }
-.scene-team-outline { fill: var(--scene-face); stroke: var(--scene-edge); stroke-width: 1; }
-.scene-team-top { fill: var(--material-paper); stroke: var(--scene-edge); stroke-width: 1; }
-.scene-team-trace { fill: none; stroke: var(--material-ink); stroke-opacity: .65; stroke-width: 2.3; }
-.scene-team-outline-line { fill: none; stroke: var(--material-subtle); stroke-width: 1.5; }
-.scene-code-book-edge { fill: var(--scene-side); stroke: var(--scene-side); }
-.scene-code-sheet { fill: var(--material-paper); stroke: var(--material-line); stroke-width: 1; }
-.scene-code-bracket { fill: none; stroke: var(--material-ink); stroke-width: 3; }
-.scene-code-lines { fill: none; stroke: var(--material-muted); stroke-width: 3; }
-.scene-inspection-face { fill: var(--scene-accent-face); stroke: var(--scene-accent-side); stroke-width: 1; }
-.scene-inspection-edge { fill: var(--scene-accent-side); stroke: var(--scene-accent-side); }
-.scene-inspection-ticks { stroke: var(--material-accent); stroke-width: 1.5; }
-.scene-inspection-text { fill: var(--material-ink); font-size: 12px; font-weight: 600; }
-.scene-compare-rail { fill: var(--scene-side); stroke: var(--scene-edge); stroke-width: 1; }
-.scene-compare-ticks { fill: none; stroke: var(--material-muted); stroke-width: 1; }
-.scene-comparison-lens { fill: color-mix(in srgb, var(--material-paper) 80%, transparent); stroke: var(--material-accent); stroke-width: 1.5; }
-.project-scene-mark { color: var(--ink-2); }
-.scene-mark-accent { stroke: var(--material-accent); }
-@media (prefers-reduced-motion: no-preference) {
-  .scene-align { animation: scene-align .95s cubic-bezier(.16, 1, .3, 1) both; }
-  .scene-analysis-sheet { animation: scene-analysis .95s cubic-bezier(.16, 1, .3, 1) both; }
-  .scene-selected-sector { animation: scene-select .9s cubic-bezier(.16, 1, .3, 1) both; }
-  .scene-sort-document { animation: scene-sort .85s cubic-bezier(.16, 1, .3, 1) both; }
-  .scene-trace { stroke-dasharray: 1000; animation: scene-trace 1.6s cubic-bezier(.16, 1, .3, 1) both; }
-  .scene-inspection-rule { animation: scene-inspect 1.1s cubic-bezier(.16, 1, .3, 1) both; }
-  .scene-comparison-window { animation: scene-compare 1.1s cubic-bezier(.16, 1, .3, 1) both; }
+.project-scene > svg {
+  display: block;
+  flex: 1;
+  width: 100%;
+  height: clamp(270px, 38vh, 470px);
+  min-height: 270px;
+  max-height: 540px;
+  overflow: visible;
 }
-@keyframes scene-align { from { translate: -16px 8px; } to { translate: 0 0; } }
-@keyframes scene-analysis { from { translate: -16px 12px; } to { translate: 0 0; } }
-@keyframes scene-select { from { transform: translate(0, 0); } to { transform: translate(18px, -14px); } }
-@keyframes scene-sort { from { translate: -12px 5px; } to { translate: 0 0; } }
-@keyframes scene-trace { from { stroke-dashoffset: 1000; } to { stroke-dashoffset: 0; } }
-@keyframes scene-inspect { from { translate: 0 -67px; } to { translate: 0 0; } }
-@keyframes scene-compare { from { translate: -72px 0; } to { translate: 0 0; } }
+.project-scene figcaption {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  padding: 8px 0 18px;
+  color: var(--ink-2);
+  font-size: 11px;
+}
+.project-scene svg {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.scene-shadow {
+  fill: var(--material-ink);
+  opacity: 0.045;
+}
+.scene-solid {
+  stroke: color-mix(in srgb, var(--material-ink) 24%, var(--material-paper));
+  stroke-width: 0.8;
+}
+.scene-solid-top {
+  fill: var(--scene-face);
+}
+.scene-solid-side {
+  fill: var(--scene-side);
+}
+.scene-solid-edge {
+  fill: var(--scene-edge);
+}
+.scene-muted .scene-solid-top {
+  fill: var(--material-wash);
+}
+.scene-muted .scene-solid-side {
+  fill: var(--scene-edge);
+}
+.scene-accent .scene-solid-top {
+  fill: var(--scene-accent-face);
+}
+.scene-accent .scene-solid-side {
+  fill: var(--scene-accent-side);
+}
+.scene-accent .scene-solid-edge {
+  fill: color-mix(in srgb, var(--material-accent) 60%, var(--material-paper));
+}
+.scene-sheet-title {
+  fill: var(--material-ink);
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.scene-ink,
+.scene-row,
+.scene-grid,
+.scene-document-lines {
+  fill: none;
+  stroke: var(--material-ink);
+  stroke-width: 1.2;
+}
+.scene-row {
+  stroke-opacity: 0.22;
+}
+.scene-row-data {
+  stroke-opacity: 0.7;
+  stroke-width: 2.5;
+}
+.scene-grid {
+  stroke-opacity: 0.13;
+}
+.scene-row-accent {
+  fill: none;
+  stroke: var(--material-accent);
+  stroke-width: 1.6;
+}
+.scene-query-window {
+  fill: var(--scene-accent-face);
+  stroke: var(--material-accent);
+  stroke-width: 1.2;
+}
+.scene-highlight-stroke {
+  fill: none;
+  stroke: var(--material-accent);
+  stroke-width: 2.7;
+}
+.scene-exception {
+  fill: var(--material-accent);
+}
+.scene-label {
+  fill: var(--ink-2);
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+}
+.scene-leader {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1;
+}
+.scene-paper-face {
+  fill: var(--material-paper);
+  stroke: color-mix(in srgb, var(--material-ink) 30%, var(--material-paper));
+  stroke-width: 1;
+}
+.scene-paper-depth {
+  fill: var(--scene-side);
+  stroke: var(--scene-side);
+}
+.scene-paper-fold {
+  fill: var(--material-wash);
+  stroke: var(--material-line);
+  stroke-width: 1;
+}
+.scene-document-lines {
+  stroke-opacity: 0.24;
+}
+.scene-document-lines path {
+  stroke-width: 1.5;
+}
+.scene-focus-ring {
+  fill: color-mix(in srgb, var(--material-paper) 85%, transparent);
+  stroke: var(--material-accent);
+  stroke-width: 3;
+}
+.scene-activity-path {
+  fill: none;
+  stroke: var(--material-ink);
+  stroke-width: 3;
+}
+.scene-plan-demand,
+.scene-plan-supply {
+  fill: none;
+  stroke-width: 6;
+}
+.scene-plan-demand {
+  stroke: var(--material-accent);
+}
+.scene-plan-supply {
+  stroke: var(--material-muted);
+}
+.scene-plan-join {
+  stroke: var(--ink-3);
+  stroke-width: 2;
+  stroke-dasharray: 4 5;
+}
+.scene-linking-axis {
+  fill: none;
+  stroke: var(--material-ink);
+  stroke-width: 3;
+}
+.scene-donut-side {
+  fill: var(--scene-side);
+  stroke: var(--scene-edge);
+  stroke-width: 1;
+}
+.scene-donut-inner {
+  fill: var(--stage);
+  stroke: var(--scene-edge);
+  stroke-width: 1;
+}
+.scene-donut-sector {
+  stroke: var(--stage);
+  stroke-width: 1.2;
+}
+.scene-donut-sector-0 {
+  fill: var(--scene-face);
+}
+.scene-donut-sector-1 {
+  fill: var(--scene-accent-face);
+}
+.scene-donut-sector-2 {
+  fill: color-mix(in srgb, var(--material-paper) 74%, var(--material-ink));
+}
+.scene-donut-sector-3 {
+  fill: color-mix(in srgb, var(--material-paper) 86%, var(--material-accent));
+}
+.scene-donut-sector-4 {
+  fill: var(--material-wash);
+}
+.scene-donut-selected-edge {
+  fill: var(--scene-accent-side);
+  stroke: var(--scene-accent-side);
+  stroke-width: 1;
+}
+.scene-selected-sector {
+  transform: translate(18px, -14px);
+}
+.scene-book-edge {
+  fill: var(--scene-side);
+  stroke: var(--scene-edge);
+  stroke-width: 1;
+}
+.scene-book-left {
+  fill: var(--scene-face);
+  stroke: var(--material-line);
+  stroke-width: 1;
+}
+.scene-book-right {
+  fill: var(--material-paper);
+  stroke: var(--material-line);
+  stroke-width: 1;
+}
+.scene-book-spine {
+  fill: none;
+  stroke: var(--scene-edge);
+  stroke-width: 1.5;
+}
+.scene-reconcile-rule {
+  fill: none;
+  stroke: var(--material-accent);
+  stroke-width: 3;
+}
+.scene-review-cell {
+  fill: var(--scene-accent-face);
+  stroke: var(--material-accent);
+  stroke-width: 1.4;
+}
+.scene-folder-tab {
+  fill: var(--scene-accent-face);
+  stroke: var(--scene-accent-side);
+  stroke-width: 1;
+}
+.scene-folder-tab-line {
+  stroke: var(--material-accent);
+  stroke-width: 2;
+}
+.scene-blueprint-face {
+  fill: var(--material-paper);
+  stroke: var(--material-line);
+  stroke-width: 1;
+}
+.scene-blueprint-side {
+  fill: var(--scene-side);
+  stroke: var(--scene-side);
+}
+.scene-erd-table {
+  fill: var(--material-paper);
+  stroke: var(--ink-3);
+  stroke-width: 1.2;
+}
+.scene-erd-table path {
+  fill: none;
+  stroke-opacity: 0.6;
+}
+.scene-erd-table text {
+  fill: var(--material-muted);
+  stroke: none;
+  font-size: 15px;
+  font-weight: 600;
+}
+.scene-erd-main rect {
+  fill: var(--scene-accent-face);
+  stroke: var(--material-accent);
+}
+.scene-relation {
+  fill: none;
+  stroke: var(--material-accent);
+  stroke-width: 2;
+}
+.scene-port {
+  fill: var(--material-accent);
+}
+.scene-privacy-boundary {
+  fill: var(--scene-accent-face);
+  stroke: var(--scene-accent-side);
+  stroke-width: 1;
+}
+.scene-privacy-depth {
+  fill: var(--scene-accent-side);
+}
+.scene-team-outline {
+  fill: var(--scene-face);
+  stroke: var(--scene-edge);
+  stroke-width: 1;
+}
+.scene-team-top {
+  fill: var(--material-paper);
+  stroke: var(--scene-edge);
+  stroke-width: 1;
+}
+.scene-team-trace {
+  fill: none;
+  stroke: var(--material-ink);
+  stroke-opacity: 0.65;
+  stroke-width: 2.3;
+}
+.scene-team-outline-line {
+  fill: none;
+  stroke: var(--material-subtle);
+  stroke-width: 1.5;
+}
+.scene-code-book-edge {
+  fill: var(--scene-side);
+  stroke: var(--scene-side);
+}
+.scene-code-sheet {
+  fill: var(--material-paper);
+  stroke: var(--material-line);
+  stroke-width: 1;
+}
+.scene-code-bracket {
+  fill: none;
+  stroke: var(--material-ink);
+  stroke-width: 3;
+}
+.scene-code-lines {
+  fill: none;
+  stroke: var(--material-muted);
+  stroke-width: 3;
+}
+.scene-inspection-face {
+  fill: var(--scene-accent-face);
+  stroke: var(--scene-accent-side);
+  stroke-width: 1;
+}
+.scene-inspection-edge {
+  fill: var(--scene-accent-side);
+  stroke: var(--scene-accent-side);
+}
+.scene-inspection-ticks {
+  stroke: var(--material-accent);
+  stroke-width: 1.5;
+}
+.scene-inspection-text {
+  fill: var(--material-ink);
+  font-size: 12px;
+  font-weight: 600;
+}
+.scene-compare-rail {
+  fill: var(--scene-side);
+  stroke: var(--scene-edge);
+  stroke-width: 1;
+}
+.scene-compare-ticks {
+  fill: none;
+  stroke: var(--material-muted);
+  stroke-width: 1;
+}
+.scene-comparison-lens {
+  fill: color-mix(in srgb, var(--material-paper) 80%, transparent);
+  stroke: var(--material-accent);
+  stroke-width: 1.5;
+}
+.project-scene-mark {
+  color: var(--ink-2);
+}
+.scene-mark-accent {
+  stroke: var(--material-accent);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .scene-align {
+    animation: scene-align 0.95s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .scene-analysis-sheet {
+    animation: scene-analysis 0.95s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .scene-selected-sector {
+    animation: scene-select 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .scene-sort-document {
+    animation: scene-sort 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .scene-trace {
+    stroke-dasharray: 1000;
+    animation: scene-trace 1.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .scene-inspection-rule {
+    animation: scene-inspect 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .scene-comparison-window {
+    animation: scene-compare 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+}
+@keyframes scene-align {
+  from {
+    translate: -16px 8px;
+  }
+  to {
+    translate: 0 0;
+  }
+}
+@keyframes scene-analysis {
+  from {
+    translate: -16px 12px;
+  }
+  to {
+    translate: 0 0;
+  }
+}
+@keyframes scene-select {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(18px, -14px);
+  }
+}
+@keyframes scene-sort {
+  from {
+    translate: -12px 5px;
+  }
+  to {
+    translate: 0 0;
+  }
+}
+@keyframes scene-trace {
+  from {
+    stroke-dashoffset: 1000;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes scene-inspect {
+  from {
+    translate: 0 -67px;
+  }
+  to {
+    translate: 0 0;
+  }
+}
+@keyframes scene-compare {
+  from {
+    translate: -72px 0;
+  }
+  to {
+    translate: 0 0;
+  }
+}
 @media (max-width: 680px) {
-  .project-scene { min-height: 260px; }
-  .project-scene > svg { height: 280px; min-height: 260px; max-height: 360px; }
-  .scene-label { font-size: 23px; }
-  .project-scene figcaption { font-size: 10px; padding-bottom: 12px; }
+  .project-scene {
+    min-height: 260px;
+  }
+  .project-scene > svg {
+    height: 280px;
+    min-height: 260px;
+    max-height: 360px;
+  }
+  .scene-label {
+    font-size: 23px;
+  }
+  .project-scene figcaption {
+    font-size: 10px;
+    padding-bottom: 12px;
+  }
 }

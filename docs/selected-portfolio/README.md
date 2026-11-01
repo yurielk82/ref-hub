@@ -4,14 +4,14 @@
 
 같은 폴더의 ART 문서는 원본 아트 기준이다. 파일 지도는 upstream 기준이며 운영 구현은 아래 위치로 옮겼다. 실제 데이터나 정량 효과를 새로 주장하지 않고, 서로 다른 업무를 서로 다른 입체 장면으로 표현한다.
 
-| 역할 | 운영 파일 |
-|---|---|
-| 공개 루트·AX·기존 상세 주소 | `app/(showcase)/` |
-| 원본 컴포넌트·스타일·프로젝트별 장면 | `components/selected-portfolio/` |
-| 글·테마 기본값 | `data/selected-portfolio/` |
-| 타입·필터·읽기·기존 편집키 연결 | `lib/selected-portfolio/` |
-| 원본의 순수 계산·검증 | `scripts/selected-portfolio/` |
-| 공개용 캡처·글꼴·원본 예제 | `public/assets/selected-portfolio/` |
+| 역할                                 | 운영 파일                           |
+| ------------------------------------ | ----------------------------------- |
+| 공개 루트·AX·기존 상세 주소          | `app/(showcase)/`                   |
+| 원본 컴포넌트·스타일·프로젝트별 장면 | `components/selected-portfolio/`    |
+| 글·테마 기본값                       | `data/selected-portfolio/`          |
+| 타입·필터·읽기·기존 편집키 연결      | `lib/selected-portfolio/`           |
+| 원본의 순수 계산·검증                | `scripts/selected-portfolio/`       |
+| 공개용 캡처·글꼴·원본 예제           | `public/assets/selected-portfolio/` |
 
 KPI.는 제약 영업 운영 플랫폼으로 소개한다. SFE·S&OP·KPIS·유통재고는 같은 계열의 기능·연계 사례이며 `parentId`로 연결한다. 공개 항목 11개를 독립 제품 11개로 집계하지 않는다. 숨긴 네 프로젝트는 JSON에서 `hidden: true`로 보관하고 목록·이전/다음·실제 상세 본문에서 제외한다.
 

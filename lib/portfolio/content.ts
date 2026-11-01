@@ -398,13 +398,17 @@ export function portfolioContent(
     ),
   };
   // 기존 이름·요약 키를 공유해 홈에서 저장한 문구가 사례에서도 이어지게 한다.
-  const details = PROJECTS.filter(
-    (project) => track === "ax" || project.scope === "company",
+  const details = PROJECTS.filter((project) =>
+    track === "sales"
+      ? project.scope === "company"
+      : project.scope === "other" ||
+        AX_TRACK_CASE_SLUGS.some((slug) => slug === project.slug),
   ).map((original) => {
     const project =
       projects.find((item) => item.slug === original.slug) ??
       projectCopy(original);
     const study = getAxCase(project.slug);
+    const usesAxSummary = track === "ax" && Boolean(study?.ax);
     const group = `상세 · ${original.name}`;
     const key = `detail.${project.slug}`;
     const screens = project.screens?.map((screen, index) => ({
@@ -429,30 +433,29 @@ export function portfolioContent(
       ? {
           ...study,
           role: text(`${key}.role`, "내 역할", group, study.role, 500, true),
-          problem: text(
-            `${key}.problem`,
-            "문제",
-            group,
-            study.problem,
-            800,
-            true,
-          ),
-          intervention: text(
-            `${key}.intervention`,
-            "내가 한 일",
-            group,
-            study.intervention,
-            1000,
-            true,
-          ),
-          outcome: text(
-            `${key}.outcome`,
-            "결과·진행 현황",
-            group,
-            study.outcome,
-            800,
-            true,
-          ),
+          problem: usesAxSummary
+            ? study.problem
+            : text(`${key}.problem`, "문제", group, study.problem, 800, true),
+          intervention: usesAxSummary
+            ? study.intervention
+            : text(
+                `${key}.intervention`,
+                "내가 한 일",
+                group,
+                study.intervention,
+                1000,
+                true,
+              ),
+          outcome: usesAxSummary
+            ? study.outcome
+            : text(
+                `${key}.outcome`,
+                "결과·진행 현황",
+                group,
+                study.outcome,
+                800,
+                true,
+              ),
           impact: study.impact
             ? text(`${key}.impact`, "대표 결과", group, study.impact, 300)
             : undefined,

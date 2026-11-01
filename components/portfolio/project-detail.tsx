@@ -49,6 +49,7 @@ export function ProjectDetail({
       <div className="folio-case-heading">
         <h1>{project.name}</h1>
         <p className="folio-lead">{project.tagline}</p>
+        {view && <p className="folio-summary">{view.headline}</p>}
         {caseStudy && (
           <dl className="folio-ownership">
             <div>
@@ -100,7 +101,12 @@ export function ProjectDetail({
             >
               <h3>{step.title}</h3>
               <p>{step.body}</p>
-              {step.image && <ScreenGallery screens={[step.image]} inline />}
+              {step.image && (
+                <>
+                  <ScreenGallery screens={[step.image]} inline />
+                  <p className="folio-screen-note">{step.image.caption}</p>
+                </>
+              )}
             </section>
           ))}
           {remaining.map((screen) => (

@@ -30,7 +30,11 @@ export function ProjectRow({
               </div>
               <div>
                 <dt>결과</dt>
-                <dd>{study.impact ?? study.outcome}</dd>
+                <dd>
+                  {track === "ax" && study.ax
+                    ? study.ax.headline
+                    : (study.impact ?? study.outcome)}
+                </dd>
               </div>
             </dl>
           )}
@@ -47,6 +51,9 @@ export function ProjectRow({
         </div>
         {featured && project.screenshot && (
           <div className="folio-project-image">
+            <p>
+              {project.screensNote ?? "실제 업무 화면 · 공개용 비식별 처리"}
+            </p>
             <Image
               src={project.screenshot}
               alt={`${project.name} 업무 화면`}
@@ -54,7 +61,6 @@ export function ProjectRow({
               height={900}
               sizes="(max-width: 760px) 100vw, 520px"
             />
-            <p>실제 업무 화면 · 공개용 비식별 처리</p>
           </div>
         )}
       </Link>

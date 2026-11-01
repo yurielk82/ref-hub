@@ -174,7 +174,7 @@ function SalesWork({ copy }: { copy: Copy }) {
     <>
       <section id="work" className="folio-section">
         <div className="folio-section-heading">
-          <h2>현재 맡고 있는 업무</h2>
+          <h2>주요 업무 경험</h2>
           <p>구축한 결과와 현재 개선 중인 일을 구분해 기록했습니다.</p>
         </div>
         <div className="folio-work-list">

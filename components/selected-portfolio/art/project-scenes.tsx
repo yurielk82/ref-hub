@@ -81,7 +81,7 @@ function KpiScene() {
       <SceneLabel x={210} y={53}>
         여러 곳의 자료
       </SceneLabel>
-      <SceneLabel x={748} y={338} anchor="end" to={{ x: 639, y: 289 }}>
+      <SceneLabel x={790} y={420} anchor="end" to={{ x: 639, y: 289 }}>
         한 기준으로 확인
       </SceneLabel>
     </>
@@ -511,7 +511,7 @@ function ErpScene() {
         <circle className="scene-port" cx={391} cy={207} r={4} />
         <circle className="scene-port" cx={476} cy={237} r={4} />
       </g>
-      <SceneLabel x={800} y={389} anchor="end">
+      <SceneLabel x={800} y={420} anchor="end">
         표의 관계를 읽을 수 있는 문서
       </SceneLabel>
     </>
@@ -610,10 +610,10 @@ function ToolsScene() {
           </text>
         </g>
       </g>
-      <SceneLabel x={211} y={51}>
+      <SceneLabel x={211} y={20}>
         작업에 붙는 기준
       </SceneLabel>
-      <SceneLabel x={793} y={370} anchor="end">
+      <SceneLabel x={793} y={420} anchor="end">
         만드는 과정에서 확인
       </SceneLabel>
     </>

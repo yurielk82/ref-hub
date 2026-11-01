@@ -685,6 +685,9 @@
 .folio-nav :focus-visible {
   outline-color: #edf18f;
 }
+.folio-owner-menu a:focus-visible {
+  outline-color: var(--folio-accent);
+}
 .folio-owner-menu {
   position: relative;
 }

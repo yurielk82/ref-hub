@@ -8,7 +8,7 @@ import {
   Monitor,
   ChartNoAxesColumnIncreasing,
 } from "lucide-react";
-import { AX_CONTACT } from "@/data/ax-content";
+import { AX_CONTACT, AX_TRACK_CASE_SLUGS } from "@/data/ax-content";
 import type { portfolioContent } from "@/lib/portfolio/content";
 import { ProjectRow } from "./project-row";
 import { SortableGrid } from "./sortable-grid";
@@ -37,11 +37,10 @@ export function PortfolioHome({ copy, track }: { copy: Copy; track: Track }) {
   const pmi = copy.work.find((chapter) => chapter.id === "pmi");
   const originalProjects = sales
     ? copy.projects
-    : copy.cases.map(
-        (item) =>
-          copy.details.find(
-            (detail) => detail.project.slug === item.projectSlug,
-          )?.project ?? item.project,
+    : AX_TRACK_CASE_SLUGS.flatMap((slug) =>
+        copy.details
+          .filter((detail) => detail.project.slug === slug)
+          .map((detail) => detail.project),
       );
   const projects = sales
     ? [
@@ -93,7 +92,7 @@ export function PortfolioHome({ copy, track }: { copy: Copy; track: Track }) {
                 width={1835}
                 height={1014}
                 sizes="(max-width: 760px) 100vw, 52vw"
-                priority
+                preload
               />
             </Link>
             <figcaption>

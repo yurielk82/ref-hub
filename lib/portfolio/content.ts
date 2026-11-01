@@ -493,7 +493,7 @@ export function portfolioContent(
   });
   const proof = [
     {
-      slug: "erp-spec",
+      slug: "pharmkpi",
       title: "ERP 원장 806개 그룹 대조",
       summary:
         "구 ERP 원장을 월·전표 기준으로 대조하고 차이 없음을 확인했습니다.",

@@ -6,11 +6,12 @@ import { AX_CONTACT } from "@/data/ax-content";
 
 import { TRACKS, trackOf } from "./track";
 
+/** 현재 트랙의 연락처와 참고 링크를 표시한다. */
 export function PortfolioFooter() {
   const developer = TRACKS[trackOf(usePathname() ?? "/")].developerLinks;
   return (
     <footer
-      className="border-t py-8"
+      className="folio-footer"
       style={{ borderColor: "var(--glass-border)" }}
     >
       <div className="mx-auto flex max-w-5xl items-center justify-between px-6 text-xs text-stone-400 dark:text-stone-500">

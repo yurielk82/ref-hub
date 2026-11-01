@@ -1,13 +1,10 @@
+import { loadPortfolio } from "@/lib/portfolio/server";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
-import { AX_TRACK_CASE_SLUGS, getAxCase } from "@/data/ax";
+import { AX_TRACK_CASE_SLUGS } from "@/data/ax";
 import { OTHER_PROJECTS, getProject } from "@/data/projects";
-import { AxCaseDetail } from "@/components/portfolio/ax-case-detail";
-import {
-  CaseNarrative,
-  storyScreenSrcs,
-} from "@/components/portfolio/case-narrative";
+
 import { ProjectDetail } from "@/components/portfolio/project-detail";
 
 /** AX 트랙에서 여는 사례 — 회사 대표 사례와 개인·외부 작업 */
@@ -18,10 +15,12 @@ const AX_DETAIL_SLUGS: readonly string[] = [
 
 export const dynamicParams = false;
 
+/** 이 트랙에서 공개하는 사례 경로를 생성한다. */
 export function generateStaticParams() {
   return AX_DETAIL_SLUGS.map((slug) => ({ slug }));
 }
 
+/** 사례 원본에서 검색 결과 제목과 설명을 만든다. */
 export async function generateMetadata(props: {
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
@@ -34,6 +33,7 @@ export async function generateMetadata(props: {
   };
 }
 
+/** 저장된 문구와 근거 화면을 같은 사례 페이지에 표시한다. */
 export default async function AxCasePage(props: {
   params: Promise<{ slug: string }>;
 }) {
@@ -41,25 +41,13 @@ export default async function AxCasePage(props: {
   const project = getProject(slug);
   if (!project || !AX_DETAIL_SLUGS.includes(slug)) notFound();
 
-  const caseStudy = getAxCase(slug);
-  const isOwnWork = project.scope === "other";
-
+  const copy = await loadPortfolio("ax");
+  const detail = copy.details.find((item) => item.project.slug === slug);
   return (
     <ProjectDetail
-      project={project}
-      narrative={
-        caseStudy &&
-        (caseStudy.ax ? (
-          <AxCaseDetail caseStudy={caseStudy} view={caseStudy.ax} />
-        ) : (
-          <CaseNarrative caseStudy={caseStudy} screens={project.screens} />
-        ))
-      }
-      storyScreens={caseStudy?.ax ? [] : storyScreenSrcs(caseStudy)}
-      back={{
-        href: isOwnWork ? "/ax#tools" : "/ax#cases",
-        label: isOwnWork ? "개인 작업 목록" : "AX 사례 목록",
-      }}
+      project={detail?.project ?? project}
+      caseStudy={detail?.study}
+      back={{ href: "/ax#cases", label: "사례 목록" }}
       track="ax"
     />
   );

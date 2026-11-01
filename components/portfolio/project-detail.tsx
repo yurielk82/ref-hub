@@ -1,210 +1,166 @@
-import type { ReactNode } from "react";
 import Link from "next/link";
-import { ArrowLeft, ExternalLink, BookOpen } from "lucide-react";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import type { Project } from "@/data/projects";
-import { NewBadge } from "@/components/portfolio/badge";
-import { ProjectThumbnail } from "@/components/portfolio/project-thumbnail";
-import { ScreenGallery } from "@/components/portfolio/screen-gallery";
-import { TechTags } from "@/components/portfolio/tech-tags";
-import { TRACKS, type Track } from "@/components/portfolio/track";
+import { CASE_STATUS_LABEL, type AxCaseStudy } from "@/data/ax-types";
+import { ScreenGallery } from "./screen-gallery";
+import { TRACKS, type Track } from "./track";
 
-/**
- * 사례 상세의 공용 틀. 영업관리 트랙(/projects/*)과 AX 트랙(/ax/cases/*)이 함께 쓰고,
- * 서사(narrative)·돌아가기 링크와 개발자용 정보(GitHub·사용 기술) 표시만 트랙마다 다르다.
- */
+/** 설명과 그 설명의 화면을 한 사례에서 읽는다. 확대만 클라이언트 상태다. */
 export function ProjectDetail({
   project,
-  narrative,
+  caseStudy,
   back,
   track,
-  storyScreens = [],
 }: {
   project: Project;
-  narrative: ReactNode;
+  caseStudy?: AxCaseStudy;
   back: { href: string; label: string };
   track: Track;
-  /** 서사 단계에 이미 붙인 화면 src — 아래 화면 모음에서는 뺀다 */
-  storyScreens?: readonly string[];
 }) {
-  const developer = TRACKS[track].developerLinks;
-  const shown = new Set(storyScreens);
-  const restScreens = (project.screens ?? []).filter(
-    (screen) => !shown.has(screen.src),
+  const view = track === "ax" ? caseStudy?.ax : undefined;
+  const facts = view
+    ? [
+        ["문제", view.problem],
+        ["구축·자동화", `${view.build} ${view.automation}`],
+        ["운영·검증", view.operation],
+      ]
+    : caseStudy
+      ? [
+          ["문제", caseStudy.problem],
+          ["내가 한 일", caseStudy.intervention],
+          ["업무에 남긴 변화", caseStudy.outcome],
+        ]
+      : [];
+  const screens = project.screens ?? [];
+  const evidence = (caseStudy?.steps ?? []).map((step) => ({
+    ...step,
+    image: screens.find((screen) => screen.src === step.screen),
+  }));
+  const shown = new Set(
+    evidence.flatMap((step) => (step.image ? [step.image.src] : [])),
   );
+  const remaining = screens.filter((screen) => !shown.has(screen.src));
   return (
-    <article className="px-6 pb-28 pt-12">
-      <div className="mx-auto max-w-5xl">
-        {/* 뒤로가기 */}
-        <Link
-          href={back.href}
-          className="mb-8 inline-flex items-center gap-1.5 text-sm text-[var(--accent)] transition-colors hover:text-[var(--accent-light)]"
-        >
-          <ArrowLeft className="h-3.5 w-3.5" />
-          {back.label}
-        </Link>
-
-        {/* 히어로: 60/40 스플릿 */}
-        <div className="flex flex-col gap-10 lg:flex-row lg:items-center">
-          {/* 좌측 60% — 텍스트 */}
-          <div className="lg:w-3/5">
-            <div className="flex items-center gap-3">
-              <span className="text-4xl">{project.emoji}</span>
-              <div>
-                <h1 className="font-[family-name:var(--font-display)] text-3xl font-bold text-stone-900 dark:text-stone-50">
-                  {project.name}
-                </h1>
-                <p className="text-base text-stone-500">{project.tagline}</p>
-              </div>
+    <article className="folio-page folio-case">
+      <Link className="folio-back" href={back.href}>
+        <ArrowLeft size={16} aria-hidden />
+        {back.label}
+      </Link>
+      <div className="folio-case-heading">
+        <h1>{project.name}</h1>
+        <p className="folio-lead">{project.tagline}</p>
+        {view && <p className="folio-summary">{view.headline}</p>}
+        {caseStudy && (
+          <dl className="folio-ownership">
+            <div>
+              <dt>내가 맡은 일</dt>
+              <dd>{caseStudy.role}</dd>
             </div>
-
-            <p className="mt-6 max-w-xl leading-relaxed text-stone-600 dark:text-stone-300">
-              {project.description}
-            </p>
-
-            {/* CTA 버튼 */}
-            <div className="mt-8 flex flex-wrap gap-3">
-              {project.liveUrl && (
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-xl bg-[var(--accent)] px-5 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90"
-                >
-                  <ExternalLink className="h-3.5 w-3.5" />
-                  사이트 보기
-                </a>
-              )}
-              {project.docsPath && (
-                <Link
-                  href={project.docsPath}
-                  className="glass-card inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-medium text-stone-700 dark:text-stone-300"
-                >
-                  <BookOpen className="h-3.5 w-3.5" />
-                  문서 보기
-                </Link>
-              )}
-              {developer && project.githubUrl && (
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="glass-card inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-medium text-stone-700 dark:text-stone-300"
-                >
-                  <svg
-                    className="h-3.5 w-3.5"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                  >
-                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z" />
-                  </svg>
-                  GitHub
-                </a>
-              )}
+            <div>
+              <dt>기간</dt>
+              <dd>{caseStudy.period}</dd>
             </div>
-          </div>
-
-          {/* 우측 40% — 스크린샷 */}
-          <div className="lg:w-2/5">
-            <div className="glass-card overflow-hidden rounded-2xl">
-              <ProjectThumbnail project={project} variant="detail" />
+            <div>
+              <dt>현재 상태</dt>
+              <dd>
+                <strong>{CASE_STATUS_LABEL[caseStudy.status.kind]}</strong> ·{" "}
+                {caseStudy.status.note}
+              </dd>
             </div>
-          </div>
-        </div>
-
-        {/* 케이스 서사 — 트랙마다 다른 관점 */}
-        {narrative}
-
-        {/* 주요 화면 — 화면별 스크린샷과 업무 설명 */}
-        {restScreens.length > 0 && (
-          <ScreenGallery
-            screens={restScreens}
-            note={project.screensNote}
-            title={shown.size > 0 ? "그 밖의 화면" : "주요 화면"}
-          />
+          </dl>
         )}
-
-        {/* 핵심 모듈 콜아웃 */}
-        {project.featuredModule && (
-          <section className="mt-16">
-            <div className="overflow-hidden rounded-2xl border border-[color-mix(in_srgb,var(--accent)_20%,transparent)] bg-gradient-to-r from-[color-mix(in_srgb,var(--accent)_5%,transparent)] to-transparent">
-              <div className="flex flex-col gap-6 p-8 sm:flex-row sm:items-center sm:justify-between">
-                <div className="flex-1">
-                  <div className="flex items-center gap-2.5">
-                    <span className="text-2xl">
-                      {project.featuredModule.emoji}
-                    </span>
-                    <NewBadge />
-                  </div>
-                  <h2 className="mt-3 font-[family-name:var(--font-display)] text-xl font-bold text-stone-900 dark:text-stone-50">
-                    {project.featuredModule.name}
-                  </h2>
-                  <p className="mt-2 max-w-xl text-sm leading-relaxed text-stone-600 dark:text-stone-400">
-                    {project.featuredModule.description}
-                  </p>
-                </div>
-                <Link
-                  href={project.featuredModule.path}
-                  className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-[var(--accent)] px-5 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90"
-                >
-                  <BookOpen className="h-3.5 w-3.5" />
-                  상세 문서
-                </Link>
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* 기술 스택 — 영업관리 트랙은 업무 내용이 먼저라 AX 트랙에서만 보여 준다 */}
-        {developer && (
-          <section className="mt-16">
-            <h2 className="mb-4 text-sm font-semibold text-stone-700 dark:text-stone-300">
-              사용 기술
-            </h2>
-            <TechTags items={project.tech} variant="full" />
-          </section>
-        )}
-
-        {/* 주요 기능 — 번호 매김 */}
-        <section className="mt-16">
-          <h2 className="text-2xl font-bold tracking-tight text-stone-900 dark:text-stone-100">
-            주요 기능
-          </h2>
-
-          <div className="mt-8 space-y-6">
-            {project.features.map((feature, i) => (
-              <div key={feature} className="flex items-start gap-5">
-                {/* 번호 뱃지 */}
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--accent)] text-sm font-bold text-white">
-                  {String(i + 1).padStart(2, "0")}
-                </div>
-
-                {/* 기능 설명 */}
-                <div className="pt-1.5">
-                  <p className="text-base font-medium text-stone-900 dark:text-stone-100">
-                    {feature}
-                  </p>
-                </div>
+      </div>
+      {facts.length > 0 ? (
+        <section className="folio-story" aria-labelledby="case-story">
+          <h2 id="case-story">문제와 해결</h2>
+          <dl>
+            {facts.map(([label, value]) => (
+              <div key={label}>
+                <dt>{label}</dt>
+                <dd>{value}</dd>
               </div>
             ))}
-          </div>
+          </dl>
+          {caseStudy?.impact && (
+            <p className="folio-impact">{caseStudy.impact}</p>
+          )}
         </section>
-
-        {/* 하이라이트 콜아웃 */}
-        <section className="mt-16">
-          <div className="glass-card flex items-center gap-5 rounded-xl border-l-4 border-l-[var(--accent-warm)] p-6">
-            <div className="flex-1">
-              <p className="font-[family-name:var(--font-mono)] text-xs uppercase tracking-wider text-stone-500">
-                하이라이트
-              </p>
-              <p className="mt-1 text-lg font-bold text-stone-900 dark:text-stone-100">
-                {project.highlight}
-              </p>
-            </div>
-            <span className="shrink-0 rounded-full bg-stone-100 px-3 py-1 text-xs font-medium text-stone-600 dark:bg-stone-800 dark:text-stone-400">
-              {project.year}
-            </span>
+      ) : (
+        <p className="folio-lead">{project.description}</p>
+      )}
+      {(evidence.length > 0 || screens.length > 0) && (
+        <section className="folio-evidence" aria-labelledby="case-evidence">
+          <div className="folio-section-heading">
+            <h2 id="case-evidence">업무에 적용한 방식</h2>
+            {project.screensNote && <p>{project.screensNote}</p>}
           </div>
+          {evidence.map((step) => (
+            <section
+              className="folio-evidence-step"
+              key={`${step.phase}-${step.title}`}
+            >
+              <h3>{step.title}</h3>
+              <p>{step.body}</p>
+              {step.image && (
+                <>
+                  <ScreenGallery screens={[step.image]} inline />
+                  <p className="folio-screen-note">{step.image.caption}</p>
+                </>
+              )}
+            </section>
+          ))}
+          {remaining.map((screen) => (
+            <section className="folio-evidence-step" key={screen.src}>
+              <h3>{screen.title}</h3>
+              <p>{screen.caption}</p>
+              <ScreenGallery screens={[screen]} inline />
+            </section>
+          ))}
         </section>
+      )}
+      <details className="folio-disclosure">
+        <summary>구현 범위와 참고 자료</summary>
+        <ul className="folio-bullets">
+          {project.features.map((feature) => (
+            <li key={feature}>{feature}</li>
+          ))}
+        </ul>
+        <div className="folio-links">
+          {project.docsPath && (
+            <Link href={project.docsPath}>
+              운영 매뉴얼 <ArrowUpRight size={16} aria-hidden />
+            </Link>
+          )}
+          {project.liveUrl && (
+            <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+              서비스 보기 <ArrowUpRight size={16} aria-hidden />
+            </a>
+          )}
+          {TRACKS[track].developerLinks && project.githubUrl && (
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              소스 코드 <ArrowUpRight size={16} aria-hidden />
+            </a>
+          )}
+          {project.featuredModule && (
+            <Link href={project.featuredModule.path}>
+              {project.featuredModule.name} 문서{" "}
+              <ArrowUpRight size={16} aria-hidden />
+            </Link>
+          )}
+        </div>
+        {TRACKS[track].developerLinks && (
+          <p className="folio-tech">{project.tech.join(" · ")}</p>
+        )}
+      </details>
+      <div className="folio-case-end">
+        <Link className="folio-button" href={back.href}>
+          <ArrowLeft size={16} aria-hidden />
+          다른 사례 살펴보기
+        </Link>
       </div>
     </article>
   );

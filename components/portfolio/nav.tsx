@@ -39,6 +39,7 @@ const THEMES: { value: string; label: string; Icon: LucideIcon }[] = [
 const LINK_CLASS =
   "rounded text-xs text-stone-500 transition-colors hover:text-[var(--accent)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]";
 
+/** 현재 트랙의 메뉴와 로그인·테마 선택을 제공한다. */
 export function PortfolioNav() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -51,7 +52,7 @@ export function PortfolioNav() {
 
   return (
     <header
-      className="fixed top-0 z-50 w-full border-b border-transparent bg-white/70 backdrop-blur-xl dark:bg-stone-950/70"
+      className="folio-nav"
       style={{ borderColor: "var(--glass-border)" }}
     >
       <nav

@@ -5,7 +5,7 @@ import { Copy, Download, Link2Off } from "lucide-react";
 import {
   shareResumeFile,
   stopResumeShare,
-} from "@/app/(portfolio)/resume/actions";
+} from "@/app/(legacy)/(portfolio)/resume/actions";
 import { PRODUCTION_ORIGIN } from "@/lib/auth/config";
 import type { ShareSummary } from "@/lib/resume/shares";
 import type { ResumePlatform } from "@/lib/resume/types";

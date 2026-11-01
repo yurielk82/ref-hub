@@ -7,7 +7,7 @@ import { PencilLine, Save, X } from "lucide-react";
 import {
   saveResumeVersion,
   type SaveInput,
-} from "@/app/(portfolio)/resume/actions";
+} from "@/app/(legacy)/(portfolio)/resume/actions";
 import type { ResumePlatform } from "@/lib/resume/types";
 import { SITE_NAMES, resumeHref } from "@/lib/resume/platforms";
 

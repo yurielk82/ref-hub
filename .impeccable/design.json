@@ -1,0 +1,339 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-01T05:09:56.368980+00:00",
+  "title": "Design System: ref-hub 포트폴리오",
+  "extensions": {
+    "colorMeta": {
+      "folio-ink": {
+        "role": "neutral",
+        "displayName": "남색 잉크 (색 띠는 설명용 생성값이며 제품 토큰이 아님)",
+        "tonalRamp": [
+          "oklch(0.150 0.0288 257.22)",
+          "oklch(0.264 0.0468 257.22)",
+          "oklch(0.379 0.0590 257.22)",
+          "oklch(0.493 0.0635 257.22)",
+          "oklch(0.607 0.0599 257.22)",
+          "oklch(0.721 0.0488 257.22)",
+          "oklch(0.836 0.0313 257.22)",
+          "oklch(0.950 0.0099 257.22)"
+        ]
+      },
+      "folio-muted": {
+        "role": "neutral",
+        "displayName": "설명 잉크 (색 띠는 설명용 생성값이며 제품 토큰이 아님)",
+        "tonalRamp": [
+          "oklch(0.150 0.0223 257.17)",
+          "oklch(0.264 0.0362 257.17)",
+          "oklch(0.379 0.0456 257.17)",
+          "oklch(0.493 0.0491 257.17)",
+          "oklch(0.607 0.0464 257.17)",
+          "oklch(0.721 0.0377 257.17)",
+          "oklch(0.836 0.0242 257.17)",
+          "oklch(0.950 0.0077 257.17)"
+        ]
+      },
+      "folio-line": {
+        "role": "neutral",
+        "displayName": "구분선 (색 띠는 설명용 생성값이며 제품 토큰이 아님)",
+        "tonalRamp": [
+          "oklch(0.150 0.0078 256.28)",
+          "oklch(0.264 0.0127 256.28)",
+          "oklch(0.379 0.0161 256.28)",
+          "oklch(0.493 0.0173 256.28)",
+          "oklch(0.607 0.0163 256.28)",
+          "oklch(0.721 0.0133 256.28)",
+          "oklch(0.836 0.0085 256.28)",
+          "oklch(0.950 0.0027 256.28)"
+        ]
+      },
+      "folio-paper": {
+        "role": "neutral",
+        "displayName": "백색 지면 (색 띠는 설명용 생성값이며 제품 토큰이 아님)",
+        "tonalRamp": [
+          "oklch(0.150 0.0000 89.88)",
+          "oklch(0.264 0.0000 89.88)",
+          "oklch(0.379 0.0000 89.88)",
+          "oklch(0.493 0.0000 89.88)",
+          "oklch(0.607 0.0000 89.88)",
+          "oklch(0.721 0.0000 89.88)",
+          "oklch(0.836 0.0000 89.88)",
+          "oklch(0.950 0.0000 89.88)"
+        ]
+      },
+      "folio-well": {
+        "role": "neutral",
+        "displayName": "증거 영역 (색 띠는 설명용 생성값이며 제품 토큰이 아님)",
+        "tonalRamp": [
+          "oklch(0.150 0.0054 259.82)",
+          "oklch(0.264 0.0088 259.82)",
+          "oklch(0.379 0.0111 259.82)",
+          "oklch(0.493 0.0120 259.82)",
+          "oklch(0.607 0.0113 259.82)",
+          "oklch(0.721 0.0092 259.82)",
+          "oklch(0.836 0.0059 259.82)",
+          "oklch(0.950 0.0019 259.82)"
+        ]
+      },
+      "folio-accent": {
+        "role": "primary",
+        "displayName": "조작 청색 (색 띠는 설명용 생성값이며 제품 토큰이 아님)",
+        "tonalRamp": [
+          "oklch(0.150 0.0545 263.26)",
+          "oklch(0.264 0.0885 263.26)",
+          "oklch(0.379 0.1114 263.26)",
+          "oklch(0.493 0.1200 263.26)",
+          "oklch(0.607 0.1133 263.26)",
+          "oklch(0.721 0.0922 263.26)",
+          "oklch(0.836 0.0591 263.26)",
+          "oklch(0.950 0.0188 263.26)"
+        ]
+      },
+      "action-hover": {
+        "role": "primary",
+        "displayName": "짙은 조작 청색 (색 띠는 설명용 생성값이며 제품 토큰이 아님)",
+        "tonalRamp": [
+          "oklch(0.150 0.0545 262.56)",
+          "oklch(0.264 0.0885 262.56)",
+          "oklch(0.379 0.1114 262.56)",
+          "oklch(0.493 0.1200 262.56)",
+          "oklch(0.607 0.1133 262.56)",
+          "oklch(0.721 0.0922 262.56)",
+          "oklch(0.836 0.0591 262.56)",
+          "oklch(0.950 0.0188 262.56)"
+        ]
+      },
+      "dark-ink": {
+        "role": "neutral",
+        "displayName": "어두운 지면의 밝은 잉크 (색 띠는 설명용 생성값이며 제품 토큰이 아님)",
+        "tonalRamp": [
+          "oklch(0.150 0.0076 259.42)",
+          "oklch(0.264 0.0123 259.42)",
+          "oklch(0.379 0.0155 259.42)",
+          "oklch(0.493 0.0166 259.42)",
+          "oklch(0.607 0.0157 259.42)",
+          "oklch(0.721 0.0128 259.42)",
+          "oklch(0.836 0.0082 259.42)",
+          "oklch(0.950 0.0026 259.42)"
+        ]
+      },
+      "dark-muted": {
+        "role": "neutral",
+        "displayName": "어두운 지면의 설명 잉크 (색 띠는 설명용 생성값이며 제품 토큰이 아님)",
+        "tonalRamp": [
+          "oklch(0.150 0.0163 256.36)",
+          "oklch(0.264 0.0265 256.36)",
+          "oklch(0.379 0.0334 256.36)",
+          "oklch(0.493 0.0359 256.36)",
+          "oklch(0.607 0.0339 256.36)",
+          "oklch(0.721 0.0276 256.36)",
+          "oklch(0.836 0.0177 256.36)",
+          "oklch(0.950 0.0056 256.36)"
+        ]
+      },
+      "dark-line": {
+        "role": "neutral",
+        "displayName": "어두운 지면의 구분선 (색 띠는 설명용 생성값이며 제품 토큰이 아님)",
+        "tonalRamp": [
+          "oklch(0.150 0.0223 259.91)",
+          "oklch(0.264 0.0362 259.91)",
+          "oklch(0.379 0.0456 259.91)",
+          "oklch(0.493 0.0491 259.91)",
+          "oklch(0.607 0.0464 259.91)",
+          "oklch(0.721 0.0377 259.91)",
+          "oklch(0.836 0.0242 259.91)",
+          "oklch(0.950 0.0077 259.91)"
+        ]
+      },
+      "dark-paper": {
+        "role": "neutral",
+        "displayName": "어두운 지면 (색 띠는 설명용 생성값이며 제품 토큰이 아님)",
+        "tonalRamp": [
+          "oklch(0.150 0.0195 258.74)",
+          "oklch(0.264 0.0317 258.74)",
+          "oklch(0.379 0.0399 258.74)",
+          "oklch(0.493 0.0430 258.74)",
+          "oklch(0.607 0.0406 258.74)",
+          "oklch(0.721 0.0330 258.74)",
+          "oklch(0.836 0.0212 258.74)",
+          "oklch(0.950 0.0067 258.74)"
+        ]
+      },
+      "dark-well": {
+        "role": "neutral",
+        "displayName": "어두운 증거 영역 (색 띠는 설명용 생성값이며 제품 토큰이 아님)",
+        "tonalRamp": [
+          "oklch(0.150 0.0247 259.32)",
+          "oklch(0.264 0.0401 259.32)",
+          "oklch(0.379 0.0505 259.32)",
+          "oklch(0.493 0.0544 259.32)",
+          "oklch(0.607 0.0514 259.32)",
+          "oklch(0.721 0.0418 259.32)",
+          "oklch(0.836 0.0268 259.32)",
+          "oklch(0.950 0.0085 259.32)"
+        ]
+      },
+      "dark-accent": {
+        "role": "primary",
+        "displayName": "어두운 지면의 연청색 (색 띠는 설명용 생성값이며 제품 토큰이 아님)",
+        "tonalRamp": [
+          "oklch(0.150 0.0465 263.99)",
+          "oklch(0.264 0.0755 263.99)",
+          "oklch(0.379 0.0951 263.99)",
+          "oklch(0.493 0.1024 263.99)",
+          "oklch(0.607 0.0967 263.99)",
+          "oklch(0.721 0.0787 263.99)",
+          "oklch(0.836 0.0504 263.99)",
+          "oklch(0.950 0.0160 263.99)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "홈 주제 제목",
+        "purpose": "홈의 주제와 역할을 읽는 첫 제목."
+      },
+      "headline": {
+        "displayName": "절 제목",
+        "purpose": "본문의 주요 절을 구분한다."
+      },
+      "title": {
+        "displayName": "소제목",
+        "purpose": "일반 소제목의 기본 역할."
+      },
+      "body": {
+        "displayName": "본문",
+        "purpose": "업무와 결과의 설명."
+      },
+      "lead": {
+        "displayName": "도입 설명",
+        "purpose": "홈과 사례의 짧은 도입."
+      },
+      "label": {
+        "displayName": "조작 이름",
+        "purpose": "본문 버튼과 주요 링크."
+      }
+    },
+    "shadows": [
+      {
+        "name": "image-dialog",
+        "value": "0 24px 80px #00000040",
+        "purpose": "화면 확대창을 본문과 분리한다."
+      }
+    ],
+    "motion": [
+      {
+        "name": "button-state",
+        "value": "background-color 0.18s ease-out, border-color 0.18s ease-out",
+        "purpose": "본문 버튼의 배경·테두리 상태 전환. 본문 진입 애니메이션은 없다."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "compact",
+        "value": "900px"
+      },
+      {
+        "name": "mobile",
+        "value": "640px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "주요 버튼",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "본문의 이동·조작. 최소 높이 44px.",
+      "html": "<button class=\"ds-button-primary\" type=\"button\">사례 보기</button>",
+      "css": ".ds-button-primary{font-family:\"Pretendard Variable\",\"Pretendard\",sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:44px;padding:10px 17px;border:1px solid var(--folio-line,#dce4ef);border-radius:3px;font-size:.95rem;font-weight:650;line-height:1.75;cursor:pointer;transition:background-color .18s ease-out,border-color .18s ease-out;background:#2457cb;border-color:#2457cb;color:#fff;}.ds-button-primary:hover{background:#1644a5;}.ds-button-primary:focus-visible{outline:2px solid var(--folio-accent,#2457cb);outline-offset:4px;}"
+    },
+    {
+      "name": "보조 버튼",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "본문의 이동·조작. 최소 높이 44px.",
+      "html": "<button class=\"ds-button-secondary\" type=\"button\">사례 보기</button>",
+      "css": ".ds-button-secondary{font-family:\"Pretendard Variable\",\"Pretendard\",sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:44px;padding:10px 17px;border:1px solid var(--folio-line,#dce4ef);border-radius:3px;font-size:.95rem;font-weight:650;line-height:1.75;cursor:pointer;transition:background-color .18s ease-out,border-color .18s ease-out;background:var(--folio-paper,#fff);color:var(--folio-ink,#162c4b);}.ds-button-secondary:hover{background:var(--folio-well,#eef3fb);border-color:var(--folio-accent,#2457cb);}.ds-button-secondary:focus-visible{outline:2px solid var(--folio-accent,#2457cb);outline-offset:4px;}"
+    },
+    {
+      "name": "원본 확대 버튼",
+      "kind": "button",
+      "refersTo": "button-expand",
+      "description": "본문 화면의 선택적 확대 조작. 미리보기에서는 외형만 표시한다.",
+      "html": "<button class=\"ds-expand\" type=\"button\">원본 확대 <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M7 7h10v10M7 17 17 7\"/></svg></button>",
+      "css": ".ds-expand{font-family:\"Pretendard Variable\",\"Pretendard\",sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:8px 12px;border:1px solid var(--folio-line,#dce4ef);border-radius:3px;color:var(--folio-accent,#2457cb);background:transparent;font-size:.85rem;font-weight:650;cursor:pointer;white-space:nowrap}.ds-expand:hover{background:var(--folio-paper,#fff)}.ds-expand:focus-visible{outline:2px solid var(--folio-accent,#2457cb);outline-offset:4px;}@media(max-width:640px){.ds-expand{padding:8px;font-size:.8rem}}"
+    },
+    {
+      "name": "트랙 메뉴",
+      "kind": "nav",
+      "refersTo": "navigation",
+      "description": "현재 트랙의 메뉴. 고정 위치는 실제 페이지에서 적용하며 미리보기에서는 흐름 안에 둔다.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"포트폴리오 메뉴\"><a class=\"ds-brand\" href=\"#intro\">포트폴리오</a><div class=\"ds-menu\"><a href=\"#work\">주요 업무</a><a href=\"#cases\">사례</a><a href=\"#career\">경력</a></div></nav>",
+      "css": ".ds-nav{font-family:\"Pretendard Variable\",\"Pretendard\",sans-serif;display:flex;align-items:center;justify-content:space-between;gap:16px;height:80px;padding:0 32px;max-width:1224px;background:var(--folio-paper,#fff);border-bottom:1px solid var(--folio-line,#dce4ef)}.ds-menu{display:flex;gap:12px}.ds-nav a{display:inline-flex;align-items:center;min-height:44px;font-size:.75rem;color:var(--folio-muted,#526580);text-decoration:none;border-radius:4px}.ds-nav .ds-brand{font-size:.875rem;font-weight:700;letter-spacing:-.025em;color:var(--folio-ink,#162c4b)}.ds-nav a:focus-visible{outline:2px solid var(--folio-accent,#2457cb);outline-offset:4px;}@media(max-width:640px){.ds-nav{height:106px;padding:8px 22px;flex-wrap:wrap;gap:0}.ds-nav .ds-brand{font-size:1rem}.ds-menu{flex-basis:100%}}"
+    },
+    {
+      "name": "보충 설명 펼침",
+      "kind": "custom",
+      "refersTo": "disclosure",
+      "description": "경력 상세와 참고 자료를 선택적으로 펼친다.",
+      "html": "<details class=\"ds-disclosure\"><summary>주요 경력 자세히 보기</summary><p>담당한 업무와 확인된 결과를 설명합니다.</p></details>",
+      "css": ".ds-disclosure{font-family:\"Pretendard Variable\",\"Pretendard\",sans-serif;padding:16px 0;border-bottom:1px solid var(--folio-line,#dce4ef);color:var(--folio-ink,#162c4b);line-height:1.75}.ds-disclosure summary{min-height:44px;padding:8px 0;font-weight:650;cursor:pointer}.ds-disclosure[open] summary{margin-bottom:16px}.ds-disclosure p{max-width:72ch;color:var(--folio-muted,#526580);margin:0}.ds-disclosure summary:focus-visible{outline:2px solid var(--folio-accent,#2457cb);outline-offset:4px;}"
+    },
+    {
+      "name": "간결한 사례 행",
+      "kind": "custom",
+      "refersTo": "case-row",
+      "description": "제목·요약·이동 안내와 상태를 한 행으로 연결한다. 문구는 미리보기 예시다.",
+      "html": "<article class=\"ds-case\"><a href=\"#case\"><h3>업무 개선 사례</h3><p>반복 업무의 문제와 해결한 범위를 설명합니다.</p><div class=\"ds-case-bottom\"><span class=\"ds-case-action\">해결 과정 보기 <svg width=\"17\" height=\"17\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M5 12h14m-7-7 7 7-7 7\"/></svg></span><span class=\"ds-case-status\">현재 상태</span></div></a></article>",
+      "css": ".ds-case{font-family:\"Pretendard Variable\",\"Pretendard\",sans-serif;border-bottom:1px solid var(--folio-line,#dce4ef);line-height:1.75}.ds-case>a{display:block;padding:26px 0;text-decoration:none;color:var(--folio-ink,#162c4b)}.ds-case h3{margin:0;font-size:1.4rem;font-weight:750;line-height:1.35;letter-spacing:-.035em;text-wrap:balance}.ds-case p{margin:12px 0 0;max-width:65ch;color:var(--folio-muted,#526580)}.ds-case-bottom{display:flex;align-items:center;flex-wrap:wrap;gap:18px;margin-top:18px}.ds-case-action{display:inline-flex;align-items:center;gap:8px;font-size:.95rem;font-weight:700;color:var(--folio-accent,#2457cb)}.ds-case-status{font-size:.8rem;color:var(--folio-muted,#526580)}.ds-case a:hover .ds-case-action{text-decoration:underline;text-underline-offset:5px}.ds-case a:focus-visible{outline:2px solid var(--folio-accent,#2457cb);outline-offset:4px;}"
+    },
+    {
+      "name": "문제 해결 설명 영역",
+      "kind": "custom",
+      "refersTo": "story-panel",
+      "description": "문제·행동·결과를 같은 바탕 안에 묶는다. 문구는 미리보기 예시다.",
+      "html": "<section class=\"ds-story\"><h2>문제와 해결</h2><dl><div><dt>문제</dt><dd>어떤 업무 문제가 있었는지 설명합니다.</dd></div><div><dt>내가 한 일</dt><dd>담당한 범위와 행동을 설명합니다.</dd></div><div><dt>업무에 남긴 변화</dt><dd>확인된 결과를 설명합니다.</dd></div></dl></section>",
+      "css": ".ds-story{font-family:\"Pretendard Variable\",\"Pretendard\",sans-serif;background:var(--folio-well,#eef3fb);padding:32px;line-height:1.75}.ds-story h2{margin:0;font-size:1.4rem;font-weight:750;line-height:1.35;letter-spacing:-.035em;color:var(--folio-ink,#162c4b)}.ds-story dl{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin:24px 0 0}.ds-story dt{margin-bottom:12px;font-size:.95rem;font-weight:700;color:var(--folio-accent,#2457cb)}.ds-story dd{margin:0;font-size:.95rem;color:var(--folio-muted,#526580)}@media(max-width:900px){.ds-story dl{grid-template-columns:1fr;gap:24px}}@media(max-width:640px){.ds-story{padding:22px}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "백색 업무 지면",
+    "overview": "백색 업무 지면은 짧은 한국어 설명과 실제 업무 화면을 같은 읽기 흐름으로 묶는다. 남색 제목, 차분한 본문, 얇은 구분선으로 구조를 드러내고 청색은 이동·조작과 핵심 설명에 사용한다. 장식보다 경력과 근거의 가독성을 우선한다.\n\n이 시스템은 공개 포트폴리오의 영업관리·AX 두 트랙과 사례 본문에 적용한다. 두 트랙은 색상·서체·구성 요소를 공유하지만 서로 연결하는 메뉴를 두지 않는다. 매뉴얼과 로그인 전용 편집 화면의 별도 스타일을 이 시스템으로 일반화하지 않는다.",
+    "keyCharacteristics": [
+      "굵은 한국어 제목과 여유 있는 본문 행간",
+      "평평한 지면, 얇은 경계선, 옅은 청색 증거 영역",
+      "자르지 않은 실제 화면과 선택적 원본 확대",
+      "밝은 테마와 어두운 테마에서 같은 정보 위계"
+    ],
+    "rules": [
+      {
+        "name": "조작의 청색",
+        "body": "본문 전체를 강조색으로 칠하지 않는다. 청색은 링크·버튼·초점과 문제 해결 설명의 짧은 표제에 사용한다.",
+        "section": "colors"
+      },
+      {
+        "name": "한국어 읽기",
+        "body": "제목은 균형 있게 줄바꿈하고, 본문은 한국어 단어 단위를 우선한다. 긴 주소나 끊기지 않는 문자열은 지면 안에서 줄바꿈한다.",
+        "section": "typography"
+      },
+      {
+        "name": "평평한 지면",
+        "body": "일반 행과 설명 영역은 선과 배경색으로 구분한다. 큰 그림자는 화면 확대창의 분리에 사용한다.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do 같은 의미의 색상 역할을 두 테마에서 유지한다.",
+      "Do 실제 업무 화면의 비율과 내용을 보존하고 설명 가까이에 둔다.",
+      "Do 확대를 닫으면 원래 읽던 위치와 누른 버튼의 초점을 보존한다.",
+      "Do 주요 본문 조작에 최소 높이 44px와 보이는 키보드 초점을 제공한다.",
+      "Do 모바일에서 설명과 화면을 읽기 순서대로 세로로 배치한다."
+    ],
+    "donts": [
+      "Don't 두 직무 트랙을 서로 이동하는 메뉴로 연결하지 않는다.",
+      "Don't 실제 캡처를 장식용 이미지처럼 잘라 쓰거나 가상의 수치로 대체하지 않는다.",
+      "Don't 본문을 숨긴 채 스크롤 진입 애니메이션을 기다리게 하지 않는다.",
+      "Don't 공개 포트폴리오의 평평한 행에 기존 전역 유리 카드 효과를 적용하지 않는다."
+    ]
+  }
+}

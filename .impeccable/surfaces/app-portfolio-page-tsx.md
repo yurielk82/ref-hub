@@ -27,3 +27,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 ## Quality bar
 
 수정 시안의 desktop/mobile 홈·사례·확대 6개 캡처를 구조와 읽기 위계 기준으로 사용한다. 실제 문구 길이와 화면 비율에 맞게 늘어나며 숫자·역할·상태를 생략하지 않는다. 대비4.5:1, 주요 조작44px, 전체 가로 넘침 없음, 캡처 무자름, 제목 단계 연속, 편집·고정주소 보존. 물성·장식 재설계는 하지 않는다.
+
+## 선택 근거 확인
+
+2026-11-01 02:41:26 UTC 최초 direction 출력에서 Experience 모드·배정 후보 3번·`seed:e886c2e399c48ef6`를 대조했다. 로컬 `--check-seed`는 기록을 찾지 못했으나 최초 실행 출력과 이 참조가 일치한다. 이후 오너가 수정한 최종 코드 시안7422d98이 구성 기준이며, 추첨 자체가 사용자 선택을 대신하지 않는다.

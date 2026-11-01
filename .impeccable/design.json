@@ -1,36 +1,75 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-01T14:00:20.440729+00:00",
-  "title": "Design System: ref-hub Magic Portfolio",
+  "generatedAt": "2026-11-01T19:25:05.524550+00:00",
+  "title": "Design System: ref-hub 선택 포트폴리오",
   "extensions": {
     "upstream": {
-      "repository": "https://github.com/once-ui-system/magic-portfolio",
-      "commit": "bee2f1bf57d3c57012449cf70b48002e07e8916a",
-      "tokens": "@once-ui-system/core@2.1.0",
-      "config": "components/magic-portfolio/resources/once-ui.config.ts"
-    }
+      "repository": "https://github.com/jihyun-el/portfolio-template",
+      "commit": "44cfd52a992c6e49b1547a30d49a0201cb10b728",
+      "tokens": "data/selected-portfolio/theme.json"
+    },
+    "motion": [
+      {
+        "name": "의미 장면",
+        "value": "0.85s–1.6s cubic-bezier(.16,1,.3,1)",
+        "purpose": "정렬·선택·검사의 단발 설명. 움직임 줄이기에서는 정지한다."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "카테고리 레일",
+        "value": "680px 또는 aspect-ratio 5/4"
+      },
+      {
+        "name": "상세 레일",
+        "value": "container 820px"
+      },
+      {
+        "name": "낮은 노트북",
+        "value": "min-width 1100px and max-height 740px"
+      }
+    ],
+    "shadows": [
+      {
+        "name": "오너 메뉴",
+        "value": "0 10px 26px color-mix(in srgb,var(--ink) 12%,transparent)",
+        "purpose": "관리 메뉴의 떠 있는 면 구분"
+      }
+    ]
   },
-  "components": [],
+  "components": [
+    {
+      "name": "주 행동 버튼",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "사례의 상세로 이동한다.",
+      "html": "<button class=\"selected-cta\">만든 과정 보기 →</button>",
+      "css": ".selected-cta{background:#171717;color:#fff;border:1px solid #171717;border-radius:999px;padding:9px 22px;min-height:48px;font-family:Pretendard,sans-serif;font-size:14px;font-weight:650;}"
+    }
+  ],
   "narrative": {
-    "northStar": "개인 소개와 실제 만든 시스템을 원본 템플릿의 이미지·경력·사례 구성으로 보여 준다.",
-    "overview": "원본 CSS Modules와 Once UI 토큰을 재사용한다. 기존 녹색 토큰은 관리·매뉴얼 화면에만 적용한다.",
+    "northStar": "실제 업무를 이해하고 해결한 과정을 프로젝트별 입체 장면과 결과물로 보여 준다.",
+    "overview": "선택한 원본의 글꼴·두 레일·장면 구조에 Apple 참고의 얇은 경계와 둥근 조작부를 적용한다.",
     "keyCharacteristics": [
-      "개인 소개 다음 실제 프로젝트",
-      "KPI 대표 프로젝트와 11개 업무 메뉴",
-      "실제 공개 캡처와 원본 이미지 확대"
+      "소개 다음 실제 프로젝트",
+      "KPI 플랫폼과 연계 기능의 관계",
+      "업무별로 다른 입체 장면",
+      "설명과 같은 본문의 실제 캡처"
     ],
     "rules": [
-      "두 공개 트랙의 메뉴를 서로 연결하지 않는다.",
-      "로그인한 오너 기능은 공개 메뉴와 분리한다.",
-      "현재 표시하는 필드만 편집하되 과거 저장 키와 자료는 보존한다."
+      {
+        "name": "사실과 상태",
+        "body": "개인 시제품·준비·종료와 실제 운영을 구분한다.",
+        "section": "components"
+      }
     ],
     "dos": [
-      "실제 역할·기간·운영 상태를 밝힌다.",
-      "S&OP 개인 시제품·KPIS 독립 앱 캡처를 해당 메뉴에 표시한다."
+      "같은 대상의 의미를 큰 그림과 작은 심볼에서 유지한다.",
+      "두 테마에서 종이의 밝은 재질을 유지한다."
     ],
     "donts": [
-      "이전 녹색 포트폴리오를 공개 디자인 기준으로 사용하지 않는다.",
-      "별도 화살표·이미지 이중 프레임·가상 인물/성과를 추가하지 않는다."
+      "무관한 네 견본을 반복 배정하지 않는다.",
+      "공개 화면에 개인 서류를 넣지 않는다."
     ]
   }
 }

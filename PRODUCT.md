@@ -38,7 +38,9 @@ web
 - `data/experience.ts`, `data/ax-content.ts`: 경력과 직무별 소개.
 - `data/projects/`, `data/ax-cases/`: 프로젝트·사례·화면 설명.
 - `public/images/portfolio/pharmkpi-exec/bin-*.webp`: 경영진 BI의 구분별 도넛 차트와 상세 화면.
-- `lib/portfolio/content.ts`, `lib/portfolio/server.ts`: 편집 가능한 문구와 공개 표시 값.
+- `data/selected-portfolio/`: 선택 템플릿의 트랙별 표시 문구와 테마.
+- `lib/selected-portfolio/adapter.ts`, `server.ts`: 새 표시 문구·편집 필드와 기존 저장값의 연결.
+- `lib/portfolio/store.ts`, `server.ts`: 기존 저장 원본·버전·요청별 읽기.
 
 ## Product Principles
 
@@ -46,3 +48,11 @@ web
 - 역량은 구호가 아니라 문제·행동·결과로 입증한다.
 - 시각적 재제작과 문구 축약을 별개의 완료 조건으로 검증한다.
 - 확인된 사실, 편집 기능, 고정 제출 주소를 보존한다.
+
+## 선택 원본과 이번 적용 범위
+
+사용자가 선택한 원본은 [jihyun-el/portfolio-template](https://github.com/jihyun-el/portfolio-template), 기준 commit 44cfd52a992c6e49b1547a30d49a0201cb10b728이다. 원본의 글꼴·왼쪽 탐색과 오른쪽 장면·두 상세 레일을 사용하고, 최신 요청에 따라 Apple 가이드를 참고해 얇은 선·둥근 조작부·차분한 선택과 여백으로 정돈한다. 원본의 아트 문법에 따라 프로젝트별 의미가 다른 SVG 입체 장면과 작은 심볼을 11개 제공한다. 종이 재질은 어두운 테마에서도 밝은 종이와 어두운 잉크를 유지한다.
+
+KPI.는 제약 영업 운영 플랫폼으로 설명하며 SFE·S&OP·KPIS·유통재고 분석을 같은 계열의 기능·연계 사례로 나눈다. 플랫폼과 기능을 별개의 독립 제품 수로 부풀리지 않는다. S&OP는 업무 미적용 개인 시제품, 유통재고 분석은 준비 중이다. 원래 목록의 KTX 자동조회·예약, 네이버 플레이스 수집, APINFY LAB, 모터 신뢰성 프로젝트는 자료를 보존하되 두 공개 트랙에서 숨긴다.
+
+사용자는 이번 수정 완료 뒤 ref.dvsharp.com 운영 교체와 배포를 명시 승인했다. 이미 받은 배포 승인을 다시 묻지 않는다. 실제 로그인 완료·오너 저장 클릭은 해당 동작을 관측한 경우에만 검증 완료로 쓴다.

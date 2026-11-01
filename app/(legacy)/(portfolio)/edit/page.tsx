@@ -1,8 +1,8 @@
-import { editableFields } from "@magic/adapter";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { jobsViewer } from "@/auth";
-import { loadPortfolio, portfolioDataDir } from "@/lib/portfolio/server";
+import { portfolioDataDir } from "@/lib/portfolio/server";
+import { loadSelectedPortfolio } from "@/lib/selected-portfolio/server";
 import { PortfolioEditor } from "@/components/portfolio/content-editor";
 
 export const metadata: Metadata = {
@@ -17,12 +17,12 @@ export default async function EditPage({
   if (!(await jobsViewer())) redirect("/login");
   if ((await searchParams).track === "ax") redirect("/ax/edit");
   const track = "sales";
-  const content = await loadPortfolio(track);
+  const content = await loadSelectedPortfolio(track);
   return (
     <PortfolioEditor
       key={track}
       track={track}
-      fields={editableFields(content, track)}
+      fields={content.fields}
       revision={content.snapshot.revision}
       canSave={Boolean(portfolioDataDir())}
     />

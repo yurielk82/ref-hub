@@ -1,5 +1,5 @@
-import { loadPortfolio } from "@/lib/portfolio/server";
-import { MagicProfile } from "@magic/Profile";
-export default async function AboutPage() {
-  return <MagicProfile copy={await loadPortfolio("ax")} track="ax" />;
+import { redirect } from "next/navigation";
+
+export default function Page() {
+  redirect("/ax#about");
 }

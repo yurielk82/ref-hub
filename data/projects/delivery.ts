@@ -4,10 +4,11 @@ import type { Project } from "../project-types";
 export const DELIVERY_PROJECTS: Project[] = [
   {
     slug: "pharmkpi",
-    name: "영업 실적 취합·보고 업무 개선",
-    tagline: "엑셀·스프레드시트로 취합하던 영업 자료의 조회·분석·보고 개선",
+    name: "KPI · 영업 업무 통합 시스템",
+    tagline:
+      "영업지원·회계·영업본부의 조회·검증·분석·보고를 연결한 사내 업무 시스템",
     description:
-      "매출·수금·채권·재고 자료를 연계하고, 월간 KPI와 거래처·품목별 조회·분석 기능을 구축했습니다. ERP 전환 전후 자료도 대조했습니다. 사내 영업 데이터 시스템 운영 중.",
+      "ERP·공공·영업활동 자료를 연결해 영업지원·회계·영업본부의 조회·검증·분석·보고를 처리하는 사내 업무 시스템입니다. 현업의 처리 기준 협의부터 데이터 연결, 조회 화면과 보고 자동화까지 직접 구축해 운영하고 있습니다.",
     category: "web",
     scope: "company",
     liveUrl: "https://kpi.dvsharp.com",

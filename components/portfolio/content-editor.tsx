@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState, useTransition } from "react";
-import { savePortfolio } from "@/app/(portfolio)/edit/actions";
+import { savePortfolio } from "@/app/(legacy)/(portfolio)/edit/actions";
 import type { CopyField } from "@/lib/portfolio/store";
 import type { PortfolioTrack } from "@/lib/portfolio/content";
 

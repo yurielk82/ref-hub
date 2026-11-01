@@ -20,7 +20,8 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@magic/*": ["./components/magic-portfolio/*"]
     }
   },
   "include": [

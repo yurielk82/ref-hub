@@ -94,10 +94,10 @@ export function ProjectDetail({
             <h2 id="case-evidence">업무에 적용한 방식</h2>
             {project.screensNote && <p>{project.screensNote}</p>}
           </div>
-          {evidence.map((step, index) => (
+          {evidence.map((step) => (
             <section
               className="folio-evidence-step"
-              key={`${step.phase}-${index}`}
+              key={`${step.phase}-${step.title}`}
             >
               <h3>{step.title}</h3>
               <p>{step.body}</p>

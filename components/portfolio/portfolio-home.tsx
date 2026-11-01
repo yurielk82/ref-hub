@@ -9,6 +9,7 @@ import type { Track } from "./track";
 type Copy = ReturnType<typeof portfolioContent>;
 const SALES_LEAD = ["pharmkpi-exec", "kpis-dsr-api", "monthly-sales-reports"];
 
+/** 경력 소개와 담당 역할을 먼저 보여 주고 같은 트랙의 사례로 연결한다. */
 export function PortfolioHome({ copy, track }: { copy: Copy; track: Track }) {
   const sales = track === "sales";
   const caseId = sales ? "projects" : "cases";
@@ -167,6 +168,7 @@ export function PortfolioHome({ copy, track }: { copy: Copy; track: Track }) {
   );
 }
 
+/** 현재 업무의 수행 내용과 결과를 펼쳐 읽도록 구성한다. */
 function SalesWork({ copy }: { copy: Copy }) {
   return (
     <>
@@ -224,6 +226,7 @@ function SalesWork({ copy }: { copy: Copy }) {
   );
 }
 
+/** AX 업무의 실행 방식과 원천 검증 근거를 보여 준다. */
 function AxPractice({ copy }: { copy: Copy }) {
   return (
     <>

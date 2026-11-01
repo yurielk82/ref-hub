@@ -5,6 +5,7 @@ import type { Project } from "@/data/projects";
 import { CASE_STATUS_LABEL, type AxCaseStudy } from "@/data/ax-types";
 import { caseHref, type Track } from "./track";
 
+/** 사례 목록에서 본인의 기여와 업무 화면을 함께 소개한다. */
 export function ProjectRow({
   project,
   study,
@@ -23,20 +24,7 @@ export function ProjectRow({
           <h3>{project.name}</h3>
           <p>{project.tagline}</p>
           {featured && study && (
-            <dl>
-              <div>
-                <dt>담당</dt>
-                <dd>{study.role}</dd>
-              </div>
-              <div>
-                <dt>결과</dt>
-                <dd>
-                  {track === "ax" && study.ax
-                    ? study.ax.headline
-                    : (study.impact ?? study.outcome)}
-                </dd>
-              </div>
-            </dl>
+            <ProjectContribution study={study} track={track} />
           )}
           <div className="folio-row-bottom">
             <span className="folio-row-action">
@@ -65,5 +53,31 @@ export function ProjectRow({
         )}
       </Link>
     </article>
+  );
+}
+
+/** 담당 범위와 확인된 결과를 같은 항목 구조로 읽게 한다. */
+function ProjectContribution({
+  study,
+  track,
+}: {
+  study: AxCaseStudy;
+  track: Track;
+}) {
+  return (
+    <dl>
+      <div>
+        <dt>담당</dt>
+        <dd>{study.role}</dd>
+      </div>
+      <div>
+        <dt>결과</dt>
+        <dd>
+          {track === "ax" && study.ax
+            ? study.ax.headline
+            : (study.impact ?? study.outcome)}
+        </dd>
+      </div>
+    </dl>
   );
 }

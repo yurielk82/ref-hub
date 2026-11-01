@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/ax" },
 };
 
+/** AX 트랙의 저장 문구를 같은 포트폴리오 틀에 연결한다. */
 export default async function AxPage() {
   const copy = await loadPortfolio("ax");
   return <PortfolioHome copy={copy} track="ax" />;

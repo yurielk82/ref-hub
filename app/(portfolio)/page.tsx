@@ -49,6 +49,7 @@ const PROFILE_JSON_LD = {
   },
 } as const;
 
+/** 영업관리 포트폴리오에 저장된 소개와 사례를 표시한다. */
 export default async function HomePage() {
   const copy = await loadPortfolio("sales");
   return (

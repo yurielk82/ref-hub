@@ -24,16 +24,18 @@ export function ScreenGallery({
   const headingId = useId();
   const isOpen = active !== null;
   useEffect(() => {
-    if (!isOpen) return;
     const root = document.documentElement;
     const previous = root.style.overflow;
-    root.style.overflow = "hidden";
-    dialogRef.current?.showModal();
+    if (isOpen) {
+      root.style.overflow = "hidden";
+      dialogRef.current?.showModal();
+    }
     return () => {
-      root.style.overflow = previous;
+      if (isOpen) root.style.overflow = previous;
     };
   }, [isOpen]);
   const current = active === null ? undefined : screens[active];
+  /** 확대창 안에서 순환하며 다음 또는 이전 화면을 선택한다. */
   const move = (delta: number) =>
     setActive((index) =>
       index === null

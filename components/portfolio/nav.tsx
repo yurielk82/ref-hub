@@ -39,6 +39,7 @@ const THEMES: { value: string; label: string; Icon: LucideIcon }[] = [
 const LINK_CLASS =
   "rounded text-xs text-stone-500 transition-colors hover:text-[var(--accent)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]";
 
+/** 현재 트랙의 메뉴와 로그인·테마 선택을 제공한다. */
 export function PortfolioNav() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);

@@ -15,10 +15,12 @@ const AX_DETAIL_SLUGS: readonly string[] = [
 
 export const dynamicParams = false;
 
+/** 이 트랙에서 공개하는 사례 경로를 생성한다. */
 export function generateStaticParams() {
   return AX_DETAIL_SLUGS.map((slug) => ({ slug }));
 }
 
+/** 사례 원본에서 검색 결과 제목과 설명을 만든다. */
 export async function generateMetadata(props: {
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
@@ -31,6 +33,7 @@ export async function generateMetadata(props: {
   };
 }
 
+/** 저장된 문구와 근거 화면을 같은 사례 페이지에 표시한다. */
 export default async function AxCasePage(props: {
   params: Promise<{ slug: string }>;
 }) {

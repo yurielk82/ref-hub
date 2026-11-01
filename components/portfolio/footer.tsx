@@ -6,6 +6,7 @@ import { AX_CONTACT } from "@/data/ax-content";
 
 import { TRACKS, trackOf } from "./track";
 
+/** 현재 트랙의 연락처와 참고 링크를 표시한다. */
 export function PortfolioFooter() {
   const developer = TRACKS[trackOf(usePathname() ?? "/")].developerLinks;
   return (

@@ -26,6 +26,7 @@ export function portfolioContent(
   values: Record<string, string> = {},
 ) {
   const fields: CopyField[] = [];
+  /** 항목을 편집 목록에 등록하고 저장값 또는 기본값을 돌려준다. */
   const text = (
     key: string,
     label: string,
@@ -39,6 +40,7 @@ export function portfolioContent(
     fields.push({ id, label, group, value, maxLength, multiline });
     return value;
   };
+  /** 여러 줄 편집값을 빈 줄 없는 목록으로 읽는다. */
   const lines = (
     key: string,
     label: string,
@@ -203,6 +205,7 @@ export function portfolioContent(
           ),
         },
   );
+  /** 사례의 공통 소개 문구에 저장값을 적용한다. */
   const projectCopy = (project: (typeof REFERENCE_PROJECTS)[number]) => ({
     ...project,
     name: text(

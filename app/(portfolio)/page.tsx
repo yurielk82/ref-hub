@@ -56,6 +56,8 @@ export default async function HomePage() {
     <>
       <script
         type="application/ld+json"
+        // JSON-LD 전용이며 아래에서 <를 이스케이프해 script 종료 태그 삽입을 막는다.
+        // skipcq: JS-0440
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             ...PROFILE_JSON_LD,

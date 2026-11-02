@@ -420,21 +420,6 @@ function PortfolioFrame({
             })}
           </ul>
         </nav>
-        {profile.links.length > 0 && (
-          <p className="browser-contact" aria-label="연락처">
-            {profile.links.map((link) => (
-              <a
-                key={link.url}
-                href={link.url}
-                {...(link.url.startsWith("https:")
-                  ? { target: "_blank", rel: "noopener noreferrer" }
-                  : {})}
-              >
-                {link.label}
-              </a>
-            ))}
-          </p>
-        )}
         <nav className="browser-resources" aria-label="소개와 기록">
           <a
             href="#about"

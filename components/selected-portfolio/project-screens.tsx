@@ -5,7 +5,7 @@ import type { ProjectScreen } from "@/lib/selected-portfolio/types";
 import { sitePath } from "@/lib/selected-portfolio/content";
 
 const VARIANT_WIDTH = 1600;
-const srcSet = (screen: ProjectScreen) =>
+export const srcSet = (screen: ProjectScreen) =>
   screen.width > VARIANT_WIDTH
     ? `${sitePath(screen.src.replace(/\.webp$/, `.w${VARIANT_WIDTH}.webp`))} ${VARIANT_WIDTH}w, ${sitePath(screen.src)} ${screen.width}w`
     : undefined;

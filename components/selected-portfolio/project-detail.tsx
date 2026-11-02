@@ -9,8 +9,25 @@ import { EditableCopy, useProjectCopy } from "./editable-copy";
 export const sectionId = (project: Project, index: number) =>
   `${project.id}-section-${index + 1}`;
 
-const leadSection = (project: Project) =>
-  project.sections.findIndex((section) => section.screens?.length);
+export type LeadScreen = {
+  section: number;
+  index: number;
+  screen: NonNullable<Project["sections"][number]["screens"]>[number];
+};
+
+/** 상세 첫 화면에 둘 캡처. project.lead가 있으면 그 캡처, 없으면 첫 캡처. */
+export function leadScreen(project: Project): LeadScreen | null {
+  const found: LeadScreen[] = project.sections.flatMap((section, s) =>
+    (section.screens ?? []).map((screen, index) => ({
+      section: s,
+      index,
+      screen,
+    })),
+  );
+  return (
+    found.find((entry) => entry.screen.src === project.lead) ?? found[0] ?? null
+  );
+}
 
 export function ProjectSections({
   project,
@@ -20,8 +37,9 @@ export function ProjectSections({
   withoutLead?: boolean;
 }) {
   const copy = useProjectCopy(project.id);
-  const lead = withoutLead ? leadSection(project) : -1;
-  const skip = (i: number) => (i === lead ? 1 : 0);
+  const lead = withoutLead ? leadScreen(project) : null;
+  const keep = (i: number) => (_: unknown, index: number) =>
+    !(lead && lead.section === i && lead.index === index);
   return (
     <>
       {project.sections.map((section, i) => (
@@ -41,10 +59,10 @@ export function ProjectSections({
           <EditableCopy field={copy?.sections[i]?.body ?? ""} as="p" multiline>
             {section.body}
           </EditableCopy>
-          {(section.screens?.length ?? 0) > skip(i) ? (
+          {(section.screens ?? []).filter(keep(i)).length > 0 ? (
             <ProjectScreens
-              screens={section.screens!.slice(skip(i))}
-              copyFields={copy?.sections[i]?.screens.slice(skip(i))}
+              screens={section.screens!.filter(keep(i))}
+              copyFields={copy?.sections[i]?.screens.filter(keep(i))}
             />
           ) : null}
         </section>
@@ -77,7 +95,7 @@ export function ProjectDetail({
 }) {
   const body = useRef<HTMLDivElement>(null);
   const copy = useProjectCopy(project.id);
-  const lead = leadSection(project);
+  const lead = leadScreen(project);
   useEffect(() => {
     const box = body.current;
     if (!box || sectionRequest?.projectId !== project.id) return;
@@ -182,10 +200,13 @@ export function ProjectDetail({
               >
                 {project.summary}
               </EditableCopy>
-              {lead >= 0 && (
+              {lead && (
                 <ProjectScreens
-                  screens={project.sections[lead].screens!.slice(0, 1)}
-                  copyFields={copy?.sections[lead]?.screens.slice(0, 1)}
+                  screens={[lead.screen]}
+                  copyFields={copy?.sections[lead.section]?.screens.slice(
+                    lead.index,
+                    lead.index + 1,
+                  )}
                 />
               )}
               {metadata}

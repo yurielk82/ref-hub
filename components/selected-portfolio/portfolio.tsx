@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Fragment,
   useEffect,
   useRef,
   useState,
@@ -145,6 +146,9 @@ function PortfolioFrame({
   const menuButton = useRef<HTMLButtonElement>(null);
   const main = useRef<HTMLElement>(null);
   const choices = useRef<HTMLElement>(null);
+  const inFamily = (entry: Project) =>
+    Boolean(entry.parentId) ||
+    projects.some((other) => other.parentId === entry.id);
   const focusMain = useRef(false);
   useEffect(() => {
     const query = window.matchMedia("(max-width: 900px)");
@@ -352,53 +356,84 @@ function PortfolioFrame({
           ref={choices}
         >
           <ul className="project-tree">
-            {projects.map((p) => {
+            {projects.map((p, at) => {
               const expanded = !workspace && project?.id === p.id;
+              const parent = projects.find((other) => other.id === p.parentId);
+              const prefix = parent ? `${parent.name.split(" · ")[0]} · ` : "";
+              const label =
+                prefix && p.name.startsWith(prefix)
+                  ? p.name.slice(prefix.length)
+                  : p.name;
+              const groupStart =
+                at > 0 && !inFamily(p) && inFamily(projects[at - 1]);
               return (
-                <li
-                  className={`project-tree-item${p.parentId ? " project-family-child" : ""}`}
-                  data-project-id={p.id}
-                  key={p.id}
-                >
-                  <a
-                    className="project-tree-link"
-                    href={`#project/${p.id}`}
-                    aria-current={current(`project/${p.id}`)}
-                    onClick={(event) =>
-                      choose(event, `project/${p.id}`, compact)
-                    }
+                <Fragment key={p.id}>
+                  {groupStart && (
+                    <li className="project-tree-group" aria-hidden="true">
+                      다른 사례
+                    </li>
+                  )}
+                  <li
+                    className={`project-tree-item${p.parentId ? " project-family-child" : ""}`}
+                    data-project-id={p.id}
                   >
-                    {p.name}
-                  </a>
-                  <ul className="project-tree-sections" hidden={!expanded}>
-                    {[{ title: "개요와 담당 역할" }, ...p.sections].map(
-                      (section, row) => {
-                        const index = row - 1;
-                        return (
-                          <li key={index}>
-                            <a
-                              className="project-tree-section"
-                              data-section-index={index}
-                              href={`${sitePath(`${trackPath}/projects/${p.id}/`)}${index >= 0 ? `#${sectionId(p, index)}` : ""}`}
-                              aria-current={
-                                detail && expanded && activeSection === index
-                                  ? "location"
-                                  : undefined
-                              }
-                              onClick={(event) => goToSection(event, p, index)}
-                            >
-                              {section.title}
-                            </a>
-                          </li>
-                        );
-                      },
-                    )}
-                  </ul>
-                </li>
+                    <a
+                      className="project-tree-link"
+                      href={`#project/${p.id}`}
+                      aria-current={current(`project/${p.id}`)}
+                      onClick={(event) =>
+                        choose(event, `project/${p.id}`, compact)
+                      }
+                    >
+                      {label}
+                    </a>
+                    <ul className="project-tree-sections" hidden={!expanded}>
+                      {[{ title: "개요와 담당 역할" }, ...p.sections].map(
+                        (section, row) => {
+                          const index = row - 1;
+                          return (
+                            <li key={index}>
+                              <a
+                                className="project-tree-section"
+                                data-section-index={index}
+                                href={`${sitePath(`${trackPath}/projects/${p.id}/`)}${index >= 0 ? `#${sectionId(p, index)}` : ""}`}
+                                aria-current={
+                                  detail && expanded && activeSection === index
+                                    ? "location"
+                                    : undefined
+                                }
+                                onClick={(event) =>
+                                  goToSection(event, p, index)
+                                }
+                              >
+                                {section.title}
+                              </a>
+                            </li>
+                          );
+                        },
+                      )}
+                    </ul>
+                  </li>
+                </Fragment>
               );
             })}
           </ul>
         </nav>
+        {profile.links.length > 0 && (
+          <p className="browser-contact" aria-label="연락처">
+            {profile.links.map((link) => (
+              <a
+                key={link.url}
+                href={link.url}
+                {...(link.url.startsWith("https:")
+                  ? { target: "_blank", rel: "noopener noreferrer" }
+                  : {})}
+              >
+                {link.label}
+              </a>
+            ))}
+          </p>
+        )}
         <nav className="browser-resources" aria-label="소개와 기록">
           <a
             href="#about"

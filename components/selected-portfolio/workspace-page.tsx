@@ -28,6 +28,12 @@ export async function WorkspacePage({
     jobsViewer(),
   ]);
   const requested = ownerSection(query.manage);
+  const returnQuery = new URLSearchParams();
+  if (requested && requested !== "login") returnQuery.set("manage", requested);
+  for (const key of ["p", "v"]) {
+    if (typeof query[key] === "string") returnQuery.set(key, query[key]);
+  }
+  if (query.edit === "1") returnQuery.set("edit", "1");
   const section =
     requested && (!viewer || requested === "login") ? "login" : requested;
   const workspace: OwnerWorkspace | null =
@@ -44,7 +50,7 @@ export async function WorkspacePage({
                   next={safeReturnTo(
                     typeof query.next === "string"
                       ? query.next
-                      : `${home}${requested && requested !== "login" ? `?manage=${requested}` : ""}`,
+                      : `${home}${returnQuery.size ? `?${returnQuery}` : ""}`,
                   )}
                   error={
                     typeof query.error === "string" ? query.error : undefined

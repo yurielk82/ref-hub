@@ -12,6 +12,7 @@ test("오너 로그인 복귀는 현재 공개 트랙의 허용된 작업만 받
     "/ax?manage=resume&p=jobkorea&v=saved_1",
   );
   assert.equal(safeReturnTo("/?manage=jobs"), "/?manage=jobs");
+  assert.equal(safeReturnTo("/ax?edit=1"), "/ax?edit=1");
   for (const value of [
     "https://evil.example/",
     "//evil.example/",

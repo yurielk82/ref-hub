@@ -7,6 +7,9 @@ export default async function EditCompatibilityPage({
   searchParams: Promise<{ track?: string }>;
 }) {
   if ((await searchParams).track === "ax") redirect("/ax/edit");
-  if (!(await jobsViewer())) redirect(ownerHref("/", "login"));
+  if (!(await jobsViewer()))
+    redirect(
+      `${ownerHref("/", "login")}&next=${encodeURIComponent("/?edit=1")}`,
+    );
   redirect("/?edit=1");
 }

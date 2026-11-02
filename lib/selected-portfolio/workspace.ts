@@ -33,6 +33,8 @@ export function safeReturnTo(value: unknown): string {
     const params = new URLSearchParams();
     const section = ownerSection(url.searchParams.get("manage"));
     if (section && section !== "login") params.set("manage", section);
+    if (!section && url.searchParams.get("edit") === "1")
+      params.set("edit", "1");
     if (section === "resume") {
       if (url.searchParams.get("p") === "jobkorea") params.set("p", "jobkorea");
       const version = url.searchParams.get("v");

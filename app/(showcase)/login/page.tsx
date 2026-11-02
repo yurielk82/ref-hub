@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import { jobsViewer } from "@/auth";
 import {
   ownerHref,
   safeReturnTo,
@@ -11,6 +12,7 @@ export default async function LoginCompatibilityPage({
 }) {
   const query = await searchParams;
   const next = safeReturnTo(query.next);
+  if (await jobsViewer()) redirect(next);
   const home = next.startsWith("/ax") ? "/ax" : "/";
   const target = new URL(ownerHref(home, "login"), "https://portfolio.invalid");
   target.searchParams.set("next", next);

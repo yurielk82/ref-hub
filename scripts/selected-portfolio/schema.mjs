@@ -108,9 +108,13 @@ export function validatePortfolio(data) {
       data.profile,
       "profile",
       ["name", "role", "intro", "fields", "links", "experiences", "education"],
-      ["workAreas", "approach"],
+      ["workAreas", "approach", "highlights"],
     )
   ) {
+    if (data.profile.highlights !== undefined)
+      list(data.profile.highlights, "profile.highlights", (item, at) =>
+        str(item, at),
+      );
     for (const key of ["name", "role", "intro"])
       str(data.profile[key], `profile.${key}`);
     list(data.profile.fields, "profile.fields", (item, at) => str(item, at));
@@ -154,10 +158,12 @@ export function validatePortfolio(data) {
           "artLabels",
           "sections",
         ],
-        ["hidden", "parentId"],
+        ["hidden", "parentId", "highlights"],
       )
     )
       return;
+    if (p.highlights !== undefined)
+      list(p.highlights, `${at}.highlights`, (item, key) => str(item, key));
     if (p.hidden !== undefined && typeof p.hidden !== "boolean")
       fail(`${at}.hidden`, "true 또는 false로 입력하세요.");
     if (p.parentId !== undefined) {

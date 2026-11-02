@@ -43,14 +43,24 @@ export async function readContent(dir: string): Promise<ContentSnapshot> {
 }
 
 // shortcut: 현재 운영은 단일 Node 프로세스다. 다중 인스턴스 도입 시 저장소의 조건부 쓰기로 바꾼다.
-let writes: Promise<unknown> = Promise.resolve();
+declare global {
+  var refHubContentWrites:
+    { pending: Promise<unknown>; reviews: Map<string, string> } | undefined;
+}
+const writes = (globalThis.refHubContentWrites ??= {
+  pending: Promise.resolve(),
+  reviews: new Map<string, string>(),
+});
 export function saveContent(
   dir: string,
   input: unknown,
   fields: readonly CopyField[],
+  options: { reviewOnly?: boolean } = {},
 ): Promise<ContentSnapshot> {
-  const task = writes.then(() => writeContent(dir, input, fields));
-  writes = task.catch(() => undefined);
+  const task = writes.pending.then(() =>
+    writeContent(dir, input, fields, options.reviewOnly ?? false),
+  );
+  writes.pending = task.catch(() => undefined);
   return task;
 }
 
@@ -58,6 +68,7 @@ async function writeContent(
   dir: string,
   input: unknown,
   fields: readonly CopyField[],
+  reviewOnly: boolean,
 ): Promise<ContentSnapshot> {
   if (
     !record(input) ||
@@ -83,7 +94,17 @@ async function writeContent(
     throw new ContentError(
       "다른 창에서 저장한 내용이 있습니다. 수정한 글을 복사한 뒤 ‘수정 취소’ → 새로고침 → 다시 붙여넣기 순서로 진행해 주세요.",
     );
-  if (Object.keys(changes).length === 0) return current;
+  const changedFields = Object.keys(changes);
+  if (
+    reviewOnly &&
+    (current.revision !== "initial" ||
+      changedFields.length !== 1 ||
+      !["sales.hero.role", "ax.hero.role"].includes(changedFields[0]))
+  )
+    throw new ContentError(
+      "검수 저장은 초기 상태의 담당 분야 한 칸만 허용합니다.",
+    );
+  if (changedFields.length === 0) return current;
   const next: ContentSnapshot = {
     revision: randomUUID(),
     savedAt: new Date().toISOString(),
@@ -102,8 +123,36 @@ async function writeContent(
     });
     await writeFile(temp, body, { flag: "wx", mode: 0o600 });
     await rename(temp, path.join(dir, "current.json"));
+    if (reviewOnly) writes.reviews.set(dir, next.revision);
   } finally {
     await rm(temp, { force: true });
   }
   return next;
+}
+
+export function clearReviewContent(
+  dir: string,
+  expectedRevision: string,
+): Promise<ContentSnapshot> {
+  const task = writes.pending.then(async () => {
+    const reviewRevision = writes.reviews.get(dir);
+    const current = await readContent(dir);
+    if (
+      !reviewRevision ||
+      reviewRevision !== expectedRevision ||
+      (current.revision !== reviewRevision && current.revision !== "initial")
+    )
+      throw new ContentError(
+        "검수 뒤 다른 저장이 있거나 검수 기록을 확인하지 못했습니다.",
+      );
+    if (current.revision === reviewRevision)
+      await rm(path.join(dir, "current.json"));
+    await rm(path.join(dir, "versions", `${reviewRevision}.json`), {
+      force: true,
+    });
+    writes.reviews.delete(dir);
+    return { revision: "initial", savedAt: null, values: {} };
+  });
+  writes.pending = task.catch(() => undefined);
+  return task;
 }

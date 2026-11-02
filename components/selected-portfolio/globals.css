@@ -450,10 +450,49 @@ button {
   line-height: 1.75;
   color: var(--ink-2);
 }
-.stage-role {
-  margin-top: 7px;
-  font-size: 13px;
-  font-weight: 600;
+.highlights {
+  max-width: 46em;
+  margin-top: 26px;
+}
+.highlights .highlights-title {
+  margin-bottom: 12px;
+  max-width: none;
+  line-height: 1.4;
+  color: var(--signal);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.highlights ul {
+  display: grid;
+  gap: 12px;
+}
+.highlights li {
+  position: relative;
+  padding-left: 16px;
+  line-height: 1.55;
+}
+.highlights li::before {
+  content: "";
+  position: absolute;
+  top: 0.62em;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 2px;
+  background: var(--signal);
+}
+.highlights strong {
+  display: block;
+  font-size: 15.5px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+.highlights li span {
+  display: block;
+  margin-top: 2px;
+  color: var(--ink-2);
+  font-size: 13.5px;
 }
 .stage-foot {
   display: flex;
@@ -1057,10 +1096,6 @@ button {
   margin-top: 24px;
   font-size: 16px;
 }
-.stage-cover-link .stage-role {
-  margin-top: 14px;
-  line-height: 1.7;
-}
 .stage-cover-link .stage-go {
   display: inline-flex;
   margin-top: 28px;
@@ -1229,8 +1264,11 @@ button {
   .stage-cover-link .stage-summary {
     font-size: 14px;
   }
-  .stage-cover-link .stage-role {
-    font-size: 12px;
+  .highlights strong {
+    font-size: 14.5px;
+  }
+  .highlights li span {
+    font-size: 13px;
   }
   .stage-foot {
     gap: 18px;

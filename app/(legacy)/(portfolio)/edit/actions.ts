@@ -7,8 +7,7 @@ import { ContentError, saveContent } from "@/lib/portfolio/store";
 import { selectedEditableFields } from "@/lib/selected-portfolio/server";
 
 export async function savePortfolio(input: unknown) {
-  const viewer = await jobsViewer();
-  if (!viewer)
+  if (!(await jobsViewer()))
     return {
       error:
         "로그인이 만료됐습니다. 수정한 글을 복사해 두고 다시 로그인해 주세요.",
@@ -22,9 +21,7 @@ export async function savePortfolio(input: unknown) {
       ...selectedEditableFields("sales"),
       ...selectedEditableFields("ax"),
     ];
-    const snapshot = await saveContent(dir, input, fields, {
-      reviewOnly: viewer.id === process.env.REF_HUB_REVIEW_USER_ID,
-    });
+    const snapshot = await saveContent(dir, input, fields);
     revalidatePath("/");
     revalidatePath("/ax");
     return { revision: snapshot.revision, savedAt: snapshot.savedAt };

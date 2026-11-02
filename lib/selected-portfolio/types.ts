@@ -42,6 +42,8 @@ export type Project = {
   accent: string;
   summary: string;
   highlights?: string[];
+  /** 상세 첫 화면에 먼저 보일 캡처의 src. 없으면 첫 캡처. */
+  lead?: string;
   stack: string[];
   links: PublicLink[];
   image: string;
@@ -57,6 +59,9 @@ export type PortfolioData = {
     role: string;
     intro: string;
     highlights?: string[];
+    /** 홈 첫 줄 헤드라인(직무 + 차별 성과 한 문장). 있으면 홈이 헤드라인 구성으로 바뀐다. */
+    headline?: string;
+    headlineNote?: string;
     fields: string[];
     links: PublicLink[];
     experiences: RecordEntry[];

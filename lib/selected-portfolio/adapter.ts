@@ -145,6 +145,28 @@ export function selectedPortfolioContent(
     ...base.profile,
     role: text("hero.role", "담당 분야", "소개", base.profile.role, 100),
     intro: [...savedIntroParts, intro].join("\n\n"),
+    ...(base.profile.headline === undefined
+      ? {}
+      : {
+          headline: text(
+            "selected.profile.headline",
+            "홈 헤드라인",
+            "소개",
+            base.profile.headline,
+            120,
+          ),
+        }),
+    ...(base.profile.headlineNote === undefined
+      ? {}
+      : {
+          headlineNote: text(
+            "selected.profile.headlineNote",
+            "헤드라인 아래 현재 직책",
+            "소개",
+            base.profile.headlineNote,
+            160,
+          ),
+        }),
     highlights: list(
       "selected.profile.highlights",
       "핵심 성과 · 한 줄에 한 항목",

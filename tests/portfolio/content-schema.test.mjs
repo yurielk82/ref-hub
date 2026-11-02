@@ -27,3 +27,16 @@ test("highlights must be a list of non-empty strings", () => {
     validatePortfolio(data).some((e) => e.startsWith("profile.highlights")),
   );
 });
+
+test("lead must name one of the project's own captures", () => {
+  const data = JSON.parse(
+    readFileSync(
+      path.join(ROOT, "data/selected-portfolio/portfolio.json"),
+      "utf8",
+    ),
+  );
+  data.projects[0].lead = "/assets/selected-portfolio/images/none.webp";
+  assert.ok(
+    validatePortfolio(data).some((e) => e.startsWith("projects[0].lead")),
+  );
+});

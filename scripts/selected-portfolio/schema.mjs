@@ -108,9 +108,12 @@ export function validatePortfolio(data) {
       data.profile,
       "profile",
       ["name", "role", "intro", "fields", "links", "experiences", "education"],
-      ["workAreas", "approach", "highlights"],
+      ["workAreas", "approach", "highlights", "headline", "headlineNote"],
     )
   ) {
+    for (const key of ["headline", "headlineNote"])
+      if (data.profile[key] !== undefined)
+        str(data.profile[key], `profile.${key}`);
     if (data.profile.highlights !== undefined)
       list(data.profile.highlights, "profile.highlights", (item, at) =>
         str(item, at),
@@ -158,10 +161,21 @@ export function validatePortfolio(data) {
           "artLabels",
           "sections",
         ],
-        ["hidden", "parentId", "highlights"],
+        ["hidden", "parentId", "highlights", "lead"],
       )
     )
       return;
+    if (p.lead !== undefined) {
+      str(p.lead, `${at}.lead`);
+      const srcs = (Array.isArray(p.sections) ? p.sections : []).flatMap(
+        (section) =>
+          object(section) && Array.isArray(section.screens)
+            ? section.screens.map((screen) => object(screen) && screen.src)
+            : [],
+      );
+      if (!srcs.includes(p.lead))
+        fail(`${at}.lead`, "이 프로젝트 캡처 중 하나의 src를 입력하세요.");
+    }
     if (p.highlights !== undefined)
       list(p.highlights, `${at}.highlights`, (item, key) => str(item, key));
     if (p.hidden !== undefined && typeof p.hidden !== "boolean")

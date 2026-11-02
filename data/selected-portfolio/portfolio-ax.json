@@ -88,12 +88,12 @@
           "body": "서로 다른 영업 구조에서 생긴 용어·필수값·자료 형식의 차이를 확인하고, 상대 부서 담당자들과 업무 기준을 협의했습니다. 잘못된 자료는 엑셀에서 임시로 고치기보다 전산팀과 협업해 ERP 원천 자료부터 바로잡았습니다. ERP 오류가 모두 해결됐다는 뜻은 아닙니다.",
           "screens": [
             {
-              "src": "/assets/selected-portfolio/images/pharmkpi/data-architecture-content-848dd4c7be9a.webp",
+              "src": "/assets/selected-portfolio/images/pharmkpi/data-architecture-content-d732773b1050.webp",
               "title": "데이터 구조도",
               "caption": "원천 수집부터 검증·반영, 저장 계층, 조회 화면까지 운영 중인 데이터 흐름을 한 장으로 보여 줍니다.",
               "note": "실제 앱 본문을 촬영했습니다. 공개를 위해 이름·사업자번호·금액·수량을 예시 값으로 바꿨습니다. 화면의 수치는 업무 성과를 뜻하지 않습니다.",
-              "width": 1367,
-              "height": 1003
+              "width": 4098,
+              "height": 3009
             }
           ]
         },
@@ -107,52 +107,52 @@
           "body": "매출·수금·채권·할인율·재고·반품의 실적과 원천 자료를 대조하고, 매월 만들던 판매·수금 보고 양식을 조회·내려받기로 연결했습니다. 시장 메뉴에서는 공공 자료와 처방·판매 자료를 함께 비교합니다.",
           "screens": [
             {
-              "src": "/assets/selected-portfolio/images/pharmkpi/overview-content-3a597ee242a9.webp",
+              "src": "/assets/selected-portfolio/images/pharmkpi/overview-content-d6a098019822.webp",
               "title": "종합 현황",
               "caption": "기준월의 매출·수금·채권 잔고·할인율·재고·반품 대표 지표와 전사 매출 월별 추세를 한 화면에서 확인합니다.",
               "note": "실제 서비스의 본문을 새로 촬영했습니다. 거래처·담당자·품목·업무 식별자와 금액·수량은 공개용 예시로 바꿨습니다. 날짜·월·백분율·설명 문구는 보존했으며 표시 수치는 실제 업무 성과를 뜻하지 않습니다.",
-              "width": 1367,
-              "height": 1060
+              "width": 4098,
+              "height": 3180
             },
             {
-              "src": "/assets/selected-portfolio/images/pharmkpi/verification-content-5a630d0a446d.webp",
+              "src": "/assets/selected-portfolio/images/pharmkpi/verification-content-6c6ad2a37e5a.webp",
               "title": "데이터 대조",
               "caption": "지표별·월별로 원본 자료와 집계 값의 대조 상태를 표시해 일치 여부와 확인이 필요한 달을 구분합니다.",
               "note": "실제 서비스의 본문을 새로 촬영했습니다. 거래처·담당자·품목·업무 식별자와 금액·수량은 공개용 예시로 바꿨습니다. 날짜·월·백분율·설명 문구는 보존했으며 표시 수치는 실제 업무 성과를 뜻하지 않습니다.",
-              "width": 1367,
-              "height": 1730
+              "width": 4098,
+              "height": 4887
             },
             {
-              "src": "/assets/selected-portfolio/images/monthly-sales-reports/sales-collection-content-ccdb8cdce2c1.webp",
+              "src": "/assets/selected-portfolio/images/monthly-sales-reports/sales-collection-content-57fe0b987b16.webp",
               "title": "판매·수금 요약",
               "caption": "기준월·분기·누적 비교 · 구분·품목 행과 소계·합계를 유지해 같은 보고서의 주요 열을 비교합니다.",
               "note": "실제 앱의 판매·수금 표에서 기준월·분기·누적 비교 열을 골라 새로 촬영했습니다. 구분·품목 열과 전체 67개 본문 행을 보존했고 과거 2개년 월별 판매 열은 대표 화면에서 생략했습니다. 금액과 품목·조직 표시는 공개용 예시이며 실제 업무 성과를 뜻하지 않습니다.",
-              "width": 1743,
-              "height": 1584
+              "width": 5229,
+              "height": 4752
             },
             {
-              "src": "/assets/selected-portfolio/images/monthly-sales-reports/sales-collection-monthly-content-3d7d0a806f34.webp",
+              "src": "/assets/selected-portfolio/images/monthly-sales-reports/sales-collection-monthly-content-4c3efa37fc3d.webp",
               "title": "판매·수금 요약 · 월별 판매·목표",
               "caption": "월별 판매와 월별 목표 · 구분·품목 행과 소계·합계를 유지해 같은 보고서의 주요 열을 비교합니다.",
               "note": "실제 앱의 판매·수금 표에서 월별 판매와 월별 목표 열을 골라 새로 촬영했습니다. 구분·품목 열과 전체 67개 본문 행을 보존했고 과거 2개년 월별 판매 열은 대표 화면에서 생략했습니다. 금액과 품목·조직 표시는 공개용 예시이며 실제 업무 성과를 뜻하지 않습니다.",
-              "width": 1797,
-              "height": 1584
+              "width": 5391,
+              "height": 4752
             },
             {
-              "src": "/assets/selected-portfolio/images/monthly-sales-reports/sales-collection-collections-content-b662ced1df33.webp",
+              "src": "/assets/selected-portfolio/images/monthly-sales-reports/sales-collection-collections-content-af0d8f0d638e.webp",
               "title": "판매·수금 요약 · 반품·수금·할인",
               "caption": "반품·수금·매출할인 · 구분·품목 행과 소계·합계를 유지해 같은 보고서의 주요 열을 비교합니다.",
               "note": "실제 앱의 판매·수금 표에서 반품·수금·매출할인 열을 골라 새로 촬영했습니다. 구분·품목 열과 전체 67개 본문 행을 보존했고 과거 2개년 월별 판매 열은 대표 화면에서 생략했습니다. 금액과 품목·조직 표시는 공개용 예시이며 실제 업무 성과를 뜻하지 않습니다.",
-              "width": 1527,
-              "height": 1584
+              "width": 4581,
+              "height": 4752
             },
             {
-              "src": "/assets/selected-portfolio/images/market-analysis/portfolio-content-e2f2f31fc819.webp",
+              "src": "/assets/selected-portfolio/images/market-analysis/portfolio-content-9249e36b4422.webp",
               "title": "자사 포트폴리오",
               "caption": "허가 품목·평균 상한가·전문/일반 구성과 품목별 가격을 한 화면에서 비교합니다.",
               "note": "실제 앱의 포트폴리오 상단 요약과 차트를 촬영했습니다. 전체 품목 목록은 별도 구획이므로 생략했습니다. 표시 품목과 가격은 공개용 예시이며 실제 업무 성과를 뜻하지 않습니다.",
-              "width": 1004,
-              "height": 618
+              "width": 3027,
+              "height": 1854
             }
           ]
         },
@@ -161,36 +161,36 @@
           "body": "영업지원팀은 주문·수금·채권·재고와 마감 상태를 조회합니다. 회계팀은 보조원장 형식으로 판매·수금·수금조정을 이어 보고 월말 채권 차이를 확인합니다. 아래는 각 업무를 확인하는 대표 화면입니다.",
           "screens": [
             {
-              "src": "/assets/selected-portfolio/images/sales-strategy-portal/home-content-8170f63e092e.webp",
+              "src": "/assets/selected-portfolio/images/sales-strategy-portal/home-content-2a29200e6376.webp",
               "title": "영업지원 홈",
               "caption": "오늘의 마감(청구서·판매·수금·물류·공급내역보고) 상태부터 실매출·판매·반품·매출할인·수금 현황, 채권 잔고·회전일까지 영업지원 업무 순서대로 한 화면에 모았습니다. 각 지표는 전년 같은 달의 같은 영업일과 비교합니다.",
               "note": "실제 서비스의 본문을 새로 촬영했습니다. 거래처·담당자·품목·업무 식별자와 금액·수량은 공개용 예시로 바꿨습니다. 날짜·월·백분율·설명 문구는 보존했으며 표시 수치는 실제 업무 성과를 뜻하지 않습니다.",
-              "width": 1367,
-              "height": 2605
+              "width": 4098,
+              "height": 7815
             },
             {
-              "src": "/assets/selected-portfolio/images/sales-strategy-portal/orders-content-5e6bac5da60a.webp",
+              "src": "/assets/selected-portfolio/images/sales-strategy-portal/orders-content-27c1f707db9f.webp",
               "title": "주문 내역",
               "caption": "ERP 주문을 기간·구분별로 조회하고 거래처·품목별 수량, 출하 단가, 금액·세액을 엑셀식 열 필터로 확인하는 화면입니다. 가독성을 위해 핵심 열과 조회 첫 20행을 담았습니다.",
               "note": "원본 조회 화면의 스크롤 영역에서 첫20행이 온전히 보이도록 높이를 맞추고 핵심 열만 표시했습니다. 원본 행·칸 값·정렬·페이지 조건은 유지했습니다. 실제 서비스의 본문을 새로 촬영했습니다. 거래처·담당자·품목·업무 식별자와 금액·수량은 공개용 예시로 바꿨습니다. 날짜·월·백분율·설명 문구는 보존했으며 표시 수치는 실제 업무 성과를 뜻하지 않습니다.",
-              "width": 1367,
-              "height": 845
+              "width": 4098,
+              "height": 2535
             },
             {
-              "src": "/assets/selected-portfolio/images/accounting-ledger/accounting-home-content-8c5708e2afc2.webp",
+              "src": "/assets/selected-portfolio/images/accounting-ledger/accounting-home-content-99d9baa0ccf1.webp",
               "title": "회계팀 홈",
               "caption": "월말 실매출(판매−반품−매출할인)을 도매·수출·수탁 구분별 공급가액·부가세로 나눠 회계 제출 양식 그대로 복사하고, 수금 방법별 실적과 도매 채권 잔액을 한 화면에서 봅니다.",
               "note": "실제 서비스의 본문을 새로 촬영했습니다. 거래처·담당자·품목·업무 식별자와 금액·수량은 공개용 예시로 바꿨습니다. 날짜·월·백분율·설명 문구는 보존했으며 표시 수치는 실제 업무 성과를 뜻하지 않습니다.",
-              "width": 1367,
-              "height": 1702
+              "width": 4098,
+              "height": 5232
             },
             {
-              "src": "/assets/selected-portfolio/images/accounting-ledger/customer-ledger-content-6201af61238f.webp",
+              "src": "/assets/selected-portfolio/images/accounting-ledger/customer-ledger-content-eeeab5f0e572.webp",
               "title": "거래처 원장",
               "caption": "사업자와 코드를 선택해 전기이월·판매·수금·월계·누계와 잔액을 한 원장에서 확인합니다.",
               "note": "원본 거래처 원장 컴포넌트와 계산 모형을 촬영용 합성 자료로 분리 렌더링했습니다. 거래처·사업자번호·품목·금액은 모두 예시이며 실제 업무 성과를 뜻하지 않습니다.",
-              "width": 1360,
-              "height": 938
+              "width": 4080,
+              "height": 2814
             }
           ]
         },
@@ -233,28 +233,28 @@
           "body": "스프레드시트의 일보를 매일 조회하고, 웹에서 자동으로 분석하며 발표 자료를 자동 생성하는 흐름으로 바꿨습니다. KPI.의 SFE와 영업본부 메뉴에서 관련 분석과 발표 자료를 확인합니다.",
           "screens": [
             {
-              "src": "/assets/selected-portfolio/images/sales-hq-sfe/summary-content-297cb1441ba9.webp",
+              "src": "/assets/selected-portfolio/images/sales-hq-sfe/summary-content-49f63b79cfc5.webp",
               "title": "SFE 요약",
               "caption": "실매출 세 기간과 활동·도달·성과 계층별 핵심 지표를 한 화면에 모읍니다. 카드마다 해당 분석 메뉴로 이어져 '얼마나 다녔나 → 맞는 곳을 다녔나 → 다닌 만큼 나왔나' 순서로 따라가며 봅니다.",
               "note": "실제 서비스의 본문을 새로 촬영했습니다. 거래처·담당자·품목·업무 식별자와 금액·수량은 공개용 예시로 바꿨습니다. 날짜·월·백분율·설명 문구는 보존했으며 표시 수치는 실제 업무 성과를 뜻하지 않습니다.",
-              "width": 1367,
-              "height": 1431
+              "width": 4098,
+              "height": 4293
             },
             {
-              "src": "/assets/selected-portfolio/images/sales-hq-sfe/metric-guide-content-741a7f0e0b67.webp",
+              "src": "/assets/selected-portfolio/images/sales-hq-sfe/metric-guide-content-78e2af69651c.webp",
               "title": "SFE 분석 안내",
               "caption": "SFE를 활동·중간·성과 순서로 읽는 방법과 모든 분석 메뉴에 공통으로 쓰는 화면 구성을 설명합니다.",
               "note": "실제 서비스의 SFE 안내 중 읽는 순서와 화면 구성 두 구획을 촬영했습니다. 수식과 안내 문구를 그대로 보존했습니다.",
-              "width": 1024,
-              "height": 681
+              "width": 3072,
+              "height": 2043
             },
             {
-              "src": "/assets/selected-portfolio/images/sales-hq-sfe/metric-guide-activity-content-76e2c5a1958c.webp",
+              "src": "/assets/selected-portfolio/images/sales-hq-sfe/metric-guide-activity-content-366e611caf2e.webp",
               "title": "SFE 지표 안내 · 활동 현황",
               "caption": "활동 현황을 예시 차트·지표 정의·계산식·후속 조치 순서로 읽어 현장 해석까지 연결합니다.",
               "note": "실제 SFE 안내의 활동 현황 구획 전체를 촬영했습니다. 해당 구획의 마지막 지표 행과 읽고 나서 할 일까지 보존했습니다.",
-              "width": 1024,
-              "height": 1374
+              "width": 3072,
+              "height": 4128
             }
           ]
         },
@@ -263,20 +263,20 @@
           "body": "중간 가공 없이 결과를 바로 볼 수 있어 지표를 해석하고 분석할 시간이 늘었습니다. 매출은 크지만 방문이 적은 거래처처럼 영업부에 조언할 대상을 찾아, 방문 시간과 우선순위를 검토하는 데 사용합니다.",
           "screens": [
             {
-              "src": "/assets/selected-portfolio/images/sales-hq-sfe/effort-value-quadrant-content-c11a8d87ea1f.webp",
+              "src": "/assets/selected-portfolio/images/sales-hq-sfe/effort-value-quadrant-content-b99d378676ab.webp",
               "title": "노력-가치 사분면",
               "caption": "도매상마다 한 달 평균 방문 횟수와 실매출을 한 점으로 올리고 중위수 선으로 네 칸을 나눕니다. 매출은 큰데 방문이 적은 곳과 자주 가는데 매출이 작은 곳을 찾아 방문 시간 배분을 바꿀 후보로 봅니다.",
               "note": "실제 서비스의 본문을 새로 촬영했습니다. 거래처·담당자·품목·업무 식별자와 금액·수량은 공개용 예시로 바꿨습니다. 날짜·월·백분율·설명 문구는 보존했으며 표시 수치는 실제 업무 성과를 뜻하지 않습니다.",
-              "width": 1367,
-              "height": 1281
+              "width": 4098,
+              "height": 3843
             },
             {
-              "src": "/assets/selected-portfolio/images/sales-hq-sfe/grade-targeting-content-314584f4cd98.webp",
+              "src": "/assets/selected-portfolio/images/sales-hq-sfe/grade-targeting-content-f6888311e972.webp",
               "title": "거래처 등급·타겟팅",
               "caption": "도매상을 12개월 매출 순으로 A·B·C 등급과 매출 순위 구간으로 나누고, 등급별 매출 비중과 최근 3개월 방문 비중을 나란히 놓습니다. 방문이 등급에 맞게 배분되는지 확인합니다.",
               "note": "실제 서비스의 본문을 새로 촬영했습니다. 거래처·담당자·품목·업무 식별자와 금액·수량은 공개용 예시로 바꿨습니다. 날짜·월·백분율·설명 문구는 보존했으며 표시 수치는 실제 업무 성과를 뜻하지 않습니다.",
-              "width": 1367,
-              "height": 1413
+              "width": 4098,
+              "height": 4239
             }
           ]
         },
@@ -285,12 +285,12 @@
           "body": "방문 뒤 주문과 방문이 없을 때의 주문을 비교하는 화면으로 활동과 성과를 함께 확인합니다. 화면의 비교 결과는 방문 우선순위를 검토할 근거로 읽습니다.",
           "screens": [
             {
-              "src": "/assets/selected-portfolio/images/sales-hq-sfe/visit-productivity-content-9754bc4da041.webp",
+              "src": "/assets/selected-portfolio/images/sales-hq-sfe/visit-productivity-content-8325841af7ac.webp",
               "title": "방문 성과",
               "caption": "방문이 주문으로 이어진 비율과 방문 없을 때의 주문률, 주문당 품목 수를 월별로 비교합니다. 방문 뒤 첫 주문까지 걸린 영업일 분포로 방문의 몫을 따로 읽습니다.",
               "note": "실제 서비스의 본문을 새로 촬영했습니다. 거래처·담당자·품목·업무 식별자와 금액·수량은 공개용 예시로 바꿨습니다. 날짜·월·백분율·설명 문구는 보존했으며 표시 수치는 실제 업무 성과를 뜻하지 않습니다.",
-              "width": 1367,
-              "height": 1301
+              "width": 4098,
+              "height": 3903
             }
           ]
         }
@@ -323,20 +323,20 @@
           "body": "자료 마감 → 수요 검토 → 공급·재고 검토 → 통합 조정 → 경영 승인으로 이어지는 월간 계획 주기를 구성했습니다. 각 단계에서 확인할 내용과 진행 상태를 화면으로 볼 수 있습니다.",
           "screens": [
             {
-              "src": "/assets/selected-portfolio/images/sales-hq-snop/monthly-overview-content-974af73edc5e.webp",
+              "src": "/assets/selected-portfolio/images/sales-hq-snop/monthly-overview-content-964cb9efbc6a.webp",
               "title": "한 달 계획 현황",
               "caption": "한 달 계획 주기의 진행 단계와 먼저 확인할 예외, 월별 도매 매출과 부족 품목을 한 본문에서 살핍니다.",
               "note": "업무 미적용 시제품의 실제 화면 부품을 촬영용 합성 자료로 분리 렌더링했습니다. 실제 회사 실적·계획이나 운영 성과가 아닙니다.",
-              "width": 2784,
-              "height": 2880
+              "width": 5568,
+              "height": 5760
             },
             {
-              "src": "/assets/selected-portfolio/images/sales-hq-snop/data-close-content-78b1a9308ed8.webp",
+              "src": "/assets/selected-portfolio/images/sales-hq-snop/data-close-content-4b37952391fa.webp",
               "title": "판매·수금·재고 마감 확인",
               "caption": "지난달 판매 마감·수금 반영·현재 로트 재고의 확인 결과를 함께 보여 줍니다. 보류 이유와 다음 단계로 넘어가는 조건을 표 끝까지 읽을 수 있습니다.",
               "note": "업무 미적용 시제품의 실제 화면 부품을 촬영용 합성 자료로 분리 렌더링했습니다. 실제 회사 실적·계획이나 운영 성과가 아닙니다.",
-              "width": 2784,
-              "height": 1902
+              "width": 5568,
+              "height": 3804
             }
           ]
         },
@@ -345,28 +345,28 @@
           "body": "월별 실적과 기준 예측을 함께 보고, 조정 가정과 계획 버전을 검토하는 화면을 만들었습니다. 예측 모델과 구간을 바꾸는 실험 화면도 시제품에 포함했습니다.",
           "screens": [
             {
-              "src": "/assets/selected-portfolio/images/sales-hq-snop/demand-review-content-077d57deee72.webp",
+              "src": "/assets/selected-portfolio/images/sales-hq-snop/demand-review-content-43254968d1de.webp",
               "title": "수요와 예측 오차 검토",
               "caption": "최근 실적과 계획, 품목별 예측 오차와 조정 수량을 비교하는 수요 검토 화면입니다. 원본 비교 차트와 품목 표 전체를 담았습니다.",
               "note": "업무 미적용 시제품의 실제 화면 부품을 촬영용 합성 자료로 분리 렌더링했습니다. 실제 회사 실적·계획이나 운영 성과가 아닙니다.",
-              "width": 2784,
-              "height": 2918
+              "width": 5568,
+              "height": 5836
             },
             {
-              "src": "/assets/selected-portfolio/images/sales-hq-snop/forecast-lab-content-54d61fe2585f.webp",
+              "src": "/assets/selected-portfolio/images/sales-hq-snop/forecast-lab-content-ddcc06380dd7.webp",
               "title": "예측 모델 후보 설정",
               "caption": "예측 모델·학습창·평가 기간의 후보를 선택하고 기존 평가를 불러오는 실제 실험실 부품입니다. 합성 자료를 넣은 촬영으로 모델 평가를 실행하거나 우수 모델을 판정하지 않았습니다.",
               "note": "업무 미적용 시제품의 실제 화면 부품을 촬영용 합성 자료로 분리 렌더링했습니다. 실제 회사 실적·계획이나 운영 성과가 아닙니다.",
-              "width": 2656,
-              "height": 1300
+              "width": 5312,
+              "height": 2600
             },
             {
-              "src": "/assets/selected-portfolio/images/sales-hq-snop/forecast-plan-content-daa0667f3865.webp",
+              "src": "/assets/selected-portfolio/images/sales-hq-snop/forecast-plan-content-f715d1e14d19.webp",
               "title": "월별 매출 계획 비교",
               "caption": "기준 매출과 조정 매출을 월별 차트·표로 비교하는 화면입니다. 가상 계획을 사용해 차트와 모든 월의 행을 끝까지 담았습니다.",
               "note": "업무 미적용 시제품의 실제 화면 부품을 촬영용 합성 자료로 분리 렌더링했습니다. 실제 회사 실적·계획이나 운영 성과가 아닙니다.",
-              "width": 3856,
-              "height": 3094
+              "width": 7712,
+              "height": 6188
             }
           ]
         },
@@ -375,20 +375,20 @@
           "body": "예상 재고와 공급 계획을 검토하고, 최근 실적과 계획 버전을 비교하는 흐름을 구현했습니다. 아래 화면은 개인 시제품의 구현 범위를 보여 줍니다.",
           "screens": [
             {
-              "src": "/assets/selected-portfolio/images/sales-hq-snop/supply-inventory-content-dd2bdea5f68a.webp",
+              "src": "/assets/selected-portfolio/images/sales-hq-snop/supply-inventory-content-c06fdbec957e.webp",
               "title": "공급 부족·재고·사용기한 검토",
               "caption": "부족 품목과 예상 재고, 입고 예정 수량, 사용기한별 재고와 폐기 위험 로트를 함께 검토하는 화면입니다. 차트와 사용기한 구간별 재고·폐기 위험 확인 영역을 끝까지 담았습니다.",
               "note": "업무 미적용 시제품의 실제 화면 부품을 촬영용 합성 자료로 분리 렌더링했습니다. 실제 회사 실적·계획이나 운영 성과가 아닙니다.",
-              "width": 2784,
-              "height": 3816
+              "width": 5568,
+              "height": 7632
             },
             {
-              "src": "/assets/selected-portfolio/images/sales-hq-snop/finance-reconcile-content-6ba544fca465.webp",
+              "src": "/assets/selected-portfolio/images/sales-hq-snop/finance-reconcile-content-220497200b52.webp",
               "title": "매출·수금 통합 조정",
               "caption": "같은 계획의 월별 매출·수금 전망을 비교하고 저장된 계획과 검토 안건을 연결하는 통합 조정 화면입니다. 실제 승인을 실행한 결과는 아닙니다.",
               "note": "업무 미적용 시제품의 실제 화면 부품을 촬영용 합성 자료로 분리 렌더링했습니다. 실제 회사 실적·계획이나 운영 성과가 아닙니다.",
-              "width": 2784,
-              "height": 3354
+              "width": 5568,
+              "height": 6708
             }
           ]
         }
@@ -439,68 +439,68 @@
           "body": "아래는 이 시스템과 연결된 KPI의 KPIS 메뉴 화면입니다. 보고 상태와 주문 대조 흐름을 보여 주며, 독립 공급내역보고 앱 자체의 화면과는 구분합니다.\n\n주요 기능: 대시보드·KPIS포털 · 보고·대조·가져오기 · 데이터·마스터DB · 연동 설정",
           "screens": [
             {
-              "src": "/assets/selected-portfolio/images/kpis-dsr-api/report-flow-content-f63dbbef2c7e.webp",
+              "src": "/assets/selected-portfolio/images/kpis-dsr-api/report-flow-content-57312b594315.webp",
               "title": "보고 흐름",
               "caption": "공급내역보고의 일곱 단계와 각 단계의 보호장치를 한눈에 봅니다.",
               "note": "실제 서비스의 정적 보고 흐름 안내를 내용 구획별로 새로 촬영했습니다. 설명·단계 번호·일정·날짜를 원문대로 보존했습니다.",
-              "width": 1152,
-              "height": 256
+              "width": 3453,
+              "height": 768
             },
             {
-              "src": "/assets/selected-portfolio/images/kpis-dsr-api/report-flow-prepare-send-content-1ab6ecac0e2d.webp",
+              "src": "/assets/selected-portfolio/images/kpis-dsr-api/report-flow-prepare-send-content-def255066c01.webp",
               "title": "보고 흐름 · 원본 수집·주문 대조·보고",
               "caption": "원본 수집·보내기 전 주문 대조·수동 및 자동 보고의 보호장치를 설명합니다.",
               "note": "실제 서비스의 정적 보고 흐름 안내를 내용 구획별로 새로 촬영했습니다. 설명·단계 번호·일정·날짜를 원문대로 보존했습니다.",
-              "width": 1152,
-              "height": 1686
+              "width": 3453,
+              "height": 5061
             },
             {
-              "src": "/assets/selected-portfolio/images/kpis-dsr-api/report-flow-confirm-audit-content-36381438c81c.webp",
+              "src": "/assets/selected-portfolio/images/kpis-dsr-api/report-flow-confirm-audit-content-3aa0b4a1f58b.webp",
               "title": "보고 흐름 · 결과 확인·마감 대조",
               "caption": "결과 확인·반송신청·일마감 대조·적기보고에서 확인할 기준과 보호장치를 설명합니다.",
               "note": "실제 서비스의 정적 보고 흐름 안내를 내용 구획별로 새로 촬영했습니다. 설명·단계 번호·일정·날짜를 원문대로 보존했습니다.",
-              "width": 1152,
-              "height": 1821
+              "width": 3453,
+              "height": 5469
             },
             {
-              "src": "/assets/selected-portfolio/images/kpis-dsr-api/report-flow-states-repairs-content-de0c0703a927.webp",
+              "src": "/assets/selected-portfolio/images/kpis-dsr-api/report-flow-states-repairs-content-788b0c11aecb.webp",
               "title": "보고 흐름 · 시간표·상태·보완",
               "caption": "하루 시간표·작업 상태 이동·보완 전후와 사람이 확인할 곳을 설명합니다.",
               "note": "실제 서비스의 정적 보고 흐름 안내를 내용 구획별로 새로 촬영했습니다. 설명·단계 번호·일정·날짜를 원문대로 보존했습니다.",
-              "width": 1152,
-              "height": 1341
+              "width": 3453,
+              "height": 4071
             },
             {
-              "src": "/assets/selected-portfolio/images/kpis-dsr-api/order-check-content-f83ad0cd273e.webp",
+              "src": "/assets/selected-portfolio/images/kpis-dsr-api/order-check-content-8c7f8a0387dd.webp",
               "title": "주문·KPIS 대조",
               "caption": "주문 내역과 KPIS 접수를 날짜·거래처별로 맞대 수량·금액 차이를 확인합니다. 가독성을 위해 조회 첫 20행을 담았습니다.",
               "note": "원본 조회 화면의 스크롤 영역에서 첫20행이 온전히 보이도록 높이를 맞추고 핵심 열만 표시했습니다. 원본 행·칸 값·정렬·페이지 조건은 유지했습니다. 실제 서비스의 본문을 새로 촬영했습니다. 거래처·담당자·품목·업무 식별자와 금액·수량은 공개용 예시로 바꿨습니다. 날짜·월·백분율·설명 문구는 보존했으며 표시 수치는 실제 업무 성과를 뜻하지 않습니다.",
-              "width": 1367,
-              "height": 976
+              "width": 4098,
+              "height": 2928
             },
             {
-              "src": "/assets/selected-portfolio/images/kpis-dsr-api/kpis-home-content-2faa3d846184.webp",
+              "src": "/assets/selected-portfolio/images/kpis-dsr-api/kpis-home-content-52dd775e7485.webp",
               "title": "KPIS 홈",
               "caption": "한 달 보고를 날짜 줄로 보여 주고 보고 완료 일수, 볼 날, 분기 적기보고율, 주문과 KPIS가 다른 거래처 수를 위에 둡니다. 최근 3개월의 볼 날을 사유와 함께 모아 보고 작업으로 바로 넘어갑니다.",
               "note": "실제 서비스의 본문을 새로 촬영했습니다. 거래처·담당자·품목·업무 식별자와 금액·수량은 공개용 예시로 바꿨습니다. 날짜·월·백분율·설명 문구는 보존했으며 표시 수치는 실제 업무 성과를 뜻하지 않습니다.",
-              "width": 1367,
-              "height": 684
+              "width": 4098,
+              "height": 2052
             },
             {
-              "src": "/assets/selected-portfolio/images/kpis-dsr-api/report-work-content-f3920d68ef8a.webp",
+              "src": "/assets/selected-portfolio/images/kpis-dsr-api/report-work-content-a44c82325eef.webp",
               "title": "보고 작업",
               "caption": "보고 대상이 없는 날의 날짜별 상태·오늘 공급 여부·반송 처리 대기 영역을 보여 줍니다.",
               "note": "실제 서비스의 본문을 새로 촬영했습니다. 거래처·담당자·품목·업무 식별자와 금액·수량은 공개용 예시로 바꿨습니다. 날짜·월·백분율·설명 문구는 보존했으며 표시 수치는 실제 업무 성과를 뜻하지 않습니다.",
-              "width": 1367,
-              "height": 333
+              "width": 4098,
+              "height": 999
             },
             {
-              "src": "/assets/selected-portfolio/images/kpis-dsr-api/supply-lines-content-001c3fff0f1d.webp",
+              "src": "/assets/selected-portfolio/images/kpis-dsr-api/supply-lines-content-c0ce81df72cd.webp",
               "title": "갑지·을지 조회",
               "caption": "날짜별 보고·반송 줄 수를 고르고 공급구분, 보고 상태, 공급받은자·제품, 수량·단가·금액을 확인합니다. 가독성을 위해 핵심 열과 조회 첫 20행을 담았습니다.",
               "note": "원본 조회 화면의 스크롤 영역에서 첫20행이 온전히 보이도록 높이를 맞추고 핵심 열만 표시했습니다. 원본 행·칸 값·정렬·페이지 조건은 유지했습니다. 실제 서비스의 본문을 새로 촬영했습니다. 거래처·담당자·품목·업무 식별자와 금액·수량은 공개용 예시로 바꿨습니다. 날짜·월·백분율·설명 문구는 보존했으며 표시 수치는 실제 업무 성과를 뜻하지 않습니다.",
-              "width": 1367,
-              "height": 979
+              "width": 4098,
+              "height": 2937
             }
           ]
         }
@@ -579,12 +579,12 @@
           "body": "검수 환경 bin의 실제 화면에 촬영용 합성 자료를 넣고 탐색 메뉴를 제외해 촬영했습니다. 실제 회사 실적이 아니며 일부 전망·확장 기능은 운영 환경과 다릅니다.",
           "screens": [
             {
-              "src": "/assets/selected-portfolio/images/pharmkpi-exec/bin-daily-content-2718dfe0e5eb.webp",
+              "src": "/assets/selected-portfolio/images/pharmkpi-exec/bin-daily-content-3caa0abc794a.webp",
               "title": "데일리 리포트",
               "caption": "판매·수금과 채권·반품, 주요 품목을 같은 기준일에서 확인하는 데일리 본문입니다. 수치는 촬영용 합성 자료입니다.",
               "note": "검수 환경의 실제 화면에 촬영용 합성 응답을 넣어 본문만 촬영했습니다. 운영 계정이나 실제 거래처·금액을 사용하지 않았습니다.",
-              "width": 1206,
-              "height": 1886
+              "width": 3618,
+              "height": 5664
             }
           ]
         },
@@ -593,28 +593,28 @@
           "body": "사업 구조·제품 특성·생산 구분을 나눠 무엇이 매출을 구성하는지 확인합니다.",
           "screens": [
             {
-              "src": "/assets/selected-portfolio/images/pharmkpi-exec/bin-composition-business-content-aefbd2e02e39.webp",
+              "src": "/assets/selected-portfolio/images/pharmkpi-exec/bin-composition-business-content-167adf25ae9b.webp",
               "title": "사업 구조별 판매 구성",
               "caption": "매출구분·도매분류·CSO·현재 팀의 판매 구성을 비교합니다. 촬영용 합성 자료입니다.",
               "note": "검수 환경의 실제 화면에 촬영용 합성 응답을 넣어 본문만 촬영했습니다. 운영 계정이나 실제 거래처·금액을 사용하지 않았습니다.",
-              "width": 1223,
-              "height": 587
+              "width": 3714,
+              "height": 1791
             },
             {
-              "src": "/assets/selected-portfolio/images/pharmkpi-exec/bin-composition-product-content-2ea33724b1ce.webp",
+              "src": "/assets/selected-portfolio/images/pharmkpi-exec/bin-composition-product-content-20d41e37c146.webp",
               "title": "주요품목·약효군별 판매 구성",
               "caption": "주요품목과 약효군의 판매 비중을 비교합니다. 촬영용 합성 자료입니다.",
               "note": "검수 환경의 실제 화면에 촬영용 합성 응답을 넣어 본문만 촬영했습니다. 운영 계정이나 실제 거래처·금액을 사용하지 않았습니다.",
-              "width": 1223,
-              "height": 269
+              "width": 3714,
+              "height": 828
             },
             {
-              "src": "/assets/selected-portfolio/images/pharmkpi-exec/bin-composition-production-content-5ddf11ba5e20.webp",
+              "src": "/assets/selected-portfolio/images/pharmkpi-exec/bin-composition-production-content-8028fa0ed9a4.webp",
               "title": "제형·생산구분별 판매 구성",
               "caption": "제형과 생산구분의 판매 비중을 비교합니다. 촬영용 합성 자료입니다.",
               "note": "검수 환경의 실제 화면에 촬영용 합성 응답을 넣어 본문만 촬영했습니다. 운영 계정이나 실제 거래처·금액을 사용하지 않았습니다.",
-              "width": 1223,
-              "height": 269
+              "width": 3714,
+              "height": 828
             }
           ]
         },
@@ -623,36 +623,36 @@
           "body": "판매 추이, 품목별 거래처·담당자, 수금과 채권을 각각 더 깊게 조회합니다.",
           "screens": [
             {
-              "src": "/assets/selected-portfolio/images/pharmkpi-exec/bin-sales-detail-content-5b61b05fd18a.webp",
+              "src": "/assets/selected-portfolio/images/pharmkpi-exec/bin-sales-detail-content-fb6e10a55471.webp",
               "title": "판매 상세 — 추이와 비교",
               "caption": "일·월·연 판매 추이와 기간별 합계를 비교하는 판매 상세입니다. 촬영용 합성 자료입니다.",
               "note": "검수 환경의 실제 화면에 촬영용 합성 응답을 넣어 본문만 촬영했습니다. 운영 계정이나 실제 거래처·금액을 사용하지 않았습니다.",
-              "width": 1280,
-              "height": 683
+              "width": 3840,
+              "height": 2055
             },
             {
-              "src": "/assets/selected-portfolio/images/pharmkpi-exec/bin-item-detail-content-4e2131509dfb.webp",
+              "src": "/assets/selected-portfolio/images/pharmkpi-exec/bin-item-detail-content-9ec6009d6d5e.webp",
               "title": "품목 상세 — 거래처·담당자까지 연결",
               "caption": "품목을 선택해 판매 추이와 거래처·담당자별 내역을 확인합니다. 촬영용 합성 자료입니다.",
               "note": "검수 환경의 실제 화면에 촬영용 합성 응답을 넣어 본문만 촬영했습니다. 운영 계정이나 실제 거래처·금액을 사용하지 않았습니다.",
-              "width": 1280,
-              "height": 719
+              "width": 3840,
+              "height": 2157
             },
             {
-              "src": "/assets/selected-portfolio/images/pharmkpi-exec/bin-collection-detail-content-b4e1ffc97a04.webp",
+              "src": "/assets/selected-portfolio/images/pharmkpi-exec/bin-collection-detail-content-7d203524b568.webp",
               "title": "수금 상세",
               "caption": "기간별 수금 추이와 매출·수금 유형, 거래처별 누계를 확인합니다. 촬영용 합성 자료입니다.",
               "note": "검수 환경의 실제 화면에 촬영용 합성 응답을 넣어 본문만 촬영했습니다. 운영 계정이나 실제 거래처·금액을 사용하지 않았습니다.",
-              "width": 1280,
-              "height": 1178
+              "width": 3840,
+              "height": 3537
             },
             {
-              "src": "/assets/selected-portfolio/images/pharmkpi-exec/bin-receivables-detail-content-fa21650afc95.webp",
+              "src": "/assets/selected-portfolio/images/pharmkpi-exec/bin-receivables-detail-content-bd52a8386abb.webp",
               "title": "채권 상세",
               "caption": "채권 잔액과 경과 구간을 거래처 단위로 살펴보는 화면입니다. 촬영용 합성 자료입니다.",
               "note": "검수 환경의 실제 화면에 촬영용 합성 응답을 넣어 본문만 촬영했습니다. 운영 계정이나 실제 거래처·금액을 사용하지 않았습니다.",
-              "width": 1280,
-              "height": 1800
+              "width": 3840,
+              "height": 5406
             }
           ]
         }
@@ -700,44 +700,44 @@
           "body": "운영 종료된 CSO 제품의 실제 화면 부품에 가상 정산·검수 자료를 넣어 분리 렌더링했습니다. 검수·통계·정산 본문을 보여 주며 실제 거래처나 금액은 사용하지 않았습니다.",
           "screens": [
             {
-              "src": "/assets/selected-portfolio/images/csoweb/edi-review-detail-content-85048d32baff.webp",
+              "src": "/assets/selected-portfolio/images/csoweb/edi-review-detail-content-8d1a1de30dd0.webp",
               "title": "EDI 정산서 검토",
               "caption": "정산서 수량과 OCR 수량을 같은 행에서 비교하고, 차이·확인 완료·OCR 누락을 구분하는 검토표입니다.",
               "note": "운영 종료된 제품의 실제 화면 부품을 가상 정산·검수 자료로 분리 렌더링한 화면입니다. 실제 거래처·금액은 사용하지 않았습니다.",
-              "width": 2560,
-              "height": 1582
+              "width": 5120,
+              "height": 3164
             },
             {
-              "src": "/assets/selected-portfolio/images/csoweb/edi-review-workbench-content-cd9cbdff3bcc.webp",
+              "src": "/assets/selected-portfolio/images/csoweb/edi-review-workbench-content-2ba8b4208054.webp",
               "title": "리뷰 큐 검토표",
               "caption": "품목별 정산 수량과 OCR 판독값, 단가·합계금액·수수료를 한 표에서 검토하는 화면입니다.",
               "note": "운영 종료된 제품의 실제 화면 부품을 가상 정산·검수 자료로 분리 렌더링한 화면입니다. 실제 거래처·금액은 사용하지 않았습니다.",
-              "width": 2560,
-              "height": 1074
+              "width": 5120,
+              "height": 2148
             },
             {
-              "src": "/assets/selected-portfolio/images/csoweb/admin-stats-content-4629e730e90a.webp",
+              "src": "/assets/selected-portfolio/images/csoweb/admin-stats-content-b14201a4df67.webp",
               "title": "관리자 통계 분석",
               "caption": "가상 정산 자료로 월별 성장률, CSO별 제품 구성, 제품별 추이와 상위 업체·품목을 비교합니다.",
               "note": "운영 종료된 제품의 실제 화면 부품을 가상 정산·검수 자료로 분리 렌더링한 화면입니다. 실제 거래처·금액은 사용하지 않았습니다.",
-              "width": 2560,
-              "height": 2564
+              "width": 5120,
+              "height": 5128
             },
             {
-              "src": "/assets/selected-portfolio/images/csoweb/settlement-master-content-12d76f49f17b.webp",
+              "src": "/assets/selected-portfolio/images/csoweb/settlement-master-content-5a56f0761874.webp",
               "title": "정산서 마스터 조회",
               "caption": "전체 정산 자료의 수량·금액·수수료를 요약하고 거래처·CSO별 소계를 함께 조회합니다.",
               "note": "운영 종료된 제품의 실제 화면 부품을 가상 정산·검수 자료로 분리 렌더링한 화면입니다. 실제 거래처·금액은 사용하지 않았습니다.",
-              "width": 2560,
-              "height": 1678
+              "width": 5120,
+              "height": 3356
             },
             {
-              "src": "/assets/selected-portfolio/images/csoweb/member-settlement-content-687c29b0d952.webp",
+              "src": "/assets/selected-portfolio/images/csoweb/member-settlement-content-c5906d8287b1.webp",
               "title": "회원사 정산서 조회",
               "caption": "회원이 월별 정산 요약과 품목 상세, 거래처·CSO별 소계를 확인하는 화면입니다.",
               "note": "운영 종료된 제품의 실제 화면 부품을 가상 정산·검수 자료로 분리 렌더링한 화면입니다. 실제 거래처·금액은 사용하지 않았습니다.",
-              "width": 2560,
-              "height": 1802
+              "width": 5120,
+              "height": 3604
             }
           ]
         }
@@ -779,52 +779,52 @@
           "body": "현재 배포 빌드 원본을 읽기 전용으로 렌더링해 개요·차트·관계도·명세·검색·매핑 확인 본문을 촬영했습니다. 공개 구조 메타데이터를 사용하고 행 수는 예시 값으로 바꿨습니다.",
           "screens": [
             {
-              "src": "/assets/selected-portfolio/images/erp-spec/overview-content-cddff1507cbb.webp",
+              "src": "/assets/selected-portfolio/images/erp-spec/overview-content-082691bddcca.webp",
               "title": "UNION_ERP 개요",
               "caption": "기존 ERP의 테이블·컬럼 통계와 마이그레이션 우선순위 기준을 함께 보여 줍니다. 화면 탐색은 제외하고 통계와 우선순위 표를 끝까지 담았습니다.",
               "note": "현재 배포 빌드 원본을 읽기 전용으로 렌더링했습니다. 업무 데이터 조회·저장은 실행하지 않았고 테이블 행 수는 공개용 합성값입니다.",
-              "width": 2144,
-              "height": 2198
+              "width": 4288,
+              "height": 4396
             },
             {
-              "src": "/assets/selected-portfolio/images/erp-spec/volume-chart-content-487ee7e65f72.webp",
+              "src": "/assets/selected-portfolio/images/erp-spec/volume-chart-content-a96bc105dba0.webp",
               "title": "데이터 볼륨",
               "caption": "카테고리별 행 수를 막대로 비교하는 화면입니다. 모든 막대와 범례를 함께 보여 주며, 행 수는 공개용 합성값입니다.",
               "note": "현재 배포 빌드 원본을 읽기 전용으로 렌더링했습니다. 업무 데이터 조회·저장은 실행하지 않았고 테이블 행 수는 공개용 합성값입니다.",
-              "width": 2144,
-              "height": 2316
+              "width": 4288,
+              "height": 4632
             },
             {
-              "src": "/assets/selected-portfolio/images/erp-spec/category-erd-content-1d7ad4165ade.webp",
+              "src": "/assets/selected-portfolio/images/erp-spec/category-erd-content-2b4ed1a4e1a2.webp",
               "title": "카테고리 관계도",
               "caption": "수주·발주 카테고리의 역할·구성·요약과 PK 컬럼명으로 추정한 테이블 관계를 함께 보여 줍니다. 관계도는 실제 앱의 확대·이동 기능을 갖춘 원본 화면입니다.",
               "note": "현재 배포 빌드 원본을 읽기 전용으로 렌더링했습니다. 업무 데이터 조회·저장은 실행하지 않았고 테이블 행 수는 공개용 합성값입니다.",
-              "width": 2144,
-              "height": 3118
+              "width": 4288,
+              "height": 6236
             },
             {
-              "src": "/assets/selected-portfolio/images/erp-spec/table-spec-content-a955514216da.webp",
+              "src": "/assets/selected-portfolio/images/erp-spec/table-spec-content-e160a4e9cfc7.webp",
               "title": "테이블 상세 명세",
               "caption": "ORDER_MASTER 테이블의 전체 컬럼 30개와 타입·NULL 허용, 인덱스를 한 화면에 담았습니다. DDL 복사 조작부도 같은 본문에서 제공합니다.",
               "note": "현재 배포 빌드 원본을 읽기 전용으로 렌더링했습니다. 업무 데이터 조회·저장은 실행하지 않았고 테이블 행 수는 공개용 합성값입니다.",
-              "width": 2144,
-              "height": 3452
+              "width": 4288,
+              "height": 6904
             },
             {
-              "src": "/assets/selected-portfolio/images/erp-spec/column-search-content-07feb14e7b01.webp",
+              "src": "/assets/selected-portfolio/images/erp-spec/column-search-content-3b9cbf5c2398.webp",
               "title": "컬럼 검색",
               "caption": "ORDER_DATETIME을 검색해 해당 컬럼을 쓰는 테이블과 타입·NULL 허용 여부를 확인하는 화면입니다. 검색 조건과 결과 표를 함께 담았습니다.",
               "note": "현재 배포 빌드 원본을 읽기 전용으로 렌더링했습니다. 업무 데이터 조회·저장은 실행하지 않았고 테이블 행 수는 공개용 합성값입니다.",
-              "width": 2144,
-              "height": 1284
+              "width": 4288,
+              "height": 2568
             },
             {
-              "src": "/assets/selected-portfolio/images/erp-spec/mapping-checklist-content-3bfd6c574912.webp",
+              "src": "/assets/selected-portfolio/images/erp-spec/mapping-checklist-content-7c97d99d95bb.webp",
               "title": "매핑 체크리스트",
               "caption": "수주·발주 카테고리로 좁힌 뒤 테이블별 매핑 상태와 메모 입력란을 확인하는 화면입니다. 촬영용 상태·메모는 비어 있으며 저장은 실행하지 않았습니다.",
               "note": "현재 배포 빌드 원본을 읽기 전용으로 렌더링했습니다. 업무 데이터 조회·저장은 실행하지 않았고 테이블 행 수는 공개용 합성값입니다.",
-              "width": 2144,
-              "height": 1086
+              "width": 4288,
+              "height": 2172
             }
           ]
         }
@@ -911,52 +911,52 @@
           "body": "실제 제품 컴포넌트를 기존 검증용 합성 자료로 분리 렌더링해 결과·분석·설문 본문을 촬영했습니다. 운영 사용자나 팀의 결과가 아닙니다.",
           "screens": [
             {
-              "src": "/assets/selected-portfolio/images/team-pulse/archetype-poster-content-f9cc0581b671.webp",
+              "src": "/assets/selected-portfolio/images/team-pulse/archetype-poster-content-8de7872a046e.webp",
               "title": "결과 캐릭터 포스터",
               "caption": "문제해결 사고유형의 합성 점수로 대표축·보조축과 협업 질문을 정리한 결과 포스터입니다.",
               "note": "실제 제품 컴포넌트를 기존 검증용 합성 자료로 분리 렌더링한 화면입니다. 운영 사용자나 팀의 결과가 아닙니다.",
-              "width": 1792,
-              "height": 1612
+              "width": 3584,
+              "height": 3224
             },
             {
-              "src": "/assets/selected-portfolio/images/team-pulse/result-hub-content-082e1cbc0162.webp",
+              "src": "/assets/selected-portfolio/images/team-pulse/result-hub-content-d8afd661e563.webp",
               "title": "결과 허브",
               "caption": "검사 완료 현황과 다음 검사·전체 결과로 이어지는 행동을 한눈에 보여 줍니다.",
               "note": "실제 제품 컴포넌트를 기존 검증용 합성 자료로 분리 렌더링한 화면입니다. 운영 사용자나 팀의 결과가 아닙니다.",
-              "width": 1792,
-              "height": 1360
+              "width": 3584,
+              "height": 2720
             },
             {
-              "src": "/assets/selected-portfolio/images/team-pulse/score-state-content-c575ba3b67d8.webp",
+              "src": "/assets/selected-portfolio/images/team-pulse/score-state-content-900ce0e95d66.webp",
               "title": "점수와 축별 해석",
               "caption": "현재 응답의 대표축·보조축과 결과 점수를 원형 그래프로 보여 줍니다.",
               "note": "실제 제품 컴포넌트를 기존 검증용 합성 자료로 분리 렌더링한 화면입니다. 운영 사용자나 팀의 결과가 아닙니다.",
-              "width": 1792,
-              "height": 1096
+              "width": 3584,
+              "height": 2192
             },
             {
-              "src": "/assets/selected-portfolio/images/team-pulse/ai-analysis-content-febe8e163ccf.webp",
+              "src": "/assets/selected-portfolio/images/team-pulse/ai-analysis-content-6d2909b6ea35.webp",
               "title": "AI 분석",
               "caption": "합성 점수의 예시 해석과 함께 다음 행동·협업 질문을 읽는 화면입니다.",
               "note": "실제 제품 컴포넌트를 기존 검증용 합성 자료로 분리 렌더링한 화면입니다. 운영 사용자나 팀의 결과가 아닙니다.",
-              "width": 1792,
-              "height": 1220
+              "width": 3584,
+              "height": 2440
             },
             {
-              "src": "/assets/selected-portfolio/images/team-pulse/team-aggregate-content-f62d32a4a59f.webp",
+              "src": "/assets/selected-portfolio/images/team-pulse/team-aggregate-content-3a8bf75d9e15.webp",
               "title": "팀 판독",
               "caption": "가상 3명 팀의 집계에서 먼저 볼 흐름, 강점·주의점·실행 질문과 분포를 함께 보여 줍니다.",
               "note": "실제 제품 컴포넌트를 기존 검증용 합성 자료로 분리 렌더링한 화면입니다. 운영 사용자나 팀의 결과가 아닙니다.",
-              "width": 1792,
-              "height": 4124
+              "width": 3584,
+              "height": 8248
             },
             {
-              "src": "/assets/selected-portfolio/images/team-pulse/survey-flow-content-b72ea987c950.webp",
+              "src": "/assets/selected-portfolio/images/team-pulse/survey-flow-content-8cae1ffd0a41.webp",
               "title": "검사 진행",
               "caption": "문항과 응답 버튼, 진행률과 현재 대표축을 함께 보여 주는 검사 진행 화면입니다.",
               "note": "실제 제품 컴포넌트를 기존 검증용 합성 자료로 분리 렌더링한 화면입니다. 운영 사용자나 팀의 결과가 아닙니다.",
-              "width": 1792,
-              "height": 1728
+              "width": 3584,
+              "height": 3456
             }
           ]
         }
@@ -1188,36 +1188,36 @@
           "body": "실제 훅·커밋 전 검사의 명령 출력과 현재 지침·폴더 구성을 읽기 전용 터미널 형태로 촬영했습니다. 비밀 값 감지 확인에는 가짜 토큰만 사용했습니다.",
           "screens": [
             {
-              "src": "/assets/selected-portfolio/images/claude-dotfiles/hook-guard-content-558b3e03bbc5.webp",
+              "src": "/assets/selected-portfolio/images/claude-dotfiles/hook-guard-content-c3f0edce3d9b.webp",
               "title": "에이전트 명령 가드 훅",
               "caption": "작업 트리 생성과 직접 빌드는 정해 둔 진입점을 안내하며 차단하고, 조회 명령은 통과시키는 실제 훅 응답입니다.",
               "note": "화면이 없는 도구라 실제 명령 출력과 현재 원본 파일을 읽기 전용 터미널 형태로 렌더링해 촬영했습니다. 비밀 값 검사는 가짜 토큰만 사용했습니다.",
-              "width": 2640,
-              "height": 1124
+              "width": 5280,
+              "height": 2248
             },
             {
-              "src": "/assets/selected-portfolio/images/claude-dotfiles/precommit-secret-content-22162fc4dcd8.webp",
+              "src": "/assets/selected-portfolio/images/claude-dotfiles/precommit-secret-content-2717f8d01df9.webp",
               "title": "커밋 전 서식·비밀 값 검사",
               "caption": "독립 임시 저장소에 가짜 토큰을 넣고 실제 커밋 전 검사를 실행했습니다. 비밀 값 후보를 감지해 커밋을 막는 결과입니다.",
               "note": "화면이 없는 도구라 실제 명령 출력과 현재 원본 파일을 읽기 전용 터미널 형태로 렌더링해 촬영했습니다. 비밀 값 검사는 가짜 토큰만 사용했습니다.",
-              "width": 2640,
-              "height": 490
+              "width": 5280,
+              "height": 980
             },
             {
-              "src": "/assets/selected-portfolio/images/claude-dotfiles/common-rules-content-784b00481e53.webp",
+              "src": "/assets/selected-portfolio/images/claude-dotfiles/common-rules-content-8b82a3a1b63f.webp",
               "title": "공통 지침",
               "caption": "개발·검사·배포·백업과 도구 적용 기준을 연결하는 현재 공통 지침입니다. 적용 원칙과 담당 문서 연결을 한 구간으로 담았습니다.",
               "note": "화면이 없는 도구라 실제 명령 출력과 현재 원본 파일을 읽기 전용 터미널 형태로 렌더링해 촬영했습니다. 비밀 값 검사는 가짜 토큰만 사용했습니다.",
-              "width": 2640,
-              "height": 2918
+              "width": 5280,
+              "height": 5836
             },
             {
-              "src": "/assets/selected-portfolio/images/claude-dotfiles/rules-layout-content-a53ab9c0d444.webp",
+              "src": "/assets/selected-portfolio/images/claude-dotfiles/rules-layout-content-4f3c074a62a9.webp",
               "title": "규칙·훅·에이전트·스킬 구성",
               "caption": "지침·정책·참조 문서와 실행 훅·자체 스킬을 관리하는 실제 폴더 구성입니다. 파일 이름을 읽을 수 있도록 본문 폭에 맞췄습니다.",
               "note": "화면이 없는 도구라 실제 명령 출력과 현재 원본 파일을 읽기 전용 터미널 형태로 렌더링해 촬영했습니다. 비밀 값 검사는 가짜 토큰만 사용했습니다.",
-              "width": 2640,
-              "height": 1598
+              "width": 5280,
+              "height": 3304
             }
           ]
         }
@@ -1259,44 +1259,44 @@
           "body": "현재 공개 문서의 방법·기준·사례는 탐색 메뉴를 제외한 본문으로 촬영했습니다. 측정 양식은 실제 원본 파일을 읽기 전용 터미널 형태로 보여 줍니다.",
           "screens": [
             {
-              "src": "/assets/selected-portfolio/images/har-eval/overview-content-14b237bcbe9f.webp",
+              "src": "/assets/selected-portfolio/images/har-eval/overview-content-85e1c57412ad.webp",
               "title": "har_eval 개요",
               "caption": "도구 도입을 결정할 질문과 평가 기준, 현재 방식으로 충분한지 확인하는 원칙을 보여 줍니다.",
               "note": "공개된 실제 문서의 본문을 촬영했습니다. 탐색 메뉴를 제외하고 설명·표가 끝나는 지점에서 나눴습니다.",
-              "width": 1664,
-              "height": 1892
+              "width": 3328,
+              "height": 3784
             },
             {
-              "src": "/assets/selected-portfolio/images/har-eval/seven-steps-content-fcc324a70006.webp",
+              "src": "/assets/selected-portfolio/images/har-eval/seven-steps-content-cd90163abff2.webp",
               "title": "7단계 요약과 산출물",
               "caption": "질문 정의부터 현재 방식 확인, 대안 비교, 측정, 최종 결정까지 일곱 단계를 끊김 없이 보여 줍니다.",
               "note": "공개된 실제 문서의 본문을 촬영했습니다. 탐색 메뉴를 제외하고 설명·표가 끝나는 지점에서 나눴습니다.",
-              "width": 1664,
-              "height": 2674
+              "width": 3328,
+              "height": 5348
             },
             {
-              "src": "/assets/selected-portfolio/images/har-eval/guardrails-content-fd83353b370c.webp",
+              "src": "/assets/selected-portfolio/images/har-eval/guardrails-content-fdb6b5cebb5e.webp",
               "title": "가드레일 H1–H10",
               "caption": "표본 수·측정 여부·비교 조건을 다루는 열 가지 기준과 각 기준을 둔 이유를 표 전체로 보여 줍니다.",
               "note": "공개된 실제 문서의 본문을 촬영했습니다. 탐색 메뉴를 제외하고 설명·표가 끝나는 지점에서 나눴습니다.",
-              "width": 1664,
-              "height": 1586
+              "width": 3328,
+              "height": 3172
             },
             {
-              "src": "/assets/selected-portfolio/images/har-eval/examples-content-32ed5c011121.webp",
+              "src": "/assets/selected-portfolio/images/har-eval/examples-content-7954c908ae94.webp",
               "title": "실전 사례",
               "caption": "도구를 만들지 않기로 한 사례와 재측정 후 유지로 판단을 바꾼 사례를 비교합니다. 각 사례의 판단 근거와 측정 범위를 함께 읽을 수 있습니다.",
               "note": "공개된 실제 문서의 본문을 촬영했습니다. 탐색 메뉴를 제외하고 설명·표가 끝나는 지점에서 나눴습니다.",
-              "width": 1664,
-              "height": 2948
+              "width": 3328,
+              "height": 5896
             },
             {
-              "src": "/assets/selected-portfolio/images/har-eval/templates-content-80f81d51f4fe.webp",
+              "src": "/assets/selected-portfolio/images/har-eval/templates-content-7060a082e582.webp",
               "title": "평가 템플릿",
               "caption": "실제 측정 양식의 비교 대상·모델 고정·판정 기준과 결과 기록 항목을 끝까지 담았습니다.",
               "note": "화면이 없는 도구라 실제 명령 출력과 현재 원본 파일을 읽기 전용 터미널 형태로 렌더링해 촬영했습니다. 비밀 값 검사는 가짜 토큰만 사용했습니다.",
-              "width": 2640,
-              "height": 2338
+              "width": 5280,
+              "height": 4676
             }
           ]
         }

@@ -101,6 +101,10 @@ for (const entry of manifest.entries) {
       `촬영 출처가 없습니다: ${entry.originalSrc}`,
     );
     fail(
+      capture.width >= 3000 && capture.source.nativeScale >= 2,
+      `촬영 원본의 해상도가 부족합니다: ${entry.originalSrc}`,
+    );
+    fail(
       capture.verification?.reviewed === true &&
         capture.verification?.sidebarExcluded === true &&
         Array.isArray(capture.verification?.errors) &&
@@ -235,7 +239,7 @@ const publicManifest = {
           height,
           sha256,
           source: Object.fromEntries(
-            ["kind", "route", "revision"]
+            ["kind", "route", "revision", "nativeScale"]
               .filter((key) => source[key])
               .map((key) => [key, source[key]]),
           ),

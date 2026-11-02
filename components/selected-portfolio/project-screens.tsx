@@ -14,9 +14,12 @@ export function ProjectScreens({
 }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const [active, setActive] = useState<ProjectScreen | null>(null);
+  const [originalSize, setOriginalSize] = useState(false);
   const open = (screen: ProjectScreen) => {
+    setOriginalSize(false);
     setActive(screen);
     dialog.current?.showModal();
+    if (dialog.current) dialog.current.scrollTop = 0;
   };
   return (
     <div className="project-evidence">
@@ -64,22 +67,39 @@ export function ProjectScreens({
       >
         <div className="evidence-dialog-head">
           <strong>{active?.title}</strong>
-          <button
-            type="button"
-            onClick={() => dialog.current?.close()}
-            autoFocus
-          >
-            닫기 ×
-          </button>
+          <div className="evidence-dialog-actions">
+            <button
+              type="button"
+              aria-pressed={originalSize}
+              onClick={() => setOriginalSize((value) => !value)}
+            >
+              {originalSize ? "화면에 맞춤" : "원본 크기"}
+            </button>
+            <button
+              type="button"
+              onClick={() => dialog.current?.close()}
+              autoFocus
+            >
+              닫기 ×
+            </button>
+          </div>
         </div>
         {active && (
           <>
-            <img
-              src={sitePath(active.src)}
-              alt={active.title}
-              width={active.width}
-              height={active.height}
-            />
+            <div
+              className="evidence-image-viewport"
+              data-original={originalSize || undefined}
+              tabIndex={originalSize ? 0 : undefined}
+              role={originalSize ? "region" : undefined}
+              aria-label={originalSize ? "원본 화면 스크롤 영역" : undefined}
+            >
+              <img
+                src={sitePath(active.src)}
+                alt={active.title}
+                width={active.width}
+                height={active.height}
+              />
+            </div>
             <p>{active.caption}</p>
             {active.note && <p className="evidence-note">{active.note}</p>}
           </>

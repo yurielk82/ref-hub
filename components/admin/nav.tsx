@@ -38,14 +38,11 @@ export function AdminNav({ canManage }: { canManage: boolean }) {
           <button
             type="button"
             className="admin-theme-toggle"
-            aria-label={dark ? "밝은 화면으로 전환" : "어두운 화면으로 전환"}
+            aria-label="화면 밝기 전환"
             onClick={() => setTheme(dark ? "light" : "dark")}
           >
-            {dark ? (
-              <Sun size={17} aria-hidden />
-            ) : (
-              <Moon size={17} aria-hidden />
-            )}
+            <Sun className="admin-theme-sun" size={17} aria-hidden />
+            <Moon className="admin-theme-moon" size={17} aria-hidden />
           </button>
           {canManage && (
             <form action="/auth/logout" method="post">

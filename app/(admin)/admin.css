@@ -177,6 +177,13 @@
 .admin-theme-toggle:hover {
   background: var(--wash);
 }
+.admin-theme-sun,
+.dark .admin-theme-moon {
+  display: none;
+}
+.dark .admin-theme-sun {
+  display: block;
+}
 .admin-logout {
   padding: 6px 10px;
   background: transparent;

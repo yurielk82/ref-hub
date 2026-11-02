@@ -513,7 +513,7 @@ export function Portfolio({
         </div>
         {project && detail && (
           <ProjectDetail
-            key={project.id}
+            key={`detail/${project.id}`}
             project={project}
             projects={projects}
             index={projects.indexOf(project)}

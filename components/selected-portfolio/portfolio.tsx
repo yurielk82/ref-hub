@@ -13,6 +13,22 @@ import type {
   PublicLink,
 } from "@/lib/selected-portfolio/types";
 import { sitePath } from "@/lib/selected-portfolio/content";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import {
+  InlineEditingProvider,
+  EditableCopy,
+  useCopyEditing,
+  useProjectCopy,
+  type OwnerEditing,
+} from "./editable-copy";
+import { OwnerBar } from "./owner-bar";
+import { ProfilePage } from "./profile-pages";
+import {
+  ownerHref,
+  type OwnerSection,
+  type PortfolioHome,
+} from "@/lib/selected-portfolio/workspace";
 import { ThemeToggle } from "./theme-toggle";
 import { ProjectArt } from "./project-art";
 import {
@@ -40,13 +56,23 @@ function Links({ links }: { links: PublicLink[] }) {
   );
 }
 function ProjectMetadata({ project }: { project: Project }) {
+  const copy = useProjectCopy(project.id);
+  const editing = useCopyEditing();
   return (
     <div className="detail-meta">
-      <p>{project.role}</p>
+      <EditableCopy field={copy?.role ?? ""} as="p" multiline>
+        {project.role}
+      </EditableCopy>
       <ul className="tags">
-        {project.stack.map((name) => (
-          <li key={name}>{name}</li>
-        ))}
+        {editing?.editing ? (
+          <li className="editable-tags">
+            <EditableCopy field={copy?.stack ?? ""} multiline>
+              {project.stack.join("\n")}
+            </EditableCopy>
+          </li>
+        ) : (
+          project.stack.map((name) => <li key={name}>{name}</li>)
+        )}
       </ul>
       <Links links={project.links} />
     </div>
@@ -72,16 +98,41 @@ function Accent({ text, accent }: { text: string; accent: string }) {
     </>
   );
 }
-export function Portfolio({
-  data,
-  trackPath = "",
-  ownerTools,
-}: {
+export type OwnerWorkspace = { section: OwnerSection; content: ReactNode };
+type PortfolioProps = {
   data: PortfolioData;
   trackPath?: string;
-  ownerTools?: ReactNode;
-}) {
+  owner?: OwnerEditing | null;
+  workspace?: OwnerWorkspace | null;
+  initialEditing?: boolean;
+};
+export function Portfolio(props: PortfolioProps) {
+  return (
+    <InlineEditingProvider
+      owner={props.owner ?? null}
+      track={props.trackPath === "/ax" ? "ax" : "sales"}
+      initialEditing={props.initialEditing}
+    >
+      <PortfolioFrame {...props} />
+    </InlineEditingProvider>
+  );
+}
+function PortfolioFrame({
+  data,
+  trackPath = "",
+  owner = null,
+  workspace = null,
+}: PortfolioProps) {
+  const router = useRouter();
+  const home: PortfolioHome = trackPath === "/ax" ? "/ax" : "/";
+  const editing = useCopyEditing();
   const { profile, projects } = data;
+  const projectKeys = projects
+    .flatMap((project) => [
+      `project/${project.id}`,
+      `project/${project.id}/details`,
+    ])
+    .join(",");
   const first = "about";
   const [selected, setSelected] = useState(first);
   const [openProject, setOpenProject] = useState<string | null>(null);
@@ -108,9 +159,7 @@ export function Portfolio({
   useEffect(() => {
     const valid = (key: string) =>
       ["about", "skills", "writing"].includes(key) ||
-      projects.some(
-        (p) => key === `project/${p.id}` || key === `project/${p.id}/details`,
-      );
+      projectKeys.split(",").includes(key);
     const sync = () => {
       let key: string;
       try {
@@ -132,7 +181,12 @@ export function Portfolio({
       window.removeEventListener("hashchange", sync);
       window.removeEventListener("popstate", sync);
     };
-  }, [first, projects]);
+  }, [first, projectKeys]);
+  useEffect(() => {
+    if (!workspace) return;
+    main.current?.scrollTo(0, 0);
+    main.current?.focus({ preventScroll: true });
+  }, [workspace?.section]);
   useEffect(() => {
     root.current
       ?.querySelector<HTMLAnchorElement>(".browser-choices a[aria-current]")
@@ -143,7 +197,8 @@ export function Portfolio({
     }
   }, [selected, navigationOpen]);
   const select = (key: string) => {
-    if (selected !== key) window.history.pushState(null, "", `#${key}`);
+    if (workspace) router.push(`${home}#${key}`, { scroll: false });
+    else if (selected !== key) window.history.pushState(null, "", `#${key}`);
     setSelected(key);
     setOpenProject(key.endsWith("/details") ? key.split("/")[1] : null);
     setActiveSection(-1);
@@ -152,7 +207,7 @@ export function Portfolio({
     focusMain.current = true;
     main.current?.scrollTo(0, 0);
   };
-  const choose = (event: MouseEvent<HTMLAnchorElement>, key: string) => {
+  const choose = (event: MouseEvent<HTMLElement>, key: string) => {
     if (
       event.button !== 0 ||
       event.metaKey ||
@@ -188,13 +243,15 @@ export function Portfolio({
       selected === `project/${p.id}` || selected === `project/${p.id}/details`,
   );
   const detail = selected.endsWith("/details");
+  const copy = useProjectCopy(project?.id ?? "");
+  const Cover = editing?.editing ? "div" : "a";
   const current = (key: string) =>
-    selected === key || selected === `${key}/details`
+    !workspace && (selected === key || selected === `${key}/details`)
       ? ("page" as const)
       : undefined;
   return (
     <div
-      className="project-browser"
+      className={`project-browser${owner ? " has-owner-bar" : ""}`}
       ref={root}
       onKeyDown={(event) => {
         if (event.key === "Escape" && navigationOpen) {
@@ -203,6 +260,7 @@ export function Portfolio({
         }
       }}
     >
+      {owner && <OwnerBar home={home} section={workspace?.section ?? null} />}
       <header className="browser-mobile-head">
         <a href="#about" onClick={(event) => choose(event, first)}>
           {profile.name}
@@ -255,21 +313,17 @@ export function Portfolio({
                   {profile.name}
                 </a>
               </h1>
-              <p>{profile.role}</p>
+              <EditableCopy field="hero.role" as="p">
+                {profile.role}
+              </EditableCopy>
             </div>
             <ThemeToggle />
           </div>
-          <p className="browser-fields">{profile.fields.join(" · ")}</p>
-          {ownerTools || (
-            <a
-              className="owner-entry"
-              href="https://ref.dvsharp.com/login"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              관리 · 로그인 ↗
-            </a>
-          )}
+          <p className="browser-fields">
+            <EditableCopy field="selected.profile.fields" multiline>
+              {profile.fields.join(" · ")}
+            </EditableCopy>
+          </p>
         </div>
         <nav className="browser-choices" aria-label="프로젝트와 목차">
           <ul className="project-tree">
@@ -367,6 +421,15 @@ export function Portfolio({
           </a>
         </nav>
         <Links links={profile.links} />
+        {!owner && (
+          <Link
+            className="owner-login-entry"
+            href={ownerHref(home, "login")}
+            scroll={false}
+          >
+            로그인
+          </Link>
+        )}
         {data.site.example && (
           <p className="template-note">
             샘플 포트폴리오
@@ -378,140 +441,109 @@ export function Portfolio({
       <main
         ref={main}
         id="main-content"
-        className={`browser-main${detail ? " is-detail" : ""}`}
+        className={`browser-main${detail && !workspace ? " is-detail" : ""}`}
         tabIndex={-1}
         inert={compact && navigationOpen}
       >
-        <div
-          key={project?.id || selected}
-          className={`scene${project ? " project-stage" : ""}`}
-          hidden={detail}
-          aria-label={project?.name || "프로필"}
-        >
-          {project ? (
-            <>
-              <a
-                className="stage-cover-link"
-                href={sitePath(`${trackPath}/projects/${project.id}/`)}
-                onClick={(event) =>
-                  choose(event, `project/${project.id}/details`)
-                }
-              >
-                <header className="stage-head">
-                  <h2 className="stage-title">
-                    <Accent text={project.title} accent={project.accent} />
-                  </h2>
-                  <p className="stage-summary">{project.summary}</p>
-                  <p className="stage-role">{project.role}</p>
-                  <span className="stage-go">
-                    만든 과정 보기 <span aria-hidden="true">→</span>
-                  </span>
-                </header>
-                <ProjectArt project={project} />
-              </a>
-              <footer className="stage-foot">
-                <div>
-                  <p className="stage-state">
-                    {project.category} · {project.period}
-                  </p>
-                  <p className="art-disclosure">
-                    업무 흐름을 표현한 그림 · 실제 화면은 만든 과정에서 확인할
-                    수 있습니다.
-                  </p>
-                  <ul className="tags">
-                    {project.stack.map((name) => (
-                      <li key={name}>{name}</li>
-                    ))}
-                  </ul>
-                </div>
-                <Links links={project.links} />
-              </footer>
-            </>
-          ) : selected === "skills" ? (
-            <section className="text-page">
-              <p className="eyebrow">TOOLS & PRACTICE</p>
-              <h2>기술 스택</h2>
-              <p className="page-intro">
-                직접 사용한 기술과, 그 기술로 해 본 일입니다.
-              </p>
-              {data.skills.length ? (
-                <div className="skills-grid">
-                  {data.skills.map((skill) => (
-                    <article key={skill.name}>
-                      <h3>{skill.name}</h3>
-                      <p>{skill.usage}</p>
-                    </article>
-                  ))}
-                </div>
-              ) : (
-                <p className="empty-state">아직 등록한 기술이 없습니다.</p>
-              )}
-            </section>
-          ) : selected === "writing" ? (
-            <section className="text-page">
-              <p className="eyebrow">NOTES & QUESTIONS</p>
-              <h2>글과 기록</h2>
-              <p className="page-intro">
-                만들면서 만난 문제와 그 문제를 풀어 간 기록입니다.
-              </p>
-              {data.writing.length ? (
-                <div className="writing-list">
-                  {data.writing.map((post) => (
-                    <article key={post.url}>
-                      <a
-                        href={post.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <h3>{post.title} ↗</h3>
-                        <p>{post.summary}</p>
-                      </a>
-                    </article>
-                  ))}
-                </div>
-              ) : (
-                <p className="empty-state">아직 등록한 글이 없습니다.</p>
-              )}
-            </section>
-          ) : (
-            <section className="text-page">
-              <p className="eyebrow">ABOUT ME</p>
-              <h2>{profile.name}</h2>
-              <p className="about-intro">{profile.intro}</p>
-              <Links links={profile.links} />
-              {projects[0] && (
-                <a
-                  className="stage-go about-project-entry"
-                  href="#project/kpi"
-                  onClick={(e) => choose(e, `project/${projects[0].id}`)}
+        {workspace ? (
+          <div className="owner-workspace">{workspace.content}</div>
+        ) : (
+          <div
+            key={project?.id || selected}
+            className={`scene${project ? " project-stage" : ""}`}
+            hidden={detail}
+            aria-label={project?.name || "프로필"}
+          >
+            {project ? (
+              <>
+                <Cover
+                  className="stage-cover-link"
+                  {...(!editing?.editing
+                    ? { href: sitePath(`${trackPath}/projects/${project.id}/`) }
+                    : {})}
+                  onClick={(event: MouseEvent<HTMLElement>) => {
+                    if (!editing?.editing)
+                      choose(event, `project/${project.id}/details`);
+                  }}
                 >
-                  대표 프로젝트 KPI 보기 <span aria-hidden="true">→</span>
-                </a>
-              )}
-              {[
-                { name: "경험", rows: profile.experiences },
-                { name: "교육", rows: profile.education },
-              ].map(
-                (group) =>
-                  group.rows.length > 0 && (
-                    <section className="record-group" key={group.name}>
-                      <h3>{group.name}</h3>
-                      {group.rows.map((row, i) => (
-                        <article key={i}>
-                          <span className="num">{row.period}</span>
-                          <div>
-                            <h4>{row.title}</h4>
-                            <p>{row.description}</p>
-                          </div>
-                        </article>
-                      ))}
-                    </section>
-                  ),
-              )}
-            </section>
-          )}
-        </div>
-        {project && detail && (
+                  <header className="stage-head">
+                    <h2 className="stage-title">
+                      {editing?.editing ? (
+                        <EditableCopy field={copy?.title ?? ""} multiline>
+                          {project.title}
+                        </EditableCopy>
+                      ) : (
+                        <Accent text={project.title} accent={project.accent} />
+                      )}
+                    </h2>
+                    <EditableCopy
+                      field={copy?.summary ?? ""}
+                      as="p"
+                      className="stage-summary"
+                      multiline
+                    >
+                      {project.summary}
+                    </EditableCopy>
+                    <EditableCopy
+                      field={copy?.role ?? ""}
+                      as="p"
+                      className="stage-role"
+                      multiline
+                    >
+                      {project.role}
+                    </EditableCopy>
+                    <span className="stage-go">
+                      만든 과정 보기 <span aria-hidden="true">→</span>
+                    </span>
+                  </header>
+                  <ProjectArt project={project} />
+                </Cover>
+                <footer className="stage-foot">
+                  <div>
+                    <p className="stage-state">
+                      <EditableCopy field={copy?.category ?? ""}>
+                        {project.category}
+                      </EditableCopy>{" "}
+                      ·{" "}
+                      <EditableCopy field={copy?.period ?? ""}>
+                        {project.period}
+                      </EditableCopy>
+                    </p>
+                    <p className="art-disclosure">
+                      업무 흐름을 표현한 그림 · 실제 화면은 만든 과정에서 확인할
+                      수 있습니다.
+                    </p>
+                    <ul className="tags">
+                      {editing?.editing ? (
+                        <li className="editable-tags">
+                          <EditableCopy field={copy?.stack ?? ""} multiline>
+                            {project.stack.join("\n")}
+                          </EditableCopy>
+                        </li>
+                      ) : (
+                        project.stack.map((name) => <li key={name}>{name}</li>)
+                      )}
+                    </ul>
+                  </div>
+                  <Links links={project.links} />
+                </footer>
+              </>
+            ) : (
+              <ProfilePage
+                page={
+                  selected === "skills"
+                    ? "skills"
+                    : selected === "writing"
+                      ? "writing"
+                      : "about"
+                }
+                data={data}
+                onProjectSelect={(id) => select(`project/${id}/details`)}
+              />
+            )}
+          </div>
+        )}
+        {project && detail && !workspace && (
           <ProjectDetail
             key={`detail/${project.id}`}
             project={project}

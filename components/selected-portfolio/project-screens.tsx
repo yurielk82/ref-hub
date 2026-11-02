@@ -3,8 +3,15 @@
 import { useRef, useState } from "react";
 import type { ProjectScreen } from "@/lib/selected-portfolio/types";
 import { sitePath } from "@/lib/selected-portfolio/content";
+import { EditableCopy } from "./editable-copy";
 
-export function ProjectScreens({ screens }: { screens: ProjectScreen[] }) {
+export function ProjectScreens({
+  screens,
+  copyFields,
+}: {
+  screens: ProjectScreen[];
+  copyFields?: { title: string; caption: string }[];
+}) {
   const dialog = useRef<HTMLDialogElement>(null);
   const [active, setActive] = useState<ProjectScreen | null>(null);
   const open = (screen: ProjectScreen) => {
@@ -13,7 +20,7 @@ export function ProjectScreens({ screens }: { screens: ProjectScreen[] }) {
   };
   return (
     <div className="project-evidence">
-      {screens.map((screen) => (
+      {screens.map((screen, index) => (
         <figure key={screen.src}>
           <button
             type="button"
@@ -31,8 +38,18 @@ export function ProjectScreens({ screens }: { screens: ProjectScreen[] }) {
             <span>화면 확대 ↗</span>
           </button>
           <figcaption>
-            <b>{screen.title}</b>
-            <p>{screen.caption}</p>
+            <b>
+              <EditableCopy field={copyFields?.[index]?.title ?? ""}>
+                {screen.title}
+              </EditableCopy>
+            </b>
+            <EditableCopy
+              field={copyFields?.[index]?.caption ?? ""}
+              as="p"
+              multiline
+            >
+              {screen.caption}
+            </EditableCopy>
             {screen.note && <p className="evidence-note">{screen.note}</p>}
           </figcaption>
         </figure>

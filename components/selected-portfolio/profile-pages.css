@@ -1,0 +1,273 @@
+.profile-page {
+  width: 100%;
+  max-width: 1120px;
+  margin-inline: auto;
+  padding-block: 12px 60px;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+.profile-page :is(h2, h3, h4, p) {
+  margin: 0;
+}
+.profile-page h2 {
+  font-size: clamp(32px, 3.4vw, 50px);
+  font-weight: 750;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+.profile-page h3 {
+  font-size: 22px;
+  font-weight: 750;
+  line-height: 1.4;
+  letter-spacing: -0.025em;
+}
+.profile-page h4 {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.55;
+  letter-spacing: -0.015em;
+}
+.profile-page p {
+  max-width: 72ch;
+  font-size: 15px;
+  line-height: 1.85;
+  white-space: pre-line;
+}
+.profile-overview {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(270px, 0.85fr);
+  gap: clamp(32px, 4vw, 64px);
+  padding-bottom: 44px;
+  border-bottom: 1px solid var(--line);
+}
+.profile-page .profile-role {
+  margin-top: 16px;
+  font-size: 20px;
+  font-weight: 650;
+  color: var(--accent);
+}
+.profile-page .profile-summary {
+  margin-top: 22px;
+  font-size: clamp(17px, 1.55vw, 20px);
+  line-height: 1.8;
+  letter-spacing: -0.015em;
+}
+.profile-career {
+  align-self: start;
+  padding-top: 8px;
+}
+.profile-career > h3 {
+  font-size: 16px;
+}
+.profile-career article {
+  margin-top: 22px;
+}
+.profile-career-period {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--ink-2);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.6;
+}
+.profile-career h4 {
+  font-size: 18px;
+}
+.profile-career p {
+  margin-top: 12px;
+  color: var(--ink-2);
+  font-size: 14px;
+}
+.profile-work,
+.profile-approach,
+.profile-education {
+  margin-top: 42px;
+}
+.profile-section-heading {
+  margin-bottom: 22px;
+}
+.profile-section-heading p,
+.profile-page-heading > p {
+  margin-top: 12px;
+  color: var(--ink-2);
+}
+.profile-work-row,
+.profile-tool-row {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.8fr) minmax(0, 2fr);
+  gap: clamp(24px, 3vw, 48px);
+  padding-block: 26px;
+  border-top: 1px solid var(--line);
+}
+.profile-work-row > div > p,
+.profile-tool-row > div > p {
+  color: var(--ink-2);
+}
+.profile-case-links,
+.profile-public-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  padding: 0;
+  margin: 14px 0 0;
+  list-style: none;
+}
+.profile-case-links li,
+.profile-public-links li {
+  min-width: 0;
+}
+.profile-case-links a,
+.profile-public-links a,
+.profile-record-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 7px;
+  min-height: 36px;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.6;
+  text-decoration: none;
+  text-underline-offset: 4px;
+}
+.profile-case-links a:hover,
+.profile-public-links a:hover,
+.profile-record-link:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+.profile-case-links svg,
+.profile-public-links svg,
+.profile-record-link svg {
+  flex-shrink: 0;
+}
+.profile-approach-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  margin-top: 24px;
+}
+.profile-approach-list article {
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.profile-approach-list h4 {
+  font-size: 16px;
+}
+.profile-approach-list p {
+  margin-top: 12px;
+  color: var(--ink-2);
+  font-size: 14px;
+}
+.profile-page-heading {
+  padding-bottom: 32px;
+}
+.profile-tools .profile-tool-row {
+  grid-template-columns: minmax(190px, 0.95fr) minmax(0, 1.85fr);
+}
+.profile-tool-name h3 {
+  font-size: 19px;
+  line-height: 1.5;
+}
+.profile-tool-category,
+.profile-record-category {
+  display: block;
+  margin-top: 8px;
+  color: var(--ink-2);
+  font-size: 12px;
+  line-height: 1.7;
+}
+.profile-writing-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 32px;
+  align-items: start;
+  padding-block: 28px;
+  border-top: 1px solid var(--line);
+}
+.profile-writing-row h3 {
+  font-size: 22px;
+}
+.profile-writing-row p {
+  margin-top: 14px;
+  color: var(--ink-2);
+}
+.profile-record-link {
+  margin-top: 2px;
+  white-space: nowrap;
+}
+@media (max-width: 1100px) {
+  .profile-overview {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+    padding-bottom: 30px;
+  }
+  .profile-career {
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+  }
+  .profile-career article {
+    margin-top: 16px;
+  }
+  .profile-career p {
+    max-width: 70ch;
+  }
+  .profile-approach-list {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+  .profile-approach-list p {
+    max-width: 72ch;
+  }
+}
+@media (max-width: 600px) {
+  .profile-page {
+    padding-block: 6px 36px;
+  }
+  .profile-page h2 {
+    font-size: 32px;
+  }
+  .profile-page h3 {
+    font-size: 20px;
+  }
+  .profile-page .profile-role {
+    margin-top: 12px;
+    font-size: 18px;
+  }
+  .profile-page .profile-summary {
+    margin-top: 18px;
+    font-size: 17px;
+  }
+  .profile-work,
+  .profile-approach,
+  .profile-education {
+    margin-top: 32px;
+  }
+  .profile-work-row,
+  .profile-tools .profile-tool-row,
+  .profile-writing-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+    padding-block: 22px;
+  }
+  .profile-work-row h4,
+  .profile-tool-name h3 {
+    font-size: 18px;
+  }
+  .profile-writing-row h3 {
+    font-size: 20px;
+  }
+  .profile-record-link {
+    justify-self: start;
+    min-height: 44px;
+  }
+  .profile-case-links {
+    gap: 4px 14px;
+    margin-top: 10px;
+  }
+  .profile-case-links a {
+    min-height: 40px;
+  }
+}

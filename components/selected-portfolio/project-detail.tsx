@@ -4,11 +4,13 @@ import { useEffect, useRef, type MouseEvent, type ReactNode } from "react";
 import type { Project } from "@/lib/selected-portfolio/types";
 import { ProjectFamily } from "./project-family";
 import { ProjectScreens } from "./project-screens";
+import { EditableCopy, useProjectCopy } from "./editable-copy";
 
 export const sectionId = (project: Project, index: number) =>
   `${project.id}-section-${index + 1}`;
 
 export function ProjectSections({ project }: { project: Project }) {
+  const copy = useProjectCopy(project.id);
   return (
     <>
       {project.sections.map((section, i) => (
@@ -21,11 +23,18 @@ export function ProjectSections({ project }: { project: Project }) {
         >
           <h3>
             <span className="num">{String(i + 1).padStart(2, "0")}</span>
-            {section.title}
+            <EditableCopy field={copy?.sections[i]?.title ?? ""}>
+              {section.title}
+            </EditableCopy>
           </h3>
-          <p>{section.body}</p>
+          <EditableCopy field={copy?.sections[i]?.body ?? ""} as="p" multiline>
+            {section.body}
+          </EditableCopy>
           {section.screens?.length ? (
-            <ProjectScreens screens={section.screens} />
+            <ProjectScreens
+              screens={section.screens}
+              copyFields={copy?.sections[i]?.screens}
+            />
           ) : null}
         </section>
       ))}
@@ -56,6 +65,7 @@ export function ProjectDetail({
   onSectionChange: (index: number) => void;
 }) {
   const body = useRef<HTMLDivElement>(null);
+  const copy = useProjectCopy(project.id);
   useEffect(() => {
     const box = body.current;
     if (!box || sectionRequest?.projectId !== project.id) return;
@@ -128,9 +138,17 @@ export function ProjectDetail({
     <section className="detail-pane" aria-labelledby="detail-title">
       <header className="detail-head">
         <div>
-          <h2 id="detail-title">{project.name}</h2>
+          <h2 id="detail-title">
+            <EditableCopy field={copy?.name ?? ""}>{project.name}</EditableCopy>
+          </h2>
           <p className="detail-status">
-            {project.category} · {project.period}
+            <EditableCopy field={copy?.category ?? ""}>
+              {project.category}
+            </EditableCopy>{" "}
+            ·{" "}
+            <EditableCopy field={copy?.period ?? ""}>
+              {project.period}
+            </EditableCopy>
           </p>
         </div>
         {back}
@@ -144,7 +162,14 @@ export function ProjectDetail({
         <div className="detail-content">
           <div className="detail-layout">
             <article className="detail-copy">
-              <p className="detail-intro">{project.summary}</p>
+              <EditableCopy
+                field={copy?.summary ?? ""}
+                as="p"
+                className="detail-intro"
+                multiline
+              >
+                {project.summary}
+              </EditableCopy>
               {metadata}
               <ProjectFamily
                 project={project}

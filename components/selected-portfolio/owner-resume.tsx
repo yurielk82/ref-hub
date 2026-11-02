@@ -1,9 +1,13 @@
 import { listShares } from "@/lib/resume/shares";
-import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { jobsViewer } from "@/auth";
+import {
+  ownerHref,
+  type PortfolioHome,
+  type WorkspaceQuery,
+} from "@/lib/selected-portfolio/workspace";
 import {
   changedPaths,
   listVersions,
@@ -21,11 +25,6 @@ import {
   SaraminWorkspace,
 } from "@/components/resume/resume-workspace";
 
-export const metadata: Metadata = {
-  title: "이력서",
-  robots: { index: false, follow: false },
-};
-
 const KST_DATE_TIME = new Intl.DateTimeFormat("ko-KR", {
   timeZone: "Asia/Seoul",
   year: "numeric",
@@ -42,13 +41,17 @@ const KST_MONTH = new Intl.DateTimeFormat("ko-KR", {
   month: "2-digit",
 });
 
-export default async function ResumePage(props: {
-  searchParams: Promise<{ v?: string | string[]; p?: string | string[] }>;
+export async function OwnerResume({
+  home,
+  query,
+}: {
+  home: PortfolioHome;
+  query: WorkspaceQuery;
 }) {
-  if (!(await jobsViewer())) redirect("/login");
+  if (!(await jobsViewer())) redirect(ownerHref(home, "login"));
 
   const dir = resumeDataDir();
-  const { v, p } = await props.searchParams;
+  const { v, p } = query;
   const platform = parsePlatform(p);
   const site = SITE_NAMES[platform];
   const versions = dir ? await listVersions(dir, platform) : [];
@@ -96,7 +99,7 @@ export default async function ResumePage(props: {
           {(Object.keys(SITE_NAMES) as ResumePlatform[]).map((key) => (
             <Link
               key={key}
-              href={resumeHref(key)}
+              href={resumeHref(key, undefined, home)}
               aria-current={key === platform ? "page" : undefined}
               className={
                 key === platform
@@ -126,6 +129,7 @@ export default async function ResumePage(props: {
         {current &&
           (() => {
             const shared = {
+              home,
               shares,
               version: {
                 id: current.id,

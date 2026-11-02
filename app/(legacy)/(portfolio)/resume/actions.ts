@@ -11,13 +11,15 @@ import { readVersion } from "@/lib/resume/versions";
 import { redirect } from "next/navigation";
 
 import { jobsViewer } from "@/auth";
+import { portfolioHome } from "@/lib/selected-portfolio/workspace";
 import { parsePlatform, resumeHref } from "@/lib/resume/platforms";
 import { resumeDataDir, saveVersion } from "@/lib/resume/versions";
 import type { JobkoreaResume, SaraminResume } from "@/lib/resume/types";
 
-export type SaveInput =
+export type SaveInput = (
   | { platform: "saramin"; resume: SaraminResume; label: string }
-  | { platform: "jobkorea"; resume: JobkoreaResume; label: string };
+  | { platform: "jobkorea"; resume: JobkoreaResume; label: string }
+) & { home?: "/" | "/ax" };
 
 /**
  * 고친 이력서를 새 버전으로 저장한다. Server Action은 누구나 POST로 부를 수 있으므로
@@ -48,7 +50,13 @@ export async function saveResumeVersion(
   } catch (error) {
     return { error: `저장하지 못했습니다: ${(error as Error).message}` };
   }
-  redirect(resumeHref(platform, id));
+  redirect(
+    resumeHref(
+      platform,
+      id,
+      input.home ? portfolioHome(input.home) : undefined,
+    ),
+  );
 }
 
 // shortcut: 현재 웹 서비스는 단일 프로세스다. 다중 인스턴스로 늘리면 공유 저장소 잠금으로 옮긴다.

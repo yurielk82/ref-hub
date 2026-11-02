@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState, useTransition, type ReactNode } from "react";
+import { useEffect, useState, useTransition, type ReactNode } from "react";
 import { PencilLine, Save, X } from "lucide-react";
 
 import {
@@ -28,6 +28,7 @@ export interface VersionOption {
  */
 export function ResumeShell<R extends object>({
   platform,
+  home,
   shares,
   version,
   versions,
@@ -37,6 +38,7 @@ export function ResumeShell<R extends object>({
   children,
 }: {
   platform: ResumePlatform;
+  home?: "/" | "/ax";
   shares: ShareSummary[];
   version: VersionOption;
   versions: VersionOption[];
@@ -55,6 +57,53 @@ export function ResumeShell<R extends object>({
   const [label, setLabel] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [saving, startSaving] = useTransition();
+  const dirty = editing && JSON.stringify(draft) !== JSON.stringify(resume);
+  const canLeave = () =>
+    !dirty ||
+    window.confirm("저장하지 않은 이력서 수정 내용이 있습니다. 이동할까요?");
+  useEffect(() => {
+    if (!dirty) return;
+    const beforeUnload = (event: BeforeUnloadEvent) => event.preventDefault();
+    const leave = (event: MouseEvent | SubmitEvent) => {
+      if (event.defaultPrevented) return;
+      if (event instanceof MouseEvent) {
+        if (
+          event.button !== 0 ||
+          event.metaKey ||
+          event.ctrlKey ||
+          event.shiftKey ||
+          event.altKey
+        )
+          return;
+        const link =
+          event.target instanceof Element
+            ? event.target.closest("a[href]")
+            : null;
+        if (
+          !(link instanceof HTMLAnchorElement) ||
+          link.target === "_blank" ||
+          link.hasAttribute("download")
+        )
+          return;
+      }
+      if (
+        !window.confirm(
+          "저장하지 않은 이력서 수정 내용이 있습니다. 이동할까요?",
+        )
+      ) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+      }
+    };
+    window.addEventListener("beforeunload", beforeUnload);
+    document.addEventListener("click", leave, true);
+    document.addEventListener("submit", leave, true);
+    return () => {
+      window.removeEventListener("beforeunload", beforeUnload);
+      document.removeEventListener("click", leave, true);
+      document.removeEventListener("submit", leave, true);
+    };
+  }, [dirty]);
 
   const changedSet = new Set(changed);
   const isChanged = (path: string) =>
@@ -81,9 +130,10 @@ export function ResumeShell<R extends object>({
           버전
           <select
             value={version.id}
-            onChange={(event) =>
-              router.push(resumeHref(platform, event.target.value))
-            }
+            onChange={(event) => {
+              if (canLeave())
+                router.push(resumeHref(platform, event.target.value, home));
+            }}
             className="w-full min-w-0 rounded-lg border border-stone-200 bg-white px-3 py-2 text-sm font-medium text-stone-900 dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100"
           >
             {versions.map((option, index) => (
@@ -123,6 +173,7 @@ export function ResumeShell<R extends object>({
                   setError(null);
                   const result = await saveResumeVersion({
                     platform,
+                    home,
                     resume: draft,
                     label,
                   } as SaveInput);

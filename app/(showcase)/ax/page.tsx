@@ -1,22 +1,32 @@
 import type { Metadata } from "next";
-import { SelectedOwnerTools } from "@/components/selected-portfolio/owner-tools";
-import { Portfolio } from "@/components/selected-portfolio/portfolio";
 import { axPortfolio } from "@/lib/selected-portfolio/content";
-import { loadSelectedPortfolio } from "@/lib/selected-portfolio/server";
+import { WorkspacePage } from "@/components/selected-portfolio/workspace-page";
+import type { WorkspaceQuery } from "@/lib/selected-portfolio/workspace";
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: `AX 포트폴리오 — ${axPortfolio.profile.name}`,
   description: axPortfolio.site.description,
   alternates: { canonical: "/ax" },
 };
 
-export default async function AxPage() {
-  const { data } = await loadSelectedPortfolio("ax");
-  return (
-    <Portfolio
-      data={data}
-      trackPath="/ax"
-      ownerTools={<SelectedOwnerTools track="ax" />}
-    />
-  );
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<WorkspaceQuery>;
+}): Promise<Metadata> {
+  const query = await searchParams;
+  return {
+    ...metadata,
+    ...(query.manage || query.edit
+      ? { robots: { index: false, follow: false } }
+      : {}),
+  };
+}
+
+export default async function AxPage({
+  searchParams,
+}: {
+  searchParams: Promise<WorkspaceQuery>;
+}) {
+  return <WorkspacePage track="ax" query={await searchParams} />;
 }

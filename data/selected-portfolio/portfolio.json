@@ -7,21 +7,53 @@
   "profile": {
     "name": "권대환",
     "role": "영업관리 · 데이터 분석",
-    "intro": "영업관리 실무를 하며, 자료를 만들고 확인하는 데 반복해서 쓰이던 시간을 줄여 왔습니다. 업무와 데이터 기준을 살피고 관계 부서와 협의하며, 조회·검증·분석·보고를 연결하는 시스템을 만들고 운영합니다.",
-    "fields": [
-      "영업관리",
-      "업무 기준",
-      "데이터 검증"
-    ],
+    "intro": "영업관리 실무와 영업본부 분석·기획을 맡고 있습니다. 반복되는 자료 취합·대조·보고를 살피고, 업무 기준을 관계 부서와 협의해 실제로 쓰는 시스템으로 연결합니다.",
+    "fields": ["영업관리", "업무 기준", "데이터 검증"],
     "links": [],
     "experiences": [
       {
-        "title": "부광유니파마(구 한국유니온제약) 영업관리팀 · 과장 · 2026-08부터 영업본부 분석·기획 겸직",
+        "title": "부광유니파마(구 한국유니온제약) · 영업관리팀 과장",
         "period": "2025-03 ~ 현재",
-        "description": "영업 자료 분석과 보고 업무를 맡고, 반복 작업을 줄이는 시스템을 직접 구축·운영합니다."
+        "description": "2026년 8월부터 영업본부 분석·기획을 겸하고 있습니다. 영업 자료 분석·보고, ERP 자료 대조, 반복 업무 개선과 사내 시스템 구축·운영을 맡습니다."
       }
     ],
-    "education": []
+    "education": [],
+    "workAreas": [
+      {
+        "title": "실적 분석과 영업 활동 검토",
+        "description": "매출·수금·채권을 분석하고 월간 KPI와 영업회의 자료를 만듭니다. 일보의 방문 기록을 ERP 실적·목표와 연결해 담당자·거래처별 활동을 살피고, 영업 활동 계획과 방문 우선순위 검토에 활용합니다. 유통재고 분석은 준비 중인 업무로 구분합니다.",
+        "projectIds": ["kpi", "kpi-sfe", "kpi-inventory"]
+      },
+      {
+        "title": "부서별 조회·검산·보고 화면",
+        "description": "영업지원팀·회계팀·영업본부가 같은 원천 자료를 각자의 업무에 맞게 보도록 화면을 구축했습니다. 경영진 데일리 리포트는 마감 뒤 원천 검산을 통과한 자료만 갱신합니다. 매달 작성하던 엑셀 월 보고서 4종은 웹 조회와 원본 양식 내려받기로 연결했습니다.",
+        "projectIds": ["bi", "kpi"]
+      },
+      {
+        "title": "ERP 자료 대조와 시장·경쟁 분석",
+        "description": "ERP 전환 전후의 집계 기준과 자료 차이를 확인하고 전산·업무 부서와 기준을 협의했습니다. 구 ERP 원장은 월·전표 기준 806개 그룹으로 대조해 차이 없음을 확인했습니다. 심평원·식약처 공공 자료는 자동으로 수집해 성분 시장과 경쟁 제품을 비교하는 데 씁니다.",
+        "projectIds": ["erp-spec", "kpi"]
+      },
+      {
+        "title": "공급내역보고와 문서 처리 자동화",
+        "description": "엑셀 검증·보정을 웹 시스템으로 옮기고 ERP 전환·바코드 서버 장애 중에도 공급내역보고를 이어갔습니다. 출고 자료 사전 대조, API 보고, 보고 뒤 최근 3개월 대사로 확장했습니다. CSO 정산 자료 조회 포털과 처방 자료 OCR도 구축했으며, 자체 포털은 상용 솔루션 도입으로 2026년 9월 운영을 종료했습니다.",
+        "projectIds": ["kpis", "csoweb"]
+      }
+    ],
+    "approach": [
+      {
+        "title": "원천에서 차이를 확인합니다",
+        "description": "숫자가 다르면 먼저 출처·기간·단위·집계 기준을 확인합니다. 엑셀에서만 임시로 맞추기보다 관련 부서와 원천 자료의 정정을 협의합니다."
+      },
+      {
+        "title": "업무 기준을 함께 정합니다",
+        "description": "화면부터 만들기 전에 담당자와 용어·필수값·예외 처리 기준을 정리합니다. 영업관리 실무를 이해하는 사람이 판단해야 할 부분을 자동 판정으로 바꾸지 않습니다."
+      },
+      {
+        "title": "구현 뒤 실제 업무로 확인합니다",
+        "description": "AI 코딩 도구와 협업해 구현하고, 원천 대조·보고 결과·실제 사용 흐름으로 확인합니다. 운영 중인 기능, 준비 중인 기능, 업무에 적용하지 않은 시제품을 구분해 설명합니다."
+      }
+    ]
   },
   "projects": [
     {
@@ -44,11 +76,7 @@
       "image": "",
       "imageAlt": "",
       "art": "quantization",
-      "artLabels": [
-        "원천 자료 확인",
-        "업무 기준 협의",
-        "조회·검증·보고"
-      ],
+      "artLabels": ["원천 자료 확인", "업무 기준 협의", "조회·검증·보고"],
       "sections": [
         {
           "title": "ERP 전환 뒤의 업무 공백",
@@ -177,11 +205,7 @@
       "image": "",
       "imageAlt": "",
       "art": "flow",
-      "artLabels": [
-        "매일 일보 조회",
-        "영업활동 분석",
-        "방문 우선순위"
-      ],
+      "artLabels": ["매일 일보 조회", "영업활동 분석", "방문 우선순위"],
       "sections": [
         {
           "title": "매월 자료를 모으던 업무",
@@ -263,11 +287,7 @@
       "image": "",
       "imageAlt": "",
       "art": "layers",
-      "artLabels": [
-        "자료 마감",
-        "수요·공급 검토",
-        "개인 시제품"
-      ],
+      "artLabels": ["자료 마감", "수요·공급 검토", "개인 시제품"],
       "sections": [
         {
           "title": "KPI.에 내장한 개인 시제품",
@@ -351,13 +371,7 @@
       "title": "수작업 보정에서\n보고 전후 검증까지.",
       "accent": "보고 전후 검증",
       "summary": "KPI.와 연결된 의약품 공급내역보고 사례입니다. 출고와 반품 보고의 수작업 보정부터 보고 전 대조, 보고 후 확인과 승인 정정까지 연결했습니다.",
-      "stack": [
-        "Express 5",
-        "React 19",
-        "Vite 7",
-        "MSSQL",
-        "TanStack Table"
-      ],
+      "stack": ["Express 5", "React 19", "Vite 7", "MSSQL", "TanStack Table"],
       "links": [],
       "image": "",
       "imageAlt": "",
@@ -452,11 +466,7 @@
       "image": "",
       "imageAlt": "",
       "art": "layers",
-      "artLabels": [
-        "숫자 수합",
-        "현황 파악·보고",
-        "준비 중"
-      ],
+      "artLabels": ["숫자 수합", "현황 파악·보고", "준비 중"],
       "sections": [
         {
           "title": "이전의 자료 수합",
@@ -491,11 +501,7 @@
       "image": "",
       "imageAlt": "",
       "art": "flow",
-      "artLabels": [
-        "확인한 문제",
-        "직접 한 일",
-        "현재 결과"
-      ],
+      "artLabels": ["확인한 문제", "직접 한 일", "현재 결과"],
       "sections": [
         {
           "title": "문제와 시작",
@@ -616,11 +622,7 @@
       "image": "",
       "imageAlt": "",
       "art": "orbit",
-      "artLabels": [
-        "확인한 문제",
-        "직접 한 일",
-        "현재 결과"
-      ],
+      "artLabels": ["확인한 문제", "직접 한 일", "현재 결과"],
       "sections": [
         {
           "title": "문제와 시작",
@@ -694,22 +696,12 @@
       "title": "ERP 데이터 구조 문서",
       "accent": "",
       "summary": "문서가 없던 ERP 테이블의 관계를 정리하고, 이관과 원천 대조에 필요한 구조를 검색·조회하도록 만들었습니다.",
-      "stack": [
-        "Next.js 15",
-        "Nextra",
-        "React Flow",
-        "dagre",
-        "TypeScript"
-      ],
+      "stack": ["Next.js 15", "Nextra", "React Flow", "dagre", "TypeScript"],
       "links": [],
       "image": "",
       "imageAlt": "",
       "art": "quantization",
-      "artLabels": [
-        "확인한 문제",
-        "직접 한 일",
-        "현재 결과"
-      ],
+      "artLabels": ["확인한 문제", "직접 한 일", "현재 결과"],
       "sections": [
         {
           "title": "문제와 시작",
@@ -791,22 +783,12 @@
       "title": "KTX 자동조회·예약",
       "accent": "",
       "summary": "열차를 반복 조회하는 작업을 자동조회·예약으로 연결한 팀 복지 도구입니다. 현재 기능은 KTX를 대상으로 합니다.",
-      "stack": [
-        "Next.js 16",
-        "FastAPI",
-        "Redis",
-        "Tailwind",
-        "Base UI"
-      ],
+      "stack": ["Next.js 16", "FastAPI", "Redis", "Tailwind", "Base UI"],
       "links": [],
       "image": "",
       "imageAlt": "",
       "art": "flow",
-      "artLabels": [
-        "확인한 문제",
-        "직접 한 일",
-        "현재 결과"
-      ],
+      "artLabels": ["확인한 문제", "직접 한 일", "현재 결과"],
       "sections": [
         {
           "title": "문제와 시작",
@@ -851,11 +833,7 @@
       "image": "",
       "imageAlt": "",
       "art": "layers",
-      "artLabels": [
-        "확인한 문제",
-        "직접 한 일",
-        "현재 결과"
-      ],
+      "artLabels": ["확인한 문제", "직접 한 일", "현재 결과"],
       "sections": [
         {
           "title": "문제와 시작",
@@ -948,11 +926,7 @@
       "image": "",
       "imageAlt": "",
       "art": "orbit",
-      "artLabels": [
-        "확인한 문제",
-        "직접 한 일",
-        "현재 결과"
-      ],
+      "artLabels": ["확인한 문제", "직접 한 일", "현재 결과"],
       "sections": [
         {
           "title": "문제와 시작",
@@ -1035,22 +1009,12 @@
       "title": "Apinfy Lab",
       "accent": "",
       "summary": "자료 수집 작업의 실행·결과·스케줄을 관리하는 플랫폼입니다. 공개 인스턴스 운영은 종료했고 코드를 공개했습니다.",
-      "stack": [
-        "Python",
-        "FastAPI",
-        "SQLAlchemy async",
-        "Docker",
-        "curl_cffi"
-      ],
+      "stack": ["Python", "FastAPI", "SQLAlchemy async", "Docker", "curl_cffi"],
       "links": [],
       "image": "",
       "imageAlt": "",
       "art": "quantization",
-      "artLabels": [
-        "확인한 문제",
-        "직접 한 일",
-        "현재 결과"
-      ],
+      "artLabels": ["확인한 문제", "직접 한 일", "현재 결과"],
       "sections": [
         {
           "title": "문제와 시작",
@@ -1146,11 +1110,7 @@
       "image": "",
       "imageAlt": "",
       "art": "flow",
-      "artLabels": [
-        "확인한 문제",
-        "직접 한 일",
-        "현재 결과"
-      ],
+      "artLabels": ["확인한 문제", "직접 한 일", "현재 결과"],
       "sections": [
         {
           "title": "문제와 시작",
@@ -1216,22 +1176,12 @@
       "title": "도구 도입 평가",
       "accent": "",
       "summary": "새 도구를 도입하기 전에 효과와 위험을 비교하는 실험 절차와 기록 양식입니다. 무엇을 만들지 결정할 때 사용합니다.",
-      "stack": [
-        "Markdown",
-        "Claude Code",
-        "Codex",
-        "Skill",
-        "Evidence-Gate"
-      ],
+      "stack": ["Markdown", "Claude Code", "Codex", "Skill", "Evidence-Gate"],
       "links": [],
       "image": "",
       "imageAlt": "",
       "art": "layers",
-      "artLabels": [
-        "확인한 문제",
-        "직접 한 일",
-        "현재 결과"
-      ],
+      "artLabels": ["확인한 문제", "직접 한 일", "현재 결과"],
       "sections": [
         {
           "title": "문제와 시작",
@@ -1305,22 +1255,12 @@
       "title": "EV 모터 시험 자료 변환",
       "accent": "",
       "summary": "시험장비 파일을 변환하고 결과를 검토하는 외부 프로젝트입니다. 파일 업로드·변환 검토·결과 확인 화면을 만들었습니다.",
-      "stack": [
-        "Python 3.11",
-        "C (DSP)",
-        "FastAPI",
-        "Anthropic SDK",
-        "Plotly"
-      ],
+      "stack": ["Python 3.11", "C (DSP)", "FastAPI", "Anthropic SDK", "Plotly"],
       "links": [],
       "image": "",
       "imageAlt": "",
       "art": "orbit",
-      "artLabels": [
-        "확인한 문제",
-        "직접 한 일",
-        "현재 결과"
-      ],
+      "artLabels": ["확인한 문제", "직접 한 일", "현재 결과"],
       "sections": [
         {
           "title": "문제와 시작",
@@ -1373,17 +1313,79 @@
   ],
   "skills": [
     {
-      "name": "업무 기준과 원천 검증",
-      "usage": "자료의 기준 차이와 오류를 확인하고 전산·업무 부서와 협업해 원천 자료를 바로잡습니다."
+      "id": "sql",
+      "name": "SQL · MSSQL · PostgreSQL",
+      "category": "자료 조회·대조",
+      "usage": "ERP 자료와 보고 자료를 조회·대조하고, 업무 화면에 필요한 집계와 데이터 연결을 구성했습니다. 공급내역보고의 MSSQL과 Supabase 기반 업무 시스템에서 사용했습니다.",
+      "projectIds": ["kpis", "kpi"]
     },
     {
-      "name": "SQL · Python · 웹 개발",
-      "usage": "업무 자료 연계, 자동 검증, 조회 화면과 보고서 생성에 사용했습니다. AI 코딩 도구와 협업해 구현하고 실제 업무 흐름으로 확인합니다."
+      "id": "web",
+      "name": "Next.js · React · TypeScript",
+      "category": "업무 화면",
+      "usage": "영업지원·회계·영업본부의 조회 화면과 경영진 보고 화면을 만들었습니다. 표·상세 조회·보고 자료 내려받기를 같은 업무 흐름 안에 연결했습니다.",
+      "projectIds": ["kpi", "bi", "erp-spec"]
     },
     {
-      "name": "영업 활동 분석",
-      "usage": "일보의 방문 기록과 ERP 실적을 연결해 매일 분석하고 영업 활동과 거래처 관리 방향을 검토합니다."
+      "id": "api",
+      "name": "Express · Vite",
+      "category": "자료 처리·API 연결",
+      "usage": "공급내역 자료의 검증·보정, 주문 자료 대조, 보고 API와 결과 확인을 연결하는 웹 시스템에 사용했습니다. 업무 규칙에 따른 자동 처리와 사람이 확인할 예외를 구분합니다.",
+      "projectIds": ["kpis"]
+    },
+    {
+      "id": "visualization",
+      "name": "Recharts · TanStack Table · React Flow",
+      "category": "분석·시각화",
+      "usage": "영업 실적과 구성 비중은 차트로, 대조 자료는 표로, ERP의 테이블 관계는 연결도로 표현했습니다. 그래프에서 품목·거래처 상세를 확인할 수 있도록 구성했습니다.",
+      "projectIds": ["bi", "kpis", "erp-spec"]
+    },
+    {
+      "id": "python",
+      "name": "Python",
+      "category": "데이터 분석 시제품",
+      "usage": "수요·공급·재고를 연결하는 S&OP의 예측 모델을 실험하는 데 사용했습니다. S&OP는 실제 업무에 적용하지 않은 개인 시제품입니다.",
+      "projectIds": ["kpi-snop"]
+    },
+    {
+      "id": "access",
+      "name": "JWT 인증 · Supabase RLS",
+      "category": "로그인·자료 접근",
+      "usage": "CSO 정산 자료 조회 포털은 자체 JWT 인증으로 업체별 접근을 구분했습니다. Team Pulse는 Supabase Auth와 RLS로 사용자별 자료 접근을 제한합니다. CSO 포털은 운영 종료 상태입니다.",
+      "projectIds": ["csoweb", "team-pulse"]
+    },
+    {
+      "id": "ai",
+      "name": "Claude Code · Codex · Git Hooks",
+      "category": "개발 협업·검증",
+      "usage": "업무 요구를 정리하고 AI 코딩 도구와 구현·검토를 나눠 수행했습니다. 반복 작업의 실행 기준과 검증 절차를 스킬·훅으로 정리했으며, AI 코딩과 업무 데이터의 자동 판정을 구분합니다.",
+      "projectIds": ["claude-dotfiles", "har-eval"]
     }
   ],
-  "writing": []
+  "writing": [
+    {
+      "title": "영업 자료를 조회·분석·보고로 연결한 과정",
+      "summary": "엑셀·스프레드시트로 취합하던 매출·수금·채권 자료를 부서별 조회, SFE 분석, 월 보고서 생성으로 옮긴 업무 개선 기록입니다. 운영 기능과 준비 중인 기능을 구분해 정리했습니다.",
+      "url": "https://ref.dvsharp.com/pharmkpi",
+      "category": "업무 개선 기록"
+    },
+    {
+      "title": "공급내역 자료에서 무엇을 검증하는가",
+      "summary": "갑지·을지의 표준코드·규격·수량·단가를 확인하고 오류를 검토하는 사용자 안내입니다. 자료 검증과 실제 보고, 반송·보류 확인을 별도 단계로 다룹니다.",
+      "url": "https://ref.dvsharp.com/kpis-dsr-api/user-guide/validation",
+      "category": "검증 절차"
+    },
+    {
+      "title": "CSO 정산 자료 조회 포털의 이전 구현",
+      "summary": "업체별 정산 자료 조회와 문서 처리, 로그인·접근 범위를 정리한 이전 매뉴얼입니다. 자체 포털은 상용 솔루션 도입에 따라 2026년 9월 운영을 종료했습니다.",
+      "url": "https://ref.dvsharp.com/csoweb",
+      "category": "이전 구현 기록"
+    },
+    {
+      "title": "도구를 만들지, 도입할지 판단하는 방법",
+      "summary": "먼저 현재 도구와 대안을 확인하고 측정·반대 근거로 판단하는 방법론입니다. 직접 만들지 않는 결정도 결과로 남기며, 측정한 사실과 추론을 구분합니다.",
+      "url": "https://ref.dvsharp.com/har-eval/method",
+      "category": "개발·판단 방법"
+    }
+  ]
 }

@@ -4,6 +4,19 @@ export type RecordEntry = {
   period: string;
   description: string;
 };
+export type WorkArea = {
+  title: string;
+  description: string;
+  projectIds: string[];
+};
+export type WorkingApproach = { title: string; description: string };
+export type PortfolioSkill = {
+  id?: string;
+  name: string;
+  usage: string;
+  category?: string;
+  projectIds?: string[];
+};
 export type ProjectScreen = {
   src: string;
   title: string;
@@ -46,8 +59,10 @@ export type PortfolioData = {
     links: PublicLink[];
     experiences: RecordEntry[];
     education: RecordEntry[];
+    workAreas?: WorkArea[];
+    approach?: WorkingApproach[];
   };
   projects: Project[];
-  skills: { name: string; usage: string }[];
-  writing: { title: string; summary: string; url: string }[];
+  skills: PortfolioSkill[];
+  writing: { title: string; summary: string; url: string; category?: string }[];
 };

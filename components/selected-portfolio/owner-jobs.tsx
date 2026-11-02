@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 import { jobsViewer } from "@/auth";
@@ -8,11 +7,6 @@ import { jobsDataDir, readStore } from "@/lib/jobs/store-file";
 import type { JobStore } from "@/lib/jobs/types";
 import { JobsBoard, type JobsBoardItem } from "@/components/jobs/jobs-board";
 import { CollectionInfo } from "@/components/jobs/collection-info";
-
-export const metadata: Metadata = {
-  title: "공고 모음",
-  robots: { index: false, follow: false },
-};
 
 const KST_DATE = new Intl.DateTimeFormat("ko-KR", {
   timeZone: "Asia/Seoul",
@@ -47,7 +41,7 @@ async function loadStore(): Promise<{
   };
 }
 
-export default async function JobsPage() {
+export async function OwnerJobs() {
   if (!(await jobsViewer())) redirect("/login");
 
   const now = new Date();

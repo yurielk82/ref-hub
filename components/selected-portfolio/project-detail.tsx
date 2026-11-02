@@ -38,6 +38,7 @@ export function ProjectSections({
 }) {
   const copy = useProjectCopy(project.id);
   const lead = withoutLead ? leadScreen(project) : null;
+  /** i번째 절의 캡처 중 상세 첫 화면에 이미 보인 캡처를 뺀다. */
   const keep = (i: number) => (_: unknown, index: number) =>
     !(lead && lead.section === i && lead.index === index);
   return (

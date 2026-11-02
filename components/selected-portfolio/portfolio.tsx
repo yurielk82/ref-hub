@@ -146,6 +146,7 @@ function PortfolioFrame({
   const menuButton = useRef<HTMLButtonElement>(null);
   const main = useRef<HTMLElement>(null);
   const choices = useRef<HTMLElement>(null);
+  /** KPI. 계열(상위 사례이거나 그 하위 사례)인지. 메뉴에서 '다른 사례' 구분선 위치를 정한다. */
   const inFamily = (entry: Project) =>
     Boolean(entry.parentId) ||
     projects.some((other) => other.parentId === entry.id);

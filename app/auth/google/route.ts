@@ -4,6 +4,10 @@ import { isAuthConfigured } from "@/auth";
 import { CALLBACK_PATH } from "@/lib/auth/config";
 import { loginErrorUrl, publicOrigin } from "@/lib/auth/origin";
 import { createSupabaseServer } from "@/lib/auth/supabase-server";
+import {
+  RETURN_TO_COOKIE,
+  safeReturnTo,
+} from "@/lib/selected-portfolio/workspace";
 
 /**
  * Google 로그인 시작 — 서버 PKCE(확인 값은 쿠키). 공용 Supabase가 Google로 보내고, Google은 sb 콜백으로,
@@ -23,9 +27,24 @@ export async function GET(request: NextRequest) {
       })
     : null;
   if (!started || started.error || !started.data.url) {
-    return NextResponse.redirect(
-      loginErrorUrl(origin, supabase ? "oauth" : "config"),
+    const url = loginErrorUrl(origin, supabase ? "oauth" : "config");
+    url.searchParams.set(
+      "next",
+      safeReturnTo(request.nextUrl.searchParams.get("next")),
     );
+    return NextResponse.redirect(url);
   }
-  return NextResponse.redirect(started.data.url);
+  const response = NextResponse.redirect(started.data.url);
+  response.cookies.set(
+    RETURN_TO_COOKIE,
+    safeReturnTo(request.nextUrl.searchParams.get("next")),
+    {
+      httpOnly: true,
+      secure: origin.startsWith("https:"),
+      sameSite: "lax",
+      path: "/",
+      maxAge: 600,
+    },
+  );
+  return response;
 }

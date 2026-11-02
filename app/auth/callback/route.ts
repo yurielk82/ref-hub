@@ -1,9 +1,13 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 import { isJobsSession } from "@/auth";
-import { JOBS_PATH, type LoginError } from "@/lib/auth/config";
+import { type LoginError } from "@/lib/auth/config";
 import { loginErrorUrl, publicOrigin } from "@/lib/auth/origin";
 import { createSupabaseServer } from "@/lib/auth/supabase-server";
+import {
+  RETURN_TO_COOKIE,
+  safeReturnTo,
+} from "@/lib/selected-portfolio/workspace";
 
 /**
  * Google 로그인에서 돌아오기 — code를 서버 세션으로 바꾸고 허용 계정인지 본다.
@@ -11,8 +15,12 @@ import { createSupabaseServer } from "@/lib/auth/supabase-server";
  */
 export async function GET(request: NextRequest) {
   const origin = publicOrigin(request.url);
-  const toLogin = (error: LoginError) =>
-    NextResponse.redirect(loginErrorUrl(origin, error));
+  const next = safeReturnTo(request.cookies.get(RETURN_TO_COOKIE)?.value);
+  const toLogin = (error: LoginError) => {
+    const url = loginErrorUrl(origin, error);
+    url.searchParams.set("next", next);
+    return NextResponse.redirect(url);
+  };
 
   const code = request.nextUrl.searchParams.get("code");
   const supabase = await createSupabaseServer();
@@ -25,5 +33,7 @@ export async function GET(request: NextRequest) {
     await supabase.auth.signOut({ scope: "local" });
     return toLogin("forbidden");
   }
-  return NextResponse.redirect(new URL(JOBS_PATH, origin));
+  const response = NextResponse.redirect(new URL(next, origin));
+  response.cookies.delete(RETURN_TO_COOKIE);
+  return response;
 }

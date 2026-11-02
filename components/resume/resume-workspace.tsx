@@ -8,6 +8,7 @@ import { ResumeShell, type VersionOption } from "./resume-shell";
 import { SaraminFields } from "./saramin-fields";
 
 interface WorkspaceProps<R> {
+  home?: "/" | "/ax";
   shares: ShareSummary[];
   version: VersionOption;
   versions: VersionOption[];

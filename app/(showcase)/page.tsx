@@ -1,18 +1,32 @@
 import type { Metadata } from "next";
-import { SelectedOwnerTools } from "@/components/selected-portfolio/owner-tools";
-import { Portfolio } from "@/components/selected-portfolio/portfolio";
 import { portfolio } from "@/lib/selected-portfolio/content";
-import { loadSelectedPortfolio } from "@/lib/selected-portfolio/server";
+import { WorkspacePage } from "@/components/selected-portfolio/workspace-page";
+import type { WorkspaceQuery } from "@/lib/selected-portfolio/workspace";
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: `${portfolio.profile.name} — ${portfolio.profile.role}`,
   description: portfolio.site.description,
   alternates: { canonical: "/" },
 };
 
-export default async function HomePage() {
-  const { data } = await loadSelectedPortfolio("sales");
-  return (
-    <Portfolio data={data} ownerTools={<SelectedOwnerTools track="sales" />} />
-  );
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<WorkspaceQuery>;
+}): Promise<Metadata> {
+  const query = await searchParams;
+  return {
+    ...metadata,
+    ...(query.manage || query.edit
+      ? { robots: { index: false, follow: false } }
+      : {}),
+  };
+}
+
+export default async function HomePage({
+  searchParams,
+}: {
+  searchParams: Promise<WorkspaceQuery>;
+}) {
+  return <WorkspacePage track="sales" query={await searchParams} />;
 }

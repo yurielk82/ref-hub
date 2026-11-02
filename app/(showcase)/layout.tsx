@@ -4,6 +4,7 @@ import { portfolio } from "@/lib/selected-portfolio/content";
 import { themeCss } from "@/lib/selected-portfolio/theme";
 import { SITE_URL } from "@/data/ax-content";
 import "@/components/selected-portfolio/globals.css";
+import "@/components/selected-portfolio/owner-workspace.css";
 
 const pretendard = localFont({
   src: "../../public/assets/selected-portfolio/fonts/PretendardVariable.woff2",

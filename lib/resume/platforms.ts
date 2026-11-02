@@ -11,10 +11,16 @@ export function parsePlatform(value: unknown): ResumePlatform {
 }
 
 /** 사람인은 처음 만든 주소(/resume?v=)를 그대로 둔다 */
-export function resumeHref(platform: ResumePlatform, id?: string): string {
+export function resumeHref(
+  platform: ResumePlatform,
+  id?: string,
+  home?: "/" | "/ax",
+): string {
   const params = new URLSearchParams();
+  if (home) params.set("manage", "resume");
   if (platform !== "saramin") params.set("p", platform);
   if (id) params.set("v", id);
   const query = params.toString();
-  return query ? `/resume?${query}` : "/resume";
+  const pathname = home ?? "/resume";
+  return query ? `${pathname}?${query}` : pathname;
 }

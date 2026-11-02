@@ -157,6 +157,9 @@ for (const name of ["portfolio.json", "portfolio-ax.json"]) {
   )) {
     replacements.set(entry.originalSrc, entry);
     replacements.set(entry.captures[0].src, entry);
+    const previous = originals.get(entry.originalSrc).captures || [];
+    if (previous[0]) replacements.set(previous[0].src, entry);
+    for (const capture of previous.slice(1)) extras.add(capture.src);
     for (const capture of entry.captures.slice(1)) extras.add(capture.src);
   }
   for (const project of data.projects) {

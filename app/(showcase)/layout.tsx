@@ -6,11 +6,21 @@ import { SITE_URL } from "@/data/ax-content";
 import "@/components/selected-portfolio/globals.css";
 import "@/components/selected-portfolio/owner-workspace.css";
 
+// 첫 화면에는 KS X 1001 한글 2,350자와 사이트에 쓴 기호만 담은 사본(약 0.5MB)을 받는다.
+// 그 밖의 드문 글자가 화면에 나올 때만 브라우저가 전체 글꼴(약 2MB)을 이어 받는다.
 const pretendard = localFont({
   src: "../../public/assets/selected-portfolio/fonts/PretendardVariable.woff2",
   variable: "--font-pretendard",
   weight: "100 900",
   display: "swap",
+});
+const pretendardFull = localFont({
+  src: "../../public/assets/selected-portfolio/fonts/PretendardVariable-full.woff2",
+  variable: "--font-pretendard-full",
+  weight: "100 900",
+  display: "swap",
+  preload: false,
+  adjustFontFallback: false,
 });
 const mono = localFont({
   src: "../../public/assets/selected-portfolio/fonts/GeistMono-Variable.woff2",
@@ -58,7 +68,9 @@ export default function ShowcaseLayout({
           }}
         />
       </head>
-      <body className={`${pretendard.variable} ${mono.variable}`}>
+      <body
+        className={`${pretendard.variable} ${pretendardFull.variable} ${mono.variable}`}
+      >
         <a className="skip-link" href="#main-content">
           본문으로 이동
         </a>

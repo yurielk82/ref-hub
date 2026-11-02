@@ -3,6 +3,12 @@
 import { useRef, useState } from "react";
 import type { ProjectScreen } from "@/lib/selected-portfolio/types";
 import { sitePath } from "@/lib/selected-portfolio/content";
+
+const VARIANT_WIDTH = 1600;
+const srcSet = (screen: ProjectScreen) =>
+  screen.width > VARIANT_WIDTH
+    ? `${sitePath(screen.src.replace(/\.webp$/, `.w${VARIANT_WIDTH}.webp`))} ${VARIANT_WIDTH}w, ${sitePath(screen.src)} ${screen.width}w`
+    : undefined;
 import { EditableCopy } from "./editable-copy";
 
 export function ProjectScreens({
@@ -13,12 +19,14 @@ export function ProjectScreens({
   copyFields?: { title: string; caption: string }[];
 }) {
   const dialog = useRef<HTMLDialogElement>(null);
+  const close = useRef<HTMLButtonElement>(null);
   const [active, setActive] = useState<ProjectScreen | null>(null);
   const [originalSize, setOriginalSize] = useState(false);
   const open = (screen: ProjectScreen) => {
     setOriginalSize(false);
     setActive(screen);
     dialog.current?.showModal();
+    close.current?.focus();
     if (dialog.current) dialog.current.scrollTop = 0;
   };
   return (
@@ -33,6 +41,8 @@ export function ProjectScreens({
           >
             <img
               src={sitePath(screen.src)}
+              srcSet={srcSet(screen)}
+              sizes="(max-width: 900px) calc(100vw - 40px), 1040px"
               alt={screen.title}
               width={screen.width}
               height={screen.height}
@@ -77,8 +87,8 @@ export function ProjectScreens({
             </button>
             <button
               type="button"
+              ref={close}
               onClick={() => dialog.current?.close()}
-              autoFocus
             >
               닫기 ×
             </button>

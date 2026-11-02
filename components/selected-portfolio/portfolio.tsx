@@ -144,6 +144,7 @@ function PortfolioFrame({
   const root = useRef<HTMLDivElement>(null);
   const menuButton = useRef<HTMLButtonElement>(null);
   const main = useRef<HTMLElement>(null);
+  const choices = useRef<HTMLElement>(null);
   const focusMain = useRef(false);
   useEffect(() => {
     const query = window.matchMedia("(max-width: 900px)");
@@ -180,6 +181,24 @@ function PortfolioFrame({
       window.removeEventListener("popstate", sync);
     };
   }, [first, projectKeys]);
+  useEffect(() => {
+    const list = choices.current;
+    if (!list) return;
+    const update = () =>
+      list.toggleAttribute(
+        "data-more",
+        list.scrollHeight - list.scrollTop - list.clientHeight > 4,
+      );
+    const observer = new ResizeObserver(update);
+    observer.observe(list);
+    if (list.firstElementChild) observer.observe(list.firstElementChild);
+    list.addEventListener("scroll", update, { passive: true });
+    update();
+    return () => {
+      observer.disconnect();
+      list.removeEventListener("scroll", update);
+    };
+  }, []);
   useEffect(() => {
     if (!workspace) return;
     main.current?.scrollTo(0, 0);
@@ -327,7 +346,11 @@ function PortfolioFrame({
             </EditableCopy>
           </p>
         </div>
-        <nav className="browser-choices" aria-label="프로젝트와 목차">
+        <nav
+          className="browser-choices"
+          aria-label="프로젝트와 목차"
+          ref={choices}
+        >
           <ul className="project-tree">
             {projects.map((p) => {
               const expanded = !workspace && project?.id === p.id;

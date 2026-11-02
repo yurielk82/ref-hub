@@ -8,6 +8,7 @@ import { dirname, resolve, relative, posix } from "node:path";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 import { validatePortfolio } from "./selected-portfolio/schema.mjs";
+import { writeVariants } from "./screenshot-variants.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const args = process.argv.slice(2);
@@ -273,6 +274,7 @@ if (options.has("--apply")) {
   const auditFile = resolve(root, "docs/quality/portfolio-captures.json");
   await mkdir(dirname(auditFile), { recursive: true });
   await writeFile(auditFile, publicText);
+  await writeVariants();
 }
 console.log(
   JSON.stringify({

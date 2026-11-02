@@ -72,6 +72,17 @@ export function validatePortfolio(data) {
       str(entry.period, `${at}.period`);
       str(entry.description, `${at}.description`, true);
     });
+  const projectRefs = (value, key) =>
+    list(value, key, (id, at) => {
+      str(id, at);
+      if (
+        !Array.isArray(data.projects) ||
+        !data.projects.some(
+          (project) => object(project) && project.id === id && !project.hidden,
+        )
+      )
+        fail(at, "공개된 프로젝트의 id를 입력하세요.");
+    });
   if (
     !obj(data, "portfolio", [
       "site",
@@ -89,15 +100,12 @@ export function validatePortfolio(data) {
       fail("site.example", "true 또는 false여야 합니다.");
   }
   if (
-    obj(data.profile, "profile", [
-      "name",
-      "role",
-      "intro",
-      "fields",
-      "links",
-      "experiences",
-      "education",
-    ])
+    obj(
+      data.profile,
+      "profile",
+      ["name", "role", "intro", "fields", "links", "experiences", "education"],
+      ["workAreas", "approach"],
+    )
   ) {
     for (const key of ["name", "role", "intro"])
       str(data.profile[key], `profile.${key}`);
@@ -105,6 +113,19 @@ export function validatePortfolio(data) {
     links(data.profile.links, "profile.links");
     records(data.profile.experiences, "profile.experiences");
     records(data.profile.education, "profile.education");
+    if (data.profile.workAreas !== undefined)
+      list(data.profile.workAreas, "profile.workAreas", (area, at) => {
+        if (!obj(area, at, ["title", "description", "projectIds"])) return;
+        str(area.title, `${at}.title`);
+        str(area.description, `${at}.description`);
+        projectRefs(area.projectIds, `${at}.projectIds`);
+      });
+    if (data.profile.approach !== undefined)
+      list(data.profile.approach, "profile.approach", (entry, at) => {
+        if (!obj(entry, at, ["title", "description"])) return;
+        str(entry.title, `${at}.title`);
+        str(entry.description, `${at}.description`);
+      });
   }
   const ids = new Set();
   list(data.projects, "projects", (p, at) => {
@@ -225,15 +246,27 @@ export function validatePortfolio(data) {
         });
     });
   });
+  const skillIds = new Set();
   list(data.skills, "skills", (skill, at) => {
-    if (!obj(skill, at, ["name", "usage"])) return;
+    if (!obj(skill, at, ["name", "usage"], ["id", "category", "projectIds"]))
+      return;
     str(skill.name, `${at}.name`);
     str(skill.usage, `${at}.usage`);
+    if (skill.id !== undefined) {
+      if (typeof skill.id !== "string" || !/^[a-z][a-z0-9-]*$/.test(skill.id))
+        fail(`${at}.id`, "영문 소문자·숫자·하이픈으로 식별자를 입력하세요.");
+      if (skillIds.has(skill.id)) fail(`${at}.id`, "기술 id가 겹칩니다.");
+      skillIds.add(skill.id);
+    }
+    if (skill.category !== undefined) str(skill.category, `${at}.category`);
+    if (skill.projectIds !== undefined)
+      projectRefs(skill.projectIds, `${at}.projectIds`);
   });
   list(data.writing, "writing", (post, at) => {
-    if (!obj(post, at, ["title", "summary", "url"])) return;
+    if (!obj(post, at, ["title", "summary", "url"], ["category"])) return;
     str(post.title, `${at}.title`);
     str(post.summary, `${at}.summary`);
+    if (post.category !== undefined) str(post.category, `${at}.category`);
     if (!isPublicUrl(post.url, false))
       fail(`${at}.url`, "https://로 시작하는 글 주소를 입력하세요.");
   });

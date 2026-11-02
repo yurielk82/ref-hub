@@ -49,6 +49,45 @@ export function findSelectedProject(
   );
 }
 
+export function projectCopyFields(project: Project) {
+  const slug = legacySlugs[project.id] ?? project.id;
+  const key = `selected.project.${project.id}`;
+  return {
+    name: `project.${slug}.name`,
+    summary: `project.${slug}.tagline`,
+    role: `detail.${slug}.role`,
+    title: `${key}.title`,
+    category: `${key}.category`,
+    period: `${key}.period`,
+    stack: `${key}.stack`,
+    sections: project.sections.map((section, index) => {
+      const sectionKey = `${key}.section.${index}`;
+      const legacy =
+        section.title === "문제와 시작"
+          ? { detail: "problem", case: "problem" }
+          : section.title === "직접 한 일"
+            ? { detail: "intervention", case: "build" }
+            : section.title === "결과와 현재 상태"
+              ? { detail: "outcome", case: "operation" }
+              : undefined;
+      return {
+        title: `${sectionKey}.title`,
+        body: legacy ? `detail.${slug}.${legacy.detail}` : `${sectionKey}.body`,
+        legacyBody: legacy ? `case.${slug}.${legacy.case}` : undefined,
+        screens: (section.screens ?? []).map((screen, screenIndex) => {
+          const screenKey =
+            legacyScreens.get(screenshotKey(screen.src)) ??
+            `${sectionKey}.screen.${screenIndex}`;
+          return {
+            title: `${screenKey}.title`,
+            caption: `${screenKey}.caption`,
+          };
+        }),
+      };
+    }),
+  };
+}
+
 export function selectedPortfolioContent(
   base: PortfolioData,
   track: PortfolioTrack,
@@ -111,6 +150,41 @@ export function selectedPortfolioContent(
       "소개",
       base.profile.fields,
     ),
+    workAreas: base.profile.workAreas?.map((area, index) => ({
+      ...area,
+      title: text(
+        `selected.profile.workAreas.${index}.title`,
+        "주요 업무 제목",
+        "소개 · 주요 업무",
+        area.title,
+        150,
+      ),
+      description: text(
+        `selected.profile.workAreas.${index}.description`,
+        "직접 한 일과 현재 상태",
+        "소개 · 주요 업무",
+        area.description,
+        2000,
+        true,
+      ),
+    })),
+    approach: base.profile.approach?.map((entry, index) => ({
+      title: text(
+        `selected.profile.approach.${index}.title`,
+        "일하는 방식 제목",
+        "소개 · 일하는 방식",
+        entry.title,
+        150,
+      ),
+      description: text(
+        `selected.profile.approach.${index}.description`,
+        "일하는 방식 설명",
+        "소개 · 일하는 방식",
+        entry.description,
+        1500,
+        true,
+      ),
+    })),
     experiences: base.profile.experiences.map((entry, index) => ({
       ...entry,
       title: text(
@@ -163,91 +237,66 @@ export function selectedPortfolioContent(
     })),
   };
   const projects = base.projects.map((project) => {
-    const slug = legacySlugs[project.id] ?? project.id;
     const group = `사례 · ${project.name}`;
-    const key = `selected.project.${project.id}`;
+    const keys = projectCopyFields(project);
     return {
       ...project,
-      name: text(`project.${slug}.name`, "이름", group, project.name, 100),
+      name: text(keys.name, "이름", group, project.name, 100),
       summary: text(
-        `project.${slug}.tagline`,
+        keys.summary,
         "소개 요약",
         group,
         project.summary,
         1000,
         true,
       ),
-      role: text(
-        `detail.${slug}.role`,
-        "직접 맡은 일",
-        group,
-        project.role,
-        1000,
-        true,
-      ),
-      title: text(`${key}.title`, "표지 제목", group, project.title, 300, true),
-      category: text(
-        `${key}.category`,
-        "현재 상태",
-        group,
-        project.category,
-        100,
-      ),
-      period: text(`${key}.period`, "기간", group, project.period, 100),
+      role: text(keys.role, "직접 맡은 일", group, project.role, 1000, true),
+      title: text(keys.title, "표지 제목", group, project.title, 300, true),
+      category: text(keys.category, "현재 상태", group, project.category, 100),
+      period: text(keys.period, "기간", group, project.period, 100),
       stack: list(
-        `${key}.stack`,
+        keys.stack,
         "사용 기술 · 한 줄에 한 항목",
         group,
         project.stack,
       ),
       sections: project.sections.map((section, sectionIndex) => {
-        const sectionKey = `${key}.section.${sectionIndex}`;
-        const bodyKey =
-          section.title === "문제와 시작"
-            ? `detail.${slug}.problem`
-            : section.title === "직접 한 일"
-              ? `detail.${slug}.intervention`
-              : section.title === "결과와 현재 상태"
-                ? `detail.${slug}.outcome`
-                : `${sectionKey}.body`;
+        const sectionKeys = keys.sections[sectionIndex];
         const sectionGroup = `${project.name} · ${section.title}`;
-        const legacyCaseKey =
-          section.title === "문제와 시작"
-            ? `case.${slug}.problem`
-            : section.title === "직접 한 일"
-              ? `case.${slug}.build`
-              : section.title === "결과와 현재 상태"
-                ? `case.${slug}.operation`
-                : undefined;
         const originalBody =
-          track === "ax" && legacyCaseKey
-            ? (overrides[`${track}.${legacyCaseKey}`] ?? section.body)
+          track === "ax" && sectionKeys.legacyBody
+            ? (overrides[`${track}.${sectionKeys.legacyBody}`] ?? section.body)
             : section.body;
         return {
           ...section,
           title: text(
-            `${sectionKey}.title`,
+            sectionKeys.title,
             "본문 제목",
             sectionGroup,
             section.title,
             200,
           ),
-          body: text(bodyKey, "본문", sectionGroup, originalBody, 12000, true),
+          body: text(
+            sectionKeys.body,
+            "본문",
+            sectionGroup,
+            originalBody,
+            12000,
+            true,
+          ),
           screens: section.screens?.map((screen, screenIndex) => {
-            const screenKey =
-              legacyScreens.get(screenshotKey(screen.src)) ??
-              `${sectionKey}.screen.${screenIndex}`;
+            const screenKeys = sectionKeys.screens[screenIndex];
             return {
               ...screen,
               title: text(
-                `${screenKey}.title`,
+                screenKeys.title,
                 `화면 ${screenIndex + 1} 제목`,
                 sectionGroup,
                 screen.title,
                 200,
               ),
               caption: text(
-                `${screenKey}.caption`,
+                screenKeys.caption,
                 `화면 ${screenIndex + 1} 설명`,
                 sectionGroup,
                 screen.caption,
@@ -266,24 +315,43 @@ export function selectedPortfolioContent(
       profile,
       projects,
       skills: base.skills.map((skill, index) => ({
+        ...skill,
         name: text(
-          `selected.skills.${index}.name`,
+          `selected.skills.${skill.id ?? index}.name`,
           "기술·도구",
           "기술 스택",
           skill.name,
           100,
         ),
         usage: text(
-          `selected.skills.${index}.usage`,
+          `selected.skills.${skill.id ?? index}.usage`,
           "실제 사용한 일",
           "기술 스택",
           skill.usage,
           2000,
           true,
         ),
+        category: skill.category
+          ? text(
+              `selected.skills.${skill.id ?? index}.category`,
+              "기술의 사용 분야",
+              "기술 스택",
+              skill.category,
+              100,
+            )
+          : undefined,
       })),
       writing: base.writing.map((post, index) => ({
         ...post,
+        category: post.category
+          ? text(
+              `selected.writing.${index}.category`,
+              "기록의 종류",
+              "글과 기록",
+              post.category,
+              100,
+            )
+          : undefined,
         title: text(
           `selected.writing.${index}.title`,
           "글 제목",

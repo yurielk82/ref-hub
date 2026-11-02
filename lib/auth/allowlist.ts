@@ -14,6 +14,7 @@ export function parseAllowlist(raw: string | undefined): Set<string> {
 
 /** 공용 로그인 서버(Supabase GoTrue)가 돌려주는 사용자 중 판정에 쓰는 부분 */
 export interface AuthUser {
+  id?: string;
   email?: string | null;
   email_confirmed_at?: string | null;
   app_metadata?: { provider?: string; providers?: string[] };
@@ -58,13 +59,53 @@ function readJwtPayload(accessToken: string): unknown {
 export function isOAuthSession(
   accessToken: string | null | undefined,
 ): boolean {
+  return hasAuthenticationMethod(accessToken, "oauth");
+}
+
+function hasAuthenticationMethod(
+  accessToken: string | null | undefined,
+  method: "oauth" | "password",
+): boolean {
   if (!accessToken) return false;
   const payload = readJwtPayload(accessToken);
-  const amr = (payload as { amr?: unknown } | null)?.amr;
+  if (typeof payload !== "object" || payload === null || !("amr" in payload))
+    return false;
+  const amr = payload.amr;
   return (
     Array.isArray(amr) &&
     amr.some(
-      (entry) => (entry as { method?: unknown } | null)?.method === "oauth",
+      (entry: unknown) =>
+        typeof entry === "object" &&
+        entry !== null &&
+        "method" in entry &&
+        entry.method === method,
     )
+  );
+}
+
+export function isReviewSession({
+  user,
+  accessToken,
+  allowlist,
+  userId,
+  expiresAt,
+  now = Date.now(),
+}: {
+  user: AuthUser | null | undefined;
+  accessToken: string | null | undefined;
+  allowlist: Set<string>;
+  userId: string | undefined;
+  expiresAt: number;
+  now?: number;
+}): boolean {
+  return Boolean(
+    userId &&
+    user?.id === userId &&
+    user.email &&
+    user.email_confirmed_at &&
+    allowlist.has(user.email.toLowerCase()) &&
+    Number.isFinite(expiresAt) &&
+    expiresAt > now &&
+    hasAuthenticationMethod(accessToken, "password"),
   );
 }

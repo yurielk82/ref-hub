@@ -187,7 +187,8 @@ function PortfolioFrame({
   }, [workspace?.section]);
   useEffect(() => {
     root.current
-      ?.querySelector<HTMLAnchorElement>(".browser-choices a[aria-current]")
+      ?.querySelector(".browser-choices a[aria-current]")
+      ?.closest("li")
       ?.scrollIntoView({ block: "nearest", inline: "nearest" });
     if (!navigationOpen && focusMain.current) {
       main.current?.focus({ preventScroll: true });
@@ -340,19 +341,13 @@ function PortfolioFrame({
                     className="project-tree-link"
                     href={`#project/${p.id}`}
                     aria-current={current(`project/${p.id}`)}
-                    aria-expanded={expanded}
-                    aria-controls={`project-toc-${p.id}`}
                     onClick={(event) =>
                       choose(event, `project/${p.id}`, compact)
                     }
                   >
                     {p.name}
                   </a>
-                  <ul
-                    className="project-tree-sections"
-                    id={`project-toc-${p.id}`}
-                    hidden={!expanded}
-                  >
+                  <ul className="project-tree-sections" hidden={!expanded}>
                     {[{ title: "개요와 담당 역할" }, ...p.sections].map(
                       (section, row) => {
                         const index = row - 1;

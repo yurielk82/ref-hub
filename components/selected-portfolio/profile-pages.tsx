@@ -2,7 +2,7 @@
 
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import type { PortfolioData } from "@/lib/selected-portfolio/types";
-import { EditableCopy } from "./editable-copy";
+import { EditableCopy, useCopyEditing } from "./editable-copy";
 import "./profile-pages.css";
 
 type ProfilePageProps = {
@@ -10,6 +10,41 @@ type ProfilePageProps = {
   data: PortfolioData;
   onProjectSelect: (id: string) => void;
 };
+
+export function Highlights({
+  title,
+  items,
+  field,
+}: {
+  title: string;
+  items: string[];
+  field: string;
+}) {
+  const editing = useCopyEditing()?.editing;
+  if (!items.length && !editing) return null;
+  return (
+    <div className="highlights">
+      <p className="highlights-title">{title}</p>
+      {editing ? (
+        <EditableCopy field={field} as="p" multiline>
+          {items.join("\n")}
+        </EditableCopy>
+      ) : (
+        <ul>
+          {items.map((item) => {
+            const [head, ...detail] = item.split(" — ");
+            return (
+              <li key={item}>
+                <strong>{head}</strong>
+                {detail.length > 0 && <span>{detail.join(" — ")}</span>}
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </div>
+  );
+}
 
 function ProjectLinks({
   ids,
@@ -178,6 +213,11 @@ export function ProfilePage({ page, data, onProjectSelect }: ProfilePageProps) {
           >
             {profile.intro}
           </EditableCopy>
+          <Highlights
+            title="핵심 성과"
+            items={profile.highlights ?? []}
+            field="selected.profile.highlights"
+          />
           <ProjectLinks
             ids={data.projects.slice(0, 1).map((project) => project.id)}
             data={data}

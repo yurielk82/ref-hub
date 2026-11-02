@@ -59,6 +59,7 @@ export function projectCopyFields(project: Project) {
     title: `${key}.title`,
     category: `${key}.category`,
     period: `${key}.period`,
+    highlights: `${key}.highlights`,
     stack: `${key}.stack`,
     sections: project.sections.map((section, index) => {
       const sectionKey = `${key}.section.${index}`;
@@ -144,6 +145,12 @@ export function selectedPortfolioContent(
     ...base.profile,
     role: text("hero.role", "담당 분야", "소개", base.profile.role, 100),
     intro: [...savedIntroParts, intro].join("\n\n"),
+    highlights: list(
+      "selected.profile.highlights",
+      "핵심 성과 · 한 줄에 한 항목",
+      "소개",
+      base.profile.highlights ?? [],
+    ),
     fields: list(
       "selected.profile.fields",
       "주요 분야 · 한 줄에 한 항목",
@@ -254,6 +261,12 @@ export function selectedPortfolioContent(
       title: text(keys.title, "표지 제목", group, project.title, 300, true),
       category: text(keys.category, "현재 상태", group, project.category, 100),
       period: text(keys.period, "기간", group, project.period, 100),
+      highlights: list(
+        keys.highlights,
+        "주요 성과 · 한 줄에 한 항목",
+        group,
+        project.highlights ?? [],
+      ),
       stack: list(
         keys.stack,
         "사용 기술 · 한 줄에 한 항목",

@@ -41,6 +41,7 @@ export type Project = {
   title: string;
   accent: string;
   summary: string;
+  highlights?: string[];
   stack: string[];
   links: PublicLink[];
   image: string;
@@ -55,6 +56,7 @@ export type PortfolioData = {
     name: string;
     role: string;
     intro: string;
+    highlights?: string[];
     fields: string[];
     links: PublicLink[];
     experiences: RecordEntry[];

@@ -23,7 +23,7 @@ import {
   type OwnerEditing,
 } from "./editable-copy";
 import { OwnerBar } from "./owner-bar";
-import { ProfilePage } from "./profile-pages";
+import { Highlights, ProfilePage } from "./profile-pages";
 import {
   ownerHref,
   type OwnerSection,
@@ -463,14 +463,11 @@ function PortfolioFrame({
                     >
                       {project.summary}
                     </EditableCopy>
-                    <EditableCopy
-                      field={copy?.role ?? ""}
-                      as="p"
-                      className="stage-role"
-                      multiline
-                    >
-                      {project.role}
-                    </EditableCopy>
+                    <Highlights
+                      title="주요 성과"
+                      items={project.highlights ?? []}
+                      field={copy?.highlights ?? ""}
+                    />
                     <span className="stage-go">
                       만든 과정 보기 <span aria-hidden="true">→</span>
                     </span>

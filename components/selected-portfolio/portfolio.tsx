@@ -15,8 +15,12 @@ import type {
 import { sitePath } from "@/lib/selected-portfolio/content";
 import { ThemeToggle } from "./theme-toggle";
 import { ProjectArt } from "./project-art";
-import { ProjectDetail, ProjectSections } from "./project-detail";
-import { useReadingChrome } from "@/lib/selected-portfolio/use-reading-chrome";
+import {
+  ProjectDetail,
+  ProjectSections,
+  sectionId,
+  type SectionRequest,
+} from "./project-detail";
 
 function Links({ links }: { links: PublicLink[] }) {
   return (
@@ -80,9 +84,27 @@ export function Portfolio({
   const { profile, projects } = data;
   const first = "about";
   const [selected, setSelected] = useState(first);
+  const [openProject, setOpenProject] = useState<string | null>(null);
+  const [activeSection, setActiveSection] = useState(-1);
+  const [sectionRequest, setSectionRequest] = useState<SectionRequest | null>(
+    null,
+  );
+  const [navigationOpen, setNavigationOpen] = useState(false);
+  const [compact, setCompact] = useState(false);
   const root = useRef<HTMLDivElement>(null);
+  const menuButton = useRef<HTMLButtonElement>(null);
   const main = useRef<HTMLElement>(null);
-  useReadingChrome(root, selected);
+  const focusMain = useRef(false);
+  useEffect(() => {
+    const query = window.matchMedia("(max-width: 900px)");
+    const sync = () => {
+      setCompact(query.matches);
+      if (!query.matches) setNavigationOpen(false);
+    };
+    sync();
+    query.addEventListener("change", sync);
+    return () => query.removeEventListener("change", sync);
+  }, []);
   useEffect(() => {
     const valid = (key: string) =>
       ["about", "skills", "writing"].includes(key) ||
@@ -90,11 +112,18 @@ export function Portfolio({
         (p) => key === `project/${p.id}` || key === `project/${p.id}/details`,
       );
     const sync = () => {
-      let key = "";
+      let key: string;
       try {
         key = decodeURIComponent(window.location.hash.slice(1));
-      } catch {}
-      setSelected(valid(key) ? key : first);
+      } catch {
+        key = first;
+      }
+      const next = valid(key) ? key : first;
+      setSelected(next);
+      setOpenProject(next.endsWith("/details") ? next.split("/")[1] : null);
+      setActiveSection(-1);
+      setSectionRequest(null);
+      setNavigationOpen(false);
     };
     sync();
     window.addEventListener("hashchange", sync);
@@ -108,7 +137,21 @@ export function Portfolio({
     root.current
       ?.querySelector<HTMLAnchorElement>(".browser-choices a[aria-current]")
       ?.scrollIntoView({ block: "nearest", inline: "nearest" });
-  }, [selected]);
+    if (!navigationOpen && focusMain.current) {
+      main.current?.focus({ preventScroll: true });
+      focusMain.current = false;
+    }
+  }, [selected, navigationOpen]);
+  const select = (key: string) => {
+    if (selected !== key) window.history.pushState(null, "", `#${key}`);
+    setSelected(key);
+    setOpenProject(key.endsWith("/details") ? key.split("/")[1] : null);
+    setActiveSection(-1);
+    setSectionRequest(null);
+    setNavigationOpen(false);
+    focusMain.current = true;
+    main.current?.scrollTo(0, 0);
+  };
   const choose = (event: MouseEvent<HTMLAnchorElement>, key: string) => {
     if (
       event.button !== 0 ||
@@ -119,10 +162,26 @@ export function Portfolio({
     )
       return;
     event.preventDefault();
-    if (selected !== key) window.history.pushState(null, "", `#${key}`);
-    setSelected(key);
-    main.current?.scrollTo(0, 0);
-    main.current?.focus({ preventScroll: true });
+    select(key);
+  };
+  const goToSection = (
+    event: MouseEvent<HTMLAnchorElement>,
+    project: Project,
+    index: number,
+  ) => {
+    if (
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.altKey ||
+      event.shiftKey
+    )
+      return;
+    event.preventDefault();
+    select(`project/${project.id}/details`);
+    focusMain.current = false;
+    setSectionRequest({ projectId: project.id, index });
+    setActiveSection(index);
   };
   const project = projects.find(
     (p) =>
@@ -134,8 +193,60 @@ export function Portfolio({
       ? ("page" as const)
       : undefined;
   return (
-    <div className="project-browser" ref={root}>
-      <aside className="browser-side">
+    <div
+      className="project-browser"
+      ref={root}
+      onKeyDown={(event) => {
+        if (event.key === "Escape" && navigationOpen) {
+          setNavigationOpen(false);
+          menuButton.current?.focus();
+        }
+      }}
+    >
+      <header className="browser-mobile-head">
+        <a href="#about" onClick={(event) => choose(event, first)}>
+          {profile.name}
+        </a>
+        <button
+          className="browser-menu-toggle"
+          type="button"
+          ref={menuButton}
+          aria-controls="portfolio-navigation"
+          aria-expanded={navigationOpen}
+          onClick={() => setNavigationOpen(!navigationOpen)}
+        >
+          {navigationOpen ? "메뉴 닫기" : "프로젝트·목차"}
+          <svg
+            viewBox="0 0 20 20"
+            aria-hidden="true"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+          >
+            {navigationOpen ? (
+              <path d="m5 5 10 10M15 5 5 15" />
+            ) : (
+              <path d="M3 5h14M3 10h14M3 15h14" />
+            )}
+          </svg>
+        </button>
+      </header>
+      {navigationOpen && (
+        <button
+          className="browser-menu-scrim"
+          type="button"
+          aria-label="탐색 메뉴 닫기"
+          onClick={() => {
+            setNavigationOpen(false);
+            menuButton.current?.focus();
+          }}
+        />
+      )}
+      <aside
+        className="browser-side"
+        id="portfolio-navigation"
+        data-open={navigationOpen || undefined}
+      >
         <div className="browser-identity">
           <div className="browser-id-row browser-name-row">
             <div className="browser-name">
@@ -160,22 +271,77 @@ export function Portfolio({
             </a>
           )}
         </div>
-        <nav className="browser-choices" aria-label="프로젝트 선택">
-          {projects.map((p, i) => (
-            <a
-              key={p.id}
-              className={p.parentId ? "project-family-child" : undefined}
-              href={`#project/${p.id}`}
-              aria-current={current(`project/${p.id}`)}
-              onClick={(e) => choose(e, `project/${p.id}`)}
-            >
-              <span className="browser-no num">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <b>{p.name}</b>
-              <em>{p.category}</em>
-            </a>
-          ))}
+        <nav className="browser-choices" aria-label="프로젝트와 목차">
+          <ul className="project-tree">
+            {projects.map((p) => {
+              const expanded = openProject === p.id;
+              const isCurrent = !!current(`project/${p.id}`);
+              return (
+                <li
+                  className={`project-tree-item${p.parentId ? " project-family-child" : ""}`}
+                  data-project-id={p.id}
+                  key={p.id}
+                >
+                  <div className="project-tree-row">
+                    <a
+                      className="project-tree-link"
+                      href={`#project/${p.id}`}
+                      aria-current={current(`project/${p.id}`)}
+                      onClick={(event) => choose(event, `project/${p.id}`)}
+                    >
+                      {p.name}
+                    </a>
+                    <button
+                      className="project-tree-toggle"
+                      type="button"
+                      aria-expanded={expanded}
+                      aria-controls={`project-toc-${p.id}`}
+                      aria-label={`${p.name} 목차 ${expanded ? "접기" : "펼치기"}`}
+                      onClick={() => setOpenProject(expanded ? null : p.id)}
+                    >
+                      <svg
+                        viewBox="0 0 16 16"
+                        aria-hidden="true"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                      >
+                        <path d="m6 3 5 5-5 5" />
+                      </svg>
+                    </button>
+                  </div>
+                  <ul
+                    className="project-tree-sections"
+                    id={`project-toc-${p.id}`}
+                    hidden={!expanded}
+                  >
+                    {[{ title: "개요와 담당 역할" }, ...p.sections].map(
+                      (section, row) => {
+                        const index = row - 1;
+                        return (
+                          <li key={index}>
+                            <a
+                              className="project-tree-section"
+                              data-section-index={index}
+                              href={`${sitePath(`${trackPath}/projects/${p.id}/`)}${index >= 0 ? `#${sectionId(p, index)}` : ""}`}
+                              aria-current={
+                                detail && isCurrent && activeSection === index
+                                  ? "location"
+                                  : undefined
+                              }
+                              onClick={(event) => goToSection(event, p, index)}
+                            >
+                              {section.title}
+                            </a>
+                          </li>
+                        );
+                      },
+                    )}
+                  </ul>
+                </li>
+              );
+            })}
+          </ul>
         </nav>
         <nav className="browser-resources" aria-label="소개와 기록">
           <a
@@ -214,32 +380,35 @@ export function Portfolio({
         id="main-content"
         className={`browser-main${detail ? " is-detail" : ""}`}
         tabIndex={-1}
+        inert={compact && navigationOpen}
       >
         <div
           key={project?.id || selected}
-          className="scene"
+          className={`scene${project ? " project-stage" : ""}`}
           hidden={detail}
           aria-label={project?.name || "프로필"}
         >
           {project ? (
             <>
-              <header className="stage-head">
-                <div className="stage-heading">
+              <a
+                className="stage-cover-link"
+                href={sitePath(`${trackPath}/projects/${project.id}/`)}
+                onClick={(event) =>
+                  choose(event, `project/${project.id}/details`)
+                }
+              >
+                <header className="stage-head">
                   <h2 className="stage-title">
                     <Accent text={project.title} accent={project.accent} />
                   </h2>
-                  <a
-                    className="stage-go"
-                    href={sitePath(`${trackPath}/projects/${project.id}/`)}
-                    onClick={(e) => choose(e, `project/${project.id}/details`)}
-                  >
+                  <p className="stage-summary">{project.summary}</p>
+                  <p className="stage-role">{project.role}</p>
+                  <span className="stage-go">
                     만든 과정 보기 <span aria-hidden="true">→</span>
-                  </a>
-                </div>
-                <p className="stage-summary">{project.summary}</p>
-                <p className="stage-role">{project.role}</p>
-              </header>
-              <ProjectArt project={project} />
+                  </span>
+                </header>
+                <ProjectArt project={project} />
+              </a>
               <footer className="stage-foot">
                 <div>
                   <p className="stage-state">
@@ -350,6 +519,8 @@ export function Portfolio({
             index={projects.indexOf(project)}
             onNavigate={choose}
             metadata={<ProjectMetadata project={project} />}
+            sectionRequest={sectionRequest}
+            onSectionChange={setActiveSection}
           />
         )}
         <noscript>

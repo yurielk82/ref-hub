@@ -33,8 +33,8 @@ export default async function LoginPage(props: {
   const configured = isAuthConfigured();
 
   return (
-    <section className="px-6 pb-28 pt-20 sm:pt-28">
-      <div className="mx-auto max-w-md">
+    <section className="admin-login">
+      <div className="admin-login-content">
         <h1 className="text-2xl font-bold tracking-tight text-stone-950 dark:text-stone-50">
           공고 모음 로그인
         </h1>
@@ -56,7 +56,7 @@ export default async function LoginPage(props: {
           <button
             type="submit"
             disabled={!configured}
-            className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] disabled:cursor-not-allowed disabled:opacity-40"
+            className="admin-primary inline-flex w-full items-center justify-center gap-2 px-5 py-3 text-sm font-semibold transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] disabled:cursor-not-allowed disabled:opacity-40"
           >
             <LogIn className="h-4 w-4" />
             Google 계정으로 로그인

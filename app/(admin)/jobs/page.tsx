@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
-import { LogOut } from "lucide-react";
 
 import { jobsViewer } from "@/auth";
 import { toBoardItems } from "@/lib/jobs/board";
@@ -94,15 +93,6 @@ export default async function JobsPage() {
               storedCount={store?.postings.length ?? 0}
               queries={SEARCH_QUERIES.map((query) => query.label)}
             />
-            <form action="/auth/logout" method="post">
-              <button
-                type="submit"
-                className="inline-flex items-center gap-1.5 rounded-lg border border-stone-200 bg-white px-3 py-2 text-xs font-semibold text-stone-600 transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] dark:border-stone-800 dark:bg-stone-900 dark:text-stone-300"
-              >
-                <LogOut className="h-3.5 w-3.5" />
-                로그아웃
-              </button>
-            </form>
           </div>
         </div>
 

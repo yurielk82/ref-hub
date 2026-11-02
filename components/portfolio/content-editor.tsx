@@ -5,7 +5,7 @@ import type { CopyField } from "@/lib/portfolio/store";
 import type { PortfolioTrack } from "@/lib/portfolio/content";
 
 const inputClass =
-  "mt-2 w-full rounded-md border border-stone-300 bg-white px-3 py-2 text-base leading-7 text-stone-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700 disabled:opacity-60 dark:border-stone-700 dark:bg-stone-900 dark:text-stone-50";
+  "admin-editor-input mt-2 w-full px-3 py-2 text-base leading-7 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] disabled:opacity-60";
 export function PortfolioEditor({
   track,
   fields,
@@ -220,7 +220,7 @@ export function PortfolioEditor({
               open={query ? true : index === 0}
               className="py-5"
             >
-              <summary className="cursor-pointer py-2 text-lg font-semibold focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700">
+              <summary className="cursor-pointer py-2 text-lg font-semibold focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]">
                 {group}
               </summary>
               <fieldset
@@ -279,7 +279,7 @@ export function PortfolioEditor({
           </p>
         )}
       </div>
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-stone-200 bg-white px-6 py-4 dark:border-stone-800 dark:bg-stone-950">
+      <div className="admin-editor-savebar fixed inset-x-0 bottom-0 z-40 px-6 py-4">
         <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-between gap-3">
           <div className="min-w-0 flex-1">
             <p role="status" className="text-sm font-medium">
@@ -321,7 +321,7 @@ export function PortfolioEditor({
             type="button"
             disabled={!dirty || pending || Boolean(invalid) || !canSave}
             onClick={submit}
-            className="min-h-11 rounded-md bg-teal-700 px-6 font-semibold text-white hover:bg-teal-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700 disabled:cursor-not-allowed disabled:opacity-40"
+            className="admin-primary min-h-11 px-6 font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] disabled:cursor-not-allowed disabled:opacity-40"
           >
             {pending ? "저장 중…" : "저장"}
           </button>

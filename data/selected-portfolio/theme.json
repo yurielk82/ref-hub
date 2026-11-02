@@ -9,7 +9,14 @@
     "stage": "#fafafa",
     "stageInk": "#232323",
     "accent": "#c04466",
-    "signalPalette": ["#edb081", "#e77e63", "#d64f5f", "#aa3a6e", "#7a2e70", "#4b2362"]
+    "signalPalette": [
+      "#edb081",
+      "#e77e63",
+      "#d64f5f",
+      "#aa3a6e",
+      "#7a2e70",
+      "#4b2362"
+    ]
   },
   "dark": {
     "paper": "#151319",

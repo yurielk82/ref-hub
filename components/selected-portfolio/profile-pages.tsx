@@ -31,10 +31,10 @@ export function Highlights({
         </EditableCopy>
       ) : (
         <ul>
-          {items.map((item) => {
+          {items.map((item, index) => {
             const [head, ...detail] = item.split(" — ");
             return (
-              <li key={item}>
+              <li key={index}>
                 <strong>{head}</strong>
                 {detail.length > 0 && <span>{detail.join(" — ")}</span>}
               </li>

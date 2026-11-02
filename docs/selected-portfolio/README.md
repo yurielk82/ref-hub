@@ -17,6 +17,8 @@ KPI.는 제약 영업 운영 플랫폼으로 소개한다. SFE·S&OP·KPIS·유�
 
 원본 `/`와 `/ax`의 메뉴는 서로 연결하지 않는다. 기존 `loadPortfolio()`가 읽는 저장소 밖 snapshot의 명시적인 수정값만 새 기본값에 덮는다. 기존 필드 이름과 저장 원본을 보존하며 의미가 바뀐 섹션에는 `selected.*` 키를 쓴다. 새 필드도 기존 저장 액션의 허용 목록에 등록한다. 같은 캡처는 실제 경로로 원래 편집키에 연결하고 편집 목록에서 중복을 제거한다.
 
-`app/(legacy)`의 로그인·편집·이력서·공고·매뉴얼과 인증·파일 저장 모듈은 유지한다. 오너 메뉴는 기존 서버 인증 판정 뒤에만 제공한다. 제출 PDF/DOCX의 고정 주소와 저장된 파일은 공개 화면 교체와 독립이다.
+로그인·편집·이력서·공고의 page는 같은 주소를 유지하며 `app/(admin)`에서 새 관리 디자인을 공유한다. 기존 서버 action·제출 다운로드/공유 route와 매뉴얼은 `app/(legacy)`에 보존한다. 인증·파일 저장 모듈은 유지한다. 오너 메뉴는 기존 서버 인증 판정 뒤에만 제공한다. 제출 PDF/DOCX의 고정 주소와 저장된 파일은 공개 화면 교체와 독립이다.
 
 [Apple 레이아웃](https://developer.apple.com/design/human-interface-guidelines/layout), [타이포그래피](https://developer.apple.com/design/human-interface-guidelines/typography), [움직임](https://developer.apple.com/design/human-interface-guidelines/motion)은 정렬·글자 위계·차분한 조작의 참고다. 실제 적용값은 운영 CSS와 `DESIGN.md`를 따른다. Apple 글꼴·상표·아이콘을 가져오지 않는다.
+
+프로젝트 탐색과 기능 목차는 하나의 트리에 통합한다. 프로젝트 이름은 표지, 화살표는 목차 펼침이며 상세에서 현재 프로젝트의 목차를 자동으로 연다. 표지의 제목·요약·입체 그림은 하나의 상세 링크다. 모바일은 메뉴 버튼으로 탐색에 접근하고 본문 선택 뒤 닫힌다. 현재 공개 배치·관리 통일 기준은 루트 DESIGN.md를 따르며, 원본 아트 문서의 두 레일 설명을 현행 구현으로 해석하지 않는다.

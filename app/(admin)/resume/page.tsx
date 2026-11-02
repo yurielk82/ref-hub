@@ -2,7 +2,6 @@ import { listShares } from "@/lib/resume/shares";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { LogOut } from "lucide-react";
 
 import { jobsViewer } from "@/auth";
 import {
@@ -43,11 +42,6 @@ const KST_MONTH = new Intl.DateTimeFormat("ko-KR", {
   month: "2-digit",
 });
 
-/**
- * 이력서 작업 화면(로그인 전용). 사람인·잡코리아 칸 순서대로 보여 주고 칸마다 복사해 붙여 넣는다.
- * 두 사이트는 칸이 달라 버전을 따로 쌓는다(?p=jobkorea). 이력서 내용은 공개 저장소에 두지 않고
- * 서버의 저장소 밖 폴더에 버전별 파일로 쌓는다.
- */
 export default async function ResumePage(props: {
   searchParams: Promise<{ v?: string | string[]; p?: string | string[] }>;
 }) {
@@ -92,15 +86,6 @@ export default async function ResumePage(props: {
               붙여 넣으세요.
             </p>
           </div>
-          <form action="/auth/logout" method="post">
-            <button
-              type="submit"
-              className="inline-flex items-center gap-1.5 rounded-lg border border-stone-200 bg-white px-3 py-2 text-xs font-semibold text-stone-600 transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] dark:border-stone-800 dark:bg-stone-900 dark:text-stone-300"
-            >
-              <LogOut className="h-3.5 w-3.5" />
-              로그아웃
-            </button>
-          </form>
         </div>
 
         <nav

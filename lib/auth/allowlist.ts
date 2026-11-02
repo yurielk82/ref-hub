@@ -74,7 +74,7 @@ function hasAuthenticationMethod(
   return (
     Array.isArray(amr) &&
     amr.some(
-      (entry) =>
+      (entry: unknown) =>
         typeof entry === "object" &&
         entry !== null &&
         "method" in entry &&

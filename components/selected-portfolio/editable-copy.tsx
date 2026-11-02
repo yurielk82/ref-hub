@@ -79,6 +79,11 @@ export function InlineEditingProvider({
   const [pending, startSaving] = useTransition();
   const saving = useRef(false);
   const restored = useRef(false);
+  const receivedRevision = useRef(owner?.revision);
+  const deferredSnapshot = useRef<{
+    revision: string;
+    values: Record<string, string>;
+  } | null>(null);
   const draftKey = `ref-hub-portfolio-draft-${track}`;
   const changed = [...definitions.values()].filter(
     (field) =>
@@ -94,6 +99,25 @@ export function InlineEditingProvider({
     !editing ||
     !dirty ||
     window.confirm("저장하지 않은 수정 내용이 있습니다. 이동할까요?");
+
+  useEffect(() => {
+    if (!owner) return;
+    if (owner.revision !== receivedRevision.current) {
+      receivedRevision.current = owner.revision;
+      deferredSnapshot.current = {
+        revision: owner.revision,
+        values: Object.fromEntries(
+          owner.fields.map((field) => [field.id, field.value]),
+        ),
+      };
+    }
+    const snapshot = deferredSnapshot.current;
+    if (!snapshot || dirty || saving.current) return;
+    deferredSnapshot.current = null;
+    setSaved(snapshot.values);
+    setDraft(snapshot.values);
+    setRevision(snapshot.revision);
+  }, [owner, dirty]);
 
   useEffect(() => {
     if (!owner || restored.current) return;
@@ -212,6 +236,7 @@ export function InlineEditingProvider({
         setSaved((current) => ({ ...current, ...normalized }));
         setDraft((current) => ({ ...current, ...normalized }));
         setRevision(result.revision);
+        deferredSnapshot.current = null;
         setEditing(false);
         setMessage("저장했습니다. 공개 홈페이지에 반영됐습니다.");
         router.refresh();
@@ -247,7 +272,13 @@ export function InlineEditingProvider({
         suspend: () => setEditing(false),
         cancel: () => {
           if (!dirty || window.confirm("수정한 내용을 취소할까요?")) {
-            setDraft(saved);
+            const snapshot = deferredSnapshot.current;
+            if (snapshot) {
+              setSaved(snapshot.values);
+              setDraft(snapshot.values);
+              setRevision(snapshot.revision);
+              deferredSnapshot.current = null;
+            } else setDraft(saved);
             setEditing(false);
             setError("");
             setMessage("");

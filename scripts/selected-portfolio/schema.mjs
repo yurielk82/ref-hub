@@ -1,6 +1,10 @@
 const object = (v) => v !== null && typeof v === "object" && !Array.isArray(v);
 export function isPublicUrl(value, email = true) {
-  if (typeof value !== "string" || /[\s\u0000-\u001f]/.test(value))
+  if (
+    typeof value !== "string" ||
+    /\s/.test(value) ||
+    [...value].some((character) => character.charCodeAt(0) < 32)
+  )
     return false;
   try {
     const url = new URL(value);

@@ -269,15 +269,6 @@ button {
 .project-tree-item {
   min-width: 0;
 }
-.project-tree-row {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 32px;
-  align-items: stretch;
-  border-radius: 9px;
-}
-.project-tree-row:has(.project-tree-link[aria-current]) {
-  background: color-mix(in srgb, var(--signal) 11%, var(--paper));
-}
 .project-tree-link,
 .project-tree-section {
   display: flex;
@@ -297,24 +288,6 @@ button {
 .project-tree-item.project-family-child .project-tree-link:not([aria-current]) {
   color: var(--ink-2);
 }
-.project-tree-toggle {
-  display: grid;
-  place-items: center;
-  min-height: 42px;
-  padding: 0;
-  border: 0;
-  border-radius: 7px;
-  background: transparent;
-  color: var(--ink-2);
-  cursor: pointer;
-}
-.project-tree-toggle svg {
-  width: 14px;
-  height: 14px;
-}
-.project-tree-toggle[aria-expanded="true"] svg {
-  rotate: 90deg;
-}
 .project-tree-sections {
   display: grid;
   gap: 2px;
@@ -331,7 +304,6 @@ button {
   line-height: 1.55;
 }
 .project-tree-link:hover,
-.project-tree-toggle:hover,
 .project-tree-section:hover,
 .project-tree-section[aria-current] {
   background: var(--wash);
@@ -339,6 +311,9 @@ button {
 }
 .project-tree-section[aria-current] {
   font-weight: 650;
+}
+.project-tree-link[aria-current] {
+  background: color-mix(in srgb, var(--signal) 11%, var(--paper));
 }
 .browser-mobile-head,
 .browser-menu-scrim {
@@ -1197,12 +1172,8 @@ button {
     background: color-mix(in srgb, var(--ink) 18%, transparent);
   }
   .project-tree-link,
-  .project-tree-toggle,
   .project-tree-section {
     min-height: 44px;
-  }
-  .project-tree-row {
-    grid-template-columns: minmax(0, 1fr) 44px;
   }
   .project-tree-link {
     font-size: 14px;

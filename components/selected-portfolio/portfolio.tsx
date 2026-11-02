@@ -135,7 +135,6 @@ function PortfolioFrame({
     .join(",");
   const first = "about";
   const [selected, setSelected] = useState(first);
-  const [openProject, setOpenProject] = useState<string | null>(null);
   const [activeSection, setActiveSection] = useState(-1);
   const [sectionRequest, setSectionRequest] = useState<SectionRequest | null>(
     null,
@@ -169,7 +168,6 @@ function PortfolioFrame({
       }
       const next = valid(key) ? key : first;
       setSelected(next);
-      setOpenProject(next.endsWith("/details") ? next.split("/")[1] : null);
       setActiveSection(-1);
       setSectionRequest(null);
       setNavigationOpen(false);
@@ -189,25 +187,29 @@ function PortfolioFrame({
   }, [workspace?.section]);
   useEffect(() => {
     root.current
-      ?.querySelector<HTMLAnchorElement>(".browser-choices a[aria-current]")
+      ?.querySelector(".browser-choices a[aria-current]")
+      ?.closest("li")
       ?.scrollIntoView({ block: "nearest", inline: "nearest" });
     if (!navigationOpen && focusMain.current) {
       main.current?.focus({ preventScroll: true });
       focusMain.current = false;
     }
   }, [selected, navigationOpen]);
-  const select = (key: string) => {
+  const select = (key: string, keepNavigation = false) => {
     if (workspace) router.push(`${home}#${key}`, { scroll: false });
     else if (selected !== key) window.history.pushState(null, "", `#${key}`);
     setSelected(key);
-    setOpenProject(key.endsWith("/details") ? key.split("/")[1] : null);
     setActiveSection(-1);
     setSectionRequest(null);
-    setNavigationOpen(false);
-    focusMain.current = true;
+    setNavigationOpen(keepNavigation);
+    focusMain.current = !keepNavigation;
     main.current?.scrollTo(0, 0);
   };
-  const choose = (event: MouseEvent<HTMLElement>, key: string) => {
+  const choose = (
+    event: MouseEvent<HTMLElement>,
+    key: string,
+    keepNavigation = false,
+  ) => {
     if (
       event.button !== 0 ||
       event.metaKey ||
@@ -217,7 +219,7 @@ function PortfolioFrame({
     )
       return;
     event.preventDefault();
-    select(key);
+    select(key, keepNavigation);
   };
   const goToSection = (
     event: MouseEvent<HTMLAnchorElement>,
@@ -328,47 +330,24 @@ function PortfolioFrame({
         <nav className="browser-choices" aria-label="프로젝트와 목차">
           <ul className="project-tree">
             {projects.map((p) => {
-              const expanded = openProject === p.id;
-              const isCurrent = !!current(`project/${p.id}`);
+              const expanded = !workspace && project?.id === p.id;
               return (
                 <li
                   className={`project-tree-item${p.parentId ? " project-family-child" : ""}`}
                   data-project-id={p.id}
                   key={p.id}
                 >
-                  <div className="project-tree-row">
-                    <a
-                      className="project-tree-link"
-                      href={`#project/${p.id}`}
-                      aria-current={current(`project/${p.id}`)}
-                      onClick={(event) => choose(event, `project/${p.id}`)}
-                    >
-                      {p.name}
-                    </a>
-                    <button
-                      className="project-tree-toggle"
-                      type="button"
-                      aria-expanded={expanded}
-                      aria-controls={`project-toc-${p.id}`}
-                      aria-label={`${p.name} 목차 ${expanded ? "접기" : "펼치기"}`}
-                      onClick={() => setOpenProject(expanded ? null : p.id)}
-                    >
-                      <svg
-                        viewBox="0 0 16 16"
-                        aria-hidden="true"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                      >
-                        <path d="m6 3 5 5-5 5" />
-                      </svg>
-                    </button>
-                  </div>
-                  <ul
-                    className="project-tree-sections"
-                    id={`project-toc-${p.id}`}
-                    hidden={!expanded}
+                  <a
+                    className="project-tree-link"
+                    href={`#project/${p.id}`}
+                    aria-current={current(`project/${p.id}`)}
+                    onClick={(event) =>
+                      choose(event, `project/${p.id}`, compact)
+                    }
                   >
+                    {p.name}
+                  </a>
+                  <ul className="project-tree-sections" hidden={!expanded}>
                     {[{ title: "개요와 담당 역할" }, ...p.sections].map(
                       (section, row) => {
                         const index = row - 1;
@@ -379,7 +358,7 @@ function PortfolioFrame({
                               data-section-index={index}
                               href={`${sitePath(`${trackPath}/projects/${p.id}/`)}${index >= 0 ? `#${sectionId(p, index)}` : ""}`}
                               aria-current={
-                                detail && isCurrent && activeSection === index
+                                detail && expanded && activeSection === index
                                   ? "location"
                                   : undefined
                               }

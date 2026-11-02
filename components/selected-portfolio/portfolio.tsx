@@ -127,6 +127,12 @@ function PortfolioFrame({
   const home: PortfolioHome = trackPath === "/ax" ? "/ax" : "/";
   const editing = useCopyEditing();
   const { profile, projects } = data;
+  const projectKeys = projects
+    .flatMap((project) => [
+      `project/${project.id}`,
+      `project/${project.id}/details`,
+    ])
+    .join(",");
   const first = "about";
   const [selected, setSelected] = useState(first);
   const [openProject, setOpenProject] = useState<string | null>(null);
@@ -153,9 +159,7 @@ function PortfolioFrame({
   useEffect(() => {
     const valid = (key: string) =>
       ["about", "skills", "writing"].includes(key) ||
-      projects.some(
-        (p) => key === `project/${p.id}` || key === `project/${p.id}/details`,
-      );
+      projectKeys.split(",").includes(key);
     const sync = () => {
       let key: string;
       try {
@@ -177,7 +181,12 @@ function PortfolioFrame({
       window.removeEventListener("hashchange", sync);
       window.removeEventListener("popstate", sync);
     };
-  }, [first, projects]);
+  }, [first, projectKeys]);
+  useEffect(() => {
+    if (!workspace) return;
+    main.current?.scrollTo(0, 0);
+    main.current?.focus({ preventScroll: true });
+  }, [workspace?.section]);
   useEffect(() => {
     root.current
       ?.querySelector<HTMLAnchorElement>(".browser-choices a[aria-current]")

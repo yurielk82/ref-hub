@@ -1349,9 +1349,9 @@
     },
     {
       "id": "access",
-      "name": "Supabase Auth · RLS",
+      "name": "JWT 인증 · Supabase RLS",
       "category": "로그인·자료 접근",
-      "usage": "업체별 정산 자료와 팀별 업무 자료를 허용된 사용자 범위에서 보도록 로그인과 데이터 접근을 구성했습니다. CSO 자체 포털은 운영 종료 상태입니다.",
+      "usage": "CSO 정산 자료 조회 포털은 자체 JWT 인증으로 업체별 접근을 구분했습니다. Team Pulse는 Supabase Auth와 RLS로 사용자별 자료 접근을 제한합니다. CSO 포털은 운영 종료 상태입니다.",
       "projectIds": ["csoweb", "team-pulse"]
     },
     {

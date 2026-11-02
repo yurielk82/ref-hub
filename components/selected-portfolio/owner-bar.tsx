@@ -37,18 +37,38 @@ export function OwnerBar({
   return (
     <header ref={bar} className="owner-bar" data-print-hide>
       <nav aria-label="오너 관리 메뉴">
-        <button
-          type="button"
-          aria-pressed={editing.editing}
-          disabled={editing.pending}
-          onClick={() => {
-            if (section)
+        {section ? (
+          <Link
+            href={`${home}?edit=1`}
+            onClick={(event) => {
+              if (
+                event.metaKey ||
+                event.ctrlKey ||
+                event.shiftKey ||
+                event.altKey
+              )
+                return;
+              event.preventDefault();
+              if (editing.pending) return;
               router.push(`${home}${window.location.hash}`, { scroll: false });
-            editing.begin();
-          }}
-        >
-          문구 편집
-        </button>
+              editing.begin();
+            }}
+            scroll={false}
+          >
+            문구 편집
+          </Link>
+        ) : (
+          <button
+            type="button"
+            aria-pressed={editing.editing}
+            disabled={editing.pending}
+            onClick={() => {
+              editing.begin();
+            }}
+          >
+            문구 편집
+          </button>
+        )}
         <Link
           href={ownerHref(home, "resume")}
           onClick={(event) => {

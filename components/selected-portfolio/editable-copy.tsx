@@ -132,14 +132,12 @@ export function InlineEditingProvider({
       )
         return;
       const changes = previous.changes;
-      const recovered = Object.fromEntries(
-        [...definitions.values()].flatMap((field) =>
-          typeof changes[field.id] === "string" &&
-          changes[field.id] !== field.value
-            ? [[field.id, changes[field.id]]]
-            : [],
-        ),
-      );
+      const recovered: Record<string, string> = {};
+      for (const field of definitions.values()) {
+        const value = changes[field.id];
+        if (typeof value === "string" && value !== field.value)
+          recovered[field.id] = value;
+      }
       if (Object.keys(recovered).length) {
         setDraft((current) => ({ ...current, ...recovered }));
         setRevision(previous.revision);

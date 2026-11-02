@@ -12,9 +12,9 @@ const metadata: Metadata = {
 export async function generateMetadata({
   searchParams,
 }: {
-  searchParams: Promise<WorkspaceQuery>;
+  searchParams?: Promise<WorkspaceQuery>;
 }): Promise<Metadata> {
-  const query = await searchParams;
+  const query = (await searchParams) ?? {};
   return {
     ...metadata,
     ...(query.manage || query.edit

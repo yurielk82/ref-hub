@@ -9,8 +9,19 @@ import { EditableCopy, useProjectCopy } from "./editable-copy";
 export const sectionId = (project: Project, index: number) =>
   `${project.id}-section-${index + 1}`;
 
-export function ProjectSections({ project }: { project: Project }) {
+const leadSection = (project: Project) =>
+  project.sections.findIndex((section) => section.screens?.length);
+
+export function ProjectSections({
+  project,
+  withoutLead = false,
+}: {
+  project: Project;
+  withoutLead?: boolean;
+}) {
   const copy = useProjectCopy(project.id);
+  const lead = withoutLead ? leadSection(project) : -1;
+  const skip = (i: number) => (i === lead ? 1 : 0);
   return (
     <>
       {project.sections.map((section, i) => (
@@ -30,10 +41,10 @@ export function ProjectSections({ project }: { project: Project }) {
           <EditableCopy field={copy?.sections[i]?.body ?? ""} as="p" multiline>
             {section.body}
           </EditableCopy>
-          {section.screens?.length ? (
+          {(section.screens?.length ?? 0) > skip(i) ? (
             <ProjectScreens
-              screens={section.screens}
-              copyFields={copy?.sections[i]?.screens}
+              screens={section.screens!.slice(skip(i))}
+              copyFields={copy?.sections[i]?.screens.slice(skip(i))}
             />
           ) : null}
         </section>
@@ -66,6 +77,7 @@ export function ProjectDetail({
 }) {
   const body = useRef<HTMLDivElement>(null);
   const copy = useProjectCopy(project.id);
+  const lead = leadSection(project);
   useEffect(() => {
     const box = body.current;
     if (!box || sectionRequest?.projectId !== project.id) return;
@@ -170,13 +182,19 @@ export function ProjectDetail({
               >
                 {project.summary}
               </EditableCopy>
+              {lead >= 0 && (
+                <ProjectScreens
+                  screens={project.sections[lead].screens!.slice(0, 1)}
+                  copyFields={copy?.sections[lead]?.screens.slice(0, 1)}
+                />
+              )}
               {metadata}
               <ProjectFamily
                 project={project}
                 projects={projects}
                 onNavigate={onNavigate}
               />
-              <ProjectSections project={project} />
+              <ProjectSections project={project} withoutLead />
             </article>
           </div>
         </div>

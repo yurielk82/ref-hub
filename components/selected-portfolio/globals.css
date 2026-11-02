@@ -135,8 +135,8 @@ body {
 }
 body {
   font-family:
-    var(--font-pretendard), "Apple SD Gothic Neo", "Malgun Gothic", system-ui,
-    sans-serif;
+    var(--font-pretendard), var(--font-pretendard-full), "Apple SD Gothic Neo",
+    "Malgun Gothic", system-ui, sans-serif;
   font-size: var(--fs-m);
   line-height: 1.7;
   word-break: keep-all;
@@ -331,6 +331,14 @@ button {
 .browser-resources a {
   text-decoration: none;
 }
+.browser-choices[data-more] {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 calc(100% - 56px),
+    transparent
+  );
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 56px), transparent);
+}
 .browser-resources a[aria-current],
 .browser-resources a:hover {
   text-decoration: underline;
@@ -512,9 +520,9 @@ button {
   font-weight: 600;
   color: var(--ink-2);
 }
-.tags li + li::before {
+.tags li:not(:last-child)::after {
   content: "/";
-  margin-right: 16px;
+  margin-left: 16px;
   color: var(--ink-3);
 }
 
@@ -681,7 +689,7 @@ button {
   font-size: 16px;
   font-weight: 750;
 }
-.detail-section h3 span {
+.detail-section h3 .num {
   display: block;
   font-size: 11px;
   color: var(--ink-2);
@@ -964,7 +972,7 @@ button {
   font-weight: 800;
   letter-spacing: -0.025em;
 }
-.detail-copy .detail-section h3 span {
+.detail-copy .detail-section h3 .num {
   margin: 0;
   font-size: 11px;
   flex: none;
@@ -1249,6 +1257,13 @@ button {
   }
   .detail-footer {
     font-size: 11px;
+  }
+  .browser-resources a,
+  .detail-footer a,
+  .detail-footer button {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
   }
 }
 @media (max-width: 560px) {

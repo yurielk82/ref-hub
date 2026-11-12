@@ -16,7 +16,7 @@ import type {
 export const AX_HERO = {
   name: "권대환",
   role: "제약 영업관리 · 데이터 분석 · 업무 효율화",
-  jobTitle: "영업관리팀 과장 · 영업본부 분석·기획 겸직",
+  jobTitle: "영업관리팀 과장",
   employer: "부광유니파마",
   title: "다른 기준을 맞추고,\n업무가 이어지게.",
   subhead: "두 회사의 업무 기준을 협의하고, 지표와 시스템으로 구현했습니다.",

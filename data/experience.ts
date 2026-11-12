@@ -17,7 +17,7 @@ export const EXPERIENCES: Experience[] = [
   {
     period: "2025-03 ~ 현재",
     title: "부광유니파마(구 한국유니온제약) 영업관리팀",
-    role: "과장 · 2026-08부터 영업본부 분석·기획 겸직",
+    role: "과장",
     description:
       "영업 자료 분석과 보고 업무를 맡고, 반복 작업을 줄이는 시스템을 직접 구축·운영합니다.",
     highlights: [

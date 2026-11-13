@@ -444,6 +444,7 @@
         "보고 전후 대조 자동화 — 출고 자료 사전 대조, API 보고, 보고 후 최근 30일 자동 대조·정정, 자동 판정이 어려운 예외만 사람이 확인",
         "자동 대조 첫 적용에서 8·9월 누락 34줄 발견·추가 보고"
       ],
+      "lead": "/assets/selected-portfolio/images/kpis-dsr-api/kpis-home-content-52dd775e7485.webp",
       "stack": ["Express 5", "React 19", "Vite 7", "MSSQL", "TanStack Table"],
       "links": [],
       "image": "",

@@ -52,7 +52,10 @@ function WorkCard({
   const copy = useProjectCopy(project.id);
   const editing = useCopyEditing()?.editing;
   return (
-    <article className={`work-card${featured ? " is-featured" : ""}`}>
+    <article
+      className={`work-card${featured ? " is-featured" : ""}`}
+      data-project={project.id}
+    >
       {lead ? (
         <a
           className="work-card-image"

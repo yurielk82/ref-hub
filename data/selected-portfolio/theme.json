@@ -28,11 +28,6 @@
     "stage": "#171512",
     "stageInk": "#f0e7dc",
     "accent": "#e89772",
-    "signalPalette": [
-      "#4a36b5",
-      "#c22170",
-      "#f0661c",
-      "#ffcc4a"
-    ]
+    "signalPalette": ["#4a36b5", "#c22170", "#f0661c", "#ffcc4a"]
   }
 }

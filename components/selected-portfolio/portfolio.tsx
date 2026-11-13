@@ -66,18 +66,21 @@ function PortfolioFrame({
       : undefined;
 
   useEffect(() => {
+    if (workspace) return;
     const followLegacyProject = () => {
       const match = /^#project\/([^/]+)(?:\/details)?$/.exec(
         window.location.hash,
       );
       const id = match?.[1];
       if (id && data.projects.some((entry) => entry.id === id))
-        router.replace(projectHref(trackPath, id));
+        router.replace(
+          `${projectHref(trackPath, id)}${window.location.search}`,
+        );
     };
     followLegacyProject();
     window.addEventListener("hashchange", followLegacyProject);
     return () => window.removeEventListener("hashchange", followLegacyProject);
-  }, [data.projects, router, trackPath]);
+  }, [data.projects, router, trackPath, workspace]);
 
   useEffect(() => {
     if (!navigationOpen) return;

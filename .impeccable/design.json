@@ -1,74 +1,46 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-02T03:14:04.123229+00:00",
-  "title": "Design System: ref-hub 선택 포트폴리오",
+  "generatedAt": "2026-11-13T00:00:00+09:00",
+  "title": "Design System: ref-hub 업무 개선 포트폴리오",
   "extensions": {
-    "upstream": {
-      "repository": "https://github.com/jihyun-el/portfolio-template",
-      "commit": "44cfd52a992c6e49b1547a30d49a0201cb10b728",
+    "reference": {
+      "url": "https://ryanschmidt.design/",
+      "sourceCommit": "eefa2de",
+      "implementation": "공개 화면 참고·독립 구현",
       "tokens": "data/selected-portfolio/theme.json"
     },
-    "motion": [
-      {
-        "name": "의미 장면",
-        "value": "0.85s–1.6s cubic-bezier(.16,1,.3,1)",
-        "purpose": "정렬·선택·검사의 단발 설명. 움직임 줄이기에서는 정지한다."
-      }
-    ],
     "breakpoints": [
       {
-        "name": "공개 탐색",
-        "value": "900px 이하에서 메뉴 패널, 그 위에서 단일 왼쪽 레일"
-      },
-      {
-        "name": "프로젝트 표지",
-        "value": "1100px 초과 글·그림 2열, 이하 세로 배치, 최대1312px"
+        "name": "목록·탐색",
+        "value": "760px 이하 1열·접는 상단 메뉴, 그 위 2열·가로 탐색"
       }
     ],
-    "shadows": []
-  },
-  "components": [
-    {
-      "name": "주 행동 버튼",
-      "kind": "button",
-      "refersTo": "button-primary",
-      "description": "사례의 상세로 이동한다.",
-      "html": "<button class=\"selected-cta\">만든 과정 보기 →</button>",
-      "css": ".selected-cta{background:#171717;color:#fff;border:1px solid #171717;border-radius:999px;padding:9px 22px;min-height:48px;font-family:Pretendard,sans-serif;font-size:14px;font-weight:650;}"
-    }
-  ],
-  "narrative": {
-    "northStar": "실제 업무를 이해하고 해결한 과정을 프로젝트별 입체 장면과 결과물로 보여 준다.",
-    "overview": "선택한 원본의 글꼴·업무별 입체 장면·단일 프로젝트 탐색을 유지한다. 소개·이력은 역할과 주요 업무·실제 사례로 구성하며 로그인한 오너는 같은 홈페이지에서 문구·이력서·공고를 관리한다.",
-    "keyCharacteristics": [
-      "소개 다음 실제 프로젝트",
-      "KPI 플랫폼과 연계 기능의 관계",
-      "업무별로 다른 입체 장면",
-      "설명과 같은 본문의 실제 캡처",
-      "선택한 프로젝트만 목차가 펼쳐지는 단일 탐색",
-      "주요 업무와 기술을 실제 사례로 연결",
-      "실제 공개 문서로 채운 글과 기록",
-      "로그인한 오너에게만 같은 화면의 상단바와 본문 직접 편집"
-    ],
-    "rules": [
+    "shadows": [
       {
-        "name": "사실과 상태",
-        "body": "개인 시제품·준비·종료와 실제 운영을 구분한다.",
-        "section": "components"
-      },
-      {
-        "name": "같은 홈페이지에서 관리",
-        "body": "공개와 관리를 별도 화면으로 나누지 않는다. 문구는 현재 자리에서 수정하며 이력서·공고도 같은 탐색의 본문에서 연다. 로그아웃하면 관리 상단바를 숨기고 공개 로그인은 탐색 하단에 작게 둔다.",
-        "section": "components"
+        "name": "상단 탐색",
+        "value": "0 5px 18px -10px rgb(50 33 17 / 0.24)"
       }
-    ],
-    "dos": [
-      "같은 대상의 의미를 큰 그림과 작은 심볼에서 유지한다.",
-      "두 테마에서 종이의 밝은 재질을 유지한다."
-    ],
-    "donts": [
-      "무관한 네 견본을 반복 배정하지 않는다.",
-      "공개 화면에 개인 서류를 넣지 않는다."
     ]
+  },
+  "components": [],
+  "narrative": {
+    "northStar": "직접 맡은 역할과 업무 변화의 결과를 먼저 보여 준다.",
+    "overview": "미색 중앙 문서·가로 탐색·대표 화면2열과 역할/결과를 먼저 읽는 사례 상세. 기존 사실과 편집·인가·공유 기능을 연결한다.",
+    "keyCharacteristics": [
+      "실제 화면을 담은 대표 사례",
+      "KPI 플랫폼과 하위 기능의 관계",
+      "역할·결과 상단 요약",
+      "문서 전체의 자연스러운 스크롤",
+      "정확한 사례·절 공유 주소",
+      "같은 화면의 오너 편집"
+    ]
+  },
+  "colors": {
+    "paper": "#faf7f2",
+    "ink": "#24201c",
+    "stage": "#f1e9df",
+    "accent": "#a74425",
+    "muted": "#625a52",
+    "line": "#d9cfc3"
   }
 }

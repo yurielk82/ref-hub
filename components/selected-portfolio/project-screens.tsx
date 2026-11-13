@@ -64,7 +64,12 @@ export function ProjectScreens({
             >
               {screen.caption}
             </EditableCopy>
-            {screen.note && <p className="evidence-note">{screen.note}</p>}
+            {screen.note && (
+              <details className="evidence-note">
+                <summary>공개용 화면 안내</summary>
+                <p>{screen.note}</p>
+              </details>
+            )}
           </figcaption>
         </figure>
       ))}

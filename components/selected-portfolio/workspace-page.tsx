@@ -1,3 +1,4 @@
+import type { PortfolioView } from "@/lib/selected-portfolio/presentation";
 import { jobsViewer } from "@/auth";
 import { portfolioDataDir } from "@/lib/portfolio/server";
 import type { PortfolioTrack } from "@/lib/portfolio/content";
@@ -18,9 +19,11 @@ import type { OwnerWorkspace } from "./portfolio";
 export async function WorkspacePage({
   track,
   query,
+  view = { kind: "home" },
 }: {
   track: PortfolioTrack;
   query: WorkspaceQuery;
+  view?: PortfolioView;
 }) {
   const home = track === "ax" ? "/ax" : "/";
   const [content, viewer] = await Promise.all([
@@ -62,6 +65,7 @@ export async function WorkspacePage({
   return (
     <Portfolio
       data={content.data}
+      view={view}
       trackPath={track === "ax" ? "/ax" : ""}
       initialEditing={query.edit === "1"}
       owner={

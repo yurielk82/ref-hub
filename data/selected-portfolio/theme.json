@@ -1,14 +1,14 @@
 {
   "light": {
-    "paper": "#ffffff",
-    "ink": "#171717",
-    "mutedInk": "#626262",
-    "subtleInk": "#989898",
-    "line": "#e3e3e3",
-    "wash": "#f3f3f3",
-    "stage": "#fafafa",
-    "stageInk": "#232323",
-    "accent": "#c04466",
+    "paper": "#faf7f2",
+    "ink": "#24201c",
+    "mutedInk": "#625a52",
+    "subtleInk": "#766b60",
+    "line": "#d9cfc3",
+    "wash": "#eee5da",
+    "stage": "#f1e9df",
+    "stageInk": "#24201c",
+    "accent": "#a74425",
     "signalPalette": [
       "#edb081",
       "#e77e63",
@@ -19,15 +19,20 @@
     ]
   },
   "dark": {
-    "paper": "#151319",
-    "ink": "#e7e5eb",
-    "mutedInk": "#b7b3bb",
-    "subtleInk": "#6d6973",
-    "line": "#2c2830",
-    "wash": "#211d25",
-    "stage": "#110f15",
-    "stageInk": "#e7e5eb",
-    "accent": "#e36986",
-    "signalPalette": ["#4a36b5", "#c22170", "#f0661c", "#ffcc4a"]
+    "paper": "#201d19",
+    "ink": "#f0e7dc",
+    "mutedInk": "#cabfb1",
+    "subtleInk": "#ad9f8d",
+    "line": "#53483b",
+    "wash": "#302920",
+    "stage": "#171512",
+    "stageInk": "#f0e7dc",
+    "accent": "#e89772",
+    "signalPalette": [
+      "#4a36b5",
+      "#c22170",
+      "#f0661c",
+      "#ffcc4a"
+    ]
   }
 }

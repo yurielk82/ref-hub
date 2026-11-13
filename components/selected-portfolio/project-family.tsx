@@ -1,14 +1,17 @@
-import type { MouseEvent } from "react";
 import type { Project } from "@/lib/selected-portfolio/types";
+import {
+  projectHref,
+  projectState,
+} from "@/lib/selected-portfolio/presentation";
 
 export function ProjectFamily({
   project,
   projects,
-  onNavigate,
+  trackPath,
 }: {
   project: Project;
   projects: Project[];
-  onNavigate: (event: MouseEvent<HTMLAnchorElement>, key: string) => void;
+  trackPath: string;
 }) {
   const parentId = project.parentId || project.id;
   const family = projects.filter(
@@ -17,19 +20,20 @@ export function ProjectFamily({
   if (family.length < 2) return null;
   return (
     <nav className="project-family" aria-label="KPI 계열 사례">
-      <p>같은 플랫폼의 기능별 사례</p>
-      <div>
+      <h2>같은 플랫폼의 기능별 사례</h2>
+      <ul>
         {family.map((item) => (
-          <a
-            key={item.id}
-            href={`#project/${item.id}/details`}
-            aria-current={item.id === project.id ? "page" : undefined}
-            onClick={(event) => onNavigate(event, `project/${item.id}/details`)}
-          >
-            {item.name}
-          </a>
+          <li key={item.id}>
+            <a
+              href={projectHref(trackPath, item.id)}
+              aria-current={item.id === project.id ? "page" : undefined}
+            >
+              <span>{item.name}</span>
+              <small>{projectState(item)}</small>
+            </a>
+          </li>
         ))}
-      </div>
+      </ul>
     </nav>
   );
 }

@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import { PROJECTS, getProject } from "@/data/projects";
-import { ProjectBody } from "@/components/selected-portfolio/portfolio";
-import { ProjectDetailRedirect } from "@/components/selected-portfolio/project-detail-redirect";
-import { ThemeToggle } from "@/components/selected-portfolio/theme-toggle";
+import { WorkspacePage } from "@/components/selected-portfolio/workspace-page";
 import { portfolio, axPortfolio } from "@/lib/selected-portfolio/content";
 import { findSelectedProject } from "@/lib/selected-portfolio/adapter";
-import { loadSelectedPortfolio } from "@/lib/selected-portfolio/server";
 import type { PortfolioTrack } from "@/lib/portfolio/content";
+import type { WorkspaceQuery } from "@/lib/selected-portfolio/workspace";
 
 export function selectedRouteParams(track: PortfolioTrack) {
   const base = track === "ax" ? axPortfolio : portfolio;
@@ -26,11 +24,32 @@ export function selectedProjectMetadata(
   const base = track === "ax" ? axPortfolio : portfolio;
   const project = findSelectedProject(base, slug);
   if (!project) return {};
+  const url = `${track === "ax" ? "/ax" : ""}/projects/${project.id}`;
+  const screen = project.sections.flatMap(
+    (section) => section.screens ?? [],
+  )[0];
   return {
     title: project.name,
     description: project.summary,
-    alternates: {
-      canonical: `${track === "ax" ? "/ax" : ""}/projects/${project.id}`,
+    alternates: { canonical: url },
+    openGraph: {
+      title: project.name,
+      description: project.summary,
+      url,
+      type: "article",
+      locale: "ko_KR",
+      ...(screen
+        ? {
+            images: [
+              {
+                url: screen.src,
+                alt: screen.title,
+                width: screen.width,
+                height: screen.height,
+              },
+            ],
+          }
+        : {}),
     },
   };
 }
@@ -38,38 +57,24 @@ export function selectedProjectMetadata(
 export async function SelectedProjectPage({
   track,
   slug,
+  query = {},
 }: {
   track: PortfolioTrack;
   slug: string;
+  query?: WorkspaceQuery;
 }) {
   const home = track === "ax" ? "/ax" : "/";
-  const { data } = await loadSelectedPortfolio(track);
-  const project = findSelectedProject(data, slug);
+  const base = track === "ax" ? axPortfolio : portfolio;
+  const project = findSelectedProject(base, slug);
   if (!project) {
     if (getProject(slug)) redirect(`${home}#about`);
     notFound();
   }
-  const destination = `${home}#project/${project.id}/details`;
   return (
-    <main id="main-content" className="standalone">
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `location.replace(${JSON.stringify(destination).replace(/</g, "\\u003c")})`,
-        }}
-      />
-      <ProjectDetailRedirect id={project.id} homePath={home} />
-      <nav className="detail-nav">
-        <a href={`${home}#project/${project.id}`}>← 포트폴리오</a>
-        <ThemeToggle />
-      </nav>
-      <header>
-        <p className="stage-kicker">
-          {project.category} · {project.period}
-        </p>
-        <h1>{project.name}</h1>
-        <p className="page-intro">{project.summary}</p>
-      </header>
-      <ProjectBody project={project} />
-    </main>
+    <WorkspacePage
+      track={track}
+      query={query}
+      view={{ kind: "project", id: project.id }}
+    />
   );
 }

@@ -294,12 +294,14 @@ export function EditableCopy({
   children,
   as: Tag = "span",
   className,
+  id: elementId,
   multiline = false,
 }: {
   field: string;
   children: string;
-  as?: "span" | "p" | "h2" | "h3" | "h4";
+  as?: "span" | "p" | "h1" | "h2" | "h3" | "h4";
   className?: string;
+  id?: string;
   multiline?: boolean;
 }) {
   const context = useCopyEditing();
@@ -313,9 +315,13 @@ export function EditableCopy({
         ].filter((key) => context?.fields.has(key))
       : [id];
   if (!context?.editing || !context.fields.has(id))
-    return <Tag className={className}>{children}</Tag>;
+    return (
+      <Tag id={elementId} className={className}>
+        {children}
+      </Tag>
+    );
   return (
-    <Tag className={`${className ?? ""} inline-copy`}>
+    <Tag id={elementId} className={`${className ?? ""} inline-copy`}>
       {keys.map((key) => {
         const definition = context.fields.get(key);
         if (!definition) return null;

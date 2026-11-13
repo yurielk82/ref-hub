@@ -1,93 +1,35 @@
 "use client";
 
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import type { PortfolioData } from "@/lib/selected-portfolio/types";
-import { EditableCopy, useCopyEditing } from "./editable-copy";
+import type { PortfolioData, Project } from "@/lib/selected-portfolio/types";
+import {
+  orderedProjects,
+  projectHref,
+  projectState,
+} from "@/lib/selected-portfolio/presentation";
+import { sitePath } from "@/lib/selected-portfolio/content";
+import { Highlights } from "./highlights";
+import { EditableCopy, useCopyEditing, useProjectCopy } from "./editable-copy";
 import { leadScreen } from "./project-detail";
 import { srcSet } from "./project-screens";
-import { sitePath } from "@/lib/selected-portfolio/content";
-import "./profile-pages.css";
-
-type ProfilePageProps = {
-  page: "about" | "skills" | "writing";
-  data: PortfolioData;
-  onProjectSelect: (id: string) => void;
-};
-
-export function Highlights({
-  title,
-  items,
-  field,
-  compact = false,
-}: {
-  title: string;
-  items: string[];
-  field: string;
-  /** 제목(— 앞)만 보인다. 홈 첫 화면처럼 한눈에 훑는 자리에서 쓴다. */
-  compact?: boolean;
-}) {
-  const editing = useCopyEditing()?.editing;
-  if (!items.length && !editing) return null;
-  return (
-    <div className="highlights">
-      <p className="highlights-title">{title}</p>
-      {editing ? (
-        <EditableCopy field={field} as="p" multiline>
-          {items.join("\n")}
-        </EditableCopy>
-      ) : (
-        <ul>
-          {items.map((item, index) => {
-            const [head, ...detail] = item.split(" — ");
-            return (
-              <li key={index}>
-                <strong>{head}</strong>
-                {!compact && detail.length > 0 && (
-                  <span>{detail.join(" — ")}</span>
-                )}
-              </li>
-            );
-          })}
-        </ul>
-      )}
-    </div>
-  );
-}
 
 function ProjectLinks({
   ids,
   data,
-  onProjectSelect,
+  trackPath,
 }: {
   ids: string[];
   data: PortfolioData;
-  onProjectSelect: (id: string) => void;
+  trackPath: string;
 }) {
-  const projects = ids.flatMap((id) => {
-    const project = data.projects.find(
-      (entry) => entry.id === id && !entry.hidden,
-    );
-    return project ? [project] : [];
-  });
-  if (!projects.length) return null;
+  const projects = ids.flatMap((id) =>
+    data.projects.filter((entry) => entry.id === id),
+  );
   return (
-    <ul className="profile-case-links" aria-label="관련 사례">
+    <ul className="profile-case-links">
       {projects.map((project) => (
         <li key={project.id}>
-          <a
-            href={`#project/${project.id}/details`}
-            onClick={(event) => {
-              if (
-                event.metaKey ||
-                event.ctrlKey ||
-                event.shiftKey ||
-                event.altKey
-              )
-                return;
-              event.preventDefault();
-              onProjectSelect(project.id);
-            }}
-          >
+          <a href={projectHref(trackPath, project.id)}>
             {project.name}
             <ArrowRight size={14} aria-hidden />
           </a>
@@ -97,40 +39,336 @@ function ProjectLinks({
   );
 }
 
-export function ProfilePage({ page, data, onProjectSelect }: ProfilePageProps) {
+function WorkCard({
+  project,
+  trackPath,
+  featured,
+}: {
+  project: Project;
+  trackPath: string;
+  featured: boolean;
+}) {
+  const lead = leadScreen(project);
+  const copy = useProjectCopy(project.id);
+  const editing = useCopyEditing()?.editing;
+  return (
+    <article className={`work-card${featured ? " is-featured" : ""}`}>
+      {lead ? (
+        <a
+          className="work-card-image"
+          href={projectHref(trackPath, project.id)}
+          aria-label={`${project.name} 사례 보기`}
+        >
+          <img
+            src={sitePath(lead.screen.src)}
+            srcSet={srcSet(lead.screen)}
+            sizes="(max-width: 760px) calc(100vw - 40px), 550px"
+            alt={`${project.name} · ${lead.screen.title}`}
+            width={lead.screen.width}
+            height={lead.screen.height}
+            loading="lazy"
+          />
+        </a>
+      ) : (
+        <div className="work-card-placeholder">
+          <span>{projectState(project)}</span>
+        </div>
+      )}
+      <div className="work-card-copy">
+        <h3>
+          {editing ? (
+            <EditableCopy field={copy?.name ?? ""}>{project.name}</EditableCopy>
+          ) : (
+            <a href={projectHref(trackPath, project.id)}>{project.name}</a>
+          )}
+        </h3>
+        <p className="project-state">
+          <EditableCopy field={copy?.category ?? ""}>
+            {project.category}
+          </EditableCopy>
+        </p>
+        <EditableCopy
+          as="p"
+          className="work-card-summary"
+          field={copy?.summary ?? ""}
+          multiline
+        >
+          {project.summary}
+        </EditableCopy>
+        <div className="work-card-bottom">
+          <span>
+            {project.parentId
+              ? "KPI. 기능·연계 사례"
+              : project.stack.slice(0, 2).join(" · ")}
+          </span>
+          <a href={projectHref(trackPath, project.id)}>
+            사례 보기 <ArrowRight size={16} aria-hidden />
+          </a>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function About({
+  data,
+  trackPath,
+}: {
+  data: PortfolioData;
+  trackPath: string;
+}) {
   const { profile } = data;
-  const headline = profile.headline;
-  const lead =
-    headline && data.projects[0] ? leadScreen(data.projects[0]) : null;
-  const proof = lead
-    ? { project: data.projects[0], screen: lead.screen }
-    : null;
-  if (page === "skills")
-    return (
+  return (
+    <section
+      id="about"
+      className="profile-section"
+      aria-labelledby="about-title"
+    >
+      <h2 id="about-title">소개·이력</h2>
+      <div className="about-overview">
+        <div>
+          <EditableCopy as="p" field="hero.role" className="about-role">
+            {profile.role}
+          </EditableCopy>
+          <EditableCopy
+            as="p"
+            field="hero.summary"
+            className="about-intro"
+            multiline
+          >
+            {profile.intro}
+          </EditableCopy>
+          <EditableCopy
+            as="p"
+            field="selected.profile.fields"
+            className="profile-fields"
+            multiline
+          >
+            {profile.fields.join(" · ")}
+          </EditableCopy>
+        </div>
+        <div className="career-list">
+          {profile.experiences.map((entry, index) => (
+            <article key={`${entry.title}-${index}`}>
+              <EditableCopy
+                as="p"
+                field={`career.${index}.period`}
+                className="record-period"
+              >
+                {entry.period}
+              </EditableCopy>
+              <EditableCopy as="h3" field={`career.${index}.title`}>
+                {entry.title}
+              </EditableCopy>
+              <EditableCopy
+                as="p"
+                field={`career.${index}.description`}
+                multiline
+              >
+                {entry.description}
+              </EditableCopy>
+            </article>
+          ))}
+        </div>
+      </div>
+      <div className="work-areas">
+        {profile.workAreas?.map((area, index) => (
+          <article className="profile-row" key={index}>
+            <EditableCopy
+              as="h3"
+              field={`selected.profile.workAreas.${index}.title`}
+            >
+              {area.title}
+            </EditableCopy>
+            <div>
+              <EditableCopy
+                as="p"
+                field={`selected.profile.workAreas.${index}.description`}
+                multiline
+              >
+                {area.description}
+              </EditableCopy>
+              <ProjectLinks
+                ids={area.projectIds}
+                data={data}
+                trackPath={trackPath}
+              />
+            </div>
+          </article>
+        ))}
+      </div>
+      <div className="working-approach">
+        {profile.approach?.map((item, index) => (
+          <article key={index}>
+            <EditableCopy
+              as="h3"
+              field={`selected.profile.approach.${index}.title`}
+            >
+              {item.title}
+            </EditableCopy>
+            <EditableCopy
+              as="p"
+              field={`selected.profile.approach.${index}.description`}
+              multiline
+            >
+              {item.description}
+            </EditableCopy>
+          </article>
+        ))}
+      </div>
+      {profile.education.length > 0 && (
+        <div className="education-list">
+          {profile.education.map((entry, index) => (
+            <article className="profile-row" key={index}>
+              <EditableCopy as="h3" field={`selected.education.${index}.title`}>
+                {entry.title}
+              </EditableCopy>
+              <div>
+                <EditableCopy
+                  as="p"
+                  field={`selected.education.${index}.period`}
+                >
+                  {entry.period}
+                </EditableCopy>
+                <EditableCopy
+                  as="p"
+                  field={`selected.education.${index}.description`}
+                  multiline
+                >
+                  {entry.description}
+                </EditableCopy>
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
+    </section>
+  );
+}
+
+export function PortfolioHome({
+  data,
+  trackPath,
+}: {
+  data: PortfolioData;
+  trackPath: string;
+}) {
+  const { profile } = data;
+  const projects = orderedProjects(data.projects);
+  const editing = useCopyEditing()?.editing;
+  const featured = projects.slice(0, 3);
+  const remaining = projects.slice(3);
+  return (
+    <>
+      <section className="home-introduction" aria-labelledby="home-title">
+        <EditableCopy
+          as="h1"
+          id="home-title"
+          field={profile.headline ? "selected.profile.headline" : "hero.role"}
+          className="home-title"
+        >
+          {profile.headline ?? profile.role}
+        </EditableCopy>
+        <EditableCopy
+          as="p"
+          field="hero.summary"
+          className="home-description"
+          multiline
+        >
+          {profile.intro}
+        </EditableCopy>
+        {profile.headlineNote && (
+          <EditableCopy
+            as="p"
+            field="selected.profile.headlineNote"
+            className="home-current-role"
+          >
+            {profile.headlineNote}
+          </EditableCopy>
+        )}
+        <div className="home-outcomes" aria-label="대표 업무 변화">
+          {featured.map((project) => (
+            <HomeOutcome
+              key={project.id}
+              project={project}
+              trackPath={trackPath}
+            />
+          ))}
+        </div>
+      </section>
+      <section id="work" className="work-section" aria-labelledby="work-title">
+        <div className="section-heading">
+          <h2 id="work-title">대표 사례</h2>
+          <a href="#all-work">
+            전체 사례 <ArrowRight size={16} aria-hidden />
+          </a>
+        </div>
+        <div className="work-grid">
+          {featured.map((project) => (
+            <WorkCard
+              key={project.id}
+              project={project}
+              trackPath={trackPath}
+              featured
+            />
+          ))}
+        </div>
+      </section>
       <section
-        className="profile-page profile-tools"
-        aria-labelledby="profile-tools-title"
+        id="all-work"
+        className="work-section all-work"
+        aria-labelledby="all-work-title"
       >
-        <header className="profile-page-heading">
-          <h2 id="profile-tools-title">기술 스택</h2>
-          <p>
-            실제 업무와 프로젝트에서 사용한 기술입니다. 도구 이름과 함께 사용한
-            일과 사례를 정리했습니다.
-          </p>
-        </header>
-        <div className="profile-tool-list">
+        <div className="section-heading">
+          <h2 id="all-work-title">함께 만든 업무와 도구</h2>
+        </div>
+        <p className="section-description">
+          KPI.의 기능별 개선 사례와 다른 업무 도구입니다. 실제 업무에 적용한
+          범위와 현재 상태를 구분했습니다.
+        </p>
+        <div className="work-grid secondary-work">
+          {remaining.map((project) => (
+            <WorkCard
+              key={project.id}
+              project={project}
+              trackPath={trackPath}
+              featured={false}
+            />
+          ))}
+        </div>
+      </section>
+      <section
+        className="profile-section profile-achievements"
+        aria-labelledby="achievements-title"
+      >
+        <h2 id="achievements-title">주요 업무 변화</h2>
+        <Highlights
+          title="핵심 성과"
+          items={profile.highlights ?? []}
+          field="selected.profile.highlights"
+        />
+      </section>
+      <About data={data} trackPath={trackPath} />
+      <section
+        id="skills"
+        className="profile-section"
+        aria-labelledby="skills-title"
+      >
+        <h2 id="skills-title">기술과 사용 경험</h2>
+        <div>
           {data.skills.map((skill, index) => {
             const key = skill.id ?? index;
             return (
-              <article className="profile-tool-row" key={key}>
-                <div className="profile-tool-name">
+              <article className="profile-row" key={key}>
+                <div>
                   <EditableCopy as="h3" field={`selected.skills.${key}.name`}>
                     {skill.name}
                   </EditableCopy>
                   {skill.category && (
                     <EditableCopy
-                      className="profile-tool-category"
+                      as="p"
                       field={`selected.skills.${key}.category`}
+                      className="record-period"
                     >
                       {skill.category}
                     </EditableCopy>
@@ -147,7 +385,7 @@ export function ProfilePage({ page, data, onProjectSelect }: ProfilePageProps) {
                   <ProjectLinks
                     ids={skill.projectIds ?? []}
                     data={data}
-                    onProjectSelect={onProjectSelect}
+                    trackPath={trackPath}
                   />
                 </div>
               </article>
@@ -155,36 +393,30 @@ export function ProfilePage({ page, data, onProjectSelect }: ProfilePageProps) {
           })}
         </div>
       </section>
-    );
-
-  if (page === "writing")
-    return (
       <section
-        className="profile-page profile-writing"
-        aria-labelledby="profile-writing-title"
+        id="writing"
+        className="profile-section"
+        aria-labelledby="writing-title"
       >
-        <header className="profile-page-heading">
-          <h2 id="profile-writing-title">글과 기록</h2>
-          <p>
-            업무를 바꾼 과정과 사용 방법, 개발 중 정리한 판단 기준입니다. 이
-            사이트에 공개한 문서와 이전 구현 기록을 모았습니다.
-          </p>
-        </header>
-        <div className="profile-writing-list">
+        <h2 id="writing-title">글과 기록</h2>
+        <div>
           {data.writing.map((post, index) => (
-            <article className="profile-writing-row" key={post.url}>
+            <article className="profile-row writing-row" key={post.url}>
               <div>
                 <EditableCopy as="h3" field={`selected.writing.${index}.title`}>
                   {post.title}
                 </EditableCopy>
                 {post.category && (
                   <EditableCopy
-                    className="profile-record-category"
+                    as="p"
+                    className="record-period"
                     field={`selected.writing.${index}.category`}
                   >
                     {post.category}
                   </EditableCopy>
                 )}
+              </div>
+              <div>
                 <EditableCopy
                   as="p"
                   field={`selected.writing.${index}.summary`}
@@ -192,246 +424,54 @@ export function ProfilePage({ page, data, onProjectSelect }: ProfilePageProps) {
                 >
                   {post.summary}
                 </EditableCopy>
+                <a
+                  className="text-link"
+                  href={post.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  문서 열기 <ArrowUpRight size={15} aria-hidden />
+                </a>
               </div>
-              <a
-                href={post.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="profile-record-link"
-                aria-label={`${post.title} 문서 열기 · 새 창`}
-              >
-                문서 열기 <ArrowUpRight size={16} aria-hidden />
-              </a>
             </article>
           ))}
         </div>
       </section>
-    );
+      {editing && (
+        <p className="editing-note">각 문구를 수정한 뒤 상단에서 저장하세요.</p>
+      )}
+    </>
+  );
+}
 
+function HomeOutcome({
+  project,
+  trackPath,
+}: {
+  project: Project;
+  trackPath: string;
+}) {
+  const copy = useProjectCopy(project.id);
+  const editing = useCopyEditing()?.editing;
+  const highlight = project.highlights?.[0] ?? project.summary;
+  const [heading, ...detail] = highlight.split(" — ");
+  const Tag = editing ? "div" : "a";
   return (
-    <section
-      className="profile-page profile-about"
-      aria-labelledby="profile-about-title"
+    <Tag
+      className="home-outcome"
+      {...(!editing ? { href: projectHref(trackPath, project.id) } : {})}
     >
-      <div className="profile-overview">
-        <header className="profile-introduction">
-          {headline ? (
-            <>
-              <h2 id="profile-about-title" className="profile-name-compact">
-                {profile.name}
-              </h2>
-              <EditableCopy
-                as="p"
-                field="selected.profile.headline"
-                className="profile-headline"
-              >
-                {headline}
-              </EditableCopy>
-              {profile.headlineNote && (
-                <EditableCopy
-                  as="p"
-                  field="selected.profile.headlineNote"
-                  className="profile-headline-note"
-                >
-                  {profile.headlineNote}
-                </EditableCopy>
-              )}
-            </>
-          ) : (
-            <>
-              <h2 id="profile-about-title">{profile.name}</h2>
-              <EditableCopy as="p" field="hero.role" className="profile-role">
-                {profile.role}
-              </EditableCopy>
-              <EditableCopy
-                as="p"
-                field="hero.summary"
-                className="profile-summary"
-                multiline
-              >
-                {profile.intro}
-              </EditableCopy>
-            </>
-          )}
-          <Highlights
-            title="핵심 성과"
-            items={profile.highlights ?? []}
-            field="selected.profile.highlights"
-            compact={Boolean(headline)}
-          />
-          <ProjectLinks
-            ids={data.projects.slice(0, 1).map((project) => project.id)}
-            data={data}
-            onProjectSelect={onProjectSelect}
-          />
-          {profile.links.length > 0 && (
-            <ul className="profile-public-links">
-              {profile.links.map((link) => (
-                <li key={link.url}>
-                  <a href={link.url}>
-                    {link.label}
-                    <ArrowUpRight size={14} aria-hidden />
-                  </a>
-                </li>
-              ))}
-            </ul>
-          )}
-        </header>
-        {proof ? (
-          <figure className="profile-proof">
-            <a
-              href={`#project/${proof.project.id}/details`}
-              onClick={(event) => {
-                if (
-                  event.metaKey ||
-                  event.ctrlKey ||
-                  event.shiftKey ||
-                  event.altKey
-                )
-                  return;
-                event.preventDefault();
-                onProjectSelect(proof.project.id);
-              }}
-            >
-              <img
-                src={sitePath(proof.screen.src)}
-                srcSet={srcSet(proof.screen)}
-                sizes="(max-width: 1100px) calc(100vw - 40px), 520px"
-                alt={`${proof.project.name} ${proof.screen.title} 화면`}
-                width={proof.screen.width}
-                height={proof.screen.height}
-              />
-            </a>
-            <figcaption>
-              <b>{proof.screen.title}</b> · 직접 만든 {proof.project.name} 화면
-            </figcaption>
-          </figure>
-        ) : (
-          profile.experiences.length > 0 && (
-            <section
-              className="profile-career"
-              aria-labelledby="profile-career-title"
-            >
-              <h3 id="profile-career-title">현재 경력</h3>
-              {profile.experiences.map((entry, index) => (
-                <article key={`${index}-${entry.period}`}>
-                  <EditableCopy
-                    field={`career.${index}.period`}
-                    className="profile-career-period"
-                  >
-                    {entry.period}
-                  </EditableCopy>
-                  <EditableCopy as="h4" field={`career.${index}.title`}>
-                    {entry.title}
-                  </EditableCopy>
-                  <EditableCopy
-                    as="p"
-                    field={`career.${index}.description`}
-                    multiline
-                  >
-                    {entry.description}
-                  </EditableCopy>
-                </article>
-              ))}
-            </section>
-          )
-        )}
-      </div>
-      {(profile.workAreas ?? []).length > 0 && (
-        <section className="profile-work" aria-labelledby="profile-work-title">
-          <div className="profile-section-heading">
-            <h3 id="profile-work-title">맡아 온 일</h3>
-            <p>
-              실무에서 발견한 문제를 자료와 업무 기준부터 살피고,
-              조회·검증·분석·보고로 연결했습니다.
-            </p>
-          </div>
-          {profile.workAreas?.map((area, index) => (
-            <article className="profile-work-row" key={index}>
-              <EditableCopy
-                as="h4"
-                field={`selected.profile.workAreas.${index}.title`}
-              >
-                {area.title}
-              </EditableCopy>
-              <div>
-                <EditableCopy
-                  as="p"
-                  field={`selected.profile.workAreas.${index}.description`}
-                  multiline
-                >
-                  {area.description}
-                </EditableCopy>
-                <ProjectLinks
-                  ids={area.projectIds}
-                  data={data}
-                  onProjectSelect={onProjectSelect}
-                />
-              </div>
-            </article>
-          ))}
-        </section>
+      <strong>{heading}</strong>
+      <span>{detail.join(" — ") || project.summary}</span>
+      <span className="outcome-project">
+        {project.name}
+        <ArrowRight size={13} aria-hidden />
+      </span>
+      {editing && (
+        <EditableCopy as="p" field={copy?.highlights ?? ""} multiline>
+          {(project.highlights ?? []).join("\n")}
+        </EditableCopy>
       )}
-      {(profile.approach ?? []).length > 0 && (
-        <section
-          className="profile-approach"
-          aria-labelledby="profile-approach-title"
-        >
-          <h3 id="profile-approach-title">일하는 방식</h3>
-          <div className="profile-approach-list">
-            {profile.approach?.map((entry, index) => (
-              <article key={index}>
-                <EditableCopy
-                  as="h4"
-                  field={`selected.profile.approach.${index}.title`}
-                >
-                  {entry.title}
-                </EditableCopy>
-                <EditableCopy
-                  as="p"
-                  field={`selected.profile.approach.${index}.description`}
-                  multiline
-                >
-                  {entry.description}
-                </EditableCopy>
-              </article>
-            ))}
-          </div>
-        </section>
-      )}
-      {profile.education.length > 0 && (
-        <section
-          className="profile-education"
-          aria-labelledby="profile-education-title"
-        >
-          <h3 id="profile-education-title">교육·학습</h3>
-          {profile.education.map((entry, index) => (
-            <article className="profile-work-row" key={index}>
-              <EditableCopy
-                field={`selected.education.${index}.period`}
-                className="profile-career-period"
-              >
-                {entry.period}
-              </EditableCopy>
-              <div>
-                <EditableCopy
-                  as="h4"
-                  field={`selected.education.${index}.title`}
-                >
-                  {entry.title}
-                </EditableCopy>
-                <EditableCopy
-                  as="p"
-                  field={`selected.education.${index}.description`}
-                  multiline
-                >
-                  {entry.description}
-                </EditableCopy>
-              </div>
-            </article>
-          ))}
-        </section>
-      )}
-    </section>
+    </Tag>
   );
 }

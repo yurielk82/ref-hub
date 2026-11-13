@@ -1,26 +1,27 @@
 ---
 version: 1
 slug: "app-portfolio-page-tsx"
-primary_target: "app/(portfolio)/page.tsx"
+primary_target: "app/(showcase)/page.tsx"
 related_targets:
-  ["app/(portfolio)/ax/page.tsx", "components/portfolio/project-detail.tsx"]
+  ["app/(showcase)/ax/page.tsx", "components/selected-portfolio/portfolio.tsx", "components/selected-portfolio/profile-pages.tsx", "components/selected-portfolio/project-detail.tsx"]
 ---
 
-# 해결 과정 먼저 — 포트폴리오 홈과 사례
+# 업무 개선의 역할과 결과가 먼저 보이는 포트폴리오
 
-Mode: Experience(home), Read(case). 2026-11-01 사용자가 새 세 시안 중 해결 과정 먼저를 명시 선택했다. 승인 comp: .impeccable/mocks/story-approved.png. 이전 백색 지면 방향은 이번 선택으로 교체한다.
+Mode: Experience(home), Read(case).
 
-## Direction contract
+2026-11-13 사용자가 Ryan Schmidt의 실제 포트폴리오 구성을 선택하고 전체 적용·배포를 승인했다. 예전 녹색 시안이나 왼쪽 탐색·입체 표지를 이 방향의 제약으로 되살리지 않는다.
 
-THESIS: 다른 두 회사의 기준을 협의하고 지표와 시스템으로 구현한 경험을 실제 작업과 연결한다. 큰 소개와 경력만 보이던 첫 화면을 바꾼다.
-OWN-WORLD: 짙은 녹색 첫 화면과 메뉴, 백색 본문, 연노랑 핵심 조작. 한국어 고딕의 굵은 두 줄 제목과 실제 BI 화면이 중심이다. 개인 작업·관리 기능은 본문의 읽기 흐름과 구분한다.
-STORY: 업무 파악→기준 합의→직접 구현→검증·운영을 먼저 읽고 원장 대조와 보고서 사례로 확인한다. 전체 작업 목록→사례 본문 안 기능 설명과 실제 화면→선택적 확대. 기능만 보려고 한 페이지 더 들어가지 않는다.
-FIRST VIEWPORT: 1536×1024 comp 기준 높이76px 메뉴. x50~710의 제목·설명·두 버튼, x742~1496 y90~580의 BI. 아래 y575~750 네 단계, y785부터 두 근거 영역. 실제 캡처 비율을 보존한다. 모바일은 메뉴→소개→BI→네 단계→근거 순서다.
-FORM: 사용자 선택 해결 과정 먼저, seed:5a985c2e52ee8b55. 시그니처는 같은 본문에서 실제 화면을 확대하고 원래 위치로 돌아오는 기존 동작이다. 가짜 차트와 생성 이미지의 문구는 제품 사실로 복사하지 않는다.
-FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+THESIS: 실무에서 발견한 문제와 직접 내린 판단·구현·검증을 역할·결과와 실제 화면으로 보여 준다.
+OWN-WORLD: 미색 바탕·짙은 잉크·적갈색 강조, 가로 탐색, 중앙1160px 문서, 큰 한국어 제목, 실제 캡처 2열 사례 목록.
+STORY: 직무와 소개→세 대표 업무 변화→KPI·공급내역보고·경영진 보고→나머지 공개 사례→소개·경력·기술·기록. 상세는 역할·결과→대표 화면→과정과 전체 화면→사용 기술·관련 사례다.
+FIRST VIEWPORT: 짧은 직무·업무 개선 제목과 구체적인 소개를 읽고 대표 업무 변화에서 사례로 바로 갈 수 있다. AX도 텍스트 소개 뒤 실제 대표 화면 목록으로 이어진다.
+FORM: 기존 사실·편집 키와 실제 캡처를 사용하며 저자 코드·사진·브랜드·성과는 복사하지 않는다. 과도한 애니메이션·생성 차트·챗봇·방문 추적을 추가하지 않는다.
+FINISH: 독립 리뷰와 운영 PC·모바일 렌더 확인, 실제 사례 주소·절 공유·키보드 본문 이동·확대·관리 경계 검수를 완료 조건으로 둔다.
 
-## 구현·검증 계약
+## 사용자 제약
 
-- 기존 편집 키·저장값, 두 트랙 경계, 인증·고정 공유 URL 보존.
-- 원본 팩트는 work-history와 사례 등록부. 사용자가 이번 대화에서 밝힌 회생·업무 지식 공백·양사 공통 기준 협의를 반영하며 전사 PMI 총괄·새 절감률을 주장하지 않는다.
-- 사용자 공통 개발 기준에 따라 제품 개발 서버는 병합 전에 띄우지 않는다. 정적 검사·관련 기존 시험→독립 코드 리뷰→PR 병합→중앙 배포→운영 PC/모바일 검수 순서. Impeccable의 선행 렌더링 게이트보다 이 사용자 실행 순서가 우선한다. 형식적인 게이트 통과를 만들지 않는다.
+- 두 트랙 분리, KPI와 하위 기능 관계, 공개11사례와 숨김4개, 기존 모든 캡처를 보존한다.
+- 운영·시제품·준비·종료 상태와 공개용 예시 고지를 보존한다.
+- 기존 편집·초안·서버 revision·저장·인증·이력서·공고·제출 공유·매뉴얼을 연결한다.
+- 제품 개발 서버는 병합 전에 띄우지 않는다. 정적 검사·관련 기존 시험→독립 검토→병합→중앙 배포→운영 렌더 확인 순서다.

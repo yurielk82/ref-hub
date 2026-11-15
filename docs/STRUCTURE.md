@@ -47,7 +47,7 @@ ref-hub/  (30 files)
     medpark/  (0 files)
       doc/  (9 files)
     portfolio/  (21 files)
-    resume/  (6 files)
+    resume/  (8 files)
     selected-portfolio/  (21 files)
       art/  (2 files)
   content/  (1 files)
@@ -106,7 +106,7 @@ ref-hub/  (30 files)
     jobs/  (8 files)
       fixtures/  (2 files)
     portfolio/  (2 files)
-    resume/  (4 files)
+    resume/  (6 files)
 ```
 
 ## Top-Level Files

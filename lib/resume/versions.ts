@@ -10,6 +10,7 @@ import type {
   ResumeVersion,
   ResumeVersionSummary,
   SaraminResume,
+  WantedResume,
 } from "./types.ts";
 
 export { careerMonths, monthsLabel } from "./months.ts";
@@ -23,6 +24,7 @@ const FOLDERS: Record<ResumePlatform, string> = {
   saramin: "versions",
   jobkorea: "jobkorea-versions",
   remember: "remember-versions",
+  wanted: "wanted-versions",
 };
 const VALIDATORS: {
   [P in ResumePlatform]: (v: unknown) => v is ResumeByPlatform[P];
@@ -30,6 +32,7 @@ const VALIDATORS: {
   saramin: isResume,
   jobkorea: isJobkoreaResume,
   remember: isRememberResume,
+  wanted: isWantedResume,
 };
 const ID = /^\d{8}-\d{6}-[0-9a-f]{6}$/;
 /** 이력서 한 벌이 이보다 크면 잘못 들어온 값으로 본다 */
@@ -279,5 +282,31 @@ export function isRememberResume(value: unknown): value is RememberResume {
       "awards",
       "certificates",
     ])
+  );
+}
+
+export function isWantedResume(value: unknown): value is WantedResume {
+  if (typeof value !== "object" || value === null) return false;
+  const r = value as Partial<WantedResume>;
+  return (
+    strings(r.basic, ["name", "phone", "email"]) &&
+    Array.isArray(r.careers) &&
+    r.careers.every(
+      (c) =>
+        strings(c, ["company", "start", "job", "position"]) &&
+        (c.end === null || typeof c.end === "string") &&
+        titledList(c.achievements, [
+          "title",
+          "start",
+          "end",
+          "job",
+          "position",
+          "detail",
+        ]),
+    ) &&
+    titledList(r.education, ["school", "start", "end", "major", "detail"]) &&
+    stringList(r.skills) &&
+    titledList(r.links, ["label", "url"]) &&
+    strings(r, ["intro", "aiExperience", "awards", "languages"])
   );
 }

@@ -160,7 +160,62 @@ export interface RememberResume {
   certificates: string;
 }
 
-export type ResumePlatform = "saramin" | "jobkorea" | "remember";
+/** 원티드 경력 안의 주요 성과 한 건 */
+export interface WantedAchievement {
+  title: string;
+  /** "YYYY.MM", 안 적었으면 빈칸 */
+  start: string;
+  end: string;
+  job: string;
+  /** 직책 (예: 과장) */
+  position: string;
+  detail: string;
+}
+
+/** 원티드 경력 한 줄. 회사마다 직무·직책을 적고 그 아래 주요 성과를 여러 건 단다. */
+export interface WantedCareer {
+  company: string;
+  /** "YYYY.MM" */
+  start: string;
+  /** "YYYY.MM", 재직 중이면 null */
+  end: string | null;
+  job: string;
+  position: string;
+  achievements: WantedAchievement[];
+}
+
+export interface WantedEducation {
+  school: string;
+  /** "YYYY.MM" */
+  start: string;
+  end: string;
+  /** 전공 및 학위 */
+  major: string;
+  /** 이수 과목·활동 */
+  detail: string;
+}
+
+/**
+ * 원티드 이력서 한 벌. 칸 순서는 원티드 이력서 편집 화면(2026-11-15 오너 제공)을 따른다.
+ * 원티드 안에서 쓰는 이력서라 제출용 파일을 따로 만들지 않는다.
+ */
+export interface WantedResume {
+  basic: { name: string; phone: string; email: string };
+  /** 간단 소개 */
+  intro: string;
+  careers: WantedCareer[];
+  education: WantedEducation[];
+  /** AI 활용 경험 요약 */
+  aiExperience: string;
+  skills: string[];
+  /** 수상/자격증/기타 (활동명·연월·세부 내용) */
+  awards: string;
+  /** 언어·어학시험 (시험명·점수/등급·날짜) */
+  languages: string;
+  links: { label: string; url: string }[];
+}
+
+export type ResumePlatform = "saramin" | "jobkorea" | "remember" | "wanted";
 
 /** 제출용 파일(이력서·경력기술서·자기소개서·포트폴리오)을 만드는 사이트 */
 export type FilePlatform = "saramin" | "jobkorea";
@@ -169,6 +224,7 @@ export interface ResumeByPlatform {
   saramin: SaraminResume;
   jobkorea: JobkoreaResume;
   remember: RememberResume;
+  wanted: WantedResume;
 }
 
 /** 저장된 한 버전. 파일 이름이 id고, 어느 사이트용인지는 담긴 폴더가 정한다. */

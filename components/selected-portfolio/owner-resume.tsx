@@ -26,11 +26,13 @@ import type {
   RememberResume,
   ResumePlatform,
   SaraminResume,
+  WantedResume,
 } from "@/lib/resume/types";
 import {
   JobkoreaWorkspace,
   RememberWorkspace,
   SaraminWorkspace,
+  WantedWorkspace,
 } from "@/components/resume/resume-workspace";
 
 const KST_DATE_TIME = new Intl.DateTimeFormat("ko-KR", {
@@ -166,6 +168,14 @@ export async function OwnerResume({
                   key={current.id}
                   {...shared}
                   resume={current.resume as RememberResume}
+                />
+              );
+            if (platform === "wanted")
+              return (
+                <WantedWorkspace
+                  key={current.id}
+                  {...shared}
+                  resume={current.resume as WantedResume}
                 />
               );
             return platform === "jobkorea" ? (

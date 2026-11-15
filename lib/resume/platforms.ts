@@ -5,6 +5,7 @@ export const SITE_NAMES: Record<ResumePlatform, string> = {
   saramin: "사람인",
   jobkorea: "잡코리아",
   remember: "리멤버",
+  wanted: "원티드",
 };
 
 /** 그 사이트에서 이 문서를 부르는 이름 */
@@ -12,6 +13,7 @@ export const SITE_DOCS: Record<ResumePlatform, string> = {
   saramin: "이력서",
   jobkorea: "이력서",
   remember: "프로필",
+  wanted: "이력서",
 };
 
 export function isPlatform(value: unknown): value is ResumePlatform {
@@ -23,7 +25,7 @@ export function parsePlatform(value: unknown): ResumePlatform {
 }
 
 export function hasFiles(platform: ResumePlatform): platform is FilePlatform {
-  return platform !== "remember";
+  return platform === "saramin" || platform === "jobkorea";
 }
 
 /** 사람인은 처음 만든 주소(/resume?v=)를 그대로 둔다 */

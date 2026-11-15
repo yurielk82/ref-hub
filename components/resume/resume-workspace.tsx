@@ -5,12 +5,14 @@ import type {
   JobkoreaResume,
   RememberResume,
   SaraminResume,
+  WantedResume,
 } from "@/lib/resume/types";
 
 import { JobkoreaFields } from "./jobkorea-fields";
 import { RememberFields } from "./remember-fields";
 import { ResumeShell, type VersionOption } from "./resume-shell";
 import { SaraminFields } from "./saramin-fields";
+import { WantedFields } from "./wanted-fields";
 
 interface WorkspaceProps<R> {
   home?: "/" | "/ax";
@@ -56,6 +58,18 @@ export function RememberWorkspace({
   return (
     <ResumeShell platform="remember" {...props}>
       {(state) => <RememberFields {...state} asOf={asOf} />}
+    </ResumeShell>
+  );
+}
+
+/** 원티드 이력서 작업 화면 */
+export function WantedWorkspace({
+  asOf,
+  ...props
+}: WorkspaceProps<WantedResume>) {
+  return (
+    <ResumeShell platform="wanted" {...props}>
+      {(state) => <WantedFields {...state} asOf={asOf} />}
     </ResumeShell>
   );
 }

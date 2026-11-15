@@ -15,9 +15,9 @@
 
 ```bash
 git submodule update --init --recursive  # submodule 초기화
-npm install
-npm run dev     # http://localhost:3000 (predev가 문서 자동 동기화)
-npm run build   # 프로덕션 빌드 (prebuild가 문서 자동 동기화)
+pnpm install
+pnpm run dev     # http://localhost:3000 (predev가 문서 자동 동기화)
+pnpm run build   # 프로덕션 빌드 (prebuild가 문서 자동 동기화)
 ```
 
 ## 구조
@@ -46,7 +46,7 @@ content/                # MDX 문서 파일 (Nextra 자동 라우팅)
 ```bash
 # 최신 문서 가져오기
 git submodule update --remote
-npm run sync
+pnpm run sync
 
 # 특정 프로젝트만 업데이트
 git submodule update --remote repos/csoweb

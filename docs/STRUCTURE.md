@@ -131,7 +131,7 @@ instrumentation.ts
 mdx-components.tsx
 next.config.mjs
 osv-scanner.toml
-package-lock.json
+pnpm-lock.yaml
 package.json
 paseo.json
 postcss.config.mjs

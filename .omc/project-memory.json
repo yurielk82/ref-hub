@@ -42,10 +42,10 @@
     "runtime": null
   },
   "build": {
-    "buildCommand": "npm run build",
+    "buildCommand": "pnpm run build",
     "testCommand": null,
     "lintCommand": null,
-    "devCommand": "npm run dev",
+    "devCommand": "pnpm run dev",
     "scripts": {
       "sync": "node scripts/sync-docs.mjs",
       "predev": "node scripts/sync-docs.mjs",

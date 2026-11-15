@@ -3,10 +3,10 @@
 // 파일명: commitlint.config.mjs (ES Module 필수 — wagoid/commitlint-github-action@v6 제약)
 //
 // 의존성 설치:
-//   npm i -D @commitlint/cli @commitlint/config-conventional
+//   pnpm add -D @commitlint/cli @commitlint/config-conventional
 //
 // CI: .github/workflows/quality-gate.yml의 commit-lint job이 PR마다 실행
-// 로컬 검증: npx commitlint --from=HEAD~1
+// 로컬 검증: pnpm exec commitlint --from=HEAD~1
 //
 // 참고: https://commitlint.js.org/reference/configuration.html
 
@@ -17,7 +17,7 @@
 // - 한글 없음/1글자인데 영어 포함 → 첫 알파벳 lower-case 강제
 // - 이모지/숫자만 있는 subject → 통과 (검증할 대상 없음)
 const koreanAwareSubjectCase = (parsed) => {
-  const subject = parsed.subject || '';
+  const subject = parsed.subject || "";
   if (!subject) return [true];
 
   const hangulCount = (subject.match(/\p{Script=Hangul}/gu) || []).length;
@@ -28,47 +28,62 @@ const koreanAwareSubjectCase = (parsed) => {
   // 영어 지배적 → 첫 알파벳 lower-case 강제
   const firstAlpha = subject.match(/[A-Za-z]/);
   if (firstAlpha && firstAlpha[0] !== firstAlpha[0].toLowerCase()) {
-    return [false, 'subject must be lower-case (require 2+ Hangul chars for Korean-mode bypass)'];
+    return [
+      false,
+      "subject must be lower-case (require 2+ Hangul chars for Korean-mode bypass)",
+    ];
   }
   return [true];
 };
 
 export default {
-  extends: ['@commitlint/config-conventional'],
+  extends: ["@commitlint/config-conventional"],
 
   plugins: [
     {
       rules: {
-        'subject-case-korean-aware': koreanAwareSubjectCase,
+        "subject-case-korean-aware": koreanAwareSubjectCase,
       },
     },
   ],
 
   rules: {
     // 허용되는 타입 (Conventional Commits + 워크스페이스 관습)
-    'type-enum': [
+    "type-enum": [
       2,
-      'always',
-      ['feat', 'fix', 'refactor', 'docs', 'test', 'chore', 'perf', 'ci', 'build', 'style', 'revert'],
+      "always",
+      [
+        "feat",
+        "fix",
+        "refactor",
+        "docs",
+        "test",
+        "chore",
+        "perf",
+        "ci",
+        "build",
+        "style",
+        "revert",
+      ],
     ],
 
     // 기본 subject-case는 해제 (Korean-aware plugin이 대체)
-    'subject-case': [0],
+    "subject-case": [0],
 
     // 한국어/영어 혼용 subject를 올바르게 검증
-    'subject-case-korean-aware': [2, 'always'],
+    "subject-case-korean-aware": [2, "always"],
 
     // 헤더(type(scope): subject) 최대 길이
-    'header-max-length': [2, 'always', 100],
+    "header-max-length": [2, "always", 100],
 
     // subject 비어 있으면 차단
-    'subject-empty': [2, 'never'],
+    "subject-empty": [2, "never"],
 
     // 타입 비어 있으면 차단 (feat: 누락 등)
-    'type-empty': [2, 'never'],
+    "type-empty": [2, "never"],
 
     // body/footer 앞 빈 줄 강제 (conventional-commits 표준)
-    'body-leading-blank': [2, 'always'],
-    'footer-leading-blank': [2, 'always'],
+    "body-leading-blank": [2, "always"],
+    "footer-leading-blank": [2, "always"],
   },
 };

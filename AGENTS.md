@@ -6,7 +6,7 @@
 
 ## 문서 흐름
 
-- csoweb·kpis-dsr-api·ev-motor-reliability 매뉴얼은 각 저장소의 `docs/manual/`이 원본이다. 그 저장소에서 고친 뒤 여기서 `git submodule update --remote repos/<project>` → `npm run sync`(`scripts/sync-docs.mjs`가 `content/<project>/`로 복사)한다.
+- csoweb·kpis-dsr-api·ev-motor-reliability 매뉴얼은 각 저장소의 `docs/manual/`이 원본이다. 그 저장소에서 고친 뒤 여기서 `git submodule update --remote repos/<project>` → `pnpm run sync`(`scripts/sync-docs.mjs`가 `content/<project>/`로 복사)한다.
 - `content/pharmkpi/`·`content/corerx/`·`content/edi-verification/`은 이 저장소에서 직접 편집한다.
 - 탐색 항목을 바꾸면 같은 폴더의 `_meta.tsx`도 함께 고친다. studiogo는 숨김이다(submodule만 보존).
 - 포트폴리오 사례 문구의 원본은 `data/work-history.ts`다. 해당 저장소(README·`docs/plans`·git log)와 `~/GitHub/wiki`에서 날짜·커밋 근거가 있는 사실만 쓰고 현재 운영 상태(운영·중지·이관)를 함께 적는다. 거래처명·직원 이름·금액은 싣지 않는다.

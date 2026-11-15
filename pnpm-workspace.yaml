@@ -1,0 +1,19 @@
+# pnpm 설정(서버 표준). 작업 트리끼리 서버 공용 창고를 나눠 쓴다.
+# 빌드·개발 서버용 설치(배포·CI·Docker)는 PNPM_CONFIG_VIRTUAL_STORE_TYPE=project 로 패키지를 프로젝트 안에 둔다.
+virtualStoreType: global
+
+# React 타입 등을 peer 로 선언하지 않은 패키지에 자동으로 붙인다.
+addMissingPeerTypes: true
+
+# 실행 파일(node_modules/.bin)을 셸 스크립트가 아니라 바로가기로 둔다(node 로 직접 여는 기동 명령이 동작한다).
+preferSymlinkedExecutables: true
+
+# 설치 스크립트를 돌려도 되는 패키지. 없는 패키지의 스크립트는 설치가 멈춘다.
+allowBuilds:
+  "@parcel/watcher": true
+  "@sentry/cli": true
+
+# 보안 고정. npm 의 package.json overrides 를 옮겼다(안 옮기면 옛 판이 다시 들어온다).
+overrides:
+  "@xmldom/xmldom": "0.9.12"
+  "katex": "^0.18.2"

@@ -1,8 +1,8 @@
 import { portfolioDocument } from "./portfolio.ts";
 import type {
+  FilePlatform,
   JobkoreaResume,
   ResumeByPlatform,
-  ResumePlatform,
   SaraminResume,
 } from "./types.ts";
 
@@ -44,7 +44,7 @@ export function parseDocKind(value: unknown): DocKind | null {
     : null;
 }
 
-export function resumeDocument<P extends ResumePlatform>(
+export function resumeDocument<P extends FilePlatform>(
   platform: P,
   resume: ResumeByPlatform[P],
   kind: DocKind,

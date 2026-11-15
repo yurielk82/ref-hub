@@ -1,9 +1,14 @@
 "use client";
 
 import type { ShareSummary } from "@/lib/resume/shares";
-import type { JobkoreaResume, SaraminResume } from "@/lib/resume/types";
+import type {
+  JobkoreaResume,
+  RememberResume,
+  SaraminResume,
+} from "@/lib/resume/types";
 
 import { JobkoreaFields } from "./jobkorea-fields";
+import { RememberFields } from "./remember-fields";
 import { ResumeShell, type VersionOption } from "./resume-shell";
 import { SaraminFields } from "./saramin-fields";
 
@@ -39,6 +44,18 @@ export function JobkoreaWorkspace({
   return (
     <ResumeShell platform="jobkorea" {...props}>
       {(state) => <JobkoreaFields {...state} asOf={asOf} />}
+    </ResumeShell>
+  );
+}
+
+/** 리멤버 프로필 작업 화면 */
+export function RememberWorkspace({
+  asOf,
+  ...props
+}: WorkspaceProps<RememberResume>) {
+  return (
+    <ResumeShell platform="remember" {...props}>
+      {(state) => <RememberFields {...state} asOf={asOf} />}
     </ResumeShell>
   );
 }

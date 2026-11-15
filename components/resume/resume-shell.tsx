@@ -9,7 +9,7 @@ import {
   type SaveInput,
 } from "@/app/(legacy)/(portfolio)/resume/actions";
 import type { ResumePlatform } from "@/lib/resume/types";
-import { SITE_NAMES, resumeHref } from "@/lib/resume/platforms";
+import { SITE_NAMES, hasFiles, resumeHref } from "@/lib/resume/platforms";
 
 import { ResumeDownloads } from "./downloads";
 import type { ShareSummary } from "@/lib/resume/shares";
@@ -209,12 +209,14 @@ export function ResumeShell<R extends object>({
           ? `'${previousLabel}' 버전과 달라진 칸에 '변경' 표시가 붙습니다. ${SITE_NAMES[platform]}에서는 그 칸만 고치면 됩니다.`
           : "처음 저장한 버전이라 비교할 이전 버전이 없습니다."}
       </p>
-      <ResumeDownloads
-        platform={platform}
-        versionId={version.id}
-        editing={editing}
-        initialShares={shares}
-      />
+      {hasFiles(platform) && (
+        <ResumeDownloads
+          platform={platform}
+          versionId={version.id}
+          editing={editing}
+          initialShares={shares}
+        />
+      )}
       {error && (
         <p
           role="alert"

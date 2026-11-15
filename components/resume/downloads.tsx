@@ -8,7 +8,7 @@ import {
 } from "@/app/(legacy)/(portfolio)/resume/actions";
 import { PRODUCTION_ORIGIN } from "@/lib/auth/config";
 import type { ShareSummary } from "@/lib/resume/shares";
-import type { ResumePlatform } from "@/lib/resume/types";
+import type { FilePlatform } from "@/lib/resume/types";
 import { BUTTON } from "./fields";
 
 const DOCUMENTS = [
@@ -26,7 +26,7 @@ export function ResumeDownloads({
   editing,
   initialShares,
 }: {
-  platform: ResumePlatform;
+  platform: FilePlatform;
   versionId: string;
   editing: boolean;
   initialShares: ShareSummary[];

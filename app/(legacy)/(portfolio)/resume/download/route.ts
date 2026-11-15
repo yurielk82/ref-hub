@@ -8,7 +8,7 @@ import {
   PRIVATE_FILE_HEADERS,
   renderFile,
 } from "@/lib/resume/files";
-import { parsePlatform } from "@/lib/resume/platforms";
+import { hasFiles, parsePlatform } from "@/lib/resume/platforms";
 import {
   listVersions,
   readVersion,
@@ -40,6 +40,8 @@ export async function GET(request: NextRequest) {
   const format = parseFileFormat(params.get("format") ?? "docx");
   if (!format) return plain(400, "파일 형식을 알 수 없습니다.");
   if (!kind) return plain(400, "문서 종류를 알 수 없습니다.");
+  if (!hasFiles(platform))
+    return plain(400, "이 사이트는 제출용 파일이 없습니다.");
 
   const id = params.get("v") ?? (await listVersions(dir, platform))[0]?.id;
   const version = id ? await readVersion(dir, id, platform) : null;

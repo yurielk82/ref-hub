@@ -12,14 +12,22 @@ import { redirect } from "next/navigation";
 
 import { jobsViewer } from "@/auth";
 import { portfolioHome } from "@/lib/selected-portfolio/workspace";
-import { parsePlatform, resumeHref } from "@/lib/resume/platforms";
+import {
+  hasFiles,
+  isPlatform,
+  parsePlatform,
+  resumeHref,
+} from "@/lib/resume/platforms";
 import { resumeDataDir, saveVersion } from "@/lib/resume/versions";
-import type { JobkoreaResume, SaraminResume } from "@/lib/resume/types";
+import type { ResumeByPlatform, ResumePlatform } from "@/lib/resume/types";
 
-export type SaveInput = (
-  | { platform: "saramin"; resume: SaraminResume; label: string }
-  | { platform: "jobkorea"; resume: JobkoreaResume; label: string }
-) & { home?: "/" | "/ax" };
+export type SaveInput = {
+  [P in ResumePlatform]: {
+    platform: P;
+    resume: ResumeByPlatform[P];
+    label: string;
+  };
+}[ResumePlatform] & { home?: "/" | "/ax" };
 
 /**
  * 고친 이력서를 새 버전으로 저장한다. Server Action은 누구나 POST로 부를 수 있으므로
@@ -36,17 +44,7 @@ export async function saveResumeVersion(
   const label = String(input.label ?? "");
   let id: string;
   try {
-    id = (
-      platform === "jobkorea"
-        ? await saveVersion(
-            dir,
-            input.resume as JobkoreaResume,
-            label,
-            new Date(),
-            "jobkorea",
-          )
-        : await saveVersion(dir, input.resume as SaraminResume, label)
-    ).id;
+    id = (await saveVersion(dir, input.resume, label, new Date(), platform)).id;
   } catch (error) {
     return { error: `저장하지 못했습니다: ${(error as Error).message}` };
   }
@@ -79,9 +77,9 @@ export async function shareResumeFile(input: {
   if (!dir) return { error: "이력서 저장 폴더가 없습니다." };
   const kind = parseDocKind(input?.kind);
   const format = parseFileFormat(input?.format);
-  if (!kind || !format || !["saramin", "jobkorea"].includes(input?.platform))
+  const platform = input?.platform;
+  if (!kind || !format || !isPlatform(platform) || !hasFiles(platform))
     return { error: "문서 종류와 파일 형식을 확인해 주세요." };
-  const platform = parsePlatform(input.platform);
   try {
     return await serializeShareChange(async () => {
       const version = await readVersion(dir, String(input.versionId), platform);

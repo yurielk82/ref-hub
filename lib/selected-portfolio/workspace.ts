@@ -1,3 +1,5 @@
+import { isPlatform } from "../resume/platforms.ts";
+
 export type PortfolioHome = "/" | "/ax";
 export type OwnerSection = "resume" | "jobs" | "login";
 export type WorkspaceQuery = Record<string, string | string[] | undefined>;
@@ -36,7 +38,9 @@ export function safeReturnTo(value: unknown): string {
     if (!section && url.searchParams.get("edit") === "1")
       params.set("edit", "1");
     if (section === "resume") {
-      if (url.searchParams.get("p") === "jobkorea") params.set("p", "jobkorea");
+      const platform = url.searchParams.get("p");
+      if (isPlatform(platform) && platform !== "saramin")
+        params.set("p", platform);
       const version = url.searchParams.get("v");
       if (version && /^[a-zA-Z0-9_-]{1,100}$/.test(version))
         params.set("v", version);

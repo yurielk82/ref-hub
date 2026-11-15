@@ -14,14 +14,22 @@ import {
   readVersion,
   resumeDataDir,
 } from "@/lib/resume/versions";
-import { SITE_NAMES, parsePlatform, resumeHref } from "@/lib/resume/platforms";
+import {
+  SITE_DOCS,
+  SITE_NAMES,
+  hasFiles,
+  parsePlatform,
+  resumeHref,
+} from "@/lib/resume/platforms";
 import type {
   JobkoreaResume,
+  RememberResume,
   ResumePlatform,
   SaraminResume,
 } from "@/lib/resume/types";
 import {
   JobkoreaWorkspace,
+  RememberWorkspace,
   SaraminWorkspace,
 } from "@/components/resume/resume-workspace";
 
@@ -54,6 +62,7 @@ export async function OwnerResume({
   const { v, p } = query;
   const platform = parsePlatform(p);
   const site = SITE_NAMES[platform];
+  const doc = SITE_DOCS[platform];
   const versions = dir ? await listVersions(dir, platform) : [];
   const wanted = typeof v === "string" ? v : undefined;
   const index = Math.max(
@@ -71,7 +80,9 @@ export async function OwnerResume({
       : null;
 
   const shares =
-    dir && current ? await listShares(dir, platform, current.id) : [];
+    dir && current && hasFiles(platform)
+      ? await listShares(dir, platform, current.id)
+      : [];
 
   return (
     <section className="px-6 pb-28 pt-12 sm:pt-16">
@@ -82,11 +93,11 @@ export async function OwnerResume({
         >
           <div>
             <h1 className="text-2xl font-bold tracking-tight text-stone-950 dark:text-stone-50">
-              {site} 이력서
+              {site} {doc}
             </h1>
             <p className="mt-2 text-sm leading-6 text-stone-600 dark:text-stone-400">
-              {site} 이력서 칸 순서대로 정리했습니다. 칸마다 복사해 {site}에
-              붙여 넣으세요.
+              {site} {doc} 칸 순서대로 정리했습니다. 칸마다 복사해 {site}에 붙여
+              넣으세요.
             </p>
           </div>
         </div>
@@ -122,7 +133,7 @@ export async function OwnerResume({
         )}
         {dir && !current && (
           <p className="mt-6 rounded-lg border border-stone-200 bg-white px-4 py-3 text-sm leading-6 text-stone-600 dark:border-stone-800 dark:bg-stone-900 dark:text-stone-300">
-            저장된 이력서 버전이 없습니다.
+            저장된 {doc} 버전이 없습니다.
           </p>
         )}
 
@@ -149,6 +160,14 @@ export async function OwnerResume({
                 .replace(/\.\s?/g, ".")
                 .replace(/\.$/, ""),
             };
+            if (platform === "remember")
+              return (
+                <RememberWorkspace
+                  key={current.id}
+                  {...shared}
+                  resume={current.resume as RememberResume}
+                />
+              );
             return platform === "jobkorea" ? (
               <JobkoreaWorkspace
                 key={current.id}

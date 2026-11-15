@@ -4,6 +4,7 @@ import path from "node:path";
 
 import type {
   JobkoreaResume,
+  RememberResume,
   ResumeByPlatform,
   ResumePlatform,
   ResumeVersion,
@@ -16,17 +17,19 @@ export { careerMonths, monthsLabel } from "./months.ts";
 /**
  * 이력서 버전 보관. 버전마다 JSON 파일 하나(<사이트 폴더>/<id>.json)이고 고치지 않고 새로 쌓는다.
  * 폴더는 RESUME_DATA_DIR, 없으면 공고 저장 폴더(JOBS_DATA_DIR) 옆의 resume 폴더다.
- * 사람인은 처음 만든 versions 폴더를 그대로 쓰고, 잡코리아는 칸이 달라 따로 쌓는다.
+ * 사람인은 처음 만든 versions 폴더를 그대로 쓰고, 다른 사이트는 칸이 달라 따로 쌓는다.
  */
 const FOLDERS: Record<ResumePlatform, string> = {
   saramin: "versions",
   jobkorea: "jobkorea-versions",
+  remember: "remember-versions",
 };
 const VALIDATORS: {
   [P in ResumePlatform]: (v: unknown) => v is ResumeByPlatform[P];
 } = {
   saramin: isResume,
   jobkorea: isJobkoreaResume,
+  remember: isRememberResume,
 };
 const ID = /^\d{8}-\d{6}-[0-9a-f]{6}$/;
 /** 이력서 한 벌이 이보다 크면 잘못 들어온 값으로 본다 */
@@ -248,6 +251,33 @@ export function isJobkoreaResume(value: unknown): value is JobkoreaResume {
       "salary",
       "jobs",
       "industries",
+    ])
+  );
+}
+
+export function isRememberResume(value: unknown): value is RememberResume {
+  if (typeof value !== "object" || value === null) return false;
+  const r = value as Partial<RememberResume>;
+  return (
+    strings(r.basic, ["name"]) &&
+    strings(r.intro, ["basic", "detail"]) &&
+    Array.isArray(r.careers) &&
+    r.careers.every(
+      (c) =>
+        strings(c, ["company", "department", "position", "start", "detail"]) &&
+        (c.end === null || typeof c.end === "string"),
+    ) &&
+    titledList(r.education, ["school", "degree", "major", "start", "end"]) &&
+    stringList(r.jobs) &&
+    stringList(r.skills) &&
+    stringList(r.websites) &&
+    strings(r, [
+      "languages",
+      "lectures",
+      "publications",
+      "articles",
+      "awards",
+      "certificates",
     ])
   );
 }

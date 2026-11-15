@@ -109,11 +109,66 @@ export interface JobkoreaResume {
   };
 }
 
-export type ResumePlatform = "saramin" | "jobkorea";
+/** 리멤버 경력 한 줄. 회사 아래 부서·직급·기간과 업무 상세 한 칸을 둔다. */
+export interface RememberCareer {
+  company: string;
+  department: string;
+  /** 직급 (예: 과장) */
+  position: string;
+  /** "YYYY.MM" */
+  start: string;
+  /** "YYYY.MM", 재직 중이면 null */
+  end: string | null;
+  /** 업무 상세 — 역할과 성과 */
+  detail: string;
+}
+
+export interface RememberEducation {
+  school: string;
+  /** 예: 학사 */
+  degree: string;
+  major: string;
+  /** "YYYY" */
+  start: string;
+  end: string;
+}
+
+/**
+ * 리멤버 프로필 한 벌. 칸 순서는 리멤버 프로필 편집 화면(2026-11-15 오너 제공)을 따른다.
+ * 파일로 내는 이력서가 아니라 프로필이라 경력기술서·자기소개서 칸과 제출용 파일이 없다.
+ */
+export interface RememberResume {
+  basic: { name: string };
+  /** 소개 영역의 두 칸(각 5,000자). 둘째 칸은 받은 화면에 이름이 없었다. */
+  intro: { basic: string; detail: string };
+  careers: RememberCareer[];
+  education: RememberEducation[];
+  /** 직무 선택 목록 */
+  jobs: string[];
+  /** 전문 분야·스킬 키워드 */
+  skills: string[];
+  languages: string;
+  websites: string[];
+  /** 강의·자문 활동 (제목·활동시기) */
+  lectures: string;
+  /** 논문·저서 (제목·발행연월) */
+  publications: string;
+  /** 기사 (제목·링크) */
+  articles: string;
+  /** 수상 및 기타이력 */
+  awards: string;
+  certificates: string;
+}
+
+export type ResumePlatform = "saramin" | "jobkorea" | "remember";
+
+/** 제출용 파일(이력서·경력기술서·자기소개서·포트폴리오)을 만드는 사이트 */
+export type FilePlatform = "saramin" | "jobkorea";
 
 export interface ResumeByPlatform {
   saramin: SaraminResume;
   jobkorea: JobkoreaResume;
+  remember: RememberResume;
 }
 
 /** 저장된 한 버전. 파일 이름이 id고, 어느 사이트용인지는 담긴 폴더가 정한다. */

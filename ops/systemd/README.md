@@ -1,13 +1,11 @@
 # 공고 모음 서버 설정
 
 로그인한 허용 계정에게만 보이는 `/jobs`(공고 모음)의 서버 쪽 설정이다. 웹 서비스 유닛 본체(`github-ref-hub.service`)는
-워크스페이스 `infra/systemd/units`가 원본이고, 여기에는 ref-hub에만 필요한 덧붙임과 수집 예약 작업만 둔다.
+워크스페이스 `infra/systemd/units`가 원본이고, 여기에는 ref-hub에만 필요한 덧붙임만 둔다. 공고 수집 예약 작업은 아래 수집 예약 작업 절을 본다.
 
 | 파일                                          | 설치 위치                                       | 역할                                                   |
 | --------------------------------------------- | ----------------------------------------------- | ------------------------------------------------------ |
 | `github-ref-hub.service.d/50-jobs-board.conf` | `/etc/systemd/system/github-ref-hub.service.d/` | 웹 서비스에 로그인 비밀 파일과 공고 저장 위치를 넣는다 |
-| `ref-hub-jobs-collect.service`                | 설치하지 않음                                   | 예전 Node 수집 작업. 아래 수집 예약 작업 참고          |
-| `ref-hub-jobs-collect.timer`                  | 설치하지 않음                                   | 예전 Node 수집 예약. 아래 수집 예약 작업 참고          |
 
 ## 비밀 파일 (git에 올리지 않는다, 소유자 전용 0600)
 
@@ -50,7 +48,7 @@ URL 복사 시 로그인·허용 계정을 다시 확인하고 선택 파일을 
 예약 작업은 손으로 설치하지 않는다. 이 서버의 타이머는 워크스페이스 등록부 `~/GitHub/bin/schedules.tsv`가 단 하나의 목록이고,
 등록부에 없는 타이머는 `schedule.py audit`가 어긋남으로 잡는다. 공고 수집은 2026-11-16부터 re-hub(Rust)가 맡으며
 등록부 행 `re-hub-jobs-collect  infra/systemd/units  re-hub`과 워크스페이스 `infra/systemd/units/re-hub-jobs-collect.{service,timer}`가 원본이다(워크스페이스 #890).
-매일 07:00 KST에 돌고, 저장 파일과 `saramin-api.env` 조건은 위와 같다. 이 폴더의 `ref-hub-jobs-collect.*`는 예전 Node 수집 작업이라 설치하지 않는다.
+매일 07:00 KST에 돌고, 저장 파일과 `saramin-api.env` 조건은 위와 같다. 예전 Node 수집 작업 `ref-hub-jobs-collect.*`는 저장소에서 지웠다.
 
 ```bash
 python3 ~/GitHub/bin/schedule.py sync re-hub-jobs-collect           # 설치할 파일만 보여 준다

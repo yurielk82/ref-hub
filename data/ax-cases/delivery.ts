@@ -463,12 +463,12 @@ export const DELIVERY_CASE_STUDIES: AxCaseStudy[] = [
   },
   {
     projectSlug: "cso-edi-review",
-    label: "CSO EDI 검토 효율화",
-    role: "OCR·AI·사람의 검수 절차와 자사 기준을 정리하며 검토 자동화를 진행하고 있습니다.",
+    label: "프로엠알 연계 EDI 검토 개선",
+    role: "프로엠알과 연계해 검토 정밀도·효율을 개선하고, OCR·AI·사람의 검수 절차와 자사 기준을 정리하며 검토 자동화를 진행하고 있습니다.",
     period: "현재 진행 중",
     status: {
       kind: "live",
-      note: "기존 csoweb 포털과 별개로 EDI 검토·기준 관리 진행 중",
+      note: "프로엠알 연계 EDI 검토 정밀도·효율 개선 진행 중",
     },
     impact:
       "반복 검토 부담을 줄이고 소액 건까지 검증 범위를 넓히는 EDI 검토 개선",
@@ -477,7 +477,7 @@ export const DELIVERY_CASE_STUDIES: AxCaseStudy[] = [
     intervention:
       "OCR 플랫폼의 날짜·수량·금액·품목 대조와 파일 변조 감지, OCR 데이터의 자사 기준 AI 재검수, 문제처·고액처·AI 보류 건의 사람 검토를 연결합니다. 사람의 검토 결과를 반영해 기준을 3개월 이상 검증·업데이트하며 개선합니다.",
     outcome:
-      "EDI 검토 자동화 진행 중입니다. 원본·판정 근거 연결, 누락·중복·규격·단위 검사, 기준 이력·과거 사례 재검증, 통과 건 표본 점검, 지급처별 누적금액·이상변동 경고는 확장 계획입니다. 기존 csoweb 포털과 별개 프로젝트입니다.",
+      "EDI 검토 자동화 진행 중입니다. 원본·판정 근거 연결, 누락·중복·규격·단위 검사, 기준 이력·과거 사례 재검증, 통과 건 표본 점검, 지급처별 누적금액·이상변동 경고는 확장 계획입니다. 프로엠알과 연계하는 별도 검토 개선 프로젝트입니다.",
     disclosure: "withheld",
     evidenceLabel: "사례 상세",
     ax: {
@@ -488,7 +488,7 @@ export const DELIVERY_CASE_STUDIES: AxCaseStudy[] = [
       automation:
         "사람의 검토 결과와 근거를 기준표에 반영하고 3개월 이상 검증·업데이트하며 개선",
       operation:
-        "EDI 검토 개선 중. 원본 근거·누락·중복·단위 검사·기준 이력·표본 점검·누적금액 경고 확장 계획. 별도 프로젝트로 진행",
+        "EDI 검토 개선 중. 원본 근거·누락·중복·단위 검사·기준 이력·표본 점검·누적금액 경고 확장 계획. 프로엠알과 연계하는 별도 프로젝트로 진행",
     },
   },
   {
@@ -498,7 +498,7 @@ export const DELIVERY_CASE_STUDIES: AxCaseStudy[] = [
     period: "2026 ~ 2026-09",
     status: {
       kind: "retired",
-      note: "상용 솔루션 도입에 따라 2026년 9월 자체 포털 운영 종료",
+      note: "프로엠알 도입에 따라 2026년 9월 자체 포털 운영 중지",
     },
     impact: "CSO 정산 자료 조회와 처방통계 이미지·PDF의 OCR 자료화",
     problem:
@@ -506,7 +506,7 @@ export const DELIVERY_CASE_STUDIES: AxCaseStudy[] = [
     intervention:
       "정산 자료와 업체 정보를 연결하는 조회 포털을 구축하고, 처방통계 이미지·PDF를 OCR로 읽어 품목·수량 자료로 만들었습니다.",
     outcome:
-      "CSO 정산 자료를 조회하고 처방 자료를 OCR로 자료화하는 시스템을 구축했습니다. 자체 포털은 상용 솔루션 도입에 따라 운영을 종료했습니다.",
+      "CSO 정산 자료를 조회하고 처방 자료를 OCR로 자료화하는 시스템을 구축했습니다. 자체 포털은 프로엠알 도입에 따라 운영을 중지했습니다.",
     disclosure: "withheld",
     evidenceLabel: "사례 상세",
     ax: {
@@ -515,7 +515,7 @@ export const DELIVERY_CASE_STUDIES: AxCaseStudy[] = [
       build: "업체별 정산 조회 포털과 대량 메일 발송 대기열 구축",
       automation: "OCR로 처방 이미지·PDF의 품목·수량 추출",
       operation:
-        "상용 솔루션 도입으로 운영 종료, 정산 이력은 영업 데이터 플랫폼에 보존",
+        "프로엠알 도입으로 운영 중지, 정산 이력은 영업 데이터 플랫폼에 보존",
     },
   },
   {

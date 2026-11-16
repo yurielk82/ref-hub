@@ -141,9 +141,9 @@ export const WORK_CHAPTERS: readonly WorkChapter[] = [
   {
     id: "edi-review",
     period: "현재 진행 중",
-    title: "CSO EDI 검토 효율화와 검증 체계 강화",
+    title: "프로엠알 연계 EDI 검토 정밀도·효율 개선",
     situation:
-      "반복 대조 부담을 줄여 문제처·고액처에 집중하면서 소액 건까지 같은 기준으로 확인하기 위해 EDI 검토 자동화를 진행하고 있습니다.",
+      "프로엠알과 연계해 EDI 검토 정밀도와 효율을 높이고, 문제처·고액처에 집중하면서 소액 건까지 같은 기준으로 확인하는 개선을 진행하고 있습니다.",
     actions: [
       "1차: OCR 플랫폼에서 날짜·수량·금액·품목 대조와 파일 변조 감지",
       "2차: OCR된 데이터를 다시 대조하고 자사 기준으로 AI가 EDI 자료 검수. 근거가 분명한 건만 통과하고 불일치·근거 부족은 판단 보류",
@@ -154,7 +154,7 @@ export const WORK_CHAPTERS: readonly WorkChapter[] = [
     ],
     results: [
       "EDI 검토 자동화 진행 중. 사람은 중요한 판단에 집중하고 소액 건까지 검증 범위를 넓히는 것이 목표",
-      "기존 csoweb 포털과 별도 프로젝트로 진행. 현재 적용 기준·사람의 판단 이력·검토 절차를 관리",
+      "프로엠알과 연계하는 별도 검토 개선 프로젝트. 현재 적용 기준·사람의 판단 이력·검토 절차를 관리",
     ],
     projects: ["cso-edi-review"],
   },
@@ -170,7 +170,7 @@ export const WORK_CHAPTERS: readonly WorkChapter[] = [
     ],
     results: [
       "데이터 처리·시스템 구축 수행",
-      "자체 포털은 상용 솔루션 도입에 따라 2026년 9월 운영 종료",
+      "자체 포털은 프로엠알 도입에 따라 2026년 9월 운영 중지",
     ],
     projects: ["csoweb"],
   },

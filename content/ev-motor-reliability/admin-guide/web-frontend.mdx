@@ -39,7 +39,7 @@ ev-motor-reliability/
 
 ```bash
 cd ev-motor-reliability/web
-npm install
+pnpm install
 ```
 
 ### 환경 변수
@@ -66,7 +66,7 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 
 # 터미널 2: 웹 프론트엔드
 cd ev-motor-reliability/web
-npm run dev
+pnpm run dev
 ```
 
 브라우저에서 `http://localhost:3000`으로 접속합니다.
@@ -98,7 +98,7 @@ npm run dev
 
 ```bash
 cd ev-motor-reliability/web
-npm run build
+pnpm run build
 ```
 
 빌드 결과물은 `web/.next/` 디렉토리에 생성됩니다.
@@ -107,7 +107,7 @@ npm run build
 
 ```bash
 cd ev-motor-reliability/web
-npm start
+pnpm start
 ```
 
 기본 포트는 3000입니다. `PORT` 환경 변수로 변경할 수 있습니다.
@@ -119,7 +119,7 @@ npm start
 ```bash
 # PM2 사용 예시
 pm2 start "uvicorn app.main:app --host 0.0.0.0 --port 8000" --name ev-api
-pm2 start "cd web && npm start" --name ev-web
+pm2 start "cd web && pnpm start" --name ev-web
 pm2 save
 ```
 

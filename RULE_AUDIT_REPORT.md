@@ -67,7 +67,7 @@
 | 검증 항목 | 결과 |
 |----------|------|
 | `tsc --noEmit` | PASS (0 errors) |
-| `npm run build` | PASS (73 pages SSG) |
+| `pnpm run build` | PASS (73 pages SSG) |
 | ESLint | N/A (미설치) |
 | Prettier | N/A (미설치) |
 | 테스트 | N/A (미설치) |

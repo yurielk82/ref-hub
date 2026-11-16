@@ -538,11 +538,11 @@ export const DELIVERY_PROJECTS: Project[] = [
   },
   {
     slug: "cso-edi-review",
-    name: "EDI 검토 자동화·기준 관리",
+    name: "프로엠알 연계 EDI 검토 개선",
     tagline:
       "반복 검토 부담을 줄이고 소액 건까지 검증 범위를 넓히는 별도 프로젝트",
     description:
-      "기존 csoweb 포털과 별도로 EDI 검토 기준과 사람의 판단 이력을 관리합니다. OCR 플랫폼 검증, 자사 기준 AI 재검수, 문제처·고액처·판단 보류 건의 필수 사람 검토를 연결하며 기준을 검증·업데이트하고 있습니다.",
+      "프로엠알과 연계해 검토 정밀도·효율을 높이기 위해 EDI 검토 기준과 사람의 판단 이력을 관리합니다. OCR 플랫폼 검증, 자사 기준 AI 재검수, 문제처·고액처·판단 보류 건의 필수 사람 검토를 연결하며 기준을 검증·업데이트하고 있습니다.",
     tech: [
       "Claude·Codex 프로젝트",
       "AI 브라우저",
@@ -566,13 +566,13 @@ export const DELIVERY_PROJECTS: Project[] = [
     name: "CSO 정산 조회·처방 자료 OCR",
     tagline: "CSO 정산 자료 조회와 처방통계 이미지·PDF의 OCR 자료화",
     description:
-      "정산 자료와 업체 정보를 연결하는 조회 포털을 구축하고, 처방통계 이미지·PDF를 OCR로 읽어 품목·수량 자료로 만들었습니다. 상용 솔루션 도입에 따라 2026년 9월 자체 포털 운영 종료.",
+      "정산 자료와 업체 정보를 연결하는 조회 포털을 구축하고, 처방통계 이미지·PDF를 OCR로 읽어 품목·수량 자료로 만들었습니다. 프로엠알 도입에 따라 2026년 9월 자체 포털 운영 중지.",
     category: "web",
     scope: "company",
     docsPath: "/csoweb",
     screenshot: "/images/portfolio/csoweb/edi-review-detail.webp",
     screensNote:
-      "운영 종료 뒤 기록용으로 찍은 화면입니다. 업체·병의원 이름과 금액은 가짜 값이고, 처방 문서 이미지는 자리표시로 바꿨습니다.",
+      "운영 중지 뒤 기록용으로 찍은 화면입니다. 업체·병의원 이름과 금액은 가짜 값이고, 처방 문서 이미지는 자리표시로 바꿨습니다.",
     screens: [
       {
         src: "/images/portfolio/csoweb/edi-review-detail.webp",

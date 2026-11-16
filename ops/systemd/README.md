@@ -6,8 +6,8 @@
 | 파일                                          | 설치 위치                                       | 역할                                                   |
 | --------------------------------------------- | ----------------------------------------------- | ------------------------------------------------------ |
 | `github-ref-hub.service.d/50-jobs-board.conf` | `/etc/systemd/system/github-ref-hub.service.d/` | 웹 서비스에 로그인 비밀 파일과 공고 저장 위치를 넣는다 |
-| `ref-hub-jobs-collect.service`                | `/etc/systemd/system/`                          | 사람인 공고를 받아 저장 파일에 합친다                  |
-| `ref-hub-jobs-collect.timer`                  | `/etc/systemd/system/`                          | 매일 07:00 KST에 수집을 돌린다                         |
+| `ref-hub-jobs-collect.service`                | 설치하지 않음                                   | 예전 Node 수집 작업. 아래 수집 예약 작업 참고          |
+| `ref-hub-jobs-collect.timer`                  | 설치하지 않음                                   | 예전 Node 수집 예약. 아래 수집 예약 작업 참고          |
 
 ## 비밀 파일 (git에 올리지 않는다, 소유자 전용 0600)
 
@@ -45,19 +45,37 @@ URL 복사 시 로그인·허용 계정을 다시 확인하고 선택 파일을 
 
 ## 설치·되돌리기
 
+### 수집 예약 작업
+
+예약 작업은 손으로 설치하지 않는다. 이 서버의 타이머는 워크스페이스 등록부 `~/GitHub/bin/schedules.tsv`가 단 하나의 목록이고,
+등록부에 없는 타이머는 `schedule.py audit`가 어긋남으로 잡는다. 공고 수집은 2026-11-16부터 re-hub(Rust)가 맡으며
+등록부 행 `re-hub-jobs-collect  infra/systemd/units  re-hub`과 워크스페이스 `infra/systemd/units/re-hub-jobs-collect.{service,timer}`가 원본이다(워크스페이스 #890).
+매일 07:00 KST에 돌고, 저장 파일과 `saramin-api.env` 조건은 위와 같다. 이 폴더의 `ref-hub-jobs-collect.*`는 예전 Node 수집 작업이라 설치하지 않는다.
+
+```bash
+python3 ~/GitHub/bin/schedule.py sync re-hub-jobs-collect           # 설치할 파일만 보여 준다
+python3 ~/GitHub/bin/schedule.py sync --apply re-hub-jobs-collect   # 설치, daemon-reload, 타이머 enable --now
+python3 ~/GitHub/bin/schedule.py audit                              # 설치본이 등록부·origin 과 같은지 확인
+```
+
+`sync`는 origin에 없는 유닛 파일은 설치를 거부하므로 유닛·등록부 변경은 워크스페이스 PR로 병합한 뒤 돌린다.
+되돌리기도 같다. 등록부 행과 유닛 파일을 워크스페이스 PR로 바꾸고 `sync --apply`·`audit`로 맞춘다.
+
+수집을 바로 한 번 돌리려면 `sudo systemctl start re-hub-jobs-collect.service`, 결과는 `journalctl -u re-hub-jobs-collect -n 50`.
+
+### 웹 서비스 덧붙임
+
+`50-jobs-board.conf`는 Node 웹 서비스(`github-ref-hub.service`)에만 붙는다. ref.dvsharp.com은 2026-11-16부터 re-hub가 맡는다(워크스페이스 #888).
+Node 서비스를 다시 쓸 때만 아래로 설치한다. 예약 작업이 아니라 등록부 대상이 아니다.
+
 ```bash
 cd ~/GitHub/ref-hub/ops/systemd
-sudo install -d -m 0755 /etc/systemd/system/github-ref-hub.service.d
-sudo install -m 0644 github-ref-hub.service.d/50-jobs-board.conf /etc/systemd/system/github-ref-hub.service.d/
-sudo install -m 0644 ref-hub-jobs-collect.service ref-hub-jobs-collect.timer /etc/systemd/system/
+sudo install -D -m 0644 github-ref-hub.service.d/50-jobs-board.conf /etc/systemd/system/github-ref-hub.service.d/50-jobs-board.conf
 sudo systemctl daemon-reload
-sudo systemctl enable --now ref-hub-jobs-collect.timer
 sudo systemctl restart github-ref-hub.service   # 비밀 파일을 바꾼 뒤에도 다시 시작해야 반영된다
 ```
 
-되돌리기: `sudo systemctl disable --now ref-hub-jobs-collect.timer`, 위 세 파일을 지우고 `daemon-reload` 뒤 웹 서비스를 다시 시작한다.
-
-수집을 바로 한 번 돌리려면 `sudo systemctl start ref-hub-jobs-collect.service`, 결과는 `journalctl -u ref-hub-jobs-collect -n 50`.
+되돌리기: 그 파일을 지우고 `daemon-reload` 뒤 웹 서비스를 다시 시작한다.
 
 ### 홈페이지 문구 편집
 

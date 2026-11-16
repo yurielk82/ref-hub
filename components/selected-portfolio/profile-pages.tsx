@@ -259,8 +259,8 @@ export function PortfolioHome({
   const { profile } = data;
   const projects = orderedProjects(data.projects);
   const editing = useCopyEditing()?.editing;
-  const featured = projects.slice(0, 3);
-  const remaining = projects.slice(3);
+  const featured = projects.slice(0, 4);
+  const remaining = projects.slice(4);
   return (
     <>
       <section className="home-introduction" aria-labelledby="home-title">
@@ -290,7 +290,7 @@ export function PortfolioHome({
           </EditableCopy>
         )}
         <div className="home-outcomes" aria-label="대표 업무 변화">
-          {featured.map((project) => (
+          {featured.slice(0, 3).map((project) => (
             <HomeOutcome
               key={project.id}
               project={project}

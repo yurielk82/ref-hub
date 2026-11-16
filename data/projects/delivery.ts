@@ -537,6 +537,31 @@ export const DELIVERY_PROJECTS: Project[] = [
     tech: ["Express 5", "React 19", "Vite 7", "MSSQL", "TanStack Table"],
   },
   {
+    slug: "cso-edi-review",
+    name: "EDI 검토 자동화·기준 관리",
+    tagline:
+      "반복 검토 부담을 줄이고 소액 건까지 검증 범위를 넓히는 별도 프로젝트",
+    description:
+      "기존 csoweb 포털과 별도로 EDI 검토 기준과 사람의 판단 이력을 관리합니다. OCR 플랫폼 검증, 자사 기준 AI 재검수, 문제처·고액처·판단 보류 건의 필수 사람 검토를 연결하며 기준을 검증·업데이트하고 있습니다.",
+    tech: [
+      "Claude·Codex 프로젝트",
+      "AI 브라우저",
+      "OCR 플랫폼",
+      "검토 기준·판단 이력 관리",
+    ],
+    category: "tool",
+    scope: "company",
+    emoji: "📋",
+    gradient: "from-blue-600/20 to-cyan-600/20",
+    features: [
+      "OCR·AI·사람의 3단계 검수와 자사 기준 관리",
+      "문제처·고액처·AI 판단 보류 건의 필수 사람 검토",
+      "확장 계획: 원본 근거·누락·중복·단위 검사·기준 이력·표본 점검·누적금액 경고",
+    ],
+    highlight: "EDI 검토 자동화·기준 관리 진행 중",
+    year: "진행 중",
+  },
+  {
     slug: "csoweb",
     name: "CSO 정산 조회·처방 자료 OCR",
     tagline: "CSO 정산 자료 조회와 처방통계 이미지·PDF의 OCR 자료화",

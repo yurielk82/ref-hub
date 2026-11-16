@@ -9,6 +9,7 @@ const CHAPTERS = [
   "executive-bi",
   "sales-hq",
   "distribution-inventory",
+  "edi-review",
   "cso-data",
   "reporting",
 ];

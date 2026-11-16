@@ -16,7 +16,7 @@ export function projectState(project: Project): string {
 }
 
 export function orderedProjects(projects: Project[]): Project[] {
-  const primary = ["kpi", "kpis", "csoweb", "bi"];
+  const primary = ["kpi", "kpis", "cso-edi-review", "bi"];
   return [
     ...primary.flatMap((id) => projects.filter((project) => project.id === id)),
     ...projects.filter((project) => !primary.includes(project.id)),

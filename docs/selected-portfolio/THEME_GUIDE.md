@@ -39,10 +39,10 @@ CSS 변수와 WebGL 셰이더의 색은 이 파일에서 함께 생성됩니다.
 ## 바꾼 뒤 확인
 
 ```sh
-npm run check-art
-npm test
-npm run build
-npm run check-types
+pnpm run check-art
+pnpm test
+pnpm run build
+pnpm run check-types
 ```
 
 정적 빌드이므로 색을 바꾼 뒤에는 다시 빌드·배포해야 사이트에 반영됩니다. GitHub Pages에서는 `main`에 변경을 올리면 워크플로가 다시 빌드합니다.

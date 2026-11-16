@@ -113,13 +113,13 @@
 
 ## 8. 회귀 검사와 커밋
 
-`npm run check-art`는 자유 색 토큰의 형식·CSS/셰이더 연결, 폰트 범위, 필수 문서와 로컬 문서 링크를 검사한다. 특정 색을 강제하지 않는다. 테스트·빌드는 다음을 포함한다.
+`pnpm run check-art`는 자유 색 토큰의 형식·CSS/셰이더 연결, 폰트 범위, 필수 문서와 로컬 문서 링크를 검사한다. 특정 색을 강제하지 않는다. 테스트·빌드는 다음을 포함한다.
 
 ```sh
-npm run check-art
-npm test
-npm run build
-npm run check-types
+pnpm run check-art
+pnpm test
+pnpm run build
+pnpm run check-types
 ```
 
 사용자가 원하는 색은 `content/theme.json`에서 자유롭게 바꾸고 정상 통과해야 한다. 실패하면 색 취향을 되돌리지 말고 토큰 누락·값 형식·연결 우회·폰트 범위 문제를 고친다. 사용자가 요청한 큰 조형·문법 변경은 이유와 화면 근거를 함께 기록한다. 단순 색 교체에 별도 승인을 요구하지 않는다.

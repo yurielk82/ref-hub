@@ -42,6 +42,7 @@ export const REFERENCE_PROJECT_SLUGS = [
   "pharmkpi",
   "pharmkpi-exec",
   "sales-strategy-portal",
+  "cso-edi-review",
   "csoweb",
   "accounting-ledger",
   "monthly-sales-reports",

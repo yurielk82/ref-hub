@@ -139,8 +139,8 @@ export const WORK_CHAPTERS: readonly WorkChapter[] = [
     projects: ["pharmkpi"],
   },
   {
-    id: "cso-data",
-    period: "2026 ~ 현재",
+    id: "edi-review",
+    period: "현재 진행 중",
     title: "CSO EDI 검토 효율화와 검증 체계 강화",
     situation:
       "반복 대조 부담을 줄여 문제처·고액처에 집중하면서 소액 건까지 같은 기준으로 확인하기 위해 EDI 검토 자동화를 진행하고 있습니다.",
@@ -154,7 +154,23 @@ export const WORK_CHAPTERS: readonly WorkChapter[] = [
     ],
     results: [
       "EDI 검토 자동화 진행 중. 사람은 중요한 판단에 집중하고 소액 건까지 검증 범위를 넓히는 것이 목표",
-      "기존 CSO 정산 조회·메일 발송 포털과 처방 자료 OCR 구축. 자체 포털은 상용 솔루션 도입에 따라 2026년 9월 운영 종료",
+      "기존 csoweb 포털과 별도 프로젝트로 진행. 현재 적용 기준·사람의 판단 이력·검토 절차를 관리",
+    ],
+    projects: ["cso-edi-review"],
+  },
+  {
+    id: "cso-data",
+    period: "2026",
+    title: "CSO 관련 데이터 처리·시스템 구축",
+    situation: "CSO 정산 자료 조회 포털과 처방 자료 OCR을 구축했습니다.",
+    actions: [
+      "정산 자료와 업체 정보를 연결하고, 업체별 정산 내역을 조회할 수 있는 포털을 구축했습니다.",
+      "처방통계 이미지·PDF를 OCR로 읽어 품목·수량 자료로 만들었습니다.",
+      "정산 자료 조회·발송에 필요한 반복 작업을 시스템으로 처리하도록 지원했습니다.",
+    ],
+    results: [
+      "데이터 처리·시스템 구축 수행",
+      "자체 포털은 상용 솔루션 도입에 따라 2026년 9월 운영 종료",
     ],
     projects: ["csoweb"],
   },

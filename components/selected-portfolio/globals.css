@@ -264,12 +264,15 @@ ul {
   word-break: keep-all;
 }
 .saying-source {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
+  display: inline-block;
   margin-top: 8px;
   font-size: 13px;
   color: var(--ink-2);
+}
+.saying-source svg {
+  display: inline;
+  margin-left: 4px;
+  vertical-align: -2px;
 }
 .saying-source:hover {
   color: var(--signal);
@@ -1022,8 +1025,8 @@ ul {
     font-size: 16px;
   }
   .saying-source {
-    min-height: 44px;
     margin-top: 0;
+    padding: 12px 0;
   }
   .home-outcomes {
     grid-template-columns: 1fr;

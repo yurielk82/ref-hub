@@ -289,6 +289,30 @@ export function PortfolioHome({
             {profile.headlineNote}
           </EditableCopy>
         )}
+        {profile.headlineSayings && (
+          <details className="home-sayings">
+            <summary>{profile.headlineSayings.label}</summary>
+            <ul>
+              {profile.headlineSayings.items.map((saying) => (
+                <li key={saying.url}>
+                  <blockquote lang="en" cite={saying.url}>
+                    {saying.quote}
+                  </blockquote>
+                  <p className="saying-translation">{saying.translation}</p>
+                  <a
+                    className="saying-source"
+                    href={saying.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {saying.source}
+                    <ArrowUpRight size={13} aria-hidden />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </details>
+        )}
         <div className="home-outcomes" aria-label="대표 업무 변화">
           {featured.slice(0, 3).map((project) => (
             <HomeOutcome

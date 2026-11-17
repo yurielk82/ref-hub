@@ -52,6 +52,12 @@ export type Project = {
   artLabels: string[];
   sections: ProjectSection[];
 };
+export type Saying = {
+  quote: string;
+  translation: string;
+  source: string;
+  url: string;
+};
 export type PortfolioData = {
   site: { title: string; description: string; example: boolean };
   profile: {
@@ -62,6 +68,8 @@ export type PortfolioData = {
     /** 홈 첫 줄 헤드라인(직무 + 차별 성과 한 문장). 있으면 홈이 헤드라인 구성으로 바뀐다. */
     headline?: string;
     headlineNote?: string;
+    /** 헤드라인과 같은 뜻의 해외 인용. 원문을 출처에서 확인한 것만 싣는다. */
+    headlineSayings?: { label: string; items: Saying[] };
     fields: string[];
     links: PublicLink[];
     experiences: RecordEntry[];

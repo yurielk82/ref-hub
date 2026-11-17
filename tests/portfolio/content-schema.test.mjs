@@ -28,6 +28,21 @@ test("highlights must be a list of non-empty strings", () => {
   );
 });
 
+test("each headline saying must link to an https source", () => {
+  const data = JSON.parse(
+    readFileSync(
+      path.join(ROOT, "data/selected-portfolio/portfolio-ax.json"),
+      "utf8",
+    ),
+  );
+  data.profile.headlineSayings.items[0].url = "mailto:someone@example.com";
+  assert.ok(
+    validatePortfolio(data).some((e) =>
+      e.startsWith("profile.headlineSayings.items[0].url"),
+    ),
+  );
+});
+
 test("lead must name one of the project's own captures", () => {
   const data = JSON.parse(
     readFileSync(

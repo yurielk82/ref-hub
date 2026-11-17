@@ -7,6 +7,30 @@
   "profile": {
     "name": "권대환",
     "role": "업무 자동화 · AX",
+    "headline": "반복은 시스템에, 판단은 사람에게",
+    "headlineSayings": {
+      "label": "해외의 비슷한 말",
+      "items": [
+        {
+          "quote": "Civilization advances by extending the number of important operations which we can perform without thinking about them.",
+          "translation": "문명은 생각하지 않고도 해낼 수 있는 중요한 일의 수를 늘리면서 발전한다.",
+          "source": "A. N. Whitehead, An Introduction to Mathematics (1911), 5장",
+          "url": "https://archive.org/details/anintroductionto00whituoft"
+        },
+        {
+          "quote": "Toil is the kind of work tied to running a production service that tends to be manual, repetitive, automatable, tactical, devoid of enduring value, and that scales linearly as a service grows.",
+          "translation": "토일(toil)은 서비스 운영에 따라붙는 일 가운데 손으로 하고, 반복되고, 자동화할 수 있고, 그때그때 대응에 그치고, 오래 남는 가치가 없고, 서비스가 커지는 만큼 늘어나는 일이다.",
+          "source": "Vivek Rau, Site Reliability Engineering (Google), 5장 Eliminating Toil",
+          "url": "https://sre.google/sre-book/eliminating-toil/"
+        },
+        {
+          "quote": "DRY—Don't Repeat Yourself. Every piece of knowledge must have a single, unambiguous, authoritative representation within a system.",
+          "translation": "반복하지 마라. 모든 지식은 시스템 안에서 단 하나의, 모호하지 않고 믿을 수 있는 표현을 가져야 한다.",
+          "source": "The Pragmatic Programmer, 20th Anniversary Edition, Tip 15",
+          "url": "https://pragprog.com/tips/"
+        }
+      ]
+    },
     "intro": "현업의 문제를 정의하고, 업무 기준과 원천 자료를 확인해 자동화 시스템으로 연결합니다. AI 코딩 도구와 협업하되 무엇을 만들고 어떻게 검증할지는 직접 판단하며, 사람이 확인할 예외를 남겨 운영합니다.",
     "highlights": [
       "영업 실적 보고 자동화 — 보고서별 자료 수합·엑셀 가공 단계를 줄이고 ERP 원천 자료 직접 조회와 월 보고서 자동 작성으로 전환",

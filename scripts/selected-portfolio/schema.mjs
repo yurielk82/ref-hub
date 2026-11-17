@@ -108,12 +108,42 @@ export function validatePortfolio(data) {
       data.profile,
       "profile",
       ["name", "role", "intro", "fields", "links", "experiences", "education"],
-      ["workAreas", "approach", "highlights", "headline", "headlineNote"],
+      [
+        "workAreas",
+        "approach",
+        "highlights",
+        "headline",
+        "headlineNote",
+        "headlineSayings",
+      ],
     )
   ) {
     for (const key of ["headline", "headlineNote"])
       if (data.profile[key] !== undefined)
         str(data.profile[key], `profile.${key}`);
+    if (
+      data.profile.headlineSayings !== undefined &&
+      obj(data.profile.headlineSayings, "profile.headlineSayings", [
+        "label",
+        "items",
+      ])
+    ) {
+      str(data.profile.headlineSayings.label, "profile.headlineSayings.label");
+      if (data.profile.headlineSayings.items?.length === 0)
+        fail("profile.headlineSayings.items", "한 건 이상 있어야 합니다.");
+      list(
+        data.profile.headlineSayings.items,
+        "profile.headlineSayings.items",
+        (saying, at) => {
+          if (!obj(saying, at, ["quote", "translation", "source", "url"]))
+            return;
+          for (const key of ["quote", "translation", "source"])
+            str(saying[key], `${at}.${key}`);
+          if (!isPublicUrl(saying.url, false))
+            fail(`${at}.url`, "https:// 주소를 입력하세요.");
+        },
+      );
+    }
     if (data.profile.highlights !== undefined)
       list(data.profile.highlights, "profile.highlights", (item, at) =>
         str(item, at),

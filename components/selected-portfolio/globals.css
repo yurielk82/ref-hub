@@ -264,7 +264,9 @@ ul {
   word-break: keep-all;
 }
 .saying-source {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   margin-top: 8px;
   font-size: 13px;
   color: var(--ink-2);
@@ -1019,6 +1021,10 @@ ul {
   .home-sayings blockquote {
     font-size: 16px;
   }
+  .saying-source {
+    min-height: 44px;
+    margin-top: 0;
+  }
   .home-outcomes {
     grid-template-columns: 1fr;
     margin-top: 26px;
@@ -1220,7 +1226,8 @@ ul {
   .back-link,
   .case-pagination,
   .back-top,
-  .evidence-open > span {
+  .evidence-open > span,
+  .home-sayings {
     display: none;
   }
   .portfolio-site {

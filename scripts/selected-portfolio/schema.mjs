@@ -129,6 +129,8 @@ export function validatePortfolio(data) {
       ])
     ) {
       str(data.profile.headlineSayings.label, "profile.headlineSayings.label");
+      if (data.profile.headlineSayings.items?.length === 0)
+        fail("profile.headlineSayings.items", "한 건 이상 있어야 합니다.");
       list(
         data.profile.headlineSayings.items,
         "profile.headlineSayings.items",

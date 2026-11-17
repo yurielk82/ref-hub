@@ -306,6 +306,7 @@ export function PortfolioHome({
                     rel="noopener noreferrer"
                   >
                     {saying.source}
+                    <ArrowUpRight size={13} aria-hidden />
                   </a>
                 </li>
               ))}

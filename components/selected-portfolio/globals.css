@@ -199,6 +199,79 @@ ul {
   font-size: 15px;
   color: var(--ink-2);
 }
+.home-sayings {
+  max-width: 800px;
+  margin-top: 22px;
+}
+.home-sayings summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 36px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  font-size: 14px;
+  color: var(--ink-2);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+.home-sayings summary::-webkit-details-marker {
+  display: none;
+}
+.home-sayings summary::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  margin-top: -3px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 250ms ease-out;
+}
+.home-sayings[open] summary::after {
+  margin-top: 3px;
+  transform: rotate(225deg);
+}
+.home-sayings summary:hover {
+  border-color: currentColor;
+  color: var(--signal);
+}
+.home-sayings summary:focus-visible {
+  outline-offset: 3px;
+}
+.home-sayings ul {
+  margin-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.home-sayings li {
+  padding: 18px 0;
+}
+.home-sayings li + li {
+  border-top: 1px solid var(--line);
+}
+.home-sayings blockquote {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.6;
+}
+.saying-translation {
+  margin-top: 8px;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--ink-2);
+  word-break: keep-all;
+}
+.saying-source {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+.saying-source:hover {
+  color: var(--signal);
+}
 .home-outcomes {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -940,6 +1013,12 @@ ul {
     margin-top: 12px;
     font-size: 13px;
   }
+  .home-sayings summary {
+    min-height: 44px;
+  }
+  .home-sayings blockquote {
+    font-size: 16px;
+  }
   .home-outcomes {
     grid-template-columns: 1fr;
     margin-top: 26px;
@@ -1125,6 +1204,9 @@ ul {
     scroll-behavior: auto;
   }
   .work-card-image img {
+    transition: none;
+  }
+  .home-sayings summary::after {
     transition: none;
   }
   .work-card-image:hover img {

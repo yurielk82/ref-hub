@@ -50,6 +50,8 @@ export type Project = {
   lead?: string;
   /** 자동화 뒤에 사람이 맡는 판단. 상세 머리의 "사람이 맡는 판단" 칸. */
   judgment?: string;
+  /** 캡처가 없는 대표 사례 카드의 그림 칸에 보일 절차. */
+  cardSteps?: { title: string; items: string[] };
   stack: string[];
   links: PublicLink[];
   image: string;

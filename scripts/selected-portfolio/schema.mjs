@@ -246,7 +246,15 @@ export function validatePortfolio(data) {
           "artLabels",
           "sections",
         ],
-        ["hidden", "parentId", "highlights", "lead", "brief", "judgment"],
+        [
+          "hidden",
+          "parentId",
+          "highlights",
+          "lead",
+          "brief",
+          "judgment",
+          "cardSteps",
+        ],
       )
     )
       return;
@@ -263,6 +271,15 @@ export function validatePortfolio(data) {
     }
     if (p.brief !== undefined) str(p.brief, `${at}.brief`);
     if (p.judgment !== undefined) str(p.judgment, `${at}.judgment`);
+    if (
+      p.cardSteps !== undefined &&
+      obj(p.cardSteps, `${at}.cardSteps`, ["title", "items"])
+    ) {
+      str(p.cardSteps.title, `${at}.cardSteps.title`);
+      list(p.cardSteps.items, `${at}.cardSteps.items`, (item, key) =>
+        str(item, key),
+      );
+    }
     if (p.highlights !== undefined)
       list(p.highlights, `${at}.highlights`, (item, key) => str(item, key));
     if (p.hidden !== undefined && typeof p.hidden !== "boolean")

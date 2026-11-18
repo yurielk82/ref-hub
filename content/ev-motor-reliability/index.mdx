@@ -1,29 +1,54 @@
 # EV Motor Reliability
 
-전기차 구동모터/인버터 신뢰성 시험 자동화 플랫폼
+EV Motor Reliability는 전기차 구동모터·인버터 신뢰성 시험을 돕는 도구 모음입니다. 운전 프로파일 CSV를 AVL PUMA 시험기용 XML 시험 프로파일로 바꾸고, 실차 시험 엑셀 자료로 온도·토크·열피로를 판정하며, 모터 제어 시뮬레이션과 Weibull·FMEA 분석을 웹 화면에서 실행합니다.
 
-## 개요
+시험 엔지니어가 시험기에 넣을 프로파일을 만들 때, 그리고 시험이 끝난 뒤 측정 자료를 같은 기준으로 판정할 때 씁니다.
 
-| 항목 | 내용 |
-|------|------|
-| **펌웨어** | C (TMS320F2838x DSP, Code Composer Studio) |
-| **분석** | Python 3.x (numpy, scipy, matplotlib, reliability) |
-| **하드웨어** | SMC300 모터제어 패키지, PMSM, BLDC |
-| **도구** | CCS, UniFlash, JTAG (SDS200i) |
+**현재 상태:** 운영 중입니다. AVL 변환 화면과 로그인 후 대시보드는 `avl.dvsharp.com`에서 서비스되고, 같은 서버에서 Python API가 돌고 있습니다(2026-11-18 서버 서비스 상태로 확인). 기능 개발은 2026-02부터 2026-06까지 했고, 그 뒤로는 의존성·빌드 정비와 변환기 수정만 있습니다(git log 기준).
 
 ## 주요 기능
 
-- 모터/인버터 신뢰성 시험 자동화
-- Weibull 분석 및 시각화
-- 고장 예측 모델 (MTTF, 고장률)
-- 시리얼/JTAG 통신 기반 실시간 데이터 수집
-- 시뮬레이션 파이프라인 (runner.py, pipeline.py)
+이 제품이 지금 하는 일은 다음과 같습니다.
 
-## 단위 규칙
+- **AVL 시험 프로파일 변환.** 운전 프로파일 CSV 한 개 또는 여러 개를 AVL XML 템플릿의 속도·토크·추가 명령 값으로 채워 XML로 내보냅니다. 열 이름이 달라도 동의어와 값 모양으로 자동 매칭하고, 변환한 XML을 다시 읽어 값이 맞는지 검증합니다. 웹에서는 로그인 없이 쓰고, PC에서는 Windows 프로그램으로 씁니다.
+- **실측 데이터 판정.** 실차 시험 엑셀(`.xlsx`)을 올리면 온도 프로파일, 토크-속도 분포, 열적 한계(SAFE, WARNING, CRITICAL), 채널별 열피로 누적 손상(PASS, MARGINAL, FAIL)을 계산합니다.
+- **모터 제어 시뮬레이션.** DC 모터와 PMSM(영구자석 동기모터) 모델로 속도·위치·토크 제어를 시뮬레이션하고 PID·FOC(자속 기준 제어) 게인을 최적화합니다.
+- **신뢰성 분석.** 고장 시간으로 Weibull 수명을 추정하고, 고장 유형으로 FMEA(고장 모드 영향 분석) 표를 만들며, 결과를 HTML 보고서로 내려받습니다.
+- **장비 연동 코드.** TMS320F2838x DSP 펌웨어 C 소스, UART 수집기, UniFlash 플래시 래퍼가 저장소에 있습니다. 장비 연결은 시험 장비가 붙은 PC에서 API를 직접 띄워야 쓸 수 있고, 펌웨어 빌드에 필요한 CCS 프로젝트 파일은 저장소에 없습니다. 자세한 내용은 [펌웨어와 시험 장비](/ev-motor-reliability/admin-guide/hardware)에 있습니다.
 
-SI 단위계 사용: `rad/s` (속도), `A` (전류), `V` (전압), `N·m` (토크), `degC` (온도)
+## 구성
 
-## 매뉴얼
+화면·서버·분석 코드가 한 저장소에 있습니다.
 
-- [사용자 매뉴얼](/ev-motor-reliability/user-guide) — 분석/시험 담당자용
-- [운영자 매뉴얼](/ev-motor-reliability/admin-guide) — 서버/장비 관리자용
+| 영역 | 기술 |
+|------|------|
+| 웹 화면 | Next.js(App Router), TypeScript, Mantine |
+| API | Python, FastAPI |
+| 분석·시뮬레이션 | numpy, scipy, pandas, matplotlib, 자체 구현 Weibull·Coffin-Manson |
+| 인증·저장 | Neon Auth(Google 로그인), Neon PostgreSQL |
+| AVL 변환기 | Python 단독 스크립트, Windows 실행 파일(PyInstaller) |
+| 펌웨어 | C, TI TMS320F2838x |
+
+## 어디서부터 읽을까
+
+하려는 일에 맞는 쪽을 고릅니다.
+
+| 하려는 일 | 읽을 쪽 |
+|-----------|---------|
+| 처음 접속하고 메뉴를 익히기 | [시작하기](/ev-motor-reliability/user-guide/getting-started) |
+| 운전 프로파일 CSV를 AVL XML로 바꾸기 | [AVL 시험 프로파일 변환하기](/ev-motor-reliability/user-guide/avl-converter) |
+| 웹 없이 PC에서 변환하기 | [변환기 PC 프로그램 쓰기](/ev-motor-reliability/user-guide/avl-converter-desktop) |
+| 자동 매칭과 step 수 규칙 알아보기 | [AVL 변환 규칙](/ev-motor-reliability/user-guide/avl-conversion-rules) |
+| 실차 시험 엑셀을 올려 판정받기 | [실측 데이터 올리기](/ev-motor-reliability/user-guide/data-upload) |
+| 판정 기준과 계산식 확인하기 | [실측 데이터 판정 기준](/ev-motor-reliability/user-guide/sample-analysis) |
+| 판정 차트를 그림 파일로 받기 | [실측 데이터 차트 파일 만들기](/ev-motor-reliability/user-guide/visualization) |
+| 제어 게인을 시뮬레이션으로 정하기 | [모터 제어 시뮬레이션 실행하기](/ev-motor-reliability/user-guide/simulation) |
+| Weibull·FMEA 분석과 보고서 만들기 | [신뢰성 분석과 보고서 만들기](/ev-motor-reliability/user-guide/analysis) |
+| 서버 구성과 배포 순서 알아보기 | [구성과 배포](/ev-motor-reliability/admin-guide/deployment) |
+| 장애 증상별 조치 찾기 | [문제 해결](/ev-motor-reliability/admin-guide/troubleshooting) |
+
+## 변경 이력
+
+DC 모터 PID 시뮬레이션과 DSP 펌웨어 골격으로 시작해 FOC 시뮬레이션, Weibull·FMEA, FastAPI, 웹 대시보드 순으로 넓혔습니다(2026-02~03). 2026-03에 실측 엑셀 판정 화면을 더했고, 2026-05에 AVL 변환기를 웹과 Windows 프로그램으로 붙였습니다. 웹 화면은 처음에 Vercel에 올렸고, 지금은 API와 같은 서버에서 서비스합니다.
+
+> 확인 기준: 2026-11-18, ev-motor-reliability 저장소 기준.

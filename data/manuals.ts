@@ -15,32 +15,31 @@ export interface Manual {
 const MANUAL_DETAILS: Record<string, Omit<Manual, "slug" | "title">> = {
   csoweb: {
     description:
-      "CSO 정산 조회 포털의 이전 매뉴얼. 자체 포털은 2026년 9월 운영 종료.",
+      "운영 당시 화면 기준의 CSO 정산 포털 매뉴얼. 자체 포털은 2026년 9월 운영 종료.",
     projectSlug: "csoweb",
   },
   "kpis-dsr-api": {
     description:
-      "엑셀 수작업 자동화, ERP 전환 후 업무 대응, 갑지·을지 다운로드와 API 공급내역보고 흐름",
+      "공급내역 적재, 주문 대조, KPIS API 보고, 반송 처리까지의 사용법과 운영 안내",
     projectSlug: "kpis-dsr-api",
   },
   pharmkpi: {
-    description: "매출·수금·채권 자료 취합·분석·보고 개선과 SFE 업무 사례",
+    description: "KPI 1차 메뉴 11개의 사용법과 데이터 반영·권한·배포 운영 안내",
     projectSlug: "pharmkpi",
   },
   "edi-verification": {
-    description: "처방통계 이미지·PDF를 OCR로 자료화한 이전 구현 사례",
+    description: "프로엠알 연계 EDI 검토의 기준 관리, AI 판정안, 집계 화면",
   },
   corerx: {
-    description:
-      "UBIST 처방·ERP 출고·CSO 정산을 통합하는 ETL + BI 플랫폼 매뉴얼",
+    description: "운영하지 않는 이전 ETL·BI 구현의 설계와 지표 기록",
   },
   "ev-motor-reliability": {
-    description: "전기차 구동모터·인버터 신뢰성 시험 자동화 플랫폼 매뉴얼",
+    description: "AVL XML 변환과 모터 시험 자료 분석 매뉴얼",
     projectSlug: "ev-motor-reliability",
   },
   "har-eval": {
     description:
-      "증거 게이트로 도구를 만들지 도입할지 결정하는 메타 하네스 문서",
+      "도구를 만들지, 들일지, 유지할지 측정과 교차 감사로 정하는 평가 방법",
     projectSlug: "har-eval",
   },
 };

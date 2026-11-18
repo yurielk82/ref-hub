@@ -1,9 +1,11 @@
-import type { MetaRecord } from 'nextra'
+import type { MetaRecord } from "nextra";
 
 const meta: MetaRecord = {
-  index: '소개',
-  'user-guide': '사용자 매뉴얼',
-  'admin-guide': '운영자 매뉴얼',
-}
+  index: "소개",
+  design: "설계 기록",
+  "data-sources": "데이터 원천",
+  metrics: "지표 정의",
+  lessons: "배운 점",
+};
 
-export default meta
+export default meta;

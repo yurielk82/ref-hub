@@ -115,6 +115,9 @@ export function validatePortfolio(data) {
         "headline",
         "headlineNote",
         "headlineSayings",
+        "identity",
+        "focus",
+        "results",
       ],
     )
   ) {
@@ -143,6 +146,58 @@ export function validatePortfolio(data) {
             fail(`${at}.url`, "https:// 주소를 입력하세요.");
         },
       );
+    }
+    if (
+      data.profile.identity !== undefined &&
+      obj(data.profile.identity, "profile.identity", ["title", "detail"])
+    ) {
+      str(data.profile.identity.title, "profile.identity.title");
+      str(data.profile.identity.detail, "profile.identity.detail");
+    }
+    const focusItems = (value, key) =>
+      list(value, key, (item, at) => {
+        if (!obj(item, at, ["text"], ["projectId"])) return;
+        str(item.text, `${at}.text`);
+        if (item.projectId !== undefined)
+          projectRefs([item.projectId], `${at}.projectId`);
+      });
+    if (
+      data.profile.focus !== undefined &&
+      obj(data.profile.focus, "profile.focus", [
+        "title",
+        "description",
+        "system",
+        "human",
+      ])
+    ) {
+      str(data.profile.focus.title, "profile.focus.title");
+      str(data.profile.focus.description, "profile.focus.description");
+      for (const side of ["system", "human"]) {
+        const at = `profile.focus.${side}`;
+        if (!obj(data.profile.focus[side], at, ["label", "items"], ["note"]))
+          continue;
+        str(data.profile.focus[side].label, `${at}.label`);
+        if (data.profile.focus[side].note !== undefined)
+          str(data.profile.focus[side].note, `${at}.note`);
+        focusItems(data.profile.focus[side].items, `${at}.items`);
+      }
+    }
+    if (
+      data.profile.results !== undefined &&
+      obj(data.profile.results, "profile.results", [
+        "title",
+        "description",
+        "rows",
+      ])
+    ) {
+      str(data.profile.results.title, "profile.results.title");
+      str(data.profile.results.description, "profile.results.description");
+      list(data.profile.results.rows, "profile.results.rows", (row, at) => {
+        if (!obj(row, at, ["work", "projectId", "system", "human"])) return;
+        for (const key of ["work", "system", "human"])
+          str(row[key], `${at}.${key}`);
+        projectRefs([row.projectId], `${at}.projectId`);
+      });
     }
     if (data.profile.highlights !== undefined)
       list(data.profile.highlights, "profile.highlights", (item, at) =>
@@ -191,7 +246,7 @@ export function validatePortfolio(data) {
           "artLabels",
           "sections",
         ],
-        ["hidden", "parentId", "highlights", "lead"],
+        ["hidden", "parentId", "highlights", "lead", "brief", "judgment"],
       )
     )
       return;
@@ -206,6 +261,8 @@ export function validatePortfolio(data) {
       if (!srcs.includes(p.lead))
         fail(`${at}.lead`, "이 프로젝트 캡처 중 하나의 src를 입력하세요.");
     }
+    if (p.brief !== undefined) str(p.brief, `${at}.brief`);
+    if (p.judgment !== undefined) str(p.judgment, `${at}.judgment`);
     if (p.highlights !== undefined)
       list(p.highlights, `${at}.highlights`, (item, key) => str(item, key));
     if (p.hidden !== undefined && typeof p.hidden !== "boolean")
@@ -273,14 +330,12 @@ export function validatePortfolio(data) {
       if ("screens" in section)
         list(section.screens, `${key}.screens`, (screen, screenKey) => {
           if (
-            !obj(screen, screenKey, [
-              "src",
-              "title",
-              "caption",
-              "note",
-              "width",
-              "height",
-            ])
+            !obj(
+              screen,
+              screenKey,
+              ["src", "title", "caption", "note", "width", "height"],
+              ["spec"],
+            )
           )
             return;
           if (!isLocalImage(screen.src))
@@ -297,6 +352,7 @@ export function validatePortfolio(data) {
           str(screen.title, `${screenKey}.title`);
           str(screen.caption, `${screenKey}.caption`);
           str(screen.note, `${screenKey}.note`, true);
+          if (screen.spec !== undefined) str(screen.spec, `${screenKey}.spec`);
         });
     });
   });

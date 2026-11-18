@@ -55,3 +55,21 @@ test("lead must name one of the project's own captures", () => {
     validatePortfolio(data).some((e) => e.startsWith("projects[0].lead")),
   );
 });
+
+test("home focus and results rows must point at public cases", () => {
+  const data = JSON.parse(
+    readFileSync(
+      path.join(ROOT, "data/selected-portfolio/portfolio-ax.json"),
+      "utf8",
+    ),
+  );
+  data.profile.focus.system.items[0].projectId = "srt";
+  data.profile.results.rows[0].projectId = "없는-사례";
+  const errors = validatePortfolio(data);
+  assert.ok(
+    errors.some((e) => e.startsWith("profile.focus.system.items[0].projectId")),
+  );
+  assert.ok(
+    errors.some((e) => e.startsWith("profile.results.rows[0].projectId")),
+  );
+});

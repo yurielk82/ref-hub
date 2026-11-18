@@ -9,25 +9,43 @@
     "role": "업무 자동화 · AX",
     "headline": "반복은 시스템에, 판단은 사람에게",
     "headlineSayings": {
-      "label": "해외의 비슷한 말",
+      "label": "인용 보기",
       "items": [
         {
-          "quote": "Civilization advances by extending the number of important operations which we can perform without thinking about them.",
-          "translation": "문명은 생각하지 않고도 해낼 수 있는 중요한 일의 수를 늘리면서 발전한다.",
-          "source": "A. N. Whitehead, An Introduction to Mathematics (1911), 5장",
-          "url": "https://archive.org/details/anintroductionto00whituoft"
+          "quote": "Computers perform repetitive tasks, people solve problems.",
+          "translation": "반복은 컴퓨터가 하고, 문제는 사람이 푼다.",
+          "source": "Jez Humble, Continuous Delivery Principles",
+          "url": "https://continuousdelivery.com/principles/"
         },
         {
-          "quote": "Toil is the kind of work tied to running a production service that tends to be manual, repetitive, automatable, tactical, devoid of enduring value, and that scales linearly as a service grows.",
-          "translation": "토일(toil)은 서비스 운영에 따라붙는 일 가운데 손으로 하고, 반복되고, 자동화할 수 있고, 그때그때 대응에 그치고, 오래 남는 가치가 없고, 서비스가 커지는 만큼 늘어나는 일이다.",
-          "source": "Vivek Rau, Site Reliability Engineering (Google), 5장 Eliminating Toil",
+          "quote": "If a human operator needs to touch your system during normal operations, you have a bug.",
+          "translation": "평소 운영 중에 사람이 시스템에 손을 대야 한다면, 그것은 버그다.",
+          "source": "Carla Geisser, Site Reliability Engineering (Google), 5장 Eliminating Toil",
           "url": "https://sre.google/sre-book/eliminating-toil/"
         },
         {
-          "quote": "DRY—Don't Repeat Yourself. Every piece of knowledge must have a single, unambiguous, authoritative representation within a system.",
-          "translation": "반복하지 마라. 모든 지식은 시스템 안에서 단 하나의, 모호하지 않고 믿을 수 있는 표현을 가져야 한다.",
-          "source": "The Pragmatic Programmer, 20th Anniversary Edition, Tip 15",
-          "url": "https://pragprog.com/tips/"
+          "quote": "There is surely nothing quite so useless as doing with great efficiency what should not be done at all.",
+          "translation": "하지 말았어야 할 일을 아주 효율적으로 해내는 것만큼 쓸모없는 일은 없다.",
+          "source": "Peter F. Drucker, Managing for Business Effectiveness, Harvard Business Review (1963)",
+          "url": "https://hbr.org/1963/05/managing-for-business-effectiveness"
+        },
+        {
+          "quote": "One machine can do the work of fifty ordinary men. No machine can do the work of one extraordinary man.",
+          "translation": "기계 한 대는 보통 사람 쉰 명의 일을 할 수 있다. 그러나 어떤 기계도 비범한 한 사람의 일은 하지 못한다.",
+          "source": "Elbert Hubbard, The Roycroft Dictionary and Book of Epigrams (1923)",
+          "url": "https://archive.org/details/roycroftdictiona00hubb"
+        },
+        {
+          "quote": "Many people spend hours clicking and typing to perform repetitive tasks, unaware that the machine they’re using could do their job in seconds if they gave it the right instructions.",
+          "translation": "많은 사람이 반복 작업에 몇 시간씩 클릭하고 타이핑한다. 지금 쓰는 컴퓨터에 제대로 지시하면 몇 초 만에 끝낼 수 있다는 것을 모른 채.",
+          "source": "Al Sweigart, Automate the Boring Stuff with Python, 3rd Edition, 서문",
+          "url": "https://automatetheboringstuff.com/3e/chapter0.html"
+        },
+        {
+          "quote": "The three principal virtues of a programmer are Laziness, Impatience, and Hubris.",
+          "translation": "프로그래머의 세 가지 미덕은 게으름, 조급함, 오만이다.",
+          "source": "Larry Wall, perl 공식 문서",
+          "url": "https://perldoc.perl.org/perl"
         }
       ]
     },

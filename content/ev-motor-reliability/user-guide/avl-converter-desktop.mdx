@@ -1,0 +1,68 @@
+# 변환기 PC 프로그램 쓰기
+
+웹 화면 없이 시험실 PC에서 운전 프로파일 CSV를 AVL XML로 바꿉니다. 웹과 같은 변환 코드를 씁니다.
+
+## 시작 전에 필요한 것
+
+다음 둘 중 하나를 준비합니다.
+
+- Windows 실행 파일 `AVL_XML_Profile_Converter.exe`. Python이 없는 PC에서도 실행됩니다. 관리자에게 받습니다.
+- 저장소의 `ref/AVL_XML_Profile_Converter_V1_0_및 데이터/AVL_XML_Profile_Converter_V1_0/` 폴더와 Python 3.
+
+그리고 다음 파일이 필요합니다.
+
+- 기준이 되는 AVL PUMA Open XML 파일. PC 프로그램에는 내장 템플릿이 없습니다.
+- 운전 프로파일 CSV 한 개.
+
+## 창으로 변환하기
+
+1. `AVL_XML_Profile_Converter.exe`를 두 번 누릅니다. Python으로 실행할 때는 폴더 안의 `run_gui_windows.bat`를 두 번 누릅니다.
+2. **I/O FILES**에서 **Source XML**에 기준 XML을, **Profile CSV**에 운전 프로파일 CSV를 고릅니다.
+3. **Output XML**에 저장할 파일 이름을 정합니다.
+4. **CONVERSION SETTINGS**의 **Target Steps**에 바꿀 step 수의 상한을 넣습니다.
+5. **VARIABLE MAPPING**에서 **AUTO-MATCH**를 누릅니다. **속도명령**, **토크명령**, **추가명령 1**의 CSV 열 번호가 채워지고, 오른쪽 **SYSTEM MONITOR**에 점수가 나옵니다. 점수가 0.9보다 낮은 변수가 있으면 "매칭 신뢰도 경고" 창이 뜹니다. 이때는 열 번호를 직접 고칩니다.
+6. 기록 설정을 바꿔야 하면 **RECORDING SETTINGS (비우면 원본 유지)** 칸을 채웁니다.
+7. **RUN CONVERSION**을 누릅니다.
+8. **SYSTEM MONITOR**에 `>> Conversion completed`와 저장 경로가 나오면 끝입니다.
+
+## 명령줄로 변환하기
+
+여러 파일을 스크립트로 돌릴 때는 명령줄을 씁니다. 폴더 안에서 실행합니다.
+
+```bat
+python avl_xml_profile_converter.py ^
+  --template base.xml ^
+  --csv profile.csv ^
+  --out converted.xml ^
+  --target-steps 10000 ^
+  --auto-match ^
+  --min-match-score 0.9
+```
+
+주요 옵션은 다음과 같습니다.
+
+| 옵션 | 뜻 | 기본값 |
+|------|-----|--------|
+| `--template`, `-t` | 기준 XML | 없음(`--csv`와 함께 필수) |
+| `--csv`, `-c` | 운전 프로파일 CSV | 없음(`--template`와 함께 필수) |
+| `--out`, `-o` | 저장할 XML | 기준 XML 옆에 `_converted_`가 붙은 이름 |
+| `--target-steps` | 바꿀 step 수의 상한 | 10000 |
+| `--auto-match` | 열 이름·값으로 자동 매칭 | 꺼짐 |
+| `--min-match-score` | 이 점수보다 낮은 매칭이 있으면 거부 | 0(검사 안 함) |
+| `--speed-csv-col`, `--torque-csv-col`, `--add1-csv-col` | 속도·토크·추가 명령의 CSV 열(1부터 세는 번호나 열 이름) | 2, 3, 4 |
+| `--speed-xml-var`, `--torque-xml-var`, `--add1-xml-var` | 바꿀 XML 변수 이름 | `N_dem_E`, `T_dem_E`, `Alpha_d_P1` |
+| `--storage-interval`, `--max-recording-time`, `--storage-name`, `--sampling-freq` | 기록 설정 | 원본 유지 |
+| `--export-channels` | 기준 XML의 채널 목록을 CSV로 저장 | 없음 |
+| `--channel-csv` | 고친 채널 CSV를 XML에 반영 | 없음 |
+| `--gui` | 창으로 실행 | `--template`, `--csv`, `--export-channels`가 모두 없으면 창이 열림 |
+
+> **참고:** 웹 화면의 **min-match-score** 기본값은 0.9이지만 명령줄 기본값은 0입니다. 명령줄에서는 `--min-match-score 0.9`를 직접 붙입니다.
+
+## 결과 확인
+
+명령줄은 "변환 완료"와 함께 저장 경로, 바꾼 step 수를 출력합니다. CSV가 템플릿보다 짧으면 마지막 몇 step을 원본 값으로 두었다는 주의도 출력합니다. 변환기는 저장한 XML을 다시 읽어 step 수와 명령 값을 대조하고, 틀리면 "Round-trip 검증 실패"를 내고 멈춥니다.
+
+## 잘 안 될 때
+
+- "매칭 신뢰도 경고"가 뜨면 CSV 열 이름과 값을 보고 열 번호를 직접 정합니다. 규칙은 [AVL 변환 규칙](/ev-motor-reliability/user-guide/avl-conversion-rules)에 있습니다.
+- 실행 파일을 받는 방법은 [구성과 배포](/ev-motor-reliability/admin-guide/deployment)에 있습니다.

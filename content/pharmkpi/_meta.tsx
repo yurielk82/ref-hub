@@ -1,9 +1,9 @@
 import type { MetaRecord } from "nextra";
 
 const meta: MetaRecord = {
-  index: "업무 개선 사례",
-  "user-guide": { title: "이전 사용자 가이드", display: "hidden" },
-  "admin-guide": { title: "이전 운영자 가이드", display: "hidden" },
+  index: "소개",
+  "user-guide": "사용자 매뉴얼",
+  "admin-guide": "운영자 매뉴얼",
 };
 
 export default meta;

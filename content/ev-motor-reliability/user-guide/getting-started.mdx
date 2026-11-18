@@ -1,44 +1,58 @@
 # 시작하기
 
-EV Motor Reliability 시스템 사용을 위한 초기 설정 가이드입니다.
+이 쪽은 처음 접속해서 계정 승인을 받고 메뉴를 익히는 순서를 안내합니다.
 
-## 시스템 요구사항
+## 두 가지 입구
 
-| 항목 | 요구사항 |
-|------|---------|
-| **Python** | 3.x (numpy, scipy, matplotlib, pandas, reliability) |
-| **펌웨어 개발** | Code Composer Studio + C2000Ware |
-| **하드웨어** | SMC300 모터제어 패키지, JTAG 디버거 (SDS200i) |
-| **OS** | Windows 10+ 또는 Linux |
+EV Motor Reliability에는 로그인이 필요 없는 화면과 로그인 후 쓰는 대시보드가 있습니다.
 
-## 환경 설정
+| 입구 | 주소 | 로그인 | 하는 일 |
+|------|------|--------|---------|
+| AVL 변환 | `avl.dvsharp.com/avl-converter` | 필요 없음 | 운전 프로파일 CSV를 AVL XML로 변환 |
+| 대시보드 | `avl.dvsharp.com` | Google 로그인 + 관리자 승인 | 실측 데이터 판정, 시뮬레이션, 신뢰성 분석 |
 
-```bash
-# Python 가상환경 생성
-python3 -m venv venv
-source venv/bin/activate  # Linux/Mac
-# venv\Scripts\activate   # Windows
+AVL 변환만 할 때는 바로 [AVL 시험 프로파일 변환하기](/ev-motor-reliability/user-guide/avl-converter)로 갑니다. AVL 변환 화면은 대시보드 메뉴에 나오지 않으므로 주소로 들어갑니다.
 
-# 의존성 설치
-pip install -r requirements.txt
-```
+## 시작 전에 필요한 것
 
-## 프로젝트 구조
+대시보드를 쓰려면 다음이 필요합니다.
 
-| 디렉토리 | 설명 |
-|---------|------|
-| `simulation/` | 시뮬레이션 도메인 (순수 수학/물리 로직) |
-| `analysis/` | 분석 도메인 (Weibull, 고장률) |
-| `automation/` | 자동화 인프라 (시리얼, JTAG, 파일 I/O) |
-| `firmware/` | DSP 펌웨어 (알고리즘 + HAL) |
-| `data/` | 시험 데이터 (Git 미추적) |
+- Google 계정
+- 관리자의 계정 승인
 
-## 단위 규칙
+## 대시보드에 처음 로그인하기
 
-모든 데이터는 SI 단위계를 사용합니다:
-- 속도: `rad/s`, 전류: `A`, 전압: `V`, 토크: `N·m`, 온도: `degC`
+1. 브라우저에서 `avl.dvsharp.com`을 엽니다. 로그인 화면으로 넘어갑니다.
+2. Google 계정으로 로그인합니다. 화면에는 "최초 로그인 시 관리자 승인 후 접근 가능합니다"라는 안내가 있습니다.
+3. 처음 로그인하면 **승인 대기 중** 화면이 나옵니다. 관리자에게 승인을 요청합니다.
+4. 관리자가 승인한 뒤 **상태 확인**을 누릅니다.
+5. **대시보드** 화면이 열리면 끝입니다.
 
-## 다음 단계
+관리자가 거절하면 로그인 화면에 **접근 거절** 안내가 나옵니다.
 
-- [데이터 업로드](/ev-motor-reliability/user-guide/data-upload)
-- [분석 실행](/ev-motor-reliability/user-guide/analysis)
+## 메뉴
+
+왼쪽 메뉴는 다음 순서입니다.
+
+| 메뉴 | 하는 일 | 안내 쪽 |
+|------|---------|---------|
+| **대시보드** | 이번 달 시뮬레이션 횟수, 분석 보고서 수, 최근 시뮬레이션, 안전 게이지 | 이 쪽 |
+| **시뮬레이션** | DC·PMSM 제어 시뮬레이션과 게인 최적화 | [모터 제어 시뮬레이션 실행하기](/ev-motor-reliability/user-guide/simulation) |
+| **모니터** | 시뮬레이션 신호나 장비 신호를 실시간 차트로 보기 | 이 쪽 |
+| **실측 데이터** | 실차 시험 엑셀 올리기와 판정 결과 | [실측 데이터 올리기](/ev-motor-reliability/user-guide/data-upload) |
+| **분석** | 시뮬 vs 실측 비교, Weibull 수명, FMEA, 보고서 | [신뢰성 분석과 보고서 만들기](/ev-motor-reliability/user-guide/analysis) |
+| **코드** | API가 도는 곳의 저장소 파일 보기·고치기, Git 끌어오기·커밋 | 이 쪽 |
+| **관리** | 함수 목록, 패키지, 시스템 상태, 로그(관리자 전용) | [API 서버](/ev-motor-reliability/admin-guide/api-server) |
+
+화면 위쪽 연결 상태 표시줄은 Python API(화면 표기 **Oracle SSH**), **데이터베이스**, **Git**, **하드웨어** 네 가지를 **연결됨**, **경고**, **에러**, **미연결**로 보여 줍니다. 표시줄을 누르면 다시 확인합니다.
+
+모든 화면 오른쪽 아래에는 AI 채팅 창이 있습니다. **Chat** 모드는 Anthropic API로 질문에 답하고, 서버에 API 키가 없으면 **AI 채팅 설정**에 본인 키를 넣어야 합니다.
+
+## 장비 연결이 필요한 기능
+
+**모니터**의 **하드웨어** 수집과 대시보드의 **모터 긴급 정지**는 시험 장비가 UART로 연결된 곳에서 API가 돌 때만 동작합니다. 운영 서버에는 장비가 붙어 있지 않으므로 이 두 기능은 꺼져 있습니다. 장비가 있는 PC에서 쓰려면 화면의 **에이전트 설치 가이드**대로 저장소를 받아 API를 직접 띄웁니다. 자세한 내용은 [펌웨어와 시험 장비](/ev-motor-reliability/admin-guide/hardware)에 있습니다.
+
+## 잘 안 될 때
+
+- 로그인 뒤 계속 **승인 대기 중**이면 관리자가 아직 승인하지 않은 것입니다.
+- 연결 상태 표시줄이 **에러**이면 [문제 해결](/ev-motor-reliability/admin-guide/troubleshooting)을 봅니다.

@@ -24,6 +24,8 @@ export type ProjectScreen = {
   note: string;
   width: number;
   height: number;
+  /** 운영 명세 묶음 이름. 이름이 같은 연속 화면은 접힌 "운영 명세 보기" 안에 들어간다. */
+  spec?: string;
 };
 export type ProjectSection = {
   title: string;
@@ -46,6 +48,8 @@ export type Project = {
   brief?: string;
   /** 상세 첫 화면에 먼저 보일 캡처의 src. 없으면 첫 캡처. */
   lead?: string;
+  /** 자동화 뒤에 사람이 맡는 판단. 상세 머리의 "사람이 맡는 판단" 칸. */
+  judgment?: string;
   stack: string[];
   links: PublicLink[];
   image: string;

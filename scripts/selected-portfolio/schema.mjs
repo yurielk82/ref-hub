@@ -246,7 +246,7 @@ export function validatePortfolio(data) {
           "artLabels",
           "sections",
         ],
-        ["hidden", "parentId", "highlights", "lead", "brief"],
+        ["hidden", "parentId", "highlights", "lead", "brief", "judgment"],
       )
     )
       return;
@@ -262,6 +262,7 @@ export function validatePortfolio(data) {
         fail(`${at}.lead`, "이 프로젝트 캡처 중 하나의 src를 입력하세요.");
     }
     if (p.brief !== undefined) str(p.brief, `${at}.brief`);
+    if (p.judgment !== undefined) str(p.judgment, `${at}.judgment`);
     if (p.highlights !== undefined)
       list(p.highlights, `${at}.highlights`, (item, key) => str(item, key));
     if (p.hidden !== undefined && typeof p.hidden !== "boolean")
@@ -329,14 +330,12 @@ export function validatePortfolio(data) {
       if ("screens" in section)
         list(section.screens, `${key}.screens`, (screen, screenKey) => {
           if (
-            !obj(screen, screenKey, [
-              "src",
-              "title",
-              "caption",
-              "note",
-              "width",
-              "height",
-            ])
+            !obj(
+              screen,
+              screenKey,
+              ["src", "title", "caption", "note", "width", "height"],
+              ["spec"],
+            )
           )
             return;
           if (!isLocalImage(screen.src))
@@ -353,6 +352,7 @@ export function validatePortfolio(data) {
           str(screen.title, `${screenKey}.title`);
           str(screen.caption, `${screenKey}.caption`);
           str(screen.note, `${screenKey}.note`, true);
+          if (screen.spec !== undefined) str(screen.spec, `${screenKey}.spec`);
         });
     });
   });

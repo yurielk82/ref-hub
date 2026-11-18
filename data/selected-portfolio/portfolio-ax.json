@@ -231,6 +231,7 @@
         "확보한 시간을 실적 지표 해석과 분석에 투입"
       ],
       "lead": "/assets/selected-portfolio/images/pharmkpi/overview-content-d6a098019822.webp",
+      "judgment": "자료 수합 대신 실적 지표를 해석하고 분석합니다.",
       "stack": [
         "Next.js 16",
         "React 19",
@@ -392,6 +393,7 @@
         "2026년 11월 보고 서버·물류 마감 적재기를 Express에서 Rust로 전환"
       ],
       "lead": "/assets/selected-portfolio/images/kpis-dsr-api/kpis-home-content-52dd775e7485.webp",
+      "judgment": "자동 판정이 어려운 예외만 사람이 확인하고 승인합니다.",
       "stack": [
         "Rust (axum)",
         "React 19",
@@ -440,7 +442,8 @@
               "caption": "공급내역보고의 일곱 단계와 각 단계의 보호장치를 한눈에 봅니다.",
               "note": "실제 서비스의 정적 보고 흐름 안내를 내용 구획별로 새로 촬영했습니다. 설명·단계 번호·일정·날짜를 원문대로 보존했습니다.",
               "width": 3453,
-              "height": 768
+              "height": 768,
+              "spec": "보고 흐름 7단계와 보호장치"
             },
             {
               "src": "/assets/selected-portfolio/images/kpis-dsr-api/report-flow-prepare-send-content-def255066c01.webp",
@@ -448,7 +451,8 @@
               "caption": "원본 수집·보내기 전 주문 대조·수동 및 자동 보고의 보호장치를 설명합니다.",
               "note": "실제 서비스의 정적 보고 흐름 안내를 내용 구획별로 새로 촬영했습니다. 설명·단계 번호·일정·날짜를 원문대로 보존했습니다.",
               "width": 3453,
-              "height": 5061
+              "height": 5061,
+              "spec": "보고 흐름 7단계와 보호장치"
             },
             {
               "src": "/assets/selected-portfolio/images/kpis-dsr-api/report-flow-confirm-audit-content-3aa0b4a1f58b.webp",
@@ -456,7 +460,8 @@
               "caption": "결과 확인·반송신청·일마감 대조·적기보고에서 확인할 기준과 보호장치를 설명합니다.",
               "note": "실제 서비스의 정적 보고 흐름 안내를 내용 구획별로 새로 촬영했습니다. 설명·단계 번호·일정·날짜를 원문대로 보존했습니다.",
               "width": 3453,
-              "height": 5469
+              "height": 5469,
+              "spec": "보고 흐름 7단계와 보호장치"
             },
             {
               "src": "/assets/selected-portfolio/images/kpis-dsr-api/report-flow-states-repairs-content-788b0c11aecb.webp",
@@ -464,7 +469,8 @@
               "caption": "하루 시간표·작업 상태 이동·보완 전후와 사람이 확인할 곳을 설명합니다.",
               "note": "실제 서비스의 정적 보고 흐름 안내를 내용 구획별로 새로 촬영했습니다. 설명·단계 번호·일정·날짜를 원문대로 보존했습니다.",
               "width": 3453,
-              "height": 4071
+              "height": 4071,
+              "spec": "보고 흐름 7단계와 보호장치"
             },
             {
               "src": "/assets/selected-portfolio/images/kpis-dsr-api/order-check-content-8c7f8a0387dd.webp",
@@ -517,6 +523,7 @@
         "실적 원인 확인용 별도 자료 조회 축소 — 판매 구성 → 품목 → 거래처·담당자를 한 화면에서 조회",
         "마감 후 원천 검산을 통과한 메뉴별 보고 자료만 갱신"
       ],
+      "judgment": "별도 자료 조회 없이 한 화면에서 실적 원인을 확인합니다.",
       "stack": [
         "Next.js 16",
         "React 19",
@@ -647,6 +654,7 @@
         "자사 기준을 3개월 이상 검증·업데이트하며 자동 처리 범위를 확대하는 중",
         "판정 근거·증빙 사진 연결, 기준 변경 이력 화면, 확정 기록 대비 AI 재검증 구현 — 누락·중복·단위 검사, 통과 건 표본 점검, 누적금액 경고는 확장 계획"
       ],
+      "judgment": "문제처·고액처와 AI 판단 보류 건을 검수하고, 결과와 근거를 기준표에 반영합니다.",
       "stack": [
         "Rust (axum)",
         "SQLite",
@@ -710,6 +718,7 @@
         "일보 미입력 담당자 알림 자동화",
         "확보한 시간을 거래처 방문 우선순위 검토와 영업부 조언에 투입"
       ],
+      "judgment": "거래처 방문 우선순위를 검토하고 영업부에 조언합니다.",
       "stack": [],
       "links": [],
       "image": "",
@@ -902,6 +911,7 @@
         "구현·검증·배포 전 점검과 OneDrive 백업 등 반복 개발 절차 자동화 — 규칙·훅·검사 묶음",
         "완료 보고 전 독립 재검증 단계 적용"
       ],
+      "judgment": "무엇을 만들고 어떻게 검증할지는 직접 판단합니다.",
       "stack": [
         "Python",
         "Bash",
@@ -988,6 +998,7 @@
         "신규 도구 도입 전 효과·위험 비교 실험 절차 정립",
         "측정 결과로 도입·개발 여부 결정 — 판정 원장으로 기존 방식 쪽 편향을 점검하고, Rust 빌드 도구 채택에 적용"
       ],
+      "judgment": "측정 결과를 보고 도입·개발 여부를 결정합니다.",
       "stack": ["Markdown", "Claude Code", "Codex", "Skill", "Evidence-Gate"],
       "links": [],
       "image": "",
@@ -1073,6 +1084,7 @@
         "처방 자료 이미지·PDF를 문서 인식(OCR)으로 품목·수량 자료화 — 정산서 수량과 같은 행에서 비교·검토",
         "2026년 9월 프로엠알 도입으로 운영 중지, 정산 이력 보존"
       ],
+      "judgment": "문서 인식으로 자료화한 처방 수량을 정산서 수량과 나란히 보고 검토합니다.",
       "stack": [
         "Next.js 16",
         "Supabase (PostgreSQL)",

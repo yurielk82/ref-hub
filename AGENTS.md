@@ -12,7 +12,7 @@
 - `content/pharmkpi/`·`content/corerx/`·`content/edi-verification/`·`content/har-eval/`은 이 저장소에서 직접 편집한다.
 - 탐색 항목을 바꾸면 같은 폴더의 `_meta.tsx`도 함께 고친다. studiogo는 숨김이다(submodule만 보존).
 - 매뉴얼은 공개 문서다. 비밀 값·포트·서버 경로·서비스 유닛 이름·사내망 접근 방식·거래처·직원 이름·금액을 싣지 않는다. 운영 화면은 re-hub가 순수 마크다운만 그리므로 JSX 컴포넌트·HTML 태그를 쓰지 않는다.
-- 운영에 내려면 이 저장소 병합 뒤 `content/`를 re-hub `content/`로 복사하고 re-hub에서 `python3 tools/docs/pagemap.py`로 탐색 지도를 다시 만든다. 매뉴얼 목록(`/docs`)의 설명은 `data/manuals.ts`와 re-hub `crates/ui/src/legacy/docs.rs`에 같이 있다.
+- 운영에 내려면 이 저장소 병합 뒤 `content/`를 re-hub `content/`로 복사하고 re-hub에서 `python3 tools/docs/pagemap.py`로 탐색 지도를 다시 만든다. 매뉴얼 목록(`/docs`)의 설명은 `data/manuals.ts`와 re-hub `data/manuals.json`에 같이 있다.
 - 포트폴리오 사례 문구의 원본은 `data/work-history.ts`다. 해당 저장소(README·`docs/plans`·git log)와 `~/GitHub/wiki`에서 날짜·커밋 근거가 있는 사실만 쓰고 현재 운영 상태(운영·중지·이관)를 함께 적는다. 거래처명·직원 이름·금액은 싣지 않는다.
 
 ## 빌드 함정

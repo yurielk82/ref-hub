@@ -12,40 +12,22 @@
       "label": "인용 보기",
       "items": [
         {
-          "quote": "Computers perform repetitive tasks, people solve problems.",
-          "translation": "반복은 컴퓨터가 하고, 문제는 사람이 푼다.",
-          "source": "Jez Humble, Continuous Delivery Principles",
-          "url": "https://continuousdelivery.com/principles/"
+          "quote": "The purpose of a radiologist is to diagnose disease, not to study the image.",
+          "translation": "영상의학과 의사의 목적은 병을 진단하는 것이지, 영상을 들여다보는 것이 아니다.",
+          "source": "Jensen Huang, The Joe Rogan Experience (CNBC 보도, 2025)",
+          "url": "https://www.cnbc.com/2025/12/04/jensen-huang-cited-radiologists-to-dispute-ai-jobs-impact.html"
         },
         {
-          "quote": "If a human operator needs to touch your system during normal operations, you have a bug.",
-          "translation": "평소 운영 중에 사람이 시스템에 손을 대야 한다면, 그것은 버그다.",
-          "source": "Carla Geisser, Site Reliability Engineering (Google), 5장 Eliminating Toil",
-          "url": "https://sre.google/sre-book/eliminating-toil/"
+          "quote": "AI Won’t Replace Humans — But Humans With AI Will Replace Humans Without AI",
+          "translation": "AI가 사람을 대체하지는 않는다. AI를 쓰는 사람이 AI를 쓰지 않는 사람을 대체한다.",
+          "source": "Karim Lakhani 인터뷰, Harvard Business Review (2023)",
+          "url": "https://hbr.org/2023/08/ai-wont-replace-humans-but-humans-with-ai-will-replace-humans-without-ai"
         },
         {
-          "quote": "There is surely nothing quite so useless as doing with great efficiency what should not be done at all.",
-          "translation": "하지 말았어야 할 일을 아주 효율적으로 해내는 것만큼 쓸모없는 일은 없다.",
-          "source": "Peter F. Drucker, Managing for Business Effectiveness, Harvard Business Review (1963)",
-          "url": "https://hbr.org/1963/05/managing-for-business-effectiveness"
-        },
-        {
-          "quote": "One machine can do the work of fifty ordinary men. No machine can do the work of one extraordinary man.",
-          "translation": "기계 한 대는 보통 사람 쉰 명의 일을 할 수 있다. 그러나 어떤 기계도 비범한 한 사람의 일은 하지 못한다.",
-          "source": "Elbert Hubbard, The Roycroft Dictionary and Book of Epigrams (1923)",
-          "url": "https://archive.org/details/roycroftdictiona00hubb"
-        },
-        {
-          "quote": "Many people spend hours clicking and typing to perform repetitive tasks, unaware that the machine they’re using could do their job in seconds if they gave it the right instructions.",
-          "translation": "많은 사람이 반복 작업에 몇 시간씩 클릭하고 타이핑한다. 지금 쓰는 컴퓨터에 제대로 지시하면 몇 초 만에 끝낼 수 있다는 것을 모른 채.",
-          "source": "Al Sweigart, Automate the Boring Stuff with Python, 3rd Edition, 서문",
-          "url": "https://automatetheboringstuff.com/3e/chapter0.html"
-        },
-        {
-          "quote": "The three principal virtues of a programmer are Laziness, Impatience, and Hubris.",
-          "translation": "프로그래머의 세 가지 미덕은 게으름, 조급함, 오만이다.",
-          "source": "Larry Wall, perl 공식 문서",
-          "url": "https://perldoc.perl.org/perl"
+          "quote": "As AIs are increasingly capable of tasks that would take a human hours to do, and as evaluating those results becomes increasingly time consuming, the value of being good at delegation increases.",
+          "translation": "AI가 사람이 몇 시간 걸릴 일을 해내고 그 결과를 검토하는 시간이 늘수록, 일을 잘 맡기는 능력의 가치가 커진다.",
+          "source": "Ethan Mollick, Management as AI superpower (2026)",
+          "url": "https://www.oneusefulthing.org/p/management-as-ai-superpower"
         }
       ]
     },

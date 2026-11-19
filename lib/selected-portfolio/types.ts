@@ -88,6 +88,8 @@ export type PortfolioData = {
     headlineNote?: string;
     /** 헤드라인과 같은 뜻의 해외 인용. 원문을 출처에서 확인한 것만 싣는다. */
     headlineSayings?: { label: string; items: Saying[] };
+    /** 홈 첫 화면 오른쪽에 둘 화면. 없으면 첫 사례의 대표 화면. */
+    homeShot?: { projectId: string; src: string };
     /** 홈 제목 아래 누구인지 한 줄(회사 이름 없이)과 작은 줄. */
     identity?: { title: string; detail: string };
     focus?: {

@@ -115,6 +115,7 @@ export function validatePortfolio(data) {
         "headline",
         "headlineNote",
         "headlineSayings",
+        "homeShot",
         "identity",
         "focus",
         "results",
@@ -124,6 +125,24 @@ export function validatePortfolio(data) {
     for (const key of ["headline", "headlineNote"])
       if (data.profile[key] !== undefined)
         str(data.profile[key], `profile.${key}`);
+    if (
+      data.profile.homeShot !== undefined &&
+      obj(data.profile.homeShot, "profile.homeShot", ["projectId", "src"])
+    ) {
+      str(data.profile.homeShot.projectId, "profile.homeShot.projectId");
+      str(data.profile.homeShot.src, "profile.homeShot.src");
+      const shown = (data.projects ?? []).find(
+        (p) => p?.id === data.profile.homeShot.projectId,
+      );
+      const srcs = (shown?.sections ?? []).flatMap((s) =>
+        (s?.screens ?? []).map((screen) => screen?.src),
+      );
+      if (!srcs.includes(data.profile.homeShot.src))
+        fail(
+          "profile.homeShot.src",
+          "그 사례 캡처 중 하나의 src를 입력하세요.",
+        );
+    }
     if (
       data.profile.headlineSayings !== undefined &&
       obj(data.profile.headlineSayings, "profile.headlineSayings", [

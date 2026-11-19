@@ -217,6 +217,11 @@
         "확보한 시간을 실적 지표 해석과 분석에 투입"
       ],
       "lead": "/assets/selected-portfolio/images/pharmkpi/overview-content-d6a098019822.webp",
+      "cover": {
+        "src": "/assets/selected-portfolio/images/pharmkpi/login-cover-0b52e718bd4e.webp",
+        "width": 1600,
+        "height": 1000
+      },
       "judgment": "자료 수합 대신 실적 지표를 해석하고 분석합니다.",
       "stack": [
         "Next.js 16",
@@ -379,6 +384,11 @@
         "2026년 11월 보고 서버·물류 마감 적재기를 Express에서 Rust로 전환"
       ],
       "lead": "/assets/selected-portfolio/images/kpis-dsr-api/kpis-home-content-52dd775e7485.webp",
+      "cover": {
+        "src": "/assets/selected-portfolio/images/kpis-dsr-api/login-cover-36eca22a8d62.webp",
+        "width": 1600,
+        "height": 1000
+      },
       "judgment": "자동 판정이 어려운 예외만 사람이 확인하고 승인합니다.",
       "stack": [
         "Rust (axum)",
@@ -622,7 +632,12 @@
             }
           ]
         }
-      ]
+      ],
+      "cover": {
+        "src": "/assets/selected-portfolio/images/pharmkpi-exec/login-cover-e67b494e5ba2.webp",
+        "width": 1600,
+        "height": 1000
+      }
     },
     {
       "id": "cso-edi-review",
@@ -642,6 +657,11 @@
         "판정 근거·증빙 사진 연결, 기준 변경 이력 화면, 확정 기록 대비 AI 재검증 구현 — 누락·중복·단위 검사, 통과 건 표본 점검, 누적금액 경고는 확장 계획"
       ],
       "lead": "/assets/selected-portfolio/images/cso-edi-review/overview-content-96cc1b8ccabf.webp",
+      "cover": {
+        "src": "/assets/selected-portfolio/images/cso-edi-review/login-cover-34a322be2693.webp",
+        "width": 1600,
+        "height": 1000
+      },
       "judgment": "문제처·고액처와 AI 판단 보류 건을 검수하고, 결과와 근거를 기준표에 반영합니다.",
       "stack": [
         "Rust (axum)",

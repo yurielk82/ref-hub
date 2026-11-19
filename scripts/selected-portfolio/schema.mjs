@@ -270,6 +270,7 @@ export function validatePortfolio(data) {
           "parentId",
           "highlights",
           "lead",
+          "cover",
           "brief",
           "judgment",
           "cardSteps",
@@ -287,6 +288,19 @@ export function validatePortfolio(data) {
       );
       if (!srcs.includes(p.lead))
         fail(`${at}.lead`, "이 프로젝트 캡처 중 하나의 src를 입력하세요.");
+    }
+    if (
+      p.cover !== undefined &&
+      obj(p.cover, `${at}.cover`, ["src", "width", "height"])
+    ) {
+      if (!isLocalImage(p.cover.src))
+        fail(
+          `${at}.cover.src`,
+          "/assets/selected-portfolio/images/ 안의 로컬 이미지 경로를 쓰세요.",
+        );
+      for (const field of ["width", "height"])
+        if (!Number.isInteger(p.cover[field]) || p.cover[field] <= 0)
+          fail(`${at}.cover.${field}`, "이미지의 양의 정수 크기를 입력하세요.");
     }
     if (p.brief !== undefined) str(p.brief, `${at}.brief`);
     if (p.judgment !== undefined) str(p.judgment, `${at}.judgment`);

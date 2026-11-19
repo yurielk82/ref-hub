@@ -48,6 +48,8 @@ export type Project = {
   brief?: string;
   /** 상세 첫 화면에 먼저 보일 캡처의 src. 없으면 첫 캡처. */
   lead?: string;
+  /** 홈 대표 사례 카드에 보일 로그인·대문 화면. 없으면 카드는 대표 화면(lead). */
+  cover?: { src: string; width: number; height: number };
   /** 자동화 뒤에 사람이 맡는 판단. 상세 머리의 "사람이 맡는 판단" 칸. */
   judgment?: string;
   /** 캡처가 없는 대표 사례 카드의 그림 칸에 보일 절차. */

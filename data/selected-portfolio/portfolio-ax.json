@@ -33,7 +33,7 @@
     },
     "homeShot": {
       "projectId": "cso-edi-review",
-      "src": "/assets/selected-portfolio/images/cso-edi-review/login-content-19917a9af36d.webp"
+      "src": "/assets/selected-portfolio/images/cso-edi-review/login-content-2e1a8ae05fd1.webp"
     },
     "identity": {
       "title": "권대환 · 제약 영업관리 과장",
@@ -662,7 +662,7 @@
       ],
       "lead": "/assets/selected-portfolio/images/cso-edi-review/overview-content-96cc1b8ccabf.webp",
       "cover": {
-        "src": "/assets/selected-portfolio/images/cso-edi-review/login-cover-34a322be2693.webp",
+        "src": "/assets/selected-portfolio/images/cso-edi-review/login-cover-3a92dfd0c2be.webp",
         "width": 1600,
         "height": 1000
       },
@@ -687,7 +687,7 @@
           "body": "기존 csoweb 자체 포털은 프로엠알 도입으로 운영을 중지했습니다. cso-edi-review는 프로엠알과 연계해 EDI 검토 정밀도를 높이고 반복 검토를 효율화하는 별도 프로젝트입니다. 현재 적용 기준과 변경 이력, 사람의 판단 이력, 검토·승인·저장 검증 절차를 관리합니다.\n\n검토는 로그인한 허용 계정만 들어오는 업무 화면에서 합니다. 메뉴는 업무 순서대로 현황·확인 요청·병원·안내 메일·설정 다섯 개입니다.",
           "screens": [
             {
-              "src": "/assets/selected-portfolio/images/cso-edi-review/login-content-19917a9af36d.webp",
+              "src": "/assets/selected-portfolio/images/cso-edi-review/login-content-2e1a8ae05fd1.webp",
               "title": "로그인 화면",
               "caption": "허용 계정만 Google 로그인으로 들어옵니다. 첫 화면에서 OCR·AI·담당자 세 차례 검증과, 담당자 판단이 검증 기준에 쌓이는 구조를 보여 줍니다.",
               "note": "실제 로그인 화면입니다. 공개를 위해 회사 이름을 지웠습니다.",

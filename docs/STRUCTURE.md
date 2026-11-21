@@ -9,7 +9,7 @@ _Auto-generated. Do NOT edit between AUTO markers - content will be regenerated.
 ## Directory Tree (max-depth 3)
 
 ```
-ref-hub/  (30 files)
+ref-hub/  (31 files)
   .circleci/  (1 files)
   .github/  (1 files)
   .impeccable/  (1 files)
@@ -48,24 +48,22 @@ ref-hub/  (30 files)
     selected-portfolio/  (21 files)
       art/  (2 files)
   content/  (1 files)
-    corerx/  (2 files)
-      admin-guide/  (5 files)
-      user-guide/  (8 files)
+    corerx/  (6 files)
     csoweb/  (2 files)
       admin-guide/  (6 files)
-      user-guide/  (7 files)
-    edi-verification/  (2 files)
+      user-guide/  (10 files)
+    edi-verification/  (4 files)
       user-guide/  (4 files)
     ev-motor-reliability/  (2 files)
-      admin-guide/  (5 files)
-      user-guide/  (6 files)
-    har-eval/  (4 files)
-    kpis-dsr-api/  (2 files)
-      admin-guide/  (5 files)
+      admin-guide/  (6 files)
       user-guide/  (10 files)
+    har-eval/  (5 files)
+    kpis-dsr-api/  (2 files)
+      admin-guide/  (6 files)
+      user-guide/  (11 files)
     pharmkpi/  (2 files)
       admin-guide/  (5 files)
-      user-guide/  (6 files)
+      user-guide/  (10 files)
   data/  (9 files)
     ax-cases/  (2 files)
     projects/  (2 files)
@@ -85,12 +83,13 @@ ref-hub/  (30 files)
     resume/  (9 files)
     selected-portfolio/  (7 files)
   ops/  (0 files)
-    systemd/  (3 files)
+    systemd/  (1 files)
       github-ref-hub.service.d/  (1 files)
   public/  (0 files)
     assets/  (0 files)
       selected-portfolio/  (1 files)
     images/  (0 files)
+      edi-verification/  (5 files)
       portfolio/  (5 files)
   repos/  (0 files)
     csoweb/  (0 files)
@@ -128,9 +127,10 @@ instrumentation.ts
 mdx-components.tsx
 next.config.mjs
 osv-scanner.toml
-pnpm-lock.yaml
 package.json
 paseo.json
+pnpm-lock.yaml
+pnpm-workspace.yaml
 postcss.config.mjs
 proxy.ts
 sentry.client.config.ts
